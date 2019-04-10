@@ -29,6 +29,7 @@
 // provides functions to measure and decompress PNG files
 
 #include <config.h>
+#include <cstring>
 
 #if HAVE_LIBPNG
 extern "C"
