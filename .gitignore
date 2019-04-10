@@ -1,0 +1,12 @@
+*.o
+*.a
+*.so
+autom4te.cache/
+config.h
+config.log
+config.status
+configure
+fltk.list
+fltk2-config
+makedepend
+makeinclude

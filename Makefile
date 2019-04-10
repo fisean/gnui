@@ -27,7 +27,8 @@
 
 include makeinclude
 
-DIRS = src $(LOCALIMAGES) images OpenGL fluid glut test
+# DIRS = src $(LOCALIMAGES) images OpenGL fluid glut test
+DIRS = src $(LOCALIMAGES) images OpenGL
 
 all: makeinclude
 	for dir in $(DIRS); do\
@@ -93,14 +94,14 @@ portable-dist:
 native-dist:
 	epm -v -f native fltk
 
-etags: 
+etags:
 	etags fltk/*.h src/*.cxx src/win32/*.cxx src/osx/*.cxx src/*.c \
 	images/*.cxx fluid/*.cxx fluid/*.h test/*.cxx test/*.h Makefile */Makefile
-dos2unix: 
+dos2unix:
 	dos2unix fltk/*.h src/*.cxx src/win32/*.cxx src/*.c images/*.cxx \
 		fluid/*.cxx fluid/*.h fluid/*.fl test/*.cxx test/*.h fltk/compat/FL/*.H README*
 	chmod -x fltk/*.h src/*.cxx src/win32/*.cxx src/*.c images/*.cxx \
-		fluid/*.cxx fluid/*.h fluid/*.fl test/*.cxx test/*.h 
+		fluid/*.cxx fluid/*.h fluid/*.fl test/*.cxx test/*.h
 #
 # End of "$Id$".
 #

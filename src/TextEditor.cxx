@@ -188,7 +188,7 @@ static void kill_selection(TextEditor* e) {
 
 int TextEditor::kf_default(int c, TextEditor* e) {
   if (!c || (!isprint(c) && c != '\t')) return 0;
-  char s[2] = { c, '\0' };
+  char s[2] = { (char)c, '\0' };
   kill_selection(e);
   if (e->insert_mode()) e->insert(s);
   else e->overstrike(s);
