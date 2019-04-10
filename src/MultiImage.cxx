@@ -1,4 +1,4 @@
-/*! \class fltk::MultiImage
+/*! \class gnui::MultiImage
 
   A Symbol containing pointers to a set of different Symbols.  The
   drawflags() are used to select which one to draw.  This is most
@@ -63,7 +63,7 @@
 #include <fltk/string.h>
 #include <stdarg.h>
 
-using namespace fltk;
+using namespace gnui;
 
 /*! \fn MultiImage::MultiImage(const Symbol& image0)
   Constructor where only the "image0" is provided. Unless you call add(),

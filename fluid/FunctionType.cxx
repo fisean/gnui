@@ -37,12 +37,12 @@
 #include <stdlib.h>
 #include "coding_style.h"
 
-using namespace fltk;
+using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 // quick check of any C code for legality, returns an error message
 static char buffer[128]; // for error messages
-extern fltk::Browser *widget_browser;
+extern gnui::Browser *widget_browser;
 
 const char *strip_default_args(const char *name) {
     if(!strchr(name, '='))
@@ -202,11 +202,11 @@ void FunctionType::read_property(const char *c) {
 #include "function_panel.h"
 #include <fltk/ask.h>
 
-static void ok_callback(fltk::Widget* w, void*) {
+static void ok_callback(gnui::Widget* w, void*) {
   w->window()->make_exec_return(true);
 }
 
-static void cancel_callback(fltk::Widget* w, void*) {
+static void cancel_callback(gnui::Widget* w, void*) {
   w->window()->make_exec_return(false);
 }
 
@@ -223,7 +223,7 @@ void FunctionType::open() {
     f_c_button->value(cdecl_);
     const char* message = 0;
     for (;;) {
-	if (message) fltk::alert(message);
+	if (message) gnui::alert(message);
 	if (!function_panel->exec()) break;
 	const char* c = f_name_input->value();
 	while (isspace(*c)) c++;
@@ -347,7 +347,7 @@ void FunctionType::write_code() {
 	
 	if (ismain()) {
 	    if (havewidgets) write_c("%sw->show(argc, argv);\n", get_indent_string(1));
-	    write_c("%sreturn %s%sfltk::run()%s;\n", get_indent_string(1),
+	    write_c("%sreturn %s%sgnui::run()%s;\n", get_indent_string(1),
 		gno_space_parens ? "" : " ",
 		galways_return_parens ? "(" : "", galways_return_parens ? ")" : "");
 	} else if (havewidgets && !constructor && !return_type)
@@ -364,7 +364,7 @@ FluidType *CodeType::make() {
     FluidType *p = FluidType::current;
     while (p && !p->is_code_block()) p = p->parent;
     if (!p) {
-	fltk::message("Please select a function");
+	gnui::message("Please select a function");
 	return 0;
     }
     CodeType *o = new CodeType();
@@ -383,7 +383,7 @@ void CodeType::open() {
     code_input->text(name());
     const char* message = 0;
     for (;;) { // repeat as long as there are errors
-	if (message) fltk::alert(message);
+	if (message) gnui::alert(message);
 	if (!code_panel->exec()) break;
 	const char*c = code_input->text();
 	message = c_check(c); if (message) continue;
@@ -416,7 +416,7 @@ FluidType *CodeBlockType::make() {
     FluidType *p = FluidType::current;
     while (p && !p->is_code_block()) p = p->parent;
     if (!p) {
-	fltk::message("Please select a function");
+	gnui::message("Please select a function");
 	return 0;
     }
     CodeBlockType *o = new CodeBlockType();
@@ -453,7 +453,7 @@ void CodeBlockType::open() {
     code_after_input->static_value(after);
     const char* message = 0;
     for (;;) { // repeat as long as there are errors
-	if (message) fltk::alert(message);
+	if (message) gnui::alert(message);
 	if (!codeblock_panel->exec()) break;
 	const char*c = code_before_input->value();
 	message = c_check(c); if (message) continue;
@@ -513,7 +513,7 @@ void DeclType::open() {
     decl_public_button->value(public_);
     const char* message = 0;
     for (;;) { // repeat as long as there are errors
-	if (message) fltk::alert(message);
+	if (message) gnui::alert(message);
 	if (!decl_panel->exec()) break;
 	const char*c = decl_input->value();
 	while (isspace(*c)) c++;
@@ -610,7 +610,7 @@ void DeclBlockType::open() {
     decl_after_input->static_value(after);
     const char* message = 0;
     for (;;) { // repeat as long as there are errors
-	if (message) fltk::alert(message);
+	if (message) gnui::alert(message);
 	if (!declblock_panel->exec()) break;
 	const char*c = decl_before_input->value();
 	while (isspace(*c)) c++;
@@ -677,27 +677,27 @@ void CommentType::read_property(const char *c) {
 
 #include "comments.h"
 
-static void load_comments_preset(fltk::Preferences &menu) 
+static void load_comments_preset(gnui::Preferences &menu) 
 {
   static const char * const predefined_comment[] = {
     "GNU Public License/GPL Header",  "GNU Public License/GPL Footer",
     "GNU Public License/LGPL Header", "GNU Public License/LGPL Footer",
     "FLTK/Header", "FLTK/Footer" };
   menu.set("n", 6);
-  fltk::Preferences db(fltk::Preferences::USER, "fltk.org", "fluid_comments");
+  gnui::Preferences db(gnui::Preferences::USER, "fltk.org", "fluid_comments");
   for (int i=0; i<6; i++) {
-    menu.set(fltk::Preferences::Name(i), predefined_comment[i]);
+    menu.set(gnui::Preferences::Name(i), predefined_comment[i]);
     db.set(predefined_comment[i], comment_text[i]);
   }
 }
 
 
-static void comment_predefined_cb(fltk::Widget * w, void * data) {
+static void comment_predefined_cb(gnui::Widget * w, void * data) {
   // TODO : handle predefined  comments menus cb
 }
 
 
-static void comment_ok_cb(fltk::Widget * w, void * data) {
+static void comment_ok_cb(gnui::Widget * w, void * data) {
   // TODO : handle predefined  comments menus cb
   const char * c = comment_input->value();
   current_comment->name(c);
@@ -724,7 +724,7 @@ void CommentType::open() {
     const char *text = name();
     {
 	int i=0, n=0;
-	fltk::Preferences menu(fltk::Preferences::USER, "fltk.org", "fluid_comments_menu");
+	gnui::Preferences menu(gnui::Preferences::USER, "fltk.org", "fluid_comments_menu");
 	comment_predefined->clear();
 	comment_predefined->add("_Edit/Add current comment...");
 	comment_predefined->add("_Edit/Remove last selection...");
@@ -733,7 +733,7 @@ void CommentType::open() {
 	menu.get("n", n, 0);
 	for (i=0;i<n;i++) {
 	    char *text;
-	    menu.get(fltk::Preferences::Name(i), text, "");
+	    menu.get(gnui::Preferences::Name(i), text, "");
 	    comment_predefined->add(text);
 	    free(text);
 	}
@@ -895,7 +895,7 @@ void ClassType::open() {
     char *na=0,*pr=0,*p=0; // name and prefix substrings
     
     for (;;) { // repeat as long as there are errors
-	if (message) fltk::alert(message);
+	if (message) gnui::alert(message);
 	if (!class_panel->exec()) break;
 	const char*c = c_name_input->value();
 	char *s = strdup(c);
@@ -998,7 +998,7 @@ void NamespaceType::open() {
     // scan the input field for namespace string and check it
     const char* message = 0;
     for (;;) { // repeat as long as there are errors
-	if (message) fltk::alert(message);
+	if (message) gnui::alert(message);
 	if (!namespace_panel->exec()) break;
 	const char*c = namespace_input->value();
 	while (isspace(*c)) c++;

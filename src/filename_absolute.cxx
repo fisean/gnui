@@ -73,7 +73,7 @@ static inline bool isdirsep(char c) {return c=='/' || c=='\\';}
   slash added to the end.
 */
 int
-fltk::filename_absolute(char *output, int length, const char *input, const char* pwd)
+gnui::filename_absolute(char *output, int length, const char *input, const char* pwd)
 {
   assert(output > input || output+length <= input);
   const char* prefix = 0;
@@ -132,7 +132,7 @@ then it is returned unchanged.
 Return value is the number of characters it wants to write to \a output.
 */
 int
-fltk::filename_relative(char *to, int tolen, const char* from, const char* cwd) {
+gnui::filename_relative(char *to, int tolen, const char* from, const char* cwd) {
   assert(to > from || to+tolen <= from);
 
   if (!isdirsep(*from)

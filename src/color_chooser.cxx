@@ -37,7 +37,7 @@
 #include <fltk/layout.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
 // Besides being a useful object on it's own, the ColorChooser was
 // an attempt to make a complex composite object that could be easily
@@ -457,7 +457,7 @@ ColorChooser::ColorChooser(int X, int Y, int W, int H, const char* L)
 Color ColorChooser::value() const {
   if (no_value_) return 0;
   Color ret =
-    fltk::color(uchar(255*r()+.5f), uchar(255*g()+.5f), uchar(255*b()+.5f));
+    gnui::color(uchar(255*r()+.5f), uchar(255*g()+.5f), uchar(255*b()+.5f));
   return ret ? ret : BLACK;
 }
 
@@ -638,11 +638,11 @@ static int run_it(const char* name)
 /*!
   \image html fl_color_chooser.jpg
 
-  fltk::color_chooser() pops up a window to let the user pick an
+  gnui::color_chooser() pops up a window to let the user pick an
   arbitrary RGB color. They can pick the hue and saturation in the
   "hue box" on the left (hold down CTRL to just change the
   saturation), and the brighness using the vertical slider. Or they
-  can type the 8-bit numbers into the RGB fltk::ValueInput fields, or
+  can type the 8-bit numbers into the RGB gnui::ValueInput fields, or
   drag the mouse across them to adjust them. The pull-down menu lets
   the user set the input fields to show RGB, HSV, or 8-bit RGB (0 to
   255).
@@ -653,10 +653,10 @@ static int run_it(const char* name)
 
   This version takes and returns numbers in the 0-1 range.
 
-  There is also a class fltk::ColorChooser which you can use to imbed
+  There is also a class gnui::ColorChooser which you can use to imbed
   a color chooser into another control panel.
 */
-bool fltk::color_chooser(const char* name, float& r, float& g, float& b) {
+bool gnui::color_chooser(const char* name, float& r, float& g, float& b) {
   make_it();
   chooser->rgb(r,g,b);
   chooser->hide_a(); avalue->hide();
@@ -670,7 +670,7 @@ bool fltk::color_chooser(const char* name, float& r, float& g, float& b) {
 
 /*! Same but user can also select an alpha value. Currently the color
   chips do not remember or set the alpha! */
-bool fltk::color_chooser(const char* name, float&r, float&g, float&b, float&a) {
+bool gnui::color_chooser(const char* name, float&r, float&g, float&b, float&a) {
   make_it();
   chooser->rgb(r,g,b);
   chooser->a(a); avalue->show();
@@ -684,7 +684,7 @@ bool fltk::color_chooser(const char* name, float&r, float&g, float&b, float&a) {
 }
 
 /*! Same but it takes and returns 8-bit numbers for the rgb arguments. */
-bool fltk::color_chooser(const char* name, uchar& r, uchar& g, uchar& b) {
+bool gnui::color_chooser(const char* name, uchar& r, uchar& g, uchar& b) {
   make_it();
   chooser->rgb(r/255.0f, g/255.0f, b/255.0f);
   chooser->hide_a(); avalue->hide();
@@ -697,7 +697,7 @@ bool fltk::color_chooser(const char* name, uchar& r, uchar& g, uchar& b) {
 }
 
 /*! Same but with 8-bit alpha chosen by the user. */
-bool fltk::color_chooser(const char* name, uchar&r, uchar&g, uchar&b, uchar&a) {
+bool gnui::color_chooser(const char* name, uchar&r, uchar&g, uchar&b, uchar&a) {
   make_it();
   chooser->rgb(r/255.0f, g/255.0f, b/255.0f);
   chooser->a(a/255.0f); avalue->show();
@@ -710,8 +710,8 @@ bool fltk::color_chooser(const char* name, uchar&r, uchar&g, uchar&b, uchar&a) {
   return true;
 }
 
-/*! Same but it takes and returns an fltk::Color number. No alpha. */
-bool fltk::color_chooser(const char* name, Color& c) {
+/*! Same but it takes and returns an gnui::Color number. No alpha. */
+bool gnui::color_chooser(const char* name, Color& c) {
   make_it();
   uchar r,g,b;
   if (c) {

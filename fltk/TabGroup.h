@@ -35,7 +35,7 @@
 
 #define MIN_TABSIZE 30
 
-namespace fltk {
+namespace gnui {
 
 class TabGroup;
 

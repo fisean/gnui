@@ -1,4 +1,4 @@
-// Represents an fltk::Group widget
+// Represents an gnui::Group widget
 
 #ifndef GroupType_h
 #define GroupType_h
@@ -10,7 +10,7 @@ public:
   const Enumeration* subtypes() const;
   virtual ~GroupType();
   virtual const char *type_name() const;
-  fltk::Widget *widget(int x,int y,int w,int h);
+  gnui::Widget *widget(int x,int y,int w,int h);
   WidgetType* _make();
   FluidType *make();
   void write_code();
@@ -21,7 +21,7 @@ public:
   int is_group() const;
 
   // live mode functionalities
-  fltk::Widget *enter_live_mode(int top);
+  gnui::Widget *enter_live_mode(int top);
   void leave_live_mode();
   void copy_properties();
   int pixmapID() { return 6; }

@@ -82,7 +82,7 @@ header files directly.
 extern FL_API Region	XRectangleRegion(int x, int y, int w, int h);
 const int XSTATE_MASK = 0x1fff;
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/x11.h
 //@{
@@ -188,7 +188,7 @@ Window* find(XWindow xid);
 
 //@}
 
-} // namespace fltk
+} // namespace gnui
 
 #   if USE_CAIRO
 #    include <fltk/fltk_cairo.h>

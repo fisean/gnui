@@ -40,7 +40,7 @@
 #include <fltk/math.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
 int sides = 20;
 int overlay_sides = 20;
@@ -57,11 +57,11 @@ class BlinkWindow : public Window {
     for (int i = 0; i < n; i++) {
       for (int j = i+1; j < n; j++) {
 	setcolor((i+j)%(5*8*5)+BLACK); // random color from cube
-	fltk::addvertex(float(cosf(2*M_PI*(j-1)/n+.1)),
+	gnui::addvertex(float(cosf(2*M_PI*(j-1)/n+.1)),
                         float(sinf(2*M_PI*(j-1)/n+.1)));
-	fltk::addvertex(float(cosf(2*M_PI*i/n+.1)),
+	gnui::addvertex(float(cosf(2*M_PI*i/n+.1)),
                         float(sinf(2*M_PI*i/n+.1)));
-	fltk::addvertex(float(cosf(2*M_PI*j/n+.1)),
+	gnui::addvertex(float(cosf(2*M_PI*j/n+.1)),
                         float(sinf(2*M_PI*j/n+.1)));
 	fillstrokepath(WHITE);
       }
@@ -82,11 +82,11 @@ class BlinkWindow : public Window {
     int n = overlay_sides;
     for (int i = 0; i < n; i++) {
       for (int j = i+1; j < n; j++) {
-        fltk::addvertex(float(cosf(2*M_PI*(j-1)/n+.1)),
+        gnui::addvertex(float(cosf(2*M_PI*(j-1)/n+.1)),
                         float(sinf(2*M_PI*(j-1)/n+.1)));
-	fltk::addvertex(float(cosf(2*M_PI*i/n+.1)),
+	gnui::addvertex(float(cosf(2*M_PI*i/n+.1)),
                         float(sinf(2*M_PI*i/n+.1)));
-	fltk::addvertex(float(cosf(2*M_PI*j/n+.1)),
+	gnui::addvertex(float(cosf(2*M_PI*j/n+.1)),
                         float(sinf(2*M_PI*j/n+.1)));
 	strokepath();
       }

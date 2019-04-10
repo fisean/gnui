@@ -31,7 +31,7 @@
 
 #  include "Input.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API FileInput : public Input {
   Color	errorcolor_;

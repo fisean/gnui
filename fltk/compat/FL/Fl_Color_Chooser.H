@@ -2,7 +2,7 @@
 #define Fl_Color_Chooser_H
 
 #include <fltk/ColorChooser.h>
-typedef fltk::ColorChooser Fl_Color_Chooser;
-#define fl_color_chooser fltk::color_chooser
+typedef gnui::ColorChooser Fl_Color_Chooser;
+#define fl_color_chooser gnui::color_chooser
 
 #endif

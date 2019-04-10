@@ -3,12 +3,12 @@
 
 #include "Fl_Widget.H"
 #include <fltk/Dial.h>
-typedef fltk::Dial Fl_Dial;
+typedef gnui::Dial Fl_Dial;
 
 enum {
-  FL_NORMAL_DIAL	= fltk::Dial::NORMAL,
-  FL_LINE_DIAL		= fltk::Dial::LINE,
-  FL_FILL_DIAL		= fltk::Dial::FILL
+  FL_NORMAL_DIAL	= gnui::Dial::NORMAL,
+  FL_LINE_DIAL		= gnui::Dial::LINE,
+  FL_FILL_DIAL		= gnui::Dial::FILL
 };
 
 #endif

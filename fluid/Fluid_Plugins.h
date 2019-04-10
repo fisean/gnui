@@ -29,7 +29,7 @@
 
 #include <FL/Fl_Menu_Item.H>
 
-namespace fltk {class Group;}
+namespace gnui {class Group;}
 
 #define PLUGINS_EXTENSION ".flpl"
 
@@ -44,7 +44,7 @@ struct Fluid_Plugin {
   int           please_show_panel; // Set it to 1 when a widget use 
                                    // some settings of this panel
 
-  fltk::Group*    panel;		   // This has to be filled by the
+  gnui::Group*    panel;		   // This has to be filled by the
                                    // make panel function
 
   // dynamic variables used by fluid only

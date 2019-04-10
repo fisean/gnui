@@ -27,7 +27,7 @@
 #include <fltk/SharedImage.h>
 #include <fltk/string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static SharedImage *check(const char *name, uchar *header, int headerlen) {
   if (memcmp(header, "/* XPM */", 9) == 0) // XPM file
@@ -48,7 +48,7 @@ static SharedImage *check(const char *name, uchar *header, int headerlen) {
 
 /*! Makes it so SharedImage can identify image files of the types
   compiled into fltk. These are XPM, PNG, and Jpeg images. */
-void fltk::register_images() {
+void gnui::register_images() {
   static bool been_here = false;
   if (been_here) return ;
   been_here = true;

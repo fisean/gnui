@@ -34,7 +34,7 @@
 
 #include "Group.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ccHueBox : public Widget {
   int px, py;

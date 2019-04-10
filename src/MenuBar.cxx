@@ -25,9 +25,9 @@
 //    http://www.fltk.org/str.php
 //
 
-/*! \class fltk::MenuBar
+/*! \class gnui::MenuBar
 
-Subclass of fltk::Menu. The top level menu items are visible and drawn
+Subclass of gnui::Menu. The top level menu items are visible and drawn
 in a horizontal row. Put this at the top edge of your window and you
 get a typical menubar.
 
@@ -47,7 +47,7 @@ pop up menu.
 #include <fltk/Item.h> // for TOGGLE, RADIO
 #define checkmark(item) (item->type()>=Item::TOGGLE && item->type()<=Item::RADIO)
 
-using namespace fltk;
+using namespace gnui;
 
 void MenuBar::draw() {
   // set_item() does not cause a redraw:
@@ -131,7 +131,7 @@ J1:
 
     // If there's no widget to revert focus,
     // it's better to do nothing in thiscase
-    if (!fltk::focus()) {
+    if (!gnui::focus()) {
       lastfocus_ = 0;
       break;
     }
@@ -150,7 +150,7 @@ J1:
       Widget* w = child(i);
       if (w->active()) {
 	value(i); highlight_ = i;
-	lastfocus_ = fltk::focus();
+	lastfocus_ = gnui::focus();
 	take_focus();
 	return 1;
       }

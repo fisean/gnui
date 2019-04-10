@@ -31,9 +31,9 @@
 #include <fltk/error.h>
 #include <string.h>
 #include <ctype.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Symbol
+/*! \class gnui::Symbol
 
     All small reusable graphics drawn by fltk are based on this class.
     This includes bitmapped images, the boxes drawn around widgets,
@@ -277,8 +277,8 @@ unsigned Symbol::text_length_ = 0;
     return without changing these values. Or they may alter the values to
     preserve aspect ratio. Or they may just return constant sizes.
 
-    The most recent values sent to fltk::setcolor(),
-    fltk::setbgcolor(), fltk::setdrawflags(), fltk::setfont(), etc,
+    The most recent values sent to gnui::setcolor(),
+    gnui::setbgcolor(), gnui::setdrawflags(), gnui::setfont(), etc,
     may influence the value that this returns.
 */
 
@@ -298,8 +298,8 @@ void Symbol::_measure(int& w, int& h) const {}
     upper-left corner, in most cases clipping to the rectangle if
     too big.
 
-    The most recent values sent to fltk::setcolor(),
-    fltk::setbgcolor(), fltk::setdrawflags(), fltk::setfont(), etc,
+    The most recent values sent to gnui::setcolor(),
+    gnui::setbgcolor(), gnui::setdrawflags(), gnui::setfont(), etc,
     may be used by the symbol to change how it draws. The symbol
     should not change any of these values, if it needs to it should
     save and restore the original value (some fake built-in symbols
@@ -330,8 +330,8 @@ void Symbol::_measure(int& w, int& h) const {}
     The default version adds the value of the inset() rectangle
     (and thus if set_inset() was not called it does nothing).
 
-    The most recent values sent to fltk::setcolor(),
-    fltk::setbgcolor(), fltk::setdrawflags(), fltk::setfont(), etc,
+    The most recent values sent to gnui::setcolor(),
+    gnui::setbgcolor(), gnui::setdrawflags(), gnui::setfont(), etc,
     may influence the value that this returns (such as to return
     a different edge for a pushed button).
 */
@@ -376,7 +376,7 @@ void Symbol::inset(Rectangle& r) const {
 bool Symbol::fills_rectangle() const {return false;}
 
 /** Return true to indicate that the area returned by inset() is
-    drawn as a solid rectangle filled with fltk::getbgcolor(),
+    drawn as a solid rectangle filled with gnui::getbgcolor(),
     and that if INVISIBLE is set in drawflags() the interior
     is not filled in at all and instead left with it's previous
     contents.
@@ -400,7 +400,7 @@ public:
 };
 
 /* Adds a symbol to the system. Returns whether correct. */
-void fltk::add_symbol(const char *name, void (*drawit)(Color), int scalable)
+void gnui::add_symbol(const char *name, void (*drawit)(Color), int scalable)
 {
   new SymbolSymbol(name,drawit);
 }

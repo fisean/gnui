@@ -62,18 +62,18 @@
 #define DEBUGPERRORMSG(msg)
 #endif /*DEBUGSELECT*/
 
-using namespace fltk;
+using namespace gnui;
 
 // fabien: added Cairo support for Quartz
 #if USE_CAIRO
 # include <cairo.h>
 # include <cairo-quartz.h>
-  FL_API cairo_t * fltk::cr=0;
+  FL_API cairo_t * gnui::cr=0;
 #endif
 
 #if USE_CAIRO
-namespace fltk {
-    cairo_surface_t * cairo_create_surface(fltk::Window* w) {
+namespace gnui {
+    cairo_surface_t * cairo_create_surface(gnui::Window* w) {
       return cairo_quartz_surface_create_for_cg_context((CGContext*) w->backbuffer(), 
                                                         w->w(), w->h());
     }
@@ -120,7 +120,7 @@ static inline void wake_select_thread() {
 }
 
 //+++ verify port to FLTK2
-void fltk::add_fd(int n, int events, FileHandler cb, void *v) {
+void gnui::add_fd(int n, int events, FileHandler cb, void *v) {
   remove_fd(n, events);
   pthread_mutex_lock(&select_mutex);
   int i = nfds++;
@@ -141,12 +141,12 @@ void fltk::add_fd(int n, int events, FileHandler cb, void *v) {
 }
 
 //+++ verify port to FLTK2
-void fltk::add_fd(int fd, FileHandler cb, void* v) {
+void gnui::add_fd(int fd, FileHandler cb, void* v) {
   add_fd(fd, POLLIN, cb, v);
 }
 
 //+++ verify port to FLTK2
-void fltk::remove_fd(int n, int events) {
+void gnui::remove_fd(int n, int events) {
   pthread_mutex_lock(&select_mutex);
   int i,j;
   maxfd = 0;
@@ -282,19 +282,19 @@ static void HandleDataReady()
 
 // public variables
 //Handle system_menu;
-SystemMenuBar *fltk::system_menu_bar = 0;
+SystemMenuBar *gnui::system_menu_bar = 0;
 
 static WindowRef capture = 0;
 static WindowRef os_capture = 0;
 
 static Window* resize_from_system;
 static ::Cursor _default_cursor;
-CursPtr fltk::default_cursor;
-CursPtr fltk::current_cursor;
-const Widget* fltk::cursor_for;
+CursPtr gnui::default_cursor;
+CursPtr gnui::current_cursor;
+const Widget* gnui::cursor_for;
 
-WindowPtr fltk::quartz_window;
-CGContextRef fltk::quartz_gc;
+WindowPtr gnui::quartz_window;
+CGContextRef gnui::quartz_gc;
 
 /**
  * handle Apple Menu items (can be created using the SystemMenuBar
@@ -458,8 +458,8 @@ static inline int fl_wait(double time)
   int got_events = 0;
   // START A THREAD TO WATCH FOR DATA READY
   if ( nfds && !select_thread) {
-    // detect if calling program did not do fltk::lock() and do it:
-    if (fl_lock_function == nothing) fltk::lock();
+    // detect if calling program did not do gnui::lock() and do it:
+    if (fl_lock_function == nothing) gnui::lock();
     pthread_mutex_init(&select_mutex, NULL);
     pipe(G_pipe);
     DEBUGMSG("*** START THREAD\n");
@@ -614,7 +614,7 @@ static pascal OSStatus carbonWindowHandler( EventHandlerCallRef nextHandler, Eve
     // But we do seem to need this, OS/X has the Windows-like bug of
     // calling the event handler directly without ever returning from
     // ReceiveNextEvent().
-    fltk::flush();
+    gnui::flush();
     break;
   case kEventWindowShown:
     handle( SHOW, window);
@@ -737,14 +737,14 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
       fl_unlock_function();
       return CallNextEventHandler( nextHandler, event );
     }
-    if ( !IsWindowActive( fltk::xid(window) ) ) {
+    if ( !IsWindowActive( gnui::xid(window) ) ) {
       // let the OS handle the activation,
       // but continue to get a click-through effect
       fl_unlock_function();
       CallNextEventHandler( nextHandler, event );
       fl_lock_function();
     }
-    os_capture = fltk::xid(window); // make all mouse events go to this window
+    os_capture = gnui::xid(window); // make all mouse events go to this window
     px = pos.h; py = pos.v;
     {UInt32 clickCount;
     GetEventParameter( event, kEventParamClickCount,
@@ -838,7 +838,7 @@ static unsigned short macKeyLookUp[128] =
     Keypad6, Keypad7, 0, Keypad8, Keypad9, 0, 0, 0,
 
     F5Key, F6Key, F7Key, F3Key, F8Key, F9Key, 0, F11Key,
-    0, F0Key+13, F0Key+16, F0Key+14, 0, F10Key, fltk::MenuKey, F12Key,
+    0, F0Key+13, F0Key+16, F0Key+14, 0, F10Key, gnui::MenuKey, F12Key,
 
     0, F0Key+15, HelpKey, HomeKey, PageUpKey, DeleteKey, F4Key, EndKey,
     F2Key, PageDownKey, F1Key, LeftKey, RightKey, DownKey, UpKey, 0,
@@ -937,7 +937,7 @@ pascal OSStatus carbonKeyboardHandler( EventHandlerCallRef nextHandler, EventRef
 // this function, so the system can move any Input Method widgets to
 // that position:
 //+++ verify port to FLTK2
-void fl_set_spot(fltk::Font *f, Widget *w, int x, int y) {}
+void fl_set_spot(gnui::Font *f, Widget *w, int x, int y) {}
 
 /*
  * initialize the Mac toolboxes, dock status, and set the default menubar
@@ -950,7 +950,7 @@ extern OSErr CPSEnableForegroundOperation(ProcessSerialNumber *psn, UInt32 _arg2
 }
 #endif
 
-void fltk::open_display() {
+void gnui::open_display() {
   static char beenHereDoneThat = 0;
   if ( !beenHereDoneThat )  {
     beenHereDoneThat = 1;
@@ -1124,7 +1124,7 @@ const Monitor& Monitor::find(int x, int y) {
  * get the current mouse pointer world coordinates
  */
 //+++ verify port to FLTK2
-void fltk::get_mouse(int &x, int &y) 
+void gnui::get_mouse(int &x, int &y) 
 {
   open_display();
   Point loc; 
@@ -1134,7 +1134,7 @@ void fltk::get_mouse(int &x, int &y)
   y = loc.v;
 }
 
-bool fltk::warp_mouse(int x, int y) {
+bool gnui::warp_mouse(int x, int y) {
   CGPoint new_pos;
   new_pos.x = x;
   new_pos.y = y;
@@ -1156,7 +1156,7 @@ static int FSSpec2UnixPath( FSSpec *fs, char *dst )
  
 ////////////////////////////////////////////////////////////////
 
-/* current value of fltk::open_callback() */
+/* current value of gnui::open_callback() */
 static void	(*open_cb)(const char *) = 0;
 
 /*
@@ -1212,7 +1212,7 @@ static OSErr OpenAppleEventHandler(const AppleEvent *appleEvt,
  * Install an open documents event handler...
  */
 
-void fltk::open_callback(void (*cb)(const char *)) {
+void gnui::open_callback(void (*cb)(const char *)) {
   if (cb == open_cb) return;
   open_cb = cb;
   if (cb)
@@ -1239,7 +1239,7 @@ static void show_drag(bool v, Widget* target, DragReference dragRef) {
     target->cursor(CURSOR_DEFAULT);
     //HideDragHilight( dragRef );
   }
-  fltk::flush(); // make any fltk drawing get done
+  gnui::flush(); // make any fltk drawing get done
 }
 
 /*
@@ -1371,7 +1371,7 @@ static pascal OSErr dndReceiveHandler( WindowPtr w, void *userData, DragReferenc
 
 ////////////////////////////////////////////////////////////////
 
-void Window::borders( fltk::Rectangle *r ) const {
+void Window::borders( gnui::Rectangle *r ) const {
   if (!this->border() || this->override() || this->parent()) {
     r->set(0,0,0,0);
   } else if (shown()) {
@@ -1586,7 +1586,7 @@ void Window::create()
 }
 
 //+++ verify port to FLTK2
-void fltk::close_display() {}
+void gnui::close_display() {}
 
 /*
  * Turn on flag to indicate that user set the min and max size.
@@ -1642,10 +1642,10 @@ static CGContextRef prev_gc = 0;
 static WindowPtr prev_window = 0;
 int fl_clip_w, fl_clip_h;
 
-namespace fltk {class Image;}
-fltk::Image* fl_current_Image;
+namespace gnui {class Image;}
+gnui::Image* fl_current_Image;
 
-void fltk::draw_into(CGContextRef gc, int w, int h) {
+void gnui::draw_into(CGContextRef gc, int w, int h) {
   prev_gc = quartz_gc;
   prev_window = quartz_window;
   quartz_window = 0;
@@ -1656,7 +1656,7 @@ void fltk::draw_into(CGContextRef gc, int w, int h) {
   fl_current_Image = 0;
 }
 
-void fltk::stop_drawing(CGImageRef) {
+void gnui::stop_drawing(CGImageRef) {
   release_quartz_context();
   quartz_gc = prev_gc;
   quartz_window = prev_window;
@@ -1702,13 +1702,13 @@ void Widget::make_current() const {
 }
 
 // helper function to manage the current CGContext fl_gc
-namespace fltk {
+namespace gnui {
   extern void restore_quartz_line_style();
 }
 
 // FLTK has only one global graphics state. This function copies the FLTK 
 // state into the current Quartz context
-void fltk::fill_quartz_context() {
+void gnui::fill_quartz_context() {
   if (!quartz_gc) return;
   int hgt = 0,wgt=0;
   if (quartz_window) {
@@ -1740,14 +1740,14 @@ void fltk::fill_quartz_context() {
 
 // The only way to reset clipping to its original state is to pop the 
 // current graphics state and restore the global state.
-void fltk::clear_quartz_clipping() {
+void gnui::clear_quartz_clipping() {
   if (!quartz_gc) return;
   CGContextRestoreGState(quartz_gc);
   CGContextSaveGState(quartz_gc);
 }
 
 // Give the Quartz context back to the system
-void fltk::release_quartz_context(CreatedWindow *x) {
+void gnui::release_quartz_context(CreatedWindow *x) {
   if (x && x->gc!=quartz_gc) return;
   if (!quartz_gc) return;
   CGContextRestoreGState(quartz_gc);
@@ -1796,7 +1796,7 @@ void Window::flush() {
 //+++ verify port to FLTK2
 void Window::free_backbuffer() {}
 
-bool fltk::enable_tablet_events() {
+bool gnui::enable_tablet_events() {
   return false;
 }
 
@@ -1815,7 +1815,7 @@ static ScrapRef myScrap = 0;
  * size of selected data
  */
 //+++ verify port to FLTK2
-void fltk::copy(const char *stuff, int len, bool clipboard) {
+void gnui::copy(const char *stuff, int len, bool clipboard) {
   if (!stuff || len<0) return;
   if (len >= selection_buffer_length[clipboard]) {
     delete[] selection_buffer[clipboard];
@@ -1844,7 +1844,7 @@ void fltk::copy(const char *stuff, int len, bool clipboard) {
 
 // Call this when a "paste" operation happens:
 //+++ verify port to FLTK2
-void fltk::paste(Widget &receiver, bool clipboard) {
+void gnui::paste(Widget &receiver, bool clipboard) {
   if (clipboard) {
     // see if we own the selection, if not go get it:
     ScrapRef scrap = 0;
@@ -1882,7 +1882,7 @@ void fltk::paste(Widget &receiver, bool clipboard) {
  *     copy(const char *stuff, int len, 0)
  */
 //+++ verify port to FLTK2
-bool fltk::dnd()
+bool gnui::dnd()
 {
   OSErr result;
   DragReference dragRef;
@@ -1923,7 +1923,7 @@ bool fltk::dnd()
 /*
  * Due to the lack of subwindows, finding the XID is a little bit more involved.
  */
-WindowPtr fltk::xid(const Window*w) {
+WindowPtr gnui::xid(const Window*w) {
   for (;;) {
     Window *w1 = w->window();
     if (!w1) break;
@@ -1932,7 +1932,7 @@ WindowPtr fltk::xid(const Window*w) {
   return CreatedWindow::find(w)->xid;
 }
 
-FILE* fltk::fltk_fopen(const char* name, const char* flags) {
+FILE* gnui::fltk_fopen(const char* name, const char* flags) {
   return fopen(name, flags);
 }
 

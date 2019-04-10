@@ -38,7 +38,7 @@
 # define VK_APPS 0x5D
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 static const struct {unsigned short vk, fltk, ext;} vktab[] = {
   {VK_SPACE,	' '},
@@ -144,11 +144,11 @@ static unsigned short fltk2ms(unsigned fltk) {
   return 0;
 }
 
-bool fltk::event_key_state(unsigned k) {
+bool gnui::event_key_state(unsigned k) {
   return (GetKeyState(fltk2ms(k))&~1) != 0;
 }
 
-bool fltk::get_key_state(unsigned k) {
+bool gnui::get_key_state(unsigned k) {
   return (GetAsyncKeyState(fltk2ms(k))&~1) != 0;
 //    uchar foo[256];
 //    GetKeyboardState(foo);

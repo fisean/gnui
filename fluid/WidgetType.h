@@ -6,7 +6,7 @@
 struct Enumeration;
 
 class FLUID_API WidgetType : public FluidType {
-  virtual fltk::Widget *widget(int,int,int,int);
+  virtual gnui::Widget *widget(int,int,int,int);
   virtual WidgetType *_make(); // virtual constructor
   virtual void setlabel(const char *);
 
@@ -26,7 +26,7 @@ protected:
 public:
 
   bool set_xy;
-  fltk::Widget *o;
+  gnui::Widget *o;
   bool public_;
   
   Fluid_Image* image;
@@ -62,11 +62,11 @@ public:
   virtual const char *type_name() const;
 
   // live mode functionalities
-  fltk::Widget *enter_live_mode(int top);
+  gnui::Widget *enter_live_mode(int top);
   void leave_live_mode();
   void copy_properties();
   
-  virtual int textstuff(int w, fltk::Font* f, float& s, fltk::Color c);
+  virtual int textstuff(int w, gnui::Font* f, float& s, gnui::Color c);
 
   static float default_size;
   int pixmapID() { return 5;}

@@ -29,7 +29,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-using namespace fltk;
+using namespace gnui;
 
 /* These are for getting the default leading: */
 #include <fltk/Widget.h>
@@ -91,10 +91,10 @@ class FixedSymbol : public Symbol {
 public:
   FixedSymbol(const char* n) : Symbol(n) {}
   void _draw(const Rectangle&) const {
-    setfont(fltk::COURIER, getsize());
+    setfont(gnui::COURIER, getsize());
   }
   void _measure(int& w, int& h) const {
-    setfont(fltk::COURIER, getsize());
+    setfont(gnui::COURIER, getsize());
     w = 0;
   }
 };
@@ -237,7 +237,7 @@ static const RightSymbol rightsymbol;
 */
 ////////////////////////////////////////////////////////////////
 
-const int* fltk::column_widths_ = 0;
+const int* gnui::column_widths_ = 0;
 
 // The implementation splits the text up into individual "symbols"
 // Each has an x/y position and a segment of text and a pointer to
@@ -538,17 +538,17 @@ static float split(
   labels in fltk. The string is formatted and aligned inside the
   passed rectangle. This also:
   - Breaks the text into lines at \\n characters. Word-wraps (if
-    flags has fltk::ALIGN_WRAP set) so the words fit in the
+    flags has gnui::ALIGN_WRAP set) so the words fit in the
     columns.
   - Looks up "@xyz;" sequeces to see if they are a Symbol, if so it
     prints that symbol instead. This is skipped if the flags has
-    fltk::RAW_LABEL set.
+    gnui::RAW_LABEL set.
   - Parses "&x" combinations to produce Microsoft style underscores,
     unless RAW_LABEL flag is set.
   - Splits it at every \\t tab character and uses column_widths() to
     set each section into a column.
 */
-void fltk::drawtext(const char* str, const Rectangle& r1, Flags flags)
+void gnui::drawtext(const char* str, const Rectangle& r1, Flags flags)
 {
   if (!str || !*str) return; // speeds up very common widgets
   Rectangle r; transform(r1,r);
@@ -575,7 +575,7 @@ void fltk::drawtext(const char* str, const Rectangle& r1, Flags flags)
   find out the settings and recreate them on the output device.
 */
 
-void fltk::drawtext(void (*textfunction)(const char*,int,float,float),
+void gnui::drawtext(void (*textfunction)(const char*,int,float,float),
 		    float (*getwidth)(const char*, int),
 		    const char* str, const Rectangle& r, Flags flags)
 {
@@ -646,11 +646,11 @@ void fltk::drawtext(void (*textfunction)(const char*,int,float,float),
   Measure the size of box necessary for drawtext() to draw the given
   string inside of it. The \a flags are used to set the alignment,
   though this should not make a difference except for
-  fltk::ALIGN_WRAP.  To correctly measure wrap \a w must be preset to
-  the width you want to wrap at if fltk::ALIGN_WRAP is on in the
+  gnui::ALIGN_WRAP.  To correctly measure wrap \a w must be preset to
+  the width you want to wrap at if gnui::ALIGN_WRAP is on in the
   flags!  \a w and \a h are changed to the size of the resulting box.
 */
-void fltk::measure(const char* str, int& w, int& h, Flags flags) {
+void gnui::measure(const char* str, int& w, int& h, Flags flags) {
 #ifdef DEBUG
   // remove warning from Valgrind/Purify:
   if (!(flags & ALIGN_WRAP)) w = 0;
@@ -665,7 +665,7 @@ void fltk::measure(const char* str, int& w, int& h, Flags flags) {
   This lets you pass your own measurement function to measure the widths
   of printed text. Also returns floating point sizes.
 */
-void fltk::measure(float (*getwidth)(const char*, int),
+void gnui::measure(float (*getwidth)(const char*, int),
 		   const char* str, float& w, float& h, Flags flags)
 {
 #ifdef DEBUG

@@ -1,4 +1,4 @@
-// Test of the fltk::Monitor calls
+// Test of the gnui::Monitor calls
 
 #include <fltk/run.h>
 #include <fltk/Window.h>
@@ -6,7 +6,7 @@
 #include <fltk/draw.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
 void print_monitor(const Monitor& m, int i) {
   if (i < 0) printf("all: ");
@@ -88,5 +88,5 @@ int main(int argc, char** argv) {
   for (int i=0; i<size; i++)
     print_monitor(list[i],i);
 
-  return fltk::run();
+  return gnui::run();
 }

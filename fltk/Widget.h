@@ -27,7 +27,7 @@
 #include "Style.h"
 #include "Rectangle.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Widget;
 class FL_API Window;

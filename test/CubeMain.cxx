@@ -35,13 +35,13 @@
 int main(int argc, char **argv) 
 {  
   // Initial global objects.
-  fltk::args(argc, argv);
-  fltk::visual(fltk::DOUBLE_BUFFER);
+  gnui::args(argc, argv);
+  gnui::visual(gnui::DOUBLE_BUFFER);
 
   CubeViewUI cvui;
   cvui.show();
     
-  return fltk::run();
+  return gnui::run();
 }
 
 

@@ -42,9 +42,9 @@
 #include <stdlib.h>
 
 #if HAVE_GL
-class CubeView : public fltk::GlWindow {
+class CubeView : public gnui::GlWindow {
 #else
-class CubeView : public fltk::Widget {
+class CubeView : public gnui::Widget {
 #endif /* HAVE_GL */
 
 public:

@@ -67,7 +67,7 @@
     #define USE_CAIRO		0
 */
 
-/* Use the fltk::clipout() method to make redrawing blink less, by
+/* Use the gnui::clipout() method to make redrawing blink less, by
    drawing the widgets first, and then the background of the
    window. This is unnecessary in double-buffered windows, and
    tests have shown it to be slower, and it is more complicated.
@@ -199,7 +199,7 @@
 /* Which header file do we include for libjpeg? */
 #define HAVE_LOCAL_JPEG_H 1
 
-/* Do we have POSIX thread library? fltk::lock() will not work unless
+/* Do we have POSIX thread library? gnui::lock() will not work unless
    this exists or WIN32 exists. */
 #define HAVE_PTHREAD 1
 #define HAVE_PTHREAD_H 1
@@ -231,8 +231,8 @@
 #define CLICK_MOVES_FOCUS	0
 
 /* If false or not defined, then if NumLock is off keypad events are
-   translated to fltk::LEFT_KEY, etc.  If on, keypad keys are always
-   reported as fltk::KEYPAD0, fltk::KEYPAD1, ..., ignoring the setting
+   translated to gnui::LEFT_KEY, etc.  If on, keypad keys are always
+   reported as gnui::KEYPAD0, gnui::KEYPAD1, ..., ignoring the setting
    of the NumLock key. This is incredibly useful if you want your
    program to actually use the keypad, and is recommended. */
 #define IGNORE_NUMLOCK		1

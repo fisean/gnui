@@ -37,11 +37,11 @@ extern "C" {
   #define AC_SRC_ALPHA  0x01
 #endif // __DMC__
 
-using namespace fltk;
+using namespace gnui;
 
 static int syncnumber = 1;
 
-struct fltk::Picture {
+struct gnui::Picture {
   int w, h, linedelta;
   unsigned long n; // bytes used
   uchar* data;
@@ -171,7 +171,7 @@ static void convert(uchar* to, const uchar* from, PixelType type, int w) {
     break;
   case MASK: {
     uchar mr,mg,mb;
-    fltk::split_color(fltk::getcolor(),mr,mg,mb);
+    gnui::split_color(gnui::getcolor(),mr,mg,mb);
     t += w;
     from += w;
     while (t > (U32*)to) {
@@ -239,7 +239,7 @@ void Image::setpixels(const uchar* buf, int y) {
   convert(to, buf, pixeltype_, width());
 }
 
-void Image::setpixels(const uchar* buf, const fltk::Rectangle& r, int linedelta)
+void Image::setpixels(const uchar* buf, const gnui::Rectangle& r, int linedelta)
 {
   if (r.empty()) return;
   buffer();
@@ -259,7 +259,7 @@ void Image::setpixels(const uchar* buf, const fltk::Rectangle& r, int linedelta)
 
 void Image::fetch_if_needed() const {
   if (pixeltype_==MASK) {
-    int fg = fltk::get_color_index(fltk::getcolor())&0xffffff00;
+    int fg = gnui::get_color_index(gnui::getcolor())&0xffffff00;
     if ((flags & 0xffffff00) != fg)
       (const_cast<Image*>(this))->flags = (flags&0xff&~FETCHED)|fg;
   }
@@ -270,11 +270,11 @@ void Image::fetch_if_needed() const {
   }
 }
 
-void Image::draw(const fltk::Rectangle& from, const fltk::Rectangle& to) const {
+void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
   fetch_if_needed();
   if (!picture) {fillrect(to); return;}
   // unfortunately rotation does not work. Pick nearest scaled size:
-  fltk::Rectangle R; fltk::transform(to,R);
+  gnui::Rectangle R; gnui::transform(to,R);
   HDC tempdc = CreateCompatibleDC(dc);
   SelectObject(tempdc, picture->bitmap);
   if (fills_rectangle() && R.w()==from.w() && R.h()==from.h()) {
@@ -309,7 +309,7 @@ void Image::make_current() {
 // true if successful, false if an Image must be used to emulate it.
 
 static bool innards(const uchar *buf, PixelType type,
-		    const fltk::Rectangle& r1,
+		    const gnui::Rectangle& r1,
 		    int linedelta,
 		    DrawImageCallback cb, void* userdata)
 {
@@ -319,7 +319,7 @@ static bool innards(const uchar *buf, PixelType type,
 
   int W = r1.w();
   int H = r1.h();
-  fltk::Rectangle r; transform(r1,r);
+  gnui::Rectangle r; transform(r1,r);
   // scaling requires an Image object:
   // (rotation does not work so I use this code in that case...)
   if (r.w() != W || r.h() != H) return false;

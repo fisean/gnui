@@ -15,7 +15,7 @@ extern void load_coding_style();
 extern const char *get_opening_brace(int is_function);
 extern const char *get_indent_string(int level);
 #include <fltk/Widget.h>
-extern void show_coding_style_cb(fltk::Widget *, void *);
+extern void show_coding_style_cb(gnui::Widget *, void *);
 extern void write_includes_from_code(char*);
 #include <fltk/Window.h>
 #include <fltk/TabGroup.h>
@@ -25,6 +25,6 @@ extern void write_includes_from_code(char*);
 #include <fltk/CheckButton.h>
 #include <fltk/ValueInput.h>
 #include <fltk/Button.h>
-fltk::Window* make_codingstyle_window();
+gnui::Window* make_codingstyle_window();
 void load_codingstyle_window();
 #endif

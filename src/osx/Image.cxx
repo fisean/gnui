@@ -1,4 +1,4 @@
-struct fltk::Picture {
+struct gnui::Picture {
   int w, h, linedelta;
   unsigned long n; // bytes used
   uchar* data;
@@ -53,7 +53,7 @@ struct fltk::Picture {
 
   // Create and return an image context that matches a given
   // subrectangle:
-  CGImageRef img(const fltk::Rectangle rect) {
+  CGImageRef img(const gnui::Rectangle rect) {
     uchar* ptr = data+rect.y()*linedelta+rect.x()*depth;
 
     CGDataProviderRef src =
@@ -116,7 +116,7 @@ void Image::clear_forceARGB32() {
   // NYI!!!
 }
 
-fltk::PixelType Image::buffer_pixeltype() const {
+gnui::PixelType Image::buffer_pixeltype() const {
   return pixeltype();
 }
 
@@ -175,7 +175,7 @@ void Image::setpixels(const uchar* buf, int y) {
   if (buf != to) memcpy(to, buf, width()*depth());
 }
 
-void Image::setpixels(const uchar* buf, const fltk::Rectangle& r, int linedelta)
+void Image::setpixels(const uchar* buf, const gnui::Rectangle& r, int linedelta)
 {
   if (r.empty()) return;
   buffer();
@@ -203,7 +203,7 @@ void Image::fetch_if_needed() const {
 
 extern void fl_set_quartz_ctm();
 
-void Image::draw(const fltk::Rectangle& from, const fltk::Rectangle& to) const {
+void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
   fetch_if_needed();
   if (!picture) {fillrect(to); return;}
   CGContextSaveGState(quartz_gc);
@@ -239,8 +239,8 @@ void Image::make_current() {
 // drawimage() calls this to see if a direct draw will work. Returns
 // true if successful, false if an Image must be used to emulate it.
 
-static bool innards(const uchar *buf, fltk::PixelType type,
-		    const fltk::Rectangle& r1,
+static bool innards(const uchar *buf, gnui::PixelType type,
+		    const gnui::Rectangle& r1,
 		    int linedelta,
 		    DrawImageCallback cb, void* userdata)
 {

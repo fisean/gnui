@@ -28,7 +28,7 @@
 
 #include "Slider.h"
 
-namespace fltk {
+namespace gnui {
 
 /*! Vertical Slider that is filled from the end (like a progress bar) */
 class FL_API FillSlider : public Slider {

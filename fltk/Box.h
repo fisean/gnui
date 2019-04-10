@@ -32,7 +32,7 @@
 #include "Flags.h"
 #include "Symbol.h"
 
-namespace fltk {
+namespace gnui {
 
 typedef Symbol Box;
 

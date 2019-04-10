@@ -34,7 +34,7 @@
 
 #include "Menu.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API CycleButton : public Menu {
 public:

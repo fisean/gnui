@@ -33,7 +33,7 @@
 #include <fltk/Button.h>
 #include <fltk/WizardGroup.h>
 
-using namespace fltk;
+using namespace gnui;
 
 // Simple 'wizard' using fltk's new Wizard widget
 
@@ -63,15 +63,15 @@ int main(int argc, char **argv) {
   G_win->begin();
   G_wiz = new WizardGroup(0,0,WIDTH, HEIGHT);
   G_wiz->begin();
-  add_group("This is the\nFirst\npage", fltk::RED,true, false ); // Wizard: page 1
-  add_group("This is the\nSecond\npage", fltk::YELLOW, false, false); // Wizard: page 2
-  add_group("This is the\nLast\npage", fltk::GREEN, false, true); // Wizard: page 3
+  add_group("This is the\nFirst\npage", gnui::RED,true, false ); // Wizard: page 1
+  add_group("This is the\nSecond\npage", gnui::YELLOW, false, false); // Wizard: page 2
+  add_group("This is the\nLast\npage", gnui::GREEN, false, true); // Wizard: page 3
   G_wiz->end();
   G_win->end();
   
   G_win->show(argc, argv);
   
-  return fltk::run();
+  return gnui::run();
 }
 
 //

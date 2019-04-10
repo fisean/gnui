@@ -22,11 +22,11 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::ShapedWindow
+/*! \class gnui::ShapedWindow
 
 This window's shape is clipped to an area defined by the alpha from
 an Image object. Current implementation insists that this be an
-fltk::xbmImage, which limits you to 1-bit alpha which must be supplied
+gnui::xbmImage, which limits you to 1-bit alpha which must be supplied
 by the program. It should not be hard to modify this on newer
 systems to accept an arbitrary Image.
 
@@ -35,7 +35,7 @@ act as though the bounding box is available to them. Therefore this
 window type is usally sublassed or occupied by a single widget.
 
 If the window will be short-lived and does not have to move, you may
-be much better off using an fltk::MenuWindow. This is a normal window
+be much better off using an gnui::MenuWindow. This is a normal window
 but with no border and no pixels are changed unless you draw into
 them. Thus you can get arbitrary shapes by the simple expediency of
 not drawing where it should be "transparent".
@@ -55,12 +55,12 @@ calling void Window::border(bool set).
 # include <X11/extensions/shape.h>
 # undef Window
 #elif defined(_WIN32)
-static HRGN bitmap2region(fltk::xbmImage*);
+static HRGN bitmap2region(gnui::xbmImage*);
 #elif defined(__APPLE__)
 // Not yet implemented for Apple
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 /*! \fn void ShapedWindow::shape(xbmImage* b)
 

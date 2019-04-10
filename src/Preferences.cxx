@@ -50,7 +50,7 @@
 #  include <unistd.h>
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 struct Entry {
   char *name, *value;

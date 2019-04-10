@@ -28,7 +28,7 @@
 #include <fltk/draw.h>
 #include <fltk/x.h>
 
-/*! \class fltk::Image
+/*! \class gnui::Image
 
   A rectangular buffer of pixels that can be efficiently drawn on the
   screen. The draw() functions will copy (or "over" composite if there
@@ -86,15 +86,15 @@
   from files.
 */
 
-using namespace fltk;
+using namespace gnui;
 
 unsigned long Image::memused_;
 
 #if USE_CAIRO || DOXYGEN
 
-// Make the fltk::Picture be a cairo_surface_t:
+// Make the gnui::Picture be a cairo_surface_t:
 #define PICTURE ((cairo_surface_t*)picture)
-#define SET_PICTURE(x) picture = (fltk::Picture*)x
+#define SET_PICTURE(x) picture = (gnui::Picture*)x
 // special flag to indicate if setimage was used:
 #define COPIED_DATA 32
 
@@ -219,7 +219,7 @@ void Image::clear_forceARGB32() {
   and 2-byte data, but there is no api to figure out anything more
   about this data.
 */
-fltk::PixelType Image::buffer_pixeltype() const {
+gnui::PixelType Image::buffer_pixeltype() const {
   switch (pixeltype_) {
   case MASK:
     return MONO;
@@ -323,7 +323,7 @@ uchar* Image::linebuffer(int y) {
   between each row of pixels in \a data. The rectangle is assummed
   to fit inside the width() and height().
 */
-void Image::setpixels(const uchar* buf, const fltk::Rectangle& r, int linedelta)
+void Image::setpixels(const uchar* buf, const gnui::Rectangle& r, int linedelta)
 {
   if (r.empty()) return;
   flags &= ~COPIED;
@@ -340,7 +340,7 @@ void Image::setpixels(const uchar* buf, const fltk::Rectangle& r, int linedelta)
   }
 }
 
-/** \fn void Image::setpixels(const uchar* data, const fltk::Rectangle& r)
+/** \fn void Image::setpixels(const uchar* data, const gnui::Rectangle& r)
   Figures out the linedelta for you as depth()*r.w().
 */
 
@@ -380,7 +380,7 @@ extern void fl_set_cairo_ctm();
   not do any transformations.
   * OS/X: works well in all cases.
 */
-void Image::draw(const fltk::Rectangle& from, const fltk::Rectangle& to) const {
+void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
   fetch_if_needed();
   if (!picture) {fillrect(to); return;}
   cairo_save(cr);
@@ -455,8 +455,8 @@ void Image::make_current() {
 // from a memory buffer without creating an Image. Returns true if
 // it can do it. Returns false if a temporary Image object should be
 // used instead to emulate it.
-static inline bool innards(const uchar *buf, fltk::PixelType type,
-                           const fltk::Rectangle& r1,
+static inline bool innards(const uchar *buf, gnui::PixelType type,
+                           const gnui::Rectangle& r1,
                            int linedelta,
                            DrawImageCallback cb, void* userdata)
 {
@@ -617,7 +617,7 @@ void Image::label(Widget* o) {
 */
 void Image::draw(int x, int y) const {
   int w,h; measure(w,h);
-  draw(fltk::Rectangle(0,0,w,h), fltk::Rectangle(x,y,w,h));
+  draw(gnui::Rectangle(0,0,w,h), gnui::Rectangle(x,y,w,h));
 }
 
 /**
@@ -640,7 +640,7 @@ void Image::draw(int x, int y) const {
   AABBBBBAA
   This function is mostly called from within FLTK's themes.
 */
-void Image::draw_diced(const fltk::Rectangle& R) {
+void Image::draw_diced(const gnui::Rectangle& R) {
 //  fetch_if_needed();
   int w, h; measure(w, h);
   int cw = w / 3;            // Corner width 
@@ -651,15 +651,15 @@ void Image::draw_diced(const fltk::Rectangle& R) {
   int dy = R.y();
   int dlw = R.w() - 2*cw;
   int dlh = R.h() - 2*ch;
-  draw(fltk::Rectangle(0, 0, cw, ch), 			fltk::Rectangle(dx, dy, cw, ch));
-  draw(fltk::Rectangle(cw, 0, lw, ch),			fltk::Rectangle(dx + cw, dy, dlw, ch));
-  draw(fltk::Rectangle(cw + lw, 0, cw, ch), 		fltk::Rectangle(dx + cw + dlw, dy, cw, ch));
-  draw(fltk::Rectangle(0, ch, cw, lh),			fltk::Rectangle(dx, dy + ch, cw, dlh));
-  draw(fltk::Rectangle(cw + lw, ch, cw, lh),		fltk::Rectangle(dx + cw + dlw, dy + ch, cw, dlh));
-  draw(fltk::Rectangle(0, ch + lh, cw, ch),		fltk::Rectangle(dx, dy + ch + dlh, cw, ch));
-  draw(fltk::Rectangle(cw + lw, ch + lh, cw, ch), 	fltk::Rectangle(dx + cw + dlw, dy + ch + dlh, cw, ch));
-  draw(fltk::Rectangle(cw, ch + lh, lw, ch), 		fltk::Rectangle(dx + cw, dy + ch + dlh, dlw, ch));
-  draw(fltk::Rectangle(cw, ch, lw, lh), 		fltk::Rectangle(dx + cw, dy + ch, dlw, dlh));
+  draw(gnui::Rectangle(0, 0, cw, ch), 			gnui::Rectangle(dx, dy, cw, ch));
+  draw(gnui::Rectangle(cw, 0, lw, ch),			gnui::Rectangle(dx + cw, dy, dlw, ch));
+  draw(gnui::Rectangle(cw + lw, 0, cw, ch), 		gnui::Rectangle(dx + cw + dlw, dy, cw, ch));
+  draw(gnui::Rectangle(0, ch, cw, lh),			gnui::Rectangle(dx, dy + ch, cw, dlh));
+  draw(gnui::Rectangle(cw + lw, ch, cw, lh),		gnui::Rectangle(dx + cw + dlw, dy + ch, cw, dlh));
+  draw(gnui::Rectangle(0, ch + lh, cw, ch),		gnui::Rectangle(dx, dy + ch + dlh, cw, ch));
+  draw(gnui::Rectangle(cw + lw, ch + lh, cw, ch), 	gnui::Rectangle(dx + cw + dlw, dy + ch + dlh, cw, ch));
+  draw(gnui::Rectangle(cw, ch + lh, lw, ch), 		gnui::Rectangle(dx + cw, dy + ch + dlh, dlw, ch));
+  draw(gnui::Rectangle(cw, ch, lw, lh), 		gnui::Rectangle(dx + cw, dy + ch, dlw, dlh));
 };
 
 
@@ -680,28 +680,28 @@ void Image::draw_diced(const fltk::Rectangle& R) {
   It is possible this will use drawflags(INACTIVE) to gray out
   the image in a system-specific way. NYI.
 */
-void Image::_draw(const fltk::Rectangle& r) const
+void Image::_draw(const gnui::Rectangle& r) const
 {
   if (r.empty()) return;
   int w,h; measure(w,h);
   // quickly handle no-scaling:
   if (r.w()==w && r.h()==h) {
   NOINSETS:
-    draw(fltk::Rectangle(0,0,w,h), r);
+    draw(gnui::Rectangle(0,0,w,h), r);
     return;
   }
   // now check the insets and use them to scale pieces individually:
-  fltk::Rectangle in(0,0,w,h); this->inset(in);
+  gnui::Rectangle in(0,0,w,h); this->inset(in);
   if (!in.x() && !in.y() && in.w()==w && in.h()==h) goto NOINSETS;
   int fx[4]; fx[0]=0; fx[1]=in.x(); fx[2]=in.r(); fx[3]=w;
   int fy[4]; fy[0]=0; fy[1]=in.y(); fy[2]=in.b(); fy[3]=h;
-  fltk::Rectangle out(r); this->inset(out);
+  gnui::Rectangle out(r); this->inset(out);
   int tx[4]; tx[0]=r.x(); tx[1]=out.x(); tx[2]=out.r(); tx[3]=r.r();
   int ty[4]; ty[0]=r.y(); ty[1]=out.y(); ty[2]=out.b(); ty[3]=r.b();
   for (int y=0; y<3; y++) if (fy[y+1]>fy[y] && ty[y+1]>ty[y]) {
     for (int x=0; x<3; x++) if (fx[x+1]>fx[x] && tx[x+1]>tx[x]) {
-      draw(fltk::Rectangle(fx[x],fy[y],fx[x+1]-fx[x],fy[y+1]-fy[y]),
-	   fltk::Rectangle(tx[x],ty[y],tx[x+1]-tx[x],ty[y+1]-ty[y]));
+      draw(gnui::Rectangle(fx[x],fy[y],fx[x+1]-fx[x],fy[y+1]-fy[y]),
+	   gnui::Rectangle(tx[x],ty[y],tx[x+1]-tx[x],ty[y+1]-ty[y]));
     }
   }
 }
@@ -732,10 +732,10 @@ static Image* reused_image;
   pixel, which is at the \e end of your buffer minus one line_delta.
 
   The X version of FLTK will abort() if the default visual is one
-  it cannot use for images. To avoid this call fltk::visual(fltk::RGB)
+  it cannot use for images. To avoid this call gnui::visual(gnui::RGB)
   at the start of your program.
 */
-void fltk::drawimage(const uchar* pointer, fltk::PixelType type,
+void gnui::drawimage(const uchar* pointer, gnui::PixelType type,
 		     const Rectangle& r,
 		     int line_delta) {
   if (innards(pointer, type, r, line_delta, 0, 0)) return;
@@ -750,12 +750,12 @@ void fltk::drawimage(const uchar* pointer, fltk::PixelType type,
   depth(<i>type</i>), indicating the rows are packed together one
   after another with no gap.
 */
-void fltk::drawimage(const uchar* pointer, fltk::PixelType type,
+void gnui::drawimage(const uchar* pointer, gnui::PixelType type,
 		     const Rectangle& r) {
   drawimage(pointer, type, r, depth(type)*r.w());
 }
 
-/** \typedef fltk::DrawImageCallback
+/** \typedef gnui::DrawImageCallback
 
   Type of function passed to drawimage(). It must return a pointer
   to a horizontal row of \a w pixels, starting with the pixel at
@@ -800,8 +800,8 @@ void fltk::drawimage(const uchar* pointer, fltk::PixelType type,
   all pixels may be asked for. You can assumme y will be asked for in
   increasing order.
 */
-void fltk::drawimage(DrawImageCallback cb,
-		     void* userdata, fltk::PixelType type,
+void gnui::drawimage(DrawImageCallback cb,
+		     void* userdata, gnui::PixelType type,
 		     const Rectangle& r) {
   if (innards(0, type, r, 0, cb, userdata)) return;
   // Fake it using a temporary Image

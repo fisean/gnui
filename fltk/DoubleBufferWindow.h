@@ -9,7 +9,7 @@
 # include "Window.h"
 #endif
 
-namespace fltk {
+namespace gnui {
 
 class DoubleBufferWindow : public Window {
 

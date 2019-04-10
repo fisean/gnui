@@ -28,11 +28,11 @@
 
 #define checkmark(item) (item->type()>=Item::TOGGLE && item->type()<=Item::RADIO)
 
-using namespace fltk;
+using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::List
+/*! \class gnui::List
 
   Allows a Browser or Choice or other subclass of Menu to display a
   hierarchy of data that is managed by the application rather than
@@ -53,11 +53,11 @@ using namespace fltk;
   items.
 
   If you wish to use a MultiBrowser you must also have space in your
-  data to store the state of the fltk::SELECTED flag on each item, and
+  data to store the state of the gnui::SELECTED flag on each item, and
   and must implement the flags_changed() method.
 
   If you wish to make a hierarcial Browser, you may want to have space
-  in your data to store the state of the fltk::STATE flag on each parent
+  in your data to store the state of the gnui::STATE flag on each parent
   item, and implement the flags_changed() method. If you don't do this
   the browser is only able to keep one item open at each level.
 
@@ -77,7 +77,7 @@ using namespace fltk;
 
   This should return -1 if the item is not a "parent" item or the
   index array is illegal. It is not necessary to return the correct
-  value until the parent is "open", which means the fltk::STATE flag
+  value until the parent is "open", which means the gnui::STATE flag
   was set in it, so if it is expensive to calculate the number you can
   return 1 for any closed parent.
 
@@ -85,7 +85,7 @@ using namespace fltk;
   have defined:
 
 \code
-int My_List::children(const fltk::Menu*, const int* indexes, int level) {
+int My_List::children(const gnui::Menu*, const int* indexes, int level) {
   Node* node = root;
   for (int l = 0; l < level; l++) {
     if (indexes[l] >= node->children_count()) return -1;
@@ -112,7 +112,7 @@ int List::children(const Menu* menu, const int* indexes, int level) {
 /*!
   Return a given child as a widget. draw() and measure() will be
   called on this widget to figure out where to place it and to draw
-  it. Typical implementations create a reusable fltk::Item and fill it
+  it. Typical implementations create a reusable gnui::Item and fill it
   in with the correct data. This should return NULL if there is
   anything illegal about the indexes.
 
@@ -120,25 +120,25 @@ int List::children(const Menu* menu, const int* indexes, int level) {
   have defined. This demonstrates how to create the dummy widget:
 
 \code
-fltk::Widget* My_List::child(const fltk::Menu*, const int* indexes, int level) {
+gnui::Widget* My_List::child(const gnui::Menu*, const int* indexes, int level) {
   Node* node = root;
   for (int l = 0; l <= level; l++) {
     if (!node->is_parent()) return 0;
     if (indexes[l] >= node->children_count()) return 0;
     node = node->child(indexes[l]);
   }
-  static fltk::Widget* widget;
+  static gnui::Widget* widget;
   if (!widget) {
-    fltk::Group::current(0);
-    widget = new fltk::Item();
+    gnui::Group::current(0);
+    widget = new gnui::Item();
   }
   widget->label(node->text());
   widget->w(0); // cause measure() to be called
   widget->user_data(node);
-  if (node->selected) widget->set_flag(fltk::SELECTED);
-  else widget->clear_flag(fltk::SELECTED);
-  if (node->is_parent() && node->open) widget->set_flag(fltk::STATE);
-  else widget->clear_flag(fltk::STATE);
+  if (node->selected) widget->set_flag(gnui::SELECTED);
+  else widget->clear_flag(gnui::SELECTED);
+  if (node->is_parent() && node->open) widget->set_flag(gnui::STATE);
+  else widget->clear_flag(gnui::STATE);
   return widget;
 }
 \endcode
@@ -160,15 +160,15 @@ Widget* List::child(const Menu* menu, const int* indexes,int level) {
   you can copy the values to permanent storage, and perhaps change
   other displays of the selection.
 
-  Currently only the fltk::OPENED and fltk::SELECTED flags are ever changed.
+  Currently only the gnui::OPENED and gnui::SELECTED flags are ever changed.
 
   Here is a sample implementation, where Node is a data type that you
   have defined:
 \code
-void My_List::flags_changed(const fltk::Menu*, fltk::Widget* widget) {
+void My_List::flags_changed(const gnui::Menu*, gnui::Widget* widget) {
   Node* node = (Node*)(widget->user_data());
-  node->open = widget->flag(fltk::OPENED);
-  node->selected = widget->flag(fltk::SELECTED);
+  node->open = widget->flag(gnui::OPENED);
+  node->selected = widget->flag(gnui::SELECTED);
 }
 \endcode
 */
@@ -192,7 +192,7 @@ static List default_list;
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::Menu
+/*! \class gnui::Menu
 
   The Menu base class is used by Browser, Choice, MenuBar, PopupMenu,
   ComboBox, and other widgets.  It is simply a Group and each item is
@@ -265,9 +265,9 @@ int Menu::children(const int* indexes, int level) const {
 /*!
   Returns the number of children at the top level. Same as children(0,0).
 
-  <i>This Overrides the method of the same name on fltk::Group</i>. This is
-  so that an fltk::List can be used. However if no fltk::List is
-  specified the action is identical to fltk::Group::children().
+  <i>This Overrides the method of the same name on gnui::Group</i>. This is
+  so that an gnui::List can be used. However if no gnui::List is
+  specified the action is identical to gnui::Group::children().
 */
 int Menu::children() const {
   return list_->children(this, 0, 0);
@@ -279,7 +279,7 @@ int Menu::children(int i) const {
 }
 
 /*! Calls list()->child(this, indexes, level).
-  If an fltk::List is used, the returned widget may be a temporary data
+  If an gnui::List is used, the returned widget may be a temporary data
   structure and may be overwritten by another call to child() in this
   <i>or any other Menu</i>!
 */
@@ -289,9 +289,9 @@ Widget* Menu::child(const int* indexes, int level) const {
 
 /*! Returns the given top-level child. Same as child(&index,0).
 
-  <i>This Overrides the method of the same name on fltk::Group</i>. This is
-  so that an fltk::List can be used. However if no fltk::List is
-  specified the action is identical to fltk::Group::child(index).
+  <i>This Overrides the method of the same name on gnui::Group</i>. This is
+  so that an gnui::List can be used. However if no gnui::List is
+  specified the action is identical to gnui::Group::child(index).
 */
 Widget* Menu::child(int n) const {
   return list_->child(this, &n, 0);
@@ -308,7 +308,7 @@ Widget* Menu::child(int n) const {
   Browser::goto_index() sets this to the current item.
 
   Since this may be the result of calling child() the returned
-  structure may be short-lived if an fltk::List is used.
+  structure may be short-lived if an gnui::List is used.
 */
 
 /*! \fn Widget* Menu::item(Widget* v)
@@ -384,7 +384,7 @@ bool Menu::set_item(const int* indexes, int level) {
   illegal Group::focus_index(), or null if this focus_index() is
   illegal.
 
-  If an fltk::List is used this will probably only go to the first
+  If an gnui::List is used this will probably only go to the first
   child and not descend any further.
 */
 Widget* Menu::get_item() {
@@ -438,7 +438,7 @@ static Widget* shortcut_search(Group* g) {
 }
 
 /*!
-  Respond to the current fltk::SHORTCUT or fltk::KEY event by finding
+  Respond to the current gnui::SHORTCUT or gnui::KEY event by finding
   a menu item it matches and calling execute() on it. True is returned
   if a menu item is found, false if none. Items are searched for a
   matching shortcut() value. "&x" shortcuts are ignored, they are

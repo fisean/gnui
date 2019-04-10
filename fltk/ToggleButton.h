@@ -30,7 +30,7 @@
 
 #include "Button.h"
 
-namespace fltk {
+namespace gnui {
 
 class ToggleButton : public Button {
 public:

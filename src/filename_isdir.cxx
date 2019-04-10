@@ -51,7 +51,7 @@ static bool last_result = false;
     The string passed to fltk_stat \b must be UTF8 (note that ASCII is
     a subset of UTF8)
 */
-int fltk::fltk_stat(const char* name, struct stat *buffer) {
+int gnui::fltk_stat(const char* name, struct stat *buffer) {
 #if defined(_WIN32) && !defined (__CYGWIN__)
   wchar_t * nativeFilename = NULL;
   int length = utf8towc(name, strlen(name), NULL, 0);
@@ -83,29 +83,29 @@ static bool fill_stat(const char *name) {
   // on _WIN32 && !__CYGWIN__, all strings into this file will be UTF-8
 
 #endif// _WIN32 || __EMX__
-  last_result = (fltk::fltk_stat(name, &last_stat)==0);
+  last_result = (gnui::fltk_stat(name, &last_stat)==0);
   return last_result;
 }
 
 /** Returns true if the file exists . */
-bool fltk::filename_exist(const char* name) {
+bool gnui::filename_exist(const char* name) {
   return name && *name && fill_stat(name);
 }
 
 /** Returns true if the file exists and is a directory. */
-bool fltk::filename_isdir(const char* name) {
+bool gnui::filename_isdir(const char* name) {
   if (!fill_stat(name)) return false;
   return ((last_stat.st_mode & 0170000) == 0040000);
 }
 
 /** Returns true if the file exists and is a regular file. */
-bool fltk::filename_isfile(const char* name) {
+bool gnui::filename_isfile(const char* name) {
   if (!fill_stat(name)) return false;
   return (last_stat.st_mode&0170000)==0100000;
 }
 
 /** Returns the size of the file in bytes. Returns zero if it does not exist.*/
-FL_FILESIZE_T fltk::filename_size(const char* name) {
+FL_FILESIZE_T gnui::filename_size(const char* name) {
   if (!fill_stat(name)) return 0;
   return (FL_FILESIZE_T)last_stat.st_size;
 }
@@ -115,7 +115,7 @@ FL_FILESIZE_T fltk::filename_size(const char* name) {
   (number of seconds since the start of 1970 in GMT). Returns 0
   if the file does not exist.
 */
-long int fltk::filename_mtime(const char *name) {
+long int gnui::filename_mtime(const char *name) {
   if (!fill_stat(name)) return 0L;
   if (last_stat.st_mtime) return (long) last_stat.st_mtime;
   if (last_stat.st_atime) return (long) last_stat.st_atime;
@@ -125,8 +125,8 @@ long int fltk::filename_mtime(const char *name) {
 /**
   Sorts two files based on their modification date.
 */
-int fltk::modificationsort(const dirent*const* a, const dirent*const* b) {
-  return fltk::filename_mtime((*a)->d_name) < fltk::filename_mtime((*b)->d_name);
+int gnui::modificationsort(const dirent*const* a, const dirent*const* b) {
+  return gnui::filename_mtime((*a)->d_name) < gnui::filename_mtime((*b)->d_name);
 }
 //
 // End of "$Id$".

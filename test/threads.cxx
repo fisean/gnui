@@ -36,16 +36,16 @@
 #  include <stdio.h>
 #  include <math.h>
 
-fltk::Thread prime_thread;
+gnui::Thread prime_thread;
 
-fltk::Browser *browser1, *browser2;
-fltk::ValueInput *value1, *value2;
+gnui::Browser *browser1, *browser2;
+gnui::ValueInput *value1, *value2;
 unsigned start2 = 5;
 
 void* prime_func(void* p)
 {
-  fltk::Browser* browser = (fltk::Browser*) p;
-  fltk::ValueInput *value;
+  gnui::Browser* browser = (gnui::Browser*) p;
+  gnui::ValueInput *value;
   unsigned n = 5;
   if (browser == browser2) {
     value = value2;
@@ -57,21 +57,21 @@ void* prime_func(void* p)
   for (; ; n += 2) {
     if (browser == browser2) {
       // for multithreaded one, get next number to test
-      fltk::lock();
+      gnui::lock();
       n = start2;
       start2 += 2;
-      fltk::unlock();
+      gnui::unlock();
     }
     for (unsigned p=3; n%p; p+=2) {
       if (p*p > n) {
 	char s[128];
 	sprintf(s, "%u", n);
-	fltk::lock();
+	gnui::lock();
 	browser->add(s);
 	browser->bottomline(browser->size());
 	if (n > value->value()) value->value(n);
-	fltk::awake((void*) (browser == browser1? p:0));	// Cause the browser to redraw ...
-	fltk::unlock();
+	gnui::awake((void*) (browser == browser1? p:0));	// Cause the browser to redraw ...
+	gnui::unlock();
 	break;
       }
     }
@@ -81,20 +81,20 @@ void* prime_func(void* p)
 
 int main()
 {
-  fltk::lock(); // you must do this before creating any threads!
+  gnui::lock(); // you must do this before creating any threads!
 
-  fltk::Window* w = new fltk::Window(200, 200, "Single Thread");
+  gnui::Window* w = new gnui::Window(200, 200, "Single Thread");
   w->begin();
-  browser1 = new fltk::Browser(0, 0, 200, 175);
+  browser1 = new gnui::Browser(0, 0, 200, 175);
   w->resizable(browser1);
-  value1 = new fltk::ValueInput(100, 175, 200, 25, "Max Prime:");
+  value1 = new gnui::ValueInput(100, 175, 200, 25, "Max Prime:");
   w->end();
   w->show();
-  w = new fltk::Window(200, 200, "Six Threads");
+  w = new gnui::Window(200, 200, "Six Threads");
   w->begin();
-  browser2 = new fltk::Browser(0, 0, 200, 175);
+  browser2 = new gnui::Browser(0, 0, 200, 175);
   w->resizable(browser2);
-  value2 = new fltk::ValueInput(100, 175, 200, 25, "Max Prime:");
+  value2 = new gnui::ValueInput(100, 175, 200, 25, "Max Prime:");
   w->end();
   w->show();
 
@@ -106,19 +106,19 @@ int main()
   browser2->add("3");
 
   // One thread displaying in one browser
-  fltk::create_thread(prime_thread, prime_func, browser1);
+  gnui::create_thread(prime_thread, prime_func, browser1);
   // Several threads displaying in another browser
-  fltk::create_thread(prime_thread, prime_func, browser2);
-  fltk::create_thread(prime_thread, prime_func, browser2);
-  fltk::create_thread(prime_thread, prime_func, browser2);
-  fltk::create_thread(prime_thread, prime_func, browser2);
-  fltk::create_thread(prime_thread, prime_func, browser2);
-  fltk::create_thread(prime_thread, prime_func, browser2);
+  gnui::create_thread(prime_thread, prime_func, browser2);
+  gnui::create_thread(prime_thread, prime_func, browser2);
+  gnui::create_thread(prime_thread, prime_func, browser2);
+  gnui::create_thread(prime_thread, prime_func, browser2);
+  gnui::create_thread(prime_thread, prime_func, browser2);
+  gnui::create_thread(prime_thread, prime_func, browser2);
 
-  //  fltk::run();
+  //  gnui::run();
   while (w->visible()) {
-    fltk::wait();
-//    void* m = fltk::thread_message();
+    gnui::wait();
+//    void* m = gnui::thread_message();
 //    printf("Received message: %p\n", m);
   }
 
@@ -128,7 +128,7 @@ int main()
 #  include <fltk/ask.h>
 
 int main() {
-  fltk::alert("Sorry, threading not supported on this platform!");
+  gnui::alert("Sorry, threading not supported on this platform!");
 }
 #endif // HAVE_PTHREAD || WIN32
 

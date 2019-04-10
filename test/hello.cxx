@@ -3,7 +3,7 @@
 #include <fltk/Window.h>
 #include <fltk/Widget.h>
 #include <fltk/run.h>
-using namespace fltk;
+using namespace gnui;
 
 int main(int argc, char **argv) {
   Window *window = new Window(300, 180);

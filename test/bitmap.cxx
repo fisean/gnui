@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include "escherknot.xbm"
 
-using namespace fltk;
+using namespace gnui;
 
 ToggleButton *leftb,*rightb,*topb,*bottomb,*insideb,*inactb;
 Button *b;
@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
   win->resizable(win);
   win->end();
   win->show(argc, argv);
-  return fltk::run();
+  return gnui::run();
 }
 
 //

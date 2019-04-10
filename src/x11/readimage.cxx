@@ -37,10 +37,10 @@
 #    undef Window
 #  endif // __sgi
 
-using namespace fltk;
+using namespace gnui;
 
 uchar *				// O - Pixel buffer or NULL if failed
-fltk::readimage(uchar *p,	// I - Pixel buffer or NULL to allocate
+gnui::readimage(uchar *p,	// I - Pixel buffer or NULL to allocate
 	PixelType type,		// Type of pixels to store (RGB and RGBA only now)
 	const Rectangle& r,	// area to read
 		int linedelta	// pointer increment per line

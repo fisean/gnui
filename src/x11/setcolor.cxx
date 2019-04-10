@@ -106,7 +106,7 @@ Returns the X pixel number used to draw the given FLTK color.
 If a colormapped visual is being used, this may allocate it, or find
 the nearest match.
 */
-ulong fltk::xpixel(Color i) {
+ulong gnui::xpixel(Color i) {
   if (!beenhere) figure_out_visual();
 
 #if USE_COLORMAP
@@ -242,16 +242,16 @@ XColorMap& fl_xmap(uchar index, uchar r, uchar g, uchar b)
 #endif // USE_COLORMAP
 }
 
-ulong fltk::current_xpixel;
+ulong gnui::current_xpixel;
 
-void fltk::setcolor(Color i) {
+void gnui::setcolor(Color i) {
   current_color_ = i;
   current_xpixel = xpixel(i);
   XSetForeground(xdisplay, gc, current_xpixel);
 }
 
 // alpha color is not implemented on X
-void fltk::setcolor_alpha(Color color, float alpha) {
+void gnui::setcolor_alpha(Color color, float alpha) {
   setcolor(color);
 }
 
@@ -278,7 +278,7 @@ static inline void free_color(Color i) {
 
 ////////////////////////////////////////////////////////////////
 
-void fltk::line_style(int style, float width, const char* dashes) {
+void gnui::line_style(int style, float width, const char* dashes) {
   line_style_ = style;
   line_width_ = width;
   line_dashes_ = dashes;

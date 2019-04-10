@@ -54,7 +54,7 @@
 #include <string.h>
 #include <fltk/ask.h>
 
-using namespace fltk;
+using namespace gnui;
 
 //
 // Globals...
@@ -253,7 +253,7 @@ show_callback(void)
   fc->show(240,200);
 
   while (fc->visible())
-    fltk::wait();
+    gnui::wait();
 
   count = fc->count();
   if (count > 0)
@@ -265,7 +265,7 @@ show_callback(void)
       if (!fc->value(i))
         break;
 
-      fltk::filename_relative(relative, sizeof(relative), fc->value(i));
+      gnui::filename_relative(relative, sizeof(relative), fc->value(i));
 
       files->add(relative,
                  FileIcon::find(fc->value(i), FileIcon::PLAIN));
@@ -284,7 +284,7 @@ main(int  argc,		// I - Number of command-line arguments
      char *argv[])	// I - Command-line arguments
 {
   // Make the file chooser...
-  //fltk::scheme(NULL);
+  //gnui::scheme(NULL);
 
   // if you decide not to link with images lib you must comment this:
   FileIcon::load_system_icons();
@@ -317,7 +317,7 @@ main(int  argc,		// I - Number of command-line arguments
 		  );
 
   button = new Button(365, 10, 25, 25);
-  button->labelcolor(fltk::YELLOW);
+  button->labelcolor(gnui::YELLOW);
   button->callback((Callback *)show_callback);
 
 #define TEST_FETCH_PNG 0
@@ -339,20 +339,20 @@ main(int  argc,		// I - Number of command-line arguments
   button->callback((Callback*)dir_callback);
 
   files = new FileBrowser(50, 80, 340, 75, "Files:");
-  files->align(fltk::ALIGN_LEFT);
+  files->align(gnui::ALIGN_LEFT);
 
   button = new Button(340, 165, 50, 25, "Close");
   button->callback((Callback*)close_callback);
   window->resizable(files);
   window->end();
   window->show(1, argv);
-  fltk::run();
+  gnui::run();
 
 #else
   const char *defaultname = "images/testimg.jpg";
-  fltk::use_system_file_chooser(true);
-  const char * name = fltk::file_chooser("Open","Image Files (*.{bmp,gif,jpg,png})\t", defaultname);
-  fltk::message("File selected is : %s", name && strlen(name) ? name : "<no_selection>");
+  gnui::use_system_file_chooser(true);
+  const char * name = gnui::file_chooser("Open","Image Files (*.{bmp,gif,jpg,png})\t", defaultname);
+  gnui::message("File selected is : %s", name && strlen(name) ? name : "<no_selection>");
 #endif
 
   return (0);

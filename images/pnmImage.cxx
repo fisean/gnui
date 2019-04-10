@@ -42,7 +42,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-using namespace fltk;
+using namespace gnui;
 //
 // 'pnmImage::pnmImage()' - Load a PNM image...
 //
@@ -77,7 +77,7 @@ bool pnmImage::fetch() {
   lineptr = fgets(line, sizeof(line), fp);
   if (!lineptr) {
     fclose(fp);
-    fltk::error("Early end-of-file in PNM file \"%s\"!", name);
+    gnui::error("Early end-of-file in PNM file \"%s\"!", name);
     return false;
   }
 

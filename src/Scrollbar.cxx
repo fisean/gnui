@@ -36,9 +36,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Scrollbar
+/*! \class gnui::Scrollbar
 
   \image html scrollbar.gif
 

@@ -1,7 +1,7 @@
 #ifndef fltk_layout_h
 #define fltk_layout_h
 
-namespace fltk {
+namespace gnui {
 
 /*!
   Values of the bits stored in Widget::layout_damage().
@@ -14,7 +14,7 @@ namespace fltk {
   expensive, this expense is now deferred until the user will actually
   see the new size.
 
-  Some Group widgets such as fltk::PackedGroup will also use the
+  Some Group widgets such as gnui::PackedGroup will also use the
   virtual Widget::layout() function to find out how big a widget
   should be.  A Widget is allowed to change it's own dimensions in
   layout() (except it is not allowed to change it if called a second

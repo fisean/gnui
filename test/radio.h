@@ -10,8 +10,8 @@
 #include <fltk/RadioButton.h>
 #include <fltk/Group.h>
 #include <fltk/Tooltip.h>
-extern fltk::LightButton* ttlb;
+extern gnui::LightButton* ttlb;
 
-namespace fltk  {
+namespace gnui  {
 }
 #endif

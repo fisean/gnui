@@ -26,7 +26,7 @@
 
 #include "Rectangle.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Monitor : public Rectangle {
   int depth_;

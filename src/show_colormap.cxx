@@ -35,7 +35,7 @@
 #include <fltk/draw.h>
 #include <fltk/events.h>
 #include <fltk/damage.h>
-using namespace fltk;
+using namespace gnui;
 
 #define BOXSIZE 14
 #define BORDER 4
@@ -143,7 +143,7 @@ int ColorMenu::handle(int e) {
 /*!
   Older style of color chooser that only chooses the "indexed" fltk
   colors. This pops up a panel of the 256 colors you can access with
-  "indexed" fltk::Color values and lets the user pick one of them.
+  "indexed" gnui::Color values and lets the user pick one of them.
 
   If the user clicks on one of them, the new index is returned.
 
@@ -151,7 +151,7 @@ int ColorMenu::handle(int e) {
 
   \image html fl_show_colormap.gif
 */
-Color fltk::show_colormap(Color oldcol) {
+Color gnui::show_colormap(Color oldcol) {
   ColorMenu m(oldcol);
   if (m.which > 255) {
     m.position(event_x_root()+5, event_y_root()-m.h()/2);

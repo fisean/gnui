@@ -4,7 +4,7 @@
 #include <fltk/ValueSlider.h>
 #include <fltk/draw.h>
 #include <fltk/Choice.h>
-using namespace fltk;
+using namespace gnui;
 
 Window *form;
 Slider *sliders[8];
@@ -19,7 +19,7 @@ public:
 
 void test_box::draw() {
   Window::draw();
-  setcolor(fltk::color((uchar)(sliders[0]->value()),
+  setcolor(gnui::color((uchar)(sliders[0]->value()),
 		       (uchar)(sliders[1]->value()),
 		       (uchar)(sliders[2]->value())));
   char buf[5];
@@ -48,29 +48,29 @@ void test_box::draw() {
 
 void build_style_menu(Group *g) {
   g->begin();
-  (new Item("fltk::SOLID"))->argument(SOLID);
-  (new Item("fltk::DASH"))->argument(DASH);
-  (new Item("fltk::DOT"))->argument(DOT);
-  (new Item("fltk::DASHDOT"))->argument(DASHDOT);
-  (new Item("fltk::DASHDOTDOT"))->argument(DASHDOTDOT);
+  (new Item("gnui::SOLID"))->argument(SOLID);
+  (new Item("gnui::DASH"))->argument(DASH);
+  (new Item("gnui::DOT"))->argument(DOT);
+  (new Item("gnui::DASHDOT"))->argument(DASHDOT);
+  (new Item("gnui::DASHDOTDOT"))->argument(DASHDOTDOT);
   g->end();
 }
 
 void build_cap_menu(Group *g) {
   g->begin();
   new Item("default");
-  (new Item("fltk::CAP_FLAT"))->argument(CAP_FLAT);
-  (new Item("fltk::CAP_ROUND"))->argument(CAP_ROUND);
-  (new Item("fltk::CAP_SQUARE"))->argument(CAP_SQUARE);
+  (new Item("gnui::CAP_FLAT"))->argument(CAP_FLAT);
+  (new Item("gnui::CAP_ROUND"))->argument(CAP_ROUND);
+  (new Item("gnui::CAP_SQUARE"))->argument(CAP_SQUARE);
   g->end();
 }
 
 void build_join_menu(Group *g) {
   g->begin();
   new Item("default");
-  (new Item("fltk::JOIN_MITER"))->argument(JOIN_MITER);
-  (new Item("fltk::JOIN_ROUND"))->argument(JOIN_ROUND);
-  (new Item("fltk::JOIN_BEVEL"))->argument(JOIN_BEVEL);
+  (new Item("gnui::JOIN_MITER"))->argument(JOIN_MITER);
+  (new Item("gnui::JOIN_ROUND"))->argument(JOIN_ROUND);
+  (new Item("gnui::JOIN_BEVEL"))->argument(JOIN_BEVEL);
   g->end();
 }
 

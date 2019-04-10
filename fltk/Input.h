@@ -25,14 +25,13 @@
 //    http://www.fltk.org/str.php
 //
 
-#ifndef fltk_Input_h
-#define fltk_Input_h
+#pragma once
 
 #ifndef fltk_Widget_h
 #include "Widget.h"
 #endif
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Input : public Widget {
 public:
@@ -127,7 +126,6 @@ private:
 
 }
 
-#endif
 
 //
 // End of "$Id$".

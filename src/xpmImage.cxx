@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::xpmImage
+/*! \class gnui::xpmImage
 
   Draws inline XPM data. This is a text-based 256-color image format
   designed for X11 and still very useful for making small icons, since
@@ -48,7 +48,7 @@ static xpmImage image_name(image_name_xpm);
 #include <fltk/string.h>
 #include <ctype.h>
 #include <config.h>
-using namespace fltk;
+using namespace gnui;
 
 bool xpmImage::fetch() {
   return fetch(*this, data);

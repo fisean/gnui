@@ -45,15 +45,15 @@ int scandir (const char *dir, dirent ***namelist,
 }
 #endif
 
-int fltk::alphasort(const dirent*const*a, const dirent*const*b) {
+int gnui::alphasort(const dirent*const*a, const dirent*const*b) {
   return strcmp((*a)->d_name, (*b)->d_name);
 }
 
-int fltk::casealphasort(const dirent*const*a, const dirent*const*b) {
+int gnui::casealphasort(const dirent*const*a, const dirent*const*b) {
   return strcasecmp((*a)->d_name, (*b)->d_name);
 }
 
-int fltk::filename_list(const char *d, dirent ***list,
+int gnui::filename_list(const char *d, dirent ***list,
                      FileSortF *sort) {
   // Nobody defines the comparison function prototype correctly!
   // It should be "const dirent* const*". I don't seem to be able to

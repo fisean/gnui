@@ -24,7 +24,7 @@ FL_PATCH_VERSION macro constants.
 
 #if defined(__cplusplus) || defined(DOXYGEN) /* Allow this file to be included by C code */
 #include "FL_API.h"
-namespace fltk {
+namespace gnui {
 
 /*!
   Returns the value of FL_VERSION that FLTK was compiled with.

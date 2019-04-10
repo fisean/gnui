@@ -37,7 +37,7 @@
 #include <string.h>
 #include <fltk/utf.h>
 #include "IFont.h"
-using namespace fltk;
+using namespace gnui;
 
 // One of these is created for each font+size+encoding combination we use:
 struct FontSize {
@@ -52,14 +52,14 @@ struct FontSize {
   //  ~FontSize();
 };
 
-fltk::Font* fltk::Font::plus(int x) {
+gnui::Font* gnui::Font::plus(int x) {
   IFont* font = (IFont*)this;
   if (x & BOLD) font = font->bold;
   if (x & ITALIC) font = font->italic;
   return &(font->f);
 }
 
-const char* fltk::Font::system_name() {
+const char* gnui::Font::system_name() {
   return ((IFont*)this)->system_name;
 }
 
@@ -71,7 +71,7 @@ FL_API void fl_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
 
 /*! Returns the operating-system dependent structure defining the
   current font. You must include <fltk/x.h> to use this. */
-XFontStruct* fltk::xfont() {return current->font;}
+XFontStruct* gnui::xfont() {return current->font;}
 
 /*!
   Return the full X11 name for the currently selected font+size+encoding.
@@ -81,7 +81,7 @@ XFontStruct* fltk::xfont() {return current->font;}
   On non-X systems, and on modern X systems with Xft (antialiased fonts)
   this returns current_font()->system_name().
 */
-const char* fltk::Font::current_name() {return current->name;}
+const char* gnui::Font::current_name() {return current->name;}
 
 FontSize::FontSize(const char* name, const char* nname) {
   this->name = nname ? nname : name;
@@ -421,7 +421,7 @@ static XFontStruct* get_xfont_utf8(const char* basefont, int cc)
 
 #endif // X_UTF8_FONT
 
-void fltk::drawtext_transformed(const char *text, int n, float x, float y) {
+void gnui::drawtext_transformed(const char *text, int n, float x, float y) {
   if (font_gc != gc) {
     // I removed this, the user MUST set the font before drawing: (was)
     // if (!current) setfont(HELVETICA, NORMAL_SIZE);
@@ -473,11 +473,11 @@ void fltk::drawtext_transformed(const char *text, int n, float x, float y) {
   }
 }
 
-float fltk::getascent()  { return current->font->ascent; }
+float gnui::getascent()  { return current->font->ascent; }
 
-float fltk::getdescent() { return current->font->descent; }
+float gnui::getdescent() { return current->font->descent; }
 
-float fltk::getwidth(const char *text, int n) {
+float gnui::getwidth(const char *text, int n) {
   int count;
   XChar2b* buffer = utf8to2b(text,n,&count);
   if (buffer) {
@@ -529,7 +529,7 @@ float fltk::getwidth(const char *text, int n) {
 //
 // Fltk uses pixelsize, not "pointsize".  This is what everybody wants!
 
-void fltk::setfont(Font* font, float psize) {
+void gnui::setfont(Font* font, float psize) {
   FontSize* f = current;
   IFont* t = (IFont*)font;
 
@@ -669,26 +669,26 @@ static IFont fonts [] = {
   {{"zapf dingbats", 0}, "-*-*zapf dingbats-*",		fonts+15,fonts+15},
 };
 
-fltk::Font* const fltk::HELVETICA 		= &(fonts[0].f);
-fltk::Font* const fltk::HELVETICA_BOLD		= &(fonts[1].f);
-fltk::Font* const fltk::HELVETICA_ITALIC	= &(fonts[2].f);
-fltk::Font* const fltk::HELVETICA_BOLD_ITALIC	= &(fonts[3].f);
-fltk::Font* const fltk::COURIER 		= &(fonts[4].f);
-fltk::Font* const fltk::COURIER_BOLD		= &(fonts[5].f);
-fltk::Font* const fltk::COURIER_ITALIC		= &(fonts[6].f);
-fltk::Font* const fltk::COURIER_BOLD_ITALIC	= &(fonts[7].f);
-fltk::Font* const fltk::TIMES 			= &(fonts[8].f);
-fltk::Font* const fltk::TIMES_BOLD		= &(fonts[9].f);
-fltk::Font* const fltk::TIMES_ITALIC		= &(fonts[10].f);
-fltk::Font* const fltk::TIMES_BOLD_ITALIC	= &(fonts[11].f);
-fltk::Font* const fltk::SYMBOL_FONT		= &(fonts[12].f);
-fltk::Font* const fltk::SCREEN_FONT		= &(fonts[13].f);
-fltk::Font* const fltk::SCREEN_BOLD_FONT	= &(fonts[14].f);
-fltk::Font* const fltk::ZAPF_DINGBATS		= &(fonts[15].f);
+gnui::Font* const gnui::HELVETICA 		= &(fonts[0].f);
+gnui::Font* const gnui::HELVETICA_BOLD		= &(fonts[1].f);
+gnui::Font* const gnui::HELVETICA_ITALIC	= &(fonts[2].f);
+gnui::Font* const gnui::HELVETICA_BOLD_ITALIC	= &(fonts[3].f);
+gnui::Font* const gnui::COURIER 		= &(fonts[4].f);
+gnui::Font* const gnui::COURIER_BOLD		= &(fonts[5].f);
+gnui::Font* const gnui::COURIER_ITALIC		= &(fonts[6].f);
+gnui::Font* const gnui::COURIER_BOLD_ITALIC	= &(fonts[7].f);
+gnui::Font* const gnui::TIMES 			= &(fonts[8].f);
+gnui::Font* const gnui::TIMES_BOLD		= &(fonts[9].f);
+gnui::Font* const gnui::TIMES_ITALIC		= &(fonts[10].f);
+gnui::Font* const gnui::TIMES_BOLD_ITALIC	= &(fonts[11].f);
+gnui::Font* const gnui::SYMBOL_FONT		= &(fonts[12].f);
+gnui::Font* const gnui::SCREEN_FONT		= &(fonts[13].f);
+gnui::Font* const gnui::SCREEN_BOLD_FONT	= &(fonts[14].f);
+gnui::Font* const gnui::ZAPF_DINGBATS		= &(fonts[15].f);
 
 /*! For back-compatabilty with FLTK1, this turns an integer into one
   of the built-in fonts. 0 = HELVETICA. */
-fltk::Font* fltk::font(int i) {return &(fonts[i%16].f);}
+gnui::Font* gnui::font(int i) {return &(fonts[i%16].f);}
 
 //
 // End of "$Id$"

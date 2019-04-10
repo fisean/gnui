@@ -37,9 +37,9 @@
 #include <string.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Browser
+/*! \class gnui::Browser
 
   Displays a scrolling vertical list of text widgets, possibly with a
   hierarchical arrangement, and lets the user select one of them.
@@ -47,11 +47,11 @@ using namespace fltk;
   \image html browser.gif
 
   The items may be created as child widgets (usually the same widgets
-  as are used to create menus: fltk::Item widgets, or fltk::ItemGroup
+  as are used to create menus: gnui::Item widgets, or gnui::ItemGroup
   widgets to make a hierarchy).
 
   All the functions used to add, remove, or modify items in the list
-  are defined by the base class fltk::Menu. See that for much more
+  are defined by the base class gnui::Menu. See that for much more
   information.  For a simple constant list you can populate the list
   by calling browser->add("text of item") once for each item.
   \see
@@ -59,7 +59,7 @@ using namespace fltk;
   - add_group()
   - add_leaf()
 
-  You can also us an fltk::List which allows you to control
+  You can also us an gnui::List which allows you to control
   the storage by dynamically creating a temporary "fake" widget for
   the browser to use each time it wants to look at or draw an item.
   This is useful for creating browsers with hundreds of thousands
@@ -71,7 +71,7 @@ using namespace fltk;
   negative if no item is selected. You can change the selected item
   with value(new_value).
 
-  The subclass fltk::MultiBrowser lets the user select more than one
+  The subclass gnui::MultiBrowser lets the user select more than one
   item at the same time.
 
   The callback() is done when the user changes the selected items or
@@ -82,27 +82,27 @@ using namespace fltk;
   with the user_data() of the item.
 
   You can control when callbacks are done with the when() method. The
-  following values are useful, the default value is fltk::WHEN_CHANGED.
+  following values are useful, the default value is gnui::WHEN_CHANGED.
 
-  - fltk::WHEN_NEVER - Callback is never done. changed() can be used
+  - gnui::WHEN_NEVER - Callback is never done. changed() can be used
     to see if the user has modified the browser.
 
-  - fltk::WHEN_CHANGED - Callback is called on every change to each
+  - gnui::WHEN_CHANGED - Callback is called on every change to each
     item as it happens. The method item() will return the one that
     is being changed. Notice that selecting large numbers in a mulit
     browser will produce large numbers of callbacks.
 
-  - fltk::WHEN_RELEASE - Callback is done when the user releases the
+  - gnui::WHEN_RELEASE - Callback is done when the user releases the
     mouse after some changes, and on any keystroke that
     changes the item. For a multi browser you will only be able
     to find out all the changes by scanning all the items in the callback.
 
-  - fltk::WHEN_RELEASE_ALWAYS - Callback is done when the user
+  - gnui::WHEN_RELEASE_ALWAYS - Callback is done when the user
     releases the mouse even if the current item has not changed, and
     on any arrow keystroke even when at the top or bottom of the
     browser.
 
-  - fltk::WHEN_ENTER_KEY - If you turn this on then the enter key is
+  - gnui::WHEN_ENTER_KEY - If you turn this on then the enter key is
     a shortcut and executes the current item like double-click.
 
 */
@@ -187,7 +187,7 @@ using namespace fltk;
 /*!
   \return true if the current item would be visible to the user 
   if the browser was scrolled to the correct location. This means 
-  that the fltk::INVISIBLE flag is not set on it, and all parents 
+  that the gnui::INVISIBLE flag is not set on it, and all parents 
   of it are open and visible as well.
 */
 bool Browser::item_is_visible() const {
@@ -245,8 +245,8 @@ Widget* Browser::goto_top() {
 
 /*! \fn Widget* Browser::goto_focus()
   Sets the item() to the "focus" (the item with the dotted square in
-  an fltk::MultiBrowser, and the selected item in a normal
-  fltk::Browser.
+  an gnui::MultiBrowser, and the selected item in a normal
+  gnui::Browser.
   \return The focused Item's Widget.
 */
 
@@ -339,7 +339,7 @@ bool Browser::item_is_parent() const {
 /** \return true if item_is_parent() is true and this item is open. \n
     If this is not a parent the result is undefined. */
 bool Browser::item_is_open() const {
-  if (item()->flag(fltk::OPENED)) return true;
+  if (item()->flag(gnui::OPENED)) return true;
   for (unsigned i = 0; i <= HERE.level; i++) {
     if (i > OPEN.level) return false;
     if (HERE.indexes[i] != OPEN.indexes[i]) return false;
@@ -761,8 +761,8 @@ void Browser::draw_clip(const Rectangle& r) {
 }
 
 void Browser::draw() {
-  const int *last_columns = fltk::column_widths();
-  fltk::column_widths(column_widths_p);
+  const int *last_columns = gnui::column_widths();
+  gnui::column_widths(column_widths_p);
   uchar d = damage();
   Item::set_style(this,false);
   if (d & DAMAGE_ALL) { // full redraw
@@ -796,8 +796,8 @@ void Browser::draw() {
     }
     if (clipped) pop_clip();
   }
-  fltk::column_widths(last_columns);
-  //fltk::column_widths(0);
+  gnui::column_widths(last_columns);
+  //gnui::column_widths(0);
   scrolldx = scrolldy = 0;
   for (unsigned n = 0; n < NUM_REDRAW; n++)
     REDRAW[n].unset();
@@ -843,7 +843,7 @@ void Browser::draw() {
 
 /*! Opens the current item (which must be a parent)
   \param open If the current item is a parent, set the open state (the
-  fltk::STATE flags) to the given value and redraw the browser
+  gnui::STATE flags) to the given value and redraw the browser
   correctly. 
   \returns true if the state was actually changed, or false if 
   it was already in that state.  */
@@ -851,10 +851,10 @@ bool Browser::set_item_opened(bool open)
 {
   if (!item() || item_is_open()==open || !item_is_parent()) return false;
   if (open) {
-    item()->set_flag(fltk::OPENED);
+    item()->set_flag(gnui::OPENED);
     set_mark(OPEN);
   } else {
-    item()->clear_flag(fltk::OPENED);
+    item()->clear_flag(gnui::OPENED);
     if (item_is_open()) {
       if (HERE.level) OPEN.level = HERE.level-1;
       else OPEN.unset();
@@ -865,7 +865,7 @@ bool Browser::set_item_opened(bool open)
   return true;
 }
 
-/*! Turns off or on the fltk::INVISIBLE flag on the given item and
+/*! Turns off or on the gnui::INVISIBLE flag on the given item and
   redraw the browser if necessary. 
   \param value The new value of the flag on the given item 
   \return true if the state was actually changed or false if it 
@@ -894,8 +894,8 @@ void Browser::layout() {
   Widget::layout();
 
   Item::set_style(this,false);
-  const int *last_columns = fltk::column_widths();
-  fltk::column_widths(column_widths_p);
+  const int *last_columns = gnui::column_widths();
+  gnui::column_widths(column_widths_p);
 
   // figure out the visible area:
   const int sw = scrollbar_width();
@@ -1049,7 +1049,7 @@ void Browser::layout() {
   }
 
   redraw(DAMAGE_CONTENTS); // assumme we need to redraw
-  fltk::column_widths(last_columns);
+  gnui::column_widths(last_columns);
   Item::clear_style();
 }
 
@@ -1098,7 +1098,7 @@ void Browser::yposition(int Y) {
 ////////////////////////////////////////////////////////////////
 // Event handling
 
-/*! Change the focus (the selected item, or in an fltk::MultiBrowser
+/*! Change the focus (the selected item, or in an gnui::MultiBrowser
   the item that has a dotted box around it, to the current item.
   This calls make_item_visible().
   \return If the focus is changed, returns true, otherwise returns false */
@@ -1112,7 +1112,7 @@ bool Browser::set_focus() {
   // make the item do it's own focus highlighting:
   if (item() && item()->take_focus());
   // otherwise take the focus from any other child:
-  else if (contains(fltk::focus())) fltk::focus(this);
+  else if (contains(gnui::focus())) gnui::focus(this);
   // scroll to show the item:
   make_item_visible();
   return ret;
@@ -1120,20 +1120,20 @@ bool Browser::set_focus() {
 
 /*! This makes the current item visible to the user.
 
-  First it turns off the fltk::INVISIBLE flag on the current item, and
-  turns off the fltk::INVISIBLE flag and opens (turning on the
-  fltk::STATE flag) all parent items. These flag changes cause
-  flags_changed() to be called on any fltk::List that you have
+  First it turns off the gnui::INVISIBLE flag on the current item, and
+  turns off the gnui::INVISIBLE flag and opens (turning on the
+  gnui::STATE flag) all parent items. These flag changes cause
+  flags_changed() to be called on any gnui::List that you have
   assigned to the browser.
 
   The browser is then scrolled by calling yposition() so the item is
   visible. 
   \param where The optional argument tells how to scroll. If not specified
-  (or the default value of fltk::Browser::NOSCROLL is given) then the
+  (or the default value of gnui::Browser::NOSCROLL is given) then the
   browser is scrolled as little as possible to show the item. If it is
-  fltk::Browser::TOP then the item is put at the top of the
-  browser. If it is fltk::Browser::MIDDLE then the item is centered
-  vertically in the browser. If it is fltk::Browser::BOTTOM then the
+  gnui::Browser::TOP then the item is put at the top of the
+  browser. If it is gnui::Browser::MIDDLE then the item is centered
+  vertically in the browser. If it is gnui::Browser::BOTTOM then the
   item is put at the bottom of the browser.
 
   This does nothing if the current item is null.
@@ -1152,7 +1152,7 @@ bool Browser::make_item_visible(linepos where) {
       if (HERE.indexes[n] >= children) break;
       Widget* i = child(HERE.indexes, n);
       i->set_visible();
-      i->set_flag(fltk::OPENED);
+      i->set_flag(gnui::OPENED);
       list()->flags_changed(this, item());
     }
     changed = true;
@@ -1205,7 +1205,7 @@ bool Browser::select(Widget* e, int v, int do_callback) {
   return set_item_selected(v ? true: false, do_callback);
 }
 /*! This is for use by the MultiBrowser subclass.
-  Turn the fltk::SELECTED flag on or off in the current item (use
+  Turn the gnui::SELECTED flag on or off in the current item (use
   goto_index() to set the current item before calling this).
 
   \param value This is the toggle switch; if true this item is SELECTED 
@@ -1348,7 +1348,7 @@ int Browser::handle(int event) {
 
   switch (event) {
 
-  case fltk::FOCUS:
+  case gnui::FOCUS:
     if (goto_mark(FOCUS) && item()) item()->take_focus();
 
   case UNFOCUS:
@@ -1817,45 +1817,45 @@ public:
     static bool left = true;
     static bool enter_before_leave = false;
     switch (event) {
-      case fltk::LEAVE:
-        if (!enter_before_leave) cursor(fltk::CURSOR_DEFAULT);
+      case gnui::LEAVE:
+        if (!enter_before_leave) cursor(gnui::CURSOR_DEFAULT);
         enter_before_leave = false;
         break;
-      case fltk::ENTER:
+      case gnui::ENTER:
         enter_before_leave = true;
         // fall through
-      case fltk::MOVE:
-        if (sides&1 && fltk::event_x()<=2) {
-          cursor(fltk::CURSOR_WE);
-        } else if (sides&2 && fltk::event_x()>=w()-2) {
-          cursor(fltk::CURSOR_WE);
+      case gnui::MOVE:
+        if (sides&1 && gnui::event_x()<=2) {
+          cursor(gnui::CURSOR_WE);
+        } else if (sides&2 && gnui::event_x()>=w()-2) {
+          cursor(gnui::CURSOR_WE);
         } else {
-          cursor(fltk::CURSOR_DEFAULT);
+          cursor(gnui::CURSOR_DEFAULT);
         }
-        if (event==fltk::ENTER) { Button::handle(event); return 1; }
+        if (event==gnui::ENTER) { Button::handle(event); return 1; }
         break;
-      case fltk::PUSH:
-        if (sides&1 && fltk::event_x()<=2) {
+      case gnui::PUSH:
+        if (sides&1 && gnui::event_x()<=2) {
           left = true;
-          ox = fltk::event_x_root() - x();
+          ox = gnui::event_x_root() - x();
           return 1;
-        } else if (sides&2 && fltk::event_x()>=w()-2) {
+        } else if (sides&2 && gnui::event_x()>=w()-2) {
           left = false;
-          ox = fltk::event_x_root() - x() - w();
+          ox = gnui::event_x_root() - x() - w();
           return 1;
         }
         break;
-      case fltk::DRAG: {
+      case gnui::DRAG: {
         if (ox==-1) break;
           Browser *w = (Browser*)(parent());
           int col = (int) argument();
           if (left)
-            w->set_column_start(col, fltk::event_x_root()-ox);
+            w->set_column_start(col, gnui::event_x_root()-ox);
           else
-            w->set_column_start(col+1, fltk::event_x_root()-ox);
+            w->set_column_start(col+1, gnui::event_x_root()-ox);
           return 1; 
         }
-      case fltk::RELEASE:
+      case gnui::RELEASE:
         if (ox==-1) break;
         ox = -1;
         return 1;
@@ -1876,7 +1876,7 @@ public:
 /*! Set an array of labels to put at the top of the browser. The initial
   sizes of them are set with column_widths(). Items in the browser can
   print into the correct columns by putting '\\t' characters into
-  their text. Or they can look at fltk::column_widths() to find
+  their text. Or they can look at gnui::column_widths() to find
   the settings from their draw() methods.
 
   \param t A const char* array of labels
@@ -2047,7 +2047,7 @@ Browser::Browser(int X,int Y,int W,int H,const char* L)
 }
 
 /*! The destructor deletes all the list items (because they are child
-  fltk::Widgets of an fltk::Group) and destroys the browser. */
+  gnui::Widgets of an gnui::Group) and destroys the browser. */
 Browser::~Browser() {
   delete[] column_widths_p;
   delete[] column_widths_i;
@@ -2059,20 +2059,20 @@ Browser::~Browser() {
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::MultiBrowser
+/*! \class gnui::MultiBrowser
 
-  The fltk::MultiBrowser class is a subclass of fltk::Browser which
+  The gnui::MultiBrowser class is a subclass of gnui::Browser which
   lets the user select any set of the lines. Clicking on an item
   selects only that one. Ctrl+click toggles items on/off. Shift+drag
   (or shift+arrows) will extend selections. Normally the callback is
   done when any item changes it's state, but you can change this with
   when().
 
-  See fltk::Browser for methods to control the display and "current
-  item", and fltk::Menu for methods to add and remove lines from the
+  See gnui::Browser for methods to control the display and "current
+  item", and gnui::Menu for methods to add and remove lines from the
   browser.
 
-  The methods on fltk::Browser for controlling the "value" control which
+  The methods on gnui::Browser for controlling the "value" control which
   item has the keyboard focus in a multi-browser. You must use the
   "select" methods described here to change what items are turned on:
   - set_item_selected()

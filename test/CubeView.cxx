@@ -54,9 +54,9 @@ CubeView::CubeView(int x,int y,int w,int h,const char *l)
 
 #if !HAVE_GL
     label("OpenGL is required for this demo to operate.");
-    align(fltk::ALIGN_WRAP | fltk::ALIGN_INSIDE);
-    box(fltk::NO_BOX);
-    labelcolor(fltk::WHITE);
+    align(gnui::ALIGN_WRAP | gnui::ALIGN_INSIDE);
+    box(gnui::NO_BOX);
+    labelcolor(gnui::WHITE);
 #endif /* !HAVE_GL */
 }
 

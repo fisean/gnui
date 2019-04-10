@@ -30,7 +30,7 @@
 
 #include "Output.h"
 
-namespace fltk {
+namespace gnui {
 
 // This class is entirely inline.  If that changes, add FL_API to its declaration
 class WordwrapOutput : public Output {

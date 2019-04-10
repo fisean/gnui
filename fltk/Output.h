@@ -31,7 +31,7 @@
 
 #include "Input.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Output : public Input {
   virtual bool replace(int, int, const char*, int); // does nothing

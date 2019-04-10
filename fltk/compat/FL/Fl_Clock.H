@@ -4,14 +4,14 @@
 #include "Fl_Widget.H"
 #include <fltk/Clock.h>
 
-typedef fltk::ClockOutput Fl_Clock_Output;
-typedef fltk::Clock Fl_Clock;
+typedef gnui::ClockOutput Fl_Clock_Output;
+typedef gnui::Clock Fl_Clock;
 
 enum {
-  FL_SQUARE_CLOCK	= fltk::Clock::SQUARE,
-  FL_ROUND_CLOCK	= fltk::Clock::ROUND,
-  FL_ANALOG_CLOCK	= fltk::Clock::SQUARE,
-  FL_DIGITAL_CLOCK	= fltk::Clock::DIGITAL // nyi
+  FL_SQUARE_CLOCK	= gnui::Clock::SQUARE,
+  FL_ROUND_CLOCK	= gnui::Clock::ROUND,
+  FL_ANALOG_CLOCK	= gnui::Clock::SQUARE,
+  FL_DIGITAL_CLOCK	= gnui::Clock::DIGITAL // nyi
 };
 
 #endif

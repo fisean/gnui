@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/** \namespace fltk */
+/** \namespace gnui */
 
 #include <ctype.h>
 #include <stdlib.h>
@@ -56,38 +56,38 @@
 #include <fltk/FL_VERSION.h>
 #include <fltk/Monitor.h>
 
-using namespace fltk;
+using namespace gnui;
 
-double fltk::version() {return FL_VERSION;}
+double gnui::version() {return FL_VERSION;}
 
 //
 // Globals...
 //
 
-Widget *fltk::belowmouse_,
-	 *fltk::pushed_,
-	 *fltk::focus_,
-	 *fltk::modal_;
-int	  fltk::e_type,
-	  fltk::e_x,
-	  fltk::e_y,
-	  fltk::e_dx,
-	  fltk::e_dy,
-	  fltk::e_x_root,
-	  fltk::e_y_root,
-  	  fltk::e_clicks,
-	  fltk::e_device = DEVICE_MOUSE;
-unsigned  fltk::e_state,
-	  fltk::e_keysym,
-	  fltk::e_is_click,
-	  fltk::e_length,
-	  fltk::e_key_repeated;
-float     fltk::e_pressure,
-          fltk::e_x_tilt,
-          fltk::e_y_tilt;
-const char *fltk::e_text = "";
-bool      fltk::grab_,
-	  fltk::exit_modal_;
+Widget *gnui::belowmouse_,
+	 *gnui::pushed_,
+	 *gnui::focus_,
+	 *gnui::modal_;
+int	  gnui::e_type,
+	  gnui::e_x,
+	  gnui::e_y,
+	  gnui::e_dx,
+	  gnui::e_dy,
+	  gnui::e_x_root,
+	  gnui::e_y_root,
+  	  gnui::e_clicks,
+	  gnui::e_device = DEVICE_MOUSE;
+unsigned  gnui::e_state,
+	  gnui::e_keysym,
+	  gnui::e_is_click,
+	  gnui::e_length,
+	  gnui::e_key_repeated;
+float     gnui::e_pressure,
+          gnui::e_x_tilt,
+          gnui::e_y_tilt;
+const char *gnui::e_text = "";
+bool      gnui::grab_,
+	  gnui::exit_modal_;
 
 static Window *xfocus;	// which window X thinks has focus
 static Window *xmousewin; // which window X thinks has ENTER
@@ -136,8 +136,8 @@ FL_API char* newstring(const char *from) {
 } /* extern "C" */
 
 /*! Tries to make this widget be the keyboard focus widget, by first
-  sending it an fltk::FOCUS event, and if it returns non-zero, setting
-  fltk::focus() to this widget. You should use this method to assign
+  sending it an gnui::FOCUS event, and if it returns non-zero, setting
+  gnui::focus() to this widget. You should use this method to assign
   the focus to a widget. Returns true if the widget accepted the
   focus.
 
@@ -152,7 +152,7 @@ bool Widget::take_focus() {
 //   if (grab_ || w && modal_) w = modal_;
 //   if (!w || !w->contains(this)) return false;
   if (!takesevents() || !handle(FOCUS)) return false;
-  if (!contains(fltk::focus())) fltk::focus(this);
+  if (!contains(gnui::focus())) gnui::focus(this);
   return true;
 }
 
@@ -191,7 +191,7 @@ static Timeout* first_timeout, *free_timeout;
     The precision of the returned value depends on the OS, but
     the minimum precision is 20ms.
 */
-double fltk::get_time_secs() {
+double gnui::get_time_secs() {
 #ifdef _WIN32
   return double(GetTickCount())/1000.0;
 #else
@@ -232,10 +232,10 @@ static void _add_timeout(double time, TimeoutHandler cb, void *arg) {
 
 /*!
   Add a one-shot timeout callback. The function will be called by
-  fltk::wait() at t seconds after this function is called. The
+  gnui::wait() at t seconds after this function is called. The
   optional void* argument is passed to the callback.
 */
-void fltk::add_timeout(float time, TimeoutHandler cb, void *arg) {
+void gnui::add_timeout(float time, TimeoutHandler cb, void *arg) {
   elapse_timeouts();
   _add_timeout(time, cb, arg);
 }
@@ -256,23 +256,23 @@ void fltk::add_timeout(float time, TimeoutHandler cb, void *arg) {
 \code
 void callback(void*) {
   printf("TICK\n");
-  fltk::repeat_timeout(1.0,callback);
+  gnui::repeat_timeout(1.0,callback);
 }
 
 main() {
-  fltk::add_timeout(1.0,callback);
-  for (;;) fltk::wait();
+  gnui::add_timeout(1.0,callback);
+  for (;;) gnui::wait();
 }
 \endcode
 */
-void fltk::repeat_timeout(float time, TimeoutHandler cb, void *arg) {
+void gnui::repeat_timeout(float time, TimeoutHandler cb, void *arg) {
   _add_timeout(time+missed_timeout_by, cb, arg);
 }
 
 /*!
  Returns true if the timeout exists and has not been called yet.
 */
-bool fltk::has_timeout(TimeoutHandler cb, void *arg) {
+bool gnui::has_timeout(TimeoutHandler cb, void *arg) {
   for (Timeout* t = first_timeout; t; t = t->next)
     if (t->cb == cb && t->arg == arg) return true;
   return false;
@@ -283,7 +283,7 @@ bool fltk::has_timeout(TimeoutHandler cb, void *arg) {
   Does nothing if there are no matching ones that have not been
   called yet.
 */
-void fltk::remove_timeout(TimeoutHandler cb, void *arg) {
+void gnui::remove_timeout(TimeoutHandler cb, void *arg) {
   for (Timeout** p = &first_timeout; *p;) {
     Timeout* t = *p;
     if (t->cb == cb && t->arg == arg) {
@@ -336,12 +336,12 @@ void check(void*) {
 }
 
 main() {
-  fltk::add_check(1.0,check);
-  return fltk::run();
+  gnui::add_check(1.0,check);
+  return gnui::run();
 }
 \endcode
 */
-void fltk::add_check(TimeoutHandler cb, void *arg) {
+void gnui::add_check(TimeoutHandler cb, void *arg) {
   Check* t = free_check;
   if (t) free_check = t->next;
   else t = new Check;
@@ -356,7 +356,7 @@ void fltk::add_check(TimeoutHandler cb, void *arg) {
   Remove all matching check callback, if any exists. You can call this
   from inside the check callback if you want.
 */
-void fltk::remove_check(TimeoutHandler cb, void *arg) {
+void gnui::remove_check(TimeoutHandler cb, void *arg) {
   for (Check** p = &first_check; *p;) {
     Check* t = *p;
     if (t->cb == cb && t->arg == arg) {
@@ -374,7 +374,7 @@ void fltk::remove_check(TimeoutHandler cb, void *arg) {
   Return true if add_check() has been done with this \a cb and \a arg,
   and remove_check() has not been done.
 */
-bool fltk::has_check(TimeoutHandler cb, void *arg) {
+bool gnui::has_check(TimeoutHandler cb, void *arg) {
   for (Check* t = first_check; t; t = t->next)
     if (t->cb == cb && t->arg == arg) return true;
   return false;
@@ -383,21 +383,21 @@ bool fltk::has_check(TimeoutHandler cb, void *arg) {
 ////////////////////////////////////////////////////////////////
 // wait/run/check/ready:
 
-void (*fltk::idle)(); // see add_idle.cxx for the add/remove functions
+void (*gnui::idle)(); // see add_idle.cxx for the add/remove functions
 
 static bool in_idle;
 
 #define FOREVER 1e20f
 
 /*!
-  Calls fltk::wait() as long as any windows are not closed. When
+  Calls gnui::wait() as long as any windows are not closed. When
   all the windows are hidden or destroyed (checked by seeing if
   Window::first() is null) this will return with zero. A program can
   also exit by having a callback call exit() or abort().
 
-  Most fltk programs will end main() with return fltk::run();.
+  Most fltk programs will end main() with return gnui::run();.
 */
-int fltk::run() {
+int gnui::run() {
   while (Window::first()) wait(FOREVER);
   return(0);
 // WAS: This was tried for fltk 2.0, and the callback for closing the last
@@ -406,11 +406,11 @@ int fltk::run() {
 }
 
 /*!
-  Same as fltk::wait(infinity). Call this repeatedly to "run" your
+  Same as gnui::wait(infinity). Call this repeatedly to "run" your
   program. You can also check what happened each time after this
   returns, which is quite useful for managing program state.
 */
-int fltk::wait() {
+int gnui::wait() {
   return wait(FOREVER);
 }
 
@@ -434,17 +434,17 @@ static void run_checks() {
   happens.
 
   What this really does is call all idle callbacks, all elapsed
-  timeouts, call fltk::flush() to get the screen to update, and then
+  timeouts, call gnui::flush() to get the screen to update, and then
   wait some time (zero if there are idle callbacks, the shortest of
   all pending timeouts, or the given time), for any events from the
-  user or any fltk::add_fd() callbacks. It then handles the events and
+  user or any gnui::add_fd() callbacks. It then handles the events and
   calls the callbacks and then returns.
 
   The return value is zero if nothing happened before the passed
   \a time_to_wait expired. It is non-zero if any events or timeouts
   came in.
 */
-int fltk::wait(float time_to_wait) {
+int gnui::wait(float time_to_wait) {
 
   // check functions must be run first so they can install idle or timeout
   // functions:
@@ -491,23 +491,23 @@ int fltk::wait(float time_to_wait) {
 }
 
 /*!
-  Same as fltk::wait(0). Calling this during a big calculation will
+  Same as gnui::wait(0). Calling this during a big calculation will
   keep the screen up to date and the interface responsive:
 \code
 while (!calculation_done()) {
   calculate();
-  fltk::check();
+  gnui::check();
   if (user_hit_abort_button()) break;
 }
 \endcode
 */
-int fltk::check() {
+int gnui::check() {
   return wait(0.0);
 }
 
 /*!
   Test to see if any events or callbacks are pending. This will
-  return true if fltk::check() would do anything other than update
+  return true if gnui::check() would do anything other than update
   the screen. Since this will not draw anything or call any code,
   it is safe to call this if your program is in an inconsistent
   state. This is also useful if your calculation is updating widgets but
@@ -516,15 +516,15 @@ int fltk::check() {
 \code
 while (!calculation_done()) {
   calculate();
-  if (fltk::ready()) {
+  if (gnui::ready()) {
     do_expensive_cleanup();
-    fltk::check();
+    gnui::check();
     if (user_hit_abort_button()) break;
   }
 }
 \endcode
 */
-int fltk::ready() {
+int gnui::ready() {
   if (first_timeout) {
     elapse_timeouts();
     if (first_timeout->time <= 0) return 1;
@@ -544,11 +544,11 @@ NULL if not found.  This uses a cache so it is slightly
 faster than iterating through the windows yourself.
 */
 #if USE_X11
-Window* fltk::find(XWindow xid)
+Window* gnui::find(XWindow xid)
 #elif defined(_WIN32)
-Window* fltk::find(HWND xid)
+Window* gnui::find(HWND xid)
 #elif USE_QUARTZ
-Window* fltk::find(WindowPtr xid)
+Window* gnui::find(WindowPtr xid)
 #endif
 {
   CreatedWindow *x;
@@ -572,9 +572,9 @@ Window* fltk::find(WindowPtr xid)
 /*!
   Returns the id of some visible() window. If there is more than
   one, the last one to receive an event is returned. This is useful
-  as a default value for fltk::Window::child_of().
-  fltk::Window::exec() uses it for this if no other parent is specified.
-  This is also used by fltk::run() to see if any windows still exist.
+  as a default value for gnui::Window::child_of().
+  gnui::Window::exec() uses it for this if no other parent is specified.
+  This is also used by gnui::run() to see if any windows still exist.
 */
 Window* Window::first() {
   for (CreatedWindow* x = CreatedWindow::first;; x = x->next) {
@@ -603,19 +603,19 @@ Window* Window::next() {
   If this window is visible, this removes it from wherever it is in
   the list and inserts it at the top, as though it received an
   event. This can be used to change the parent of dialog boxes run by
-  fltk::Window::exec() or fltk::ask().
+  gnui::Window::exec() or gnui::ask().
 */
 void Window::first(Window* window) {
   if (!window || !window->shown()) return;
-  fltk::find(xid(window));
+  gnui::find(xid(window));
 }
 
-int fltk::damage_;
+int gnui::damage_;
 
-/*! \fn int fltk::damage()
+/*! \fn int gnui::damage()
 
   True if any Widget::redraw() calls have been done since the
-  last fltk::flush(). This indicates that flush() will do something.
+  last gnui::flush(). This indicates that flush() will do something.
   Currently the meaning of any bits are undefined.
 
   Window flush() routines can set this to indicate that flush() should
@@ -628,7 +628,7 @@ int fltk::damage_;
   Redraws all widgets. This is a good idea if you have made global
   changes to the styles.
 */
-void fltk::redraw() {
+void gnui::redraw() {
   for (CreatedWindow* x = CreatedWindow::first; x; x = x->next)
     x->window->redraw();
 }
@@ -682,7 +682,7 @@ void fl_window_flush(Window* window) {
 
   wait() calls this before it waits for events.
 */
-void fltk::flush() {
+void gnui::flush() {
 #if USE_X11
   if (!xdisplay) return; // ignore if no windows created yet
 #endif
@@ -713,7 +713,7 @@ void fltk::flush() {
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::Rectangle
+/*! \class gnui::Rectangle
   Describes an integer-sized rectangle. This is the base class of
   Widget, and also used a lot to pass rectangular areas to drawing
   functions. Almost all the functions are inline.
@@ -736,7 +736,7 @@ void fltk::flush() {
     difference in sizes is odd, it always rounds up and left.
     Default value for \a flags is to center in both directions.
  */
-void fltk::Rectangle::set(const fltk::Rectangle& r, int w, int h, int flags) {
+void gnui::Rectangle::set(const gnui::Rectangle& r, int w, int h, int flags) {
   if (flags & ALIGN_LEFT) {
     if (flags & ALIGN_RIGHT &&  w > r.w()) x_ = r.r()-w;
     else x_ = r.x();
@@ -773,7 +773,7 @@ void fltk::Rectangle::set(const fltk::Rectangle& r, int w, int h, int flags) {
   If one rectangle is empty(), the other is returned unchanged
   (ie it does not union in the degenerate point of that rectangle).
 */
-void fltk::Rectangle::merge(const fltk::Rectangle& R) {
+void gnui::Rectangle::merge(const gnui::Rectangle& R) {
   if (R.empty()) return;
   if (empty()) {*this = R; return;}
   if (R.x() < x()) set_x(R.x());
@@ -788,7 +788,7 @@ void fltk::Rectangle::merge(const fltk::Rectangle& R) {
   width and/or height, this means empty() will return true, but some
   code may still draw this rectangle.
 */
-void fltk::Rectangle::intersect(const fltk::Rectangle& R) {
+void gnui::Rectangle::intersect(const gnui::Rectangle& R) {
   if (R.x() > x()) set_x(R.x());
   if (R.r() < r()) set_r(R.r());
   if (R.y() > y()) set_y(R.y());
@@ -798,7 +798,7 @@ void fltk::Rectangle::intersect(const fltk::Rectangle& R) {
 ////////////////////////////////////////////////////////////////
 // Event handling:
 
-Widget* fl_pending_callback = 0; // used by fltk::Input
+Widget* fl_pending_callback = 0; // used by gnui::Input
 static void call_pending_if_not(Widget* i) {
   Widget* w = fl_pending_callback;
   if (w && w != i) {
@@ -808,17 +808,17 @@ static void call_pending_if_not(Widget* i) {
 }
 
 /*!
-  Returns true if the current fltk::event_x() and fltk::event_y()
+  Returns true if the current gnui::event_x() and gnui::event_y()
   put it inside the Rectangle. You should always call this rather
   than doing your own comparison so you are consistent about edge
   effects.
 */
-bool fltk::event_inside(const fltk::Rectangle& r) {
+bool gnui::event_inside(const gnui::Rectangle& r) {
   return r.contains(e_x, e_y);
 }
 
 //! return the corresponding str of an event, should not consume memory if api is not used
-const char * fltk::event_name(int event) {
+const char * gnui::event_name(int event) {
     const char * const event_n[]= {
 	"NO_EVENT",
 	"PUSH",
@@ -851,22 +851,22 @@ const char * fltk::event_name(int event) {
 	event_n[event] : "<Unknown Event>";
 }
 
-/*! \fn Widget* fltk::focus()
-  Returns the widgets that will receive fltk::KEY events. This is NULL
+/*! \fn Widget* gnui::focus()
+  Returns the widgets that will receive gnui::KEY events. This is NULL
   if the application does not have focus now, or if no widgets
   accepted focus.
 */
 /*!
-  Change fltk::focus() to the given widget, the previous widget and
+  Change gnui::focus() to the given widget, the previous widget and
   all parents (that don't contain the new widget) are sent
-  fltk::UNFOCUS events, the new widget is sent an fltk::FOCUS
-  event, and all parents of it get fltk::FOCUS_CHANGE events.
+  gnui::UNFOCUS events, the new widget is sent an gnui::FOCUS
+  event, and all parents of it get gnui::FOCUS_CHANGE events.
 
-  fltk::focus() is set whether or not the applicaton has the focus or
+  gnui::focus() is set whether or not the applicaton has the focus or
   if the widgets accept the focus. You may want to use
-  fltk::Widget::take_focus() instead, it will test first.
+  gnui::Widget::take_focus() instead, it will test first.
 */
-void fltk::focus(Widget *o) {
+void gnui::focus(Widget *o) {
   call_pending_if_not(o);
   Widget *p = focus_;
   if (o != p) {
@@ -897,23 +897,23 @@ void fltk::focus(Widget *o) {
 
 static bool dnd_flag; // makes belowmouse send DND_LEAVE instead of LEAVE
 
-/*! \fn Widget* fltk::belowmouse()
+/*! \fn Widget* gnui::belowmouse()
   Get the widget that is below the mouse. This is the last widget to
-  respond to an fltk::ENTER event as long as the mouse is still
+  respond to an gnui::ENTER event as long as the mouse is still
   pointing at it. This is for highlighting buttons and bringing up
-  tooltips. It is not used to send fltk::PUSH or fltk::MOVE directly,
+  tooltips. It is not used to send gnui::PUSH or gnui::MOVE directly,
   for several obscure reasons, but those events typically go to this
   widget.
 */
 
 /*!
-  Change the fltk::belowmouse() widget, the previous one and all
-  parents (that don't contain the new widget) are sent fltk::LEAVE
-  events. Changing this does not send fltk::ENTER to this or any
-  widget, because sending fltk::ENTER is supposed to test if the
+  Change the gnui::belowmouse() widget, the previous one and all
+  parents (that don't contain the new widget) are sent gnui::LEAVE
+  events. Changing this does not send gnui::ENTER to this or any
+  widget, because sending gnui::ENTER is supposed to test if the
   widget wants the mouse (by it returning non-zero from handle()).
 */
-void fltk::belowmouse(Widget *o) {
+void gnui::belowmouse(Widget *o) {
   Widget *p = belowmouse_;
   if (o != p) {
     belowmouse_ = o;
@@ -924,16 +924,16 @@ void fltk::belowmouse(Widget *o) {
   }
 }
 
-/*! \fn Widget* fltk::pushed()
-  Get the widget that is being pushed. fltk::DRAG or fltk::RELEASE
-  (and any more fltk::PUSH) events will be sent to this widget. This
+/*! \fn Widget* gnui::pushed()
+  Get the widget that is being pushed. gnui::DRAG or gnui::RELEASE
+  (and any more gnui::PUSH) events will be sent to this widget. This
   is null if no mouse button is being held down, or if no widget
-  responded to the fltk::PUSH event.
+  responded to the gnui::PUSH event.
 */
 /*!
-  Change the fltk::pushed() widget. This sends no events.
+  Change the gnui::pushed() widget. This sends no events.
 */
-void fltk::pushed(Widget *o) {
+void gnui::pushed(Widget *o) {
   call_pending_if_not(o);
   pushed_ = o;
 }
@@ -941,17 +941,17 @@ void fltk::pushed(Widget *o) {
 /*! This function is called by ~Widget() and by deactivate() and by
   hide(). It indicates that the widget does not want to receive any
   more events, and also removes all global variables that point at the
-  widget (not just the fltk::focus(), but the fltk::belowmouse(),
-  fltk::modal(), and some internal pointers). Unlike older versions of
-  fltk, no events (i.e. fltk::LEAVE or fltk::UNFOCUS) are sent to the
+  widget (not just the gnui::focus(), but the gnui::belowmouse(),
+  gnui::modal(), and some internal pointers). Unlike older versions of
+  fltk, no events (i.e. gnui::LEAVE or gnui::UNFOCUS) are sent to the
   widget.  */
 void Widget::throw_focus() {
   clear_flag(HIGHLIGHT|FOCUSED);
-  if (contains(fltk::pushed())) pushed_ = 0;
+  if (contains(gnui::pushed())) pushed_ = 0;
 #if USE_X11
   if (contains(selection_requestor)) selection_requestor = 0;
 #endif
-  if (contains(fltk::belowmouse())) {belowmouse_ = 0; e_is_click = 0;}
+  if (contains(gnui::belowmouse())) {belowmouse_ = 0; e_is_click = 0;}
   if (this == xmousewin) xmousewin = Window::first();
   if (contains(focus_)) focus_ = 0;
   if (this == xfocus) xfocus = 0;
@@ -963,27 +963,27 @@ void Widget::throw_focus() {
 
 /*! Restricts events to a certain widget.
 
- First thing: much of the time fltk::Window::exec() will do what you
+ First thing: much of the time gnui::Window::exec() will do what you
  want, so try using that.
 
  This function sets the passed widget as the "modal widget". All user
  events are directed to it or a child of it, preventing the user from
  messing with other widgets. The modal widget does not have to be
- visible or even a child of an fltk::Window for this to work (but if
- it not visible, fltk::event_x() and fltk::event_y() are meaningless,
- use fltk::event_x_root() and fltk::event_y_root()).
+ visible or even a child of an gnui::Window for this to work (but if
+ it not visible, gnui::event_x() and gnui::event_y() are meaningless,
+ use gnui::event_x_root() and gnui::event_y_root()).
 
  The calling code is responsible for saving the current value of
  modal() and grab() and restoring them by calling this after it is
- done. The code calling this should then loop calling fltk::wait()
- until fltk::exit_modal_flag() is set or you otherwise decide to get
+ done. The code calling this should then loop calling gnui::wait()
+ until gnui::exit_modal_flag() is set or you otherwise decide to get
  out of the modal state. It is the calling code's responsibility to
  monitor this flag and restore the modal widget to it's previous value
  when it turns on.
 
  \a grab indicates that the modal widget should get events from
  anywhere on the screen. This is done by messing with the window
- system. If fltk::exit_modal() is called in response to an fltk::PUSH
+ system. If gnui::exit_modal() is called in response to an gnui::PUSH
  event (rather than waiting for the drag or release event) fltk will
  "repost" the event so that it is handled after modal state is
  exited. This may also be done for keystrokes in the future. On both X
@@ -992,7 +992,7 @@ void Widget::throw_focus() {
  careful that your program does not enter an infinite loop while
  grab() is on, it will lock up your screen!
 */
-void fltk::modal(Widget* widget, bool grab) {
+void gnui::modal(Widget* widget, bool grab) {
 
   // release the old grab:
   if (grab_) {
@@ -1085,7 +1085,7 @@ void fltk::modal(Widget* widget, bool grab) {
   exit_modal_ = false;
 }
 
-/*! \fn Widget* fltk::modal()
+/*! \fn Widget* gnui::modal()
   Returns the current modal widget, or null if there isn't one.  It is
   useful to test these in timeouts and file descriptor callbacks in
   order to block actions that should not happen while the modal window
@@ -1093,17 +1093,17 @@ void fltk::modal(Widget* widget, bool grab) {
   state.
 */
 
-/*! \fn bool fltk::grab()
+/*! \fn bool gnui::grab()
   returns the current value of grab (this is always false if modal()
   is null).
 */
 
-/*! \fn void fltk::exit_modal()
+/*! \fn void gnui::exit_modal()
   Turns on exit_modal_flag(). This may be used by user callbacks to
-  cancel modal state. See also fltk::Window::make_exec_return().
+  cancel modal state. See also gnui::Window::make_exec_return().
 */
 
-/*! \fn bool fltk::exit_modal_flag()
+/*! \fn bool gnui::exit_modal_flag()
   True if exit_modal() has been called. The flag is also set by the
   destruction or hiding of the modal widget, and on Windows by other
   applications taking the focus when grab is on.
@@ -1126,7 +1126,7 @@ static const handler_link *handlers = 0;
 
   Currently this is called for these reasons:
   - If there is a keystroke that no widgets are interested in, this is
-    called with fltk::SHORTCUT. You can use this to implement global
+    called with gnui::SHORTCUT. You can use this to implement global
     hotkeys.
   - Unrecognized X events cause this to be called with NO_EVENT. The
     Window parameter is set if fltk can figure out the target window
@@ -1143,7 +1143,7 @@ static const handler_link *handlers = 0;
     wants to send it to returns zero. However the exact rules when
     this happens may change in future versions.
 */
-void fltk::add_event_handler(int (*h)(int, Window*)) {
+void gnui::add_event_handler(int (*h)(int, Window*)) {
   handler_link *l = new handler_link;
   l->handle = h;
   l->next = handlers;
@@ -1190,7 +1190,7 @@ Window* fl_actual_window;
   returns false, then do what you want the key to do.
 
 */
-bool fltk::try_shortcut() {
+bool gnui::try_shortcut() {
   static bool recursion;
   if (recursion) return false;
   recursion = true;
@@ -1204,8 +1204,8 @@ bool fltk::try_shortcut() {
 
   You can call it directly to fake events happening to your
   widgets. Currently data other than the event number can only be
-  faked by writing to the undocumented fltk::e_* variables, for
-  instance to make event_x() return 5, you should do fltk::e_x =
+  faked by writing to the undocumented gnui::e_* variables, for
+  instance to make event_x() return 5, you should do gnui::e_x =
   5. This may change in future versions.
 
   This will redirect events to the modal(), pushed(), belowmouse(), or
@@ -1220,13 +1220,13 @@ bool fltk::try_shortcut() {
 # include <stdio.h>
 #endif
 
-bool fltk::handle(int event, Window* window)
+bool gnui::handle(int event, Window* window)
 {
   e_type = event;
 
 #ifdef DUMP_EVENTS
   static unsigned long evtnum=0L;
-  if (event) printf("event name = %8lu %s\n", ++evtnum, fltk::event_name(event));
+  if (event) printf("event name = %8lu %s\n", ++evtnum, gnui::event_name(event));
 #endif
 
   if (fl_local_grab) return fl_local_grab(event);
@@ -1329,16 +1329,16 @@ bool fltk::handle(int event, Window* window)
   return false;
 }
 
-/*! \fn FILE* fltk::fltk_fopen(const char* name, const char* flags)
+/*! \fn FILE* gnui::fltk_fopen(const char* name, const char* flags)
   Portably calls the fopen() function for different systems.
   Note that ALL calls to this function MUST make sure the filename is
   UTF8 encoded.
 
   \param name UTF8 encoded directory name
   \param flags Flags to pass to fopen (commonly 'r', 'w', etc...)
-  \see fltk::utf8froma()
-  \see fltk::utf8frommb();
-  \see fltk::utf8test();
+  \see gnui::utf8froma()
+  \see gnui::utf8frommb();
+  \see gnui::utf8test();
   \return Returns the same FILE* that fopen() returns
 */
 //

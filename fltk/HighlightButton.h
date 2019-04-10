@@ -30,7 +30,7 @@
 
 #include "Button.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API HighlightButton : public Button {
 public:

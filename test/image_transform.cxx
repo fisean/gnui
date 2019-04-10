@@ -8,7 +8,7 @@
 #include <fltk/RadioButton.h>
 #include <fltk/rgbImage.h>
 
-using namespace fltk;
+using namespace gnui;
 
 #define SLIDERS 9
 
@@ -55,7 +55,7 @@ class Drawing : public Widget {
     } else {
       drawimage((uchar*)array,
 		alpha ? ARGB32 : RGB32,
-		fltk::Rectangle((int)xy[0], (int)xy[1], SIZE, SIZE));
+		gnui::Rectangle((int)xy[0], (int)xy[1], SIZE, SIZE));
     }
     setcolor(GRAY80);
     addvertex(xy[0],xy[1]);
@@ -117,11 +117,11 @@ int main(int argc, char** argv) {
     s->align(ALIGN_LEFT);
     s->callback(slider_cb, (void*)n);
   }
-  RadioButton* b = new RadioButton(50,y,240,25,"RGB32 fltk::drawimage()"); y+= 25;
+  RadioButton* b = new RadioButton(50,y,240,25,"RGB32 gnui::drawimage()"); y+= 25;
   b->callback(noalpha_cb); b->set();
-  b = new RadioButton(50,y,240,25,"ARGB32 fltk::drawimage()"); y+= 25;
+  b = new RadioButton(50,y,240,25,"ARGB32 gnui::drawimage()"); y+= 25;
   b->callback(alpha_cb);
-  b = new RadioButton(50,y,240,25,"ARGB32 fltk::Image object"); y+= 25;
+  b = new RadioButton(50,y,240,25,"ARGB32 gnui::Image object"); y+= 25;
   b->callback(image_cb);
 
   window.end();

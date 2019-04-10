@@ -26,7 +26,7 @@
 
 #include "MenuWindow.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Tooltip : public MenuWindow {
 public:

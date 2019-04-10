@@ -34,11 +34,11 @@ you use this if you need any windows functions rather than including
 that file directly.
 
 You can probably combine FLTK with other libraries that make their own
-WIN32 window classes.  The easiest way is to call fltk::wait(), it
+WIN32 window classes.  The easiest way is to call gnui::wait(), it
 will call DispatchMessage() for all messages to the other windows. If
 your other library insists on reading all the events, it will still
 work (as long as it calls DispatchMessage()), but you will
-have to arrange for the function fltk::flush() to be called regularily
+have to arrange for the function gnui::flush() to be called regularily
 so that widgets are updated. Timeouts, the idle function, and file
 descriptor callbacks will not work in this case.
 
@@ -114,7 +114,7 @@ extern pfGetTextMetricsW     __GetTextMetricsW;
 
 #include "draw.h"
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/win32.h
 //@{

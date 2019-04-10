@@ -44,7 +44,7 @@
 #include <ctype.h>
 #include "ARRAY.h"
 
-using namespace fltk;
+using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 // Menu-style api:
@@ -254,7 +254,7 @@ static Widget* innards(
     you must type "\\/" for a forward slash, and "\\\\" for a backward
     slash.
 
-    \a shortcut : 0 for no shortcut, fltk::CTRL|'a' for ctrl-a, etc.
+    \a shortcut : 0 for no shortcut, gnui::CTRL|'a' for ctrl-a, etc.
 
     \a callback : function to call when item picked. If null, the callback
     for the Menu widget itself is called.

@@ -36,7 +36,7 @@
 #include <fltk/run.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 #include "circle.xbm" // bitmap mask for window shape
 
 class ClockWindow : public ShapedWindow {
@@ -48,7 +48,7 @@ class ClockWindow : public ShapedWindow {
 int ClockWindow::handle(int e) {
   static int bx, by;
   static int button1 = 0;
-  if (e == PUSH) button1 = (fltk::event_button() == 1);
+  if (e == PUSH) button1 = (gnui::event_button() == 1);
   if (button1) switch(e) {
     case DRAG:
       position(x()+event_x_root()-bx, y()+event_y_root()-by);
@@ -67,7 +67,7 @@ void callback(Widget* w, void* d) {
 }
 
 int main(int argc, char **argv) {
-  ClockWindow window(220, 220, "fltk::Clock");
+  ClockWindow window(220, 220, "gnui::Clock");
   window.color(12);
   window.begin();
   // don't show window manager border-- some window managers do this for you
@@ -80,8 +80,8 @@ int main(int argc, char **argv) {
   Clock clock(10,10,200,200); // Fabien : why ?
 #endif
   clock.type(ClockOutput::ROUND);
-  clock.box(fltk::OVAL_BOX);
-  clock.align(fltk::ALIGN_BOTTOM|fltk::ALIGN_WRAP);
+  clock.box(gnui::OVAL_BOX);
+  clock.align(gnui::ALIGN_BOTTOM|gnui::ALIGN_WRAP);
   PopupMenu popup(0, 0, 220, 220);
   popup.type(PopupMenu::POPUP3);
   popup.begin();

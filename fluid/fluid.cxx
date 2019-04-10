@@ -103,7 +103,7 @@ const char *copyright =
 #include "fluid_menus.h"
 #include "undo.h"
 
-using namespace fltk;
+using namespace gnui;
 
 DECL_MENUCBV2(toggle_sourceview_cb,DoubleBufferWindow);
 
@@ -183,7 +183,7 @@ void set_filename(const char *c) {
   if (*a && a[1]==':') a+=2;
 #endif
   if (*a=='/') a++;
-  char* p = (char*)(fltk::filename_name(a));
+  char* p = (char*)(gnui::filename_name(a));
   if (p > a && *(p-1)=='/') p--;
   *p = 0;
   fix_images_dir();
@@ -233,13 +233,13 @@ void save_cb(Widget *, void *v) {
     }
 }
 void template_browser_cb(Browser* b,void*) {
-    if (fltk::event_clicks()) {
+    if (gnui::event_clicks()) {
       template_panel->hide();
       return;
     }
-    fltk::SharedImage *img = (fltk::SharedImage *)template_preview->image();
+    gnui::SharedImage *img = (gnui::SharedImage *)template_preview->image();
     if (img) img->remove();
-    template_preview->image((fltk::Symbol*)0);
+    template_preview->image((gnui::Symbol*)0);
     template_preview->redraw();
 
     int item = template_browser->value();
@@ -271,7 +271,7 @@ void template_browser_cb(Browser* b,void*) {
     if ((ext = strrchr(pngfile, '.')) == NULL) return;
     strcpy(ext, ".png");
 
-    img = fltk::SharedImage::get(pngfile);
+    img = gnui::SharedImage::get(pngfile);
 
     if (img) {
       template_preview->image(img);
@@ -312,7 +312,7 @@ bool template_filename_from(const char * c, char * filename, size_t size) {
   return true;
 }
 
-void template_delete_cb(fltk::Button *, void *) {
+void template_delete_cb(gnui::Button *, void *) {
   int item = template_browser->value();
   if (item < 1) return;
   
@@ -320,11 +320,11 @@ void template_delete_cb(fltk::Button *, void *) {
   const char *name = template_browser->child(item)->label();
   if (!template_filename_from(name, filename, sizeof(filename) )) return;
   
-  if (!fltk::choice("Are you sure you want to delete the template \"%s\"?",
+  if (!gnui::choice("Are you sure you want to delete the template \"%s\"?",
                  "Cancel", "Delete", 0, name)) return;
   
   if (unlink(filename)) {
-    fltk::alert("Unable to delete template file \"%s\":\n%s", filename, strerror(errno));
+    gnui::alert("Unable to delete template file \"%s\":\n%s", filename, strerror(errno));
     return;
   }
   template_browser->remove(item);
@@ -354,7 +354,7 @@ void save_template_cb(Widget *, void *) {
 
   // Show the panel and wait for the user to do something...
   template_panel->show();
-  while (template_panel->visible()) fltk::wait();
+  while (template_panel->visible()) gnui::wait();
 
   // Get the template name, return if it is empty...
   const char *c = template_name->value();
@@ -399,7 +399,7 @@ void save_template_cb(Widget *, void *) {
 
   if ((fp = fopen(filename, "wb")) == NULL) {
     delete[] pixels;
-    fltk::alert("Error writing %s: %s", filename, strerror(errno));
+    gnui::alert("Error writing %s: %s", filename, strerror(errno));
     return;
   }
 
@@ -482,7 +482,7 @@ void open_cb(Widget *, void *v) {
   if (!v && modflag && !ask("Discard changes?")) return;
   const char *c;
   if (!(c = file_chooser("Open:", "*.f[ld]", filename, 0, 0))) return;
-  if (!fltk::filename_exist(c)) {
+  if (!gnui::filename_exist(c)) {
     message("%s not found", c);
     return;
   }
@@ -513,7 +513,7 @@ void open_history_cb(Widget *, void *v) {
       }
   }
   char *oldfilename = (char *)v;
-  if (!fltk::filename_exist(oldfilename )) {
+  if (!gnui::filename_exist(oldfilename )) {
     message("%s not found", oldfilename );
     check_history(oldfilename);
     return;
@@ -589,7 +589,7 @@ void new_cb(Widget *, void *v) {
 
   // Show the panel and wait for the user to do something...
   template_panel->show();
-  while (template_panel->visible()) fltk::wait();
+  while (template_panel->visible()) gnui::wait();
 
   // See if the user chose anything...
   int item = template_browser->value();
@@ -787,11 +787,11 @@ Window * splash() {
     if (!about_panel) make_about_panel(copyright);
     Window * o= about_panel;
     o->border(false);
-    o->Rectangle::set(fltk::Monitor::find(0,0),o->w(),o->h(),fltk::ALIGN_CENTER);
+    o->Rectangle::set(gnui::Monitor::find(0,0),o->w(),o->h(),gnui::ALIGN_CENTER);
     o->show();
     about_ok->clear_visible();
     o->flush();
-    do {fltk::check(); } while(!o->visible()) ;
+    do {gnui::check(); } while(!o->visible()) ;
     return about_panel;
 }
 
@@ -801,7 +801,7 @@ void about_cb(Widget *, void *) {
     //copyright_box->hide();
     //display_group->show();
     o->border(true);
-    o->Rectangle::set(fltk::Monitor::find(0,0),o->w(),o->h(),fltk::ALIGN_CENTER);
+    o->Rectangle::set(gnui::Monitor::find(0,0),o->w(),o->h(),gnui::ALIGN_CENTER);
     about_ok->set_visible();
     o->show();
 }
@@ -892,14 +892,14 @@ void theme_cb(Widget *, void *) {
 void initialize_tab_colors() {
     int c = prefs.tabcolor();
     if (panel_tabs) {
-	panel_tabs->child(0)->color((unsigned) c ? prefs.tabcolor1() : fltk::GRAY75);
-	panel_tabs->child(1)->color((unsigned) c ? prefs.tabcolor2() : fltk::GRAY75);
-	panel_tabs->child(2)->color((unsigned) c ? prefs.tabcolor3() : fltk::GRAY75);
+	panel_tabs->child(0)->color((unsigned) c ? prefs.tabcolor1() : gnui::GRAY75);
+	panel_tabs->child(1)->color((unsigned) c ? prefs.tabcolor2() : gnui::GRAY75);
+	panel_tabs->child(2)->color((unsigned) c ? prefs.tabcolor3() : gnui::GRAY75);
     }
     if (pref_tabs) {
-	pref_tabs->child(0)->color((unsigned) c ? prefs.tabcolor1() : fltk::GRAY75);
-	pref_tabs->child(1)->color((unsigned) c ? prefs.tabcolor3() : fltk::GRAY75);
-	pref_tabs->child(2)->color((unsigned) c ? prefs.tabcolor2() : fltk::GRAY75);
+	pref_tabs->child(0)->color((unsigned) c ? prefs.tabcolor1() : gnui::GRAY75);
+	pref_tabs->child(1)->color((unsigned) c ? prefs.tabcolor3() : gnui::GRAY75);
+	pref_tabs->child(2)->color((unsigned) c ? prefs.tabcolor2() : gnui::GRAY75);
     }
 }
 
@@ -1019,7 +1019,7 @@ shell_pipe_cb(int, void*) {
     shell_run_buffer->append(line);
   } else {
     // End of file; tell the parent...
-    fltk::remove_fd(fileno(shell_pipe));
+    gnui::remove_fd(fileno(shell_pipe));
 
     pclose(shell_pipe);
     shell_pipe = NULL;
@@ -1030,18 +1030,18 @@ shell_pipe_cb(int, void*) {
 }
 
 ////////////////////////////////////////////////////////////////
-void do_shell_command(fltk::ReturnButton*, void*) {
+void do_shell_command(gnui::ReturnButton*, void*) {
     const char	*command;	// Command to run
 
   shell_window->hide();
 
   if (shell_pipe) {
-    fltk::alert("Previous shell command still running!");
+    gnui::alert("Previous shell command still running!");
     return;
   }
 
   if ((command = shell_command_input->value()) == NULL || !*command) {
-    fltk::alert("No shell command entered!");
+    gnui::alert("No shell command entered!");
     return;
   }
 
@@ -1070,7 +1070,7 @@ void do_shell_command(fltk::ReturnButton*, void*) {
   shell_run_window->label("Shell Command Running...");
 
   if ((shell_pipe = popen((char *)command, "r")) == NULL) {
-    fltk::alert("Unable to run shell command: %s", strerror(errno));
+    gnui::alert("Unable to run shell command: %s", strerror(errno));
     return;
   }
 
@@ -1078,26 +1078,26 @@ void do_shell_command(fltk::ReturnButton*, void*) {
   shell_run_window->show();
   shell_run_window->hotspot(shell_run_display);
 
-  fltk::add_fd(fileno(shell_pipe), shell_pipe_cb);
+  gnui::add_fd(fileno(shell_pipe), shell_pipe_cb);
 
-  while (shell_pipe) fltk::wait();
+  while (shell_pipe) gnui::wait();
 
   shell_run_button->activate();
   shell_run_window->label("Shell Command Complete");
-  fltk::beep();
+  gnui::beep();
 
-  while (shell_run_window->shown()) fltk::wait();
+  while (shell_run_window->shown()) gnui::wait();
 }
 #else
 // Just do basic shell command stuff, no status window...
-void do_shell_command(fltk::ReturnButton*, void*) {
+void do_shell_command(gnui::ReturnButton*, void*) {
     const char	*command;	// Command to run
   int		status;		// Status from command...
 
   shell_window->hide();
 
   if ((command = shell_command_input->value()) == NULL || !*command) {
-    fltk::alert("No shell command entered!");
+    gnui::alert("No shell command entered!");
     return;
   }
 
@@ -1119,9 +1119,9 @@ void do_shell_command(fltk::ReturnButton*, void*) {
   }
 */
   if ((status = system(command)) != 0) {
-    fltk::alert("Shell command returned status %d!", status);
+    gnui::alert("Shell command returned status %d!", status);
   } else if (completion_button->value()) {
-    fltk::message("Shell command completed successfully!");
+    gnui::message("Shell command completed successfully!");
   }
 }
 #endif // (!WIN32 || __CYGWIN__) && !__MWERKS__
@@ -1204,8 +1204,8 @@ void update_sourceview_cb(Button*, void*) {
   }
 
 //FIXME
-//  strlcpy(i18n_program, fltk::filename_name(sv_source_filename), sizeof(i18n_program));
-//  fltk::filename_ext(i18n_program, sizeof(i18n_program), "");
+//  strlcpy(i18n_program, gnui::filename_name(sv_source_filename), sizeof(i18n_program));
+//  gnui::filename_ext(i18n_program, sizeof(i18n_program), "");
   const char *code_file_name_bak = code_file_name;
   code_file_name = sv_source_filename;
   const char *header_file_name_bak = header_file_name;
@@ -1242,7 +1242,7 @@ void update_sourceview_timer(void*)  {
 void check_history (const char * fname) {
     int i;
     for (i=0;i<MAX_HISTORY;i++) {
-	if (!strcmp(fname,absolute_history[i]) && !fltk::filename_exist(absolute_history[i])) {
+	if (!strcmp(fname,absolute_history[i]) && !gnui::filename_exist(absolute_history[i])) {
 	    if (i<MAX_HISTORY-1) {
 		for (int p=i;p<MAX_HISTORY-1;p++) {
 		    strcpy(absolute_history[p],absolute_history[p+1]);
@@ -1383,7 +1383,7 @@ int main(int argc,char **argv) {
   register_images();
 
   Window * sw = 0;
-  double splash_time = fltk::get_time_secs();
+  double splash_time = gnui::get_time_secs();
   if(!compile_only && prefs.show_splash()) sw = splash();
 
   fluid_style_set = new StyleSet();
@@ -1427,8 +1427,8 @@ int main(int argc,char **argv) {
   signal(SIGINT,sigint);
 #endif
   if (sw) { // hide splash screen if still visible (no escape have been pressed)
-    while(sw->visible() && fltk::get_time_secs()-splash_time<1.0)
-      fltk::check();
+    while(sw->visible() && gnui::get_time_secs()-splash_time<1.0)
+      gnui::check();
     sw->hide();
   }
   return run();

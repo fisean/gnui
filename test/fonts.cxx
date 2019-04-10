@@ -35,52 +35,52 @@
 #include <stdlib.h>
 #include <string.h>
 
-fltk::Window *form;
+gnui::Window *form;
 
-class FontDisplay : public fltk::Widget {
+class FontDisplay : public gnui::Widget {
   void draw();
 public:
-  fltk::Font* font; float size; const char* encoding;
-  FontDisplay(fltk::Box* B, int X, int Y, int W, int H, const char* L = 0) :
-    fltk::Widget(X,Y,W,H,L) {box(B); font = 0; size = 14.0f;}
+  gnui::Font* font; float size; const char* encoding;
+  FontDisplay(gnui::Box* B, int X, int Y, int W, int H, const char* L = 0) :
+    gnui::Widget(X,Y,W,H,L) {box(B); font = 0; size = 14.0f;}
 };
 
-fltk::Widget* id_box;
+gnui::Widget* id_box;
 
 void FontDisplay::draw() {
   draw_box();
-  fltk::push_clip(2,2,w()-4,h()-4);
-  const char* saved_encoding = fltk::get_encoding();
-  fltk::set_encoding(encoding);
-  fltk::setfont(font, size);
-  id_box->label(fltk::Font::current_name());
+  gnui::push_clip(2,2,w()-4,h()-4);
+  const char* saved_encoding = gnui::get_encoding();
+  gnui::set_encoding(encoding);
+  gnui::setfont(font, size);
+  id_box->label(gnui::Font::current_name());
   id_box->redraw();
-  fltk::setcolor(fltk::BLACK);
+  gnui::setcolor(gnui::BLACK);
   char buffer[32];
   for (int Y = 1; Y < 8; Y++) {
     for (int X = 0; X < 32; X++) buffer[X] = (32*Y+X);
-    fltk::drawtext(buffer, 32, 3, 3+(size+leading())*Y);
+    gnui::drawtext(buffer, 32, 3, 3+(size+leading())*Y);
   }
-  fltk::set_encoding(saved_encoding);
-  fltk::pop_clip();
+  gnui::set_encoding(saved_encoding);
+  gnui::pop_clip();
 }
 
 FontDisplay *textobj;
 
-fltk::Browser *fontobj, *sizeobj, *encobj;
+gnui::Browser *fontobj, *sizeobj, *encobj;
 
-fltk::Font** fonts; // list returned by fltk
+gnui::Font** fonts; // list returned by fltk
 
-fltk::Group *button_group;
-fltk::CheckButton* bold_button, *italic_button;
+gnui::Group *button_group;
+gnui::CheckButton* bold_button, *italic_button;
 
 float pickedsize = 14.0f;
 
-void font_cb(fltk::Widget *, long) {
+void font_cb(gnui::Widget *, long) {
   int fn = fontobj->value();
 //printf("font: %d    name: %s   bigname: %s\n", fn, fonts[fn]->name(), fonts[fn]->system_name());
 
-  fltk::Font* f = fonts[fn];
+  gnui::Font* f = fonts[fn];
   if (f->bold() == f) bold_button->deactivate();
   else bold_button->activate();
   if (f->italic() == f) italic_button->deactivate();
@@ -101,7 +101,7 @@ void font_cb(fltk::Widget *, long) {
   for (int i = 0; i < ne; i++) {
     encobj->add(encodings[i]);
     if (!strcmp(encodings[i], saved)) picked = i;
-    if (!strcmp(encodings[i], fltk::get_encoding())) iso8859 = i;
+    if (!strcmp(encodings[i], gnui::get_encoding())) iso8859 = i;
   }
   if (picked < 0) picked = iso8859;
   textobj->encoding = encodings[picked];
@@ -111,8 +111,8 @@ void font_cb(fltk::Widget *, long) {
   int *s; int n = f->sizes(s);
   if (!n) {
     // no sizes (this only happens on X)
-    fltk::setfont(f, pickedsize);
-    textobj->size = fltk::getsize();
+    gnui::setfont(f, pickedsize);
+    textobj->size = gnui::getsize();
   } else /*if (s[0] == 0)*/ {
     // many sizes;
     int j = 1;
@@ -142,7 +142,7 @@ void font_cb(fltk::Widget *, long) {
   button_group->redraw();
 }
 
-void encoding_cb(fltk::Widget *, long) {
+void encoding_cb(gnui::Widget *, long) {
   int i = encobj->value();
   if (i < 0)
      return;
@@ -150,7 +150,7 @@ void encoding_cb(fltk::Widget *, long) {
   textobj->redraw();
 }
 
-void size_cb(fltk::Widget *, long) {
+void size_cb(gnui::Widget *, long) {
   int i = sizeobj->value();
   if (i < 0) 
      return;
@@ -162,35 +162,35 @@ void size_cb(fltk::Widget *, long) {
 }
 
 void create_the_forms() {
-  form = new fltk::Window(550,390);
+  form = new gnui::Window(550,390);
   form->set_double_buffer();
   form->begin();
-  id_box = new fltk::Widget(10, 172, 530, 15);
-  id_box->box(fltk::ENGRAVED_BOX);
+  id_box = new gnui::Widget(10, 172, 530, 15);
+  id_box->box(gnui::ENGRAVED_BOX);
   id_box->labelsize(10);
-  id_box->labelfont(fltk::COURIER);
-  id_box->set_flag(fltk::ALIGN_INSIDE|fltk::ALIGN_CLIP|fltk::ALIGN_LEFT);
-  textobj = new FontDisplay(fltk::ENGRAVED_BOX,10,10,530,160);
-  textobj->clear_flag(fltk::ALIGN_MASK);
-  textobj->set_flag(fltk::ALIGN_TOP|fltk::ALIGN_LEFT|fltk::ALIGN_INSIDE|fltk::ALIGN_CLIP);
-  button_group = new fltk::Group(10, 190, 140, 20);
+  id_box->labelfont(gnui::COURIER);
+  id_box->set_flag(gnui::ALIGN_INSIDE|gnui::ALIGN_CLIP|gnui::ALIGN_LEFT);
+  textobj = new FontDisplay(gnui::ENGRAVED_BOX,10,10,530,160);
+  textobj->clear_flag(gnui::ALIGN_MASK);
+  textobj->set_flag(gnui::ALIGN_TOP|gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE|gnui::ALIGN_CLIP);
+  button_group = new gnui::Group(10, 190, 140, 20);
   button_group->begin();
-  bold_button = new fltk::CheckButton(0, 0, 70, 20, "Bold");
+  bold_button = new gnui::CheckButton(0, 0, 70, 20, "Bold");
   bold_button->labelfont(bold_button->labelfont()->bold());
   bold_button->callback(font_cb, 1);
-  italic_button = new fltk::CheckButton(70, 0, 70, 20, "Italic");
+  italic_button = new gnui::CheckButton(70, 0, 70, 20, "Italic");
   italic_button->labelfont(italic_button->labelfont()->italic());
   italic_button->callback(font_cb, 1);
   button_group->end();
-  fontobj = new fltk::Browser(10, 210, 280, 170);
-  fontobj->when(fltk::WHEN_CHANGED);
+  fontobj = new gnui::Browser(10, 210, 280, 170);
+  fontobj->when(gnui::WHEN_CHANGED);
   fontobj->callback(font_cb);
   form->resizable(fontobj);
-  encobj = new fltk::Browser(300, 210, 100, 170);
-  encobj->when(fltk::WHEN_CHANGED);
+  encobj = new gnui::Browser(300, 210, 100, 170);
+  encobj->when(gnui::WHEN_CHANGED);
   encobj->callback(encoding_cb, 1);
-  sizeobj = new fltk::Browser(410, 210, 130, 170);
-  sizeobj->when(fltk::WHEN_CHANGED);
+  sizeobj = new gnui::Browser(410, 210, 130, 170);
+  sizeobj->when(gnui::WHEN_CHANGED);
   sizeobj->callback(size_cb);
   form->end();
 }
@@ -199,15 +199,15 @@ void create_the_forms() {
 
 int main(int argc, char **argv) {
   create_the_forms();
-  int numfonts = fltk::list_fonts(fonts);
+  int numfonts = gnui::list_fonts(fonts);
   for (int i = 0; i < numfonts; i++)
        fontobj->add(fonts[i]->name());
 
   fontobj->value(0);
-  textobj->encoding = fltk::get_encoding();
+  textobj->encoding = gnui::get_encoding();
   font_cb(fontobj,0);
   form->show(argc,argv);
-  return fltk::run();
+  return gnui::run();
 }
 
 //

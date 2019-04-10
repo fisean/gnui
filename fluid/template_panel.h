@@ -4,22 +4,22 @@
 #define template_panel_h
 // Header for //\n// "$Id$"\n//\n// FLUID template support for ...
 #include <fltk/DoubleBufferWindow.h>
-extern fltk::DoubleBufferWindow* template_panel;
+extern gnui::DoubleBufferWindow* template_panel;
 #include <fltk/Browser.h>
-extern void template_browser_cb(fltk::Browser*, void*);
-extern fltk::Browser* template_browser;
+extern void template_browser_cb(gnui::Browser*, void*);
+extern gnui::Browser* template_browser;
 #include <fltk/InvisibleBox.h>
-extern fltk::InvisibleBox* template_preview;
+extern gnui::InvisibleBox* template_preview;
 #include <fltk/Input.h>
-extern fltk::Input* template_name;
-extern fltk::Input* template_instance;
+extern gnui::Input* template_name;
+extern gnui::Input* template_instance;
 #include <fltk/Group.h>
 #include <fltk/Button.h>
-extern void template_delete_cb(fltk::Button*, void*);
-extern fltk::Button* template_delete;
+extern void template_delete_cb(gnui::Button*, void*);
+extern gnui::Button* template_delete;
 #include <fltk/ReturnButton.h>
-extern fltk::ReturnButton* template_submit;
-fltk::DoubleBufferWindow* make_template_panel();
+extern gnui::ReturnButton* template_submit;
+gnui::DoubleBufferWindow* make_template_panel();
 void template_clear();
 void template_load();
 // Header for //\n// End of "$Id$".\n//

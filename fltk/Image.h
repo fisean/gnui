@@ -27,7 +27,7 @@
 #include "Symbol.h"
 # undef OPAQUE // fix for windows.h
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Widget;
 struct Picture; // secret internal system-specific data
@@ -43,10 +43,10 @@ class FL_API Image : public Symbol {
 public:
 
   Image(const char* name=0) :
-    Symbol(name), pixeltype_(fltk::RGB32), w_(12), h_(12),
+    Symbol(name), pixeltype_(gnui::RGB32), w_(12), h_(12),
     picture(0), flags(MEASUREFETCH) {}
   Image(int w, int h, const char* name=0) :
-    Symbol(name), pixeltype_(fltk::RGB32), w_(w), h_(h),
+    Symbol(name), pixeltype_(gnui::RGB32), w_(w), h_(h),
     picture(0), flags(0) {}
   Image(PixelType p, int w, int h, const char* name=0) :
     Symbol(name), pixeltype_(p), w_(w), h_(h),
@@ -58,7 +58,7 @@ public:
   ~Image();
 
   PixelType pixeltype() const {return pixeltype_;}
-  int depth() const {return fltk::depth(pixeltype_);}
+  int depth() const {return gnui::depth(pixeltype_);}
   int w() const {return w_;}
   int width() const {return w_;}
   int h() const {return h_;}
@@ -72,7 +72,7 @@ public:
   uchar* linebuffer(int y);
 
   void setimage(const uchar* d, PixelType p, int w, int h, int linedelta);
-  void setimage(const uchar* d, PixelType p, int w, int h) {setimage(d,p,w,h,fltk::depth(p)*w);}
+  void setimage(const uchar* d, PixelType p, int w, int h) {setimage(d,p,w,h,gnui::depth(p)*w);}
 
   uchar* buffer();
   const uchar* buffer() const;

@@ -28,7 +28,7 @@
 
 #include "Widget.h"
 
-namespace fltk {
+namespace gnui {
 
 /** A ClockOutput can be used to display a program-supplied time */
 

@@ -3,7 +3,7 @@
 
 #include <fltk/FL_API.h>
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Widget;
 class FL_API AssociationType;
@@ -70,10 +70,10 @@ class FL_API AssociationType {
   virtual void destroy(void* data) const = 0;
 
   /*! \brief Finds all data of this association type for a widget
-   * This function just calls fltk::foreach(this, wg, fkt). If \a wg
+   * This function just calls gnui::foreach(this, wg, fkt). If \a wg
    * is NULL this function will find all data for any widget.
    */
-  void* foreach(const Widget* wg, AssociationFunctor& fkt) { return fltk::foreach(this, wg, fkt); }
+  void* foreach(const Widget* wg, AssociationFunctor& fkt) { return gnui::foreach(this, wg, fkt); }
 };
 
 }

@@ -40,7 +40,7 @@
   appears that putenv is missing on some versions of Windows so I
   commented it all out there, sigh.
 */
-void fltk::display(const char *d) {
+void gnui::display(const char *d) {
 #ifndef _WIN32
   char *e = new char[strlen(d)+13];
   strcpy(e,"DISPLAY=");

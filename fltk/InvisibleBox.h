@@ -10,7 +10,7 @@
 
 #include "Widget.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API InvisibleBox : public Widget {
 public:

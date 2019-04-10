@@ -33,7 +33,7 @@
 
 #include "Group.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API PackedGroup : public Group {
   int spacing_;

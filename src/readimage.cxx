@@ -27,10 +27,10 @@
 #include <fltk/x.h>
 #include <fltk/draw.h>
 
-/** \fn uchar *fltk::readimage(uchar* p, PixelType type, const Rectangle&rectangle, int linedelta);
+/** \fn uchar *gnui::readimage(uchar* p, PixelType type, const Rectangle&rectangle, int linedelta);
 
   Reads a 2-D image off the current drawing destination. The
-  resulting data can be passed to fltk::drawimage() or the 8-bit
+  resulting data can be passed to gnui::drawimage() or the 8-bit
   pixels examined or stored by your program.
 
   The return value is either \a p or NULL if there is some problem
@@ -40,7 +40,7 @@
   \a p points to the location to store the first byte of the
   upper-left pixel of the image. The caller must allocate this buffer.
 
-  \a type can be fltk::RGB or fltk::RGBA (possibly other types will
+  \a type can be gnui::RGB or gnui::RGBA (possibly other types will
   be supported in the future).
 
   \a rectangle indicates the position on the surface in the current
@@ -58,8 +58,8 @@
 */
 
 /** Same except \a linedelta is set to r.w()*depth(type). */
-uchar* fltk::readimage(uchar* p, PixelType type, const Rectangle& r) {
-  return fltk::readimage(p, type, r, depth(type)*r.w());
+uchar* gnui::readimage(uchar* p, PixelType type, const Rectangle& r) {
+  return gnui::readimage(p, type, r, depth(type)*r.w());
 }
 
 #if USE_X11
@@ -70,6 +70,6 @@ uchar* fltk::readimage(uchar* p, PixelType type, const Rectangle& r) {
 # include "osx/readimage.cxx"
 #else
 // Function returns null to indicate failure on unsupported platforms:
-uchar* fltk::readimage(uchar *, PixelType, const Rectangle&, int) {return 0;}
+uchar* gnui::readimage(uchar *, PixelType, const Rectangle&, int) {return 0;}
 
 #endif

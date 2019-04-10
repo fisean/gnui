@@ -6,48 +6,48 @@
 #include <fltk/TextBuffer.h>
 #include <fltk/TextDisplay.h>
 extern void load_history();
-extern fltk::TextBuffer *shell_run_buffer;
+extern gnui::TextBuffer *shell_run_buffer;
 #include <fltk/Window.h>
-extern fltk::Window* preferences_window;
+extern gnui::Window* preferences_window;
 #include <fltk/TabGroup.h>
-extern fltk::TabGroup* pref_tabs;
+extern gnui::TabGroup* pref_tabs;
 #include <fltk/Group.h>
 #include <fltk/CheckButton.h>
-extern fltk::CheckButton* openlast_button;
-extern fltk::CheckButton* prevpos_button;
-extern fltk::CheckButton* completion_button;
+extern gnui::CheckButton* openlast_button;
+extern gnui::CheckButton* prevpos_button;
+extern gnui::CheckButton* completion_button;
 #include <fltk/ValueInput.h>
-extern fltk::ValueInput* recent_spinner;
-extern fltk::CheckButton* tabcolor_button;
-extern fltk::CheckButton* splash_button;
+extern gnui::ValueInput* recent_spinner;
+extern gnui::CheckButton* tabcolor_button;
+extern gnui::CheckButton* splash_button;
 #include <fltk/Widget.h>
 #include <fltk/Input.h>
-extern void header_input_cb(fltk::Input*, void*);
-extern fltk::Input* header_file_input;
-extern void code_input_cb(fltk::Input*, void*);
-extern fltk::Input* code_file_input;
-extern void include_H_from_C_button_cb(fltk::CheckButton*, void*);
-extern fltk::CheckButton* include_H_from_C_button;
-extern void alignment_cb(fltk::Input*, long);
-extern fltk::Input* horizontal_input;
-extern fltk::Input* vertical_input;
-extern fltk::Input* snap_input;
+extern void header_input_cb(gnui::Input*, void*);
+extern gnui::Input* header_file_input;
+extern void code_input_cb(gnui::Input*, void*);
+extern gnui::Input* code_file_input;
+extern void include_H_from_C_button_cb(gnui::CheckButton*, void*);
+extern gnui::CheckButton* include_H_from_C_button;
+extern void alignment_cb(gnui::Input*, long);
+extern gnui::Input* horizontal_input;
+extern gnui::Input* vertical_input;
+extern gnui::Input* snap_input;
 #include <fltk/RadioButton.h>
-extern void default_widget_size_cb(fltk::RadioButton*, long);
-extern fltk::RadioButton* def_widget_size[6];
+extern void default_widget_size_cb(gnui::RadioButton*, long);
+extern gnui::RadioButton* def_widget_size[6];
 #include <fltk/Button.h>
-fltk::Window* make_preferences_window();
+gnui::Window* make_preferences_window();
 #include <fltk/DoubleBufferWindow.h>
-extern fltk::DoubleBufferWindow* shell_window;
-extern fltk::Input* shell_command_input;
-extern fltk::CheckButton* shell_writecode_button;
-extern fltk::CheckButton* shell_writemsgs_button;
-extern fltk::CheckButton* shell_savefl_button;
+extern gnui::DoubleBufferWindow* shell_window;
+extern gnui::Input* shell_command_input;
+extern gnui::CheckButton* shell_writecode_button;
+extern gnui::CheckButton* shell_writemsgs_button;
+extern gnui::CheckButton* shell_savefl_button;
 #include <fltk/ReturnButton.h>
-extern void do_shell_command(fltk::ReturnButton*, void*);
-extern fltk::DoubleBufferWindow* shell_run_window;
+extern void do_shell_command(gnui::ReturnButton*, void*);
+extern gnui::DoubleBufferWindow* shell_run_window;
 #include <fltk/TextDisplay.h>
-extern fltk::TextDisplay* shell_run_display;
-extern fltk::ReturnButton* shell_run_button;
-fltk::DoubleBufferWindow* make_shell_window();
+extern gnui::TextDisplay* shell_run_display;
+extern gnui::ReturnButton* shell_run_button;
+gnui::DoubleBufferWindow* make_shell_window();
 #endif

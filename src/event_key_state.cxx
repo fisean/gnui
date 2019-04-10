@@ -23,24 +23,24 @@
 //    http://www.fltk.org/str.php
 //
 
-/*! \fn bool fltk::event_key_state(unsigned key);
+/*! \fn bool gnui::event_key_state(unsigned key);
 
   Returns true if the given key was held down (or pressed) <i>during the
   last event</i>. This is constant until the next event is read from the
-  server. The possible values for the key are listed under fltk::SpaceKey.
+  server. The possible values for the key are listed under gnui::SpaceKey.
 
   On Win32 event_key_state(KeypadEnter) does not work.
 */
 
-/*! \fn bool fltk::get_key_state(unsigned key);
+/*! \fn bool gnui::get_key_state(unsigned key);
 
   Returns true if the given key is held down \e now. This is different
   than event_key_state() as that returns how the key was during the
   last event. This can also be slower as it requires a round-trip
   query to the window server. The values to pass are described
-  under fltk::SpaceKey.
+  under gnui::SpaceKey.
 
-  On Win32 fltk::get_key_state(fltk::KeypadEnter) does not work. 
+  On Win32 gnui::get_key_state(gnui::KeypadEnter) does not work. 
 */
 
 #include <config.h>

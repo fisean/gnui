@@ -31,7 +31,7 @@
 #include "WidgetType.h"
 #include "undo.h"
 
-using namespace fltk;
+using namespace gnui;
 /**
  * the first behaviour always uses the first selected widget as a reference
  * the second behaviour uses the largest widget (most extreme positions) as
@@ -432,7 +432,7 @@ void widget_size_cb(Widget *, long size) {
       w->labelsize((float) size);
       Font f;
       float s = (float) size;
-      Color c=fltk::BLACK;
+      Color c=gnui::BLACK;
       ((WidgetType *)o)->textstuff(2, &f, s, c);
 
       w->redraw();

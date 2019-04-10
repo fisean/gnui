@@ -27,26 +27,26 @@
 #include <fltk/math.h>
 #include <fltk/string.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::NumericInput
+/*! \class gnui::NumericInput
 
-  The fltk::NumericInput class is a subclass of fltk::Input that
+  The gnui::NumericInput class is a subclass of gnui::Input that
   redefines the up and down arrow keys to increment and decrement the
   digit of the number to the right of the cursor. This makes it very
   easy to edit numbers.
 
-  If you change when() to fltk::WHEN_ENTER_KEY the callback is only
+  If you change when() to gnui::WHEN_ENTER_KEY the callback is only
   done when the user hits the up/down arrow keys or when the user
   types the Enter key. This may be more useful than the default
-  setting of fltk::WHEN_CHANGED which can make the callback happen
+  setting of gnui::WHEN_CHANGED which can make the callback happen
   when partially-edited numbers are in the field.
 
   This version lets the user type any text into the field. This is
   useful if you run the text through an expression parser so the user
   can type in math expressions. However if you want to limit the input
   to text that can be run through strtol() or strtod() you should use
-  the subclasses fltk::IntInput or fltk::FloatInput.
+  the subclasses gnui::IntInput or gnui::FloatInput.
 
   When you construct the widget the text starts out blank. You may want
   to set it with value(0) or something.

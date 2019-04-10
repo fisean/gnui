@@ -2,13 +2,13 @@
 
 #include "tabs.h"
 
-fltk::Window *foo_window=(fltk::Window *)0;
+gnui::Window *foo_window=(gnui::Window *)0;
 
-static void cb_cancel(fltk::Button*, void*) {
+static void cb_cancel(gnui::Button*, void*) {
   exit(1);
 }
 
-static void cb_OK(fltk::ReturnButton*, void*) {
+static void cb_OK(gnui::ReturnButton*, void*) {
   exit(0);
 }
 
@@ -16,94 +16,94 @@ static void cb_OK(fltk::ReturnButton*, void*) {
 
 int main (int argc, char **argv) {
 
-  fltk::Window* w;
-   {fltk::Window* o = foo_window = new fltk::Window(320, 296);
+  gnui::Window* w;
+   {gnui::Window* o = foo_window = new gnui::Window(320, 296);
     w = o;
     o->shortcut(0xff1b);
     o->begin();
-     {fltk::TabGroup* o = new fltk::TabGroup(10, 10, 300, 191);
+     {gnui::TabGroup* o = new gnui::TabGroup(10, 10, 300, 191);
       o->begin();
-       {fltk::Group* o = new fltk::Group(0, 20, 300, 171, "Label1");
+       {gnui::Group* o = new gnui::Group(0, 20, 300, 171, "Label1");
         o->begin();
-        new fltk::Input(50, 14, 240, 22, "input:");
-        new fltk::Input(50, 36, 240, 22, "input2:");
-         {fltk::WordwrapInput* o = new fltk::WordwrapInput(50, 58, 240, 99, "input3:");
+        new gnui::Input(50, 14, 240, 22, "input:");
+        new gnui::Input(50, 36, 240, 22, "input2:");
+         {gnui::WordwrapInput* o = new gnui::WordwrapInput(50, 58, 240, 99, "input3:");
           o->type(5);
         }
         o->end();
-        fltk::Group::current()->resizable(o);
+        gnui::Group::current()->resizable(o);
       }
-       {fltk::Group* o = new fltk::Group(0, 20, 300, 171, "tab2");
+       {gnui::Group* o = new gnui::Group(0, 20, 300, 171, "tab2");
         o->hide();
         o->begin();
-        new fltk::Button(10, 25, 100, 22, "button1");
-        new fltk::Input(130, 58, 100, 22, "input in box2");
-        new fltk::Button(20, 113, 260, 22, "This is stuff inside the Fl_Group \"tab2\"");
+        new gnui::Button(10, 25, 100, 22, "button1");
+        new gnui::Input(130, 58, 100, 22, "input in box2");
+        new gnui::Button(20, 113, 260, 22, "This is stuff inside the Fl_Group \"tab2\"");
         o->end();
       }
-       {fltk::Group* o = new fltk::Group(0, 20, 300, 171, "tab3");
+       {gnui::Group* o = new gnui::Group(0, 20, 300, 171, "tab3");
         o->hide();
         o->begin();
-         {fltk::Button* o = new fltk::Button(10, 30, 60, 80, "button2");
+         {gnui::Button* o = new gnui::Button(10, 30, 60, 80, "button2");
           o->set_vertical();
         }
-         {fltk::Button* o = new fltk::Button(70, 30, 60, 80, "button");
+         {gnui::Button* o = new gnui::Button(70, 30, 60, 80, "button");
           o->set_vertical();
         }
-         {fltk::Button* o = new fltk::Button(130, 30, 60, 80, "button");
-          o->set_vertical();
-        }
-        o->end();
-      }
-       {fltk::Group* o = new fltk::Group(0, 20, 300, 171, "tab4");
-        o->labelfont(fltk::HELVETICA_ITALIC);
-        o->hide();
-        o->begin();
-         {fltk::Button* o = new fltk::Button(10, 20, 60, 110, "button2");
-          o->set_vertical();
-        }
-         {fltk::Button* o = new fltk::Button(70, 20, 60, 110, "button");
-          o->set_vertical();
-        }
-         {fltk::Button* o = new fltk::Button(130, 20, 60, 110, "button");
+         {gnui::Button* o = new gnui::Button(130, 30, 60, 80, "button");
           o->set_vertical();
         }
         o->end();
       }
-       {fltk::Group* o = new fltk::Group(0, 20, 300, 171, "very long tab text");
-        o->labeltype(fltk::ENGRAVED_LABEL);
+       {gnui::Group* o = new gnui::Group(0, 20, 300, 171, "tab4");
+        o->labelfont(gnui::HELVETICA_ITALIC);
         o->hide();
         o->begin();
-         {fltk::Button* o = new fltk::Button(10, 50, 60, 80, "button2");
+         {gnui::Button* o = new gnui::Button(10, 20, 60, 110, "button2");
           o->set_vertical();
         }
-         {fltk::Button* o = new fltk::Button(80, 60, 60, 80, "button");
+         {gnui::Button* o = new gnui::Button(70, 20, 60, 110, "button");
           o->set_vertical();
         }
-         {fltk::Clock* o = new fltk::Clock(155, 13, 100, 100, "Make sure this clock does not use processor time when this tab is hidden or w\
+         {gnui::Button* o = new gnui::Button(130, 20, 60, 110, "button");
+          o->set_vertical();
+        }
+        o->end();
+      }
+       {gnui::Group* o = new gnui::Group(0, 20, 300, 171, "very long tab text");
+        o->labeltype(gnui::ENGRAVED_LABEL);
+        o->hide();
+        o->begin();
+         {gnui::Button* o = new gnui::Button(10, 50, 60, 80, "button2");
+          o->set_vertical();
+        }
+         {gnui::Button* o = new gnui::Button(80, 60, 60, 80, "button");
+          o->set_vertical();
+        }
+         {gnui::Clock* o = new gnui::Clock(155, 13, 100, 100, "Make sure this clock does not use processor time when this tab is hidden or w\
 indow is iconized");
-          o->box(fltk::OSHADOW_BOX);
-          o->labelfont(fltk::TIMES);
-          o->color((fltk::Color)238);
+          o->box(gnui::OSHADOW_BOX);
+          o->labelfont(gnui::TIMES);
+          o->color((gnui::Color)238);
           o->labelsize(10);
-          o->align(fltk::ALIGN_BOTTOM|fltk::ALIGN_WRAP);
+          o->align(gnui::ALIGN_BOTTOM|gnui::ALIGN_WRAP);
         }
         o->end();
       }
       o->end();
-      fltk::Group::current()->resizable(o);
+      gnui::Group::current()->resizable(o);
     }
-    new fltk::Input(60, 211, 130, 22, "inputA:");
-    new fltk::Input(60, 233, 250, 22, "inputB:");
-     {fltk::Button* o = new fltk::Button(180, 266, 60, 22, "cancel");
-      o->callback((fltk::Callback*)cb_cancel);
+    new gnui::Input(60, 211, 130, 22, "inputA:");
+    new gnui::Input(60, 233, 250, 22, "inputB:");
+     {gnui::Button* o = new gnui::Button(180, 266, 60, 22, "cancel");
+      o->callback((gnui::Callback*)cb_cancel);
     }
-     {fltk::ReturnButton* o = new fltk::ReturnButton(250, 266, 60, 22, "OK");
+     {gnui::ReturnButton* o = new gnui::ReturnButton(250, 266, 60, 22, "OK");
       o->shortcut(0xff0d);
-      o->callback((fltk::Callback*)cb_OK);
+      o->callback((gnui::Callback*)cb_OK);
     }
     o->end();
   }
   w->show(argc, argv);
-  return  fltk::run();
+  return  gnui::run();
 }

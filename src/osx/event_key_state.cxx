@@ -31,7 +31,7 @@
 
 #include <fltk/events.h>
 #include <fltk/x.h>
-using namespace fltk;
+using namespace gnui;
 
 // convert an FLTK (X) keysym to a MacOS symbol:
 // See also the inverse converter in mac.cxx
@@ -55,7 +55,7 @@ static const struct {unsigned short vk, fltk;} vktab[] = {
   { 113, ScrollLockKey }, { 53, EscapeKey }, { 115, HomeKey }, {123, LeftKey},
   { 126, UpKey }, { 124, RightKey }, { 125, DownKey }, { 116, PageUpKey },
   { 121, PageDownKey },  { 119, EndKey }, { 107, PrintKey}, {114, InsertKey},
-  { 127, fltk::MenuKey }, { 114, HelpKey }, { 71, NumLockKey }, 
+  { 127, gnui::MenuKey }, { 114, HelpKey }, { 71, NumLockKey }, 
   { 76, KeypadEnter }, { 67, MultiplyKey }, { 69, AddKey}, { 78, SubtractKey},
   { 65, DecimalKey }, { 75, DivideKey }, 
   { 82, Keypad0 }, { 83, Keypad1 }, { 84, Keypad2 }, { 85, Keypad3 }, 
@@ -85,14 +85,14 @@ static unsigned short fltk2mac(unsigned fltk) {
 }
 
 //: returns true, if that key was pressed during the last event
-bool fltk::event_key_state(unsigned k) {
+bool gnui::event_key_state(unsigned k) {
   return get_key_state(k);
 }
 
 //#include <stdio.h>
 
 //: returns true, if that key is pressed right now
-bool fltk::get_key_state(unsigned k) {
+bool gnui::get_key_state(unsigned k) {
   KeyMap foo;
   GetKeys(foo);
 #ifdef MAC_TEST_FOR_KEYCODES

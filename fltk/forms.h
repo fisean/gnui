@@ -491,7 +491,7 @@ inline int fl_get_button(Fl_Widget* b) {return ((Fl_Button*)b)->value();}
 inline void fl_set_button(Fl_Widget* b, int v) {((Fl_Button*)b)->value(v);}
 inline int fl_get_button_numb(Fl_Widget*) {return Fl::event_button();}
 inline void fl_set_object_shortcut(Fl_Widget* b, const char* s, int=0) {
-  b->shortcut(fltk::key(s));}
+  b->shortcut(gnui::key(s));}
 #define fl_set_button_shortcut fl_set_object_shortcut
 
 #include <fltk/Fl_Light_Button.h>
@@ -739,7 +739,7 @@ inline void fl_replace_menu_item(Fl_Widget* o, int i, const char* s) {
 inline void fl_delete_menu_item(Fl_Widget* o, int i) {
     ((Fl_Menu_Button*)o)->remove(i-1);}
 inline void fl_set_menu_item_shortcut(Fl_Widget* o, int i, const char* s) {
-    ((Fl_Menu_Button*)o)->shortcut(i-1,fltk::key(s));}
+    ((Fl_Menu_Button*)o)->shortcut(i-1,gnui::key(s));}
 // inline void fl_set_menu_item_mode(Fl_Widget* o, int i, long x) {
 //     ((Fl_Menu_Button*)o)->mode(i-1,x);}
 inline void fl_show_menu_symbol(Fl_Widget*, int ) {

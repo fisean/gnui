@@ -6,16 +6,16 @@
 #include <stdio.h>
 #include <fltk/Widget.h>
 #include <fltk/Slider.h>
-extern void callback(fltk::Slider*, void*);
+extern void callback(gnui::Slider*, void*);
 #include <fltk/ValueInput.h>
-extern void callback(fltk::ValueInput*, void*);
+extern void callback(gnui::ValueInput*, void*);
 #include <fltk/Scrollbar.h>
-extern void callback(fltk::Scrollbar*, void*);
+extern void callback(gnui::Scrollbar*, void*);
 #include <fltk/ValueSlider.h>
-extern void callback(fltk::ValueSlider*, void*);
+extern void callback(gnui::ValueSlider*, void*);
 #include <fltk/ThumbWheel.h>
-extern void callback(fltk::ThumbWheel*, void*);
+extern void callback(gnui::ThumbWheel*, void*);
 #include <fltk/Group.h>
 #include <fltk/Dial.h>
-extern void callback(fltk::Dial*, void*);
+extern void callback(gnui::Dial*, void*);
 #endif

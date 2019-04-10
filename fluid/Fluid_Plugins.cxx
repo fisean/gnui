@@ -114,7 +114,7 @@ static void ReadPlugins(const char* location)
 #include <fltk/xpmImage.h>
 void link_whole_fltk()
 {
-  new fltk::xpmImage((char**)0);
+  new gnui::xpmImage((char**)0);
   // add some more if you get problems when reading your plugins ...
 }
 

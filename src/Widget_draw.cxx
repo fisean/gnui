@@ -34,7 +34,7 @@
 #include <fltk/draw.h>
 #include <fltk/string.h>
 #include <config.h>
-using namespace fltk;
+using namespace gnui;
 
 LabelType* LabelType::find(const char* name) {
   for (LabelType* p = LabelType::first; p; p = p->next)
@@ -61,8 +61,8 @@ void LabelType::draw(const char* label,
 }
 
 static LabelType normalLabel("normal");
-LabelType* const fltk::NORMAL_LABEL = &normalLabel;
-LabelType* const fltk::SYMBOL_LABEL = &normalLabel;
+LabelType* const gnui::NORMAL_LABEL = &normalLabel;
+LabelType* const gnui::SYMBOL_LABEL = &normalLabel;
 
 LabelType::~LabelType() {}
 
@@ -74,7 +74,7 @@ public:
   NoLabel(const char * n) : LabelType(n) {}
 };
 static NoLabel noLabel("none");
-LabelType* const fltk::NO_LABEL = &noLabel;
+LabelType* const gnui::NO_LABEL = &noLabel;
 
 ////////////////////////////////////////////////////////////////
 // Drawing methods (designed to be called from a draw() implementation):
@@ -221,7 +221,7 @@ void Widget::draw_label(const Rectangle& ir, Flags flags) const {
   }
 
   // skip outside labels:
-  if ((!(flags & fltk::ALIGN_POSITIONMASK) || (flags & fltk::ALIGN_INSIDE)) &&
+  if ((!(flags & gnui::ALIGN_POSITIONMASK) || (flags & gnui::ALIGN_INSIDE)) &&
       r.w()>0 && label_ && *label_) {
     // add some interior border for the text:
     if (r.w() > 6 && flags&ALIGN_LEFT) {

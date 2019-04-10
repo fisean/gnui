@@ -34,7 +34,7 @@
 #include "Valuator.h"
 #endif
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Slider : public Valuator {
 

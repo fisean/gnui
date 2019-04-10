@@ -29,7 +29,7 @@
 
 #include "SharedImage.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_IMAGES_API pnmImage : public SharedImage {
 public:

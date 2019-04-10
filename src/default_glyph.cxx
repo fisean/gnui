@@ -24,7 +24,7 @@
 #include <fltk/Widget.h>
 #include <fltk/Box.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
 static class DefaultGlyph : public Symbol {
 public:
@@ -36,18 +36,18 @@ public:
   This is the value of glyph() in the Widget::default_style. It is
   an internal symbol called "@widget;".  It draws a
   number of small buttons with arrows on them. The direction of the
-  arrows are determined by the align values in fltk::setflags():
+  arrows are determined by the align values in gnui::setflags():
 
-  - fltk::ALIGN_LEFT draws left-pointing arrow
-  - fltk::ALIGN_RIGHT draws right-pointing arrow
-  - fltk::ALIGN_TOP draws up-pointing arrow
-  - fltk::ALIGN_BOTTOM draws right-pointing arrow
-  - fltk::ALIGN_INSIDE draws the current drawstyle() buttonbox() around
-  the arrow. This will usually use the fltk::PUSHED or other flags
+  - gnui::ALIGN_LEFT draws left-pointing arrow
+  - gnui::ALIGN_RIGHT draws right-pointing arrow
+  - gnui::ALIGN_TOP draws up-pointing arrow
+  - gnui::ALIGN_BOTTOM draws right-pointing arrow
+  - gnui::ALIGN_INSIDE draws the current drawstyle() buttonbox() around
+  the arrow. This will usually use the gnui::PUSHED or other flags
   to decide to draw pushed in or out.
   - if left/right/top/bottom are all off it draws a box as well. This
   is so zero will draw something.
-  - fltk::INACTIVE_R draws it grayed out.
+  - gnui::INACTIVE_R draws it grayed out.
 
   Only one arrow direction at a time is currently supported. This
   may be improved in the future.
@@ -124,7 +124,7 @@ void DefaultGlyph::_draw(const Rectangle& rr) const
   draws a different image depending on the align flags.  This allows
   the style to be changed by replacing the glyph function, though the
   replacement should draw the same things for the align flags, perhaps
-  by being an fltk::MultiImage.
+  by being an gnui::MultiImage.
 */
 void Widget::draw_glyph(int which, const Rectangle& rectangle) const {
   int savedflags = drawflags_;

@@ -45,7 +45,7 @@
 #include <pixmaps/folder_small2.xpm>
 #include <pixmaps/folder_small3.xpm>
 
-using namespace fltk;
+using namespace gnui;
 
 Button * abutton=0;
 MultiImage* multi;
@@ -65,7 +65,7 @@ void rb_cb(Widget*, void*) {
       reset_theme();
   } else {
     // Default Style handling for changing the scheme of all widget at once
-    Button::default_style->box_ = fltk::PLASTIC_UP_BOX;
+    Button::default_style->box_ = gnui::PLASTIC_UP_BOX;
     Button::default_style->color_ = 256-36;
     Widget::default_style->highlight_color(3);
   }
@@ -136,11 +136,11 @@ int main(int argc, char ** argv) {
   b->callback(cb_active_butt);
 #if !defined(TESTIMAGES)
   abutton = b = new Button(X1, Y, W, H, "Inactive");
-  multi = new MultiImage(fold2,  fltk::PUSHED, fold3,fltk::INACTIVE, ifold2);
+  multi = new MultiImage(fold2,  gnui::PUSHED, fold3,gnui::INACTIVE, ifold2);
   b->image(multi); 
 #else
   abutton = b = new Button(X1, Y, W, H*2, "Inactive");
-  multi = new MultiImage(fold2,  fltk::PUSHED, fold3,fltk::INACTIVE, ifold2);
+  multi = new MultiImage(fold2,  gnui::PUSHED, fold3,gnui::INACTIVE, ifold2);
   b->image(&fold2,&ifold2);
 #endif
   b->activate(0);  

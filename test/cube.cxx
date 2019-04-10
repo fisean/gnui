@@ -37,13 +37,13 @@
 #include <fltk/Slider.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 #if !HAVE_GL
 #include <fltk/ask.h>
 
 int main(int, char**) {
-  fltk::alert("This demo does not work without OpenGL");
+  gnui::alert("This demo does not work without OpenGL");
   return 1;
 }
 #else
@@ -192,8 +192,8 @@ int main(int argc, char **argv) {
   cube->make_current(); // causes context to be created
   cube2->context(cube->context()); // share the contexts
 #endif
-  fltk::add_idle(idle_cb, 0);
-  fltk::run();
+  gnui::add_idle(idle_cb, 0);
+  gnui::run();
   return 0;
 }
 

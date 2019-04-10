@@ -37,12 +37,12 @@
 #ifndef fltk_Flags_h
 #define fltk_Flags_h
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/Flags.h
 //@{
 
-/*! Type returned by fltk::Widget::flags() and passed to fltk::Box
+/*! Type returned by gnui::Widget::flags() and passed to gnui::Box
   and many other drawing functions. */
 typedef unsigned Flags;
 
@@ -91,7 +91,7 @@ enum {
   CHANGED		  = 0x00004000, //!< value changed since last callback
   COPIED_LABEL		  = 0x00008000, //!< copy_label() was called
   RAW_LABEL		  = 0x00010000, //!< don't interpret & or @ in label
-  LAYOUT_VERTICAL	  = 0x00020000, //!< fltk::Pack puts this widget vertical
+  LAYOUT_VERTICAL	  = 0x00020000, //!< gnui::Pack puts this widget vertical
   TAB_TO_FOCUS		  = 0x00040000, //!< Widget::tab_to_focus();
   CLICK_TO_FOCUS	  = 0x00080000, //!< Widget::click_to_focus()
   INACTIVE_R		  = 0x00100000, //!< draw it grayed-out

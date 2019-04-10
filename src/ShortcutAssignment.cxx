@@ -33,7 +33,7 @@
 #include <fltk/string.h>
 #include <ctype.h>
 
-using namespace fltk;
+using namespace gnui;
 
 class shortcutAssociationType : public AssociationType {
 
@@ -58,32 +58,32 @@ static shortcutAssociationType shortcutAssociation;
   If you only want one shortcut use shortcut() to assign it.
 
   The shortcut value is a bitwise OR (or sum) of a any set of shift flags
-  returned by fltk::event_state(), and either a key symbol returned by
-  fltk::event_key(), or an ASCII character from fltk::event_text().  Examples:
-  - <code>fltk::CTRL+'a'</code>
-  - <code>fltk::ACCELERATOR+fltk::CTRL+'A'</code>
+  returned by gnui::event_state(), and either a key symbol returned by
+  gnui::event_key(), or an ASCII character from gnui::event_text().  Examples:
+  - <code>gnui::CTRL+'a'</code>
+  - <code>gnui::ACCELERATOR+gnui::CTRL+'A'</code>
   - just <code>'a'</code>
-  - <code>fltk::SHIFT+'#'</code>
-  - <code>fltk::SHIFT+fltk::UpKey</code>
+  - <code>gnui::SHIFT+'#'</code>
+  - <code>gnui::SHIFT+gnui::UpKey</code>
 
   For letters, <code>'A'</code> will only match if the Shift key
-  is \e not held down, and <code>fltk::SHIFT+'a'</code> will only match
+  is \e not held down, and <code>gnui::SHIFT+'a'</code> will only match
   if the shift key \e is held down. Case (and thus Caps Lock) is ignored.
   The case does control how the shortcut is displayed in a menu so
   you will want to choose based on the style of your application.
 
-  Non-letters without <code>fltk::SHIFT</code> will match whether or
-  not Shift is held down. Since both fltk::event_key() and
-  fltk::event_text()[0] are matched, the '#' can be specified by any
-  of <code>fltk::SHIFT+'3'</code>, <code>fltk::SHIFT+'#'</code>, or
+  Non-letters without <code>gnui::SHIFT</code> will match whether or
+  not Shift is held down. Since both gnui::event_key() and
+  gnui::event_text()[0] are matched, the '#' can be specified by any
+  of <code>gnui::SHIFT+'3'</code>, <code>gnui::SHIFT+'#'</code>, or
   by <code>'#'</code>. You can choose based on how you want the shortcut
   to appear in menus and how you want to map to foreign keyboards.
 
-  When FLTK gets a keystroke, it sends it to the fltk::focus()
+  When FLTK gets a keystroke, it sends it to the gnui::focus()
   widget. If that widget's handle() returns 0, it will also send
   the keystroke to all parents of that widget (this is mostly for
   keyboard navigation to work). If all of them return 0, or the
-  fltk::focus() is null, then it will try sending a SHORTCUT event
+  gnui::focus() is null, then it will try sending a SHORTCUT event
   to every single widget inside the same window as the focus until
   one of them returns non-zero. In most cases widgets will call
   Widget::test_shortcut() to see if the keystroke is registered here (many
@@ -117,7 +117,7 @@ void Widget::remove_shortcuts() {
 /*!
   Returns one of the add_shortcut() assignments for this widget,
   or returns zero if there are none. If you want to look at more
-  than onle you must use fltk::list_shortcuts(this).
+  than onle you must use gnui::list_shortcuts(this).
 */
 unsigned Widget::shortcut() const {
   return unsigned(long(get(shortcutAssociation)));
@@ -296,7 +296,7 @@ public:
 };
 f() {
   ListShortcuts listShortcuts;
-  fltk::foreachShortcut(listShortcuts);
+  gnui::foreachShortcut(listShortcuts);
 }
 \endcode
 
@@ -305,7 +305,7 @@ f() {
   for drawing the shortcuts on a widget (though most fltk widgets only
   draw the first one).
 */
-unsigned fltk::foreachShortcut(const Widget* widget, ShortcutFunctor& f) {
+unsigned gnui::foreachShortcut(const Widget* widget, ShortcutFunctor& f) {
   GlueFunctor g(f);
   return unsigned(long(foreach(&shortcutAssociation, widget, g)));
 }

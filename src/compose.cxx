@@ -27,7 +27,7 @@
 #include <fltk/events.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
 // This table starts at character 0xA0 (non-breaking space)
 // The characters may be typed in either order after the compose key.
@@ -295,24 +295,24 @@ static const char dead_keys[] = {
 #endif
 
 // For some reason DM C/C++ compiler complains about compose_state saying:
-// Error 42: Symbol Undefined ?compose_state@fltk@@3HA (int fltk::compose_state)
-// WAS: any idea why many dozens of other symbols, such as all the fltk::e_x
+// Error 42: Symbol Undefined ?compose_state@fltk@@3HA (int gnui::compose_state)
+// WAS: any idea why many dozens of other symbols, such as all the gnui::e_x
 // and similar in run.cxx, work?
 #if __DMC__
   int compose_state;
 #else
-  int fltk::compose_state;
+  int gnui::compose_state;
 #endif
 
 /**
   Use of this function is very simple. Any text editing widget should
-  call this for each fltk::KEY event.
+  call this for each gnui::KEY event.
 
-  If true is returned, then it has modified the fltk::event_text() and
-  fltk::event_length() to a set of bytes to insert (it may be of zero
+  If true is returned, then it has modified the gnui::event_text() and
+  gnui::event_length() to a set of bytes to insert (it may be of zero
   length!). It will also set the \a del parameter to the number of bytes
   to the left of the cursor to delete, this is used to delete the
-  results of the previous call to fltk::compose(). Compose may consume
+  results of the previous call to gnui::compose(). Compose may consume
   the key, which is indicated by returning true, but both the length
   and del are set to zero.
 
@@ -325,7 +325,7 @@ static const char dead_keys[] = {
   other user-interface things to allow international characters to be
   selected.
 */
-bool fltk::compose(int& del) {
+bool gnui::compose(int& del) {
 
   del = 0;
   char ascii = e_text[0];
@@ -438,9 +438,9 @@ bool fltk::compose(int& del) {
   return false;
 }
 
-/*! \fn void fltk::compose_reset()
+/*! \fn void gnui::compose_reset()
   If the user moves the cursor, be sure to call
-  fltk::compose_reset(). The next call to fltk::compose() will start
+  gnui::compose_reset(). The next call to gnui::compose() will start
   out in an initial state. In particular it will not set "del" to
   non-zero. This call is very fast so it is ok to call it many times
   and in many places.

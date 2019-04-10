@@ -27,9 +27,9 @@
 #include <fltk/Output.h>
 #include <fltk/draw.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Output
+/*! \class gnui::Output
 
   \image html text.gif
 
@@ -77,7 +77,7 @@ Output::Output(int x, int y, int w, int h, const char *l)
   style(default_style);
 }
 
-/*! \class fltk::MultiLineOutput
+/*! \class gnui::MultiLineOutput
 
   \image html text.gif
 
@@ -87,7 +87,7 @@ Output::Output(int x, int y, int w, int h, const char *l)
   There are no scrollbars, so this is for short pieces of text only.
 */
 
-/*! \class fltk::WordwrapOutput
+/*! \class gnui::WordwrapOutput
 
   \image html text.gif
 

@@ -32,7 +32,7 @@
 
 #include "Group.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API TiledGroup : public Group {
 protected:

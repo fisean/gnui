@@ -32,7 +32,7 @@
 #include <fltk/math.h>
 #include <fltk/utf.h>
 
-using namespace fltk;
+using namespace gnui;
 
 // One of these is made for each combination of size + encoding:
 struct FontSize {
@@ -47,23 +47,23 @@ struct FontSize {
   ~FontSize();
 };
 
-// The public-visible fltk::Font structures are actually imbedded in
+// The public-visible gnui::Font structures are actually imbedded in
 // this larger structure which points at the the above list
 struct IFont {
-  fltk::Font f;
+  gnui::Font f;
   int attribute_mask; // all attributes that can be turned on
   unsigned numsizes;
   FontSize** fontsizes;
 };
 
 // We store the attributes in neat blocks of 2^n:
-fltk::Font* fltk::Font::plus(int x) {
+gnui::Font* gnui::Font::plus(int x) {
   IFont* font = (IFont*)this;
   x &= font->attribute_mask & ~attributes_;
   return &((font+x)->f);
 }
 
-const char* fltk::Font::system_name() {
+const char* gnui::Font::system_name() {
   return name_;
 }
 
@@ -163,25 +163,25 @@ static IFont fonts [] = {
   {{"Wingdings",0},	0,	0}
 };
 
-fltk::Font* const fltk::HELVETICA 		= &(fonts[0].f);
-fltk::Font* const fltk::HELVETICA_BOLD		= &(fonts[1].f);
-fltk::Font* const fltk::HELVETICA_ITALIC	= &(fonts[2].f);
-fltk::Font* const fltk::HELVETICA_BOLD_ITALIC	= &(fonts[3].f);
-fltk::Font* const fltk::COURIER 		= &(fonts[4].f);
-fltk::Font* const fltk::COURIER_BOLD		= &(fonts[5].f);
-fltk::Font* const fltk::COURIER_ITALIC		= &(fonts[6].f);
-fltk::Font* const fltk::COURIER_BOLD_ITALIC	= &(fonts[7].f);
-fltk::Font* const fltk::TIMES 			= &(fonts[8].f);
-fltk::Font* const fltk::TIMES_BOLD		= &(fonts[9].f);
-fltk::Font* const fltk::TIMES_ITALIC		= &(fonts[10].f);
-fltk::Font* const fltk::TIMES_BOLD_ITALIC	= &(fonts[11].f);
-fltk::Font* const fltk::SYMBOL_FONT		= &(fonts[12].f);
-fltk::Font* const fltk::SCREEN_FONT		= &(fonts[4].f);
-fltk::Font* const fltk::SCREEN_BOLD_FONT	= &(fonts[5].f);
-fltk::Font* const fltk::ZAPF_DINGBATS		= &(fonts[13].f);
+gnui::Font* const gnui::HELVETICA 		= &(fonts[0].f);
+gnui::Font* const gnui::HELVETICA_BOLD		= &(fonts[1].f);
+gnui::Font* const gnui::HELVETICA_ITALIC	= &(fonts[2].f);
+gnui::Font* const gnui::HELVETICA_BOLD_ITALIC	= &(fonts[3].f);
+gnui::Font* const gnui::COURIER 		= &(fonts[4].f);
+gnui::Font* const gnui::COURIER_BOLD		= &(fonts[5].f);
+gnui::Font* const gnui::COURIER_ITALIC		= &(fonts[6].f);
+gnui::Font* const gnui::COURIER_BOLD_ITALIC	= &(fonts[7].f);
+gnui::Font* const gnui::TIMES 			= &(fonts[8].f);
+gnui::Font* const gnui::TIMES_BOLD		= &(fonts[9].f);
+gnui::Font* const gnui::TIMES_ITALIC		= &(fonts[10].f);
+gnui::Font* const gnui::TIMES_BOLD_ITALIC	= &(fonts[11].f);
+gnui::Font* const gnui::SYMBOL_FONT		= &(fonts[12].f);
+gnui::Font* const gnui::SCREEN_FONT		= &(fonts[4].f);
+gnui::Font* const gnui::SCREEN_BOLD_FONT	= &(fonts[5].f);
+gnui::Font* const gnui::ZAPF_DINGBATS		= &(fonts[13].f);
 
 // Turn an fltk1 integer font id into a predefined font:
-fltk::Font* fltk::font(int i) {
+gnui::Font* gnui::font(int i) {
   i = i & 15;
   switch (i) {
   case 13: i = 4; break; // "screen"
@@ -194,7 +194,7 @@ fltk::Font* fltk::font(int i) {
 
 ////////////////////////////////////////////////////////////////
 
-// For fltk::list_fonts(), make a new font, and optionally the bold and
+// For gnui::list_fonts(), make a new font, and optionally the bold and
 // italic subfonts:
 Font* fl_make_font(const char* name, int attrib) {
   // see if it is one of our built-in fonts and return it:
@@ -218,17 +218,17 @@ Font* fl_make_font(const char* name, int attrib) {
 ////////////////////////////////////////////////////////////////
 // Public interface:
 
-HFONT fltk::xfont() {return current->font;}
-TEXTMETRICW* fltk::textmetric() {return &(current->metr);}
+HFONT gnui::xfont() {return current->font;}
+TEXTMETRICW* gnui::textmetric() {return &(current->metr);}
 
-const char* fltk::Font::current_name() {
+const char* gnui::Font::current_name() {
   return current_font_->name_;
 }
 
 // we need to decode the encoding somehow!
 static int charset = DEFAULT_CHARSET;
 
-void fltk::setfont(Font* font, float psize) {
+void gnui::setfont(Font* font, float psize) {
 
   // only integers supported right now, I think there is a newer
   // interface that takes arbitrary sizes, though...
@@ -266,12 +266,12 @@ void fltk::setfont(Font* font, float psize) {
   current = array[a] = new FontSize(font->name_, font->attributes_, size, charset);
 }
 
-float fltk::getascent()  { return float(current->metr.tmAscent); }
-float fltk::getdescent() { return float(current->metr.tmDescent); }
+float gnui::getascent()  { return float(current->metr.tmAscent); }
+float gnui::getdescent() { return float(current->metr.tmDescent); }
 
 #define WCBUFLEN 256
 
-float fltk::getwidth(const char* text, int n) {	
+float gnui::getwidth(const char* text, int n) {	
   HDC dc = getDC();
   SelectObject(dc, current->font);
   wchar_t localbuffer[WCBUFLEN];
@@ -288,7 +288,7 @@ float fltk::getwidth(const char* text, int n) {
   return (float)(size.cx);
 }
 
-void fltk::drawtext_transformed(const char *text, int n, float x, float y) {
+void gnui::drawtext_transformed(const char *text, int n, float x, float y) {
   SetTextColor(dc, current_xpixel);
   SelectObject(dc, current->font);
   wchar_t localbuffer[WCBUFLEN];

@@ -32,7 +32,7 @@
 #include <fltk/Box.h>
 #include <fltk/Style.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
 class OvalBox : public Box {
 public:
@@ -47,7 +47,7 @@ public:
 };
 static OvalBox ovalBox("oval");
 /**  Ellipse with a black border. */
-Box* const fltk::OVAL_BOX = &ovalBox;
+Box* const gnui::OVAL_BOX = &ovalBox;
 
 class OvalShadowBox : public Box {
 public:
@@ -73,7 +73,7 @@ public:
 };
 static OvalShadowBox ovalShadowBox("oval_shadow");
 /** Ellipse with a black border and gray shadow. */
-Box* const fltk::OSHADOW_BOX = &ovalShadowBox;
+Box* const gnui::OSHADOW_BOX = &ovalShadowBox;
 
 class OvalFlatBox : public Box {
 public:
@@ -88,7 +88,7 @@ public:
 };
 static OvalFlatBox ovalFlatBox(0);
 /** Ellipse with no border. */
-Box* const fltk::OFLAT_BOX = &ovalFlatBox;
+Box* const gnui::OFLAT_BOX = &ovalFlatBox;
 
 
 //

@@ -33,7 +33,7 @@
 #include <fltk/x.h>
 #include <fltk/string.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
 struct Matrix {
   float a, b, c, d, x, y;
@@ -101,7 +101,7 @@ bool fl_get_invert_matrix(XTransform& i) {
   may be fixing this without notice.
 
 */
-void fltk::push_matrix() {
+void gnui::push_matrix() {
   if (sptr >= stacksize) {
     stacksize = stacksize ? 2*stacksize : 16;
     Matrix* newstack = new Matrix[stacksize];
@@ -116,7 +116,7 @@ void fltk::push_matrix() {
   Put the transformation back to the way it was before the last
   push_matrix(). Calling this without a matching push_matrix will crash!
 */
-void fltk::pop_matrix() {m = stack[--sptr];}
+void gnui::pop_matrix() {m = stack[--sptr];}
 
 /**
 Multiply the current transformation by
@@ -126,7 +126,7 @@ c d 0
 x y 1
 \endcode
 */
-void fltk::concat(float a, float b, float c, float d, float x, float y) {
+void gnui::concat(float a, float b, float c, float d, float x, float y) {
   if (m.trivial) {
     m.a = a; m.b = b; m.c = c; m.d = d;
     m.x += x; m.ix = int(floorf(m.x+.5f));
@@ -153,7 +153,7 @@ x 0 0
 0 0 1
 \endcode
 */
-void fltk::scale(float x,float y) {
+void gnui::scale(float x,float y) {
   if (x != 1.0 || y != 1.0)
     concat(x, 0, 0, y, 0, 0);
 }
@@ -166,7 +166,7 @@ x 0 0
 0 0 1
 \endcode
 */
-void fltk::scale(float x) {
+void gnui::scale(float x) {
   if (x != 1.0) concat(x,0,0,x,0,0);
 }
 
@@ -178,7 +178,7 @@ Translate the current transformation by multiplying it by
 x y 1
 \endcode
 */
-void fltk::translate(float x,float y) {
+void gnui::translate(float x,float y) {
   if (m.trivial) {
     m.x += x; m.ix = int(floorf(m.x+.5f));
     m.y += y; m.iy = int(floorf(m.y+.5f));
@@ -197,7 +197,7 @@ void fltk::translate(float x,float y) {
   etc) of the math functions from <fltk/math.h> to produce floats and
   get maximum calculation speed.
 */
-void fltk::translate(int x, int y) {
+void gnui::translate(int x, int y) {
   if (m.trivial) {
     m.ix += x; m.x = float(m.ix);
     m.iy += y; m.y = float(m.iy);
@@ -215,7 +215,7 @@ sin  cos 0
 0     0  1
 \endcode
 */
-void fltk::rotate(float d) {
+void gnui::rotate(float d) {
   if (d) {
     float s, c;
     if (d == 0) {s = 0; c = 1;}
@@ -232,7 +232,7 @@ Replace the current transform with the identity transform, which
 puts 0,0 in the top-left corner of the window and each unit is 1
 pixel in size.
 */
-void fltk::load_identity() {
+void gnui::load_identity() {
   m.a = 1; m.b = 0; m.c = 0; m.d = 1;
   m.x = 0; m.y = 0;
   m.ix = 0; m.iy = 0;
@@ -247,7 +247,7 @@ Device-specific code can use this to draw things using the
 fltk transformation matrix. If the backend is Cairo or another
 API that does transformations, this may return xy unchagned.
 */
-void fltk::transform(float& x, float& y) {
+void gnui::transform(float& x, float& y) {
   if (!m.trivial) {
     float t = x*m.a + y*m.c + m.x;
     y = x*m.b + y*m.d + m.y;
@@ -263,7 +263,7 @@ Replace x and y with the tranformed coordinates, ignoring
 translation. This transforms a vector which is measuring a distance
 between two positions, rather than a position.
 */
-void fltk::transform_distance(float& x, float& y) {
+void gnui::transform_distance(float& x, float& y) {
   if (!m.trivial) {
     float t = x*m.a + y*m.c;
     y = x*m.b + y*m.d;
@@ -275,7 +275,7 @@ void fltk::transform_distance(float& x, float& y) {
 Replace x and y with the transformed coordinates, rounded to the
 nearest integer.
 */
-void fltk::transform(int& x, int& y) {
+void gnui::transform(int& x, int& y) {
   if (!m.trivial) {
     int t = int(floorf(x*m.a + y*m.c + m.x + .5f));
     y = int(floorf(x*m.b + y*m.d + m.y + .5f));
@@ -294,7 +294,7 @@ the same area (this is useful for inscribing circles, and is about
 the best that can be done for device functions that don't handle
 rotation.
 */
-void fltk::transform(const Rectangle& from, Rectangle& to) {
+void gnui::transform(const Rectangle& from, Rectangle& to) {
   if (m.trivial || from.empty()) {
     to.set(from.x()+m.ix, from.y()+m.iy, from.w(), from.h());
     return;
@@ -315,7 +315,7 @@ void fltk::transform(const Rectangle& from, Rectangle& to) {
 Same as transform(Rectangle(X,Y,W,H),to) but replaces XYWH with the transformed
 rectangle. This may be faster as it avoids the rectangle construction.
 */
-void fltk::transform(int& X,int& Y,int& W,int& H) {
+void gnui::transform(int& X,int& Y,int& W,int& H) {
   if (m.trivial) {
     X += m.ix; Y += m.iy;
     return;
@@ -339,7 +339,7 @@ void fltk::transform(int& X,int& Y,int& W,int& H) {
 #elif USE_QUARTZ
 // Quartz has its own coordinate stack
 static bool first_point = true;
-namespace fltk { 
+namespace gnui { 
   void quartz_add_vertex(float x, float y) {
     if (first_point) {
       CGContextMoveToPoint(quartz_gc, x, y);
@@ -383,7 +383,7 @@ static void add_n_points(int n) {
 }
 
 // The path also contains one dummy pie/chord piece:
-static fltk::Rectangle circle;
+static gnui::Rectangle circle;
 static float circle_start, circle_end;
 static enum {NONE=0, PIE, CHORD} circle_type;
 
@@ -394,7 +394,7 @@ static enum {NONE=0, PIE, CHORD} circle_type;
   or a closepath() was done, this is equivalent to a "moveto"
   in PostScript, otherwise it is equivalent to a "lineto").
 */
-void fltk::addvertex(float X, float Y) {
+void gnui::addvertex(float X, float Y) {
 #if USE_CAIRO
   transform(X,Y);
   cairo_line_to(cr,X,Y);
@@ -422,7 +422,7 @@ void fltk::addvertex(float X, float Y) {
   etc) of the math functions from <fltk/math.h> to produce floats and
   get maximum calculation speed.
 */
-void fltk::addvertex(int X, int Y) {
+void gnui::addvertex(int X, int Y) {
 #if USE_CAIRO
   transform(X,Y);
   cairo_line_to(cr,X,Y);
@@ -449,9 +449,9 @@ void fltk::addvertex(int X, int Y) {
 
 /**
   Add a whole set of vertices to the current path. This is much faster
-  than calling fltk::addvertex once for each point.
+  than calling gnui::addvertex once for each point.
 */
-void fltk::addvertices(int n, const float array[][2]) {
+void gnui::addvertices(int n, const float array[][2]) {
   const float* a = array[0];
   const float* e = a+2*n;
 #if USE_CAIRO
@@ -495,7 +495,7 @@ void fltk::addvertices(int n, const float array[][2]) {
 }
 
 /** Add a whole set of integer vertices to the current path. */
-void fltk::addvertices(int n, const int array[][2]) {
+void gnui::addvertices(int n, const int array[][2]) {
   const int* a = array[0];
   const int* e = a+2*n;
 #if USE_CAIRO
@@ -540,10 +540,10 @@ void fltk::addvertices(int n, const int array[][2]) {
 
 /**
   Adds a whole set of vertcies that have been produced from values
-  returned by fltk::transform(). This is how curve() and arc() are
+  returned by gnui::transform(). This is how curve() and arc() are
   implemented.
 */
-void fltk::addvertices_transformed(int n, const float array[][2]) {
+void gnui::addvertices_transformed(int n, const float array[][2]) {
   const float* a = array[0];
   const float* e = a+2*n;
 #if USE_CAIRO
@@ -571,11 +571,11 @@ void fltk::addvertices_transformed(int n, const float array[][2]) {
   fltk knows the path is closed. The next addvertex() will start a
   new disconnected part of the shape.
 
-  It is harmless to call fltk::closepath() several times in a row, or
+  It is harmless to call gnui::closepath() several times in a row, or
   to call it before the first point. Sections with less than 3 points
   in them will not draw anything when filled.
 */
-void fltk::closepath() {
+void gnui::closepath() {
 #if USE_CAIRO
   cairo_close_path(cr);
   cairo_new_sub_path(cr);
@@ -626,7 +626,7 @@ void fltk::closepath() {
 
   \see addchord()
 */
-void fltk::addpie(const Rectangle& r, float start, float end) {
+void gnui::addpie(const Rectangle& r, float start, float end) {
 #if USE_CAIRO || USE_QUARTZ
   closepath();
   addvertex(r.x()+r.w()*.5f, r.y()+r.h()*.5f);
@@ -650,7 +650,7 @@ void fltk::addpie(const Rectangle& r, float start, float end) {
   Xlib and GDI32. Limitations are that you can only draw one,
   a rotated current transform does not work.
 */
-void fltk::addchord(const Rectangle& r, float start, float end) {
+void gnui::addchord(const Rectangle& r, float start, float end) {
 #if USE_CAIRO || USE_QUARTZ
   closepath();
   float delta = sqrtf(1/fabsf(m.a*m.d-m.b*m.c));
@@ -676,10 +676,10 @@ static inline void inline_newpath() {
 }
 
 /**
-  Clear the current "path". This is normally done by fltk::fillpath() or
+  Clear the current "path". This is normally done by gnui::fillpath() or
   any other drawing command.
 */
-void fltk::newpath() {inline_newpath();}
+void gnui::newpath() {inline_newpath();}
 
 ////////////////////////////////////////////////////////////////
 
@@ -690,7 +690,7 @@ void fltk::newpath() {inline_newpath();}
   In theory the line_style() should affect how big the points are, but I
   don't think that works on X.
 */
-void fltk::drawpoints() {
+void gnui::drawpoints() {
 #if USE_CAIRO
   // Not implemented!
 #elif USE_QUARTZ
@@ -707,10 +707,10 @@ void fltk::drawpoints() {
 
 /**
   Draw a line between all the points in the path (see
-  fltk::line_style() for ways to set the thicknesss and dot pattern of
+  gnui::line_style() for ways to set the thicknesss and dot pattern of
   the line), then clear the path.
 */
-void fltk::strokepath() {
+void gnui::strokepath() {
 #if USE_CAIRO
   cairo_stroke(cr);
 #elif USE_QUARTZ
@@ -764,7 +764,7 @@ void fltk::strokepath() {
 }
 
 /**
-  Does fltk::closepath() and then fill with the current color, and
+  Does gnui::closepath() and then fill with the current color, and
   then clear the path.
 
   For portability, you should only draw polygons that appear the same
@@ -777,7 +777,7 @@ void fltk::strokepath() {
   we may change the Win32 version to match in the future, perhaps by
   making the current pen invisible?
 */
-void fltk::fillpath() {
+void gnui::fillpath() {
 #if USE_CAIRO
   cairo_fill(cr);
 #elif USE_QUARTZ
@@ -839,14 +839,14 @@ void fltk::fillpath() {
 }
 
 /**
-  Does fltk::fill(), then sets the current color to linecolor and does
-  fltk::stroke with the same closed path, and then clears the path.
+  Does gnui::fill(), then sets the current color to linecolor and does
+  gnui::stroke with the same closed path, and then clears the path.
 
   This seems to produce very similar results on X and Win32. Also it
   takes advantage of a single GDI32 call that does this and should
   be faster.
 */
-void fltk::fillstrokepath(Color color) {
+void gnui::fillstrokepath(Color color) {
 #if USE_CAIRO
   closepath();
   cairo_fill_preserve(cr);

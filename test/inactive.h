@@ -4,7 +4,7 @@
 #define inactive_h
 #include <fltk/Window.h>
 #include <fltk/Group.h>
-extern fltk::Group* the_group;
+extern gnui::Group* the_group;
 #include <fltk/Button.h>
 #include <fltk/CheckButton.h>
 #include <fltk/Slider.h>

@@ -38,7 +38,7 @@
 #include <stdio.h>
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 class CursorBox : public Widget {
   int handle(int);
@@ -82,7 +82,7 @@ struct gcc4_bug_workaround {const char* name; Cursor* cursor;} table[] = {
 int load_file(int argc, char** argv, int&i){
   Image *img = SharedImage::get(argv[i]);
   if( img ){
-    table[COUNT-1].cursor = fltk::cursor(img, 0, 0);
+    table[COUNT-1].cursor = gnui::cursor(img, 0, 0);
     ++i;
     return 1;
   }
@@ -92,11 +92,11 @@ int load_file(int argc, char** argv, int&i){
 int main(int argc, char **argv) {
   register_images();
   int i;
-  if ( fltk::args(argc, argv, i, load_file) < argc -1) {
+  if ( gnui::args(argc, argv, i, load_file) < argc -1) {
     fprintf(stderr,"args return %d (%d)\n",i,argc);
     return 1;
   }
-  if(!table[COUNT-1].cursor)table[COUNT-1].cursor = fltk::cursor(SharedImage::get("porsche.xpm"),32,32);
+  if(!table[COUNT-1].cursor)table[COUNT-1].cursor = gnui::cursor(SharedImage::get("porsche.xpm"),32,32);
 #else
 int main(int argc, char **argv) {
 #endif

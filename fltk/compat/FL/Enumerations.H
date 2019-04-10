@@ -131,44 +131,44 @@ enum Fl_When { // These should match values in fltk/Widget.h
 
 #include <fltk/Style.h>
 
-typedef fltk::Box* Fl_Boxtype;
+typedef gnui::Box* Fl_Boxtype;
 
 // Box types. Many of the FRAME types are deleted in fltk2.0, these have
 // been replaced with the equivalent BOX which draws it's inner area:
-#define FL_NO_BOX		fltk::NO_BOX
-#define FL_FLAT_BOX		fltk::FLAT_BOX
-#define FL_UP_BOX		fltk::UP_BOX
-#define FL_DOWN_BOX		fltk::DOWN_BOX
-#define FL_UP_FRAME		fltk::UP_BOX //
-#define FL_DOWN_FRAME		fltk::DOWN_BOX //
-#define FL_THIN_UP_BOX		fltk::THIN_UP_BOX
-#define FL_THIN_DOWN_BOX	fltk::THIN_DOWN_BOX
-#define FL_THIN_UP_FRAME	fltk::THIN_UP_BOX //
-#define FL_THIN_DOWN_FRAME	fltk::THIN_DOWN_BOX //
-#define FL_ENGRAVED_BOX		fltk::ENGRAVED_BOX
-#define FL_EMBOSSED_BOX		fltk::EMBOSSED_BOX
-#define FL_ENGRAVED_FRAME	fltk::ENGRAVED_BOX //
-#define FL_EMBOSSED_FRAME	fltk::EMBOSSED_BOX //
-#define FL_BORDER_BOX		fltk::BORDER_BOX
-#define FL_SHADOW_BOX		fltk::SHADOW_BOX
-#define FL_BORDER_FRAME		fltk::BORDER_FRAME
-#define FL_SHADOW_FRAME		fltk::SHADOW_BOX //
-#define FL_ROUNDED_BOX		fltk::ROUNDED_BOX
-#define FL_RSHADOW_BOX		fltk::RSHADOW_BOX
-#define FL_ROUNDED_FRAME	fltk::ROUNDED_BOX //
-#define FL_RFLAT_BOX		fltk::RFLAT_BOX
-#define FL_ROUND_UP_BOX		fltk::ROUND_UP_BOX
-#define FL_ROUND_DOWN_BOX	fltk::ROUND_DOWN_BOX
-#define FL_DIAMOND_UP_BOX	fltk::DIAMOND_UP_BOX
-#define FL_DIAMOND_DOWN_BOX	fltk::DIAMOND_DOWN_BOX
-#define FL_OVAL_BOX		fltk::OVAL_BOX
-#define FL_OSHADOW_BOX		fltk::OSHADOW_BOX
-#define FL_OVAL_FRAME		fltk::OVAL_BOX //
-#define FL_OFLAT_BOX		fltk::OFLAT_BOX
-#define FL_PLASTIC_UP_BOX	fltk::PLASTIC_UP_BOX
-#define FL_PLASTIC_DOWN_BOX	fltk::PLASTIC_DOWN_BOX
-#define FL_PLASTIC_UP_FRAME	fltk::PLASTIC_UP_BOX //
-#define FL_PLASTIC_DOWN_FRAME	fltk::PLASTIC_DOWN_BOX //
+#define FL_NO_BOX		gnui::NO_BOX
+#define FL_FLAT_BOX		gnui::FLAT_BOX
+#define FL_UP_BOX		gnui::UP_BOX
+#define FL_DOWN_BOX		gnui::DOWN_BOX
+#define FL_UP_FRAME		gnui::UP_BOX //
+#define FL_DOWN_FRAME		gnui::DOWN_BOX //
+#define FL_THIN_UP_BOX		gnui::THIN_UP_BOX
+#define FL_THIN_DOWN_BOX	gnui::THIN_DOWN_BOX
+#define FL_THIN_UP_FRAME	gnui::THIN_UP_BOX //
+#define FL_THIN_DOWN_FRAME	gnui::THIN_DOWN_BOX //
+#define FL_ENGRAVED_BOX		gnui::ENGRAVED_BOX
+#define FL_EMBOSSED_BOX		gnui::EMBOSSED_BOX
+#define FL_ENGRAVED_FRAME	gnui::ENGRAVED_BOX //
+#define FL_EMBOSSED_FRAME	gnui::EMBOSSED_BOX //
+#define FL_BORDER_BOX		gnui::BORDER_BOX
+#define FL_SHADOW_BOX		gnui::SHADOW_BOX
+#define FL_BORDER_FRAME		gnui::BORDER_FRAME
+#define FL_SHADOW_FRAME		gnui::SHADOW_BOX //
+#define FL_ROUNDED_BOX		gnui::ROUNDED_BOX
+#define FL_RSHADOW_BOX		gnui::RSHADOW_BOX
+#define FL_ROUNDED_FRAME	gnui::ROUNDED_BOX //
+#define FL_RFLAT_BOX		gnui::RFLAT_BOX
+#define FL_ROUND_UP_BOX		gnui::ROUND_UP_BOX
+#define FL_ROUND_DOWN_BOX	gnui::ROUND_DOWN_BOX
+#define FL_DIAMOND_UP_BOX	gnui::DIAMOND_UP_BOX
+#define FL_DIAMOND_DOWN_BOX	gnui::DIAMOND_DOWN_BOX
+#define FL_OVAL_BOX		gnui::OVAL_BOX
+#define FL_OSHADOW_BOX		gnui::OSHADOW_BOX
+#define FL_OVAL_FRAME		gnui::OVAL_BOX //
+#define FL_OFLAT_BOX		gnui::OFLAT_BOX
+#define FL_PLASTIC_UP_BOX	gnui::PLASTIC_UP_BOX
+#define FL_PLASTIC_DOWN_BOX	gnui::PLASTIC_DOWN_BOX
+#define FL_PLASTIC_UP_FRAME	gnui::PLASTIC_UP_BOX //
+#define FL_PLASTIC_DOWN_FRAME	gnui::PLASTIC_DOWN_BOX //
 //#define FL_FREE_BOXTYPE not used in fltk 2.0
 
 // conversions of box types to other boxtypes:
@@ -182,27 +182,27 @@ typedef fltk::Box* Fl_Boxtype;
 #define FL_DIAMOND_BOX		FL_DIAMOND_DOWN_BOX
 
 // labeltypes:
-#define FL_NO_LABEL		fltk::NO_LABEL
-#define FL_NORMAL_LABEL		fltk::NORMAL_LABEL
-#define FL_SHADOW_LABEL		fltk::SHADOW_LABEL
-#define FL_ENGRAVED_LABEL	fltk::ENGRAVED_LABEL
-#define FL_EMBOSSED_LABEL	fltk::EMBOSSED_LABEL
+#define FL_NO_LABEL		gnui::NO_LABEL
+#define FL_NORMAL_LABEL		gnui::NORMAL_LABEL
+#define FL_SHADOW_LABEL		gnui::SHADOW_LABEL
+#define FL_ENGRAVED_LABEL	gnui::ENGRAVED_LABEL
+#define FL_EMBOSSED_LABEL	gnui::EMBOSSED_LABEL
 //#define FL_FREE_LABELTYPE not used in fltk2.0
 #define FL_SYMBOL_LABEL		FL_NORMAL_LABEL
 
-#define Fl_Align		fltk::Flags
+#define Fl_Align		gnui::Flags
 enum {
   FL_ALIGN_CENTER		= 0,
-  FL_ALIGN_TOP			= fltk::ALIGN_TOP,
-  FL_ALIGN_BOTTOM		= fltk::ALIGN_BOTTOM,
-  FL_ALIGN_LEFT			= fltk::ALIGN_LEFT,
-  FL_ALIGN_RIGHT		= fltk::ALIGN_RIGHT,
-  FL_ALIGN_INSIDE		= fltk::ALIGN_INSIDE,
-  FL_ALIGN_TEXT_OVER_IMAGE	= fltk::ALIGN_BOTTOM|fltk::ALIGN_INSIDE, //
+  FL_ALIGN_TOP			= gnui::ALIGN_TOP,
+  FL_ALIGN_BOTTOM		= gnui::ALIGN_BOTTOM,
+  FL_ALIGN_LEFT			= gnui::ALIGN_LEFT,
+  FL_ALIGN_RIGHT		= gnui::ALIGN_RIGHT,
+  FL_ALIGN_INSIDE		= gnui::ALIGN_INSIDE,
+  FL_ALIGN_TEXT_OVER_IMAGE	= gnui::ALIGN_BOTTOM|gnui::ALIGN_INSIDE, //
   FL_ALIGN_IMAGE_OVER_TEXT	= 0,
-  FL_ALIGN_CLIP			= fltk::ALIGN_CLIP,
-  FL_ALIGN_WRAP			= fltk::ALIGN_WRAP,
-  FL_ALIGN_MASK			= fltk::ALIGN_MASK,
+  FL_ALIGN_CLIP			= gnui::ALIGN_CLIP,
+  FL_ALIGN_WRAP			= gnui::ALIGN_WRAP,
+  FL_ALIGN_MASK			= gnui::ALIGN_MASK,
   FL_ALIGN_TOP_LEFT		= FL_ALIGN_TOP | FL_ALIGN_LEFT,
   FL_ALIGN_TOP_RIGHT		= FL_ALIGN_TOP | FL_ALIGN_RIGHT,
   FL_ALIGN_BOTTOM_LEFT		= FL_ALIGN_BOTTOM | FL_ALIGN_LEFT,
@@ -214,52 +214,52 @@ enum {
   FL_ALIGN_NOWRAP		= 0
 };
 
-#define FL_HELVETICA		fltk::HELVETICA
-#define FL_HELVETICA_BOLD	fltk::HELVETICA_BOLD
-#define FL_HELVETICA_ITALIC	fltk::HELVETICA_ITALIC
-#define FL_HELVETICA_BOLD_ITALIC fltk::HELVETICA_BOLD_ITALIC
-#define FL_COURIER		fltk::COURIER
-#define FL_COURIER_BOLD		fltk::COURIER_BOLD
-#define FL_COURIER_ITALIC	fltk::COURIER_ITALIC
-#define FL_COURIER_BOLD_ITALIC	fltk::COURIER_BOLD_ITALIC
-#define FL_TIMES		fltk::TIMES
-#define FL_TIMES_BOLD		fltk::TIMES_BOLD
-#define FL_TIMES_ITALIC		fltk::TIMES_ITALIC
-#define FL_TIMES_BOLD_ITALIC	fltk::TIMES_BOLD_ITALIC
-#define FL_SYMBOL		fltk::SYMBOL_FONT
-#define FL_SCREEN		fltk::SCREEN_FONT
-#define FL_SCREEN_BOLD		fltk::SCREEN_BOLD_FONT
-#define FL_ZAPF_DINGBATS	fltk::ZAPF_DINGBATS
+#define FL_HELVETICA		gnui::HELVETICA
+#define FL_HELVETICA_BOLD	gnui::HELVETICA_BOLD
+#define FL_HELVETICA_ITALIC	gnui::HELVETICA_ITALIC
+#define FL_HELVETICA_BOLD_ITALIC gnui::HELVETICA_BOLD_ITALIC
+#define FL_COURIER		gnui::COURIER
+#define FL_COURIER_BOLD		gnui::COURIER_BOLD
+#define FL_COURIER_ITALIC	gnui::COURIER_ITALIC
+#define FL_COURIER_BOLD_ITALIC	gnui::COURIER_BOLD_ITALIC
+#define FL_TIMES		gnui::TIMES
+#define FL_TIMES_BOLD		gnui::TIMES_BOLD
+#define FL_TIMES_ITALIC		gnui::TIMES_ITALIC
+#define FL_TIMES_BOLD_ITALIC	gnui::TIMES_BOLD_ITALIC
+#define FL_SYMBOL		gnui::SYMBOL_FONT
+#define FL_SCREEN		gnui::SCREEN_FONT
+#define FL_SCREEN_BOLD		gnui::SCREEN_BOLD_FONT
+#define FL_ZAPF_DINGBATS	gnui::ZAPF_DINGBATS
 //#define FL_FREE_FONT
 // These used to be added to the above fonts but were sometimes used alone
 // because FL_HELVETICA was zero. Only using these by themselves works now:
-#define FL_BOLD			fltk::HELVETICA_BOLD
-#define FL_ITALIC		fltk::HELVETICA_ITALIC
+#define FL_BOLD			gnui::HELVETICA_BOLD
+#define FL_ITALIC		gnui::HELVETICA_ITALIC
 
-#define FL_NORMAL_SIZE (fltk::Widget::default_style->labelsize_)
-#define FL_FOREGROUND_COLOR (fltk::Widget::default_style->labelcolor_)
-#define FL_BACKGROUND2_COLOR (fltk::Widget::default_style->color_)
-#define FL_SELECTION_COLOR (fltk::Widget::default_style->selection_color_)
+#define FL_NORMAL_SIZE (gnui::Widget::default_style->labelsize_)
+#define FL_FOREGROUND_COLOR (gnui::Widget::default_style->labelcolor_)
+#define FL_BACKGROUND2_COLOR (gnui::Widget::default_style->color_)
+#define FL_SELECTION_COLOR (gnui::Widget::default_style->selection_color_)
 
-#define Fl_Color	fltk::Color
+#define Fl_Color	gnui::Color
 enum {
-  FL_GRAY0		= fltk::GRAY00,
-  FL_DARK3		= fltk::GRAY33,
-  FL_DARK2		= fltk::GRAY60,
-  FL_DARK1		= fltk::GRAY66,
-  FL_GRAY		= fltk::GRAY75,
-  FL_BACKGROUND_COLOR	= fltk::GRAY75,
-  FL_LIGHT1		= fltk::GRAY85,
-  FL_LIGHT2		= fltk::GRAY90,
-  FL_LIGHT3		= fltk::GRAY99,
+  FL_GRAY0		= gnui::GRAY00,
+  FL_DARK3		= gnui::GRAY33,
+  FL_DARK2		= gnui::GRAY60,
+  FL_DARK1		= gnui::GRAY66,
+  FL_GRAY		= gnui::GRAY75,
+  FL_BACKGROUND_COLOR	= gnui::GRAY75,
+  FL_LIGHT1		= gnui::GRAY85,
+  FL_LIGHT2		= gnui::GRAY90,
+  FL_LIGHT3		= gnui::GRAY99,
 
-  FL_BLACK		= fltk::BLACK,
-  FL_RED		= fltk::RED,
-  FL_GREEN		= fltk::GREEN,
-  FL_YELLOW		= fltk::YELLOW,
-  FL_BLUE		= fltk::BLUE,
-  FL_MAGENTA		= fltk::MAGENTA,
-  FL_CYAN		= fltk::CYAN,
+  FL_BLACK		= gnui::BLACK,
+  FL_RED		= gnui::RED,
+  FL_GREEN		= gnui::GREEN,
+  FL_YELLOW		= gnui::YELLOW,
+  FL_BLUE		= gnui::BLUE,
+  FL_MAGENTA		= gnui::MAGENTA,
+  FL_CYAN		= gnui::CYAN,
   FL_DARK_RED		= 72,
 
   FL_DARK_GREEN		= 60,
@@ -268,51 +268,51 @@ enum {
   FL_DARK_MAGENTA	= 152,
   FL_DARK_CYAN		= 140,
 
-  FL_WHITE		= fltk::WHITE,
+  FL_WHITE		= gnui::WHITE,
 
   FL_FREE_COLOR		= 16,
   FL_NUM_FREE_COLOR	= 16,
-  FL_GRAY_RAMP		= fltk::GRAY00,
+  FL_GRAY_RAMP		= gnui::GRAY00,
   FL_NUM_GRAY		= 24,
-  FL_COLOR_CUBE		= fltk::BLACK,
+  FL_COLOR_CUBE		= gnui::BLACK,
   FL_NUM_RED		= 5,
   FL_NUM_GREEN		= 8,
   FL_NUM_BLUE		= 5
 };
 
-#define fl_inactive(c)		fltk::inactive(c)
-#define fl_contrast(a,b)	fltk::contrast(a,b)
-#define fl_color_average(a,b,c)	fltk::lerp(b,a,c)
-#define fl_lighter(c)		fltk::lerp(fltk::WHITE,c,.67f)
-#define fl_darker(c)		fltk::lerp(fltk::BLACK,c,.67f)
-#define fl_rgb_color		fltk::color
-#define fl_gray_ramp(i)		(fltk::GRAY00+(i))
-#define fl_color_cube(r,g,b)	(((b)*5+(r))*8+(g)+fltk::BLACK)
+#define fl_inactive(c)		gnui::inactive(c)
+#define fl_contrast(a,b)	gnui::contrast(a,b)
+#define fl_color_average(a,b,c)	gnui::lerp(b,a,c)
+#define fl_lighter(c)		gnui::lerp(gnui::WHITE,c,.67f)
+#define fl_darker(c)		gnui::lerp(gnui::BLACK,c,.67f)
+#define fl_rgb_color		gnui::color
+#define fl_gray_ramp(i)		(gnui::GRAY00+(i))
+#define fl_color_cube(r,g,b)	(((b)*5+(r))*8+(g)+gnui::BLACK)
 
 #include <fltk/Cursor.h>
-#define Fl_Cursor		fltk::Cursor*
-#define FL_CURSOR_DEFAULT	fltk::CURSOR_DEFAULT
-#define FL_CURSOR_ARROW		fltk::CURSOR_ARROW
-#define FL_CURSOR_CROSS		fltk::CURSOR_CROSS
-#define FL_CURSOR_WAIT		fltk::CURSOR_WAIT
-#define FL_CURSOR_INSERT	fltk::CURSOR_INSERT
-#define FL_CURSOR_HAND		fltk::CURSOR_HAND
-#define FL_CURSOR_HELP		fltk::CURSOR_HELP
-#define FL_CURSOR_MOVE		fltk::CURSOR_MOVE
-#define FL_CURSOR_NS		fltk::CURSOR_NS
-#define FL_CURSOR_WE		fltk::CURSOR_WE
-#define FL_CURSOR_NWSE		fltk::CURSOR_NWSE
-#define FL_CURSOR_NESW		fltk::CURSOR_NESW
-#define FL_CURSOR_NO		fltk::CURSOR_NO
-#define FL_CURSOR_NONE		fltk::CURSOR_NONE
-#define FL_CURSOR_N		fltk::CURSOR_NS
-#define FL_CURSOR_NE		fltk::CURSOR_NESW
-#define FL_CURSOR_E		fltk::CURSOR_WE
-#define FL_CURSOR_SE		fltk::CURSOR_NWSE
-#define FL_CURSOR_S		fltk::CURSOR_NS
-#define FL_CURSOR_SW		fltk::CURSOR_NESW
-#define FL_CURSOR_W		fltk::CURSOR_WE
-#define FL_CURSOR_NW		fltk::CURSOR_NWSE
+#define Fl_Cursor		gnui::Cursor*
+#define FL_CURSOR_DEFAULT	gnui::CURSOR_DEFAULT
+#define FL_CURSOR_ARROW		gnui::CURSOR_ARROW
+#define FL_CURSOR_CROSS		gnui::CURSOR_CROSS
+#define FL_CURSOR_WAIT		gnui::CURSOR_WAIT
+#define FL_CURSOR_INSERT	gnui::CURSOR_INSERT
+#define FL_CURSOR_HAND		gnui::CURSOR_HAND
+#define FL_CURSOR_HELP		gnui::CURSOR_HELP
+#define FL_CURSOR_MOVE		gnui::CURSOR_MOVE
+#define FL_CURSOR_NS		gnui::CURSOR_NS
+#define FL_CURSOR_WE		gnui::CURSOR_WE
+#define FL_CURSOR_NWSE		gnui::CURSOR_NWSE
+#define FL_CURSOR_NESW		gnui::CURSOR_NESW
+#define FL_CURSOR_NO		gnui::CURSOR_NO
+#define FL_CURSOR_NONE		gnui::CURSOR_NONE
+#define FL_CURSOR_N		gnui::CURSOR_NS
+#define FL_CURSOR_NE		gnui::CURSOR_NESW
+#define FL_CURSOR_E		gnui::CURSOR_WE
+#define FL_CURSOR_SE		gnui::CURSOR_NWSE
+#define FL_CURSOR_S		gnui::CURSOR_NS
+#define FL_CURSOR_SW		gnui::CURSOR_NESW
+#define FL_CURSOR_W		gnui::CURSOR_WE
+#define FL_CURSOR_NW		gnui::CURSOR_NWSE
 
 enum { // must match values in fltk/run.h
   FL_READ = 1,
@@ -337,11 +337,11 @@ enum Fl_Mode { // must match values in fltk/visual.h
 
 #include <fltk/damage.h>
 enum Fl_Damage {
-  FL_DAMAGE_CHILD    = fltk::DAMAGE_CHILD,
-  FL_DAMAGE_EXPOSE   = fltk::DAMAGE_EXPOSE,
-  FL_DAMAGE_SCROLL   = fltk::DAMAGE_SCROLL,
-  FL_DAMAGE_OVERLAY  = fltk::DAMAGE_OVERLAY,
-  FL_DAMAGE_ALL      = fltk::DAMAGE_ALL
+  FL_DAMAGE_CHILD    = gnui::DAMAGE_CHILD,
+  FL_DAMAGE_EXPOSE   = gnui::DAMAGE_EXPOSE,
+  FL_DAMAGE_SCROLL   = gnui::DAMAGE_SCROLL,
+  FL_DAMAGE_OVERLAY  = gnui::DAMAGE_OVERLAY,
+  FL_DAMAGE_ALL      = gnui::DAMAGE_ALL
 };
 
 // FLTK 1.0.x compatibility definitions...

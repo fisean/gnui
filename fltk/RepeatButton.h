@@ -31,7 +31,7 @@
 
 #include "Button.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API RepeatButton : public Button {
   static void repeat_callback(void *);

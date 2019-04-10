@@ -33,9 +33,9 @@
 #include <config.h>
 #include <fltk/x.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
-static fltk::Rectangle pr(0,0,0,0);
+static gnui::Rectangle pr(0,0,0,0);
 
 static void draw_current_rect() {
   if (pr.empty()) return;
@@ -55,11 +55,11 @@ static void draw_current_rect() {
 #endif
 }
 
-void fltk::overlay_clear() {
+void gnui::overlay_clear() {
   if (!pr.empty()) {draw_current_rect(); pr.w(0);}
 }
 
-void fltk::overlay_rect(int x, int y, int w, int h) {
+void gnui::overlay_rect(int x, int y, int w, int h) {
   if (w < 0) {x += w; w = -w;} else if (!w) w = 1;
   if (h < 0) {y += h; h = -h;} else if (!h) h = 1;
   if (!pr.empty()) {

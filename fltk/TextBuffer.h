@@ -32,7 +32,7 @@
 
 #include "FL_API.h"
 
-namespace fltk {
+namespace gnui {
 
 /* Maximum length in characters of a tab or control character expansion
    of a single buffer character */
@@ -275,7 +275,7 @@ protected:
 				                   not do any undo calls */
 };
 
-} /* namespace fltk */
+} /* namespace gnui */
 
 #endif
 

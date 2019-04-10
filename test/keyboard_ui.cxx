@@ -3,538 +3,538 @@
 #include "keyboard_ui.h"
 #include <fltk/events.h>
 
-fltk::Output *key_output=(fltk::Output *)0;
+gnui::Output *key_output=(gnui::Output *)0;
 
-fltk::Output *text_output=(fltk::Output *)0;
+gnui::Output *text_output=(gnui::Output *)0;
 
-fltk::Window* make_window() {
-  fltk::Window* w;
-   {fltk::Window* o = new fltk::Window(490, 190);
+gnui::Window* make_window() {
+  gnui::Window* w;
+   {gnui::Window* o = new gnui::Window(490, 190);
     w = o;
     o->shortcut(0xff1b);
     o->begin();
-     {fltk::Output* o = key_output = new fltk::Output(15, 15, 170, 30, "fltk::event_key():");
-      o->textfont(fltk::COURIER);
+     {gnui::Output* o = key_output = new gnui::Output(15, 15, 170, 30, "gnui::event_key():");
+      o->textfont(gnui::COURIER);
       o->labelsize(10);
-      o->align(fltk::ALIGN_TOP|fltk::ALIGN_LEFT);
+      o->align(gnui::ALIGN_TOP|gnui::ALIGN_LEFT);
     }
-     {fltk::Output* o = text_output = new fltk::Output(195, 15, 190, 30, "fltk::event_text():");
-      o->textfont(fltk::COURIER);
+     {gnui::Output* o = text_output = new gnui::Output(195, 15, 190, 30, "gnui::event_text():");
+      o->textfont(gnui::COURIER);
       o->labelsize(10);
-      o->align(fltk::ALIGN_TOP|fltk::ALIGN_LEFT);
+      o->align(gnui::ALIGN_TOP|gnui::ALIGN_LEFT);
     }
-     {fltk::Button* o = new fltk::Button(15, 50, 20, 20, "Esc ");
+     {gnui::Button* o = new gnui::Button(15, 50, 20, 20, "Esc ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::EscapeKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::EscapeKey));
     }
-     {fltk::Button* o = new fltk::Button(50, 50, 20, 20, "F1");
+     {gnui::Button* o = new gnui::Button(50, 50, 20, 20, "F1");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F1Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F1Key));
     }
-     {fltk::Button* o = new fltk::Button(70, 50, 20, 20, "F2");
+     {gnui::Button* o = new gnui::Button(70, 50, 20, 20, "F2");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F2Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F2Key));
     }
-     {fltk::Button* o = new fltk::Button(90, 50, 20, 20, "F3");
+     {gnui::Button* o = new gnui::Button(90, 50, 20, 20, "F3");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F3Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F3Key));
     }
-     {fltk::Button* o = new fltk::Button(110, 50, 20, 20, "F4");
+     {gnui::Button* o = new gnui::Button(110, 50, 20, 20, "F4");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F4Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F4Key));
     }
-     {fltk::Button* o = new fltk::Button(140, 50, 20, 20, "F5");
+     {gnui::Button* o = new gnui::Button(140, 50, 20, 20, "F5");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F5Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F5Key));
     }
-     {fltk::Button* o = new fltk::Button(160, 50, 20, 20, "F6");
+     {gnui::Button* o = new gnui::Button(160, 50, 20, 20, "F6");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F6Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F6Key));
     }
-     {fltk::Button* o = new fltk::Button(180, 50, 20, 20, "F7");
+     {gnui::Button* o = new gnui::Button(180, 50, 20, 20, "F7");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F7Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F7Key));
     }
-     {fltk::Button* o = new fltk::Button(200, 50, 20, 20, "F8");
+     {gnui::Button* o = new gnui::Button(200, 50, 20, 20, "F8");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F8Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F8Key));
     }
-     {fltk::Button* o = new fltk::Button(230, 50, 20, 20, "F9");
+     {gnui::Button* o = new gnui::Button(230, 50, 20, 20, "F9");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F9Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F9Key));
     }
-     {fltk::Button* o = new fltk::Button(250, 50, 20, 20, "F10");
+     {gnui::Button* o = new gnui::Button(250, 50, 20, 20, "F10");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F10Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F10Key));
     }
-     {fltk::Button* o = new fltk::Button(270, 50, 20, 20, "F11");
+     {gnui::Button* o = new gnui::Button(270, 50, 20, 20, "F11");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F11Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F11Key));
     }
-     {fltk::Button* o = new fltk::Button(290, 50, 20, 20, "F12");
+     {gnui::Button* o = new gnui::Button(290, 50, 20, 20, "F12");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::F12Key));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::F12Key));
     }
-     {fltk::Button* o = new fltk::Button(325, 50, 20, 20, "Print ");
+     {gnui::Button* o = new gnui::Button(325, 50, 20, 20, "Print ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::PrintKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::PrintKey));
     }
-     {fltk::Button* o = new fltk::Button(345, 50, 20, 20, "Sclk ");
+     {gnui::Button* o = new gnui::Button(345, 50, 20, 20, "Sclk ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::ScrollLockKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::ScrollLockKey));
     }
-     {fltk::Button* o = new fltk::Button(365, 50, 20, 20, "Paus ");
+     {gnui::Button* o = new gnui::Button(365, 50, 20, 20, "Paus ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::PauseKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::PauseKey));
     }
-     {fltk::Button* o = new fltk::Button(15, 80, 20, 20, "`");
+     {gnui::Button* o = new gnui::Button(15, 80, 20, 20, "`");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(35, 80, 20, 20, "1");
+     {gnui::Button* o = new gnui::Button(35, 80, 20, 20, "1");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(55, 80, 20, 20, "2");
+     {gnui::Button* o = new gnui::Button(55, 80, 20, 20, "2");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(75, 80, 20, 20, "3");
+     {gnui::Button* o = new gnui::Button(75, 80, 20, 20, "3");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(95, 80, 20, 20, "4");
+     {gnui::Button* o = new gnui::Button(95, 80, 20, 20, "4");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(115, 80, 20, 20, "5");
+     {gnui::Button* o = new gnui::Button(115, 80, 20, 20, "5");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(135, 80, 20, 20, "6");
+     {gnui::Button* o = new gnui::Button(135, 80, 20, 20, "6");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(155, 80, 20, 20, "7");
+     {gnui::Button* o = new gnui::Button(155, 80, 20, 20, "7");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(175, 80, 20, 20, "8");
+     {gnui::Button* o = new gnui::Button(175, 80, 20, 20, "8");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(195, 80, 20, 20, "9");
+     {gnui::Button* o = new gnui::Button(195, 80, 20, 20, "9");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(215, 80, 20, 20, "0");
+     {gnui::Button* o = new gnui::Button(215, 80, 20, 20, "0");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(235, 80, 20, 20, "-");
+     {gnui::Button* o = new gnui::Button(235, 80, 20, 20, "-");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(255, 80, 20, 20, "=");
+     {gnui::Button* o = new gnui::Button(255, 80, 20, 20, "=");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(275, 80, 35, 20, "Bksp");
+     {gnui::Button* o = new gnui::Button(275, 80, 35, 20, "Bksp");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::BackSpaceKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::BackSpaceKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(325, 80, 20, 20, "Ins ");
+     {gnui::Button* o = new gnui::Button(325, 80, 20, 20, "Ins ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::InsertKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::InsertKey));
     }
-     {fltk::Button* o = new fltk::Button(345, 80, 20, 20, "Home");
+     {gnui::Button* o = new gnui::Button(345, 80, 20, 20, "Home");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::HomeKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::HomeKey));
     }
-     {fltk::Button* o = new fltk::Button(365, 80, 20, 20, "pgup ");
+     {gnui::Button* o = new gnui::Button(365, 80, 20, 20, "pgup ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::PageUpKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::PageUpKey));
     }
-     {fltk::Button* o = new fltk::Button(400, 80, 20, 20, "Num");
+     {gnui::Button* o = new gnui::Button(400, 80, 20, 20, "Num");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::NumLockKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::NumLockKey));
     }
-     {fltk::Button* o = new fltk::Button(420, 80, 20, 20, "/");
+     {gnui::Button* o = new gnui::Button(420, 80, 20, 20, "/");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'/'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'/'));
     }
-     {fltk::Button* o = new fltk::Button(440, 80, 20, 20, "*");
+     {gnui::Button* o = new gnui::Button(440, 80, 20, 20, "*");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'*'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'*'));
     }
-     {fltk::Button* o = new fltk::Button(460, 80, 20, 20, "-");
+     {gnui::Button* o = new gnui::Button(460, 80, 20, 20, "-");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'-'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'-'));
     }
-     {fltk::Button* o = new fltk::Button(15, 100, 27, 20, "Tab");
+     {gnui::Button* o = new gnui::Button(15, 100, 27, 20, "Tab");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::TabKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::TabKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(42, 100, 20, 20, "Q");
+     {gnui::Button* o = new gnui::Button(42, 100, 20, 20, "Q");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(62, 100, 20, 20, "W");
+     {gnui::Button* o = new gnui::Button(62, 100, 20, 20, "W");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(82, 100, 20, 20, "E");
+     {gnui::Button* o = new gnui::Button(82, 100, 20, 20, "E");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(102, 100, 20, 20, "R");
+     {gnui::Button* o = new gnui::Button(102, 100, 20, 20, "R");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(122, 100, 20, 20, "T");
+     {gnui::Button* o = new gnui::Button(122, 100, 20, 20, "T");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(142, 100, 20, 20, "Y");
+     {gnui::Button* o = new gnui::Button(142, 100, 20, 20, "Y");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(162, 100, 20, 20, "U");
+     {gnui::Button* o = new gnui::Button(162, 100, 20, 20, "U");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(182, 100, 20, 20, "I");
+     {gnui::Button* o = new gnui::Button(182, 100, 20, 20, "I");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(202, 100, 20, 20, "O");
+     {gnui::Button* o = new gnui::Button(202, 100, 20, 20, "O");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(222, 100, 20, 20, "P");
+     {gnui::Button* o = new gnui::Button(222, 100, 20, 20, "P");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(242, 100, 20, 20, "[");
+     {gnui::Button* o = new gnui::Button(242, 100, 20, 20, "[");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(262, 100, 20, 20, "]");
+     {gnui::Button* o = new gnui::Button(262, 100, 20, 20, "]");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(282, 100, 28, 20, "\\");
+     {gnui::Button* o = new gnui::Button(282, 100, 28, 20, "\\");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb);
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(325, 100, 20, 20, "Del ");
+     {gnui::Button* o = new gnui::Button(325, 100, 20, 20, "Del ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::DeleteKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::DeleteKey));
     }
-     {fltk::Button* o = new fltk::Button(345, 100, 20, 20, "End ");
+     {gnui::Button* o = new gnui::Button(345, 100, 20, 20, "End ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::EndKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::EndKey));
     }
-     {fltk::Button* o = new fltk::Button(365, 100, 20, 20, "pgdn ");
+     {gnui::Button* o = new gnui::Button(365, 100, 20, 20, "pgdn ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::PageDownKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::PageDownKey));
     }
-     {fltk::Button* o = new fltk::Button(400, 100, 20, 20, "7");
+     {gnui::Button* o = new gnui::Button(400, 100, 20, 20, "7");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'7'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'7'));
     }
-     {fltk::Button* o = new fltk::Button(420, 100, 20, 20, "8");
+     {gnui::Button* o = new gnui::Button(420, 100, 20, 20, "8");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'8'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'8'));
     }
-     {fltk::Button* o = new fltk::Button(440, 100, 20, 20, "9");
+     {gnui::Button* o = new gnui::Button(440, 100, 20, 20, "9");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'9'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'9'));
     }
-     {fltk::Button* o = new fltk::Button(460, 100, 20, 40, "+");
+     {gnui::Button* o = new gnui::Button(460, 100, 20, 40, "+");
       o->set_vertical();
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'+'));
-      o->align(fltk::ALIGN_TOP|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'+'));
+      o->align(gnui::ALIGN_TOP|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(15, 120, 36, 20, "Lock");
+     {gnui::Button* o = new gnui::Button(15, 120, 36, 20, "Lock");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::CapsLockKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::CapsLockKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(51, 120, 20, 20, "A");
+     {gnui::Button* o = new gnui::Button(51, 120, 20, 20, "A");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(71, 120, 20, 20, "S");
+     {gnui::Button* o = new gnui::Button(71, 120, 20, 20, "S");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(91, 120, 20, 20, "D");
+     {gnui::Button* o = new gnui::Button(91, 120, 20, 20, "D");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(111, 120, 20, 20, "F");
+     {gnui::Button* o = new gnui::Button(111, 120, 20, 20, "F");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(131, 120, 20, 20, "G");
+     {gnui::Button* o = new gnui::Button(131, 120, 20, 20, "G");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(151, 120, 20, 20, "H");
+     {gnui::Button* o = new gnui::Button(151, 120, 20, 20, "H");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(171, 120, 20, 20, "J");
+     {gnui::Button* o = new gnui::Button(171, 120, 20, 20, "J");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(191, 120, 20, 20, "K");
+     {gnui::Button* o = new gnui::Button(191, 120, 20, 20, "K");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(211, 120, 20, 20, "L");
+     {gnui::Button* o = new gnui::Button(211, 120, 20, 20, "L");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(231, 120, 20, 20, ";");
+     {gnui::Button* o = new gnui::Button(231, 120, 20, 20, ";");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(251, 120, 20, 20, "'");
+     {gnui::Button* o = new gnui::Button(251, 120, 20, 20, "'");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(271, 120, 39, 20, "Enter");
+     {gnui::Button* o = new gnui::Button(271, 120, 39, 20, "Enter");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::ReturnKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::ReturnKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(400, 120, 20, 20, "4");
+     {gnui::Button* o = new gnui::Button(400, 120, 20, 20, "4");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'4'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'4'));
     }
-     {fltk::Button* o = new fltk::Button(420, 120, 20, 20, "5");
+     {gnui::Button* o = new gnui::Button(420, 120, 20, 20, "5");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'5'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'5'));
     }
-     {fltk::Button* o = new fltk::Button(440, 120, 20, 20, "6");
+     {gnui::Button* o = new gnui::Button(440, 120, 20, 20, "6");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'6'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'6'));
     }
-     {fltk::Button* o = new fltk::Button(15, 140, 45, 20, "Shift");
+     {gnui::Button* o = new gnui::Button(15, 140, 45, 20, "Shift");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::LeftShiftKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::LeftShiftKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(60, 140, 20, 20, "Z");
+     {gnui::Button* o = new gnui::Button(60, 140, 20, 20, "Z");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(80, 140, 20, 20, "X");
+     {gnui::Button* o = new gnui::Button(80, 140, 20, 20, "X");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(100, 140, 20, 20, "C");
+     {gnui::Button* o = new gnui::Button(100, 140, 20, 20, "C");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(120, 140, 20, 20, "V");
+     {gnui::Button* o = new gnui::Button(120, 140, 20, 20, "V");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(140, 140, 20, 20, "B");
+     {gnui::Button* o = new gnui::Button(140, 140, 20, 20, "B");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(160, 140, 20, 20, "N");
+     {gnui::Button* o = new gnui::Button(160, 140, 20, 20, "N");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(180, 140, 20, 20, "M");
+     {gnui::Button* o = new gnui::Button(180, 140, 20, 20, "M");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(200, 140, 20, 20, ",");
+     {gnui::Button* o = new gnui::Button(200, 140, 20, 20, ",");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(220, 140, 20, 20, ".");
+     {gnui::Button* o = new gnui::Button(220, 140, 20, 20, ".");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(240, 140, 20, 20, "/");
+     {gnui::Button* o = new gnui::Button(240, 140, 20, 20, "/");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb);
+      o->callback((gnui::Callback*)key_cb);
     }
-     {fltk::Button* o = new fltk::Button(260, 140, 50, 20, "Shift");
+     {gnui::Button* o = new gnui::Button(260, 140, 50, 20, "Shift");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::RightShiftKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::RightShiftKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(345, 140, 20, 20, "@8->");
+     {gnui::Button* o = new gnui::Button(345, 140, 20, 20, "@8->");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::UpKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::UpKey));
     }
-     {fltk::Button* o = new fltk::Button(400, 140, 20, 20, "1");
+     {gnui::Button* o = new gnui::Button(400, 140, 20, 20, "1");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'1'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'1'));
     }
-     {fltk::Button* o = new fltk::Button(420, 140, 20, 20, "2");
+     {gnui::Button* o = new gnui::Button(420, 140, 20, 20, "2");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'2'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'2'));
     }
-     {fltk::Button* o = new fltk::Button(440, 140, 20, 20, "3");
+     {gnui::Button* o = new gnui::Button(440, 140, 20, 20, "3");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'3'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'3'));
     }
-     {fltk::Button* o = new fltk::Button(460, 140, 20, 40);
+     {gnui::Button* o = new gnui::Button(460, 140, 20, 40);
       o->set_vertical();
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::KeypadEnter));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::KeypadEnter));
     }
-     {fltk::Button* o = new fltk::Button(15, 160, 30, 20, "Ctrl");
+     {gnui::Button* o = new gnui::Button(15, 160, 30, 20, "Ctrl");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::LeftCtrlKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::LeftCtrlKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(45, 160, 30, 20, "Meta");
+     {gnui::Button* o = new gnui::Button(45, 160, 30, 20, "Meta");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::LeftMetaKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::LeftMetaKey));
     }
-     {fltk::Button* o = new fltk::Button(75, 160, 30, 20, "Alt ");
+     {gnui::Button* o = new gnui::Button(75, 160, 30, 20, "Alt ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::LeftAltKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::LeftAltKey));
     }
-     {fltk::Button* o = new fltk::Button(105, 160, 85, 20);
+     {gnui::Button* o = new gnui::Button(105, 160, 85, 20);
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(' '));
+      o->callback((gnui::Callback*)key_cb, (void*)(' '));
     }
-     {fltk::Button* o = new fltk::Button(190, 160, 30, 20, "Alt ");
+     {gnui::Button* o = new gnui::Button(190, 160, 30, 20, "Alt ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::RightAltKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::RightAltKey));
     }
-     {fltk::Button* o = new fltk::Button(220, 160, 30, 20, "Meta");
+     {gnui::Button* o = new gnui::Button(220, 160, 30, 20, "Meta");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::RightMetaKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::RightMetaKey));
     }
-     {fltk::Button* o = new fltk::Button(250, 160, 30, 20, "Menu ");
+     {gnui::Button* o = new gnui::Button(250, 160, 30, 20, "Menu ");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::MenuKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::MenuKey));
     }
-     {fltk::Button* o = new fltk::Button(280, 160, 30, 20, "Ctrl");
+     {gnui::Button* o = new gnui::Button(280, 160, 30, 20, "Ctrl");
       o->labelsize(8);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::RightCtrlKey));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::RightCtrlKey));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(325, 160, 20, 20, "@4->");
+     {gnui::Button* o = new gnui::Button(325, 160, 20, 20, "@4->");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::LeftKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::LeftKey));
     }
-     {fltk::Button* o = new fltk::Button(345, 160, 20, 20, "@2->");
+     {gnui::Button* o = new gnui::Button(345, 160, 20, 20, "@2->");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::DownKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::DownKey));
     }
-     {fltk::Button* o = new fltk::Button(365, 160, 20, 20, "@6->");
+     {gnui::Button* o = new gnui::Button(365, 160, 20, 20, "@6->");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::RightKey));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::RightKey));
     }
-     {fltk::Button* o = new fltk::Button(400, 160, 40, 20, "0");
+     {gnui::Button* o = new gnui::Button(400, 160, 40, 20, "0");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'0'));
-      o->align(fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'0'));
+      o->align(gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE);
     }
-     {fltk::Button* o = new fltk::Button(440, 160, 20, 20, ".");
+     {gnui::Button* o = new gnui::Button(440, 160, 20, 20, ".");
       o->labelsize(10);
-      o->callback((fltk::Callback*)key_cb, (void*)(fltk::Keypad+'.'));
+      o->callback((gnui::Callback*)key_cb, (void*)(gnui::Keypad+'.'));
     }
-     {fltk::Widget* o = new fltk::Widget(400, 15, 80, 40, "fltk::event_state():");
-      o->box(fltk::NO_BOX);
+     {gnui::Widget* o = new gnui::Widget(400, 15, 80, 40, "gnui::event_state():");
+      o->box(gnui::NO_BOX);
       o->labelsize(10);
-      o->align(fltk::ALIGN_TOP|fltk::ALIGN_LEFT);
+      o->align(gnui::ALIGN_TOP|gnui::ALIGN_LEFT);
     }
-     {fltk::Button* o = new fltk::Button(400, 15, 20, 10, "shift ");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(400, 15, 20, 10, "shift ");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::SHIFT));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::SHIFT));
     }
-     {fltk::Button* o = new fltk::Button(420, 15, 20, 10, "lock ");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(420, 15, 20, 10, "lock ");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::CAPSLOCK));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::CAPSLOCK));
     }
-     {fltk::Button* o = new fltk::Button(440, 15, 20, 10, "ctrl");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(440, 15, 20, 10, "ctrl");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::CTRL));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::CTRL));
     }
-     {fltk::Button* o = new fltk::Button(460, 15, 20, 10, "alt");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(460, 15, 20, 10, "alt");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::ALT));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::ALT));
     }
-     {fltk::Button* o = new fltk::Button(400, 25, 20, 10, "num");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(400, 25, 20, 10, "num");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::NUMLOCK));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::NUMLOCK));
     }
-     {fltk::Button* o = new fltk::Button(420, 25, 20, 10, "?");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(420, 25, 20, 10, "?");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(0x20));
+      o->callback((gnui::Callback*)shift_cb, (void*)(0x20));
     }
-     {fltk::Button* o = new fltk::Button(440, 25, 20, 10, "meta");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(440, 25, 20, 10, "meta");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::META));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::META));
     }
-     {fltk::Button* o = new fltk::Button(460, 25, 20, 10, "sclk");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(460, 25, 20, 10, "sclk");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::SCROLLLOCK));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::SCROLLLOCK));
     }
-     {fltk::Button* o = new fltk::Button(400, 35, 20, 10, "b1");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(400, 35, 20, 10, "b1");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::BUTTON1));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::BUTTON1));
     }
-     {fltk::Button* o = new fltk::Button(420, 35, 20, 10, "b2");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(420, 35, 20, 10, "b2");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::BUTTON2));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::BUTTON2));
     }
-     {fltk::Button* o = new fltk::Button(440, 35, 20, 10, "b3");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(440, 35, 20, 10, "b3");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(fltk::BUTTON3));
+      o->callback((gnui::Callback*)shift_cb, (void*)(gnui::BUTTON3));
     }
-     {fltk::Button* o = new fltk::Button(460, 35, 20, 10, "?");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(460, 35, 20, 10, "?");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(0x800));
+      o->callback((gnui::Callback*)shift_cb, (void*)(0x800));
     }
-     {fltk::Button* o = new fltk::Button(400, 45, 20, 10, "?");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(400, 45, 20, 10, "?");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(0x1000));
+      o->callback((gnui::Callback*)shift_cb, (void*)(0x1000));
     }
-     {fltk::Button* o = new fltk::Button(420, 45, 20, 10, "?");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(420, 45, 20, 10, "?");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(0x2000));
+      o->callback((gnui::Callback*)shift_cb, (void*)(0x2000));
     }
-     {fltk::Button* o = new fltk::Button(440, 45, 20, 10, "?");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(440, 45, 20, 10, "?");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(0x4000));
+      o->callback((gnui::Callback*)shift_cb, (void*)(0x4000));
     }
-     {fltk::Button* o = new fltk::Button(460, 45, 20, 10, "?");
-      o->selection_color((fltk::Color)3);
+     {gnui::Button* o = new gnui::Button(460, 45, 20, 10, "?");
+      o->selection_color((gnui::Color)3);
       o->labelsize(8);
-      o->callback((fltk::Callback*)shift_cb, (void*)(0x8000));
+      o->callback((gnui::Callback*)shift_cb, (void*)(0x8000));
     }
     o->end();
     o->shortcut(0);

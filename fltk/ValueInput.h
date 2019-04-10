@@ -31,7 +31,7 @@
 #include "Valuator.h"
 #include "FloatInput.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ValueInput : public Valuator {
 public:

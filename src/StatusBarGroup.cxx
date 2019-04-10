@@ -23,7 +23,7 @@
 //    http://www.fltk.org/str.php
 //
 
-/*! \class fltk::StatusBarGroup
+/*! \class gnui::StatusBarGroup
 
   This class permits to create and handle a statusbar with minimum efforts.<br>
     It features automatic positionning and resizing adapting to parent Group/Window.<br>
@@ -60,7 +60,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-using namespace fltk;
+using namespace gnui;
 
 const int BORDER_WIDTH=2;
 
@@ -75,7 +75,7 @@ NamedStyle* StatusBarGroup::default_style = &::style;
 
 void StatusBarGroup::init() {
   tf_[0] = tf_[1] = tf_[2] = 0;
-  b_[0] = b_[1] = b_[2] = fltk::FLAT_BOX; 
+  b_[0] = b_[1] = b_[2] = gnui::FLAT_BOX; 
   saved_h_=this->h();
   style(default_style);
   align(ALIGN_INSIDE);

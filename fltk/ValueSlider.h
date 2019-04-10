@@ -29,7 +29,7 @@
 #include "Slider.h"
 #include "FloatInput.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ValueSlider : public Slider {
 public:

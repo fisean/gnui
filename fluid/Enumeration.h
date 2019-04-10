@@ -12,9 +12,9 @@ struct Enumeration {
 };
 
 // Use this call to make a menu/Choice from a table. Warning this
-// will overwrite the user_data() of the fltk::Menu:
-namespace fltk {class Menu;}
-void set_menu(fltk::Menu*, const Enumeration*);
+// will overwrite the user_data() of the gnui::Menu:
+namespace gnui {class Menu;}
+void set_menu(gnui::Menu*, const Enumeration*);
 
 // Converters from/to strings and values:
 const Enumeration* from_value(void* data, const Enumeration* table);

@@ -31,15 +31,15 @@
 
 #include "Image.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API xbmImage : public Image {
 public:
   const unsigned char *array;
   xbmImage(const unsigned char *bits, int w,int h) :
-    Image(fltk::MASK,w,h), array(bits) {}
+    Image(gnui::MASK,w,h), array(bits) {}
   xbmImage(const char *bits, int w, int h) :
-    Image(fltk::MASK,w,h), array((const unsigned char *)bits) {}
+    Image(gnui::MASK,w,h), array((const unsigned char *)bits) {}
   bool fetch();
 };
 

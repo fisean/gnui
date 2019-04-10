@@ -27,7 +27,7 @@
 
 #include "Group.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API AlignGroup : public Group {
   bool vertical_;

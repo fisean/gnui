@@ -44,7 +44,7 @@
 class FLUID_API FluidType {
 
   friend class Widget_Browser;
-  friend fltk::Widget *make_type_browser(int,int,int,int,const char *l=0);
+  friend gnui::Widget *make_type_browser(int,int,int,int,const char *l=0);
   friend class WindowType;
   virtual void setlabel(const char *); // virtual part of label(char*)
 
@@ -63,7 +63,7 @@ protected:
   const char *callback_;
   const char *user_data_;
   const char *user_data_type_;
-  fltk::Widget *live_widget;
+  gnui::Widget *live_widget;
 
 public:	// things that should not be public:
 
@@ -140,18 +140,18 @@ public:
   virtual void write_code();   // write .h and .c file
 
   // live mode
-  virtual fltk::Widget *enter_live_mode(int top=0); // build widgets needed for live mode
+  virtual gnui::Widget *enter_live_mode(int top=0); // build widgets needed for live mode
   virtual void leave_live_mode(); // free allocated resources
   virtual void copy_properties(); // copy properties from this type into a potetial live object
 
   // fake rtti:
   virtual int is_parent() const; // makes it open/close in browser
-  virtual int is_widget() const; // is an fltk::Widget
+  virtual int is_widget() const; // is an gnui::Widget
   virtual int is_button() const; // has true/false value()
   virtual int is_valuator() const; // double value(), range, step, etc
   virtual int is_menu_item() const; // can be put into menus
-  virtual int is_group() const; // is an fltk::Group but not an fltk::Menu
-  virtual int is_window() const; // is an outermost fltk::Window
+  virtual int is_group() const; // is an gnui::Group but not an gnui::Menu
+  virtual int is_window() const; // is an outermost gnui::Window
   virtual int is_code_block() const;
   virtual int is_decl_block() const;
   virtual int is_comment() const;
@@ -171,7 +171,7 @@ public:
 // This header file also declares all the global functions in fluid:
 
 // object list operations:
-fltk::Widget *make_widget_browser(int x,int y,int w,int h);
+gnui::Widget *make_widget_browser(int x,int y,int w,int h);
 void delete_all(int selected_only=0);
 void selection_changed(FluidType* new_current);
 

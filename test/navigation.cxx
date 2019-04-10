@@ -38,7 +38,7 @@
 #define HEIGHT 300
 #define GRID 25
 
-using namespace fltk;
+using namespace gnui;
 
 int main(int argc, char **argv) {
   if (argc > 1) srand(atoi(argv[1]));
@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
   }
   window.resizable(window);
   window.show();
-  return fltk::run();
+  return gnui::run();
 }
 
 //

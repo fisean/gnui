@@ -30,7 +30,7 @@
 #include <fltk/events.h>
 #include <fltk/damage.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
 static void revert(Style *s) {
   s->box_ = THIN_UP_BOX;
@@ -75,7 +75,7 @@ int BarGroup::handle(int event)
 	highlighted = hl;
 	if (highlight_color()) redraw(DAMAGE_HIGHLIGHT);
       }
-      if (hl) {fltk::belowmouse(this); return 1;}
+      if (hl) {gnui::belowmouse(this); return 1;}
     }
     break;
   case LEAVE:
@@ -110,7 +110,7 @@ int BarGroup::handle(int event)
     if (pushed) {
       opened(!open_);
       pushed = false;
-      highlighted = event_inside(fltk::Rectangle(glyph_size_, glyph_size_));
+      highlighted = event_inside(gnui::Rectangle(glyph_size_, glyph_size_));
       redraw(DAMAGE_HIGHLIGHT);
       do_callback();
     } else if (highlighted) {

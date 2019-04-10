@@ -26,7 +26,7 @@
   pointer to the trailing nul if none. Notice that this points \e at
   the period, not after it!
 */
-const char *fltk::filename_ext(const char *buf) {
+const char *gnui::filename_ext(const char *buf) {
   const char *q = 0;
   const char *p = buf;
   for (p=buf; *p; p++) {

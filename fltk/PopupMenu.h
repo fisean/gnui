@@ -33,7 +33,7 @@
 
 #include "Menu.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API PopupMenu : public Menu {
 public:

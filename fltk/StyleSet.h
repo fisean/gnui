@@ -32,7 +32,7 @@
 
 #include "Style.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API StyleSet {
   NamedStyle* first_style;

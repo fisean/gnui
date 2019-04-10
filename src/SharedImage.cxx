@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 const char*	SharedImage::shared_image_root=0;
 SharedImage*	SharedImage::first_image = 0;

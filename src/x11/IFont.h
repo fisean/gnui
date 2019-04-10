@@ -1,4 +1,4 @@
-// This is the structure created for each fltk::Font the user sees.
+// This is the structure created for each gnui::Font the user sees.
 // It is defined here so it can be used by both fl_font_x.cxx and
 // by fl_list_fonts_x.cxx.
 //
@@ -9,7 +9,7 @@
 #include <fltk/Font.h>
 struct FontSize;
 struct IFont {
-  fltk::Font f;
+  gnui::Font f;
   const char* system_name;
   // pointers to any matched bold or italic versions:
   IFont* bold;

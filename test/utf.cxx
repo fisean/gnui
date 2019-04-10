@@ -12,9 +12,9 @@
 #include <fltk/math.h>
 #include <fltk/Tooltip.h>
 #include <fltk/events.h>
-using namespace fltk;
+using namespace gnui;
 
-fltk::Font** fonts; // list returned by fltk
+gnui::Font** fonts; // list returned by fltk
 Scrollbar* scrollbar;
 
 class Drawing : public Widget {
@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
   ::scrollbar = &scrollbar;
   scrollbar.callback(scroll_cb);
   Choice fontchooser(0,400,400,WH);
-  int numfonts = fltk::list_fonts(fonts);
+  int numfonts = gnui::list_fonts(fonts);
   int i; for (i = 0; i < numfonts; i++) fontchooser.add(fonts[i]->name());
   fontchooser.callback(font_cb);
   Slider sizeslider(0,400+WH,400,WH);

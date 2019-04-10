@@ -1,4 +1,4 @@
-// Represents a user-defined subclass of fltk::Window or Group
+// Represents a user-defined subclass of gnui::Window or Group
 
 #ifndef WidgetClassType_h
 #define WidgetClassType_h
@@ -18,7 +18,7 @@ public:
   void write_code();
   void write_code1();
   FluidType *make();
-  virtual const char *type_name() const  {return "fltk::WidgetClass";}
+  virtual const char *type_name() const  {return "gnui::WidgetClass";}
   int is_parent() const {return 1;}
   int is_decl_block() const {return 1;}
   int is_class() const {return 1;}

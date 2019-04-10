@@ -8,7 +8,7 @@
 #include <fltk/draw.h>
 #include <fltk/string.h> // for snprintf
 
-using namespace fltk;
+using namespace gnui;
 
 class ShapeWidget : public Widget {
   int sides_;

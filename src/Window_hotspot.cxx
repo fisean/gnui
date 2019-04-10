@@ -32,7 +32,7 @@
 # include <fltk/x.h>
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 /*! position() the window so that the mouse is pointing at the center
   of the \a widget, which may be the window itself. If \a offscreen is

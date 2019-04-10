@@ -30,7 +30,7 @@
 
 #include "CheckButton.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API LightButton : public CheckButton {
 public:

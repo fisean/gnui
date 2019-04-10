@@ -30,7 +30,7 @@
 
 #include "Window.h"
 
-namespace fltk {
+namespace gnui {
 
 #ifndef GLContext // you can define this to the correct type if wanted
 typedef void* GLContext; //!< Actually a GLXContext or HGLDC

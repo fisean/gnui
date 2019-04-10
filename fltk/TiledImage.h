@@ -31,7 +31,7 @@
 
 #include "Symbol.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API TiledImage : public Symbol {
 protected:

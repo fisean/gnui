@@ -31,7 +31,7 @@
 # undef check
 #endif
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/run.h
 //@{

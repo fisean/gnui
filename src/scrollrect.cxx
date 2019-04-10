@@ -57,15 +57,15 @@ static bool is_visible(int x, int y, int w, int h)
   // Get visible region of window
   HRGN rgn0 = CreateRectRgn (0, 0, 0, 0);
 
-  // Copy system clipping region from fltk::dc
-  GetRandomRgn (fltk::dc, rgn0, SYSRGN);
+  // Copy system clipping region from gnui::dc
+  GetRandomRgn (gnui::dc, rgn0, SYSRGN);
 
   if (!has_unicode()) {
     // if not unicode then we are running on Win9x and the following applies:
     // Windows 9x operating systems the region is returned in window coordinates,
     // and on Windows XP/2k machines the region is in screen coordinates.. SIGH!
     POINT pt = { 0, 0 };
-    ClientToScreen(fltk::xid(fltk::Window::drawing_window()), &pt);
+    ClientToScreen(gnui::xid(gnui::Window::drawing_window()), &pt);
     OffsetRgn(rgn0, -pt.x, -pt.y);
   }
 
@@ -104,7 +104,7 @@ static bool is_visible(int x, int y, int w, int h)
   \a draw_area for the entire rectangle. This is also done on systems
   (Quartz) that do not support copying screen regions.
 */
-void fltk::scrollrect(const Rectangle& r, int dx, int dy,
+void gnui::scrollrect(const Rectangle& r, int dx, int dy,
 		       void (*draw_area)(void*, const Rectangle&), void* data)
 {
   if (!dx && !dy) return;

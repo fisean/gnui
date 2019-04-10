@@ -10,7 +10,7 @@
 
 #include "FL_API.h"
 
-namespace fltk {
+namespace gnui {
 
 struct Cursor; // this is not public
 

@@ -111,7 +111,7 @@ static short cmap[256][3] = {
 // The rest of the colormap is a gray ramp and table, filled in below:
 };
 
-// This is fltk::set_background() from Style.C, with modifications:
+// This is gnui::set_background() from Style.C, with modifications:
 
 enum {
   GRAY00 = 32,

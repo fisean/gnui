@@ -35,17 +35,17 @@
 #include <ctype.h>
 #include "CodeEditor.h"
 
-using namespace fltk;
+using namespace gnui;
 
 TextDisplay::StyleTableEntry CodeEditor::
 		styletable[] = {	// Style table
-		  { fltk::BLACK, fltk::COURIER,        11 }, // A - Plain
-		  { fltk::DARK_GREEN,       fltk::COURIER_ITALIC, 11 }, // B - Line comments
-		  { fltk::DARK_GREEN,       fltk::COURIER_ITALIC, 11 }, // C - Block comments
-		  { fltk::BLUE,             fltk::COURIER,        11 }, // D - Strings
-		  { fltk::DARK_RED,         fltk::COURIER,        11 }, // E - Directives
-		  { fltk::DARK_RED,         fltk::COURIER_BOLD,   11 }, // F - Types
-		  { fltk::BLUE,             fltk::COURIER_BOLD,   11 }  // G - Keywords
+		  { gnui::BLACK, gnui::COURIER,        11 }, // A - Plain
+		  { gnui::DARK_GREEN,       gnui::COURIER_ITALIC, 11 }, // B - Line comments
+		  { gnui::DARK_GREEN,       gnui::COURIER_ITALIC, 11 }, // C - Block comments
+		  { gnui::BLUE,             gnui::COURIER,        11 }, // D - Strings
+		  { gnui::DARK_RED,         gnui::COURIER,        11 }, // E - Directives
+		  { gnui::DARK_RED,         gnui::COURIER_BOLD,   11 }, // F - Types
+		  { gnui::BLUE,             gnui::COURIER_BOLD,   11 }  // G - Keywords
 		};
 const char * const CodeEditor::
 		code_keywords[] = {	// Sorted list of C/C++ keywords...
@@ -362,7 +362,7 @@ int CodeEditor::auto_indent(int, CodeEditor* e) {
   }
   e->show_insert_position();
   e->set_changed();
-  if (e->when()&fltk::WHEN_CHANGED) e->do_callback();
+  if (e->when()&gnui::WHEN_CHANGED) e->do_callback();
 
   free(text);
 

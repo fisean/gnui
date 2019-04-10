@@ -32,7 +32,7 @@
 #include "Widget.h"
 #endif
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Item : public Widget {
 public:

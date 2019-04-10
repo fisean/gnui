@@ -7,18 +7,18 @@
 #include "Enumerations.H"
 #include <fltk/x.h>
 
-#define Fl_X		fltk::CreatedWindow
-#define fl_display	fltk::xdisplay
-#define fl_screen	fltk::xscreen
-#define fl_xevent	(&fltk::xevent)
-#define fl_colormap	fltk::xcolormap
-#define fl_open_display	fltk::open_display
-#define fl_visual	fltk::xvisual
-#define fl_xid(w)	fltk::xid(w)
-#define fl_event_time	fltk::event_time
-#define fl_xpixel(x)	fltk::xpixel(x)
-#define fl_window	fltk::xwindow
-#define fl_gc		fltk::gc
-#define fl_xfont	fltk::xfont()
+#define Fl_X		gnui::CreatedWindow
+#define fl_display	gnui::xdisplay
+#define fl_screen	gnui::xscreen
+#define fl_xevent	(&gnui::xevent)
+#define fl_colormap	gnui::xcolormap
+#define fl_open_display	gnui::open_display
+#define fl_visual	gnui::xvisual
+#define fl_xid(w)	gnui::xid(w)
+#define fl_event_time	gnui::event_time
+#define fl_xpixel(x)	gnui::xpixel(x)
+#define fl_window	gnui::xwindow
+#define fl_gc		gnui::gc
+#define fl_xfont	gnui::xfont()
 
 #endif

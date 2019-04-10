@@ -2,7 +2,7 @@
 
 X version of lock()/unlock() that uses XInitThreads and a pipe for awake().
 
-This code is not normally used. Instead an fltk::RecursiveMutex is used,
+This code is not normally used. Instead an gnui::RecursiveMutex is used,
 see the code in ../lock.cxx.
 
 We don't use this by default for 2 reasons:
@@ -28,8 +28,8 @@ extern void (*fl_unlock_function)();
 static void init_function();
 static void (*init_or_lock_function)() = init_function;
 
-static void lock_function() {XLockDisplay(fltk::xdisplay);}
-static void unlock_function() {XUnlockDisplay(fltk::xdisplay);}
+static void lock_function() {XLockDisplay(gnui::xdisplay);}
+static void unlock_function() {XUnlockDisplay(gnui::xdisplay);}
 
 static void* thread_message_;
 static void thread_awake_cb(int fd, void*) {
@@ -39,25 +39,25 @@ static int thread_filedes[2];
 
 static void init_function() {
   XInitThreads();
-  fltk::open_display();
+  gnui::open_display();
   // Init threads communication pipe to let threads awake FLTK from wait
   pipe(thread_filedes);
   fcntl(thread_filedes[0], F_SETFL, O_NONBLOCK);
-  fltk::add_fd(thread_filedes[0], fltk::READ, thread_awake_cb);
+  gnui::add_fd(thread_filedes[0], gnui::READ, thread_awake_cb);
   fl_lock_function = init_or_lock_function = lock_function;
   fl_unlock_function = unlock_function;
   lock_function();
 }
 
-void fltk::lock() {init_or_lock_function();}
+void gnui::lock() {init_or_lock_function();}
 
-void fltk::unlock() {fl_unlock_function();}
+void gnui::unlock() {fl_unlock_function();}
 
-void fltk::awake(void* msg) {
+void gnui::awake(void* msg) {
   write(thread_filedes[1], &msg, sizeof(void*));
 }
 
-void* fltk::thread_message() {
+void* gnui::thread_message() {
   void* r = thread_message_;
   thread_message_ = 0;
   return r;

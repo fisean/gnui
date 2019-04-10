@@ -4,6 +4,6 @@
 #include "Fl_Window.H"
 
 #include <fltk/GlWindow.h>
-typedef fltk::GlWindow Fl_Gl_Window;
+typedef gnui::GlWindow Fl_Gl_Window;
 
 #endif

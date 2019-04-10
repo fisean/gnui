@@ -4,11 +4,11 @@
 #include "Fl_Group.H"
 #include <fltk/PackedGroup.h>
 
-class Fl_Pack : public fltk::PackedGroup {
+class Fl_Pack : public gnui::PackedGroup {
 
 public:
   Fl_Pack(int x, int y, int w, int h, const char*l = 0)
-    : fltk::PackedGroup(x,y,w,h,l) {begin();}
+    : gnui::PackedGroup(x,y,w,h,l) {begin();}
 
 }; // Fl_Pack class
 

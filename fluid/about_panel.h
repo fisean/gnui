@@ -3,10 +3,10 @@
 #ifndef about_panel_h
 #define about_panel_h
 #include <fltk/DoubleBufferWindow.h>
-extern fltk::DoubleBufferWindow* about_panel;
+extern gnui::DoubleBufferWindow* about_panel;
 #include <fltk/Group.h>
-extern fltk::Group* display_group;
+extern gnui::Group* display_group;
 #include <fltk/ReturnButton.h>
-extern fltk::ReturnButton* about_ok;
-fltk::DoubleBufferWindow* make_about_panel(const char *copyright);
+extern gnui::ReturnButton* about_ok;
+gnui::DoubleBufferWindow* make_about_panel(const char *copyright);
 #endif

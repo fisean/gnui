@@ -26,7 +26,7 @@
 #include <config.h>
 #include <fltk/Window.h>
 #include <fltk/x.h>
-using namespace fltk;
+using namespace gnui;
 
 extern bool fl_show_iconic; // in x.C/win32.C
 

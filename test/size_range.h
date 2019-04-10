@@ -34,7 +34,7 @@
 class UI  {
 public:
   UI();
-  fltk::DoubleBufferWindow *window;
+  gnui::DoubleBufferWindow *window;
 };
 int main();
 #endif

@@ -8,7 +8,7 @@
 
 extern char fl_key_vector[32]; // in x.C
 
-bool fltk::event_key_state(unsigned keysym) {
+bool gnui::event_key_state(unsigned keysym) {
   if (keysym > 0 && keysym <= 8)
     return event_state(BUTTON(keysym)) != 0;
   int keycode;
@@ -49,7 +49,7 @@ bool fltk::event_key_state(unsigned keysym) {
   return (fl_key_vector[keycode/8] & (1 << (keycode%8))) != 0;
 }
 
-bool fltk::get_key_state(unsigned key) {
+bool gnui::get_key_state(unsigned key) {
   open_display();
   XQueryKeymap(xdisplay, fl_key_vector);
   return event_key_state(key);

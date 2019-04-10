@@ -34,7 +34,7 @@
 #include <stdlib.h>
 #include <config.h>
 
-using namespace fltk;
+using namespace gnui;
 
 extern int has_unicode();
 
@@ -110,8 +110,8 @@ int Font::sizes(int*& sizep) {
 
 extern "C" {
 static int sort_function(const void *aa, const void *bb) {
-  fltk::Font* a = *(fltk::Font**)aa;
-  fltk::Font* b = *(fltk::Font**)bb;
+  gnui::Font* a = *(gnui::Font**)aa;
+  gnui::Font* b = *(gnui::Font**)bb;
   int ret = stricmp(a->name_, b->name_); if (ret) return ret;
   return a->attributes_ - b->attributes_;
 }}
@@ -169,7 +169,7 @@ static int CALLBACK enumcbA(CONST LOGFONT* lplf,
 }
 
 
-int fltk::list_fonts(Font**& arrayp) {
+int gnui::list_fonts(Font**& arrayp) {
   if (font_array) {arrayp = font_array; return num_fonts;}
   HDC dc = getDC();
 

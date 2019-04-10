@@ -32,18 +32,18 @@
 #endif
 #include <fltk/x.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \typedef fltk::Color
+/*! \typedef gnui::Color
 
-  fltk::Color is a typedef for a 32-bit integer containing r,g,b bytes
+  gnui::Color is a typedef for a 32-bit integer containing r,g,b bytes
   and an "index" in the lowest byte (the \e first byte on a
   little-endian machine such as an x86).  For instance 0xFF008000 is
   255 red, zero green, and 128 blue. If rgb are not zero then the low
   byte is ignored, or may be treated as "alpha" by some code.
 
   If the rgb is zero, the N is the color "index". This index is used
-  to look up an fltk::Color in an internal table of 255 colors shown
+  to look up an gnui::Color in an internal table of 255 colors shown
   here.  All the indexed colors may be changed by using
   set_color_index().  However fltk uses the ones between 32 and 255
   and assummes they are not changed from their default values.
@@ -51,11 +51,11 @@ using namespace fltk;
   \image html fl_show_colormap.gif
   (this is \e not the X colormap used by fltk)
 
-  A Color of zero (fltk::NO_COLOR) will draw black but is
+  A Color of zero (gnui::NO_COLOR) will draw black but is
   ambiguous. It is returned as an error value or to indicate portions
   of a Style that should be inherited, and it is also used as the
   default label color for everything so that changing color zero can
-  be used by the -fg switch. You should use fltk::BLACK (56) to get
+  be used by the -fg switch. You should use gnui::BLACK (56) to get
   black.
 
 */
@@ -67,7 +67,7 @@ static unsigned cmap[256] = {
 /*! Set r,g,b to the 8-bit components of this color. If it is an indexed
   color they are looked up in the table, otherwise they are simply copied
   out of the color number. */
-void fltk::split_color(Color i,
+void gnui::split_color(Color i,
 		       unsigned char& r,
 		       unsigned char& g,
 		       unsigned char& b) {
@@ -79,7 +79,7 @@ void fltk::split_color(Color i,
 
 /*! Find an indexed color in the range 56-127 that is closest to this
   color. If this is an indexed color it is returned unchanged. */
-Color fltk::nearest_index(Color i) {
+Color gnui::nearest_index(Color i) {
   if (!(i & 0xFFFFFF00)) return i;
   uchar r = i>>24;
   uchar g = i>>16;
@@ -90,7 +90,7 @@ Color fltk::nearest_index(Color i) {
 
 /*! Return (1-weight)*color0 + weight*color1. \a weight is clamped
   to the 0-1 range before use. */
-Color fltk::lerp(Color color0, Color color1, float weight) {
+Color gnui::lerp(Color color0, Color color1, float weight) {
   if (weight <= 0) return color0;
   if (weight >= 1) return color1;
   Color rgb0 = get_color_index(color0);
@@ -102,18 +102,18 @@ Color fltk::lerp(Color color0, Color color1, float weight) {
 }
 
 /*! Same as lerp(fg, bg, .5), it grays out the color. */
-Color fltk::inactive(Color fg, Color bg) {
+Color gnui::inactive(Color fg, Color bg) {
   return lerp(fg, bg, .5);
 }
 
 /*! Same as lerp(fg, getbgcolor(), .5). This is for back-compatability only? */
-Color fltk::inactive(Color fg) {
+Color gnui::inactive(Color fg) {
   return lerp(fg, current_bgcolor_, .5);
 }
 
 /*! Returns \a fg if fltk decides it can be seen well when drawn against
-  \a bg. Otherwise it returns either fltk::BLACK or fltk::WHITE. */
-Color fltk::contrast(Color fg, Color bg) {
+  \a bg. Otherwise it returns either gnui::BLACK or gnui::WHITE. */
+Color gnui::contrast(Color fg, Color bg) {
   uchar r1,g1,b1; split_color(fg, r1,g1,b1);
   uchar r2,g2,b2; split_color(bg, r2,g2,b2);
   int t = int(r1)-int(r2);
@@ -136,7 +136,7 @@ Color fltk::contrast(Color fg, Color bg) {
   Set the color for all subsequent drawing operations.
   \see setcolor_alpha()   
 */
-void fltk::setcolor(Color color) {
+void gnui::setcolor(Color color) {
   current_color_ = color;
   uchar r,g,b; split_color(color,r,g,b);
   cairo_set_source_rgb(cr,r/255.0,g/255.0,b/255.0);
@@ -148,7 +148,7 @@ void fltk::setcolor(Color color) {
    The color you pass should \e not premultiplied by the alpha value,
    that would be a different, nyi, call.
 */
-void fltk::setcolor_alpha(Color color, float alpha) {
+void gnui::setcolor_alpha(Color color, float alpha) {
   current_color_ = color;
   uchar r,g,b; split_color(color,r,g,b);
   cairo_set_source_rgba(cr,r/255.0,g/255.0,b/255.0,alpha);
@@ -157,23 +157,23 @@ void fltk::setcolor_alpha(Color color, float alpha) {
 /**
   Set how to draw lines (the "pen"). If you change this it is your
   responsibility to set it back to the default with
-  fltk::line_style(0).
+  gnui::line_style(0).
 
   \a style is a bitmask in which you 'or' the following values. If you
   don't specify a dash type you will get a solid line. If you don't
   specify a cap or join type you will get a system-defined default of
   whatever value is fastest.
-  - fltk::SOLID      -------
-  - fltk::DASH       - - - -
-  - fltk::DOT        ·········
-  - fltk::DASHDOT    - · - ·
-  - fltk::DASHDOTDOT - ·· - ··
-  - fltk::CAP_FLAT
-  - fltk::CAP_ROUND
-  - fltk::CAP_SQUARE (extends past end point 1/2 line width)
-  - fltk::JOIN_MITER (pointed)
-  - fltk::JOIN_ROUND
-  - fltk::JOIN_BEVEL (flat)
+  - gnui::SOLID      -------
+  - gnui::DASH       - - - -
+  - gnui::DOT        ·········
+  - gnui::DASHDOT    - · - ·
+  - gnui::DASHDOTDOT - ·· - ··
+  - gnui::CAP_FLAT
+  - gnui::CAP_ROUND
+  - gnui::CAP_SQUARE (extends past end point 1/2 line width)
+  - gnui::JOIN_MITER (pointed)
+  - gnui::JOIN_ROUND
+  - gnui::JOIN_BEVEL (flat)
 
   \a width is the number of pixels thick to draw the lines. Zero
   results in the system-defined default, which on both X and Windows
@@ -188,7 +188,7 @@ void fltk::setcolor_alpha(Color color, float alpha) {
   result in undefined behavior. <i>The dashes array is ignored on
   Windows 95/98.</i>
 */
-void fltk::line_style(int style, float width, const char* dashes) {
+void gnui::line_style(int style, float width, const char* dashes) {
   line_style_ = style;
   line_width_ = width;
   line_dashes_ = dashes;
@@ -258,7 +258,7 @@ void fltk::line_style(int style, float width, const char* dashes) {
 
 /*! Set one of the indexed colors to the given rgb color. \a i must be
   in the range 0-255, and \a c must be a non-indexed rgb color. */
-void fltk::set_color_index(Color i, Color color) {
+void gnui::set_color_index(Color i, Color color) {
   if (cmap[i] != color) {
 #if CALL_FREE_COLOR // defined for X11 colormaps
     free_color(i);
@@ -269,7 +269,7 @@ void fltk::set_color_index(Color i, Color color) {
 
 /*! Return the rgb form of \a color. If it is an indexed color that
   entry is returned. If it is an rgb color it is returned unchanged. */
-Color fltk::get_color_index(Color color) {
+Color gnui::get_color_index(Color color) {
   if (color & 0xFFFFFF00) return color;
   return (Color)cmap[color];
 }
@@ -282,23 +282,23 @@ Color fltk::get_color_index(Color color) {
   Makes a gray-scale color using an 8-bit gray level. This is
   done by multiplying \a gray by 0x1010100. */
 
-Color	fltk::current_color_;
-Color	fltk::current_bgcolor_;
-Flags	fltk::drawflags_;
-int	fltk::line_style_;
-float	fltk::line_width_;
-const char* fltk::line_dashes_;
+Color	gnui::current_color_;
+Color	gnui::current_bgcolor_;
+Flags	gnui::drawflags_;
+int	gnui::line_style_;
+float	gnui::line_width_;
+const char* gnui::line_dashes_;
 
-/*! \fn Color fltk::getcolor()
+/*! \fn Color gnui::getcolor()
   Returns the last Color passed to setcolor().
 */
 
-/*! \fn void fltk::setbgcolor(Color)
+/*! \fn void gnui::setbgcolor(Color)
   Set the "background" color. This is not used by the drawing functions,
   but many box and image types will refer to it by calling getbgcolor().
 */
 
-/*! \fn Color fltk::getbgcolor()
+/*! \fn Color gnui::getbgcolor()
   Returns the last Color passed to setbgcolor().
   To actually draw in the bg color, do this:
 \code
@@ -309,10 +309,10 @@ const char* fltk::line_dashes_;
 \endcode
 */
 
-/*! \fn void fltk::setdrawflags(Flags)
+/*! \fn void gnui::setdrawflags(Flags)
 
   Store a set of bit flags that may influence the drawing of some
-  fltk::Symbol subclasses, such as boxes. Generally you must also
+  gnui::Symbol subclasses, such as boxes. Generally you must also
   use setcolor() and setbgcolor() to set the color you expect
   as not all symbols draw differently depending on the flags.
 
@@ -327,28 +327,28 @@ const char* fltk::line_dashes_;
     - FOCUSED: Draw as though it has keyboard focus
     - INVISIBLE: Some boxes don't draw their interior if this is set
 
-  \see fltk::drawstyle()
+  \see gnui::drawstyle()
 */
 
-/*! \fn Flags fltk::drawflags()
+/*! \fn Flags gnui::drawflags()
   Return the last flags passed to setdrawflags().
 */
 
-/*! \fn Flags fltk::drawflags(Flags f)
+/*! \fn Flags gnui::drawflags(Flags f)
   Same as (drawflags() & f), returns true if any of the flags in \a f
   are set.
 */
 
-/*! \fn int fltk::line_style()
+/*! \fn int gnui::line_style()
   Return the last value sent to line_style(int,width,dashes), indicating the
   cap and join types and the built-in dash patterns.
 */
 
-/*! \fn float fltk::line_width()
+/*! \fn float gnui::line_width()
   Return the last value for \a width sent to line_style(int,width,dashes).
 */
 
-/*! \fn const char* fltk::line_dashes()
+/*! \fn const char* gnui::line_dashes()
   Return the last value for \a dashes sent to line_style(int,width,dashes).
   Note that the actual pointer is returned, which may not point at legal
   data if a local array was passed, so this is only useful for checking

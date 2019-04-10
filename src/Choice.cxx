@@ -21,9 +21,9 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::Choice
+/*! \class gnui::Choice
 
-Subclass of fltk::Menu that provides a button that pops up the menu, and
+Subclass of gnui::Menu that provides a button that pops up the menu, and
 also displays the text of the most-recently selected menu item.
 
 \image html choice.gif
@@ -38,7 +38,7 @@ OptionButton.
 The user can change the value by popping up the menu by clicking
 anywhere in the widget and moving the cursor to a different item, or
 by typing up and down arrow keys to cycle amoung the items.  Typing
-the fltk::Widget::shortcut() of any of the
+the gnui::Widget::shortcut() of any of the
 items will also change the value to that item.
 
 If you set a shortcut() on this widget itself or put &x in the label,
@@ -48,12 +48,12 @@ or the mouse to change the selected item.
 When the user changes the value() the callback is done.
 
 If you wish to display text that is different than any of the menu
-items, you may instead want an fltk::PopupMenu. It works identically
+items, you may instead want an gnui::PopupMenu. It works identically
 but instead displays an empty box with the label() inside it, you
 can then change the label() as needed.
 
 If you want a "real" ComboBox where the user edits the text, this is
-a planned addition to the fltk::Input widget. All text input will have
+a planned addition to the gnui::Input widget. All text input will have
 menus of possible replacements and completions. Not yet implemented,
 unfortunately.
 
@@ -66,7 +66,7 @@ unfortunately.
 #include <fltk/Item.h>
 #include <fltk/draw.h>
 #include <fltk/run.h>
-using namespace fltk;
+using namespace gnui;
 
 // The dimensions for the glyph in this and the PopupMenu are exactly
 // the same, so that glyphs may be shared between them.
@@ -168,9 +168,9 @@ int Choice::handle(int e, const Rectangle& rectangle) {
 //  event_is_click(0);
     if (click_to_focus()) {
       take_focus();
-      fltk::flush(); // this is a temporary fix for Nuke!
+      gnui::flush(); // this is a temporary fix for Nuke!
       // Nuke is destroying widgets in layout(), not a good idea...
-      if (fltk::focus() != this) return 1; // detect if take_focus destroys this
+      if (gnui::focus() != this) return 1; // detect if take_focus destroys this
     }
   EXECUTE:
     if (!children) return 1;

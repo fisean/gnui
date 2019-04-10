@@ -29,28 +29,28 @@
 #include <fltk/Group.h>
 #include <fltk/Box.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Button
+/*! \class gnui::Button
 
   Buttons generate callbacks when they are clicked by the user. You
   control exactly when and how by changing the values for when():
-  - fltk::WHEN_NEVER: The callback is not done, instead changed() is
+  - gnui::WHEN_NEVER: The callback is not done, instead changed() is
     turned on.
-  - fltk::WHEN_RELEASE: This is the default, the callback is done
+  - gnui::WHEN_RELEASE: This is the default, the callback is done
     after the user successfully clicks the button (i.e. they let it go
     with the mouse still pointing at it), or when a shortcut is typed.
-  - fltk::WHEN_CHANGED : The callback is done each time the value()
+  - gnui::WHEN_CHANGED : The callback is done each time the value()
     changes (when the user pushes and releases the button, and as the
     mouse is dragged around in and out of the button).
 
-  Buttons can also generate callbacks in response to fltk::SHORTCUT
+  Buttons can also generate callbacks in response to gnui::SHORTCUT
   events. The button can either have an explicit shortcut() value or a
   letter shortcut can be indicated in the label() with an '&'
   character before it. For the label shortcut it does not matter if
   Alt is held down, but if you have an input field in the same window,
   the user will have to hold down the Alt key so that the input field
-  does not eat the event first as an fltk::KEY event.
+  does not eat the event first as an gnui::KEY event.
 
   \image html buttons.gif
 */
@@ -293,7 +293,7 @@ Button::Button(int x,int y,int w,int h, const char *l) : Widget(x,y,w,h,l) {
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::ToggleButton
+/*! \class gnui::ToggleButton
   This button turns the state() on and off each release of a click
   inside of it.
 

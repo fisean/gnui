@@ -5,7 +5,7 @@
 #include <fltk/MultiLineOutput.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
 Widget* bluewidget = 0;
 Widget* greenwidget = 0;
@@ -21,8 +21,8 @@ public:
         greenwidget->color(0); greenwidget->redraw(); greenwidget = 0;
       }
       bluewidget = this; color(12); redraw();
-      fltk::copy(label(), strlen(label()));
-      fltk::dnd();
+      gnui::copy(label(), strlen(label()));
+      gnui::dnd();
       bluewidget = 0;
       if (this != greenwidget) {color(0); redraw();}
       return true;
@@ -45,9 +45,9 @@ public:
       color(10); redraw(); // this should never be seen as paste replaces it!
       return 1;
     case PASTE:
-      //printf("%s : PASTE '%s'\n", label(), fltk::event_text());
+      //printf("%s : PASTE '%s'\n", label(), gnui::event_text());
       greenwidget = this; color(GREEN); redraw();
-      ::output->text(fltk::event_text());
+      ::output->text(gnui::event_text());
       return 1;
     default:
       return Widget::handle(event);
@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
   output = new MultiLineOutput(BORDER, 2*BORDER+NUM*(SIZE+BORDER),
                                NUM*(SIZE+BORDER)-BORDER, 50,
                                "Last paste:");
-  output->align(fltk::ALIGN_TOP|fltk::ALIGN_LEFT);
+  output->align(gnui::ALIGN_TOP|gnui::ALIGN_LEFT);
   window.show(argc, argv);
-  return fltk::run();
+  return gnui::run();
 }

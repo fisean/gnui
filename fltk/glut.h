@@ -58,9 +58,9 @@
 #  include <fltk/Cursor.h>
 #  include <fltk/visual.h>
 
-namespace fltk {
+namespace gnui {
 	
-	class FL_GLUT_API GlutWindow : public fltk::GlWindow {
+	class FL_GLUT_API GlutWindow : public gnui::GlWindow {
 	  void _init();
 	  int mouse_down;
 	protected:
@@ -87,7 +87,7 @@ namespace fltk {
 	};
 }
 
-extern FL_GLUT_API fltk::GlutWindow *glut_window;	// the current window
+extern FL_GLUT_API gnui::GlutWindow *glut_window;	// the current window
 extern FL_GLUT_API int glut_menu;			// the current menu
 
 // function pointers that are not per-window:
@@ -103,17 +103,17 @@ FL_GLUT_API void glutInit(int *argcp, char **argv); // creates first window
 
 FL_GLUT_API void glutInitDisplayMode(unsigned int mode);
 enum {
-  GLUT_RGB	= fltk::RGB_COLOR,
-  GLUT_RGBA	= fltk::RGB_COLOR,
-  GLUT_INDEX	= fltk::INDEXED_COLOR,
-  GLUT_SINGLE	= fltk::SINGLE_BUFFER,
-  GLUT_DOUBLE	= fltk::DOUBLE_BUFFER,
-  GLUT_ACCUM	= fltk::ACCUM_BUFFER,
-  GLUT_ALPHA	= fltk::ALPHA_BUFFER,
-  GLUT_DEPTH	= fltk::DEPTH_BUFFER,
-  GLUT_STENCIL	= fltk::STENCIL_BUFFER,
-  GLUT_MULTISAMPLE = fltk::MULTISAMPLE,
-  GLUT_STEREO	= fltk::STEREO
+  GLUT_RGB	= gnui::RGB_COLOR,
+  GLUT_RGBA	= gnui::RGB_COLOR,
+  GLUT_INDEX	= gnui::INDEXED_COLOR,
+  GLUT_SINGLE	= gnui::SINGLE_BUFFER,
+  GLUT_DOUBLE	= gnui::DOUBLE_BUFFER,
+  GLUT_ACCUM	= gnui::ACCUM_BUFFER,
+  GLUT_ALPHA	= gnui::ALPHA_BUFFER,
+  GLUT_DEPTH	= gnui::DEPTH_BUFFER,
+  GLUT_STENCIL	= gnui::STENCIL_BUFFER,
+  GLUT_MULTISAMPLE = gnui::MULTISAMPLE,
+  GLUT_STEREO	= gnui::STEREO
 //GLUT_LUMINANCE = 512
 };
 
@@ -159,32 +159,32 @@ inline void glutHideWindow() {glut_window->hide();}
 
 inline void glutFullScreen() {glut_window->fullscreen();}
 
-inline void glutSetCursor(fltk::Cursor* cursor) {glut_window->cursor(cursor);}
+inline void glutSetCursor(gnui::Cursor* cursor) {glut_window->cursor(cursor);}
 // notice that the numeric values are different than glut:
 
 //#define GLUT_CURSOR_RIGHT_ARROW
 //#define GLUT_CURSOR_LEFT_ARROW
-#define GLUT_CURSOR_INFO	fltk::CURSOR_HAND
+#define GLUT_CURSOR_INFO	gnui::CURSOR_HAND
 //#define GLUT_CURSOR_DESTROY
-#define GLUT_CURSOR_HELP	fltk::CURSOR_HELP
+#define GLUT_CURSOR_HELP	gnui::CURSOR_HELP
 //#define GLUT_CURSOR_CYCLE
 //#define GLUT_CURSOR_SPRAY
-#define GLUT_CURSOR_WAIT	fltk::CURSOR_WAIT
-#define GLUT_CURSOR_TEXT	fltk::CURSOR_INSERT
-#define GLUT_CURSOR_CROSSHAIR	fltk::CURSOR_CROSS
-#define GLUT_CURSOR_UP_DOWN	fltk::CURSOR_NS
-#define GLUT_CURSOR_TOP_SIDE	fltk::CURSOR_NS
-#define GLUT_CURSOR_BOTTOM_SIDE	fltk::CURSOR_NS
-#define GLUT_CURSOR_LEFT_RIGHT	fltk::CURSOR_WE
-#define GLUT_CURSOR_LEFT_SIDE	fltk::CURSOR_WE
-#define GLUT_CURSOR_RIGHT_SIDE	fltk::CURSOR_WE
-#define GLUT_CURSOR_TOP_LEFT_CORNER	fltk::CURSOR_NWSE
-#define GLUT_CURSOR_TOP_RIGHT_CORNER	fltk::CURSOR_NESW
-#define GLUT_CURSOR_BOTTOM_RIGHT_CORNER	fltk::CURSOR_NWSE
-#define GLUT_CURSOR_BOTTOM_LEFT_CORNER	fltk::CURSOR_NESW
-#define GLUT_CURSOR_INHERIT		fltk::CURSOR_DEFAULT
-#define GLUT_CURSOR_NONE		fltk::CURSOR_NONE
-#define GLUT_CURSOR_FULL_CROSSHAIR	fltk::CURSOR_CROSS
+#define GLUT_CURSOR_WAIT	gnui::CURSOR_WAIT
+#define GLUT_CURSOR_TEXT	gnui::CURSOR_INSERT
+#define GLUT_CURSOR_CROSSHAIR	gnui::CURSOR_CROSS
+#define GLUT_CURSOR_UP_DOWN	gnui::CURSOR_NS
+#define GLUT_CURSOR_TOP_SIDE	gnui::CURSOR_NS
+#define GLUT_CURSOR_BOTTOM_SIDE	gnui::CURSOR_NS
+#define GLUT_CURSOR_LEFT_RIGHT	gnui::CURSOR_WE
+#define GLUT_CURSOR_LEFT_SIDE	gnui::CURSOR_WE
+#define GLUT_CURSOR_RIGHT_SIDE	gnui::CURSOR_WE
+#define GLUT_CURSOR_TOP_LEFT_CORNER	gnui::CURSOR_NWSE
+#define GLUT_CURSOR_TOP_RIGHT_CORNER	gnui::CURSOR_NESW
+#define GLUT_CURSOR_BOTTOM_RIGHT_CORNER	gnui::CURSOR_NWSE
+#define GLUT_CURSOR_BOTTOM_LEFT_CORNER	gnui::CURSOR_NESW
+#define GLUT_CURSOR_INHERIT		gnui::CURSOR_DEFAULT
+#define GLUT_CURSOR_NONE		gnui::CURSOR_NONE
+#define GLUT_CURSOR_FULL_CROSSHAIR	gnui::CURSOR_CROSS
 //inline void glutWarpPointer(int x, int y);
 
 inline void glutEstablishOverlay() {glut_window->make_overlay_current();}
@@ -255,7 +255,7 @@ FL_GLUT_API void glutIdleFunc(void (*f)());
 
 // Warning: this cast may not work on all machines:
 inline void glutTimerFunc(unsigned int msec, void (*f)(int), int value) {
-  fltk::add_timeout(msec*.001f, (fltk::TimeoutHandler)f, (void *)value);
+  gnui::add_timeout(msec*.001f, (gnui::TimeoutHandler)f, (void *)value);
 }
 
 inline void glutMenuStateFunc(void (*f)(int state)) {
@@ -281,15 +281,15 @@ enum {
   GLUT_KEY_F11		= 11,
   GLUT_KEY_F12		= 12,
 // WARNING: Different values than Glut uses:
-  GLUT_KEY_LEFT		= fltk::LeftKey,
-  GLUT_KEY_UP		= fltk::UpKey,
-  GLUT_KEY_RIGHT	= fltk::RightKey,
-  GLUT_KEY_DOWN		= fltk::DownKey,
-  GLUT_KEY_PAGE_UP	= fltk::PageUpKey,
-  GLUT_KEY_PAGE_DOWN	= fltk::PageDownKey,
-  GLUT_KEY_HOME		= fltk::HomeKey,
-  GLUT_KEY_END		= fltk::EndKey,
-  GLUT_KEY_INSERT	= fltk::InsertKey
+  GLUT_KEY_LEFT		= gnui::LeftKey,
+  GLUT_KEY_UP		= gnui::UpKey,
+  GLUT_KEY_RIGHT	= gnui::RightKey,
+  GLUT_KEY_DOWN		= gnui::DownKey,
+  GLUT_KEY_PAGE_UP	= gnui::PageUpKey,
+  GLUT_KEY_PAGE_DOWN	= gnui::PageDownKey,
+  GLUT_KEY_HOME		= gnui::HomeKey,
+  GLUT_KEY_END		= gnui::EndKey,
+  GLUT_KEY_INSERT	= gnui::InsertKey
 };
 //inline void glutSpaceballMotionFunc(void (*)(int x, int y, int z));
 
@@ -382,11 +382,11 @@ enum {
 
 // WARNING: these values are different than Glut uses:
 enum {
-  GLUT_ACTIVE_SHIFT	= fltk::SHIFT,
-  GLUT_ACTIVE_CTRL	= fltk::CTRL,
-  GLUT_ACTIVE_ALT	= fltk::ALT
+  GLUT_ACTIVE_SHIFT	= gnui::SHIFT,
+  GLUT_ACTIVE_CTRL	= gnui::CTRL,
+  GLUT_ACTIVE_ALT	= gnui::ALT
 };
-inline int glutGetModifiers() {return fltk::event_state() & (GLUT_ACTIVE_SHIFT | GLUT_ACTIVE_CTRL | GLUT_ACTIVE_ALT);}
+inline int glutGetModifiers() {return gnui::event_state() & (GLUT_ACTIVE_SHIFT | GLUT_ACTIVE_CTRL | GLUT_ACTIVE_ALT);}
 
 int glutLayerGet(GLenum);
 #  define GLUT_OVERLAY_POSSIBLE		800
@@ -420,7 +420,7 @@ int glutLayerGet(GLenum);
 // Emulated GLUT drawing functions:
 
 // Font argument must be a void* for compatability, so...
-extern FL_GLUT_API struct Glut_Bitmap_Font {fltk::Font* font; int size;}
+extern FL_GLUT_API struct Glut_Bitmap_Font {gnui::Font* font; int size;}
   glutBitmap9By15, glutBitmap8By13, glutBitmapTimesRoman10,
   glutBitmapTimesRoman24, glutBitmapHelvetica10, glutBitmapHelvetica12,
   glutBitmapHelvetica18;

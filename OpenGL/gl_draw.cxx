@@ -47,7 +47,7 @@ static void glXUseXftFont(XftFont*, unsigned listbase);
 # define TEXTURES 0
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 extern GLContext fl_current_glcontext;
 FL_API unsigned fl_font_opengl_id();
@@ -64,7 +64,7 @@ static float scalefactor = 1; // current scale factor
   similar as possible to an FLTK Font. Currently the font is
   aliased except on X.
 */
-void fltk::glsetfont(fltk::Font* font, float size) {
+void gnui::glsetfont(gnui::Font* font, float size) {
   if (!fl_current_glcontext) {
     setfont(font, size); // necessary so measure() works
     return;
@@ -130,20 +130,20 @@ void fltk::glsetfont(fltk::Font* font, float size) {
 
 /**
   Draw \a text at the current glRasterPos in the current font selected
-  with fltk::glsetfont(). You can use glRasterPos2f() or similar calls
+  with gnui::glsetfont(). You can use glRasterPos2f() or similar calls
   to set the position before calling this.
 
   The string is in UTF-8, although only characters in ISO-8859-1 are
   drawn correctly, others draw as question marks.
 */
-void fltk::gldrawtext(const char* str) {
+void gnui::gldrawtext(const char* str) {
   gldrawtext(str, strlen(str));
 }
 
 /**
   Draw the first \a n bytes of \a text at the current glRasterPos.
 */
-void fltk::gldrawtext(const char* text, int n) {
+void gnui::gldrawtext(const char* text, int n) {
 #if TEXTURES
   GLboolean v; glGetBooleanv(GL_CURRENT_RASTER_POSITION_VALID,&v);
   if (!v) return;
@@ -222,7 +222,7 @@ void fltk::gldrawtext(const char* text, int n) {
 /**
   Draw \a text at the given point in 3D space transformed to the screen.
 */
-void fltk::gldrawtext(const char* str, float x, float y, float z) {
+void gnui::gldrawtext(const char* str, float x, float y, float z) {
   gldrawtext(str, strlen(str), x, y, z);
 }
 
@@ -230,22 +230,22 @@ void fltk::gldrawtext(const char* str, float x, float y, float z) {
   Draw the first \a n bytes of \a text at the given point in 3D space
   transformed to the screen.
 */
-void fltk::gldrawtext(const char* str, int n, float x, float y, float z) {
+void gnui::gldrawtext(const char* str, int n, float x, float y, float z) {
   glRasterPos3f(x, y, z);
   gldrawtext(str, n);
 }
 
 // All current systems use exactly the same fonts for OpenGL
 // and for normal drawing, so we can share the functions:
-float fltk::glgetascent() {return getascent();}
-float fltk::glgetdescent() {return getdescent();}
-float fltk::glgetwidth(const char* s) {return getwidth(s);}
-float fltk::glgetwidth(const char* s, int n) {return getwidth(s,n);}
+float gnui::glgetascent() {return getascent();}
+float gnui::glgetdescent() {return getdescent();}
+float gnui::glgetwidth(const char* s) {return getwidth(s);}
+float gnui::glgetwidth(const char* s, int n) {return getwidth(s,n);}
 
 /**
   Draw a 1-thick line just inside the given rectangle.
 */
-void fltk::glstrokerect(int x, int y, int w, int h) {
+void gnui::glstrokerect(int x, int y, int w, int h) {
   if (w < 0) {w = -w; x = x-w;}
   if (h < 0) {h = -h; y = y-h;}
   glBegin(GL_LINE_STRIP);
@@ -257,7 +257,7 @@ void fltk::glstrokerect(int x, int y, int w, int h) {
   glEnd();
 }
 
-/** \fn void fltk::glfillrect(int x, int y, int w, int h)
+/** \fn void gnui::glfillrect(int x, int y, int w, int h)
   Inline wrapper for glRecti(x,y,x+w,y+h).
 */
 
@@ -271,7 +271,7 @@ extern int fl_overlay_depth;
 /**
 Set the current OpenGL color to a FLTK color, or as close as possible.
 */
-void fltk::glsetcolor(Color i) {
+void gnui::glsetcolor(Color i) {
 #if USE_GL_OVERLAY
 #ifndef _WIN32
   if (fl_overlay) {glIndexi(int(xpixel(i))); return;}
@@ -301,7 +301,7 @@ Uses glDrawPixels to draw an image using the same arguments as drawimage().
 If you are in the normal OpenGL coordinate system with 0,0 in the lower-left,
 the first pixel is memory is the lower-left corner.
 */
-void fltk::gldrawimage(const uchar* b, int x, int y, int w, int h, int d, int ld) {
+void gnui::gldrawimage(const uchar* b, int x, int y, int w, int h, int d, int ld) {
   if (!ld) ld = w*d;
   glPixelStorei(GL_UNPACK_ROW_LENGTH, ld/d);
   glRasterPos2i(x, y);

@@ -22,7 +22,7 @@ const Enumeration* from_value(int data, const Enumeration* table)
 
 const Enumeration* from_text(const char* text, const Enumeration* table)
 {
-  // For back compatability we strip leading fltk:: from symbols:
+  // For back compatability we strip leading gnui:: from symbols:
   if (text[0]=='F' && text[1]=='L' && text[2]=='_') text += 3;
   for (;table->menu_entry; table++) {
     if (table->symbol && !strcmp(table->symbol, text)) return table;
@@ -65,23 +65,23 @@ const char* number_to_text(int number, const Enumeration* table)
 }
 
 ////////////////////////////////////////////////////////////////
-// Code to translate a table of Enumeration entries into fltk::Menu items:
+// Code to translate a table of Enumeration entries into gnui::Menu items:
 
-class Enumeration_List : public fltk::List {
-  virtual int children(const fltk::Menu*, const int* indexes, int level);
-  virtual fltk::Widget* child(const fltk::Menu*, const int* indexes, int level);
+class Enumeration_List : public gnui::List {
+  virtual int children(const gnui::Menu*, const int* indexes, int level);
+  virtual gnui::Widget* child(const gnui::Menu*, const int* indexes, int level);
   public: 
     virtual ~Enumeration_List() {}
 };
 
 static Enumeration_List enumeration_list;
 
-void set_menu(fltk::Menu* menu, const Enumeration* list) {
+void set_menu(gnui::Menu* menu, const Enumeration* list) {
   menu->list(&enumeration_list);
   menu->user_data((void*)list);
 }
 
-int Enumeration_List::children(const fltk::Menu* menu, const int*, int level)
+int Enumeration_List::children(const gnui::Menu* menu, const int*, int level)
 {
   if (level) return -1;
   const Enumeration* e = (const Enumeration*)(menu->user_data());
@@ -90,16 +90,16 @@ int Enumeration_List::children(const fltk::Menu* menu, const int*, int level)
   return n;
 }
 
-fltk::Widget* Enumeration_List::child(const fltk::Menu* menu, const int* indexes, int)
+gnui::Widget* Enumeration_List::child(const gnui::Menu* menu, const int* indexes, int)
 {
   const Enumeration* e = (const Enumeration*)(menu->user_data());
   int n = *indexes;
   while (n && e->menu_entry) {n--; e++;}
   if (!e->menu_entry) return 0;
-  static fltk::Widget* widget;
+  static gnui::Widget* widget;
   if (!widget) {
-    fltk::Group::current(0);
-    widget = new fltk::Item();
+    gnui::Group::current(0);
+    widget = new gnui::Item();
   }
   widget->user_data((void*)e);
   widget->label(e->menu_entry);

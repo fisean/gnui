@@ -93,7 +93,7 @@
 #include "fluid_img.h"
 #include <fltk/xpmImage.h>
 
-using namespace fltk;
+using namespace gnui;
 
 xpmImage	open_pixmap(folder_small);
 xpmImage	new_pixmap(file_small2);

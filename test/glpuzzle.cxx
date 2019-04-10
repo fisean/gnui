@@ -38,7 +38,7 @@
 
 
 int main(int, char**) {
-    fltk::alert("This demo does not work without GL and GLU");
+    gnui::alert("This demo does not work without GL and GLU");
   return 1;
 }
 #else

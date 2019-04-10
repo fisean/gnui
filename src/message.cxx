@@ -43,7 +43,7 @@
 # include <windows.h>
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 static void m_revert(Style* s) {
   s->box_ = NO_BOX;
@@ -53,7 +53,7 @@ static NamedStyle m_style("Message", m_revert, &message_style);
   You can change the textfont() or textsize() to make them print
   differently.
 */
-NamedStyle* fltk::message_style = &m_style;
+NamedStyle* gnui::message_style = &m_style;
 
 static void i_revert(Style* s) {
   s->box_ = THIN_UP_BOX;
@@ -62,11 +62,11 @@ static void i_revert(Style* s) {
   s->color_ = GRAY99;
   s->textcolor_ = s->labelcolor_ = BLUE;
 }
-static NamedStyle i_style("Icon", i_revert, &fltk::icon_style);
+static NamedStyle i_style("Icon", i_revert, &gnui::icon_style);
 /*! This Style is used for the 50x50 icon area on the left of all
   the popup windows. You can change the colors or font used here.
 */
-NamedStyle* fltk::icon_style = &i_style;
+NamedStyle* gnui::icon_style = &i_style;
 
 static int button_number;
 static void set_button_number(Widget* w, long a) {
@@ -242,7 +242,7 @@ static int innards(
   int bh = BUTTON_H;
   for (int i = 3; i--;) {
     if (blabels[i]) {
-      fltk::Button* button;
+      gnui::Button* button;
       int glyph_width=0;
       if (i == default_button) {
         button = new ReturnButton(0, 0, 0, 0, blabels[i]);
@@ -256,7 +256,7 @@ static int innards(
         glyph_width += 3; 
 
       } else {
-        button = new fltk::Button(0, 0, 0, 0, blabels[i]);
+        button = new gnui::Button(0, 0, 0, 0, blabels[i]);
       }
       button->callback(set_button_number, i);
 
@@ -307,22 +307,22 @@ static int innards(
 }
 
 /*! Set this to change the title of message(), alert(), ask(), choice(), etc. windows. */
-const char* fltk::message_window_label= NULL;
+const char* gnui::message_window_label= NULL;
 
 /*! Set this to a positive value to cause the message(), alert(), ask(), choice(), etc. windows to close automatically after this timeout.  If the timeout expires, -1 will be returned by the functions that return int. The timeout value is in seconds. */
-float fltk::message_window_timeout= 0;
+float gnui::message_window_timeout= 0;
 
 /*! When this is set to true, then (all) message windows will use scrollbars if the given message is too long. */
-bool fltk::message_window_scrollable = 0;
+bool gnui::message_window_scrollable = 0;
 
 /*! You can change this string to convert fltk to a foreign language. */
-const char* fltk::no = "&No";
+const char* gnui::no = "&No";
 /*! You can change this string to convert fltk to a foreign language. */
-const char* fltk::yes= "&Yes";
+const char* gnui::yes= "&Yes";
 /*! You can change this string to convert fltk to a foreign language. */
-const char* fltk::ok = "&OK";
+const char* gnui::ok = "&OK";
 /*! You can change this string to convert fltk to a foreign language. */
-const char* fltk::cancel= "&Cancel";
+const char* gnui::cancel= "&Cancel";
 
 // beep on dialogs state
 static bool sBeepOnDlg = false;
@@ -330,12 +330,12 @@ static bool sBeepOnDlg = false;
 /*! You get the state enable beep on default message dialog 
     (like ask, choice, input, ...) 
     by  using this function with true (default is false) */
-bool fltk::beep_on_dialog() {return sBeepOnDlg;}
+bool gnui::beep_on_dialog() {return sBeepOnDlg;}
 
 /*! You can enable beep on default message dialog 
     (like ask, choice, input, ...) 
     by  using this function with true (default is false) */
-void fltk::beep_on_dialog(bool b) {sBeepOnDlg=b;}
+void gnui::beep_on_dialog(bool b) {sBeepOnDlg=b;}
 
 /*!
   \image html fl_message.gif
@@ -344,8 +344,8 @@ void fltk::beep_on_dialog(bool b) {sBeepOnDlg=b;}
   the window, or may be many lines by putting '\\n' characters into
   it. The enter key is a shortcut for the OK button.
 */
-void fltk::message(const char *fmt, ...) {
-  if (fltk::beep_on_dialog()) (fltk::beep(BEEP_MESSAGE));
+void gnui::message(const char *fmt, ...) {
+  if (gnui::beep_on_dialog()) (gnui::beep(BEEP_MESSAGE));
   va_list ap;
   va_start(ap, fmt);
   innards("i", 0, 0, fmt, ap, ok, 0, 0);
@@ -355,10 +355,10 @@ void fltk::message(const char *fmt, ...) {
 
 /*!
   \image html fl_alert.gif
-  Same as fltk::message() except for the "!" symbol. 
+  Same as gnui::message() except for the "!" symbol. 
 */
-void fltk::alert(const char *fmt, ...) {
-  if (fltk::beep_on_dialog()) (fltk::beep(fltk::BEEP_ERROR));
+void gnui::alert(const char *fmt, ...) {
+  if (gnui::beep_on_dialog()) (gnui::beep(gnui::BEEP_ERROR));
   va_list ap;
   va_start(ap, fmt);
   innards("!", 0, 0, fmt, ap, ok, 0, 0);
@@ -375,8 +375,8 @@ void fltk::alert(const char *fmt, ...) {
   If message_window_timeout is used, then -1 will be returned if the
   timeout expires.
 */
-int fltk::ask(const char *fmt, ...) {
-  if (fltk::beep_on_dialog()) (fltk::beep(BEEP_QUESTION));
+int gnui::ask(const char *fmt, ...) {
+  if (gnui::beep_on_dialog()) (gnui::beep(BEEP_QUESTION));
   va_list ap;
   va_start(ap, fmt);
   int r = innards("?", 0, 0, fmt, ap, no, yes, 0);
@@ -395,8 +395,8 @@ int fltk::ask(const char *fmt, ...) {
   If message_window_timeout is used, then -1 will be returned if the
   timeout expires.
 */
-int fltk::choice(const char*fmt,const char *b0,const char *b1,const char *b2,...){
-    if (fltk::beep_on_dialog()) (fltk::beep(fltk::BEEP_QUESTION));
+int gnui::choice(const char*fmt,const char *b0,const char *b1,const char *b2,...){
+    if (gnui::beep_on_dialog()) (gnui::beep(gnui::BEEP_QUESTION));
   va_list ap;
   va_start(ap, b2);
   int r = innards("?", 0, 0, fmt, ap, b0, b1, b2);
@@ -407,8 +407,8 @@ int fltk::choice(const char*fmt,const char *b0,const char *b1,const char *b2,...
 }
 
 /*! Same as choice() except a "!" icon is used instead of a "?" */
-int fltk::choice_alert(const char*fmt,const char *b0,const char *b1,const char *b2,...){
-  if (fltk::beep_on_dialog()) (fltk::beep(fltk::BEEP_QUESTION));
+int gnui::choice_alert(const char*fmt,const char *b0,const char *b1,const char *b2,...){
+  if (gnui::beep_on_dialog()) (gnui::beep(gnui::BEEP_QUESTION));
   va_list ap;
   va_start(ap, b2);
   int r = innards("!", 0, 0, fmt, ap, b0, b1, b2);
@@ -421,7 +421,7 @@ int fltk::choice_alert(const char*fmt,const char *b0,const char *b1,const char *
 static const char* input_innards(const char* fmt, va_list ap,
 				 const char* defstr, uchar type) {
   int r = innards("?", defstr ? defstr : "", type,
-		  fmt, ap, fltk::cancel, fltk::ok, 0);
+		  fmt, ap, gnui::cancel, gnui::ok, 0);
   return r>0 ? textfield->text() : 0;
 }
 
@@ -429,15 +429,15 @@ static const char* input_innards(const char* fmt, va_list ap,
   \image html fl_input.gif
   Pops up a window displaying a string, lets the user edit it, and
   return the new value. The cancel button returns NULL. The returned
-  pointer is only valid until the next time fltk::input() is
+  pointer is only valid until the next time gnui::input() is
   called. Due to back-compatability, the arguments to any printf
   commands in the label are after the default value.
 
   If message_window_timeout is used, then 0 will be returned if the
   timeout expires.
 */
-const char* fltk::input(const char *fmt, const char *defstr, ...) {
-  if (fltk::beep_on_dialog()) (fltk::beep(fltk::BEEP_QUESTION));
+const char* gnui::input(const char *fmt, const char *defstr, ...) {
+  if (gnui::beep_on_dialog()) (gnui::beep(gnui::BEEP_QUESTION));
   va_list ap;
   va_start(ap, defstr);
   const char* r = input_innards(fmt, ap, defstr, Input::NORMAL);
@@ -447,10 +447,10 @@ const char* fltk::input(const char *fmt, const char *defstr, ...) {
 
 /*!
   \image html fl_password.gif
-  Same as fltk::input() except an fltk::SecretInput field is used. 
+  Same as gnui::input() except an gnui::SecretInput field is used. 
 */
-const char *fltk::password(const char *fmt, const char *defstr, ...) {
-  if (fltk::beep_on_dialog()) (fltk::beep(fltk::BEEP_PASSWORD));
+const char *gnui::password(const char *fmt, const char *defstr, ...) {
+  if (gnui::beep_on_dialog()) (gnui::beep(gnui::BEEP_PASSWORD));
   va_list ap;
   va_start(ap, defstr);
   const char* r = input_innards(fmt, ap, defstr, Input::SECRET);
@@ -461,43 +461,43 @@ const char *fltk::password(const char *fmt, const char *defstr, ...) {
 /*!
   Generates a simple beep message 
 */
-void fltk::beep(int type) {
+void gnui::beep(int type) {
   switch (type) {
 #if defined(WIN32)
-    case fltk::BEEP_QUESTION :
-    case fltk::BEEP_PASSWORD :
+    case gnui::BEEP_QUESTION :
+    case gnui::BEEP_PASSWORD :
       MessageBeep(MB_ICONQUESTION);
       break;
-    case fltk::BEEP_MESSAGE :
+    case gnui::BEEP_MESSAGE :
       MessageBeep(MB_ICONASTERISK);
       break;
-    case fltk::BEEP_NOTIFICATION :
+    case gnui::BEEP_NOTIFICATION :
       MessageBeep(MB_ICONASTERISK);
       break;
-    case fltk::BEEP_ERROR :
+    case gnui::BEEP_ERROR :
       MessageBeep(MB_ICONERROR);
       break;
     default :
       MessageBeep(0xFFFFFFFF);
       break;
 #elif defined(__APPLE__)
-      //    case fltk::BEEP_DEFAULT :
-      //    case fltk::BEEP_ERROR :
+      //    case gnui::BEEP_DEFAULT :
+      //    case gnui::BEEP_ERROR :
       //      break;
     default :
       SysBeep(30); // this is the only simple beep available so use it for all
       break;
 #else
-    case fltk::BEEP_DEFAULT :
-    case fltk::BEEP_ERROR :
-      if (!fltk::xdisplay) fltk::open_display();
+    case gnui::BEEP_DEFAULT :
+    case gnui::BEEP_ERROR :
+      if (!gnui::xdisplay) gnui::open_display();
 
-      XBell(fltk::xdisplay, 100);
+      XBell(gnui::xdisplay, 100);
       break;
     default :
-      if (!fltk::xdisplay) fltk::open_display();
+      if (!gnui::xdisplay) gnui::open_display();
 
-      XBell(fltk::xdisplay, 50);
+      XBell(gnui::xdisplay, 50);
       break;
 #endif // WIN32
   }

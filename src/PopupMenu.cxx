@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::PopupMenu
+/*! \class gnui::PopupMenu
 
 This subclass pops up a menu in response to a user click. The menu is
 popped up positioned so that the mouse is pointing at the last-selected
@@ -43,7 +43,7 @@ so that pressing that button pops up the menu.
 The menu will also pop up in response to shortcuts indicated by
 the shortcut() or by putting '&x' in the label().
 
-Typing the fltk::Widget::shortcut() of any menu items will cause it
+Typing the gnui::Widget::shortcut() of any menu items will cause it
 to be picked. The callback will be done but there will be no visible
 effect to the widget.
 
@@ -56,7 +56,7 @@ effect to the widget.
 #include <fltk/draw.h>
 #include <fltk/Item.h>
 
-using namespace fltk;
+using namespace gnui;
 
 extern Widget* fl_did_clipping;
 static PopupMenu* pushed;

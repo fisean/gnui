@@ -1,4 +1,4 @@
-// Represents an fltk::Window. Also lots of methods for the fluid ui
+// Represents an gnui::Window. Also lots of methods for the fluid ui
 // for selecting and moving widgets.
 
 #ifndef WindowType_h
@@ -27,7 +27,7 @@ public:
   virtual void setlabel(const char *);
   void write_code();
   WidgetType *_make() {return 0;} // we don't call this
-  fltk::Widget *widget(int,int,int,int) {return 0;}
+  gnui::Widget *widget(int,int,int,int) {return 0;}
   void moveallchildren();
   void move_children(FluidType*, int);
   WidgetType* clicked_widget();
@@ -60,7 +60,7 @@ public:
   int is_window() const {return 1;}
 
   // live mode functionalities
-  fltk::Widget *enter_live_mode(int top);
+  gnui::Widget *enter_live_mode(int top);
   void leave_live_mode();
   void copy_properties();
   

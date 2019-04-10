@@ -14,16 +14,16 @@
 
 namespace Fl = fltk;
 
-typedef fltk::TimeoutHandler Fl_Timeout_Handler;
+typedef gnui::TimeoutHandler Fl_Timeout_Handler;
 
-namespace fltk {
+namespace gnui {
 
   class Widget;
 
   // fltk2 does not keep track of selection owner:
-  inline fltk::Widget* selection_owner() {return 0;}
-  inline void selection_owner(fltk::Widget*) {}
-  inline void selection(fltk::Widget &owner, const char* b, int len) {copy(b,len,false);}
+  inline gnui::Widget* selection_owner() {return 0;}
+  inline void selection_owner(gnui::Widget*) {}
+  inline void selection(gnui::Widget &owner, const char* b, int len) {copy(b,len,false);}
 
   inline void visible_focus(int) {} // fltk2 always acts like this is off
 

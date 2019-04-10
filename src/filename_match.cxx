@@ -43,7 +43,7 @@
   - all other characters must match exactly
  
 */
-bool fltk::filename_match(const char *s, const char *p) {
+bool gnui::filename_match(const char *s, const char *p) {
   int nesting;
 
   for (;;) {

@@ -4,11 +4,11 @@
 #define keyboard_ui_h
 #include <fltk/Window.h>
 #include <fltk/Output.h>
-extern fltk::Output* key_output;
-extern fltk::Output* text_output;
+extern gnui::Output* key_output;
+extern gnui::Output* text_output;
 #include <fltk/Button.h>
-extern void key_cb(fltk::Button*, void*);
+extern void key_cb(gnui::Button*, void*);
 #include <fltk/Widget.h>
-extern void shift_cb(fltk::Button*, void*);
-fltk::Window* make_window();
+extern void shift_cb(gnui::Button*, void*);
+gnui::Window* make_window();
 #endif

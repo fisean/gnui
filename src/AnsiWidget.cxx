@@ -51,9 +51,9 @@ extern HDC fl_bitmap_dc;
 
 #include <fltk/AnsiWidget.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::AnsiWidget
+/*! \class gnui::AnsiWidget
  
   Displays ANSI escape codes. 
 
@@ -303,7 +303,7 @@ void AnsiWidget::saveImage(const char* filename, int x, int y,
   uchar* pixels = (uchar*)malloc(width*height*3);
   begin_offscreen();
   readimage(pixels, RGB, Rectangle(x,y,width,height));
-  fltk::rgbImage jpg(pixels, RGB, width, height);
+  gnui::rgbImage jpg(pixels, RGB, width, height);
   //jpg.write_jpeg(filename);
   //TODO: re-enable jpeg write function
   free((void*)pixels);
@@ -332,7 +332,7 @@ void AnsiWidget::setPixel(int x, int y, int c) {
 int AnsiWidget::getPixel(int x, int y) {
 #if USE_X11
   XImage *image = 
-    XGetImage(fltk::xdisplay, xwindow, x, y, 1, 1, AllPlanes, ZPixmap);
+    XGetImage(gnui::xdisplay, xwindow, x, y, 1, 1, AllPlanes, ZPixmap);
   if (image) {
     int color = XGetPixel(image, 0, 0);
     XDestroyImage(image);
@@ -352,7 +352,7 @@ int AnsiWidget::getPixel(int x, int y) {
 /*! create audible beep sound
  */
 void AnsiWidget::beep() const {
-  fltk::beep(fltk::BEEP_MESSAGE);
+  gnui::beep(gnui::BEEP_MESSAGE);
 }
 
 /*! Returns the width in pixels using the current font setting
@@ -373,7 +373,7 @@ int AnsiWidget::textHeight(void) {
 
 /*! callback for scrollrect
  */
-void eraseBottomLine(void* data, const fltk::Rectangle& r) {
+void eraseBottomLine(void* data, const gnui::Rectangle& r) {
   AnsiWidget* out = (AnsiWidget*)data;
   setcolor(out->color());
   fillrect(r);
@@ -414,7 +414,7 @@ Color AnsiWidget::ansiToFltk(long c) {
     int b = (c>>16) & 0xFF;
     int g = (c>>8) & 0xFF;
     int r = (c) & 0xFF;
-    return fltk::color(r, g, b);
+    return gnui::color(r, g, b);
   }
 
   return (c > 16) ? WHITE : colors[c];
@@ -572,7 +572,7 @@ bool AnsiWidget::doEscape(unsigned char* &p) {
 /*! Prepares to display text according to accumulated flags
  */
 void AnsiWidget::setFont() {
-  fltk::Font* font = labelfont();
+  gnui::Font* font = labelfont();
   if (bold) {
     font = font->bold();
   }

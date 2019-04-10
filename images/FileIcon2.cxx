@@ -67,7 +67,7 @@
 # include <unistd.h>
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 //
 // Local functions...
@@ -402,7 +402,7 @@ FileIcon::load_system_icons(void)
   // Add symbols if they haven't been added already...
   if (!init)
   {
-    fltk::register_images();
+    gnui::register_images();
     if (getenv("KDE_FULL_SESSION")) {
       if (!kdedir) {
         // Figure out where KDE is installed...
@@ -548,7 +548,7 @@ load_kde_icons(const char *directory,	// I - Directory to load
     if (entries[i]->d_name[0] != '.') {
       snprintf(full, sizeof(full), "%s/%s", directory, entries[i]->d_name);
 
-      if (fltk::filename_isdir(full)) load_kde_icons(full, icondir);
+      if (gnui::filename_isdir(full)) load_kde_icons(full, icondir);
       else load_kde_mimelnk(full, icondir);
     }
 

@@ -57,7 +57,7 @@
 # include "xutf8.cxx"
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 // interface to poll/select call:
@@ -213,7 +213,7 @@ static void fl_init_xim()
     warning("XOpenIM() failed");
 }
 
-void fl_set_spot(fltk::Font *f, Widget *w, int x, int y)
+void fl_set_spot(gnui::Font *f, Widget *w, int x, int y)
 {
   int change = 0;
   XVaNestedList preedit_attr;
@@ -222,7 +222,7 @@ void fl_set_spot(fltk::Font *f, Widget *w, int x, int y)
   char          *def_string;
   const char *fnt = NULL;
   static XIC ic = NULL;
-  static fltk::Font *spotf = NULL;
+  static gnui::Font *spotf = NULL;
   static Widget *spotw = NULL;
   static XPoint	spot, spot_set;
   static Color background_orig, textcolor_orig;
@@ -296,29 +296,29 @@ void fl_set_spot(fltk::Font *f, Widget *w, int x, int y)
 }
 
 #else // !USE_XIM
-void fl_set_spot(fltk::Font *f, Widget *w, int x, int y) {}
+void fl_set_spot(gnui::Font *f, Widget *w, int x, int y) {}
 #endif
 
 /*!
 
   Add file descriptor fd to listen to. When the fd becomes ready for
-  reading fltk::wait() will call the callback function and then
+  reading gnui::wait() will call the callback function and then
   return. The callback is passed the fd and the arbitrary void*
   argument.
 
   The second argument is a bitfield to indicate when the callback
   should be done. You can or these together to make the callback be
   called for multiple conditions:
-  - fltk::READ - Call the callback when there is data to be read.
-  - fltk::WRITE - Call the callback when data can be written without blocking.
-  - fltk::EXCEPT - Call the callback if an exception occurs on the file.
+  - gnui::READ - Call the callback when there is data to be read.
+  - gnui::WRITE - Call the callback when data can be written without blocking.
+  - gnui::EXCEPT - Call the callback if an exception occurs on the file.
 
   Under UNIX any file descriptor can be monitored (files, devices,
   pipes, sockets, etc.) Due to limitations in Microsoft Windows, WIN32
   applications can only monitor sockets (? and is the when value
   ignored?)
 */
-void fltk::add_fd(int n, int events, FileHandler cb, void *v) {
+void gnui::add_fd(int n, int events, FileHandler cb, void *v) {
   remove_fd(n,events);
   int i = nfds++;
   if (i >= fd_array_size) {
@@ -344,7 +344,7 @@ void fltk::add_fd(int n, int events, FileHandler cb, void *v) {
 }
 
 /*! Same as add_fd(fd, READ, cb, v); */
-void fltk::add_fd(int fd, FileHandler cb, void* v) {
+void gnui::add_fd(int fd, FileHandler cb, void* v) {
   add_fd(fd, POLLIN, cb, v);
 }
 
@@ -355,7 +355,7 @@ void fltk::add_fd(int fd, FileHandler cb, void* v) {
   are removed from each callback for the file descriptor, and the
   callback removed only if all of the bits turn off.
 */
-void fltk::remove_fd(int n, int events) {
+void gnui::remove_fd(int n, int events) {
   int i,j;
 #if !USE_POLL
   maxfd = 0;
@@ -491,45 +491,45 @@ static inline int fl_ready() {
 
 /**
 The open X display.  This is needed as an argument to most Xlib calls.
-Don't attempt to change it!  This is NULL before fltk::open_display()
+Don't attempt to change it!  This is NULL before gnui::open_display()
 is called.
 */
-Display *fltk::xdisplay = 0;
+Display *gnui::xdisplay = 0;
 
 /**
-This dummy 1x1 window is created by fltk::open_display() and is
+This dummy 1x1 window is created by gnui::open_display() and is
 never destroyed. You can use it to communicate with the window
 manager or other programs.
 */
-XWindow fltk::message_window;
+XWindow gnui::message_window;
 
 /**
-Which screen number to use.  This is set by fltk::open_display() to
+Which screen number to use.  This is set by gnui::open_display() to
 the default screen.  You can change it by setting this to a different
 value immediately afterwards.
 */
-int fltk::xscreen;
+int gnui::xscreen;
 
 /**
 The X visual that FLTK will use for all windows.  These are set by
-fltk::open_display() to the default visual.  You can change them
+gnui::open_display() to the default visual.  You can change them
 before calling Window::show() the first time.  Typical code for
 changing the default visual is:
 
 \code
-fltk::args(argc, argv); // do this first so $DISPLAY is set
-fltk::open_display();
-fltk::xvisual = find_a_good_visual(fltk::xdisplay, fltk::xscreen);
-if (!fltk::xvisual) fltk::abort(&quot;No good visual&quot;);
-fltk::xcolormap = make_a_colormap(fltk::xdisplay, fltk::xvisual->visual, fltk::xvisual->depth);
+gnui::args(argc, argv); // do this first so $DISPLAY is set
+gnui::open_display();
+gnui::xvisual = find_a_good_visual(gnui::xdisplay, gnui::xscreen);
+if (!gnui::xvisual) gnui::abort(&quot;No good visual&quot;);
+gnui::xcolormap = make_a_colormap(gnui::xdisplay, gnui::xvisual->visual, gnui::xvisual->depth);
 // it is now ok to show() windows:
 window->show(argc, argv);
 \endcode
 
 A portable interface to get a TrueColor visual (which is probably
-the only reason to do this) is to call fltk::visual(int).
+the only reason to do this) is to call gnui::visual(int).
 */
-XVisualInfo *fltk::xvisual;
+XVisualInfo *gnui::xvisual;
 
 /**
 The colormap being used by FLTK. This is needed as an argument for
@@ -538,7 +538,7 @@ is called to your own colormap. The function own_colormap() can be
 used to make FLTK create a private one. FLTK uses the same colormap
 for all windows and there is no way to change that, sorry.
 */
-Colormap fltk::xcolormap;
+Colormap gnui::xcolormap;
 
 /** \fn XWindow xid(const Window* window);
 Returns the XID for a window, or zero if show() has not been called on it.
@@ -590,10 +590,10 @@ call this if you wish to do X calls and there is a chance that your
 code will be called before the first show() of a window.  This is
 called automatically Window::show().
 
-This may call fltk::abort() if there is an error opening the 
+This may call gnui::abort() if there is an error opening the 
 display.
 */
-void fltk::open_display() {
+void gnui::open_display() {
   if (xdisplay) return;
 
   setlocale(LC_CTYPE, "");
@@ -611,7 +611,7 @@ perhaps by another GUI library.  Calling this will set
 xdisplay to the passed display and also read information
 FLTK needs from it. <i>Don't call this if the display is already open!</i>
 */
-void fltk::open_display(Display* d) {
+void gnui::open_display(Display* d) {
   xdisplay = d;
   add_fd(ConnectionNumber(d), POLLIN, do_queued_events);
 
@@ -679,7 +679,7 @@ this if you want your program to continue without the X connection. You
 cannot open the display again, and probably cannot call any FLTK 
 functions. 
 */
-void fltk::close_display() {
+void gnui::close_display() {
   remove_fd(ConnectionNumber(xdisplay));
   XCloseDisplay(xdisplay);
   xdisplay = 0;
@@ -689,7 +689,7 @@ void fltk::close_display() {
 
 static bool reload_info = true;
 
-/*! \class fltk::Monitor
+/*! \class gnui::Monitor
     Structure describing one of the monitors (screens) connected to
     the system. You can ask for one by position with find(), ask for
     all of them with list(), and ask for a fake one that surrounds all
@@ -896,13 +896,13 @@ const Monitor& Monitor::find(int x, int y) {
 
 /*!
   Return where the mouse is on the screen by doing a round-trip query
-  to the server. You should use fltk::event_x_root() and
-  fltk::event_y_root() if possible, but this is necessary if you are
+  to the server. You should use gnui::event_x_root() and
+  gnui::event_y_root() if possible, but this is necessary if you are
   not sure if a mouse event has been processed recently (such as to
   position your first window). If the display is not open, this will
   open it.
 */
-void fltk::get_mouse(int &x, int &y) {
+void gnui::get_mouse(int &x, int &y) {
   open_display();
   XWindow root = RootWindow(xdisplay, xscreen);
   XWindow c; int mx,my,cx,cy; unsigned int mask;
@@ -916,7 +916,7 @@ void fltk::get_mouse(int &x, int &y) {
   Returns true if successful, false on failure (exactly what success
   and failure means depends on the os).
 */
-bool fltk::warp_mouse(int x, int y) {
+bool gnui::warp_mouse(int x, int y) {
   XWindow root = RootWindow(xdisplay, xscreen);
   XWarpPointer(xdisplay, root, root, 0, 0, 0, 0, x, y);
   return true; // always works
@@ -992,7 +992,7 @@ static bool open_stylus_device(XDeviceInfo *list, int i, int n) {
   return true;
 }
 
-bool fltk::enable_tablet_events() {
+bool gnui::enable_tablet_events() {
   open_display();
   // check if there is an XInput extension on this machine
   XExtensionVersion	*version;
@@ -1035,10 +1035,10 @@ DND_DRAG event to indicate what it will do to the object. Fltk presets
 this to <tt>XdndActionCopy</tt> so that is what is returned if you
 don't set it.
 */
-Atom fltk::dnd_action;
+Atom gnui::dnd_action;
 
 /** The X id of the window being dragged from. */
-XWindow fltk::dnd_source_window;
+XWindow gnui::dnd_source_window;
 
 /**
 Zero-terminated list of atoms describing the formats of the source
@@ -1062,7 +1062,7 @@ at your own array. Only the first 3 types are sent. Also, FLTK has no
 support for reporting back what type the target requested, so all your
 types must use the same block of data.
 */
-Atom *fltk::dnd_source_types;
+Atom *gnui::dnd_source_types;
 
 /**
 The program can set this when returning non-zero for a DND_RELEASE
@@ -1072,11 +1072,11 @@ event to indicate the translation wanted. FLTK presets this to
 dnd_source_types, but <tt>"text/plain"</tt> appears to
 always work).
 */
-Atom fltk::dnd_type;
+Atom gnui::dnd_type;
 
 /**
 The action the source program wants to perform. Due to oddities in the
-Xdnd design this variable is \e not set on the fltk::DND_ENTER event,
+Xdnd design this variable is \e not set on the gnui::DND_ENTER event,
 instead it is set on each DND_DRAG event, and it may change each time.
 
 To print the string value of the Atom use this code:
@@ -1087,10 +1087,10 @@ puts(x);
 XFree(x);
 \endcode
 
-You can set this before calling fltk::dnd() to communicate a different
+You can set this before calling gnui::dnd() to communicate a different
 action. See #dnd_source_types, which you must also set.
 */
-Atom fltk::dnd_source_action;
+Atom gnui::dnd_source_action;
 
 Atom *fl_incoming_dnd_source_types;
 
@@ -1126,11 +1126,11 @@ bool fl_i_own_selection[2];
 /*!
   Change the current selection. The block of text is copied to an
   internal buffer by FLTK (be careful if doing this in response to an
-  fltk::PASTE as this may be the same buffer returned by
+  gnui::PASTE as this may be the same buffer returned by
   event_text()).
 
   The block of text may be retrieved (from this program or whatever
-  program last set it) with fltk::paste().
+  program last set it) with gnui::paste().
 
   There are actually two buffers. If \a clipboard is true then the text
   goes into the user-visible selection that is moved around with
@@ -1139,7 +1139,7 @@ bool fl_i_own_selection[2];
   used for temporarily selecting text with the mouse and for drag &
   drop (on X this is the XA_PRIMARY selection).
 */
-void fltk::copy(const char *stuff, int len, bool clipboard) {
+void gnui::copy(const char *stuff, int len, bool clipboard) {
   if (!stuff || len<0) return;
   if (len >= selection_buffer_length[clipboard]) {
     delete[] selection_buffer[clipboard];
@@ -1159,9 +1159,9 @@ void fltk::copy(const char *stuff, int len, bool clipboard) {
 
 /*!
   This is what a widget does when a "paste" command (like Ctrl+V or
-  the middle mouse click) is done to it. Cause an fltk::PASTE event to
+  the middle mouse click) is done to it. Cause an gnui::PASTE event to
   be sent to the receiver with the contents of the current selection
-  in the fltk::event_text(). The selection can be set by fltk::copy().
+  in the gnui::event_text(). The selection can be set by gnui::copy().
 
   There are actually two buffers. If \a clipboard is true then the text
   is from the user-visible selection that is moved around with
@@ -1176,7 +1176,7 @@ void fltk::copy(const char *stuff, int len, bool clipboard) {
   buffer (or even to screw up completely) without complex and
   error-prone synchronization code most toolkits require.
 */
-void fltk::paste(Widget &receiver, bool clipboard) {
+void gnui::paste(Widget &receiver, bool clipboard) {
   if (fl_i_own_selection[clipboard]) {
     // We already have it, do it quickly without window server.
     // Notice that the text is clobbered if set_selection is
@@ -1196,11 +1196,11 @@ void fltk::paste(Widget &receiver, bool clipboard) {
 ////////////////////////////////////////////////////////////////
 
 /** The most recent X event. */
-XEvent fltk::xevent;
+XEvent gnui::xevent;
 
 /** The last timestamp from an X event that reported it (not all do).
 Many X calls (like cut and paste) need this value. */
-ulong fltk::event_time;
+ulong gnui::event_time;
 
 char fl_key_vector[32]; // used by get_key()
 
@@ -1265,15 +1265,15 @@ static void set_stylus_data() {
   You can use this to feed artifical X events to it, or to use your
   own code to get events from X.
 
-  Besides feeding events your code should call fltk::flush() periodically so
+  Besides feeding events your code should call gnui::flush() periodically so
   that FLTK redraws its windows.
 
   This function will call any widget callbacks from the widget code.
   It will not return until they complete, for instance if it pops up a
-  modal window with fltk::ask() it will not return until the user
+  modal window with gnui::ask() it will not return until the user
   clicks yes or no.
 */
-bool fltk::handle()
+bool gnui::handle()
 {
   Window* window = find(xevent.xany.window);
   int event = 0;
@@ -2009,7 +2009,7 @@ either CreatedWindow::create() or CreatedWindow::set_xid().
 An example for Xlib (include x.h to make this work):
 \code
 void MyWindow::create() {
-  fltk::open_display();	// necessary if this is first window
+  gnui::open_display();	// necessary if this is first window
   // we only calcualte the necessary visual & colormap once:
   static XVisualInfo* visual;
   static Colormap colormap;
@@ -2019,7 +2019,7 @@ void MyWindow::create() {
     colormap = XCreateColormap(xdisplay, RootWindow(xdisplay,xscreen),
 			        vis->visual, AllocNone);
     XColor xcol; xcol.red = 1; xcol.green = 2; xcol.blue = 3;
-    XAllocColor(fltk::display, colormap, &xcol);
+    XAllocColor(gnui::display, colormap, &xcol);
     background = xcol.pixel;
   }
   CreatedWindow::create(this, visual, colormap, background);
@@ -2185,7 +2185,7 @@ void CreatedWindow::create(Window* window,
       if (w->shown()) hints->window_group = w->i->xid;
     hints->flags |= WindowGroupHint;
 #endif
-    if (!fltk::modal() && fl_show_iconic) {
+    if (!gnui::modal() && fl_show_iconic) {
       hints->flags |= StateHint;
       hints->initial_state = IconicState;
       fl_show_iconic = false;
@@ -2358,7 +2358,7 @@ Set by Window::make_current() and/or draw_into() to the window being
 drawn into. This may be different than the xid() of the window, as it
 may be the back buffer which has a different id.
 */
-XWindow fltk::xwindow;
+XWindow gnui::xwindow;
 
 /**
 The single X GC used for all drawing. This is initialized by the first
@@ -2370,15 +2370,15 @@ Most Xlib drawing calls look like this:
 XDrawSomething(xdisplay, xwindow, gc, ...);
 \endcode
 */
-GC fltk::gc;
+GC gnui::gc;
 
 #if USE_CAIRO
-cairo_t* fltk::cr;
+cairo_t* gnui::cr;
 static cairo_surface_t* surface;
 #endif
 
 #if USE_XFT
-XftDraw* fltk::xftc;
+XftDraw* gnui::xftc;
 #endif
 
 /** Make the fltk drawing functions draw into this widget.
@@ -2409,13 +2409,13 @@ void Widget::make_current() const {
   translate(x,y);
 }
 
-namespace fltk {class Image;}
-fltk::Image* fl_current_Image;
+namespace gnui {class Image;}
+gnui::Image* fl_current_Image;
 
 #if USE_CAIRO
 /** Fltk cairo create surface function accepting a Window* as input */
-cairo_surface_t* fltk::cairo_create_surface(Window* wi) {
-  XWindow window = fltk::xid(wi);
+cairo_surface_t* gnui::cairo_create_surface(Window* wi) {
+  XWindow window = gnui::xid(wi);
   cairo_surface_t* surface =  cairo_xlib_surface_create(xdisplay, window, 
 				   xvisual->visual, wi->w(), wi->h());
   cairo_xlib_surface_set_size(surface, wi->w(), wi->h());
@@ -2425,16 +2425,16 @@ cairo_surface_t* fltk::cairo_create_surface(Window* wi) {
 
 /**
   Fltk can draw into any X window or pixmap that uses the
-  fltk::xvisual.  This will reset the transformation and clip region
+  gnui::xvisual.  This will reset the transformation and clip region
   and leave the font, color, etc at unpredictable values. The \a w and
   \a h arguments must be the size of the window and are used by
-  fltk::not_clipped().
+  gnui::not_clipped().
 
   Before you destroy the window or pixmap you must call
-  fltk::stop_drawing() so that it can destroy any temporary structures
+  gnui::stop_drawing() so that it can destroy any temporary structures
   that were created by this.
 */
-void fltk::draw_into(XWindow window, int w, int h) {
+void gnui::draw_into(XWindow window, int w, int h) {
   fl_current_Image = 0;
   fl_clip_w = w;
   fl_clip_h = h;
@@ -2456,11 +2456,11 @@ void fltk::draw_into(XWindow window, int w, int h) {
 
     // The X11 GC structure does not contain the drawable, so only
     // one is needed and it can be reused all we want:
-    if (!fltk::gc) fltk::gc = XCreateGC(xdisplay, window, 0, 0);
+    if (!gnui::gc) gnui::gc = XCreateGC(xdisplay, window, 0, 0);
 
 #if USE_XFT
     // It appears that Xft contexts can be reused for different drawables:
-    if (!fltk::xftc)
+    if (!gnui::xftc)
       xftc = XftDrawCreate(xdisplay, window, xvisual->visual, xcolormap);
     else
       XftDrawChange(xftc, window);
@@ -2494,7 +2494,7 @@ void fltk::draw_into(XWindow window, int w, int h) {
   Even if the graphics context is not used, destroying it after destroying
   it's target will cause a crash. Sigh.
 */
-void fltk::stop_drawing(XWindow window) {
+void gnui::stop_drawing(XWindow window) {
   if (xwindow == window) {
     xwindow = 0;
 #if USE_CAIRO
@@ -2539,7 +2539,7 @@ static bool can_xdbe() {
 #endif
 
 /**
-This virtual function is called by fltk::flush() to update the
+This virtual function is called by gnui::flush() to update the
 window. You can override it for special window subclasses to change
 how they draw.
 
@@ -2686,7 +2686,7 @@ void Window::free_backbuffer() {
 
 ////////////////////////////////////////////////////////////////
 
-void Window::borders( fltk::Rectangle *r ) const {
+void Window::borders( gnui::Rectangle *r ) const {
 
   if (!this->border() || this->override() || this->parent()) {
     r->set(0,0,0,0);
@@ -2793,7 +2793,7 @@ void Window::system_layout() {
   }
 }
 
-FILE* fltk::fltk_fopen(const char* name, const char* flags) {
+FILE* gnui::fltk_fopen(const char* name, const char* flags) {
   return fopen(name, flags);
 }
 

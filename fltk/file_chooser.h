@@ -26,7 +26,7 @@
 
 #include "FL_API.h"
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/file_chooser.h
 //@{

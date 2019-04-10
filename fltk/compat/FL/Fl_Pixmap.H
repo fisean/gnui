@@ -4,6 +4,6 @@
 #include "Fl_Widget.H"
 #include "fltk/xpmImage.h"
 
-typedef fltk::xpmImage Fl_Pixmap;
+typedef gnui::xpmImage Fl_Pixmap;
 
 #endif

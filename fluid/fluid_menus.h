@@ -28,25 +28,25 @@
 
 #include "FluidType.h"
 
-namespace fltk {
+namespace gnui {
     class MenuBar;
     class ItemGroup;
     class Item;
     class xpmImage;
 };
 
-fltk::MenuBar* build_hierarchy(fltk::MenuBar* menubar);
-void fill_in_New_Menu(fltk::ItemGroup* menu);
-fltk::Item* fluidMenuItem(FluidType& wt,int n=-1);
+gnui::MenuBar* build_hierarchy(gnui::MenuBar* menubar);
+void fill_in_New_Menu(gnui::ItemGroup* menu);
+gnui::Item* fluidMenuItem(FluidType& wt,int n=-1);
 
 const int MAX_HISTORY = 10; //!< maximum number of items in menu File
 extern char absolute_history[MAX_HISTORY][1024];
 extern char relative_history[MAX_HISTORY][1024];
 
-extern fltk::Item *history_item[10],*undo_item[2],
+extern gnui::Item *history_item[10],*undo_item[2],
     *iwidget_bin,*itooltip,*isource_view,*istatusbar, *ishow_overlay;
-extern fltk::ItemGroup *newMenu;
-extern fltk::MenuBar* Main_Menu;
+extern gnui::ItemGroup *newMenu;
+extern gnui::MenuBar* Main_Menu;
 
 #define DECL_MENUCBV(n) void n(Widget *, void *)
 #define DECL_MENUCBL(n) void n(Widget *, long)

@@ -37,7 +37,7 @@
 #include <stdio.h>
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 static Input *ibinput;
 
 static NamedStyle style("InputBrowser", 0, &InputBrowser::default_style);
@@ -53,7 +53,7 @@ InputBrowser::InputBrowser(int x, int y, int w, int h, const char *l)
   if (m_input.parent()) m_input.parent()->remove(m_input);
   m_input.parent(this);
   m_input.callback((Callback_p)input_cb, this);
-  m_input.when(fltk::WHEN_ENTER_KEY_CHANGED | fltk::WHEN_RELEASE); // FL_WHEN_CHANGED FL_WHEN_ENTER_KEY_ALWAYS
+  m_input.when(gnui::WHEN_ENTER_KEY_CHANGED | gnui::WHEN_RELEASE); // FL_WHEN_CHANGED FL_WHEN_ENTER_KEY_ALWAYS
 
   over_now = false; over_last = true;
 
@@ -75,7 +75,7 @@ static InputBrowser *ib;
 static Browser *browser;
 static bool toggle;
 
-namespace fltk {
+namespace gnui {
 
 class ComboWindow : public MenuWindow {
   public:
@@ -105,7 +105,7 @@ InputBrowser::~InputBrowser()
     if(win) delete win;
 }
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ComboBrowser : public Browser {
   public:
@@ -124,7 +124,7 @@ ComboBrowser::ComboBrowser(int x, int y, int w, int h)
 int ComboBrowser::handle(int event) {
   if(event_key()==DownKey && (!item() || children()==1)) {
     item(child(0));
-    fltk::focus(item());
+    gnui::focus(item());
   }
 
   if (event == KEY && event_state(ACCELERATOR)) {
@@ -183,9 +183,9 @@ int ComboBrowser::handle(int event) {
   case RELEASE:
   case DRAG:
     // this causes a drag-in to the widget to work:
-    if (event_inside(Rectangle(0, 0, w(), h()))) fltk::pushed(this);
+    if (event_inside(Rectangle(0, 0, w(), h()))) gnui::pushed(this);
     else {
-      fltk::pushed(this);
+      gnui::pushed(this);
       return 0;
     }
     break;
@@ -251,7 +251,7 @@ int InputBrowser::handle(int event) {
       redraw_highlight();
   //if (event == ENTER || event == LEAVE) redraw_highlight();
 
-  if (event == FOCUS) fltk::focus(m_input);
+  if (event == FOCUS) gnui::focus(m_input);
 
   // Scroll using arrow keys
   if ((event == KEY) && (event_key() == UpKey || event_key() == DownKey )) {
@@ -264,7 +264,7 @@ int InputBrowser::handle(int event) {
   // all other keys should be sent to Input
   } else if ((event_inside(m_input) || event == KEY)
     && !(type()&NONEDITABLE) && !pushed() && event != MOUSEWHEEL) {
-    if (event == PUSH) { fltk::pushed(m_input); fltk::focus(m_input); }
+    if (event == PUSH) { gnui::pushed(m_input); gnui::focus(m_input); }
     return m_input.handle(event); // if this doesn't work, try send(e)
   }
 
@@ -369,7 +369,7 @@ void InputBrowser::draw() {
 
 void InputBrowser::hide_popup() {
   if (win && win->visible()) {
-    fltk::exit_modal();
+    gnui::exit_modal();
   }
 }
 
@@ -469,7 +469,7 @@ void InputBrowser::popup() {
   win->exec(0, true);
 
   if(type()&NONEDITABLE) throw_focus();
-  else fltk::focus(m_input);
+  else gnui::focus(m_input);
 
   clear_flag(PUSHED);
   redraw(DAMAGE_VALUE);

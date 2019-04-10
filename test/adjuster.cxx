@@ -32,7 +32,7 @@
 #include <fltk/Box.h>
 #include <fltk/Rectangle.h>
 
-using namespace fltk;
+using namespace gnui;
 
 void adjcb(Widget *o, void *v) {
   Adjuster *a = (Adjuster*)o;
@@ -45,15 +45,15 @@ int main(int, char ** argv) {
    Window window(320,100,argv[0]);
 
    char buf1[100];
-   FrameBox b1(fltk::DOWN_BOX,20,30,80,25,buf1);
-   b1.color(fltk::WHITE);
+   FrameBox b1(gnui::DOWN_BOX,20,30,80,25,buf1);
+   b1.color(gnui::WHITE);
    Adjuster a1(20+80,30,3*25,25);
    a1.callback(adjcb,&b1);
    adjcb(&a1,&b1);
 
    char buf2[100];
-   FrameBox b2(fltk::DOWN_BOX,20+80+4*25,30,80,25,buf2);
-   b2.color(fltk::WHITE);
+   FrameBox b2(gnui::DOWN_BOX,20+80+4*25,30,80,25,buf2);
+   b2.color(gnui::WHITE);
    Adjuster a2(b2.dx()+b2.dw(),10,25,3*25);
    a2.callback(adjcb,&b2);
    adjcb(&a2,&b2);
@@ -61,7 +61,7 @@ int main(int, char ** argv) {
    window.resizable(window);
    window.end();
    window.show();
-   return fltk::run();
+   return gnui::run();
 }
 
 //

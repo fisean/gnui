@@ -24,21 +24,21 @@
 #ifndef fltk_PixelType_h
 #define fltk_PixelType_h
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/PixelType.h
 //@{
 
 /**
   Enumeration describing how colors are stored in an array of bytes
-  that is a pixel. This is used as an argument for fltk::drawimage(),
-  fltk::readimage(), and fltk::Image.
+  that is a pixel. This is used as an argument for gnui::drawimage(),
+  gnui::readimage(), and gnui::Image.
 
   Notice that the order of the bytes in memory of ARGB32 or RGB32 is
   a,r,g,b on a little-endian machine and b,g,r,a on a big-endian
   machine. Due to the use of these types by Windows, this is often
   the fastest form of data, if you have a choice. To convert an
-  fltk::Color to RGB32, shift it right by 8 (for ARGB32 shift the
+  gnui::Color to RGB32, shift it right by 8 (for ARGB32 shift the
   alpha left 24 and or it in).
 
   More types may be added in the future. The set is as minimal as

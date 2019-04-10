@@ -34,7 +34,7 @@
 //   WizardGroup::value()     - Set the visible child.
 //
 
-/*! \class fltk::WizardGroup
+/*! \class gnui::WizardGroup
   This class encapsulates Groups and shows only one group <br>
   among n others at any time.<br>
   Just create a WizardGroup as you would create a Group 
@@ -51,27 +51,27 @@ int main(int argc, char **argv) {
   G_win->begin(); 
   G_wiz = new WizardGroup(0,0,WIDTH, HEIGHT);// create Wizard
   G_wiz->begin();
-  add_group("This is the\nFirst\npage", fltk::RED,true, false ); // Wz p.1
-  add_group("This is the\nSecond\npage", fltk::YELLOW, false, false); // Wz p.2
-  add_group("This is the\nLast\npage", fltk::GREEN, false, true); // Wz p.3
+  add_group("This is the\nFirst\npage", gnui::RED,true, false ); // Wz p.1
+  add_group("This is the\nSecond\npage", gnui::YELLOW, false, false); // Wz p.2
+  add_group("This is the\nLast\npage", gnui::GREEN, false, true); // Wz p.3
   G_wiz->end();
   G_win->end();
   G_win->show(argc, argv);
-  return fltk::run();
+  return gnui::run();
 }
 \endcode
 */
 
-/** \fn void fltk::WizardGroup::draw(); 
+/** \fn void gnui::WizardGroup::draw(); 
    draw WizardGroup and make sure before that only one child is visible 
 */
-/** \fn void fltk::WizardGroup::next(); 
+/** \fn void gnui::WizardGroup::next(); 
    show next (or last if no more next) child, usually a group.
 */
-/** \fn void fltk::WizardGroup::prev(); 
+/** \fn void gnui::WizardGroup::prev(); 
     show previous (or first if no more previous) child, usually a group.
 */
-/** \fn fltk::WizardGroup::value(Widget *kid);
+/** \fn gnui::WizardGroup::value(Widget *kid);
     Set  the visible child, 
     look in the Wizard for  this widget, 
     make it visible, hide all others.
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
 #include <fltk/Cursor.h>
 #include <fltk/WizardGroup.h>
 
-using namespace fltk;
+using namespace gnui;
 
 void WizardGroup::draw() {
   if (!value()) value(children() ? child(0) : 0);  

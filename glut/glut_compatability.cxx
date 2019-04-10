@@ -44,9 +44,9 @@
 #include <fltk/ItemGroup.h>
 #include <fltk/Monitor.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::GlutWindow
+/*! \class gnui::GlutWindow
 
 Window subclass used to emulate GLUT. See the glut.h header file for
 more details on GLUT emulation.
@@ -56,7 +56,7 @@ to manipulate instances directly rather than use GLUT window id's.
 These may be created without opening the display, and thus can fit
 better into FLTK's method of creating windows.
 
-The current GLUT window is available in the global variable fltk::glut_window.
+The current GLUT window is available in the global variable gnui::glut_window.
 
 */
 
@@ -321,7 +321,7 @@ static void domenu(int n, int ex, int ey) {
       glut_menustate_function(1);
   if (glut_menustatus_function)
       glut_menustatus_function(1,ex,ey);
-  menus[n]->popup(fltk::Rectangle(event_x(), event_y(),0,0), 0);
+  menus[n]->popup(gnui::Rectangle(event_x(), event_y(),0,0), 0);
   if (glut_menustatus_function)
       glut_menustatus_function(0,ex,ey);
   if (glut_menustate_function)
@@ -378,8 +378,8 @@ void glutRemoveMenuItem(int item) {
 void glutIdleFunc(void (*f)())
 {
   if (glut_idle_function == f) return;  // no change
-  if (glut_idle_function) fltk::remove_idle((void (*)(void *))glut_idle_function);
-  if (f) fltk::add_idle((void (*)(void *))f);
+  if (glut_idle_function) gnui::remove_idle((void (*)(void *))glut_idle_function);
+  if (f) gnui::add_idle((void (*)(void *))f);
   glut_idle_function = f;
 }
 

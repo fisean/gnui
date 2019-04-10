@@ -250,7 +250,7 @@ my_error_exit (j_common_ptr cinfo)
 static void declare_now(void*) { }
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 bool jpegImage::fetch()
 {

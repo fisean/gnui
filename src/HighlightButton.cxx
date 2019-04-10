@@ -26,9 +26,9 @@
 #include <fltk/events.h>
 #include <fltk/HighlightButton.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::HighlightButton
+/*! \class gnui::HighlightButton
   Same as a normal button but the box() defaults to a style that draws
   as a flat rectangle until the mouse points at it, then it draws as
   a raised highlighted rectangle.

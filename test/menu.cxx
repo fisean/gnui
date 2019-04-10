@@ -20,7 +20,7 @@
 #include <fltk/StringList.h>
 #include <fltk/events.h>
 #include <fltk/ask.h>
-using namespace fltk;
+using namespace gnui;
 
 #define WIDTH 600
 #define HEIGHT 23
@@ -32,7 +32,7 @@ void callback(Widget* w, void*) {
 	 menu->label() ? menu->label() : "menu bar",
 	 item ? item->label() ? item->label() : "unnamed" : "none");
   if (item) item->do_callback();
-  printf("event_button = %d\n", fltk::event_button());
+  printf("event_button = %d\n", gnui::event_button());
 }
 
 void never_cb(Widget* w, void*) {
@@ -141,7 +141,7 @@ int main(int argc, char **argv) {
 
   Widget box(VWIDTH,HEIGHT,WIDTH-VWIDTH,400-HEIGHT);
   //box.color(WHITE);
-  box.box(fltk::DOWN_BOX);
+  box.box(gnui::DOWN_BOX);
   box.tooltip("Press right button for a pop-up menu");
 
   PopupMenu mb(VWIDTH,HEIGHT,WIDTH-VWIDTH,400-HEIGHT, "popup");
@@ -179,7 +179,7 @@ int main(int argc, char **argv) {
   InputBrowser ib(x,y,100,25,"Input&Browser:");
   ib.type(InputBrowser::INDENTED);
   ib.callback(callback);
-  ib.when(fltk::WHEN_CHANGED);
+  ib.when(gnui::WHEN_CHANGED);
   ib.begin();
   build_hierarchy();
   ib.end();

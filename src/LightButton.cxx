@@ -27,9 +27,9 @@
 #include <fltk/Box.h>
 #include <fltk/draw.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::LightButton
+/*! \class gnui::LightButton
 
   This button turns the value() on and off each release of a click
   inside of it, and displays a light to show the user this. This style

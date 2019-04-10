@@ -25,9 +25,9 @@
 
 #include <fltk/RepeatButton.h>
 #include <fltk/events.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::RepeatButton
+/*! \class gnui::RepeatButton
   The callback is done when the user pushes the button down, and then
   after .5 second it is repeated 10 times a second, as long as the
   user is pointing at the button and holding it down.

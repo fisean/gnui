@@ -38,7 +38,7 @@
 
 #define DEF_WIDTH 0.03
 
-using namespace fltk;
+using namespace gnui;
 
 // put your drawing stuff here
 float drawargs[7] = {90, 90, 100, 100, 0, 360, 0};
@@ -136,11 +136,11 @@ public:
 
   CairoWindow() : Window(300,300) {
     resizable(this); // comment this out for fixed-size
-    color(fltk::WHITE); // desired background color
+    color(gnui::WHITE); // desired background color
   }
 
   void draw() {
-    fltk::Window::draw(); // this erases it
+    gnui::Window::draw(); // this erases it
     cairo_save(cr);
 
     double xc = 0.5;
@@ -162,12 +162,12 @@ public:
 int main(int argc, char** argv) {
   CairoWindow window;
   window.show(argc,argv);
-  return fltk::run();
+  return gnui::run();
 }
 #else
 #include <fltk/ask.h>
 int main(int argc, char** argv) {
-  fltk::message("please configure fltk with CAIRO enabled (--enable-cairo)"); 
+  gnui::message("please configure fltk with CAIRO enabled (--enable-cairo)"); 
   return 0;
 }
 

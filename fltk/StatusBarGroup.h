@@ -33,7 +33,7 @@
 #include "Group.h"
 #include "InvisibleBox.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API StatusBarGroup : public Group {
 public:

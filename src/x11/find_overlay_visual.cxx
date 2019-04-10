@@ -35,7 +35,7 @@
 
 #include <fltk/events.h>
 #include <fltk/x.h>
-using namespace fltk;
+using namespace gnui;
 
 // SERVER_OVERLAY_VISUALS property element:
 struct OverlayInfo {

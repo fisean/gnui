@@ -82,16 +82,16 @@
 #  include <pwd.h>
 #endif /* WIN32 */
 
-using namespace fltk;
+using namespace gnui;
 
-/** \class fltk::FileChooser
-  The fltk::FileChooser widget displays a standard file selection
+/** \class gnui::FileChooser
+  The gnui::FileChooser widget displays a standard file selection
   dialogue that supports various selection modes.
 
   \image html FileChooser.jpg
   \image latex FileChooer.jpg "FileChooser" width=12cm
 
-  The fltk::FileChooser class also exports several static values
+  The gnui::FileChooser class also exports several static values
   that may be used to localise or customise the appearance of all file chooser
   dialogues:
 
@@ -167,11 +167,11 @@ using namespace fltk;
 	</TR>
     </TABLE></CENTER>
 
-  The fltk::FileChooser::sort member specifies the sort function that is 
+  The gnui::FileChooser::sort member specifies the sort function that is 
   used when loading the contents of a directory and can be customised
   at run-time.
 
-  For more complex customisation, considering copying the fltk::FileChooser
+  For more complex customisation, considering copying the gnui::FileChooser
   code and modifying it accordingly.
 */
 
@@ -199,7 +199,7 @@ const char	*FileChooser::new_directory_tooltip = "Create a new directory.";
 const char	*FileChooser::preview_label = "Preview";
 const char	*FileChooser::save_label = "Save";
 const char	*FileChooser::show_label = "Show:";
-FileSortF	*FileChooser::sort = fltk::casenumericsort;
+FileSortF	*FileChooser::sort = gnui::casenumericsort;
 
 
 //
@@ -298,7 +298,7 @@ void FileChooser::directory(const char *d, bool f) {
 #else
     if (d[0] != '/' && d[0] != '\\')
 #endif /* WIN32 || __EMX__ */
-      fltk::filename_absolute(directory_, sizeof(directory_), d);
+      gnui::filename_absolute(directory_, sizeof(directory_), d);
     else
       strlcpy(directory_, d, sizeof(directory_));
 
@@ -337,10 +337,10 @@ void FileChooser::directory(const char *d, bool f) {
     if ((pathname[0] && pathname[strlen(pathname) - 1] != '/') || !pathname[0])
       strlcat(pathname, "/", sizeof(pathname));
     // Prevent users from cursing us: keep basename, if not a directory
-    if (!fltk::filename_isdir(fileName->text())) {
+    if (!gnui::filename_isdir(fileName->text())) {
       dirptr = strchr(pathname, 0);
-      strlcat(pathname, fltk::filename_name(fileName->text()), sizeof(pathname));
-      if (!(type_ & CREATE) && !fltk::filename_isfile(pathname))
+      strlcat(pathname, gnui::filename_name(fileName->text()), sizeof(pathname));
+      if (!(type_ & CREATE) && !gnui::filename_isfile(pathname))
         *dirptr = 0;
     }
    
@@ -547,12 +547,12 @@ void FileChooser::fileListCB() {
     snprintf(pathname, sizeof(pathname), "%s/%s", directory_, filename);
   }
 
-  if (fltk::event_clicks()) {
+  if (gnui::event_clicks()) {
 #if (defined(WIN32) && ! defined(__CYGWIN__)) || defined(__EMX__)
     if ((strlen(pathname) == 2 && pathname[1] == ':') ||
-        fltk::filename_isdir(pathname))
+        gnui::filename_isdir(pathname))
 #else
-    if (fltk::filename_isdir(pathname))
+    if (gnui::filename_isdir(pathname))
 #endif /* WIN32 || __EMX__ */
     {
       // Change directories...
@@ -562,7 +562,7 @@ void FileChooser::fileListCB() {
       // be treated as a triple-click.  We use a value of -1 because
       // the next click will increment click count to 0, which is what
       // we really want...
-      //fltk::event_clicks(-1); // fabien: doesn't seems to be useful
+      //gnui::event_clicks(-1); // fabien: doesn't seems to be useful
       fileList->deselect();	// after directory the file is already 
 				// selected from previous state so deselect it
     } else {
@@ -594,7 +594,7 @@ void FileChooser::fileListCB() {
     // Strip any trailing slash from the directory name...
     if (*filename == '/') *filename = '\0';
 
-    if (!fltk::filename_isfile(pathname)) {
+    if (!gnui::filename_isfile(pathname)) {
       filename = strrchr((char*)fileName->text(), '/');
       if (filename && filename+1) filename++;
       sprintf(pathname, "%s%s%s", pathname, filename ? "/" : "", filename ? filename : "");
@@ -602,14 +602,14 @@ void FileChooser::fileListCB() {
     fileName->value(pathname);
 
     // Update the preview box...
-    fltk::remove_timeout((TimeoutHandler)previewCB, this);
-    fltk::add_timeout(0.5, (TimeoutHandler)previewCB, this);
+    gnui::remove_timeout((TimeoutHandler)previewCB, this);
+    gnui::add_timeout(0.5, (TimeoutHandler)previewCB, this);
 
     // Do any callback that is registered...
     if (callback_) (*callback_)(this, data_);
 
     // Activate the OK button as needed...
-    if (!fltk::filename_isdir(fileName->text()) || (type_ & DIRECTORY))
+    if (!gnui::filename_isdir(fileName->text()) || (type_ & DIRECTORY))
       okButton->activate();
     else
       okButton->deactivate();
@@ -646,7 +646,7 @@ void FileChooser::fileNameCB() {
 
   // Expand ~ and $ variables as needed...
   if (strchr(filename, '~') || strchr(filename, '$')) {
-    fltk::filename_absolute(pathname, sizeof(pathname), filename);
+    gnui::filename_absolute(pathname, sizeof(pathname), filename);
     filename = pathname;
     value(pathname);
   }
@@ -659,7 +659,7 @@ void FileChooser::fileNameCB() {
 #else
   if (directory_[0] != '\0' && filename[0] != '/') {
 #endif /* WIN32 || __EMX__ */
-    fltk::filename_absolute(pathname, sizeof(pathname), filename);
+    gnui::filename_absolute(pathname, sizeof(pathname), filename);
     value(pathname);
     fileName->position(fileName->mark()); // no selection after expansion
   } else if (filename != pathname) {
@@ -670,19 +670,19 @@ void FileChooser::fileNameCB() {
   filename = pathname;
 
   // Now process things according to the key pressed...
-  if (fltk::event_key() == ReturnKey || fltk::event_key() == KeypadEnter) {
+  if (gnui::event_key() == ReturnKey || gnui::event_key() == KeypadEnter) {
     // Enter pressed - select or change directory...
 #if (defined(WIN32) && ! defined(__CYGWIN__)) || defined(__EMX__)
     if ((isalpha(pathname[0] & 255) && pathname[1] == ':' && !pathname[2]) ||
-        fltk::filename_isdir(pathname) &&
+        gnui::filename_isdir(pathname) &&
 	compare_dirnames(pathname, directory_)) {
 #else
-    if (fltk::filename_isdir(pathname) &&
+    if (gnui::filename_isdir(pathname) &&
 	compare_dirnames(pathname, directory_)) {
 #endif /* WIN32 || __EMX__ */
       directory(pathname, false);
     } else if ((type_ & CREATE) || access(pathname, 0) == 0) {
-      if (!fltk::filename_isdir(pathname) || (type_ & DIRECTORY)) {
+      if (!gnui::filename_isdir(pathname) || (type_ & DIRECTORY)) {
 	// Update the preview box...
 	update_preview();
 
@@ -694,11 +694,11 @@ void FileChooser::fileNameCB() {
       }
     } else {
       // File doesn't exist, so beep at and alert the user...
-      fltk::alert(existing_file_label);
+      gnui::alert(existing_file_label);
     }
   }
-    else if (fltk::event_key() != fltk::DeleteKey &&
-           fltk::event_key() != fltk::BackSpaceKey) {
+    else if (gnui::event_key() != gnui::DeleteKey &&
+           gnui::event_key() != gnui::BackSpaceKey) {
     // Check to see if the user has entered a directory...
     if ((slash = strrchr(pathname, '/')) == NULL)
       slash = strrchr(pathname, '\\');
@@ -805,7 +805,7 @@ void FileChooser::fileNameCB() {
     activate_okButton_if_file();
 
   } else {
-    // fltk::DeleteKey or fltk::BackSpace
+    // gnui::DeleteKey or gnui::BackSpace
     fileList->deselect(0);
     fileList->redraw();
     activate_okButton_if_file();
@@ -880,7 +880,7 @@ void FileChooser::newdir() {
 
 
   // Get a directory name from the user
-  if ((dir = fltk::input(new_directory_label, NULL)) == NULL)
+  if ((dir = gnui::input(new_directory_label, NULL)) == NULL)
     return;
 
   // Make it relative to the current directory as needed...
@@ -901,7 +901,7 @@ void FileChooser::newdir() {
 #endif /* WIN32 */
     if (errno != EEXIST)
     {
-      fltk::alert("%s", strerror(errno));
+      gnui::alert("%s", strerror(errno));
       return;
     }
 
@@ -999,7 +999,7 @@ void FileChooser::showChoiceCB() {
   item = showChoice->child(showChoice->value())->label();
 
   if (strcmp(item, custom_filter_label) == 0) {
-    if ((item = fltk::input(custom_filter_label, pattern_)) != NULL) {
+    if ((item = gnui::input(custom_filter_label, pattern_)) != NULL) {
       strlcpy(pattern_, item, sizeof(pattern_));
 
       quote_pathname(temp, item, sizeof(temp));
@@ -1048,13 +1048,13 @@ void FileChooser::update_favorites() {
   favoritesButton->clear();
   favoritesButton->add("bla");
   favoritesButton->clear();
-  favoritesButton->add(add_favorites_label, fltk::ALT + 'a', 0);
-  favoritesButton->add(manage_favorites_label, fltk::ALT + 'm', 0, 0, fltk::MENU_DIVIDER);
-  favoritesButton->add(filesystems_label, fltk::ALT + 'f', 0);
+  favoritesButton->add(add_favorites_label, gnui::ALT + 'a', 0);
+  favoritesButton->add(manage_favorites_label, gnui::ALT + 'm', 0, 0, gnui::MENU_DIVIDER);
+  favoritesButton->add(filesystems_label, gnui::ALT + 'f', 0);
     
   if ((home = getenv("HOME")) != NULL) {
     quote_pathname(menuname, home, sizeof(menuname));
-    favoritesButton->add(menuname, fltk::ALT + 'h', 0);
+    favoritesButton->add(menuname, gnui::ALT + 'h', 0);
   }
 
   for (i = 0; i < 100; i ++) {
@@ -1064,7 +1064,7 @@ void FileChooser::update_favorites() {
 
     quote_pathname(menuname, pathname, sizeof(menuname));
 
-    if (i < 10) favoritesButton->add(menuname, fltk::ALT + '0' + i, 0);
+    if (i < 10) favoritesButton->add(menuname, gnui::ALT + '0' + i, 0);
     else favoritesButton->add(menuname);
   }
 
@@ -1101,16 +1101,16 @@ void FileChooser::update_preview() {
   } else {
     filename = NULL;
   }
-  if (filename == NULL || fltk::filename_isdir(filename)) image = NULL;
+  if (filename == NULL || gnui::filename_isdir(filename)) image = NULL;
   else {
-    window->cursor(fltk::CURSOR_WAIT);
-    fltk::check();
+    window->cursor(gnui::CURSOR_WAIT);
+    gnui::check();
 
     image = SharedImage::get(filename);
 
     if (image) {
-      window->cursor(fltk::CURSOR_DEFAULT);
-      fltk::check();
+      window->cursor(gnui::CURSOR_DEFAULT);
+      gnui::check();
     }
   }
 
@@ -1138,8 +1138,8 @@ void FileChooser::update_preview() {
       preview_text_[0] = '\0';
     }
 
-    window->cursor(fltk::CURSOR_DEFAULT);
-    fltk::check();
+    window->cursor(gnui::CURSOR_DEFAULT);
+    gnui::check();
 
     // Scan the buffer for printable chars...
     for (ptr = preview_text_;
@@ -1149,9 +1149,9 @@ void FileChooser::update_preview() {
     if (*ptr || ptr == preview_text_) {
       // Non-printable file, just show a big ?...
       previewBox->label(filename ? "?" : 0);
-      previewBox->align(fltk::ALIGN_CLIP);
+      previewBox->align(gnui::ALIGN_CLIP);
       previewBox->labelsize(100);
-      previewBox->labelfont(fltk::HELVETICA);
+      previewBox->labelfont(gnui::HELVETICA);
     } else {
       // Show the first 1k of text...
       int size = previewBox->h() / 20;
@@ -1159,10 +1159,10 @@ void FileChooser::update_preview() {
       else if (size > 14) size = 14;
 
       previewBox->label(preview_text_);
-      previewBox->align((fltk::ALIGN_CLIP | fltk::ALIGN_INSIDE |
-                                   fltk::ALIGN_LEFT | fltk::ALIGN_TOP));
+      previewBox->align((gnui::ALIGN_CLIP | gnui::ALIGN_INSIDE |
+                                   gnui::ALIGN_LEFT | gnui::ALIGN_TOP));
       previewBox->labelsize((uchar)size);
-      previewBox->labelfont(fltk::COURIER);
+      previewBox->labelfont(gnui::COURIER);
     }
   } else {
     pbw = previewBox->w() - 20;
@@ -1182,9 +1182,9 @@ void FileChooser::update_preview() {
       previewBox->image((Image *)image);
     }
 
-    previewBox->align(fltk::ALIGN_CLIP);
+    previewBox->align(gnui::ALIGN_CLIP);
     previewBox->label(0);
-    previewBox->set_flag(fltk::RESIZE_FIT);
+    previewBox->set_flag(gnui::RESIZE_FIT);
   }
 
   previewBox->redraw();
@@ -1315,10 +1315,10 @@ void FileChooser::value(const char *filename) {
 #endif // WIN32
 
   // See if there is a directory in there...
-  fltk::filename_absolute(pathname, sizeof(pathname), filename);
+  gnui::filename_absolute(pathname, sizeof(pathname), filename);
   if ((slash = strrchr(pathname, '/')) != NULL) {
     // Yes, change the display to the directory... 
-    if (fltk::filename_isdir(pathname))
+    if (gnui::filename_isdir(pathname))
       slash = pathname;
     else
       *slash++ = 0;
@@ -1367,7 +1367,7 @@ void FileChooser::value(const char *filename) {
 */
 void FileChooser::activate_okButton_if_file() {
     if (((type_ & CREATE) || !access(fileName->text(), 0)) &&
-        (!fltk::filename_isdir(fileName->text()) || (type_ & DIRECTORY)))
+        (!gnui::filename_isdir(fileName->text()) || (type_ & DIRECTORY)))
       okButton->activate();
     else
       okButton->deactivate();

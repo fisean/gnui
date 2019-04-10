@@ -39,7 +39,7 @@
 #include <fltk/Input.h>
 #include <fltk/InputBrowser.h>
 #include <fltk/events.h>
-using namespace fltk;
+using namespace gnui;
 
 #define DEBUG 1
 
@@ -165,8 +165,8 @@ int main(int, char **) {
   window->resizable(subwindow);
   subwindow->end();
   subwindow->tooltip(
-"This is a child fltk::Window. This may be necessary for imbedding "
-"controls that need a different X visual, OpenGL (using fltk::GlWindow), "
+"This is a child gnui::Window. This may be necessary for imbedding "
+"controls that need a different X visual, OpenGL (using gnui::GlWindow), "
 "or to use the system's clipping to the edge of the window. This program "
 "tests for bugs in event handling and redrawing of these windows.\n\n"
 
@@ -193,7 +193,7 @@ int main(int, char **) {
   window->end();
   subwindow->show(); // this should do nothing. On older fltk it crashed.
   window->show(); // this actually shows the window + subwindow
-  return fltk::run();
+  return gnui::run();
 }
 
 //

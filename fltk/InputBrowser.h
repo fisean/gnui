@@ -37,7 +37,7 @@
 #include "Menu.h"
 #include "Input.h"
 
-namespace fltk {
+namespace gnui {
 
 class ComboBrowser;
 class ComboWindow;

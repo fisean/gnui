@@ -33,7 +33,7 @@
 
 #include "Image.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API xpmImage : public Image {
 public:

@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 /* implementation:
  *   hashtable over the primary key (the widget)
@@ -244,9 +244,9 @@ bool Widget::find(const AssociationType& at, void* data) const {
 
 /*!
   Call the functor for each piece of data of the give AssociationType.
-  This is a wrapper for fltk::foreach(&at, this, fkt).
+  This is a wrapper for gnui::foreach(&at, this, fkt).
  */
-void* Widget::foreach(const AssociationType& at, AssociationFunctor& fkt) const { return fltk::foreach(&at, this, fkt); }
+void* Widget::foreach(const AssociationType& at, AssociationFunctor& fkt) const { return gnui::foreach(&at, this, fkt); }
 
 // This is an internal function that is called by ~Widget().
 // It destroys all the associations with the widget.
@@ -299,7 +299,7 @@ static void* foreach(const PrimaryAssociation* node, const AssociationType* at, 
   return 0;
 }
 
-void* fltk::foreach(const AssociationType* at, const Widget* wg, AssociationFunctor& fkt) {
+void* gnui::foreach(const AssociationType* at, const Widget* wg, AssociationFunctor& fkt) {
 
   if (wg) {
 

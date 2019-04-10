@@ -32,7 +32,7 @@
 #include <fltk/ItemGroup.h>
 #include <fltk/Divider.h>
 
-using namespace fltk;
+using namespace gnui;
 
 int Fl_Menu_Item::size() const {
   const Fl_Menu_Item* m = this;

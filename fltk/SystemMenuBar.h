@@ -32,7 +32,7 @@
 
 struct Fl_Menu_Item;
 
-namespace fltk {
+namespace gnui {
 
 #ifdef __APPLE__
 

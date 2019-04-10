@@ -26,7 +26,7 @@
 
 #include "FL_API.h"
 
-namespace fltk {
+namespace gnui {
 
 /**
  * Preferences are a data tree containing a root, branches and leafs

@@ -53,20 +53,20 @@
 int                changed = 0;
 char               filename[256] = "";
 char               title[256];
-fltk::TextBuffer     *textbuf = 0;
+gnui::TextBuffer     *textbuf = 0;
 
 
 // Syntax highlighting stuff...
-fltk::TextBuffer     *stylebuf = 0;
-fltk::TextDisplay::StyleTableEntry
+gnui::TextBuffer     *stylebuf = 0;
+gnui::TextDisplay::StyleTableEntry
                    styletable[] = {	// Style table
-		     { fltk::BLACK,           fltk::COURIER,        12 }, // A - Plain
-		     { fltk::DARK_GREEN,      fltk::COURIER_ITALIC, 12 }, // B - Line comments
-		     { fltk::DARK_GREEN,      fltk::COURIER_ITALIC, 12 }, // C - Block comments
-		     { fltk::BLUE,            fltk::COURIER,        12 }, // D - Strings
-		     { fltk::DARK_RED,        fltk::COURIER,        12 }, // E - Directives
-		     { fltk::DARK_RED,        fltk::COURIER_BOLD,   12 }, // F - Types
-		     { fltk::BLUE,            fltk::COURIER_BOLD,   12/*, fltk::TextDisplay::ATTR_UNDERLINE*/ }  // G - Keywords
+		     { gnui::BLACK,           gnui::COURIER,        12 }, // A - Plain
+		     { gnui::DARK_GREEN,      gnui::COURIER_ITALIC, 12 }, // B - Line comments
+		     { gnui::DARK_GREEN,      gnui::COURIER_ITALIC, 12 }, // C - Block comments
+		     { gnui::BLUE,            gnui::COURIER,        12 }, // D - Strings
+		     { gnui::DARK_RED,        gnui::COURIER,        12 }, // E - Directives
+		     { gnui::DARK_RED,        gnui::COURIER_BOLD,   12 }, // F - Types
+		     { gnui::BLUE,            gnui::COURIER_BOLD,   12/*, gnui::TextDisplay::ATTR_UNDERLINE*/ }  // G - Keywords
 		   };
 const char         *code_keywords[] = {	// List of known C/C++ keywords...
 		     "and",
@@ -304,7 +304,7 @@ style_init(void) {
   memset(style, 'A', textbuf->length());
   style[textbuf->length()] = '\0';
 
-  if (!stylebuf) stylebuf = new fltk::TextBuffer(textbuf->length());
+  if (!stylebuf) stylebuf = new gnui::TextBuffer(textbuf->length());
 
   style_parse(text, style, textbuf->length());
 
@@ -388,7 +388,7 @@ style_update(int        pos,		// I - Position of update
 //         style, style[end - start - 1]);
 
   stylebuf->replace(start, end, style);
-  ((fltk::TextEditor *)cbArg)->redisplay_range(start, end);
+  ((gnui::TextEditor *)cbArg)->redisplay_range(start, end);
 
   if (start==end || last != style[end - start - 1]) {
 //    printf("Recalculate the rest of the buffer style\n");
@@ -405,7 +405,7 @@ style_update(int        pos,		// I - Position of update
     style_parse(text, style, end - start);
 
     stylebuf->replace(start, end, style);
-    ((fltk::TextEditor *)cbArg)->redisplay_range(start, end);
+    ((gnui::TextEditor *)cbArg)->redisplay_range(start, end);
   }
 
   free(text);
@@ -416,44 +416,44 @@ style_update(int        pos,		// I - Position of update
 // Editor window functions and class...
 void save_cb();
 void saveas_cb();
-void find2_cb(fltk::Widget*, void*);
-void replall_cb(fltk::Widget*, void*);
-void replace2_cb(fltk::Widget*, void*);
-void replcan_cb(fltk::Widget*, void*);
+void find2_cb(gnui::Widget*, void*);
+void replall_cb(gnui::Widget*, void*);
+void replace2_cb(gnui::Widget*, void*);
+void replcan_cb(gnui::Widget*, void*);
 
-class EditorWindow : public fltk::Window {
+class EditorWindow : public gnui::Window {
   public:
     EditorWindow(int w, int h, const char* t);
     ~EditorWindow();
 
-    fltk::Window          *replace_dlg;
-    fltk::Input           *replace_find;
-    fltk::Input           *replace_with;
-    fltk::Button          *replace_all;
-    fltk::ReturnButton   *replace_next;
-    fltk::Button          *replace_cancel;
+    gnui::Window          *replace_dlg;
+    gnui::Input           *replace_find;
+    gnui::Input           *replace_with;
+    gnui::Button          *replace_all;
+    gnui::ReturnButton   *replace_next;
+    gnui::Button          *replace_cancel;
 
-    fltk::TextEditor     *editor;
+    gnui::TextEditor     *editor;
     char               search[256];
 };
 
-EditorWindow::EditorWindow(int w, int h, const char* t) : fltk::Window(w, h, t) {
-  replace_dlg = new fltk::Window(300, 105, "Replace");
+EditorWindow::EditorWindow(int w, int h, const char* t) : gnui::Window(w, h, t) {
+  replace_dlg = new gnui::Window(300, 105, "Replace");
   replace_dlg->begin();
-    replace_find = new fltk::Input(80, 10, 210, 25, "Find:");
-    replace_find->align(fltk::ALIGN_LEFT);
+    replace_find = new gnui::Input(80, 10, 210, 25, "Find:");
+    replace_find->align(gnui::ALIGN_LEFT);
 
-    replace_with = new fltk::Input(80, 40, 210, 25, "Replace:");
-    replace_with->align(fltk::ALIGN_LEFT);
+    replace_with = new gnui::Input(80, 40, 210, 25, "Replace:");
+    replace_with->align(gnui::ALIGN_LEFT);
 
-    replace_all = new fltk::Button(10, 70, 90, 25, "Replace All");
-    replace_all->callback((fltk::Callback *)replall_cb, this);
+    replace_all = new gnui::Button(10, 70, 90, 25, "Replace All");
+    replace_all->callback((gnui::Callback *)replall_cb, this);
 
-    replace_next = new fltk::ReturnButton(105, 70, 120, 25, "Replace Next");
-    replace_next->callback((fltk::Callback *)replace2_cb, this);
+    replace_next = new gnui::ReturnButton(105, 70, 120, 25, "Replace Next");
+    replace_next->callback((gnui::Callback *)replace2_cb, this);
 
-    replace_cancel = new fltk::Button(230, 70, 60, 25, "Cancel");
-    replace_cancel->callback((fltk::Callback *)replcan_cb, this);
+    replace_cancel = new gnui::Button(230, 70, 60, 25, "Cancel");
+    replace_cancel->callback((gnui::Callback *)replcan_cb, this);
   replace_dlg->end();
   replace_dlg->set_non_modal();
   editor = 0;
@@ -467,7 +467,7 @@ EditorWindow::~EditorWindow() {
 int check_save(void) {
   if (!changed) return 1;
 
-  int r = fltk::choice("The current file has not been saved.\n"
+  int r = gnui::choice("The current file has not been saved.\n"
                     "Would you like to save it now?",
                     "Don't Save", "Save", "Cancel");
 
@@ -489,7 +489,7 @@ void load_file(const char *newfile, int ipos) {
   if (!insert) r = textbuf->loadfile(newfile);
   else r = textbuf->insertfile(newfile, ipos);
   if (r) {
-    if (fltk::ask("File '%s' does not exit. Do you want to create one?", newfile))
+    if (gnui::ask("File '%s' does not exit. Do you want to create one?", newfile))
       strcpy(filename, newfile);
     else
       strcpy(filename, "");
@@ -502,32 +502,32 @@ void load_file(const char *newfile, int ipos) {
 
 void save_file(const char *newfile) {
   if (textbuf->savefile(newfile))
-    fltk::alert("Error writing to file \'%s\':\n%s.", newfile, strerror(errno));
+    gnui::alert("Error writing to file \'%s\':\n%s.", newfile, strerror(errno));
   else
     strcpy(filename, newfile);
   changed = 0;
   textbuf->call_modify_callbacks();
 }
 
-void copy_cb(fltk::Widget*, void* v) {
+void copy_cb(gnui::Widget*, void* v) {
   EditorWindow* e = (EditorWindow*)v;
-  fltk::TextEditor::kf_copy(0, e->editor);
+  gnui::TextEditor::kf_copy(0, e->editor);
 }
 
-void cut_cb(fltk::Widget*, void* v) {
+void cut_cb(gnui::Widget*, void* v) {
   EditorWindow* e = (EditorWindow*)v;
-  fltk::TextEditor::kf_cut(0, e->editor);
+  gnui::TextEditor::kf_cut(0, e->editor);
 }
 
-void delete_cb(fltk::Widget*, void*) {
+void delete_cb(gnui::Widget*, void*) {
   textbuf->remove_selection();
 }
 
-void find_cb(fltk::Widget* w, void* v) {
+void find_cb(gnui::Widget* w, void* v) {
   EditorWindow* e = (EditorWindow*)v;
   const char *val;
 
-  val = fltk::input("Search String:", e->search);
+  val = gnui::input("Search String:", e->search);
   if (val != NULL) {
     // User entered a string - go find it!
     strcpy(e->search, val);
@@ -535,7 +535,7 @@ void find_cb(fltk::Widget* w, void* v) {
   }
 }
 
-void find2_cb(fltk::Widget* w, void* v) {
+void find2_cb(gnui::Widget* w, void* v) {
   EditorWindow* e = (EditorWindow*)v;
   if (e->search[0] == '\0') {
     // Search string is blank; get a new one...
@@ -551,10 +551,10 @@ void find2_cb(fltk::Widget* w, void* v) {
     e->editor->insert_position(pos+strlen(e->search));
     e->editor->show_insert_position();
   }
-  else fltk::alert("No occurrences of \'%s\' found!", e->search);
+  else gnui::alert("No occurrences of \'%s\' found!", e->search);
 }
 
-void set_title(fltk::Window* w) {
+void set_title(gnui::Window* w) {
   if (filename[0] == '\0') strcpy(title, "Untitled.txt");
   else {
     char *slash;
@@ -578,7 +578,7 @@ void changed_cb(int, int nInserted, int nDeleted,int, const char*, void* v) {
   if (loading) w->editor->show_insert_position();
 }
 
-void new_cb(fltk::Widget*, void*) {
+void new_cb(gnui::Widget*, void*) {
   if (!check_save()) return;
 
   filename[0] = '\0';
@@ -588,28 +588,28 @@ void new_cb(fltk::Widget*, void*) {
   textbuf->call_modify_callbacks();
 }
 
-void open_cb(fltk::Widget*, void*) {
+void open_cb(gnui::Widget*, void*) {
   if (!check_save()) return;
 
-  const char *newfile = fltk::file_chooser("Open File?", "*", filename);
+  const char *newfile = gnui::file_chooser("Open File?", "*", filename);
   if (newfile != NULL) load_file(newfile, -1);
 }
 
-void insert_cb(fltk::Widget*, void *v) {
-  const char *newfile = fltk::file_chooser("Insert File?", "*", filename);
+void insert_cb(gnui::Widget*, void *v) {
+  const char *newfile = gnui::file_chooser("Insert File?", "*", filename);
   EditorWindow *w = (EditorWindow *)v;
   if (newfile != NULL) load_file(newfile, w->editor->insert_position());
 }
 
-void paste_cb(fltk::Widget*, void* v) {
+void paste_cb(gnui::Widget*, void* v) {
   EditorWindow* e = (EditorWindow*)v;
-  fltk::TextEditor::kf_paste(0, e->editor);
+  gnui::TextEditor::kf_paste(0, e->editor);
 }
 
 int num_windows = 0;
 
-void close_cb(fltk::Widget*, void* v) {
-  fltk::Window* w = (fltk::Window*)v;
+void close_cb(gnui::Widget*, void* v) {
+  gnui::Window* w = (gnui::Window*)v;
   if (num_windows == 1 && !check_save()) {
     return;
   }
@@ -621,19 +621,19 @@ void close_cb(fltk::Widget*, void* v) {
   if (!num_windows) exit(0);
 }
 
-void quit_cb(fltk::Widget*, void*) {
+void quit_cb(gnui::Widget*, void*) {
   if (changed && !check_save())
     return;
 
   exit(0);
 }
 
-void replace_cb(fltk::Widget*, void* v) {
+void replace_cb(gnui::Widget*, void* v) {
   EditorWindow* e = (EditorWindow*)v;
   e->replace_dlg->show();
 }
 
-void replace2_cb(fltk::Widget*, void* v) {
+void replace2_cb(gnui::Widget*, void* v) {
   EditorWindow* e = (EditorWindow*)v;
   const char *find = e->replace_find->text();
   const char *replace = e->replace_with->text();
@@ -658,10 +658,10 @@ void replace2_cb(fltk::Widget*, void* v) {
     e->editor->insert_position(pos+strlen(replace));
     e->editor->show_insert_position();
   }
-  else fltk::alert("No occurrences of \'%s\' found!", find);
+  else gnui::alert("No occurrences of \'%s\' found!", find);
 }
 
-void replall_cb(fltk::Widget*, void* v) {
+void replall_cb(gnui::Widget*, void* v) {
   EditorWindow* e = (EditorWindow*)v;
   const char *find = e->replace_find->text();
   const char *replace = e->replace_with->text();
@@ -694,11 +694,11 @@ void replall_cb(fltk::Widget*, void* v) {
     }
   }
 
-  if (times) fltk::message("Replaced %d occurrences.", times);
-  else fltk::alert("No occurrences of \'%s\' found!", find);
+  if (times) gnui::message("Replaced %d occurrences.", times);
+  else gnui::alert("No occurrences of \'%s\' found!", find);
 }
 
-void replcan_cb(fltk::Widget*, void* v) {
+void replcan_cb(gnui::Widget*, void* v) {
   EditorWindow* e = (EditorWindow*)v;
   e->replace_dlg->hide();
 }
@@ -713,70 +713,70 @@ void save_cb() {
 }
 
 void saveas_cb() {
-  const char *newfile = fltk::file_chooser("Save File As?", "*", filename);
+  const char *newfile = gnui::file_chooser("Save File As?", "*", filename);
   if (newfile != NULL) save_file(newfile);
 }
 
-fltk::Window* new_view();
+gnui::Window* new_view();
 
-void view_cb(fltk::Widget*, void*) {
-  fltk::Window* w = new_view();
+void view_cb(gnui::Widget*, void*) {
+  gnui::Window* w = new_view();
   w->show();
 }
 
-static void build_menus(fltk::MenuBar * menu, fltk::Widget *w) {
-    fltk::ItemGroup * g;
+static void build_menus(gnui::MenuBar * menu, gnui::Widget *w) {
+    gnui::ItemGroup * g;
     menu->user_data(w);
     menu->begin();
-      g = new fltk::ItemGroup( "&File" );
+      g = new gnui::ItemGroup( "&File" );
       g->begin();
-	new fltk::Item( "&New File",        0, (fltk::Callback *)new_cb );
-	new fltk::Item( "&Open File...",    fltk::COMMAND + 'O', (fltk::Callback *)open_cb );
-	new fltk::Item( "&Insert File...",  fltk::COMMAND + 'I', (fltk::Callback *)insert_cb);
-	new fltk::Divider();
-	new fltk::Item( "&Save File",       fltk::COMMAND + 'S', (fltk::Callback *)save_cb );
-	new fltk::Item( "Save File &As...", fltk::COMMAND + fltk::SHIFT + 'S', (fltk::Callback *)saveas_cb);
-	new fltk::Divider();
-	new fltk::Item( "New &View", fltk::ACCELERATOR + 'V', (fltk::Callback *)view_cb, 0 );
-	new fltk::Item( "&Close View", fltk::COMMAND + 'W', (fltk::Callback *)close_cb);
-	new fltk::Divider();
-	new fltk::Item( "E&xit", fltk::COMMAND + 'Q', (fltk::Callback *)quit_cb, 0 );
+	new gnui::Item( "&New File",        0, (gnui::Callback *)new_cb );
+	new gnui::Item( "&Open File...",    gnui::COMMAND + 'O', (gnui::Callback *)open_cb );
+	new gnui::Item( "&Insert File...",  gnui::COMMAND + 'I', (gnui::Callback *)insert_cb);
+	new gnui::Divider();
+	new gnui::Item( "&Save File",       gnui::COMMAND + 'S', (gnui::Callback *)save_cb );
+	new gnui::Item( "Save File &As...", gnui::COMMAND + gnui::SHIFT + 'S', (gnui::Callback *)saveas_cb);
+	new gnui::Divider();
+	new gnui::Item( "New &View", gnui::ACCELERATOR + 'V', (gnui::Callback *)view_cb, 0 );
+	new gnui::Item( "&Close View", gnui::COMMAND + 'W', (gnui::Callback *)close_cb);
+	new gnui::Divider();
+	new gnui::Item( "E&xit", gnui::COMMAND + 'Q', (gnui::Callback *)quit_cb, 0 );
       g->end();
-      g = new fltk::ItemGroup( "&Edit" );
+      g = new gnui::ItemGroup( "&Edit" );
       g->begin();
-	new fltk::Item( "Cu&t",        fltk::COMMAND + 'X', (fltk::Callback *)cut_cb );
-	new fltk::Item( "&Copy",       fltk::COMMAND + 'C', (fltk::Callback *)copy_cb );
-	new fltk::Item( "&Paste",      fltk::COMMAND + 'V', (fltk::Callback *)paste_cb );
-	new fltk::Item( "&Delete",     0, (fltk::Callback *)delete_cb );
+	new gnui::Item( "Cu&t",        gnui::COMMAND + 'X', (gnui::Callback *)cut_cb );
+	new gnui::Item( "&Copy",       gnui::COMMAND + 'C', (gnui::Callback *)copy_cb );
+	new gnui::Item( "&Paste",      gnui::COMMAND + 'V', (gnui::Callback *)paste_cb );
+	new gnui::Item( "&Delete",     0, (gnui::Callback *)delete_cb );
       g->end();
-      g = new fltk::ItemGroup( "&Search" );
+      g = new gnui::ItemGroup( "&Search" );
       g->begin();
-	new fltk::Item( "&Find...",       fltk::COMMAND + 'F', (fltk::Callback *)find_cb );
-	new fltk::Item( "F&ind Again",    fltk::COMMAND + 'G', find2_cb );
-	new fltk::Item( "&Replace...",    fltk::COMMAND + 'R', replace_cb );
-	new fltk::Item( "Re&place Again", fltk::COMMAND + 'T', replace2_cb );
+	new gnui::Item( "&Find...",       gnui::COMMAND + 'F', (gnui::Callback *)find_cb );
+	new gnui::Item( "F&ind Again",    gnui::COMMAND + 'G', find2_cb );
+	new gnui::Item( "&Replace...",    gnui::COMMAND + 'R', replace_cb );
+	new gnui::Item( "Re&place Again", gnui::COMMAND + 'T', replace2_cb );
       g->end();
     menu->end();
 }
 
-fltk::Window* new_view() {
+gnui::Window* new_view() {
   EditorWindow* w = new EditorWindow(660, 400, title);
   w->begin();
-    fltk::MenuBar* m = new fltk::MenuBar(0, 0, 660, 21);
+    gnui::MenuBar* m = new gnui::MenuBar(0, 0, 660, 21);
     build_menus(m,w);
-    w->editor = new fltk::TextEditor(0, 21, 660, 379);
+    w->editor = new gnui::TextEditor(0, 21, 660, 379);
     w->editor->buffer(textbuf);
     w->editor->highlight_data(stylebuf, styletable,
       sizeof(styletable) / sizeof(styletable[0]),
      'A', style_unfinished_cb, 0);
-    w->editor->textfont(fltk::COURIER);
+    w->editor->textfont(gnui::COURIER);
   w->end();
   w->resizable(w->editor);
-  w->callback((fltk::Callback *)close_cb, w);
+  w->callback((gnui::Callback *)close_cb, w);
 
   w->editor->linenumber_width(60);
   w->editor->wrap_mode(true, 0);
-  w->editor->cursor_style(fltk::TextDisplay::BLOCK_CURSOR);
+  w->editor->cursor_style(gnui::TextDisplay::BLOCK_CURSOR);
   // w->editor->insert_mode(false);
 
   textbuf->add_modify_callback(style_update, w->editor);
@@ -788,10 +788,10 @@ fltk::Window* new_view() {
 
 int main(int argc, char **argv) {
 
-  textbuf = new fltk::TextBuffer(0);
+  textbuf = new gnui::TextBuffer(0);
   style_init();
 
-  fltk::Window* window = new_view();
+  gnui::Window* window = new_view();
 
   window->show(1, argv);
 
@@ -800,7 +800,7 @@ int main(int argc, char **argv) {
     load_file(argv[1], -1);
   }
 
-  return fltk::run();
+  return gnui::run();
 }
 
 //

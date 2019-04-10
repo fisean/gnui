@@ -36,7 +36,7 @@
 #include <fltk/gl.h>
 #include <fltk/GlWindow.h>
 
-class shape_window : public fltk::GlWindow {
+class shape_window : public gnui::GlWindow {
   void draw();
 public:
   int sides;
@@ -44,7 +44,7 @@ public:
 };
 
 shape_window::shape_window(int x,int y,int w,int h,const char *l) :
-  fltk::GlWindow(x,y,w,h,l)
+  gnui::GlWindow(x,y,w,h,l)
 {
   sides = 3;
 }
@@ -70,7 +70,7 @@ void shape_window::draw() {
 
 #else
 
-class shape_window : public fltk::Widget {
+class shape_window : public gnui::Widget {
 public:	
   int sides;
   shape_window(int x,int y,int w,int h,const char *l=0)
@@ -82,15 +82,15 @@ public:
 #endif
 
 // when you change the data, as in this callback, you must call redraw():
-void sides_cb(fltk::Widget *o, void *p) {
+void sides_cb(gnui::Widget *o, void *p) {
   shape_window *sw = (shape_window *)p;
-  sw->sides = int(((fltk::Slider *)o)->value());
+  sw->sides = int(((gnui::Slider *)o)->value());
   sw->redraw();
 }
 
 int main(int argc, char **argv) {
 
-  fltk::Window window(300, 330);
+  gnui::Window window(300, 330);
   window.begin();
 
 // the shape window could be it's own window, but here we make it
@@ -100,9 +100,9 @@ int main(int argc, char **argv) {
   window.resizable(&sw);
   //  window.size_range(300,330,0,0,1,1,1);
 // add a knob to control it:
-  fltk::Slider slider(50, 295, window.w()-60, 30, "Sides:");
-  slider.clear_flag(fltk::ALIGN_MASK);
-  slider.set_flag(fltk::ALIGN_LEFT);
+  gnui::Slider slider(50, 295, window.w()-60, 30, "Sides:");
+  slider.clear_flag(gnui::ALIGN_MASK);
+  slider.set_flag(gnui::ALIGN_LEFT);
   slider.callback(sides_cb,&sw);
   slider.value(sw.sides);
   slider.step(1);
@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
   window.end();
   window.show(argc,argv);
     
-  return fltk::run();
+  return gnui::run();
 }
 
 //

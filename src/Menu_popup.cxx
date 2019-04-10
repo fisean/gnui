@@ -44,7 +44,7 @@
 #include <fltk/Item.h> // for TOGGLE, RADIO
 #define checkmark(item) (item->type()>=Item::TOGGLE && item->type()<=Item::RADIO)
 
-using namespace fltk;
+using namespace gnui;
 
 // class MenuTitle is a small window for the title, it will look like
 // it is being drawn in the menu bar, but is actually a window
@@ -902,7 +902,7 @@ Widget* Menu::try_popup(const Rectangle& r, const char* title, bool menubar)
     rectangle.move(event_x_root()-event_x(),
 		   event_y_root()-event_y());
   }
-  if (fltk::event() == fltk::PUSH)
+  if (gnui::event() == gnui::PUSH)
     monitor = &Monitor::find(event_x_root(), event_y_root());
   else
     monitor = &Monitor::all();
@@ -1034,7 +1034,7 @@ Widget* Menu::try_popup(const Rectangle& r, const char* title, bool menubar)
     }
   }
 
-  //fltk::remove_timeout(autoscroll_timeout, &p);
+  //gnui::remove_timeout(autoscroll_timeout, &p);
   Item::clear_style();
 
   // destroy all the submenus we created:
@@ -1075,7 +1075,7 @@ Widget* Menu::try_popup(const Rectangle& r, const char* title, bool menubar)
   narrower. The coordinates are measured relative to the widget whose
   handle() method is being executed now.
 
-  \a title is a widget (usually an fltk::Item) that is used to make a
+  \a title is a widget (usually an gnui::Item) that is used to make a
   title atop the menu, in the style of SGI's popup menus. You cannot
   use a List child, as the drawing of the menu may navigate that list
   to other children, overwriting the original widget.

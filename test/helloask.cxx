@@ -4,7 +4,7 @@
 #include <fltk/Widget.h>
 #include <fltk/run.h>
 #include <fltk/ask.h>
-using namespace fltk;
+using namespace gnui;
 
 void window_callback(Widget* widget, void*) {
   if (ask("Do you really want to exit?"))

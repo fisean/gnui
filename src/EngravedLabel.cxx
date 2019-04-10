@@ -30,7 +30,7 @@
 #include <fltk/Widget.h>
 #include <fltk/LabelType.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
 // data is dx, dy, color triples
 
@@ -55,21 +55,21 @@ void EngravedLabel::draw(const char* label, const Rectangle& r, Flags align) con
 
 static const int shadow_data[2][3] = {{2,2,GRAY33},{0,0,0}};
 static EngravedLabel shadowLabel("shadow", shadow_data);
-LabelType* const fltk::SHADOW_LABEL = &shadowLabel;
+LabelType* const gnui::SHADOW_LABEL = &shadowLabel;
 
 static const int engraved_data[7][3] = {
   {1,0,GRAY99},{1,1,GRAY99},{0,1,GRAY99},
   {-1,0,GRAY33},{-1,-1,GRAY33},{0,-1,GRAY33},
   {0,0,0}};
 static EngravedLabel engravedLabel("engraved", engraved_data);
-LabelType* const fltk::ENGRAVED_LABEL = &engravedLabel;
+LabelType* const gnui::ENGRAVED_LABEL = &engravedLabel;
 
 static const int embossed_data[7][3] = {
   {-1,0,GRAY99},{-1,-1,GRAY99},{0,-1,GRAY99},
   {1,0,GRAY33},{1,1,GRAY33},{0,1,GRAY33},
   {0,0,0}};
 static EngravedLabel embossedLabel("embossed", embossed_data);
-LabelType* const fltk::EMBOSSED_LABEL = &embossedLabel;
+LabelType* const gnui::EMBOSSED_LABEL = &embossedLabel;
 
 //
 // End of "$Id$".

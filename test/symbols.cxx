@@ -31,7 +31,7 @@
 #include <fltk/Slider.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 int sort(const void* a, const void* b) {
   const Symbol* A = *(const Symbol**)a;
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
   CONTINUE:;
   }
   window.show(argc, argv);
-  return fltk::run();
+  return gnui::run();
 }
 
 /*

@@ -34,9 +34,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-using namespace fltk;
+using namespace gnui;
 
-extern void fl_set_spot(fltk::Font *f, Widget *w, int x, int y);
+extern void fl_set_spot(gnui::Font *f, Widget *w, int x, int y);
 
 extern Widget* fl_pending_callback;
 
@@ -55,29 +55,29 @@ static void changed_stuff(Input* i) {
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::Input
+/*! \class gnui::Input
 
   This is the FLTK text input widget. It displays a single line of
   text and lets the user edit it. The text may contain any bytes
   (even '\\0'). The bytes 0..31 are displayed in ^X notation, the
-  rest are interpreted as UTF-8 (see fltk::utf8decode()).
+  rest are interpreted as UTF-8 (see gnui::utf8decode()).
 
   The default when() is WHEN_RELEASE. This is fine for a popup
   control panel where nothing happens until the panel is closed.
   But for most other uses of the input field you want to change
   it. Useful values are:
 
-  - fltk::WHEN_NEVER: The callback is not done, but changed() is turned on.
-  - fltk::WHEN_CHANGED: The callback is done each time the text is
+  - gnui::WHEN_NEVER: The callback is not done, but changed() is turned on.
+  - gnui::WHEN_CHANGED: The callback is done each time the text is
     changed by the user.
-  - fltk::WHEN_ENTER_KEY: Hitting the enter key after changing the
+  - gnui::WHEN_ENTER_KEY: Hitting the enter key after changing the
     text will cause the callback. 
-  - fltk::WHEN_ENTER_KEY_ALWAYS: The Enter key will do the callback
+  - gnui::WHEN_ENTER_KEY_ALWAYS: The Enter key will do the callback
     even if the text has not changed. Useful for command fields.
     Also you need to do this if you want both the enter key and
-    either fltk::WHEN_CHANGED or fltk::WHEN_RELEASE, in this case you 
-	can tell if Enter was typed by testing fltk::event_key()==fltk::ReturnKey.
-  - fltk::WHEN_RELEASE: Deprecated. The callback is done if the
+    either gnui::WHEN_CHANGED or gnui::WHEN_RELEASE, in this case you 
+	can tell if Enter was typed by testing gnui::event_key()==gnui::ReturnKey.
+  - gnui::WHEN_RELEASE: Deprecated. The callback is done if the
     text has changed and the user clicks on another widget or the
     focus moves (which can happen due to the window this widget
     is on being closed).
@@ -214,7 +214,7 @@ static Input* dnd_target;
 static int dnd_target_position;
 
 void Input::setfont() const {
-  fltk::setfont(textfont(), textsize());
+  gnui::setfont(textfont(), textsize());
 }
 
 static int line_spacing(float leading) {
@@ -239,7 +239,7 @@ void Input::draw() {
       const float leading = this->leading();
       int height = line_spacing(leading);
       float desc = line_ascent(leading);
-      fltk::setfont(labelfont(), labelsize());
+      gnui::setfont(labelfont(), labelsize());
       float width = getwidth(label());
       label_width = int(width+getwidth(":")+2.5);
       Color color = this->color();
@@ -264,7 +264,7 @@ void Input::draw() {
   drawn into. This method is provided so a subclass can place the text
   into a subrectangle.
 
-  If damage()&fltk::DAMAGE_ALL is true, this assummes the area has
+  If damage()&gnui::DAMAGE_ALL is true, this assummes the area has
   already been erased to color(). Otherwise it does minimal update and
   erases the area itself.
 */
@@ -668,7 +668,7 @@ void Input::up_down_position(int i, bool keepmark) {
 
 /*!
   Put the current selection between mark() and position() into the
-  selection or clipboard by calling fltk::copy(). If position() and
+  selection or clipboard by calling gnui::copy(). If position() and
   mark() are equal this does nothing (ie it does not clear the clipboard).
 
   If \a clipboard is true the text is put into the user-visible cut &
@@ -676,8 +676,8 @@ void Input::up_down_position(int i, bool keepmark) {
   false it is put into the less-visible selection buffer that is used
   to do middle-mouse paste and drag & drop.
 
-  To paste the clipboard, call fltk::paste(true) and fltk will send
-  the widget a fltk::PASTE event with the text, which will cause it to
+  To paste the clipboard, call gnui::paste(true) and fltk will send
+  the widget a gnui::PASTE event with the text, which will cause it to
   be inserted.
 */
 bool Input::copy(bool clipboard) {
@@ -686,7 +686,7 @@ bool Input::copy(bool clipboard) {
   if (b != e) {
     if (b > e) {b = mark(); e = position();}
     if (type() == SECRET) e = b;
-    fltk::copy(text_+b, e-b, clipboard);
+    gnui::copy(text_+b, e-b, clipboard);
     return true;
   }
   return false;
@@ -1089,7 +1089,7 @@ void Input::shift_up_down_position(int p) {
 
 /*! Handle KEY events. The handle() method calls this. This provides
   an Emacs and Windows style of editing. Most Emacs commands are first
-  run through fltk::try_shortcut() to test if they are menu items for
+  run through gnui::try_shortcut() to test if they are menu items for
   the program.
 
   - Shift: do not move the mark when moving the point
@@ -1118,7 +1118,7 @@ void Input::shift_up_down_position(int p) {
   - Ctrl+X, Ctrl+W: cut
   - Ctrl+Y: redo
   - Ctrl+Z, Ctrl+/: undo
-  - All printing characters are run through fltk::compose() and the result
+  - All printing characters are run through gnui::compose() and the result
     used to insert text.
 
   For the (obsolete) MULTILINE mode you can also do these:
@@ -1291,7 +1291,7 @@ bool Input::handle_key() {
     if (i == position() && i < size()) i++;
     if (cut(position(), i))
       // Make all the adjacent ^K's go into the clipboard, like Emacs:
-      fltk::copy(undobuffer, yankcut, true);
+      gnui::copy(undobuffer, yankcut, true);
     return true;
 
   case 'c':
@@ -1415,7 +1415,7 @@ static int drag_start;
     click selects lines (triple click is broken on Windows)
   - Receives drag&drop and accepts.
   - Handles PASTE events caused by accepting the drag&drop or by
-    calling fltk::paste() (which handle_key() does for ^V)
+    calling gnui::paste() (which handle_key() does for ^V)
 */
 int Input::handle(int event, const Rectangle& r) {
   int newpos, newmark;
@@ -1450,7 +1450,7 @@ int Input::handle(int event, const Rectangle& r) {
       break;
     }
 #else
-    if (fltk::event() == KEY) {
+    if (gnui::event() == KEY) {
       position(size(),0);
     } else {
       position(position(), mark());
@@ -1503,7 +1503,7 @@ int Input::handle(int event, const Rectangle& r) {
     if (drag_start >= 0) {
       drag_start = -1;
       copy(false);
-      fltk::dnd();
+      gnui::dnd();
     }
     return 1;
 #endif
@@ -1581,7 +1581,7 @@ int Input::handle(int event, const Rectangle& r) {
     return 1;
 
   case DND_ENTER:
-    fltk::belowmouse(this); // send the leave events first
+    gnui::belowmouse(this); // send the leave events first
     // fall through:
   case DND_DRAG: {
     int p = mouse_position(r);

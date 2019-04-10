@@ -8,7 +8,7 @@
 #include <fltk/StringList.h>
 #include <fltk/Item.h>
 #include <fltk/string.h>
-using namespace fltk;
+using namespace gnui;
 
 const int SIZE = 50;
 const int DEPTH = 3;
@@ -36,7 +36,7 @@ public:
 
 int main(int argc, char** argv) {
   MyList list;
-  Window window(330,300,"Sample fltk::List subclass");
+  Window window(330,300,"Sample gnui::List subclass");
   window.begin();
   Browser browser(10,10,200,280);
   browser.list(&list);
@@ -49,5 +49,5 @@ int main(int argc, char** argv) {
   window.resize_align(ALIGN_TOP);
   window.end();
   window.show(argc, argv);
-  return fltk::run();
+  return gnui::run();
 }

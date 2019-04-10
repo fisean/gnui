@@ -49,14 +49,14 @@
 #if USE_CAIRO
 # include <cairo.h>
 # include <cairo-win32.h>
-  FL_API cairo_t * fltk::cr=0;
+  FL_API cairo_t * gnui::cr=0;
 #endif
 
 ////////////////////////////////////////////////////////////////
 // fabien: added Cairo support for WIN32
 #if USE_CAIRO
-namespace fltk {
-    cairo_surface_t * cairo_create_surface(fltk::Window* w) {
+namespace gnui {
+    cairo_surface_t * cairo_create_surface(gnui::Window* w) {
 	return cairo_win32_surface_create((HDC)w->backbuffer());
     }
 }
@@ -80,7 +80,7 @@ namespace fltk {
 #include <wchar.h>
 #include <fltk/math.h>
 
-using namespace fltk;
+using namespace gnui;
 
 #define DEBUG_TABLET 0
 #if DEBUG_TABLET
@@ -140,7 +140,7 @@ using namespace fltk;
 # define VK_APPS 0x5D
 #endif
 
-// WM_FLSELECT is the user-defined message used for fltk::add_fd()
+// WM_FLSELECT is the user-defined message used for gnui::add_fd()
 // to indicate that a socket is ready.
 #define WM_FLSELECT	(WM_USER+0x0400)
 
@@ -209,7 +209,7 @@ static bool fl_load_imm32() {
   } // fl_load_imm32() function
 #endif // USE_IMM
 
-void fl_set_spot(fltk::Font *f, Widget *w, int x, int y) {
+void fl_set_spot(gnui::Font *f, Widget *w, int x, int y) {
 #if USE_IMM
   if (!fl_use_imm32) return;
 
@@ -219,7 +219,7 @@ void fl_set_spot(fltk::Font *f, Widget *w, int x, int y) {
   hwnd = xid(flwindow);}
   int change = 0;
   //const char *fnt = NULL;
-  static fltk::Font *spotf = NULL;
+  static gnui::Font *spotf = NULL;
   static Widget *spotw = NULL;
   //static RECT spot_set;
   static RECT spot;
@@ -254,7 +254,7 @@ void fl_set_spot(fltk::Font *f, Widget *w, int x, int y) {
       cfs.ptCurrentPos.x = spot.left;
       cfs.ptCurrentPos.y = spot.top;
       pfnImmSetCompositionWindow(himc, &cfs);
-      GetObject(fltk::xfont(), sizeof(LOGFONTW), &lf);
+      GetObject(gnui::xfont(), sizeof(LOGFONTW), &lf);
       pfnImmSetCompositionFontW(himc, &lf);
       pfnImmReleaseContext(hwnd, himc);
       himcold = 0;
@@ -299,7 +299,7 @@ static struct FD {
 } *fd = 0;
 
 
-void fltk::add_fd(int n, int events, FileHandler cb, void *v) {
+void gnui::add_fd(int n, int events, FileHandler cb, void *v) {
   remove_fd(n,events);
   int i = nfds++;
   if (i >= fd_array_size) {
@@ -324,11 +324,11 @@ void fltk::add_fd(int n, int events, FileHandler cb, void *v) {
 #endif // USE_ASYNC_SELECT
 }
 
-void fltk::add_fd(int fd, FileHandler cb, void* v) {
+void gnui::add_fd(int fd, FileHandler cb, void* v) {
   add_fd(fd, POLLIN, cb, v);
 }
 
-void fltk::remove_fd(int n, int events) {
+void gnui::remove_fd(int n, int events) {
   int i,j;
   for (i=j=0; i<nfds; i++) {
     if (fd[i].fd == n) {
@@ -359,7 +359,7 @@ void (*fl_lock_function)() = nothing;
 void (*fl_unlock_function)() = nothing;
 
 static void* thread_message_;
-void* fltk::thread_message() {
+void* gnui::thread_message() {
   void* r = thread_message_;
   thread_message_ = 0;
   return r;
@@ -384,12 +384,12 @@ static inline int fl_ready() {
 
 /**
 The most recent message read by GetMessage() (which is called by
-fltk::wait().  This may not be the most recent message sent to an FLTK
+gnui::wait().  This may not be the most recent message sent to an FLTK
 window (because our fun-loving friends at MicroSoft decided that
 calling the handle procedures directly would be a good idea
 sometimes...)
 */
-MSG fltk::msg;
+MSG gnui::msg;
 
 // Wait up to the given time for any events or sockets to become ready,
 // do the callbacks for the events and sockets.
@@ -455,7 +455,7 @@ static inline int fl_wait(double time_to_wait) {
     } else
 #endif
     if (msg.message == WM_MAKEWAITRETURN) {
-      // save any data from fltk::awake() call:
+      // save any data from gnui::awake() call:
       if (msg.wParam) thread_message_ = (void*)msg.wParam;
       // WM_MAKEWAITRETURN is used by WndProc to try to make wait()
       // return so the main loop recovers and can flush the display. We
@@ -674,14 +674,14 @@ const Monitor& Monitor::find(int x, int y) {
 
 ////////////////////////////////////////////////////////////////
 
-void fltk::get_mouse(int &x, int &y) {
+void gnui::get_mouse(int &x, int &y) {
   POINT p;
   GetCursorPos(&p);
   x = p.x;
   y = p.y;
 }
 
-bool fltk::warp_mouse(int x, int y) {
+bool gnui::warp_mouse(int x, int y) {
 	return SetCursorPos(x, y) ? true : false;
 }
 
@@ -813,11 +813,11 @@ void tablet_close(HWND hWnd) {
   to enable tablets on X and Windows. In the future FLTK may do this
   automatically without you calling this.
 
-  If a tablet is detected, fltk::event_pressure()
+  If a tablet is detected, gnui::event_pressure()
   will return the pen pressure as a float value between 0 and 1. Some
   tablets also support event_x_tilt() and event_y_tilt().
 */
-bool fltk::enable_tablet_events() {
+bool gnui::enable_tablet_events() {
   if (wintab_dll) return true;
   open_display();
   // dynamically load the Windows Tablet driver DLL
@@ -876,7 +876,7 @@ static int selection_buffer_length[2];
 static bool i_own_selection;
 
 // call this when you create a selection:
-void fltk::copy(const char *stuff, int len, bool clipboard) {
+void gnui::copy(const char *stuff, int len, bool clipboard) {
   if (!stuff || len<0) return;
   if (len >= selection_buffer_length[clipboard]) {
     delete[] selection_buffer[clipboard];
@@ -962,7 +962,7 @@ static void pasteW(Widget& receiver, wchar_t* ucs) {
 }
 
 // Call this when a "paste" operation happens:
-void fltk::paste(Widget &receiver, bool clipboard) {
+void gnui::paste(Widget &receiver, bool clipboard) {
   if (!clipboard || i_own_selection) {
     // We already have it, do it quickly without window server.
     // Notice that the text is clobbered if set_selection is
@@ -1547,7 +1547,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     // This convinces MSWindows we have painted whatever they wanted
     // us to paint, and stops it from sending WM_PAINT messages:
     ValidateRgn(hWnd, i->region);
-    fltk::damage(1); // make flush() do something
+    gnui::damage(1); // make flush() do something
     // Originally it called flush() directly here, but it appears to
     // be better to get wait() to return by posting a message. This
     // merges the damage together and waits for idle. Windows appears to
@@ -1624,7 +1624,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     }
 
     // translate to text:
-    static char buffer[31]; // must be big enough for fltk::compose() output
+    static char buffer[31]; // must be big enough for gnui::compose() output
     static char dbcsbuf[3];
     if (uMsg == WM_CHAR || uMsg == WM_SYSCHAR) {
       if (e_keysym==ReturnKey || e_keysym==KeypadEnter) {
@@ -1718,7 +1718,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     break;
 
   case WM_MAKEWAITRETURN:
-    // save any data from fltk::awake() call:
+    // save any data from gnui::awake() call:
     if (wParam) thread_message_ = (void*)wParam;
     // This will be called if MakeWaitReturn fails because Stoopid Windows
     // called the WndProc directly. Instead do the best we can, which is
@@ -1734,7 +1734,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
       // made iconic, and the "ignore_size_change_window" is used to
       // ignore changes when it is de-iconized.
       if ( window->iconic() ) break;
-      fltk::Rectangle r; window->borders(&r);
+      gnui::Rectangle r; window->borders(&r);
       WINDOWPOS *pos = (WINDOWPOS*)lParam;
       if (hWnd == ignore_size_change_window) {
 	ignore_size_change_window = 0;
@@ -1742,7 +1742,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	if (window->x()==USEDEFAULT) window->x(pos->x-r.x());
 	if (window->y()==USEDEFAULT) window->y(pos->y-r.y());
       } else {
-	fltk::Rectangle newRect;
+	gnui::Rectangle newRect;
 	if ( pos->flags & SWP_NOMOVE ) {
 	  newRect.x( window->x() );
 	  newRect.y( window->y() );
@@ -1860,7 +1860,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 ////////////////////////////////////////////////////////////////
 
-void Window::borders( fltk::Rectangle *r ) const
+void Window::borders( gnui::Rectangle *r ) const
 {
   if (!this->border() || this->override() || this->parent()) {
     r->set(0,0,0,0);
@@ -1932,7 +1932,7 @@ void Window::system_layout() {
     flags = 0;
   }
   if (i && flags) {
-    fltk::Rectangle r(*this);
+    gnui::Rectangle r(*this);
     borders(&r);
     r.x(r.x()+x());
     r.y(r.y()+y());
@@ -1957,7 +1957,7 @@ void Window::create() {
 }
 
 const Window* fl_mdi_window = 0; // set by show_inside()
-HCURSOR fltk::default_cursor;
+HCURSOR gnui::default_cursor;
 
 static void register_unicode(HICON smallicon, HICON bigicon)
 {
@@ -2055,7 +2055,7 @@ void CreatedWindow::create(Window* window) {
       xp += p->x(); yp += p->y();
       p=p->parent();
     }
-    parent = fltk::xid((Window*)p);
+    parent = gnui::xid((Window*)p);
 
   } else if (window->override()) {
 
@@ -2074,7 +2074,7 @@ void CreatedWindow::create(Window* window) {
     else
       style = WS_DLGFRAME | WS_CAPTION;
     style |= WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
-    fltk::Rectangle r; window->borders(&r);
+    gnui::Rectangle r; window->borders(&r);
     if (!window->contains(modal()))
       style |= WS_SYSMENU | WS_MINIMIZEBOX;
     else
@@ -2142,7 +2142,7 @@ void CreatedWindow::create(Window* window) {
 
 ////////////////////////////////////////////////////////////////
 
-HINSTANCE fltk::xdisplay = NULL;
+HINSTANCE gnui::xdisplay = NULL;
 
 extern "C" {
   // Forward declaration of emulation functions
@@ -2166,17 +2166,17 @@ pfMessageBoxW		__MessageBoxW		= MessageBoxW;
 pfCreateFontIndirectW	__CreateFontIndirectW	= CreateFontIndirectW;
 pfGetTextMetricsW	__GetTextMetricsW	= GetTextMetricsW;
 
-void fltk::open_display() {
+void gnui::open_display() {
   static int been_here=0;
   if(been_here) return;
   been_here = 1;
 
   if (has_unicode()) {
     // Setup our function pointers to "W" functions
-    fltk::xdisplay              = GetModuleHandleW(NULL);
+    gnui::xdisplay              = GetModuleHandleW(NULL);
   } else {
     // Setup our function pointers to "A" and emulation functions
-    fltk::xdisplay              = GetModuleHandleA(NULL);
+    gnui::xdisplay              = GetModuleHandleA(NULL);
     __CreateWindowExW           = ansi_CreateWindowExW;
     __LoadLibraryW		= ansi_LoadLibraryW;
     __SetWindowTextW	        = ansi_SetWindowTextW;
@@ -2190,7 +2190,7 @@ void fltk::open_display() {
     __GetTextMetricsW           = ansi_GetTextMetricsW;
   }
 }
-void fltk::close_display() {}
+void gnui::close_display() {}
 
 void Window::size_range_() {
   size_range_set = 1;
@@ -2198,7 +2198,7 @@ void Window::size_range_() {
 
 void CreatedWindow::set_minmax(LPMINMAXINFO minmax)
 {
-  fltk::Rectangle r; window->borders(&r);
+  gnui::Rectangle r; window->borders(&r);
 
   minmax->ptMinTrackSize.x = window->minw + r.w();
   minmax->ptMinTrackSize.y = window->minh + r.h();
@@ -2252,15 +2252,15 @@ const Window *Window::drawing_window_;
 int fl_clip_w, fl_clip_h;
 
 /** The device context that is currently being drawn into. */
-HDC fltk::dc;
+HDC gnui::dc;
 
 #if USE_CAIRO
 static void cairo_invalidate_context() {
   // invalidate cairo context so that it will be resynchronized
   // on next first real draw()
-    if (fltk::cr) {
-	cairo_destroy (fltk::cr); // delete previous context pointing on old hdc
-	fltk::cr = 0; // don't create now, wait for draw()
+    if (gnui::cr) {
+	cairo_destroy (gnui::cr); // delete previous context pointing on old hdc
+	gnui::cr = 0; // don't create now, wait for draw()
     }
     return;
 }
@@ -2289,10 +2289,10 @@ void Widget::make_current() const {
 }
 
 HDC fl_bitmap_dc;
-namespace fltk {class Image;}
-fltk::Image* fl_current_Image;
+namespace gnui {class Image;}
+gnui::Image* fl_current_Image;
 
-void fltk::draw_into(HBITMAP bitmap, int w, int h) {
+void gnui::draw_into(HBITMAP bitmap, int w, int h) {
   if (!fl_bitmap_dc) {
     fl_bitmap_dc = CreateCompatibleDC(getDC());
     SetTextAlign(fl_bitmap_dc, TA_BASELINE|TA_LEFT);
@@ -2314,11 +2314,11 @@ void fltk::draw_into(HBITMAP bitmap, int w, int h) {
 }
 
 #if __BORLANDC__ || __DMC__
-  void fltk::stop_drawing(HWND window) {}
+  void gnui::stop_drawing(HWND window) {}
 #else
   /** Destroy any dc or other objects used to draw into this window. */
-  void fltk::stop_drawing(HWND window) {}
-  void fltk::stop_drawing(HBITMAP bitmap) {}
+  void gnui::stop_drawing(HWND window) {}
+  void gnui::stop_drawing(HBITMAP bitmap) {}
 #endif
 
 static HDC screen_dc = 0;
@@ -2327,7 +2327,7 @@ static HDC screen_dc = 0;
     need one as an argument. The returned value is short-lived and may
     be destroyed the next time anything is drawn into a window!
 */
-HDC fltk::getDC() {
+HDC gnui::getDC() {
   //if (dc) return dc;
   if (CreatedWindow::first) return CreatedWindow::first->dc;
   if (screen_dc) ReleaseDC(0,screen_dc);
@@ -2450,7 +2450,7 @@ void Window::free_backbuffer() {
 
 extern void fl_font_rid();
 
-namespace fltk {
+namespace gnui {
 
 static struct Cleanup { ~Cleanup(); } cleanup;
 
@@ -2594,7 +2594,7 @@ int WINAPI ansi_MessageBoxW(HWND hWnd, LPCWSTR lpText, LPCWSTR lpCaption, UINT u
 }; /* extern "C" */
 
 
-FILE* fltk::fltk_fopen(const char* name, const char* flags) {
+FILE* gnui::fltk_fopen(const char* name, const char* flags) {
 	wchar_t *wname, *wflags;
 	unsigned namelen, flaglen;
 

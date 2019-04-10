@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <fltk/string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 int Font::encodings(const char**& arrayp) {
   // CET - FIXME - What about this encoding stuff?
@@ -110,8 +110,8 @@ int Fl::get_font_sizes(Fl_Font fnum, int*& sizep) {
 
 extern "C" {
 static int sort_function(const void *aa, const void *bb) {
-  fltk::Font* a = *(fltk::Font**)aa;
-  fltk::Font* b = *(fltk::Font**)bb;
+  gnui::Font* a = *(gnui::Font**)aa;
+  gnui::Font* b = *(gnui::Font**)bb;
   int ret = strcasecmp(a->name_, b->name_); if (ret) return ret;
   return a->attributes_ - b->attributes_;
 }}
@@ -122,7 +122,7 @@ static Font** font_array = 0;
 static int num_fonts = 0;
 static int array_size = 0;
 
-int fltk::list_fonts(Font**& arrayp) {
+int gnui::list_fonts(Font**& arrayp) {
   if (font_array) {arrayp = font_array; return num_fonts;}
   //FMFontFamilyInstanceIterator ffiIterator;
   //FMFont font;

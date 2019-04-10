@@ -30,7 +30,7 @@
 
 #include "LightButton.h"
 
-namespace fltk {
+namespace gnui {
 
 class RadioLightButton : public LightButton {
 public:

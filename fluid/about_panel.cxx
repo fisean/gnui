@@ -2,9 +2,9 @@
 
 #include "about_panel.h"
 
-fltk::DoubleBufferWindow *about_panel=(fltk::DoubleBufferWindow *)0;
+gnui::DoubleBufferWindow *about_panel=(gnui::DoubleBufferWindow *)0;
 
-fltk::Group *display_group=(fltk::Group *)0;
+gnui::Group *display_group=(gnui::Group *)0;
 
 #include <fltk/xpmImage.h>
 static const char *datas_fluid_about[] = {
@@ -1814,29 +1814,29 @@ static const char *datas_fluid_about[] = {
   "                s>y>                                                                                                                                                              #';)                                                                    G,j'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    q>@)n>                                                                                                                                                                            ",
   "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "};
 
-fltk::ReturnButton *about_ok=(fltk::ReturnButton *)0;
+gnui::ReturnButton *about_ok=(gnui::ReturnButton *)0;
 
-static void cb_about_ok(fltk::ReturnButton*, void*) {
+static void cb_about_ok(gnui::ReturnButton*, void*) {
   about_panel->hide()
 ;}
 
-fltk::DoubleBufferWindow* make_about_panel(const char *copyright) {
-  fltk::DoubleBufferWindow* w;
-   {fltk::DoubleBufferWindow* o = about_panel = new fltk::DoubleBufferWindow(550, 400, "about fluid");
+gnui::DoubleBufferWindow* make_about_panel(const char *copyright) {
+  gnui::DoubleBufferWindow* w;
+   {gnui::DoubleBufferWindow* o = about_panel = new gnui::DoubleBufferWindow(550, 400, "about fluid");
     w = o;
     o->type(241);
-    o->color((fltk::Color)97);
-    o->selection_color((fltk::Color)47);
+    o->color((gnui::Color)97);
+    o->selection_color((gnui::Color)47);
     o->begin();
-     {fltk::Group* o = display_group = new fltk::Group(0, 0, 550, 400);
-       o->image(new fltk::xpmImage(datas_fluid_about));
+     {gnui::Group* o = display_group = new gnui::Group(0, 0, 550, 400);
+       o->image(new gnui::xpmImage(datas_fluid_about));
       o->begin();
-       {fltk::ReturnButton* o = about_ok = new fltk::ReturnButton(483, 364, 50, 16, "OK");
-        o->buttoncolor((fltk::Color)0x4c519000);
-        o->labelcolor((fltk::Color)0xffffff00);
-        o->highlight_color((fltk::Color)0x6a4fe800);
+       {gnui::ReturnButton* o = about_ok = new gnui::ReturnButton(483, 364, 50, 16, "OK");
+        o->buttoncolor((gnui::Color)0x4c519000);
+        o->labelcolor((gnui::Color)0xffffff00);
+        o->highlight_color((gnui::Color)0x6a4fe800);
         o->shortcut(0xff0d);
-        o->callback((fltk::Callback*)cb_about_ok);
+        o->callback((gnui::Callback*)cb_about_ok);
       }
       o->end();
       o->resizable(o);

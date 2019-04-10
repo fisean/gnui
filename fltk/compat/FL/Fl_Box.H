@@ -8,7 +8,7 @@
 
 #include "Fl_Widget.H"
 #include <fltk/InvisibleBox.h>
-typedef fltk::InvisibleBox Fl_Box;
+typedef gnui::InvisibleBox Fl_Box;
 
 #endif
 

@@ -28,7 +28,7 @@
 // WAS: This needs to take an arbitrary Image as a mask!
 #include "xbmImage.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ShapedWindow : public Window {
     void init() { shape_ = 0; lw = lh = 0; changed = 0; }

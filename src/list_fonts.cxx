@@ -40,10 +40,10 @@
 # include "osx/list_fonts.cxx"
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \fn int fltk::list_fonts(fltk::Font**& arrayp);
-  \relates fltk::Font
+/*! \fn int gnui::list_fonts(gnui::Font**& arrayp);
+  \relates gnui::Font
 
   Generate an array containing every font on the server. \a arrayp
   is set to a pointer to this array, and the length of the array is
@@ -56,21 +56,21 @@ using namespace fltk;
   old array and return a new one.
 */
 
-/*! \relates fltk::Font
+/*! \relates gnui::Font
 
   Find a font with the given "nice" name. You can get bold and italic
   by adding a space and "bold" or "italic" (or both) to the name, or
   by passing them as the attributes. Case is ignored and fltk will
   accept some variations in the font name.
 
-  The current implementation calls fltk::list_fonts() and then does a
+  The current implementation calls gnui::list_fonts() and then does a
   binary search of the returned list. This can make the first call
   pretty slow, especially on X. Directly calling the system has a
   problem in that we want the same structure returned for any call
   that names the same font. This is sufficiently painful that I have
   not done this yet.
 */
-fltk::Font* fltk::font(const char* name, int attributes /* = 0 */) {
+gnui::Font* gnui::font(const char* name, int attributes /* = 0 */) {
   if (!name || !*name) return 0;
 
   // find out if the " bold" or " italic" are on the end:
@@ -88,7 +88,7 @@ fltk::Font* fltk::font(const char* name, int attributes /* = 0 */) {
   Font* font = 0;
   // always try the built-in fonts first, because list_fonts is *slow*...
   int i; for (i = 0; i <= 12; i += 4) {
-    font = fltk::font(i);
+    font = gnui::font(i);
     const char* fontname = font->name();
     if (!strncasecmp(name, fontname, length) && !fontname[length]) goto GOTIT;
   }
@@ -117,17 +117,17 @@ fltk::Font* fltk::font(const char* name, int attributes /* = 0 */) {
   return font->plus(attributes);
 }
 
-/*! \fn fltk::Font* fltk::font(int i)
-  \relates fltk::Font
+/*! \fn gnui::Font* gnui::font(int i)
+  \relates gnui::Font
   Turn an fltk1 integer font id into a font.
 */
 
-/*! \fn int fltk::Font::sizes(int*& sizep);
+/*! \fn int gnui::Font::sizes(int*& sizep);
 
   Sets array to point at a list of sizes. The return value is the
   length of this array. The sizes are sorted from smallest to largest
-  and indicate what sizes can be given to fltk::setfont() that will be
-  matched exactly (fltk::setfont() will pick the closest size for
+  and indicate what sizes can be given to gnui::setfont() that will be
+  matched exactly (gnui::setfont() will pick the closest size for
   other sizes). A zero in the first location of the array indicates a
   scalable font, where any size works, although the array may still
   list sizes that work "better" than others. The returned array points
@@ -139,10 +139,10 @@ fltk::Font* fltk::font(const char* name, int attributes /* = 0 */) {
   each time this call is done.
 */
 
-/*! \fn int fltk::Font::encodings(const char**& arrayp);
+/*! \fn int gnui::Font::encodings(const char**& arrayp);
 
   Return all the encodings for this font. These strings may be
-  sent to fltk::set_encoding() before using the font.
+  sent to gnui::set_encoding() before using the font.
 
   The return value is the length of the list. The argument \a arrayp
   is set to point at the array, which is in static memory reused

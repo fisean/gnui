@@ -1,8 +1,8 @@
 #include <fltk/StringList.h>
 #include <fltk/Item.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::StringHierarchy
+/*! \class gnui::StringHierarchy
 
   This subclass of List allows a Menu or Browser to display strings
   that are generated at run time. This is the most efficient way to
@@ -27,7 +27,7 @@ Widget* StringHierarchy::child(const Menu* group, const int* indexes,int level)
   //generated_item_->h(0);
   // We must clear flags so it does not accidentally think the item
   // is selected or (if a parent) is opened:
-  generated_item_->clear_flag(fltk::SELECTED|fltk::STATE|fltk::OPENED);
+  generated_item_->clear_flag(gnui::SELECTED|gnui::STATE|gnui::OPENED);
   generated_item_->label(label(group, indexes, level));
   return generated_item_;
 }
@@ -48,7 +48,7 @@ Widget* StringHierarchy::child(const Menu* group, const int* indexes,int level)
   width is needed and you happen to know it.
 */
 
-/*! \class fltk::StringList
+/*! \class gnui::StringList
   This is a simplification of StringHierarchy where there are no subitems.
   It makes the virtual functions easier to write.
 
@@ -87,7 +87,7 @@ const char* StringList::label(const Menu* group, const int* indexes, int level)
   return label(group, indexes[0]);
 }
 
-/*! \class fltk::StringArray
+/*! \class gnui::StringArray
 
   This subclass of List allows a Menu or Browser to display an array
   of const C strings. The array is given to the constructor of can

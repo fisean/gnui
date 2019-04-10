@@ -37,7 +37,7 @@
 #include "TextBuffer.h"
 #include "Font.h"
 
-namespace fltk {
+namespace gnui {
 
 typedef void (*UnfinishedStyleCb)(int, void *);
 
@@ -53,7 +53,7 @@ public:
     CURSOR_POS, CHARACTER_POS
   };
 
-  // drag types- they match fltk::event_clicks() so that single clicking to
+  // drag types- they match gnui::event_clicks() so that single clicking to
   // start a collection selects by character, double clicking selects by
   // word and triple clicking selects by line.
   enum {
@@ -348,7 +348,7 @@ protected:
   int linenumleft_, linenumwidth_; /* Line number margin and width */
 };
 
-} /* namespace fltk */
+} /* namespace gnui */
 
 #endif
 

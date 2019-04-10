@@ -77,10 +77,10 @@
 #  include <sys/mount.h>
 #endif // __APPLE__ && !__MWERKS__
 
-using namespace fltk;
+using namespace gnui;
 
-/** \class fltk::FileBrowser
-  The fltk::FileBrowser widget displays a list of filenames, optionally
+/** \class gnui::FileBrowser
+  The gnui::FileBrowser widget displays a list of filenames, optionally
   with file-specific icons.
 */
 
@@ -272,9 +272,9 @@ int FileBrowser::load(const char *directory, FileSortF *sort) {
     else if (filename[i] != '/' && filename[i] != '\\')
       strlcat(filename, "/", sizeof(filename));
 
-    num_files = fltk::filename_list(filename, &files, sort);
+    num_files = gnui::filename_list(filename, &files, sort);
 #else
-    num_files = fltk::filename_list(directory_, &files, sort);
+    num_files = gnui::filename_list(directory_, &files, sort);
 #endif /* WIN32 || __EMX__ */
 
     if (num_files <= 0)
@@ -293,11 +293,11 @@ int FileBrowser::load(const char *directory, FileSortF *sort) {
 	    (!show_hidden_ &&  files[i]->d_name[0]=='.' &&  strncmp(files[i]->d_name,"../",2)))
 	  continue;
 	if ((icon && icon->type() == FileIcon::DIRECTORY) ||
-	     fltk::filename_isdir(filename)) {
+	     gnui::filename_isdir(filename)) {
           num_dirs ++;
           this->insert(num_dirs-1, files[i]->d_name, icon);
 	} else if (filetype_ == FILES &&
-	           fltk::filename_match(files[i]->d_name, pattern_)) {
+	           gnui::filename_match(files[i]->d_name, pattern_)) {
           add(files[i]->d_name, icon);
 	}
       }

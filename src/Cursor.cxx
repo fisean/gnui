@@ -45,13 +45,13 @@
 #include <fltk/Color.h>
 #include <fltk/Image.h>
 
-using namespace fltk;
+using namespace gnui;
 
 /*! \fn void Widget::cursor(Cursor* c) const
 
   Change the cursor being displayed on the screen. A widget should do
-  this in response to \c fltk::ENTER and \c fltk::MOVE events. FLTK will change
-  it back to \c fltk::CURSOR_DEFAULT if the mouse is moved outside this
+  this in response to \c gnui::ENTER and \c gnui::MOVE events. FLTK will change
+  it back to \c gnui::CURSOR_DEFAULT if the mouse is moved outside this
   widget, unless another widget calls this.
 
   On X you can mess with the colors by setting the Color variables
@@ -59,7 +59,7 @@ using namespace fltk;
   this.
 */
 
-/*! \class fltk::Cursor
+/*! \class gnui::Cursor
 
   Cursor is an opaque system-dependent class. Currently you can only
   use the built-in cursors but a method to turn an Image into a Cursor
@@ -68,20 +68,20 @@ using namespace fltk;
   To display a cursor, call Widget::cursor().
 
   Built-in cursors are:
-  - \c fltk::CURSOR_DEFAULT - the default cursor, usually an arrow.
-  - \c fltk::CURSOR_ARROW - up-left arrow pointer
-  - \c fltk::CURSOR_CROSS - crosshairs
-  - \c fltk::CURSOR_WAIT - watch or hourglass
-  - \c fltk::CURSOR_INSERT - I-beam
-  - \c fltk::CURSOR_HAND - hand / pointing finger
-  - \c fltk::CURSOR_HELP - question mark
-  - \c fltk::CURSOR_MOVE - 4-pointed arrow
-  - \c fltk::CURSOR_NS - up/down arrow
-  - \c fltk::CURSOR_WE - left/right arrow
-  - \c fltk::CURSOR_NWSE - diagonal arrow
-  - \c fltk::CURSOR_NESW - diagonal arrow
-  - \c fltk::CURSOR_NO - circle with slash
-  - \c fltk::CURSOR_NONE - invisible
+  - \c gnui::CURSOR_DEFAULT - the default cursor, usually an arrow.
+  - \c gnui::CURSOR_ARROW - up-left arrow pointer
+  - \c gnui::CURSOR_CROSS - crosshairs
+  - \c gnui::CURSOR_WAIT - watch or hourglass
+  - \c gnui::CURSOR_INSERT - I-beam
+  - \c gnui::CURSOR_HAND - hand / pointing finger
+  - \c gnui::CURSOR_HELP - question mark
+  - \c gnui::CURSOR_MOVE - 4-pointed arrow
+  - \c gnui::CURSOR_NS - up/down arrow
+  - \c gnui::CURSOR_WE - left/right arrow
+  - \c gnui::CURSOR_NWSE - diagonal arrow
+  - \c gnui::CURSOR_NESW - diagonal arrow
+  - \c gnui::CURSOR_NO - circle with slash
+  - \c gnui::CURSOR_NONE - invisible
 */
 
 #ifdef __sgi
@@ -96,14 +96,14 @@ FL_API Color fl_cursor_bg = WHITE;
 ////////////////////////////////////////////////////////////////
 #elif USE_X11
 
-struct fltk::Cursor {
+struct gnui::Cursor {
   ::Cursor cursor;
   uchar fontid;
   uchar tableid;
 };
 
-FL_API fltk::Cursor *fltk::cursor(void *raw) {
-  fltk::Cursor *c = new fltk::Cursor;
+FL_API gnui::Cursor *gnui::cursor(void *raw) {
+  gnui::Cursor *c = new gnui::Cursor;
   c->cursor = (::Cursor)raw;
   c->fontid = 0;
   c->tableid = 0;
@@ -133,9 +133,9 @@ static XcursorImage* create_cursor_image(Image *cimg, int x, int y) {
   return xcimage;
 }
 
-FL_API fltk::Cursor *fltk::cursor(Image *img, int x, int y) {
-  fltk::Cursor *c = new fltk::Cursor;
-  if(!xdisplay)fltk::open_display();
+FL_API gnui::Cursor *gnui::cursor(Image *img, int x, int y) {
+  gnui::Cursor *c = new gnui::Cursor;
+  if(!xdisplay)gnui::open_display();
   img->fetch();
   XcursorImage *xcimage = create_cursor_image(img, x, y);
   c->cursor = XcursorImageLoadCursor(xdisplay, xcimage);
@@ -148,22 +148,22 @@ FL_API fltk::Cursor *fltk::cursor(Image *img, int x, int y) {
 
 #endif //USE_XCURSOR
 
-static fltk::Cursor arrow = {0,35};
-static fltk::Cursor cross = {0,66};
-static fltk::Cursor wait_c = {0,76};
-static fltk::Cursor insert = {0,77};
-static fltk::Cursor hand = {0,31};
-static fltk::Cursor help = {0,47};
-static fltk::Cursor move = {0,27};
-static fltk::Cursor ns = {0,0,0};
-static fltk::Cursor we = {0,0,1};
-static fltk::Cursor nwse = {0,0,2};
-static fltk::Cursor nesw = {0,0,3};
-static fltk::Cursor no = {0,0,4};
-static fltk::Cursor none = {0,0,5};
+static gnui::Cursor arrow = {0,35};
+static gnui::Cursor cross = {0,66};
+static gnui::Cursor wait_c = {0,76};
+static gnui::Cursor insert = {0,77};
+static gnui::Cursor hand = {0,31};
+static gnui::Cursor help = {0,47};
+static gnui::Cursor move = {0,27};
+static gnui::Cursor ns = {0,0,0};
+static gnui::Cursor we = {0,0,1};
+static gnui::Cursor nwse = {0,0,2};
+static gnui::Cursor nesw = {0,0,3};
+static gnui::Cursor no = {0,0,4};
+static gnui::Cursor none = {0,0,5};
 
 // this probably should be a nicer bitmap:
-fltk::Cursor fl_drop_ok_cursor = {0,21};
+gnui::Cursor fl_drop_ok_cursor = {0,21};
 
 #define CURSORSIZE 16
 #define HOTXY 8
@@ -214,7 +214,7 @@ static struct TableEntry {
   {{0}, {0}} // CURSOR_NONE
 };
 
-void Widget::cursor(fltk::Cursor* c) const {
+void Widget::cursor(gnui::Cursor* c) const {
   Window* window = is_window() ? (Window*)this : this->window();
   if (!window) return;
   CreatedWindow* i = CreatedWindow::find(window);
@@ -266,13 +266,13 @@ void Widget::cursor(fltk::Cursor* c) const {
 ////////////////////////////////////////////////////////////////
 #elif defined(_WIN32)
 
-struct fltk::Cursor {
+struct gnui::Cursor {
   LPTSTR resource;
   HCURSOR cursor;
 };
 
-FL_API fltk::Cursor *fltk::cursor(void *raw) {
-  fltk::Cursor *c = new fltk::Cursor;
+FL_API gnui::Cursor *gnui::cursor(void *raw) {
+  gnui::Cursor *c = new gnui::Cursor;
   c->cursor = (HCURSOR)raw;
   c->resource = 0;
   return c;
@@ -344,33 +344,33 @@ static HCURSOR create_cursor_from_image(Image *img, int x, int y)
   return hAlphaCursor;
 }
 
-FL_API fltk::Cursor *fltk::cursor(Image *img, int x, int y) {
+FL_API gnui::Cursor *gnui::cursor(Image *img, int x, int y) {
   img->fetch();
-  fltk::Cursor *c = new fltk::Cursor;
+  gnui::Cursor *c = new gnui::Cursor;
   c->cursor = create_cursor_from_image(img, x, y);
   c->resource = 0;
   return c;
 }
 
 
-static fltk::Cursor arrow = {TEXT(IDC_ARROW)};
-static fltk::Cursor cross = {TEXT(IDC_CROSS)};
-static fltk::Cursor wait_c = {TEXT(IDC_WAIT)};
-static fltk::Cursor insert = {TEXT(IDC_IBEAM)};
+static gnui::Cursor arrow = {TEXT(IDC_ARROW)};
+static gnui::Cursor cross = {TEXT(IDC_CROSS)};
+static gnui::Cursor wait_c = {TEXT(IDC_WAIT)};
+static gnui::Cursor insert = {TEXT(IDC_IBEAM)};
 #ifndef IDC_HAND
 # define IDC_HAND IDC_UPARROW
 #endif
-static fltk::Cursor hand = {TEXT(IDC_HAND)};
-static fltk::Cursor help = {TEXT(IDC_HELP)};
-static fltk::Cursor move = {TEXT(IDC_SIZEALL)};
-static fltk::Cursor ns = {TEXT(IDC_SIZENS)};
-static fltk::Cursor we = {TEXT(IDC_SIZEWE)};
-static fltk::Cursor nwse = {TEXT(IDC_SIZENWSE)};
-static fltk::Cursor nesw = {TEXT(IDC_SIZENESW)};
-static fltk::Cursor no = {TEXT(IDC_NO)};
-static fltk::Cursor none = {0};
+static gnui::Cursor hand = {TEXT(IDC_HAND)};
+static gnui::Cursor help = {TEXT(IDC_HELP)};
+static gnui::Cursor move = {TEXT(IDC_SIZEALL)};
+static gnui::Cursor ns = {TEXT(IDC_SIZENS)};
+static gnui::Cursor we = {TEXT(IDC_SIZEWE)};
+static gnui::Cursor nwse = {TEXT(IDC_SIZENWSE)};
+static gnui::Cursor nesw = {TEXT(IDC_SIZENESW)};
+static gnui::Cursor no = {TEXT(IDC_NO)};
+static gnui::Cursor none = {0};
 
-void Widget::cursor(fltk::Cursor* c) const {
+void Widget::cursor(gnui::Cursor* c) const {
   Window* window = is_window() ? (Window*)this : this->window();
   if (!window) return;
   while (window->parent()) window = window->window();
@@ -393,7 +393,7 @@ void Widget::cursor(fltk::Cursor* c) const {
 ////////////////////////////////////////////////////////////////
 #elif defined(__APPLE__)
 
-struct fltk::Cursor {
+struct gnui::Cursor {
   int resource;
   uchar data[32];
   uchar mask[32];
@@ -401,7 +401,7 @@ struct fltk::Cursor {
   ::Cursor* cursor() {return (::Cursor*)data;}
 };
 
-static fltk::Cursor hand =
+static gnui::Cursor hand =
 { 0,
   { 0x06,0x00, 0x09,0x00, 0x09,0x00, 0x09,0x00, 0x09,0xC0, 0x09,0x38, 0x69,0x26, 0x98,0x05,
     0x88,0x01, 0x48,0x01, 0x20,0x02, 0x20,0x02, 0x10,0x04, 0x08,0x04, 0x04,0x08, 0x04,0x08 },
@@ -410,7 +410,7 @@ static fltk::Cursor hand =
   { 1, 5 } // Hotspot: ( y, x )
 };
 
-static fltk::Cursor help =
+static gnui::Cursor help =
 { 0,
   { 0x00,0x00, 0x40,0x00, 0x60,0x00, 0x70,0x00, 0x78,0x3C, 0x7C,0x7E, 0x7E,0x66, 0x7F,0x06,
     0x7F,0x8C, 0x7C,0x18, 0x6C,0x18, 0x46,0x00, 0x06,0x18, 0x03,0x18, 0x03,0x00, 0x00,0x00 },
@@ -419,7 +419,7 @@ static fltk::Cursor help =
   { 1, 1 }
 };
 
-static fltk::Cursor move =
+static gnui::Cursor move =
 { 0,
   { 0x00,0x00, 0x01,0x80, 0x03,0xC0, 0x07,0xE0, 0x07,0xE0, 0x19,0x98, 0x39,0x9C, 0x7F,0xFE,
     0x7F,0xFE, 0x39,0x9C, 0x19,0x98, 0x07,0xE0, 0x07,0xE0, 0x03,0xC0, 0x01,0x80, 0x00,0x00 },
@@ -428,7 +428,7 @@ static fltk::Cursor move =
   { 8, 8 }
 };
 
-static fltk::Cursor ns =
+static gnui::Cursor ns =
 { 0,
   { 0x00,0x00, 0x01,0x80, 0x03,0xC0, 0x07,0xE0, 0x0F,0xF0, 0x01,0x80, 0x01,0x80, 0x01,0x80,
     0x01,0x80, 0x01,0x80, 0x01,0x80, 0x0F,0xF0, 0x07,0xE0, 0x03,0xC0, 0x01,0x80, 0x00,0x00 },
@@ -437,7 +437,7 @@ static fltk::Cursor ns =
   { 8, 8 }
 };
 
-static fltk::Cursor we =
+static gnui::Cursor we =
 { 0,
   { 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x08,0x10, 0x18,0x18, 0x38,0x1C, 0x7F,0xFE,
     0x7F,0xFE, 0x38,0x1C, 0x18,0x18, 0x08,0x10, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00 },
@@ -446,7 +446,7 @@ static fltk::Cursor we =
   { 8, 8 }
 };
 
-static fltk::Cursor nwse =
+static gnui::Cursor nwse =
 { 0,
   { 0x00,0x00, 0x7E,0x00, 0x7C,0x00, 0x78,0x00, 0x7C,0x00, 0x6E,0x00, 0x47,0x10, 0x03,0xB0,
     0x01,0xF0, 0x00,0xF0, 0x01,0xF0, 0x03,0xF0, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00 },
@@ -455,7 +455,7 @@ static fltk::Cursor nwse =
   { 8, 8 }
 };
 
-static fltk::Cursor nesw =
+static gnui::Cursor nesw =
 { 0,
   { 0x00,0x00, 0x03,0xF0, 0x01,0xF0, 0x00,0xF0, 0x01,0xF0, 0x03,0xB0, 0x47,0x10, 0x6E,0x00,
     0x7C,0x00, 0x78,0x00, 0x7C,0x00, 0x7E,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00 },
@@ -464,7 +464,7 @@ static fltk::Cursor nesw =
   { 8, 8 }
 };
 
-static fltk::Cursor none =
+static gnui::Cursor none =
 { 0,
   { 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00,
     0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00 },
@@ -473,7 +473,7 @@ static fltk::Cursor none =
   { 0, 0 }
 };
 
-static fltk::Cursor arrow =
+static gnui::Cursor arrow =
 { 0,
   { 0x00,0x00, 0x40,0x00, 0x60,0x00, 0x70,0x00, 0x78,0x00, 0x7C,0x00, 0x7E,0x00, 0x7F,0x00,
     0x7F,0x80, 0x7C,0x00, 0x6C,0x00, 0x46,0x00, 0x06,0x00, 0x03,0x00, 0x03,0x00, 0x00,0x00 },
@@ -482,11 +482,11 @@ static fltk::Cursor arrow =
   { 1, 1 }
 };
 
-static fltk::Cursor cross = {crossCursor};
-static fltk::Cursor wait_c  = {watchCursor};
-static fltk::Cursor insert= {iBeamCursor};
+static gnui::Cursor cross = {crossCursor};
+static gnui::Cursor wait_c  = {watchCursor};
+static gnui::Cursor insert= {iBeamCursor};
 
-static fltk::Cursor no =
+static gnui::Cursor no =
 { 0,
   { 0x00,0x00, 0x03,0xc0, 0x0f,0xf0, 0x1c,0x38, 0x30,0x3c, 0x30,0x7c, 0x60,0xe6, 0x61,0xc6,
     0x63,0x86, 0x67,0x06, 0x3e,0x0c, 0x3c,0x0c, 0x1c,0x38, 0x0f,0xf0, 0x03,0xc0, 0x00,0x00 },
@@ -499,18 +499,18 @@ static fltk::Cursor no =
     single cursor rather than one per window. The main loop checks to
     see if we are still pointing at the cursor widget and puts the
     cursor back to the default if not. */
-void Widget::cursor(fltk::Cursor* c) const {
+void Widget::cursor(gnui::Cursor* c) const {
   CursPtr xcursor;
   if (!c) {
-    xcursor = fltk::default_cursor;
+    xcursor = gnui::default_cursor;
   } else if (c->resource) {
     xcursor = *GetCursor(c->resource);
   } else {
     xcursor = c->cursor();
   }
-  fltk::cursor_for = this;
-  if (fltk::current_cursor != xcursor) {
-    fltk::current_cursor = xcursor;
+  gnui::cursor_for = this;
+  if (gnui::current_cursor != xcursor) {
+    gnui::current_cursor = xcursor;
     SetCursor(xcursor);
   }
 }
@@ -520,8 +520,8 @@ void Widget::cursor(fltk::Cursor* c) const {
 // that the structure itself did not port to Intel, as it is defined with
 // 16-bit shorts but apparently the system api wants the bytes the same,
 // probably because they expect it to be resource data.
-FL_API fltk::Cursor *fltk::cursor(void *raw) {
-  fltk::Cursor *c = new fltk::Cursor;
+FL_API gnui::Cursor *gnui::cursor(void *raw) {
+  gnui::Cursor *c = new gnui::Cursor;
   c->resource=0;
   if(raw) {
      // This overwrites the data, mask, and hotspot:
@@ -534,20 +534,20 @@ FL_API fltk::Cursor *fltk::cursor(void *raw) {
 
 #endif
 
-fltk::Cursor* const fltk::CURSOR_DEFAULT= 0;
-fltk::Cursor* const fltk::CURSOR_ARROW	= &arrow;
-fltk::Cursor* const fltk::CURSOR_CROSS	= &cross;
-fltk::Cursor* const fltk::CURSOR_WAIT	= &wait_c;
-fltk::Cursor* const fltk::CURSOR_INSERT	= &insert;
-fltk::Cursor* const fltk::CURSOR_HAND	= &hand;
-fltk::Cursor* const fltk::CURSOR_HELP	= &help;
-fltk::Cursor* const fltk::CURSOR_MOVE	= &move;
-fltk::Cursor* const fltk::CURSOR_NS	= &ns;
-fltk::Cursor* const fltk::CURSOR_WE	= &we;
-fltk::Cursor* const fltk::CURSOR_NWSE	= &nwse;
-fltk::Cursor* const fltk::CURSOR_NESW	= &nesw;
-fltk::Cursor* const fltk::CURSOR_NO	= &no;
-fltk::Cursor* const fltk::CURSOR_NONE	= &none;
+gnui::Cursor* const gnui::CURSOR_DEFAULT= 0;
+gnui::Cursor* const gnui::CURSOR_ARROW	= &arrow;
+gnui::Cursor* const gnui::CURSOR_CROSS	= &cross;
+gnui::Cursor* const gnui::CURSOR_WAIT	= &wait_c;
+gnui::Cursor* const gnui::CURSOR_INSERT	= &insert;
+gnui::Cursor* const gnui::CURSOR_HAND	= &hand;
+gnui::Cursor* const gnui::CURSOR_HELP	= &help;
+gnui::Cursor* const gnui::CURSOR_MOVE	= &move;
+gnui::Cursor* const gnui::CURSOR_NS	= &ns;
+gnui::Cursor* const gnui::CURSOR_WE	= &we;
+gnui::Cursor* const gnui::CURSOR_NWSE	= &nwse;
+gnui::Cursor* const gnui::CURSOR_NESW	= &nesw;
+gnui::Cursor* const gnui::CURSOR_NO	= &no;
+gnui::Cursor* const gnui::CURSOR_NONE	= &none;
 
 //
 // End of "$Id$".

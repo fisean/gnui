@@ -34,19 +34,19 @@
 #ifndef _WIN32
 #  include <sys/time.h>
 #endif /* !_WIN32 */
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::ClockOutput
+/*! \class gnui::ClockOutput
   Base class of Clock, this one does not move, it just displays whatever
   time  you set into it. The include file is <fltk/Clock.h>
 
   type() may be set to SQUARE, ROUND, or DIGITAL (nyi).
 */
 
-/*! \class fltk::Clock
+/*! \class gnui::Clock
   This widget provides a round analog clock display and is provided
   for Forms compatibility. It installs a 1-second timeout callback
-  using fltk::add_timeout().
+  using gnui::add_timeout().
 
   The color() fills the background. The selectioncolor() (which defaults
   to GRAY85) fills the hands. The textcolor() is used to color in the
@@ -77,8 +77,8 @@ static void drawhand(float ang,const float v[][2],Color fill,Color line)
 }
 
 /** Draws the hands on the clock.
-    \param fill The fltk::Color used to fill the hands
-    \param line The fltk::Color used to draw the hand outlines
+    \param fill The gnui::Color used to fill the hands
+    \param line The gnui::Color used to draw the hand outlines
 */
 void ClockOutput::drawhands(Color fill, Color line) {
   drawhand(-360*(hour()+minute()/60.0f)/12, hourhand, fill, line);

@@ -15,37 +15,37 @@ class CubeViewUI  {
 public:
   CubeViewUI();
 private:
-  fltk::Window *mainWindow;
+  gnui::Window *mainWindow;
 public:
-      fltk::ValueSlider *zoom;
+      gnui::ValueSlider *zoom;
 private:
-      inline void cb_zoom_i(fltk::ValueSlider*, void*);
-      static void cb_zoom(fltk::ValueSlider*, void*);
+      inline void cb_zoom_i(gnui::ValueSlider*, void*);
+      static void cb_zoom(gnui::ValueSlider*, void*);
 public:
-      fltk::Group *VChange;
-        fltk::ThumbWheel *vrot;
+      gnui::Group *VChange;
+        gnui::ThumbWheel *vrot;
 private:
-        inline void cb_vrot_i(fltk::ThumbWheel*, void*);
-        static void cb_vrot(fltk::ThumbWheel*, void*);
+        inline void cb_vrot_i(gnui::ThumbWheel*, void*);
+        static void cb_vrot(gnui::ThumbWheel*, void*);
 public:
-        fltk::Slider *ypan;
+        gnui::Slider *ypan;
 private:
-        inline void cb_ypan_i(fltk::Slider*, void*);
-        static void cb_ypan(fltk::Slider*, void*);
+        inline void cb_ypan_i(gnui::Slider*, void*);
+        static void cb_ypan(gnui::Slider*, void*);
 public:
-      fltk::Group *HChange;
-        fltk::Slider *xpan;
+      gnui::Group *HChange;
+        gnui::Slider *xpan;
 private:
-        inline void cb_xpan_i(fltk::Slider*, void*);
-        static void cb_xpan(fltk::Slider*, void*);
+        inline void cb_xpan_i(gnui::Slider*, void*);
+        static void cb_xpan(gnui::Slider*, void*);
 public:
-        fltk::ThumbWheel *hrot;
+        gnui::ThumbWheel *hrot;
 private:
-        inline void cb_hrot_i(fltk::ThumbWheel*, void*);
-        static void cb_hrot(fltk::ThumbWheel*, void*);
+        inline void cb_hrot_i(gnui::ThumbWheel*, void*);
+        static void cb_hrot(gnui::ThumbWheel*, void*);
 public:
-      fltk::Group *MainView;
-        fltk::InvisibleBox *cframe;
+      gnui::Group *MainView;
+        gnui::InvisibleBox *cframe;
         CubeView *cube;
   void show();
 };

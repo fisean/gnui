@@ -27,9 +27,9 @@
 #include <fltk/Widget.h>
 #include <string.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::StyleSet
+/*! \class gnui::StyleSet
 
   Fltk can manage "sets" of styles. This is useful for making a
   program that displays more than one "theme" at a time, such as a
@@ -42,7 +42,7 @@ using namespace fltk;
   when the widget is constructed.
 
   The actual implementation is to change the pointers such as
-  fltk::Widget::default_style for every widget class to point to a new
+  gnui::Widget::default_style for every widget class to point to a new
   copy, so when the constructors for each widget are run they assign
   the new copy. The previous copies are saved and restored if the
   older set name is used.
@@ -69,7 +69,7 @@ StyleSet::StyleSet() {
     return;
   }
   // Otherwise we must init to a blank set:
-  fltk::theme(fltk_theme);
+  gnui::theme(fltk_theme);
   background = 0xc0c0c000; // get_color_index(GRAY75); // 
   // Make all the named styles build copies of themselves and then
   // assign that list to this set:
@@ -94,7 +94,7 @@ StyleSet::StyleSet() {
 
 /*!
   Make this set be current. All widgets created after this use this
-  set, and calling fltk::reload_theme() will change the styles
+  set, and calling gnui::reload_theme() will change the styles
   belonging to this set.
 */
 void StyleSet::make_current() {
@@ -102,13 +102,13 @@ void StyleSet::make_current() {
 
   // update the fields in the current set so they are saved:
   StyleSet* c = current_set;
-  c->theme = fltk::theme();
+  c->theme = gnui::theme();
   c->background = get_color_index(GRAY75);
   c->first_style = NamedStyle::first;
 
   current_set = this;
 
-  fltk::theme(theme);
+  gnui::theme(theme);
   set_background(background);
   NamedStyle *l = NamedStyle::first = first_style;
   while (l) {

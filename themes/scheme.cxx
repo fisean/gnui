@@ -33,7 +33,7 @@
 // defined by plugin code and thus the only part that was being used was
 // the "themes" line from the file.
 
-// The scheme argument (set by fltk::Style::scheme() or by the -scheme
+// The scheme argument (set by gnui::Style::scheme() or by the -scheme
 // switch when Fl::arg() is used) is used to choose the scheme file to
 // read, by adding ".scheme" to the end. If not specified or null,
 // "default" is used.  There are some sample scheme files provided for
@@ -64,18 +64,18 @@
 #define PATH_MAX 128
 #endif
 
-static fltk::Color grok_color(const char* cf, const char *colstr) {
+static gnui::Color grok_color(const char* cf, const char *colstr) {
   char key[80], val[32];
   const char *p = colstr;
   snprintf(key, sizeof(key), "aliases/%s", colstr);
   if (!getconf(cf, key, val, sizeof(val))) p = val;
   char* q;
   long l = strtoul(p, &q, 0);
-  if (!*q) return (fltk::Color)l;
-  return fltk::color(p);
+  if (!*q) return (gnui::Color)l;
+  return gnui::color(p);
 }
 
-static fltk::Font* grok_font(const char* cf, const char* fontstr) {
+static gnui::Font* grok_font(const char* cf, const char* fontstr) {
   char key[80], val[80];
   const char *p = fontstr;
   snprintf(key, sizeof(key), "aliases/%s", fontstr);
@@ -83,20 +83,20 @@ static fltk::Font* grok_font(const char* cf, const char* fontstr) {
 
   char* q;
   long l = strtoul(p, &q, 0);
-  if (!*q) return fltk::font(l);
+  if (!*q) return gnui::font(l);
 
-  return fltk::font(p);
+  return gnui::font(p);
 }
 
 extern "C" bool fltk_theme() {
 
-  const char* scheme = fltk::Style::scheme();
+  const char* scheme = gnui::Style::scheme();
   if (!scheme || !*scheme) scheme = "default";
 
   char temp[PATH_MAX];
   snprintf(temp, PATH_MAX, "%s.scheme", scheme);
   char sfile_buf[PATH_MAX];
-  const char* sfile = fltk::find_config_file(sfile_buf, PATH_MAX, temp);
+  const char* sfile = gnui::find_config_file(sfile_buf, PATH_MAX, temp);
   if (!sfile) {
     fprintf(stderr, "Cannot find scheme \"%s\"\n", temp);
     return false;
@@ -112,27 +112,27 @@ extern "C" bool fltk_theme() {
 
   if (!::getconf(sfile, "general/themes", temp, sizeof(temp))) {
     recurse = true;
-    fltk::Theme f = fltk::Style::load_theme(temp);
+    gnui::Theme f = gnui::Style::load_theme(temp);
     if (f) f();
     else fprintf(stderr,"Unable to load %s theme\n", temp);
     recurse = false;
   }
 
   char valstr[80];
-  fltk::Color col;
+  gnui::Color col;
 
   if (!::getconf(sfile, "global colors/background", valstr, sizeof(valstr))) {
     col = grok_color(sfile, valstr);
-    fltk::set_background(fltk::get_color_index(col));
+    gnui::set_background(gnui::get_color_index(col));
   }
 
-  static struct { const char* key; fltk::Color col; } colors[] = {
-    { "DARK1", fltk::GRAY66 },
-    { "DARK2", fltk::GRAY60 },
-    { "DARK3", fltk::GRAY33 },
-    { "LIGHT1", fltk::GRAY85 },
-    { "LIGHT2", fltk::GRAY90 },
-    { "LIGHT3", fltk::GRAY99 },
+  static struct { const char* key; gnui::Color col; } colors[] = {
+    { "DARK1", gnui::GRAY66 },
+    { "DARK2", gnui::GRAY60 },
+    { "DARK3", gnui::GRAY33 },
+    { "LIGHT1", gnui::GRAY85 },
+    { "LIGHT2", gnui::GRAY90 },
+    { "LIGHT3", gnui::GRAY99 },
     { 0, 0 }
   };
 
@@ -141,20 +141,20 @@ extern "C" bool fltk_theme() {
     int res = ::getconf(sfile, temp, valstr, sizeof(valstr));
     if (!res) {
       col = grok_color(sfile, valstr);
-      fltk::set_color_index(colors[i].col, col);
+      gnui::set_color_index(colors[i].col, col);
     }
   }
 
   conf_list section_list = 0, key_list = 0;
   conf_entry* cent;
 
-  fltk::Font* font;
-  fltk::LabelType* labeltype;
-  fltk::Box* boxtype;
+  gnui::Font* font;
+  gnui::LabelType* labeltype;
+  gnui::Box* boxtype;
 
   if (!getconf_sections(sfile, "widgets", &section_list)) {
     for (cent = section_list; cent; cent = cent->next) {
-      fltk::Style* style = fltk::Style::find(cent->key);
+      gnui::Style* style = gnui::Style::find(cent->key);
       if (!style) continue;
 
       snprintf(temp, sizeof(temp), "widgets/%s", cent->key);
@@ -162,11 +162,11 @@ extern "C" bool fltk_theme() {
 
       // box around widget
       if (!getconf_list(key_list, "box", valstr, sizeof(valstr)))
-        if ( (boxtype = fltk::Box::find(valstr)) ) style->box = boxtype;
+        if ( (boxtype = gnui::Box::find(valstr)) ) style->box = boxtype;
 
       // box around buttons within widget
       if (!getconf_list(key_list, "button box", valstr, sizeof(valstr)))
-        if ( (boxtype = fltk::Box::find(valstr)) ) style->buttonbox = (Box*)boxtype;
+        if ( (boxtype = gnui::Box::find(valstr)) ) style->buttonbox = (Box*)boxtype;
 
       // color of widget background
       if (!getconf_list(key_list, "color", valstr, sizeof(valstr)))
@@ -213,7 +213,7 @@ extern "C" bool fltk_theme() {
 
       // type of widget's label
       if (!getconf_list(key_list, "label type", valstr, sizeof(valstr)))
-        if ( (labeltype = fltk::LabelType::find(valstr)) ) style->labeltype = labeltype;
+        if ( (labeltype = gnui::LabelType::find(valstr)) ) style->labeltype = labeltype;
 
       // font size of widget's label
       if (!getconf_list(key_list, "label size", valstr, sizeof(valstr)))

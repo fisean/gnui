@@ -36,7 +36,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static FILE *bmpFile;
 static const uchar* bmpDatasStart;
@@ -148,7 +148,7 @@ bool bmpImage::fetch()
     colors_used = 0;
     repcount = info_size - 12;
     this->setsize(w,h);
-    this->setpixeltype(fltk::RGB);
+    this->setpixeltype(gnui::RGB);
   } else {
     // New BMP header...
     // Must take absolute value:
@@ -176,7 +176,7 @@ bool bmpImage::fetch()
       }
     }
     this->setsize(w,h);
-    this->setpixeltype(mask ? fltk::RGBA : fltk::RGB);
+    this->setpixeltype(mask ? gnui::RGBA : gnui::RGB);
   }
 
   //printf("w %d, h %d, bitsperpixel %d, compression %d, colors_used %d, repcount %d\n", w(), h(), bitsperpixel, compression, colors_used, repcount);

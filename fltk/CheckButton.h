@@ -29,7 +29,7 @@
 
 #include "Button.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API CheckButton : public Button {
 public:

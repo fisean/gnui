@@ -10,7 +10,7 @@
 #endif
 
 // these two are in the FLUID output from coding_style.fl									  
-extern fltk::Window *make_codingstyle_window();
+extern gnui::Window *make_codingstyle_window();
 extern void load_codingstyle_window();
 
 int gbrace_style = 1;
@@ -123,9 +123,9 @@ const char *get_opening_brace(int isfunction)
   return " {\n";
 }
 
-void show_coding_style_cb(fltk::Widget *, void *)
+void show_coding_style_cb(gnui::Widget *, void *)
 {
-	static fltk::Window *pWindow = NULL;
+	static gnui::Window *pWindow = NULL;
 
 	if(!pWindow)
 		pWindow = make_codingstyle_window();
