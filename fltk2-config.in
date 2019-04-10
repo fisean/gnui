@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # "$Id$"
-# 
+#
 # FLTK configuration utility.
 #
 # Copyright 2000-2003 by Bill Spitzak and others.
@@ -39,7 +39,7 @@ APIVERSION="$MAJOR_VERSION.$MINOR_VERSION"
 # First, we need to figure out where we are, in case we are in a non-installed invocation
 # BUT to do that we need to check if we were called via a symlink or not...
 # AND some systems (e.g. mingw) have neither symlinks, nor readlink, nor which...
-HAVE_READLINK=`type -p readlink`
+HAVE_READLINK="YES"
 if test -z "$HAVE_READLINK"; then
 # We don't have readlink, so just use local dir as selfdir
   selfdir=`dirname $0`
@@ -148,10 +148,10 @@ post=
 debug=
 
 # Parse command line options
-while test $# -gt 0 
+while test $# -gt 0
 do
     case "$1" in
-	-*=*) 
+	-*=*)
 	    optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'`
 	    ;;
 	*)
@@ -225,7 +225,7 @@ do
 	    ;;
 	--cc)
 	    echo_cc_name=yes
-	    ;;	    
+	    ;;
 	--post)
 	    post=$2
 	    shift
@@ -263,7 +263,7 @@ case `uname -s` in
 	;;
 esac
 LDSTATIC_PATHS=$libs
-LDLIBS_PATHS=$libs 
+LDLIBS_PATHS=$libs
 
 # Calculate needed libraries
 LDSTATIC="$libdir/libfltk2.a $LDLIBS"
@@ -312,7 +312,7 @@ if test -n "$compile"; then
 	    exit 1
 	    ;;
     esac
-	    
+
     post=$prog
 
     echo $CXX $includes $CXXFLAGS $debug -o $prog $compile $LDSTATIC
