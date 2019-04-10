@@ -62,7 +62,7 @@
 #include <fltk/draw.h>
 #include <fltk/MenuBuild.h>
 
-using namespace fltk;
+using namespace gnui;
 
 Window *mainwin;
 Window *infowin;
@@ -291,7 +291,7 @@ void PSthickstroke() {
     addvertex(float(PSpath[i].x), float(PSpath[i].y));
   }
   setcolor(YELLOW);
-  float dx = .3f, dy = 0; fltk::transform_distance(dx,dy);
+  float dx = .3f, dy = 0; gnui::transform_distance(dx,dy);
   line_style(JOIN_ROUND|CAP_ROUND,int(sqrt(dx*dx+dy*dy)+.9));
   strokepath();
   line_style(0);
@@ -405,7 +405,7 @@ void winline(int i,double x,double y, double z) {
 /* draw position x and any of the rest of the board that might obscure
    it.  If x is zero, also erase the previous board.  If instance is
    on, draw the new piece using instance drawing. */
-void drawfrom(int ifrom, int instance, fltk::Widget* widget) {
+void drawfrom(int ifrom, int instance, gnui::Widget* widget) {
   double x,y,z,l1;
   int a,b,c,i,from;
   from = ifrom;
@@ -561,7 +561,7 @@ void undo(void) {
   maindisplay();
 }
 
-int setAPiece(double pntx, double pnty, int for_real, fltk::Widget* widget)
+int setAPiece(double pntx, double pnty, int for_real, gnui::Widget* widget)
 {
   static int needsReset=FALSE;
   static int pieceReset=0;

@@ -1,8 +1,8 @@
 //
 // "$Id$"
 //
-// Object describing an fltk::Group and links to WindowType.C and
-// the fltk::TabGroup widget, with special stuff to select tab items and
+// Object describing an gnui::Group and links to WindowType.C and
+// the gnui::TabGroup widget, with special stuff to select tab items and
 // insure that only one is visible.
 //
 // Copyright 1998-2006 by Bill Spitzak and others.
@@ -36,7 +36,7 @@
 #include <fltk/ask.h>
 #include "undo.h"
 
-using namespace fltk;
+using namespace gnui;
 
 WidgetType* GroupType::_make() {return new GroupType();}
 
@@ -45,20 +45,20 @@ GroupType::~GroupType() {
 	  remove_child(q);
 	  if(q->is_widget() && (((WidgetType *)q)->o->parent() == o)) {
 		  ((WidgetType *)q)->o->parent(0);
-		  // fltk::Group destructor will delete all its children!!
+		  // gnui::Group destructor will delete all its children!!
 		  ((WidgetType *)q)->o = 0;
 	  }
   }
 }
 
-fltk::Widget *GroupType::widget(int x,int y,int w,int h) {
+gnui::Widget *GroupType::widget(int x,int y,int w,int h) {
   Group *g = new Group(x,y,w,h);
   g->resizable(0);
-  fltk::Group::current(0);
+  gnui::Group::current(0);
   return g;
 }
 
-const char* GroupType::type_name() const {return "fltk::Group";}
+const char* GroupType::type_name() const {return "gnui::Group";}
 
 int GroupType::is_parent() const {return 1;}
 int GroupType::is_group() const {return 1;}
@@ -72,7 +72,7 @@ FluidType *GroupType::make() {
 // all groups whenever the user moves any widgets.
 void fix_group_size(FluidType *t) {
   if (!t || !t->is_group()) return;
-  fltk::Group* g = (fltk::Group*)((GroupType*)t)->o;
+  gnui::Group* g = (gnui::Group*)((GroupType*)t)->o;
   int X = g->x(), X0=X;
   int Y = g->y(), Y0=Y;
   int R = g->r();
@@ -80,7 +80,7 @@ void fix_group_size(FluidType *t) {
 
   for (FluidType *nn = t->first_child; nn; nn = nn->next_brother) {
     if (nn->is_widget()) {
-      fltk::Widget* o = ((WidgetType*)nn)->o;
+      gnui::Widget* o = ((WidgetType*)nn)->o;
       int x = o->x();  if (x+X0 < X) 
 	  X = x+X0;
       int y = o->y();  if (y+Y0 < Y) Y = y+Y0;
@@ -95,7 +95,7 @@ void fix_group_size(FluidType *t) {
   if (dx || dy) {
     for (FluidType *nn = t->first_child; nn; nn = nn->next_brother) {
       if (nn->is_widget()) {
-	fltk::Widget* o = ((WidgetType*)nn)->o;
+	gnui::Widget* o = ((WidgetType*)nn)->o;
 	o->x(o->x()-dx);
 	o->y(o->y()-dy);
       }
@@ -137,7 +137,7 @@ void group_cb(Widget *, void *) {
     FluidType *qq = FluidType::current;
     while (qq && (!qq->is_widget() || qq->is_menu_item())) qq = qq->parent;
     if (!qq || !qq->parent || !qq->parent->is_widget()) {
-	fltk::message("Please select widgets to group");
+	gnui::message("Please select widgets to group");
 	return;
     }
     Undo::checkpoint();
@@ -162,13 +162,13 @@ void group_cb(Widget *, void *) {
     Undo::resume();
 }
 
-void ungroup_cb(fltk::Widget *, void *) {
+void ungroup_cb(gnui::Widget *, void *) {
     // Find the group:
     FluidType *q = FluidType::current;
     while (q && (!q->is_widget() || q->is_menu_item())) q = q->parent;
     if (q) q = q->parent;
     if (!q || !q->parent->is_widget()) {
-	fltk::message("Please select widgets in a group");
+	gnui::message("Please select widgets in a group");
 	return;
     }
     Undo::checkpoint();
@@ -203,7 +203,7 @@ void GroupType::write_code() {
     write_c("%so->end();\n", indent());
   }
   write_extra_code();
-  if (resizable()) write_c("%sfltk::Group::current()->resizable(o);\n", indent());
+  if (resizable()) write_c("%sgnui::Group::current()->resizable(o);\n", indent());
   write_block_close();
 }
 
@@ -213,9 +213,9 @@ void GroupType::write_code() {
 
 #if 0
 // I took this out because I don't think it is needed for back-compatability
-const fltk::Enumeration pack_type_menu[] = {
-  {"normal",		0,		(void*)fltk::PackedGroup::NORMAL},
-  {"all-vertical",	"HORIZONTAL",	(void*)fltk::PackedGroup::ALL_CHILDREN_VERTICAL},
+const gnui::Enumeration pack_type_menu[] = {
+  {"normal",		0,		(void*)gnui::PackedGroup::NORMAL},
+  {"all-vertical",	"HORIZONTAL",	(void*)gnui::PackedGroup::ALL_CHILDREN_VERTICAL},
   {0}};
 #endif
 
@@ -228,13 +228,13 @@ const fltk::Enumeration pack_type_menu[] = {
 // If none, return o unchanged:
 
 FluidType* TabsType::click_test(int x, int y) {
-  fltk::TabGroup *t = (fltk::TabGroup*)o;
+  gnui::TabGroup *t = (gnui::TabGroup*)o;
   int i = t->which(x-t->x(),y-t->y());
   if (i < 0) return 0; // didn't click on tab
   // okay, run the tabs ui until they let go of mouse:
-  t->handle(fltk::PUSH);
-  fltk::pushed(t);
-  while (fltk::pushed()==t) fltk::wait();
+  t->handle(gnui::PUSH);
+  gnui::pushed(t);
+  while (gnui::pushed()==t) gnui::wait();
   return (FluidType*)(t->selected_child()->user_data());
 }
 
@@ -243,8 +243,8 @@ FluidType* TabsType::click_test(int x, int y) {
 
 void GroupType::add_child(FluidType* cc, FluidType* before) {
   WidgetType* c = (WidgetType*)cc;
-  fltk::Widget* b = before ? ((WidgetType*)before)->o : 0;
-  ((fltk::Group*)o)->insert(*(c->o), b);
+  gnui::Widget* b = before ? ((WidgetType*)before)->o : 0;
+  ((gnui::Group*)o)->insert(*(c->o), b);
   o->redraw();
 }
 
@@ -257,13 +257,13 @@ void TabsType::add_child(FluidType* c, FluidType* before) {
 
 void GroupType::remove_child(FluidType* cc) {
   WidgetType* c = (WidgetType*)cc;
-  ((fltk::Group*)o)->remove(c->o);
+  ((gnui::Group*)o)->remove(c->o);
   o->redraw();
 }
 
 void TabsType::remove_child(FluidType* cc) {
   WidgetType* c = (WidgetType*)cc;
-  fltk::TabGroup *t = (fltk::TabGroup*)o;
+  gnui::TabGroup *t = (gnui::TabGroup*)o;
   if (t->selected_child() == c->o) t->value(0);
   GroupType::remove_child(c);
 }
@@ -272,9 +272,9 @@ void TabsType::remove_child(FluidType* cc) {
 
 void GroupType::move_child(FluidType* cc, FluidType* before) {
   WidgetType* c = (WidgetType*)cc;
-  fltk::Widget* b = before ? ((WidgetType*)before)->o : 0;
-  ((fltk::Group*)o)->remove(c->o);
-  ((fltk::Group*)o)->insert(*(c->o), b);
+  gnui::Widget* b = before ? ((WidgetType*)before)->o : 0;
+  ((gnui::Group*)o)->remove(c->o);
+  ((gnui::Group*)o)->insert(*(c->o), b);
   o->redraw();
 }
 
@@ -284,12 +284,12 @@ void GroupType::move_child(FluidType* cc, FluidType* before) {
 #include <fltk/ScrollGroup.h>
 
 const Enumeration scroll_type_menu[] = {
-  {"Both",		"BOTH",		(void*)fltk::ScrollGroup::BOTH},
-  {"Horizontal",	"HORIZONTAL",	(void*)fltk::ScrollGroup::HORIZONTAL},
-  {"Vertical",		"VERTICAL",	(void*)fltk::ScrollGroup::VERTICAL},
-  {"Horizontal Always",	"HORIZONTAL_ALWAYS", (void*)fltk::ScrollGroup::HORIZONTAL_ALWAYS},
-  {"Vertical Always",	"VERTICAL_ALWAYS", (void*)fltk::ScrollGroup::VERTICAL_ALWAYS},
-  {"Both Always",	"BOTH_ALWAYS",	(void*)fltk::ScrollGroup::BOTH_ALWAYS},
+  {"Both",		"BOTH",		(void*)gnui::ScrollGroup::BOTH},
+  {"Horizontal",	"HORIZONTAL",	(void*)gnui::ScrollGroup::HORIZONTAL},
+  {"Vertical",		"VERTICAL",	(void*)gnui::ScrollGroup::VERTICAL},
+  {"Horizontal Always",	"HORIZONTAL_ALWAYS", (void*)gnui::ScrollGroup::HORIZONTAL_ALWAYS},
+  {"Vertical Always",	"VERTICAL_ALWAYS", (void*)gnui::ScrollGroup::VERTICAL_ALWAYS},
+  {"Both Always",	"BOTH_ALWAYS",	(void*)gnui::ScrollGroup::BOTH_ALWAYS},
   {0}};
 
 

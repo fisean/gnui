@@ -2,7 +2,7 @@
 // "$Id$"
 //
 
-/*! \class fltk::InvisibleBox
+/*! \class gnui::InvisibleBox
 
   This Widget is invisible due to not having a box(). The
   label still prints so it can be used to position labels. Also
@@ -11,7 +11,7 @@
 
 #include <fltk/InvisibleBox.h>
 #include <fltk/events.h>
-using namespace fltk;
+using namespace gnui;
 
 static void revert(Style* s) {
   s->color_ = GRAY75;
@@ -19,7 +19,7 @@ static void revert(Style* s) {
 }
 // this is unnamed as there is no need for themes to alter this:
 static NamedStyle style(0, revert, &InvisibleBox::default_style);
-/*! Sets box() to \c fltk::NO_BOX, sets color() to \c fltk::GRAY75 for
+/*! Sets box() to \c gnui::NO_BOX, sets color() to \c gnui::GRAY75 for
   compatability with fltk1's Fl_Box widget. */
 NamedStyle* InvisibleBox::default_style = &::style;
 

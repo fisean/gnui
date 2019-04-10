@@ -32,11 +32,11 @@
 #include <fltk/draw.h>
 #include <stdlib.h>
 #include <fltk/math.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Dial
+/*! \class gnui::Dial
 
-  The fltk::Dial widget provides a circular dial to control a single
+  The gnui::Dial widget provides a circular dial to control a single
   floating point value.
 
   \image html Fl_Dial.gif

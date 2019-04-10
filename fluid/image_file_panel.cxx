@@ -2,52 +2,52 @@
 
 #include "image_file_panel.h"
 
-fltk::Window *images_dir_window=(fltk::Window *)0;
+gnui::Window *images_dir_window=(gnui::Window *)0;
 
-static void cb_images_dir_window(fltk::Window*, void*) {
+static void cb_images_dir_window(gnui::Window*, void*) {
   images_dir_window->hide();
   modal=0;
 }
 
-fltk::Input *images_dir_input=(fltk::Input *)0;
+gnui::Input *images_dir_input=(gnui::Input *)0;
 
-static void cb_Browse(fltk::Button*, void*) {
+static void cb_Browse(gnui::Button*, void*) {
   browse_dir_cb();
 }
 
-static void cb_OK(fltk::ReturnButton*, void*) {
+static void cb_OK(gnui::ReturnButton*, void*) {
   images_dir_window->hide();
   modal=0;
 }
 
-static void cb_Cancel(fltk::Button*, void*) {
+static void cb_Cancel(gnui::Button*, void*) {
   images_dir_window->hide();
   modal=0; cancel=1;
 }
 
-fltk::Window* make_images_dir_window() {
-  fltk::Window* w;
-   {fltk::Window* o = images_dir_window = new fltk::Window(310, 98, "Images root directory");
+gnui::Window* make_images_dir_window() {
+  gnui::Window* w;
+   {gnui::Window* o = images_dir_window = new gnui::Window(310, 98, "Images root directory");
     w = o;
-    o->callback((fltk::Callback*)cb_images_dir_window);
+    o->callback((gnui::Callback*)cb_images_dir_window);
     o->begin();
-     {fltk::Input* o = images_dir_input = new fltk::Input(10, 22, 220, 22);
-      ((fltk::Window*)(o->parent()))->hotspot(o);
+     {gnui::Input* o = images_dir_input = new gnui::Input(10, 22, 220, 22);
+      ((gnui::Window*)(o->parent()))->hotspot(o);
     }
-     {fltk::Button* o = new fltk::Button(230, 22, 70, 22, "Browse ...");
-      o->callback((fltk::Callback*)cb_Browse);
+     {gnui::Button* o = new gnui::Button(230, 22, 70, 22, "Browse ...");
+      o->callback((gnui::Callback*)cb_Browse);
     }
-     {fltk::Widget* o = new fltk::Widget(10, 44, 220, 16, "(relative to the location of the .fl file)");
-      o->box(fltk::NO_BOX);
+     {gnui::Widget* o = new gnui::Widget(10, 44, 220, 16, "(relative to the location of the .fl file)");
+      o->box(gnui::NO_BOX);
       o->labelsize(10);
-      o->align(fltk::ALIGN_TOP|fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE|fltk::ALIGN_WRAP);
+      o->align(gnui::ALIGN_TOP|gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE|gnui::ALIGN_WRAP);
     }
-     {fltk::ReturnButton* o = new fltk::ReturnButton(150, 66, 70, 22, "OK");
+     {gnui::ReturnButton* o = new gnui::ReturnButton(150, 66, 70, 22, "OK");
       o->shortcut(0xff0d);
-      o->callback((fltk::Callback*)cb_OK);
+      o->callback((gnui::Callback*)cb_OK);
     }
-     {fltk::Button* o = new fltk::Button(230, 66, 70, 22, "Cancel");
-      o->callback((fltk::Callback*)cb_Cancel);
+     {gnui::Button* o = new gnui::Button(230, 66, 70, 22, "Cancel");
+      o->callback((gnui::Callback*)cb_Cancel);
     }
     o->end();
     o->resizable(o);

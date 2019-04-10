@@ -3,12 +3,12 @@
 
 #include "Fl_Input.H"
 #include <fltk/Output.h>
-typedef fltk::Output Fl_Output;
+typedef gnui::Output Fl_Output;
 
 enum {
-  FL_NORMAL_OUTPUT	= fltk::Input::NORMAL,
-  FL_MULTILINE_OUTPUT	= fltk::Input::MULTILINE,
-  FL_MULTILINE_OUTPUT_WRAP = fltk::Input::WORDWRAP
+  FL_NORMAL_OUTPUT	= gnui::Input::NORMAL,
+  FL_MULTILINE_OUTPUT	= gnui::Input::MULTILINE,
+  FL_MULTILINE_OUTPUT_WRAP = gnui::Input::WORDWRAP
 };
 
 #endif

@@ -3,7 +3,7 @@
 #include <fltk/ProgressBar.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 Window* win;
 

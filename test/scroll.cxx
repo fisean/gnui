@@ -37,44 +37,44 @@
 #include <fltk/InvisibleBox.h>
 #include <fltk/MenuBuild.h>
 
-using namespace fltk;
+using namespace gnui;
 
 class Drawing : public Widget {
   void draw();
 public:
   Drawing(int X,int Y,int W,int H,const char* L) : Widget(X,Y,W,H,L) {
-    align(fltk::ALIGN_TOP);
-    box(fltk::FLAT_BOX);
-    color(fltk::WHITE);
+    align(gnui::ALIGN_TOP);
+    box(gnui::FLAT_BOX);
+    color(gnui::WHITE);
   }
 };
 
 void Drawing::draw() {
   draw_box();
-  fltk::push_matrix();
+  gnui::push_matrix();
   // Change from fltk1 to 2: removed translation by x(),y():
-  fltk::translate(w()/2, h()/2);
-  fltk::scale(w()/2, h()/2);
-  fltk::color(fltk::BLACK);
+  gnui::translate(w()/2, h()/2);
+  gnui::scale(w()/2, h()/2);
+  gnui::color(gnui::BLACK);
   for (int i = 0; i < 20; i++) {
     for (int j = i+1; j < 20; j++) {
       // Change from fltk1 to 2: added 'f' to make arguments float:
-      fltk::newpath();
-      fltk::addvertex(cosf(M_PI*i/10+.1), sinf(M_PI*i/10+.1));
-      fltk::addvertex(cosf(M_PI*j/10+.1), sinf(M_PI*j/10+.1));
-//      fltk::closepath(); //bug
-      fltk::strokepath();
+      gnui::newpath();
+      gnui::addvertex(cosf(M_PI*i/10+.1), sinf(M_PI*i/10+.1));
+      gnui::addvertex(cosf(M_PI*j/10+.1), sinf(M_PI*j/10+.1));
+//      gnui::closepath(); //bug
+      gnui::strokepath();
       // you must reset the line type when done:
       line_style(SOLID);
     }
   }
-  fltk::pop_matrix();
+  gnui::pop_matrix();
 }
 
 ScrollGroup* thescroll;
 
 void box_cb(Widget* o, void*) {
-  thescroll->box(((Button*)o)->value() ? fltk::DOWN_BOX : fltk::NO_BOX);
+  thescroll->box(((Button*)o)->value() ? gnui::DOWN_BOX : gnui::NO_BOX);
   thescroll->relayout(); // added for fltk2
   thescroll->redraw();
 }
@@ -104,17 +104,17 @@ void align_cb(Widget*, void* v) {
 
 void load_menu_achoice (Choice* c)  {
  c->begin();
-  new Item("left+top", 0, align_cb, (void*)(fltk::ALIGN_LEFT+fltk::ALIGN_TOP));
-  new Item("left+bottom", 0, align_cb, (void*)(fltk::ALIGN_LEFT+fltk::ALIGN_BOTTOM));
-  new Item("right+top", 0, align_cb, (void*)(fltk::ALIGN_RIGHT+fltk::ALIGN_TOP));
-  new Item("right+bottom", 0, align_cb, (void*)(fltk::ALIGN_RIGHT+fltk::ALIGN_BOTTOM));
+  new Item("left+top", 0, align_cb, (void*)(gnui::ALIGN_LEFT+gnui::ALIGN_TOP));
+  new Item("left+bottom", 0, align_cb, (void*)(gnui::ALIGN_LEFT+gnui::ALIGN_BOTTOM));
+  new Item("right+top", 0, align_cb, (void*)(gnui::ALIGN_RIGHT+gnui::ALIGN_TOP));
+  new Item("right+bottom", 0, align_cb, (void*)(gnui::ALIGN_RIGHT+gnui::ALIGN_BOTTOM));
  c->end();
 }
 
 int main(int argc, char** argv) {
   Window window(5*75,400);
   //window.clear_double_buffer(); // use this to test scroll_area()
-  //window.box(fltk::NO_BOX); //remove trash
+  //window.box(gnui::NO_BOX); //remove trash
   window.begin();
   ScrollGroup scroll(0,0,5*75,300);
   scroll.begin();
@@ -125,7 +125,7 @@ int main(int argc, char** argv) {
     Button* b = new Button(x*75,y*25+(y>=8?5*75:0),75,25);
     b->copy_label(buf);
     b->color(n);
-//    b->labelcolor(fltk::WHITE);
+//    b->labelcolor(gnui::WHITE);
   }
   Drawing drawing(0,8*25,5*75,5*75,0);
   scroll.end();
@@ -145,11 +145,11 @@ int main(int argc, char** argv) {
 
   thescroll = &scroll;
 
-  scroll.box(fltk::DOWN_BOX);
+  scroll.box(gnui::DOWN_BOX);
   scroll.type(ScrollGroup::VERTICAL);
   window.end();
   window.show(argc,argv);
-  return fltk::run();
+  return gnui::run();
 }
 
 //

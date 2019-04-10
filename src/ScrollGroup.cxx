@@ -28,9 +28,9 @@
 #include <fltk/Box.h>
 #include <fltk/draw.h>
 #include <config.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::ScrollGroup
+/*! \class gnui::ScrollGroup
 
 This container widget lets you maneuver around a set of widgets much 
 larger than your window.  If the child widgets are larger than the size 
@@ -51,7 +51,7 @@ child widget "canvas".  This child widget should be of your own class,
 with a draw() method that draws everything. The scrolling is done by
 changing the x() and y() of the widget and drawing it with the fltk
 clip region set to the newly exposed rectangles. You can speed things
-up by using fltk::not_clipped() or fltk::intersect_with_clip() to
+up by using gnui::not_clipped() or gnui::intersect_with_clip() to
 detect and skip the clipped portions of the drawing.
 
 By default you can scroll in both directions, and the scrollbars 
@@ -394,7 +394,7 @@ int ScrollGroup::handle(int event) {
     // SCROLLGROUP OR PACKEDGROUP.  NOTHING IS MORE FRUSTRATING THAN DESIGNING CODE
     // SPECIFIC TO A UI LIBRARY AND HAVING THAT LIBRARY CONSTANTLY CHANGE FROM UNDER YOU.
 
-    Widget* w = fltk::focus();
+    Widget* w = gnui::focus();
     int x = w->x();
     int y = w->y();
     for (Group* p = w->parent(); p != this; p = p->parent()) {
@@ -507,7 +507,7 @@ int ScrollGroup::handle(int event) {
   case MOUSEWHEEL:
     {
       if ( (scrollbar.visible()||hscrollbar.visible())
-           && !fltk::event_state( fltk::ALT ) ) {
+           && !gnui::event_state( gnui::ALT ) ) {
         if (event_key() == WheelLeft || event_key() == WheelRight) {
           return hscrollbar.send(event);
         } else {

@@ -4,11 +4,11 @@
 #include "Fl_Widget.H"
 #include <fltk/TiledGroup.h>
 
-class Fl_Tile : public fltk::TiledGroup {
+class Fl_Tile : public gnui::TiledGroup {
 
 public:
   Fl_Tile(int x, int y, int w, int h, const char*l = 0)
-    : fltk::TiledGroup(x,y,w,h,l) {begin();}
+    : gnui::TiledGroup(x,y,w,h,l) {begin();}
 };
 
 #endif

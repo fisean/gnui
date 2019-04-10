@@ -35,9 +35,9 @@
 #include <stdlib.h> // for free
 #include <config.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Widget
+/*! \class gnui::Widget
 
   The base class for all widgets in FLTK. The basic Widget draws an
   empty box() and the label(), and ignores all events. This can be
@@ -104,7 +104,7 @@ Widget::~Widget() {
 
 /*! \fn Group* Widget::parent() const
   Returns a pointer to the parent widget.  Usually this is a
-  fltk::Group or fltk::Window.  Returns NULL if none.
+  gnui::Group or gnui::Window.  Returns NULL if none.
 */
 
 /*! Returns true if \a b is a child of this widget, or is equal to
@@ -187,7 +187,7 @@ void Widget::copy_label(const char* s) {
   of interesting things to be put into the tooltip.
 */
 
-/*! \fn void Widget::callback(fltk::Callback*, void*)
+/*! \fn void Widget::callback(gnui::Callback*, void*)
   Each widget has a single callback.  You can set it or examine it with
   these methods. The callback is called with the widget as the first
   argument and the void* as the second argument. It is called in response
@@ -199,10 +199,10 @@ void Widget::copy_label(const char* s) {
   Set the second argument to the callback.
 */
 
-/*! \fn void Widget::callback(fltk::Callback1*, long = 0)
+/*! \fn void Widget::callback(gnui::Callback1*, long = 0)
   For convenience you can also define the callback as taking a long
   integer argument.  This is implemented by casting the function to a
-  fltk::Callback and casting the <tt>long</tt> to a <tt>void*</tt> and
+  gnui::Callback and casting the <tt>long</tt> to a <tt>void*</tt> and
   may not be portable to some machines.
 */
 
@@ -211,10 +211,10 @@ void Widget::copy_label(const char* s) {
   by casting the long to a void*.
 */
 
-/*! \fn void Widget::callback(fltk::Callback0*)
+/*! \fn void Widget::callback(gnui::Callback0*)
   For convenience you can also define the callback as taking only the
   Widget as an argument.  This is implemented by casting this to a
-  fltk::Callback and may not be portable to some machines.
+  gnui::Callback and may not be portable to some machines.
 */
 
 /*! \fn void Widget::do_callback()
@@ -237,7 +237,7 @@ void Widget::copy_label(const char* s) {
   into the base class). Widget subclasses may store values in the
   range 0-99 here (larger values are reserved for use by FLTK).
 
-  The fltk::PackedGroup widget uses the low bit of the type() of
+  The gnui::PackedGroup widget uses the low bit of the type() of
   each child to indicate HORIZONTAL (1) or VERTICAL (0).
 
   For portability FLTK does not use RTTI (Run Time Typing Infomation)
@@ -246,23 +246,23 @@ void Widget::copy_label(const char* s) {
   value.  These unique values must be greater than the symbol
   Widget::RESERVED_TYPE (which is 100).  Look through the header
   files for Widget::RESERVED_TYPE to find an unused number.  If you
-  make a subclass of fltk::Window you must use Widget::WINDOW_TYPE+n
+  make a subclass of gnui::Window you must use Widget::WINDOW_TYPE+n
   (\e n must be in the range 1 to 7) so that is_window() will work, if you
-  make a subclass of fltk::Group you must use Widget::GROUP_TYPE+n
+  make a subclass of gnui::Group you must use Widget::GROUP_TYPE+n
   (\e n must be in the range 1 to 7) so that is_group() will work.  */
 
 /*! \fn bool Widget::is_group() const
-  Returns true for subclasses of fltk::Group. If so you can cast it to
-  a group with <tt>(fltk::Group*)(widget)</tt>. This is done by using
+  Returns true for subclasses of gnui::Group. If so you can cast it to
+  a group with <tt>(gnui::Group*)(widget)</tt>. This is done by using
   type(), but if your compiler supports RTTI you may want to safer
-  <tt>dynamic_cast&lt;fltk::Group*&gt;(widget)</tt>.
+  <tt>dynamic_cast&lt;gnui::Group*&gt;(widget)</tt>.
 */
 
 /*! \fn bool Widget::is_window() const
-  Returns true for subclasses of fltk::Window. If so you can cast it
-  to a window with <tt>(fltk::Window*)(widget)</tt>. This is done by
+  Returns true for subclasses of gnui::Window. If so you can cast it
+  to a window with <tt>(gnui::Window*)(widget)</tt>. This is done by
   using type(), but if your compiler supports RTTI you may want to safer
-  <tt>dynamic_cast&lt;fltk::Window*&gt;(widget)</tt>. If this is true,
+  <tt>dynamic_cast&lt;gnui::Window*&gt;(widget)</tt>. If this is true,
   is_group() is also true.
 */
 
@@ -313,9 +313,9 @@ void Widget::copy_label(const char* s) {
 */
 
 /*! \fn void Widget::align(Flags);
-  Forces the values of all the fltk::ALIGN_* flags to the passed
+  Forces the values of all the gnui::ALIGN_* flags to the passed
   value. This determines how the label is printed next to or inside
-  the widget. The default value is fltk::ALIGN_CENTER, which centers
+  the widget. The default value is gnui::ALIGN_CENTER, which centers
   the label. The value can be any of the ALIGN flags or'd together.
 */
 
@@ -328,24 +328,24 @@ void Widget::copy_label(const char* s) {
 
   The following constants can be used, their exact meaning depends on
   the widget's implementation:
-  - fltk::WHEN_NEVER - Never call the callback (0).
-  - fltk::WHEN_CHANGED - Do the callback each time the widget's value
+  - gnui::WHEN_NEVER - Never call the callback (0).
+  - gnui::WHEN_CHANGED - Do the callback each time the widget's value
   is changed by the user (many callbacks may be done as the user drags
   the mouse)
-  - fltk::WHEN_RELEASE - Each keystroke that modifies the value, or
+  - gnui::WHEN_RELEASE - Each keystroke that modifies the value, or
   when the mouse is released and the value has changed, causes the
   callback (some widgets do not implement this and act like
-  fltk::WHEN_CHANGED)
-  - fltk::WHEN_RELEASE_ALWAYS - Each recognized keystroke and the
+  gnui::WHEN_CHANGED)
+  - gnui::WHEN_RELEASE_ALWAYS - Each recognized keystroke and the
   mouse being released will cause the callback, even if the value did
   not change. (some widgets do not implement this and act like
-  fltk::WHEN_RELEASE)
-  - fltk::WHEN_ENTER_KEY - Do the callback when the user presses the
-  ENTER key and the value has chagned (used by fltk::Input and
-  fltk::Browser.
-  - fltk::WHEN_ENTER_KEY_ALWAYS - Do the callback when the user
+  gnui::WHEN_RELEASE)
+  - gnui::WHEN_ENTER_KEY - Do the callback when the user presses the
+  ENTER key and the value has chagned (used by gnui::Input and
+  gnui::Browser.
+  - gnui::WHEN_ENTER_KEY_ALWAYS - Do the callback when the user
   presses the ENTER key, even if the value has not changed.
-  -fltk::WHEN_ENTER_KEY_CHANGED - Do the callback when the user
+  -gnui::WHEN_ENTER_KEY_CHANGED - Do the callback when the user
   presses the ENTER key and each time the value changes.
 
 */
@@ -425,7 +425,7 @@ void Widget::relayout(uchar flags) {
   layout_damage_ |= flags;
   for (Widget* w = this->parent(); w; w = w->parent())
     w->layout_damage_ |= LAYOUT_CHILD;
-  fltk::damage(1); // make flush() do something
+  gnui::damage(1); // make flush() do something
 }
 
 /*! \fn uchar Widget::layout_damage() const
@@ -449,7 +449,7 @@ MyClass::layout() {
   Directly change the value returned by layout_damage(). */
 
 /*! \fn bool Widget::horizontal() const
-  Return true if this widget has a horizontal orientation and fltk::Pack
+  Return true if this widget has a horizontal orientation and gnui::Pack
   will position it against the top or bottom edge. This is the default.
 */
 
@@ -459,16 +459,16 @@ MyClass::layout() {
 
 /*! \fn void Widget::set_vertical()
   Makes vertical() return true. This will affect how a surrounding
-  fltk::Pack (or similar group) will place the widget, but you must
+  gnui::Pack (or similar group) will place the widget, but you must
   call relayout() to indicate that this must be recalculated.
 
-  Some widgets classes such as fltk::MenuBar or fltk::Slider will draw
+  Some widgets classes such as gnui::MenuBar or gnui::Slider will draw
   differently if this is turned on, in a vertical arrangement.
 */
 
 /*! \fn void Widget::set_horizontal()
   Undoes set_vertical() and makes horizontal() return true. This will
-  affect how a surrounding fltk::Pack (or similar group) will place
+  affect how a surrounding gnui::Pack (or similar group) will place
   the widget, but you must call relayout() to indicate that this must
   be recalculated.
 */
@@ -476,11 +476,11 @@ MyClass::layout() {
 ////////////////////////////////////////////////////////////////
 // REDRAWING
 
-/*! \var fltk::DAMAGE_CHILD
+/*! \var gnui::DAMAGE_CHILD
   A child of this group widget needs to be
   redrawn (non-group widgets can use this bit for their own purposes).
 */
-/*! \var fltk::DAMAGE_CHILD_LABEL
+/*! \var gnui::DAMAGE_CHILD_LABEL
   An outside label of this widget needs
   to be redrawn. This is handled (and this bit is cleared) by the
   parent group.
@@ -489,31 +489,31 @@ MyClass::layout() {
   used anymore. Instead if an outside label needs to change the entire
   parent widget is redrawn.
 */
-/*! \var fltk::DAMAGE_EXPOSE
+/*! \var gnui::DAMAGE_EXPOSE
   Damage caused by damage() or by expose
-  events from the operating system. If this and fltk::DAMAGE_ALL is on
+  events from the operating system. If this and gnui::DAMAGE_ALL is on
   the widget should draw every pixel inside it's region.
 */
-/*! \var fltk::DAMAGE_ALL
+/*! \var gnui::DAMAGE_ALL
   This bit is set by redraw() and indicates that
   all of the widget (but not "holes" where the background shows
   through) needs to be redraw.
 */
-/*! \var fltk::DAMAGE_VALUE
+/*! \var gnui::DAMAGE_VALUE
   A widget may use this to indicate that the displayed value has changed. */
-/*! \var fltk::DAMAGE_PUSHED
+/*! \var gnui::DAMAGE_PUSHED
   A widget may use this to indicate that the user has pushed or released
   a button. */
-/*! \var fltk::DAMAGE_SCROLL
+/*! \var gnui::DAMAGE_SCROLL
   A widget may use this to indicate that
   the displayed data has scrolled moved horizontally and/or vertically. */
-/*! \var fltk::DAMAGE_OVERLAY
-  Same value as fltk::DAMAGE_SCROLL. */
-/*! \var fltk::DAMAGE_HIGHLIGHT
+/*! \var gnui::DAMAGE_OVERLAY
+  Same value as gnui::DAMAGE_SCROLL. */
+/*! \var gnui::DAMAGE_HIGHLIGHT
   A widget may use this to indicate that
   the mouse has entered/exited part of the widget. */
-/*! \var fltk::DAMAGE_CONTENTS
-  Same as fltk::DAMAGE_EXPOSE but if fltk::DAMAGE_ALL is off a widget can
+/*! \var gnui::DAMAGE_CONTENTS
+  Same as gnui::DAMAGE_EXPOSE but if gnui::DAMAGE_ALL is off a widget can
   use this for it's own purposes. */
 
 /*! \fn uchar Widget::damage() const
@@ -574,7 +574,7 @@ void Widget::redraw(uchar flags) {
   damage_ |= flags;
   for (Widget* widget = parent(); widget; widget = widget->parent())
     widget->damage_ |= DAMAGE_CHILD;
-  fltk::damage(1); // make flush() do something
+  gnui::damage(1); // make flush() do something
 }
 
 /*! Indicates that the label() should be redrawn. This does nothing
@@ -661,7 +661,7 @@ void Widget::draw()
   position) is accessed by various functions listed in the same header
   file.
 
-  The default version returns true for fltk::ENTER and fltk::MOVE
+  The default version returns true for gnui::ENTER and gnui::MOVE
   events, this is done so you can put tooltips on the base widget. All
   other events return zero.
 
@@ -678,10 +678,10 @@ int Widget::handle(int event) {
     // This calls belowmouse() directly do this works as the fallback
     // for Group::handle(), and also so it somewhat works if called
     // directly rather than from send():
-    fltk::belowmouse(this);
+    gnui::belowmouse(this);
     return true;
   case DND_DRAG:
-    fltk::belowmouse(this);
+    gnui::belowmouse(this);
     return false;
   case LEAVE:
     redraw_highlight();
@@ -697,12 +697,12 @@ int Widget::handle(int event) {
     The previous values are restored before this returns.
   - It makes sure the widget is active and/or visible if the event
     requres this.
-  - If this is not the fltk::belowmouse() widget then it changes
-    fltk::MOVE into fltk::ENTER and turns fltk::DND_DRAG into
-    fltk::DND_ENTER. If this \e is the fltk::belowmouse() widget then
+  - If this is not the gnui::belowmouse() widget then it changes
+    gnui::MOVE into gnui::ENTER and turns gnui::DND_DRAG into
+    gnui::DND_ENTER. If this \e is the gnui::belowmouse() widget then
     the opposite conversion is done.
   - For move, focus, and push events if handle() returns true it sets
-    the fltk::belowmouse() or fltk::focus() or fltk::pushed() widget to
+    the gnui::belowmouse() or gnui::focus() or gnui::pushed() widget to
     reflect this.
 */
 int Widget::send(int event) {
@@ -730,7 +730,7 @@ int Widget::send(int event) {
       set_flag(FOCUSED);
       // If it returns true then this is the focus() widget, but only
       // set this if handle() did not pass this on to a child:
-      if (!contains(fltk::focus())) fltk::focus(this);
+      if (!contains(gnui::focus())) gnui::focus(this);
     }
     break;
 
@@ -739,10 +739,10 @@ int Widget::send(int event) {
     if (!visible()) break;
     if (active()) set_flag(HIGHLIGHT);
     // figure out correct type of event:
-    event = (contains(fltk::belowmouse())) ? MOVE : ENTER;
+    event = (contains(gnui::belowmouse())) ? MOVE : ENTER;
     ret = handle(event);
     // Set belowmouse only if handle() did not set it to some child:
-    if (!contains(fltk::belowmouse())) fltk::belowmouse(this);
+    if (!contains(gnui::belowmouse())) gnui::belowmouse(this);
     break;
 
   case LEAVE:
@@ -756,11 +756,11 @@ int Widget::send(int event) {
     if (!takesevents()) break;
     set_flag(HIGHLIGHT);
     // figure out correct type of event:
-    event = (contains(fltk::belowmouse())) ? DND_DRAG : DND_ENTER;
+    event = (contains(gnui::belowmouse())) ? DND_DRAG : DND_ENTER;
     // see if it wants the event:
     ret = handle(event);
     // Set belowmouse only if handle() did not set it to some child:
-    if (!contains(fltk::belowmouse())) fltk::belowmouse(this);
+    if (!contains(gnui::belowmouse())) gnui::belowmouse(this);
     break;
 
   case PUSH:
@@ -777,8 +777,8 @@ int Widget::send(int event) {
       // and if the mouse is still down:
       // Widgets with click_to_focus flag on will get the focus if
       // they accept the mouse push.
-      if (event_state(0x0f000000) && !contains(fltk::pushed())) {
-	fltk::pushed(this);
+      if (event_state(0x0f000000) && !contains(gnui::pushed())) {
+	gnui::pushed(this);
 	if (click_to_focus()) take_focus();
       }
     }
@@ -823,17 +823,17 @@ static void widget_timeout(void* data) {
   from inside handle(TIMEOUT).
 */
 void Widget::add_timeout(float time) {
-  fltk::add_timeout(time, widget_timeout, this);
+  gnui::add_timeout(time, widget_timeout, this);
 }
 /*! Call handle(TIMEOUT) at the given time interval since the last timeout.
   This will produce much more accurate time intervals than add_timeout().
 */
 void Widget::repeat_timeout(float time) {
-  fltk::repeat_timeout(time, widget_timeout, this);
+  gnui::repeat_timeout(time, widget_timeout, this);
 }
 /*! Cancel any and all pending handle(TIMEOUT) callbacks. */
 void Widget::remove_timeout() {
-  fltk::remove_timeout(widget_timeout, this);
+  gnui::remove_timeout(widget_timeout, this);
 }
 
 ////////////////////////////////////////////////////////////////
@@ -864,7 +864,7 @@ bool Widget::active_r() const {
 }
 
 /*! If active() is false, this turns it on. If active_r() is now true
-  send() an fltk::ACTIVATE event. */
+  send() an gnui::ACTIVATE event. */
 void Widget::activate() {
   if (!active()) {
     clear_flag(INACTIVE);
@@ -878,7 +878,7 @@ void Widget::activate() {
 }
 
 /*! If active() is true, this turns it off. If active_r() was true
-  send() an fltk::DEACTIVATE event. */
+  send() an gnui::DEACTIVATE event. */
 void Widget::deactivate() {
   if (active_r()) {
     set_flag(INACTIVE|INACTIVE_R);
@@ -912,7 +912,7 @@ bool Widget::visible_r() const {
 }
 
 /*! If visible() is false, turn it on. If visible_r() is then true, send()
-  a fltk::SHOW event. */
+  a gnui::SHOW event. */
 void Widget::show() {
   if (!visible()) {
     clear_flag(INVISIBLE);
@@ -925,7 +925,7 @@ void Widget::show() {
 }
 
 /*! If visible() is true, turn it off. If visible_r() was true then
-  send() a fltk::HIDE event, and redraw() the parent if necessary. */
+  send() a gnui::HIDE event, and redraw() the parent if necessary. */
 void Widget::hide() {
   if (visible_r()) {
     set_flag(INVISIBLE);
@@ -949,17 +949,17 @@ void Widget::hide() {
 
 /*! bool Widget::click_to_focus() const
   If true then clicking on this widget will give it the focus (the
-  handle() method must also return non-zero for fltk::PUSH and for
-  fltk::FOCUS events).
+  handle() method must also return non-zero for gnui::PUSH and for
+  gnui::FOCUS events).
 
   By default fltk only turns this on on certain widgets such as
-  fltk::Input. Turning this on on all widgets will make the user
+  gnui::Input. Turning this on on all widgets will make the user
   interface match Windows more closely.
 */
 
 /*! bool Widget::tab_to_focus() const
   If true then this widget can be given focus by keyboard navigation.
-  (the handle() method must also return non-zero for fltk::FOCUS events).
+  (the handle() method must also return non-zero for gnui::FOCUS events).
 
   Turning this off with clear_tab_to_focus() will also turn off
   the click_to_focus() flag. This is for compatability in case we
@@ -983,34 +983,34 @@ void Widget::hide() {
 */
 
 /*! bool Widget::value() const
-  A true/false flag used by fltk::Button to indicate the current state
-  and by "parent" items in a hierarchial fltk::Browser to indicate if
+  A true/false flag used by gnui::Button to indicate the current state
+  and by "parent" items in a hierarchial gnui::Browser to indicate if
   they are open. Many widgets will draw pushed-in or otherwise
   indicate that this flag is on.
 */
 
 /*! bool Widget::selected() const
   A true/false flag used to mark widgets currently selected in
-  fltk::Menu and fltk::Browser widgets. Some widgets will draw with
+  gnui::Menu and gnui::Browser widgets. Some widgets will draw with
   much different colors if this is on.  */
 
-/*!  Returns true if this is equal to fltk::pushed(), meaning it has
-  responded to an fltk::PUSH event and the mouse is still held
+/*!  Returns true if this is equal to gnui::pushed(), meaning it has
+  responded to an gnui::PUSH event and the mouse is still held
   down. Using this function avoids the need to include the <fltk/Fl.h>
   header file. */
-bool Widget::pushed() const {return this == fltk::pushed();}
+bool Widget::pushed() const {return this == gnui::pushed();}
 
-/*!  Returns true if this is equal to fltk::focus(), meaning it has
-  the keyboard focus and fltk::KEY events will be sent to this
+/*!  Returns true if this is equal to gnui::focus(), meaning it has
+  the keyboard focus and gnui::KEY events will be sent to this
   widget. Using this function avoids the need to include the
   <fltk/Fl.h> header file. */
-bool Widget::focused() const {return this == fltk::focus();}
+bool Widget::focused() const {return this == gnui::focus();}
 
-/*!  Returns true if this is equal to fltk::belowmouse(), meaning it
-  has the keyboard focus and fltk::MOVE or fltk::PUSH events will be
+/*!  Returns true if this is equal to gnui::belowmouse(), meaning it
+  has the keyboard focus and gnui::MOVE or gnui::PUSH events will be
   sent to this widget. Using this function avoids the need to include
   the <fltk/Fl.h> header file. */
-bool Widget::belowmouse() const {return this == fltk::belowmouse();}
+bool Widget::belowmouse() const {return this == gnui::belowmouse();}
 
 ////////////////////////////////////////////////////////////////
 

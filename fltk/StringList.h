@@ -26,12 +26,12 @@
 
 #include "Menu.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API StringHierarchy : public List {
   Widget* generated_item_;
 public:
-  // fltk::List virtual functions:
+  // gnui::List virtual functions:
   virtual Widget* child(const Menu*, const int* indexes, int level);
   // virtual functions to return hierarchy of strings:
   virtual int children(const Menu*, const int* indexes, int level) = 0;

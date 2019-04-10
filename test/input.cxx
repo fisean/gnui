@@ -37,7 +37,7 @@
 #include <fltk/ToggleButton.h>
 #include <fltk/show_colormap.h>
 #include <stdio.h>
-using namespace fltk;
+using namespace gnui;
 
 void cb(Widget *ob) {
   printf("Callback for %s '%s'\n",ob->label(),((Input*)ob)->text());
@@ -90,7 +90,7 @@ void color_cb(Widget* button, void* v) {
   //s.selection_textcolor = contrast(s.textcolor, s.selection_color);
   button->color(c);
   button->labelcolor(contrast(BLACK,(Color)c));
-  fltk::redraw();
+  gnui::redraw();
 }
 
 int main(int argc, char **argv) {

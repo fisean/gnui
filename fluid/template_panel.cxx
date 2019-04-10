@@ -17,12 +17,12 @@
 #include <unistd.h>
 #endif // WIN32 && !__CYGWIN__
 
-fltk::DoubleBufferWindow *template_panel=(fltk::DoubleBufferWindow *)0;
+gnui::DoubleBufferWindow *template_panel=(gnui::DoubleBufferWindow *)0;
 
-static void cb_template_panel(fltk::DoubleBufferWindow*, void*) {
-  fltk::SharedImage *img = (fltk::SharedImage *)template_preview->image();
+static void cb_template_panel(gnui::DoubleBufferWindow*, void*) {
+  gnui::SharedImage *img = (gnui::SharedImage *)template_preview->image();
   if (img) img->remove();
-  template_preview->image((fltk::Symbol*)0);
+  template_preview->image((gnui::Symbol*)0);
   
   template_browser->deselect();
   template_name->value("");
@@ -30,27 +30,27 @@ static void cb_template_panel(fltk::DoubleBufferWindow*, void*) {
   template_panel->hide();
 }
 
-fltk::Browser *template_browser=(fltk::Browser *)0;
+gnui::Browser *template_browser=(gnui::Browser *)0;
 
-fltk::InvisibleBox *template_preview=(fltk::InvisibleBox *)0;
+gnui::InvisibleBox *template_preview=(gnui::InvisibleBox *)0;
 
-fltk::Input *template_name=(fltk::Input *)0;
+gnui::Input *template_name=(gnui::Input *)0;
 
-static void cb_template_name(fltk::Input*, void*) {
+static void cb_template_name(gnui::Input*, void*) {
   if (strlen(template_name->value())) {
     template_submit->activate();
-    if (fltk::event_key() == fltk::KeypadEnter || fltk::event_key() == fltk::ReturnKey) template_panel->hide();
+    if (gnui::event_key() == gnui::KeypadEnter || gnui::event_key() == gnui::ReturnKey) template_panel->hide();
   } else template_submit->deactivate();
 }
 
-fltk::Input *template_instance=(fltk::Input *)0;
+gnui::Input *template_instance=(gnui::Input *)0;
 
-fltk::Button *template_delete=(fltk::Button *)0;
+gnui::Button *template_delete=(gnui::Button *)0;
 
-static void cb_Cancel(fltk::Button*, void*) {
-  fltk::SharedImage *img = (fltk::SharedImage *)template_preview->image();
+static void cb_Cancel(gnui::Button*, void*) {
+  gnui::SharedImage *img = (gnui::SharedImage *)template_preview->image();
   if (img) img->remove();
-  template_preview->image((fltk::Symbol*)0);
+  template_preview->image((gnui::Symbol*)0);
   
   template_browser->deselect();
   template_name->value("");
@@ -58,62 +58,62 @@ static void cb_Cancel(fltk::Button*, void*) {
   template_panel->hide();
 }
 
-fltk::ReturnButton *template_submit=(fltk::ReturnButton *)0;
+gnui::ReturnButton *template_submit=(gnui::ReturnButton *)0;
 
-static void cb_template_submit(fltk::ReturnButton*, void*) {
-  fltk::SharedImage *img = 
-  	 (fltk::SharedImage *)template_preview->image();
+static void cb_template_submit(gnui::ReturnButton*, void*) {
+  gnui::SharedImage *img = 
+  	 (gnui::SharedImage *)template_preview->image();
   if (img) img->remove();
-  template_preview->image((fltk::Symbol*)0);
+  template_preview->image((gnui::Symbol*)0);
   
   template_panel->hide();
 }
 
-fltk::DoubleBufferWindow* make_template_panel() {
-  fltk::DoubleBufferWindow* w;
-   {fltk::DoubleBufferWindow* o = template_panel = new fltk::DoubleBufferWindow(460, 355, "New/Save Template");
+gnui::DoubleBufferWindow* make_template_panel() {
+  gnui::DoubleBufferWindow* w;
+   {gnui::DoubleBufferWindow* o = template_panel = new gnui::DoubleBufferWindow(460, 355, "New/Save Template");
     w = o;
     o->type(241);
     o->shortcut(0xff1b);
-    o->callback((fltk::Callback*)cb_template_panel);
+    o->callback((gnui::Callback*)cb_template_panel);
     o->begin();
-     {fltk::Browser* o = template_browser = new fltk::Browser(10, 28, 180, 250, "Available Templates:");
+     {gnui::Browser* o = template_browser = new gnui::Browser(10, 28, 180, 250, "Available Templates:");
       o->set_vertical();
-      o->labelfont(fltk::HELVETICA_BOLD);
-      o->callback((fltk::Callback*)template_browser_cb);
-      o->align(fltk::ALIGN_TOP|fltk::ALIGN_LEFT);
-      o->when(fltk::WHEN_CHANGED);
+      o->labelfont(gnui::HELVETICA_BOLD);
+      o->callback((gnui::Callback*)template_browser_cb);
+      o->align(gnui::ALIGN_TOP|gnui::ALIGN_LEFT);
+      o->when(gnui::WHEN_CHANGED);
     }
-     {fltk::InvisibleBox* o = template_preview = new fltk::InvisibleBox(200, 28, 250, 250);
-      o->box(fltk::THIN_DOWN_BOX);
-      o->align(fltk::ALIGN_TOP|fltk::ALIGN_LEFT|fltk::ALIGN_CENTER|fltk::ALIGN_CLIP);
-      fltk::Group::current()->resizable(o);
+     {gnui::InvisibleBox* o = template_preview = new gnui::InvisibleBox(200, 28, 250, 250);
+      o->box(gnui::THIN_DOWN_BOX);
+      o->align(gnui::ALIGN_TOP|gnui::ALIGN_LEFT|gnui::ALIGN_CENTER|gnui::ALIGN_CLIP);
+      gnui::Group::current()->resizable(o);
     }
-     {fltk::Input* o = template_name = new fltk::Input(124, 288, 326, 25, "Template Name:");
-      o->labelfont(fltk::HELVETICA_BOLD);
-      o->textfont(fltk::COURIER);
-      o->callback((fltk::Callback*)cb_template_name);
-      o->when(fltk::WHEN_NEVER);
+     {gnui::Input* o = template_name = new gnui::Input(124, 288, 326, 25, "Template Name:");
+      o->labelfont(gnui::HELVETICA_BOLD);
+      o->textfont(gnui::COURIER);
+      o->callback((gnui::Callback*)cb_template_name);
+      o->when(gnui::WHEN_NEVER);
     }
-     {fltk::Input* o = template_instance = new fltk::Input(124, 288, 326, 25, "Instance Name:");
-      o->labelfont(fltk::HELVETICA_BOLD);
-      o->textfont(fltk::COURIER);
+     {gnui::Input* o = template_instance = new gnui::Input(124, 288, 326, 25, "Instance Name:");
+      o->labelfont(gnui::HELVETICA_BOLD);
+      o->textfont(gnui::COURIER);
       o->hide();
     }
-     {fltk::Group* o = new fltk::Group(10, 323, 440, 25);
+     {gnui::Group* o = new gnui::Group(10, 323, 440, 25);
       o->begin();
-       {fltk::Button* o = template_delete = new fltk::Button(0, 0, 133, 25, "Delete Template");
-        o->callback((fltk::Callback*)template_delete_cb);
+       {gnui::Button* o = template_delete = new gnui::Button(0, 0, 133, 25, "Delete Template");
+        o->callback((gnui::Callback*)template_delete_cb);
       }
-       {fltk::InvisibleBox* o = new fltk::InvisibleBox(143, 0, 126, 25);
-        fltk::Group::current()->resizable(o);
+       {gnui::InvisibleBox* o = new gnui::InvisibleBox(143, 0, 126, 25);
+        gnui::Group::current()->resizable(o);
       }
-       {fltk::Button* o = new fltk::Button(279, 0, 72, 25, "Cancel");
-        o->callback((fltk::Callback*)cb_Cancel);
+       {gnui::Button* o = new gnui::Button(279, 0, 72, 25, "Cancel");
+        o->callback((gnui::Callback*)cb_Cancel);
       }
-       {fltk::ReturnButton* o = template_submit = new fltk::ReturnButton(361, 0, 79, 25, "Save");
+       {gnui::ReturnButton* o = template_submit = new gnui::ReturnButton(361, 0, 79, 25, "Save");
         o->shortcut(0xff0d);
-        o->callback((fltk::Callback*)cb_template_submit);
+        o->callback((gnui::Callback*)cb_template_submit);
       }
       o->end();
     }
@@ -139,10 +139,10 @@ void template_load() {
   prefs.getUserdataPath(path, sizeof(path));
   strlcat(path, "templates", sizeof(path));
   
-  num_files = fltk::filename_list(path, &files);
+  num_files = gnui::filename_list(path, &files);
   
   for (i = 0; i < num_files; i ++) {
-    if (fltk::filename_match(files[i]->d_name, "*.fl")) {
+    if (gnui::filename_match(files[i]->d_name, "*.fl")) {
       // Format the name as the filename with "_" replaced with " "
       // and without the trailing ".fl"...
       strlcpy(name, files[i]->d_name, sizeof(name));

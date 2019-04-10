@@ -27,9 +27,9 @@
 #include <fltk/events.h>
 #include <fltk/draw.h>
 #include <fltk/Symbol.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::ReturnButton
+/*! \class gnui::ReturnButton
   Same as a normal button except the shortcut() is preset to ReturnKey
   and KeypadEnter, and a glyph is drawn to indicate this.
 

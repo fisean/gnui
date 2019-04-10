@@ -29,9 +29,9 @@
 #include <fltk/draw.h>
 #include <fltk/math.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::ValueSlider
+/*! \class gnui::ValueSlider
 
   Controls a single floating point value through a combination of a
   FloatInput and a Slider.
@@ -56,7 +56,7 @@ using namespace fltk;
   they use up/down keys to change the number in the text, or if they
   edit the text, when they hit the Enter key or they click on another
   widget or put the focus on another widget. Changing when() to
-  fltk::WHEN_CHANGED will make it do the callback on every edit
+  gnui::WHEN_CHANGED will make it do the callback on every edit
   of the text.
 
   You can get at the input field by using the public "input" instance

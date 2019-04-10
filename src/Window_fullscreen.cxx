@@ -32,7 +32,7 @@
 #include <fltk/x.h>
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static void innards(Window*, bool fullscreen, int X, int Y, int W, int H);
 
@@ -99,7 +99,7 @@ static void innards(Window* window, bool fullscreen, int X, int Y, int W, int H)
     // this method does in fact work, and is used below in my maximize()
     // so it should probably work here as well
     // possible problem is that sometimes one have to process/flush events
-    // i.e. by using fltk::wait(1) to have this working
+    // i.e. by using gnui::wait(1) to have this working
     // Perhaps below code can be done correctly(?) again - look at maximize()
     // (or perhaps Im totally wrong, Im new to Xlib  ;)  --Rafal
 
@@ -187,7 +187,7 @@ void Window::maximize() {
 
   // idea from Edzard Egberts - thanks
 
-  HWND hWnd = fltk::xid(this);
+  HWND hWnd = gnui::xid(this);
   ShowWindow(hWnd, SW_MAXIMIZE);
 
 #elif USE_X11
@@ -206,7 +206,7 @@ void Window::maximize() {
 
   memset(&xev, 0, sizeof(xev));
   xev.type = ClientMessage;
-  xev.xclient.window = fltk::xid(this);
+  xev.xclient.window = gnui::xid(this);
   xev.xclient.message_type = wm_state;
   xev.xclient.format = 32;
   xev.xclient.data.l[0] = 1;

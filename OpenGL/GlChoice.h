@@ -81,7 +81,7 @@
 # define GLContext GLXContext
 #endif
 
-namespace fltk {
+namespace gnui {
 
 // Describes crap needed to create a GLContext.
 class FL_GL_API GlChoice {

@@ -32,7 +32,7 @@
 
 #include "Input.h"
 
-namespace fltk {
+namespace gnui {
 
 class SecretInput : public Input {
 public:

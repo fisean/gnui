@@ -33,7 +33,7 @@
 
 #include <fltk/glut.h>
 #include <fltk/gl.h>
-using namespace fltk;
+using namespace gnui;
 
 Glut_Bitmap_Font glutBitmap9By15 = {SCREEN_FONT, 15};
 Glut_Bitmap_Font glutBitmap8By13 = {SCREEN_FONT, 13};

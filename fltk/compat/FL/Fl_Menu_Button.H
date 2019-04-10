@@ -3,6 +3,6 @@
 
 #include "Fl_Menu_.H"
 #include <fltk/PopupMenu.h>
-typedef fltk::PopupMenu Fl_Menu_Button;
+typedef gnui::PopupMenu Fl_Menu_Button;
 
 #endif

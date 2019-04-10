@@ -2,122 +2,122 @@
 
 #include "CubeViewUI.h"
 
-inline void CubeViewUI::cb_zoom_i(fltk::ValueSlider* o, void*) {
+inline void CubeViewUI::cb_zoom_i(gnui::ValueSlider* o, void*) {
   cube->setsize((float) o->value());
   cube->redraw();
 }
-void CubeViewUI::cb_zoom(fltk::ValueSlider* o, void* v) {
+void CubeViewUI::cb_zoom(gnui::ValueSlider* o, void* v) {
   ((CubeViewUI*)(o->parent()->parent()->user_data()))->cb_zoom_i(o,v);
 }
 
-inline void CubeViewUI::cb_vrot_i(fltk::ThumbWheel* o, void*) {
+inline void CubeViewUI::cb_vrot_i(gnui::ThumbWheel* o, void*) {
   cube->v_angle((float) o->value());
   cube->redraw();
 }
-void CubeViewUI::cb_vrot(fltk::ThumbWheel* o, void* v) {
+void CubeViewUI::cb_vrot(gnui::ThumbWheel* o, void* v) {
   ((CubeViewUI*)(o->parent()->parent()->parent()->user_data()))->cb_vrot_i(o,v);
 }
 
-inline void CubeViewUI::cb_ypan_i(fltk::Slider* o, void*) {
+inline void CubeViewUI::cb_ypan_i(gnui::Slider* o, void*) {
   cube->pany((float) o->value());
   cube->redraw();
 }
-void CubeViewUI::cb_ypan(fltk::Slider* o, void* v) {
+void CubeViewUI::cb_ypan(gnui::Slider* o, void* v) {
   ((CubeViewUI*)(o->parent()->parent()->parent()->user_data()))->cb_ypan_i(o,v);
 }
 
-inline void CubeViewUI::cb_xpan_i(fltk::Slider* o, void*) {
+inline void CubeViewUI::cb_xpan_i(gnui::Slider* o, void*) {
   cube->panx((float) o->value());
   cube->redraw();
 }
-void CubeViewUI::cb_xpan(fltk::Slider* o, void* v) {
+void CubeViewUI::cb_xpan(gnui::Slider* o, void* v) {
   ((CubeViewUI*)(o->parent()->parent()->parent()->user_data()))->cb_xpan_i(o,v);
 }
 
-inline void CubeViewUI::cb_hrot_i(fltk::ThumbWheel* o, void*) {
+inline void CubeViewUI::cb_hrot_i(gnui::ThumbWheel* o, void*) {
   cube->h_angle((float) o->value());
   cube->redraw();
 }
-void CubeViewUI::cb_hrot(fltk::ThumbWheel* o, void* v) {
+void CubeViewUI::cb_hrot(gnui::ThumbWheel* o, void* v) {
   ((CubeViewUI*)(o->parent()->parent()->parent()->user_data()))->cb_hrot_i(o,v);
 }
 
 CubeViewUI::CubeViewUI() {
-  fltk::Window* w;
-   {fltk::Window* o = mainWindow = new fltk::Window(415, 406, "CubeView");
+  gnui::Window* w;
+   {gnui::Window* o = mainWindow = new gnui::Window(415, 406, "CubeView");
     w = o;
     o->user_data((void*)(this));
     o->begin();
-     {fltk::Group* o = new fltk::Group(3, 3, 409, 400);
+     {gnui::Group* o = new gnui::Group(3, 3, 409, 400);
       o->begin();
-       {fltk::ValueSlider* o = zoom = new fltk::ValueSlider(101, 0, 227, 19, "Zoom");
-        o->labelfont(fltk::HELVETICA_BOLD);
-        o->labelcolor((fltk::Color)136);
+       {gnui::ValueSlider* o = zoom = new gnui::ValueSlider(101, 0, 227, 19, "Zoom");
+        o->labelfont(gnui::HELVETICA_BOLD);
+        o->labelcolor((gnui::Color)136);
         o->minimum(1);
         o->maximum(50);
         o->step(0.1);
         o->value(10);
-        o->callback((fltk::Callback*)cb_zoom);
-        o->align(fltk::ALIGN_LEFT);
+        o->callback((gnui::Callback*)cb_zoom);
+        o->align(gnui::ALIGN_LEFT);
       }
-       {fltk::Group* o = VChange = new fltk::Group(0, 97, 37, 192);
+       {gnui::Group* o = VChange = new gnui::Group(0, 97, 37, 192);
         o->set_vertical();
         o->begin();
-         {fltk::ThumbWheel* o = vrot = new fltk::ThumbWheel(0, 0, 17, 186, "V Rot");
+         {gnui::ThumbWheel* o = vrot = new gnui::ThumbWheel(0, 0, 17, 186, "V Rot");
           o->set_vertical();
-          o->labeltype(fltk::NO_LABEL);
+          o->labeltype(gnui::NO_LABEL);
           o->minimum(-180);
           o->maximum(180);
           o->step(1);
-          o->callback((fltk::Callback*)cb_vrot);
-          o->align(fltk::ALIGN_TOP|fltk::ALIGN_WRAP);
+          o->callback((gnui::Callback*)cb_vrot);
+          o->align(gnui::ALIGN_TOP|gnui::ALIGN_WRAP);
         }
-         {fltk::Slider* o = ypan = new fltk::Slider(20, 0, 17, 186);
+         {gnui::Slider* o = ypan = new gnui::Slider(20, 0, 17, 186);
           o->set_vertical();
-          o->labeltype(fltk::NO_LABEL);
-          o->labelcolor((fltk::Color)136);
+          o->labeltype(gnui::NO_LABEL);
+          o->labelcolor((gnui::Color)136);
           o->minimum(-25);
           o->maximum(25);
           o->step(0.1);
-          o->callback((fltk::Callback*)cb_ypan);
-          o->align(fltk::ALIGN_CENTER);
+          o->callback((gnui::Callback*)cb_ypan);
+          o->align(gnui::ALIGN_CENTER);
         }
         o->end();
       }
-       {fltk::Group* o = HChange = new fltk::Group(115, 359, 190, 40);
+       {gnui::Group* o = HChange = new gnui::Group(115, 359, 190, 40);
         o->begin();
-         {fltk::Slider* o = xpan = new fltk::Slider(2, 2, 186, 17);
-          o->labeltype(fltk::NO_LABEL);
-          o->labelcolor((fltk::Color)136);
+         {gnui::Slider* o = xpan = new gnui::Slider(2, 2, 186, 17);
+          o->labeltype(gnui::NO_LABEL);
+          o->labelcolor((gnui::Color)136);
           o->minimum(25);
           o->maximum(-25);
           o->step(0.1);
-          o->callback((fltk::Callback*)cb_xpan);
-          o->align(fltk::ALIGN_CENTER);
+          o->callback((gnui::Callback*)cb_xpan);
+          o->align(gnui::ALIGN_CENTER);
         }
-         {fltk::ThumbWheel* o = hrot = new fltk::ThumbWheel(2, 21, 186, 17, "H Rotation");
-          o->labeltype(fltk::NO_LABEL);
+         {gnui::ThumbWheel* o = hrot = new gnui::ThumbWheel(2, 21, 186, 17, "H Rotation");
+          o->labeltype(gnui::NO_LABEL);
           o->minimum(-180);
           o->maximum(180);
           o->step(1);
-          o->callback((fltk::Callback*)cb_hrot);
-          o->align(fltk::ALIGN_LEFT);
+          o->callback((gnui::Callback*)cb_hrot);
+          o->align(gnui::ALIGN_LEFT);
         }
         o->end();
       }
-       {fltk::Group* o = MainView = new fltk::Group(41, 24, 333, 333);
+       {gnui::Group* o = MainView = new gnui::Group(41, 24, 333, 333);
         o->begin();
-         {fltk::InvisibleBox* o = cframe = new fltk::InvisibleBox(0, 0, 333, 333);
-          o->box(fltk::DOWN_BOX);
-          o->color((fltk::Color)56);
-          o->selection_color((fltk::Color)69);
+         {gnui::InvisibleBox* o = cframe = new gnui::InvisibleBox(0, 0, 333, 333);
+          o->box(gnui::DOWN_BOX);
+          o->color((gnui::Color)56);
+          o->selection_color((gnui::Color)69);
         }
          {cube = new CubeView(2, 2, 329, 329);
         }
         o->end();
       }
       o->end();
-      fltk::Group::current()->resizable(o);
+      gnui::Group::current()->resizable(o);
     }
     o->end();
   }

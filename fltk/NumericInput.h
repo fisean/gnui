@@ -33,7 +33,7 @@
 
 #include "Input.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API NumericInput : public Input {
  protected:

@@ -94,7 +94,7 @@ static int numericsort(const dirent*const*A, const dirent*const*B, int cs) {
  * 'fl_casenumericsort()' - Compare directory entries with case-sensitivity.
  */
 
-int fltk::casenumericsort(const dirent*const*A, const dirent*const*B) {
+int gnui::casenumericsort(const dirent*const*A, const dirent*const*B) {
     return ::numericsort(A, B, 0);
 }
 
@@ -102,11 +102,11 @@ int fltk::casenumericsort(const dirent*const*A, const dirent*const*B) {
  * 'fl_numericsort()' - Compare directory entries with case-sensitivity.
  */
 
-int fltk::numericsort(const dirent*const*A, const dirent*const*B) {
+int gnui::numericsort(const dirent*const*A, const dirent*const*B) {
     return ::numericsort(A, B, 1);
 }
 
-int fltk::filename_list(const char *d, dirent ***list) {
+int gnui::filename_list(const char *d, dirent ***list) {
   return filename_list(d, list, numericsort);
 }
 

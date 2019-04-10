@@ -6,6 +6,6 @@
 // If you want the user to be able to change it, replace with a Value_Input.
 
 #include <fltk/ValueOutput.h>
-typedef fltk::ValueOutput Fl_Value_Output;
+typedef gnui::ValueOutput Fl_Value_Output;
 
 #endif

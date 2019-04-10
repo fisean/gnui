@@ -28,7 +28,7 @@
 
 #include "Dial.h"
 
-namespace fltk {
+namespace gnui {
 
 /*! Dial but the constructor sets type() to FILL, so it draws a pie slice. */
 class FL_API FillDial : public Dial {

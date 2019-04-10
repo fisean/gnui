@@ -27,7 +27,7 @@
 #include <fltk/visual.h>
 #include <fltk/x.h>
 
-/*! \fn void fltk::own_colormap();
+/*! \fn void gnui::own_colormap();
 
   Makes FLTK use its own X colormap. This may make FLTK display
   better and will reduce conflicts with other programs that want lots
@@ -44,11 +44,11 @@
 
 // There is probably something relevant to do on MSWindows 8-bit displays
 // but I don't know what it is
-void fltk::own_colormap() {}
+void gnui::own_colormap() {}
 
 #else
 
-void fltk::own_colormap() {
+void gnui::own_colormap() {
   open_display();
 #if USE_COLORMAP
   switch (xvisual->c_class) {

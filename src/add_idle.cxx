@@ -27,7 +27,7 @@
 // Replaces the older set_idle() call (which is used to implement this)
 
 #include <fltk/run.h>
-using namespace fltk;
+using namespace gnui;
 
 struct IdleCb {
   void (*cb)(void*);
@@ -49,23 +49,23 @@ static void call_idle() {
 }
 
 /*!
-  Adds a callback function that is called every time by fltk::wait()
+  Adds a callback function that is called every time by gnui::wait()
   and also makes it act as though the timeout is zero (this makes
-  fltk::wait() return immediately, so if it is in a loop it is called
+  gnui::wait() return immediately, so if it is in a loop it is called
   repeatedly, and thus the idle fucntion is called repeatedly). The
   idle function can be used to get background processing done.
 
   You can have multiple idle callbacks. They are called one after
   another in a round-robin fashion, checking for events between each.
 
-  fltk::wait() and fltk::check() call idle callbacks, but
-  fltk::ready() does not.
+  gnui::wait() and gnui::check() call idle callbacks, but
+  gnui::ready() does not.
 
   The idle callback can call any FLTK functions, including
-  fltk::wait(), fltk::check(), and fltk::ready(). In this case fltk
+  gnui::wait(), gnui::check(), and gnui::ready(). In this case fltk
   will not recursively call the idle callback.
 */
-void fltk::add_idle(TimeoutHandler cb, void* data) {
+void gnui::add_idle(TimeoutHandler cb, void* data) {
   IdleCb* p = freelist;
   if (p) freelist = p->next;
   else p = new IdleCb;
@@ -83,14 +83,14 @@ void fltk::add_idle(TimeoutHandler cb, void* data) {
 }
 
 /*! Returns true if the specified idle callback is currently installed. */
-bool fltk::has_idle(TimeoutHandler cb, void* data) {
+bool gnui::has_idle(TimeoutHandler cb, void* data) {
   for (IdleCb* p = first; p != last; p = p->next)
     if (p->cb == cb && p->data == data) return true;
   return false;
 }
 
 /*! Removes the specified idle callback, if it is installed. */
-void fltk::remove_idle(TimeoutHandler cb, void* data) {
+void gnui::remove_idle(TimeoutHandler cb, void* data) {
   IdleCb* p = first;
   if (!p) return;
   IdleCb* l = last;

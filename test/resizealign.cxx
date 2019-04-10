@@ -31,7 +31,7 @@
 #include <fltk/Window.h>
 #include <fltk/ToggleButton.h>
 
-using namespace fltk;
+using namespace gnui;
 
 Window *window;
 int flags = 0;

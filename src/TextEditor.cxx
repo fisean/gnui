@@ -33,7 +33,7 @@
 #include <fltk/TextEditor.h>
 #include <fltk/ask.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static void revert(Style* s) { }
 static NamedStyle style("TextEditor", revert, &TextEditor::default_style);
@@ -357,7 +357,7 @@ int TextEditor::kf_copy(int, TextEditor* e) {
   if (!e->buffer()->selected()) return 1;
   char *copy = e->buffer()->selection_text();
   if (*copy) {
-    fltk::copy(copy, strlen(copy), 1);
+    gnui::copy(copy, strlen(copy), 1);
   }
   free(copy);
   e->show_insert_position();
@@ -400,7 +400,7 @@ int TextEditor::handle_key() {
   // the changes that should be made to the text, as a number of
   // bytes to delete and a string to insert:
   int del;
-  if (fltk::compose(del)) {
+  if (gnui::compose(del)) {
     if (del) buffer()->select(insert_position()-del, insert_position());
     if (event_length()) {
       kill_selection(this);
@@ -444,7 +444,7 @@ int TextEditor::handle(int event) {
     if (buffer()->selected()) {
       redraw(); // Redraw selections...
     }
-    fltk::focus(this);
+    gnui::focus(this);
     return 1;
 
   case UNFOCUS:
@@ -481,8 +481,8 @@ int TextEditor::handle(int event) {
   case PUSH:
     if (event_button() == 2) {
       dragtype_ = -1;
-      fltk::paste(*this, 0);
-      fltk::focus(this);
+      gnui::paste(*this, 0);
+      gnui::focus(this);
       maybe_do_callback();
       return 1;
     }

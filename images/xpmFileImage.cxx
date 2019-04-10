@@ -20,12 +20,12 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::xpmFileImage
+/*! \class gnui::xpmFileImage
 
   Image type that reads a .xpm (X Pixmap) file in from disk.
 
   The normal use of a .xpm file is to #include it into
-  your source code. In that case you want to use an fltk::xpmImage
+  your source code. In that case you want to use an gnui::xpmImage
   object.
 
 */
@@ -37,7 +37,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
 static int hexdigit(int x) {
   if (isdigit(x)) return x-'0';

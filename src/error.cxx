@@ -88,14 +88,14 @@ static void error(const char *format, ...) {
 // Doxygen seems to have some trouble with these unless the comments
 // are put first like this:
 
-/*! \var void (*fltk::warning)(const char* format, ...)
+/*! \var void (*gnui::warning)(const char* format, ...)
   fltk will call this when it wants to report a recoverable problem.
   The display may be messed up but the user can probably keep
   working. (all X protocol errors call this). The default version on
   Unix prints a message to stderr, on Windows it pops up a MessageBox.
 */
 
-/*! \var void (*fltk::error)(const char* format, ...)
+/*! \var void (*gnui::error)(const char* format, ...)
   fltk will call this when it wants to report a recoverable problem.
   but in this case the display is so messed up it is unlikely the user
   can continue. Very little calls this now. The default version on
@@ -106,15 +106,15 @@ static void error(const char *format, ...) {
   own code.
 */
 
-/*! \var void (*fltk::fatal)(const char* format, ...)
+/*! \var void (*gnui::fatal)(const char* format, ...)
   fltk will call this when it wants to report a problem that it cannot
   recover from. You must not make any fltk calls again. The default
   version is the same function as error().
 */
 
-void (*fltk::warning)(const char* format, ...) = ::warning;
-void (*fltk::error)(const char* format, ...) = ::error;
-void (*fltk::fatal)(const char* format, ...) = ::error;
+void (*gnui::warning)(const char* format, ...) = ::warning;
+void (*gnui::error)(const char* format, ...) = ::error;
+void (*gnui::fatal)(const char* format, ...) = ::error;
 
 //
 // End of "$Id$".

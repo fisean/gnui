@@ -43,39 +43,39 @@
 
 const Enumeration item_type_menu[] = {
   {"Normal", "NORMAL", (void*)0},
-  {"Toggle", "TOGGLE", (void*)fltk::Item::TOGGLE},
-  {"Radio",  "RADIO",  (void*)fltk::Item::RADIO},
+  {"Toggle", "TOGGLE", (void*)gnui::Item::TOGGLE},
+  {"Radio",  "RADIO",  (void*)gnui::Item::RADIO},
   {0}};
 
 extern int reading_file;
 
-using namespace fltk;
+using namespace gnui;
 
 Widget *ItemType::widget(int,int,int,int) {
-  return new fltk::Item(reading_file ? 0 : "item");
+  return new gnui::Item(reading_file ? 0 : "item");
 }
 
 Widget *SubmenuType::widget(int,int,int,int) {
-  fltk::ItemGroup *g = new fltk::ItemGroup(reading_file ? 0 : "submenu");
-  fltk::Group::current(0);
+  gnui::ItemGroup *g = new gnui::ItemGroup(reading_file ? 0 : "submenu");
+  gnui::Group::current(0);
   return g;
 }
 
 ////////////////////////////////////////////////////////////////
 
 // This is the base class for widgets that contain a menu (ie
-// subclasses of fltk::Menu).
+// subclasses of gnui::Menu).
 
 FluidType* MenuType::click_test(int, int) {
   if (selected()) return 0; // let user move the widget
-  fltk::Menu* w = (fltk::Menu*)o;
+  gnui::Menu* w = (gnui::Menu*)o;
   if (!w->size()) return 0;
   Widget* save = w->item();
   w->item(0);
   // disable menu items callbacks so we can do selection
   w->when(WHEN_NEVER);
-  fltk::pushed(w);
-  w->handle(fltk::PUSH);
+  gnui::pushed(w);
+  w->handle(gnui::PUSH);
   // enable them again
   w->when(WHEN_RELEASE);
   const Widget* m = w->item();
@@ -89,28 +89,28 @@ FluidType* MenuType::click_test(int, int) {
 #include <fltk/PopupMenu.h>
 const Enumeration button_type_menu[] = {
   {"normal", 0,		(void*)0},
-  {"popup1", "POPUP1",	(void*)fltk::PopupMenu::POPUP1},
-  {"popup2", "POPUP2",	(void*)fltk::PopupMenu::POPUP2},
-  {"popup3", "POPUP3",	(void*)fltk::PopupMenu::POPUP3},
-  {"popup12","POPUP12", (void*)fltk::PopupMenu::POPUP12},
-  {"popup23","POPUP23", (void*)fltk::PopupMenu::POPUP23},
-  {"popup13","POPUP13", (void*)fltk::PopupMenu::POPUP13},
-  {"popup123","POPUP123",(void*)fltk::PopupMenu::POPUP123},
+  {"popup1", "POPUP1",	(void*)gnui::PopupMenu::POPUP1},
+  {"popup2", "POPUP2",	(void*)gnui::PopupMenu::POPUP2},
+  {"popup3", "POPUP3",	(void*)gnui::PopupMenu::POPUP3},
+  {"popup12","POPUP12", (void*)gnui::PopupMenu::POPUP12},
+  {"popup23","POPUP23", (void*)gnui::PopupMenu::POPUP23},
+  {"popup13","POPUP13", (void*)gnui::PopupMenu::POPUP13},
+  {"popup123","POPUP123",(void*)gnui::PopupMenu::POPUP123},
   {0}};
 
 ////////////////////////////////////////////////////////////////
 
 const Enumeration input_browser_type_menu[] = {
-  {"Normal",		0,	(void*)fltk::InputBrowser::NORMAL},
-  {"Non-Editable","NONEDITABLE",(void*)fltk::InputBrowser::NONEDITABLE},
-  {"Indented",	"INDENTED",	(void*)fltk::InputBrowser::INDENTED},
-  {"Non-Editable Indented","NONEDITABLE_INDENTED",(void*)fltk::InputBrowser::NONEDITABLE_INDENTED},
+  {"Normal",		0,	(void*)gnui::InputBrowser::NORMAL},
+  {"Non-Editable","NONEDITABLE",(void*)gnui::InputBrowser::NONEDITABLE},
+  {"Indented",	"INDENTED",	(void*)gnui::InputBrowser::INDENTED},
+  {"Non-Editable Indented","NONEDITABLE_INDENTED",(void*)gnui::InputBrowser::NONEDITABLE_INDENTED},
   {0}};
 
 #include <fltk/Browser.h>
 const Enumeration browser_type_menu[] = {
-  {"Single",	0,	(void*)fltk::Browser::NORMAL},
-  {"Multi",	"MULTI",	(void*)fltk::Browser::MULTI, "fltk::MultiBrowser"},
+  {"Single",	0,	(void*)gnui::Browser::NORMAL},
+  {"Multi",	"MULTI",	(void*)gnui::Browser::MULTI, "gnui::MultiBrowser"},
   {0}};
 
 #include <fltk/FileBrowser.h>
@@ -123,39 +123,39 @@ const Enumeration browser_type_menu[] = {
 #include <fltk/draw.h>
 
 void Shortcut_Button::draw() {
-  label(fltk::key_name(svalue));
+  label(gnui::key_name(svalue));
 #ifdef _WIN32
   Button::draw();
 #else
-  fltk::Button::draw();
+  gnui::Button::draw();
 #endif
 }
 
 int Shortcut_Button::handle(int e) {
   when(0); type(TOGGLE);
-  if (e == fltk::KEY) {
+  if (e == gnui::KEY) {
     if (!value()) return 0;
-    unsigned v = fltk::event_text()[0];
+    unsigned v = gnui::event_text()[0];
     if ((v > 32 && v < 0x7f) || (v > 0xa0 && v <= 0xff)) {
-      v = v | (fltk::event_state()&(fltk::META|fltk::ALT|fltk::CTRL));
+      v = v | (gnui::event_state()&(gnui::META|gnui::ALT|gnui::CTRL));
     } else {
-      v = (fltk::event_state()&(fltk::META|fltk::ALT|fltk::CTRL|fltk::SHIFT)) | fltk::event_key();
-      if (v == fltk::BackSpaceKey && svalue) v = 0;
+      v = (gnui::event_state()&(gnui::META|gnui::ALT|gnui::CTRL|gnui::SHIFT)) | gnui::event_key();
+      if (v == gnui::BackSpaceKey && svalue) v = 0;
     }
     if (v != svalue) {svalue = v; do_callback(); redraw();}
     return 1;
-  } else if (e == fltk::UNFOCUS) {
+  } else if (e == gnui::UNFOCUS) {
     int c = changed(); value(0); if (c) set_changed();
     return 1;
-  } else if (e == fltk::FOCUS) {
+  } else if (e == gnui::FOCUS) {
     return value();
   } else {
 #ifdef _WIN32
     int r = Button::handle(e);
 #else
-    int r = fltk::Button::handle(e);
+    int r = gnui::Button::handle(e);
 #endif
-    if (e == fltk::RELEASE && value() && fltk::focus() != this) take_focus();
+    if (e == gnui::RELEASE && value() && gnui::focus() != this) take_focus();
     return r;
   }
 }
@@ -178,8 +178,8 @@ void shortcut_in_cb(Shortcut_Button* i, void* v) {
 	if (o->is_menu_item()) ((WidgetType*)o)->redraw();
       }
   }
-  fltk::Color tc = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, shortcut)) tc = fltk::RED;
+  gnui::Color tc = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, shortcut)) tc = gnui::RED;
   if (i->labelcolor() != tc)
     { i->labelcolor(tc); i->redraw_label(); }
 }

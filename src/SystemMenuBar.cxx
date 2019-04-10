@@ -30,8 +30,8 @@
  * It has been tested on the "menubar" sample program and provides
  * basic functionality. 
  * 
- * To use the SystemMenuBar, simply replace the main fltk::MenuBar
- * in an application with fltk::SystemMenuBar and call fltk::System
+ * To use the SystemMenuBar, simply replace the main gnui::MenuBar
+ * in an application with gnui::SystemMenuBar and call gnui::System
  * MenuBar::layout() to refresh the menu in the top bar 
  *
  * FLTK features not supported by the Mac System menu
@@ -61,7 +61,7 @@
 
 #include <fltk/string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 /**
  * copy the text of a menuitem into a buffer.

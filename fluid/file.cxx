@@ -166,7 +166,7 @@ void read_error(const char *format, ...) {
   if (!fin) {
     char buffer[1024];
     vsprintf(buffer, format, args);
-    fltk::message(buffer);
+    gnui::message(buffer);
   } else {
     fprintf(stderr, "%s:%d: ", fname, lineno);
     vfprintf(stderr, format, args);
@@ -534,43 +534,43 @@ int fdesign_magic;
 #include <fltk/Group.h>
 
 static const char *class_matcher[] = {
-"fltk::CHECKBUTTON", "fltk::CheckButton",
-"fltk::ROUNDBUTTON", "fltk::RadioButton",
-"fltk::ROUND3DBUTTON", "fltk::RadioButton",
-"fltk::LIGHTBUTTON", "fltk::LightButton",
-"fltk::FRAME", "fltk::Box",
-"fltk::LABELFRAME", "fltk::Box",
-"fltk::TEXT", "fltk::Box",
-"fltk::VALSLIDER", "fltk::ValueSlider",
-"fltk::MENU", "fltk::PopupMenu",
-"3", "fltk::BITMAP",
-"1", "fltk::BOX",
-"71","fltk::BROWSER",
-"11","fltk::BUTTON",
-"4", "fltk::CHART",
-"42","fltk::CHOICE",
-"61","fltk::CLOCK",
-"25","fltk::COUNTER",
-"22","fltk::DIAL",
-"101","fltk::FREE",
-"31","fltk::INPUT",
-"12","fltk::LightButton",
-"41","fltk::MENU",
-"23","fltk::POSITIONER",
-"13","fltk::RadioButton",
-"21","fltk::SLIDER",
-"2", "fltk::BOX", // was fltk::TEXT
-"62","fltk::TIMER",
-"24","fltk::ValueSlider",
+"gnui::CHECKBUTTON", "gnui::CheckButton",
+"gnui::ROUNDBUTTON", "gnui::RadioButton",
+"gnui::ROUND3DBUTTON", "gnui::RadioButton",
+"gnui::LIGHTBUTTON", "gnui::LightButton",
+"gnui::FRAME", "gnui::Box",
+"gnui::LABELFRAME", "gnui::Box",
+"gnui::TEXT", "gnui::Box",
+"gnui::VALSLIDER", "gnui::ValueSlider",
+"gnui::MENU", "gnui::PopupMenu",
+"3", "gnui::BITMAP",
+"1", "gnui::BOX",
+"71","gnui::BROWSER",
+"11","gnui::BUTTON",
+"4", "gnui::CHART",
+"42","gnui::CHOICE",
+"61","gnui::CLOCK",
+"25","gnui::COUNTER",
+"22","gnui::DIAL",
+"101","gnui::FREE",
+"31","gnui::INPUT",
+"12","gnui::LightButton",
+"41","gnui::MENU",
+"23","gnui::POSITIONER",
+"13","gnui::RadioButton",
+"21","gnui::SLIDER",
+"2", "gnui::BOX", // was gnui::TEXT
+"62","gnui::TIMER",
+"24","gnui::ValueSlider",
 0};
 
 // This is copied from forms_compatability.cxx:
 
 static void fl_end_group() {
-  fltk::Group* g = fltk::Group::current();
+  gnui::Group* g = gnui::Group::current();
   // set the dimensions of a group to surround contents
   if (g->children() && !g->w()) {
-    fltk::Widget* o = g->child(0);
+    gnui::Widget* o = g->child(0);
     int rx = o->x();
     int ry = o->y();
     int rw = rx+o->w();
@@ -588,11 +588,11 @@ static void fl_end_group() {
     g->h(rh-ry);
   }
   // flip all the children's coordinate systems:
-  //if (fltk::flip) {
-    fltk::Widget* o = g->is_window() ? g : g->window();
+  //if (gnui::flip) {
+    gnui::Widget* o = g->is_window() ? g : g->window();
     int Y = o->h();
     for (int i=g->children(); i--;) {
-      fltk::Widget* o = g->child(i);
+      gnui::Widget* o = g->child(i);
 //      o->y(Y-o->y()-o->h());
       // I think this is equivalent?
       o->position(o->x(), Y-o->y()-o->h());
@@ -621,23 +621,23 @@ void read_fdesign() {
 
     if (!strcmp(name,"Name")) {
 
-      window = (WidgetType*)FluidType::make("fltk::Window");
+      window = (WidgetType*)FluidType::make("gnui::Window");
       window->name(value);
       window->label(value);
       FluidType::current = widget = window;
 
     } else if (!strcmp(name,"class")) {
 
-      if (!strcmp(value,"fltk::BEGIN_GROUP")) {
-	  group = widget = (WidgetType*)FluidType::make("fltk::Group");
+      if (!strcmp(value,"gnui::BEGIN_GROUP")) {
+	  group = widget = (WidgetType*)FluidType::make("gnui::Group");
 	FluidType::current = group;
-      } else if (!strcmp(value,"fltk::END_GROUP")) {
+      } else if (!strcmp(value,"gnui::END_GROUP")) {
 	if (group) {
-	  fltk::Group* g = (fltk::Group*)(group->o);
+	  gnui::Group* g = (gnui::Group*)(group->o);
 	  g->begin();
 	  // g->forms_end();
 	  fl_end_group(); // how 'bout this instead?
-	  fltk::Group::current(0);
+	  gnui::Group::current(0);
 	}
 	group = widget = 0;
 	FluidType::current = window;
@@ -647,8 +647,8 @@ void read_fdesign() {
 	    value = class_matcher[i+1]; break;}
 	  widget = (WidgetType*)FluidType::make(value);
 	if (!widget) {
-	  printf("class %s not found, using fltk::Button\n", value);
-	  widget = (WidgetType*)FluidType::make("fltk::Button");
+	  printf("class %s not found, using gnui::Button\n", value);
+	  widget = (WidgetType*)FluidType::make("gnui::Button");
 	}
       }
 

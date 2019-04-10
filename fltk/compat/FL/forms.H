@@ -34,8 +34,8 @@
 #include <fltk/Color.h>
 #include <fltk/Style.h>
 
-typedef fltk::Widget FL_OBJECT;
-typedef fltk::Window FL_FORM;
+typedef gnui::Widget FL_OBJECT;
+typedef gnui::Window FL_FORM;
 
 ////////////////////////////////////////////////////////////////
 // Random constants & symbols defined by forms.h file:
@@ -61,50 +61,50 @@ typedef fltk::Window FL_FORM;
 #define FL_IGNORE	-1
 #define FL_CLOSE	-2
 
-#define FL_LCOL		fltk::BLACK
-#define FL_COL1		fltk::GRAY75
-#define FL_MCOL		fltk::GRAY85
-#define FL_LEFT_BCOL	fltk::GRAY99
-#define FL_TOP_BCOL	fltk::GRAY90
-#define FL_BOTTOM_BCOL	fltk::GRAY35
-#define FL_RIGHT_BCOL	fltk::GRAY20
-#define FL_INACTIVE	fltk::GRAY66
-#define FL_INACTIVE_COL	fltk::GRAY66
-#define FL_FREE_COL1	fltk::Color(16)
-#define FL_FREE_COL2	fltk::Color(17)
-#define FL_FREE_COL3	fltk::Color(18)
-#define FL_FREE_COL4	fltk::Color(19)
-#define FL_FREE_COL5	fltk::Color(20)
-#define FL_FREE_COL6	fltk::Color(21)
-#define FL_FREE_COL7	fltk::Color(22)
-#define FL_FREE_COL8	fltk::Color(23)
-#define FL_FREE_COL9	fltk::Color(24)
-#define FL_FREE_COL10	fltk::Color(25)
-#define FL_FREE_COL11	fltk::Color(26)
-#define FL_FREE_COL12	fltk::Color(27)
-#define FL_FREE_COL13	fltk::Color(28)
-#define FL_FREE_COL14	fltk::Color(29)
-#define FL_FREE_COL15	fltk::Color(30)
-#define FL_FREE_COL16	fltk::Color(31)
-#define FL_TOMATO	fltk::Color(131)
-#define FL_INDIANRED	fltk::Color(164)
-#define FL_SLATEBLUE	fltk::Color(195)
-#define FL_DARKGOLD	fltk::Color(84)
-#define FL_PALEGREEN	fltk::Color(157)
-#define FL_ORCHID	fltk::Color(203)
-#define FL_DARKCYAN	fltk::Color(189)
-#define FL_DARKTOMATO	fltk::Color(113)
-#define FL_WHEAT	fltk::Color(174)
+#define FL_LCOL		gnui::BLACK
+#define FL_COL1		gnui::GRAY75
+#define FL_MCOL		gnui::GRAY85
+#define FL_LEFT_BCOL	gnui::GRAY99
+#define FL_TOP_BCOL	gnui::GRAY90
+#define FL_BOTTOM_BCOL	gnui::GRAY35
+#define FL_RIGHT_BCOL	gnui::GRAY20
+#define FL_INACTIVE	gnui::GRAY66
+#define FL_INACTIVE_COL	gnui::GRAY66
+#define FL_FREE_COL1	gnui::Color(16)
+#define FL_FREE_COL2	gnui::Color(17)
+#define FL_FREE_COL3	gnui::Color(18)
+#define FL_FREE_COL4	gnui::Color(19)
+#define FL_FREE_COL5	gnui::Color(20)
+#define FL_FREE_COL6	gnui::Color(21)
+#define FL_FREE_COL7	gnui::Color(22)
+#define FL_FREE_COL8	gnui::Color(23)
+#define FL_FREE_COL9	gnui::Color(24)
+#define FL_FREE_COL10	gnui::Color(25)
+#define FL_FREE_COL11	gnui::Color(26)
+#define FL_FREE_COL12	gnui::Color(27)
+#define FL_FREE_COL13	gnui::Color(28)
+#define FL_FREE_COL14	gnui::Color(29)
+#define FL_FREE_COL15	gnui::Color(30)
+#define FL_FREE_COL16	gnui::Color(31)
+#define FL_TOMATO	gnui::Color(131)
+#define FL_INDIANRED	gnui::Color(164)
+#define FL_SLATEBLUE	gnui::Color(195)
+#define FL_DARKGOLD	gnui::Color(84)
+#define FL_PALEGREEN	gnui::Color(157)
+#define FL_ORCHID	gnui::Color(203)
+#define FL_DARKCYAN	gnui::Color(189)
+#define FL_DARKTOMATO	gnui::Color(113)
+#define FL_WHEAT	gnui::Color(174)
 
-#define FL_ALIGN_BESIDE	fltk::ALIGN_INSIDE
+#define FL_ALIGN_BESIDE	gnui::ALIGN_INSIDE
 
 #define FL_PUP_TOGGLE	2 // FL_MENU_TOGGLE
 #define FL_PUP_INACTIVE 1 // FL_MENU_INACTIVE
-#define FL_NO_FRAME	fltk::NO_BOX
-#define FL_ROUNDED3D_UPBOX 	fltk::ROUND_UP_BOX
-#define FL_ROUNDED3D_DOWNBOX	fltk::ROUND_DOWN_BOX
-#define FL_OVAL3D_UPBOX		fltk::ROUND_UP_BOX
-#define FL_OVAL3D_DOWNBOX	fltk::ROUND_DOWN_BOX
+#define FL_NO_FRAME	gnui::NO_BOX
+#define FL_ROUNDED3D_UPBOX 	gnui::ROUND_UP_BOX
+#define FL_ROUNDED3D_DOWNBOX	gnui::ROUND_DOWN_BOX
+#define FL_OVAL3D_UPBOX		gnui::ROUND_UP_BOX
+#define FL_OVAL3D_DOWNBOX	gnui::ROUND_DOWN_BOX
 
 #define FL_MBUTTON1	1
 #define FL_LEFTMOUSE	1

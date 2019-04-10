@@ -2,7 +2,7 @@
 #include "PrefsData.h"
 #include <fltk/Window.h>
 
-using namespace fltk;
+using namespace gnui;
 
 WidgetClassType Widget_Class_type;
 WidgetClassType *current_widget_class = 0;

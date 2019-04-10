@@ -4,14 +4,14 @@
 #include <fltk/filename.h>
 #include <string.h>
 
-#define fl_filename_name	fltk::filename_name
-#define fl_filename_ext		fltk::filename_ext
-#define fl_filename_match	fltk::filename_match
-#define fl_filename_isdir	fltk::filename_isdir
-#define fl_filename_list	fltk::filename_list
+#define fl_filename_name	gnui::filename_name
+#define fl_filename_ext		gnui::filename_ext
+#define fl_filename_match	gnui::filename_match
+#define fl_filename_isdir	gnui::filename_isdir
+#define fl_filename_list	gnui::filename_list
 
 inline char *fl_filename_setext(char * name, const char *ext) {
-  strcpy(fltk::filename_ext(name), ext ? ext : "");
+  strcpy(gnui::filename_ext(name), ext ? ext : "");
   return name;
 }
 #define FL_PATH_MAX PATH_MAX // all buffers are assummed to be at least this long

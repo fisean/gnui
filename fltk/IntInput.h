@@ -28,7 +28,7 @@
 
 #include "FloatInput.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API IntInput : public FloatInput {
 public:

@@ -47,7 +47,7 @@
 #endif // WIN32 && !__CYGWIN__
 
 
-extern fltk::Item*  undo_item[2];
+extern gnui::Item*  undo_item[2];
 const int UNDO_ITEM=0;
 const int REDO_ITEM=1;
 
@@ -78,7 +78,7 @@ void Undo::update_saved() {
 }
 
 // Redo menu callback
-void Undo::redo_cb(fltk::Widget *, void *) {
+void Undo::redo_cb(gnui::Widget *, void *) {
   char	fname[1024];			// Undo checkpoint file
   if (current >= last) return;
 
@@ -100,7 +100,7 @@ void Undo::redo_cb(fltk::Widget *, void *) {
 }
 
 // Undo menu callback
-void Undo::undo_cb(fltk::Widget *, void *) {
+void Undo::undo_cb(gnui::Widget *, void *) {
   char	fname[1024];			// Undo checkpoint file
   
   if (current <= 0) return;

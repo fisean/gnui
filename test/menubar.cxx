@@ -48,18 +48,18 @@
 #include <fltk/SystemMenuBar.h>
 #endif
 
-fltk::Window *window;
+gnui::Window *window;
 
-fltk::Menu* menus[4];
+gnui::Menu* menus[4];
 
-void test_cb(fltk::Widget* w, void*)
+void test_cb(gnui::Widget* w, void*)
 {
-  fltk::Menu* mw = (fltk::Menu*)w;
-  fltk::Widget* m = mw->item();
+  gnui::Menu* mw = (gnui::Menu*)w;
+  gnui::Widget* m = mw->item();
   if (!m)
     printf("NULL\n");
   else if (m->shortcut())
-    printf("%s - %s\n", m->label(), fltk::key_name(m->shortcut()));
+    printf("%s - %s\n", m->label(), gnui::key_name(m->shortcut()));
   else
     printf("%s\n", m->label());
 
@@ -72,37 +72,37 @@ void test_cb(fltk::Widget* w, void*)
   m->do_callback();
 }
 
-void quit_cb(fltk::Widget*, void*) { exit(0); }
+void quit_cb(gnui::Widget*, void*) { exit(0); }
 
 Fl_Menu_Item hugemenu[100];
 
 Fl_Menu_Item menutable[] = {
   {"foo",0,0,0,FL_MENU_INACTIVE},
   {"&File",0,0,0,FL_SUBMENU},
-    {"&Open",	fltk::COMMAND+'O', 0, 0, FL_MENU_INACTIVE},
+    {"&Open",	gnui::COMMAND+'O', 0, 0, FL_MENU_INACTIVE},
     {"&Close",	0,	0},
-    {"&Quit",	fltk::COMMAND+'Q', quit_cb, 0, fltk::MENU_DIVIDER},
+    {"&Quit",	gnui::COMMAND+'Q', quit_cb, 0, gnui::MENU_DIVIDER},
     {"shortcut",'A'},
-    {"shortcut",fltk::SHIFT+'A'},
-    {"shortcut",fltk::COMMAND+'A'},
-    {"shortcut",fltk::COMMAND+fltk::SHIFT+'A'},
-    {"shortcut",fltk::ACCELERATOR+'A'},
-    {"shortcut",fltk::ACCELERATOR+fltk::SHIFT+'A'},
-    {"shortcut",fltk::ACCELERATOR+fltk::COMMAND+'A'},
-    {"shortcut",fltk::ACCELERATOR+fltk::SHIFT+fltk::COMMAND+'A', 0,0, fltk::MENU_DIVIDER},
-    {"shortcut",fltk::ReturnKey},
-    {"shortcut",fltk::COMMAND+fltk::ReturnKey, 0,0, fltk::MENU_DIVIDER},
-    {"shortcut",fltk::F1Key},
-    {"shortcut",fltk::SHIFT+fltk::F1Key},
-    {"shortcut",fltk::COMMAND+fltk::F1Key},
-    {"shortcut",fltk::SHIFT+fltk::COMMAND+fltk::F1Key},
-    {"shortcut",fltk::ACCELERATOR+fltk::F1Key},
-    {"shortcut",fltk::ACCELERATOR+fltk::SHIFT+fltk::F1Key},
-    {"shortcut",fltk::ACCELERATOR+fltk::COMMAND+fltk::F1Key},
-    {"shortcut",fltk::ACCELERATOR+fltk::SHIFT+fltk::COMMAND+fltk::F1Key, 0,0, fltk::MENU_DIVIDER},
-    {"&Submenus", fltk::ACCELERATOR+'S',	0, (void*)"Submenu1", FL_SUBMENU},
+    {"shortcut",gnui::SHIFT+'A'},
+    {"shortcut",gnui::COMMAND+'A'},
+    {"shortcut",gnui::COMMAND+gnui::SHIFT+'A'},
+    {"shortcut",gnui::ACCELERATOR+'A'},
+    {"shortcut",gnui::ACCELERATOR+gnui::SHIFT+'A'},
+    {"shortcut",gnui::ACCELERATOR+gnui::COMMAND+'A'},
+    {"shortcut",gnui::ACCELERATOR+gnui::SHIFT+gnui::COMMAND+'A', 0,0, gnui::MENU_DIVIDER},
+    {"shortcut",gnui::ReturnKey},
+    {"shortcut",gnui::COMMAND+gnui::ReturnKey, 0,0, gnui::MENU_DIVIDER},
+    {"shortcut",gnui::F1Key},
+    {"shortcut",gnui::SHIFT+gnui::F1Key},
+    {"shortcut",gnui::COMMAND+gnui::F1Key},
+    {"shortcut",gnui::SHIFT+gnui::COMMAND+gnui::F1Key},
+    {"shortcut",gnui::ACCELERATOR+gnui::F1Key},
+    {"shortcut",gnui::ACCELERATOR+gnui::SHIFT+gnui::F1Key},
+    {"shortcut",gnui::ACCELERATOR+gnui::COMMAND+gnui::F1Key},
+    {"shortcut",gnui::ACCELERATOR+gnui::SHIFT+gnui::COMMAND+gnui::F1Key, 0,0, gnui::MENU_DIVIDER},
+    {"&Submenus", gnui::ACCELERATOR+'S',	0, (void*)"Submenu1", FL_SUBMENU},
       {"A very long menu item"},
-      {"&submenu",fltk::COMMAND+'S',	0, (void*)"submenu2", FL_SUBMENU},
+      {"&submenu",gnui::COMMAND+'S',	0, (void*)"submenu2", FL_SUBMENU},
 	{"item 1"},
 	{"item 2"},
 	{"item 3"},
@@ -112,43 +112,43 @@ Fl_Menu_Item menutable[] = {
       {0},
     {0},
   {"&Edit",0,0,0,FL_SUBMENU},
-    {"Undo",	fltk::COMMAND+'Z',	0},
-    {"Redo",	fltk::COMMAND+'Y',	0, 0, fltk::MENU_DIVIDER},
-    {"Cut",	fltk::COMMAND+'X',	0},
-    {"Copy",	fltk::COMMAND+'C',	0},
-    {"Paste",	fltk::COMMAND+'V',	0},
-    {"Inactive",fltk::COMMAND+'D',	0, 0, FL_MENU_INACTIVE},
-    {"Clear",	0,	0, 0, fltk::MENU_DIVIDER},
-    {"Invisible",fltk::COMMAND+'E',	0, 0, FL_MENU_INVISIBLE},
+    {"Undo",	gnui::COMMAND+'Z',	0},
+    {"Redo",	gnui::COMMAND+'Y',	0, 0, gnui::MENU_DIVIDER},
+    {"Cut",	gnui::COMMAND+'X',	0},
+    {"Copy",	gnui::COMMAND+'C',	0},
+    {"Paste",	gnui::COMMAND+'V',	0},
+    {"Inactive",gnui::COMMAND+'D',	0, 0, FL_MENU_INACTIVE},
+    {"Clear",	0,	0, 0, gnui::MENU_DIVIDER},
+    {"Invisible",gnui::COMMAND+'E',	0, 0, FL_MENU_INVISIBLE},
     {"Preferences",0,	0},
     {"Larger", '+', 0, 0},
     {"Smaller", '-', 0, 0},
     {0},
   {"&Checkbox",0,0,0,FL_SUBMENU},
-    {"&Alpha",	0,	0, (void *)1, fltk::MENU_TOGGLE|FL_MENU_VALUE},
-    {"&Beta",	0,	0, (void *)2, fltk::MENU_TOGGLE},
-    {"&Gamma",	0,	0, (void *)3, fltk::MENU_TOGGLE},
-    {"&Delta",	0,	0, (void *)4, fltk::MENU_TOGGLE|FL_MENU_VALUE},
-    {"&Epsilon",0,	0, (void *)5, fltk::MENU_TOGGLE},
-    {"&Pi",	0,	0, (void *)6, fltk::MENU_TOGGLE},
-    {"&Mu",	0,	0, (void *)7, fltk::MENU_TOGGLE|fltk::MENU_DIVIDER},
-    {"Red",	0,	0, (void *)1, fltk::MENU_TOGGLE},
-    {"Black",	0,	0, (void *)1, fltk::MENU_TOGGLE|fltk::MENU_DIVIDER},
-    {"00",	0,	0, (void *)1, fltk::MENU_TOGGLE},
-    {"000",	0,	0, (void *)1, fltk::MENU_TOGGLE},
+    {"&Alpha",	0,	0, (void *)1, gnui::MENU_TOGGLE|FL_MENU_VALUE},
+    {"&Beta",	0,	0, (void *)2, gnui::MENU_TOGGLE},
+    {"&Gamma",	0,	0, (void *)3, gnui::MENU_TOGGLE},
+    {"&Delta",	0,	0, (void *)4, gnui::MENU_TOGGLE|FL_MENU_VALUE},
+    {"&Epsilon",0,	0, (void *)5, gnui::MENU_TOGGLE},
+    {"&Pi",	0,	0, (void *)6, gnui::MENU_TOGGLE},
+    {"&Mu",	0,	0, (void *)7, gnui::MENU_TOGGLE|gnui::MENU_DIVIDER},
+    {"Red",	0,	0, (void *)1, gnui::MENU_TOGGLE},
+    {"Black",	0,	0, (void *)1, gnui::MENU_TOGGLE|gnui::MENU_DIVIDER},
+    {"00",	0,	0, (void *)1, gnui::MENU_TOGGLE},
+    {"000",	0,	0, (void *)1, gnui::MENU_TOGGLE},
     {0},
   {"&Radio",0,0,0,FL_SUBMENU},
-    {"&Alpha",	0,	0, (void *)1, fltk::MENU_RADIO},
-    {"&Beta",	0,	0, (void *)2, fltk::MENU_RADIO},
-    {"&Gamma",	0,	0, (void *)3, fltk::MENU_RADIO},
-    {"&Delta",	0,	0, (void *)4, fltk::MENU_RADIO|FL_MENU_VALUE},
-    {"&Epsilon",0,	0, (void *)5, fltk::MENU_RADIO},
-    {"&Pi",	0,	0, (void *)6, fltk::MENU_RADIO},
-    {"&Mu",	0,	0, (void *)7, fltk::MENU_RADIO|fltk::MENU_DIVIDER},
-    {"Red",	0,	0, (void *)1, fltk::MENU_RADIO},
-    {"Black",	0,	0, (void *)1, fltk::MENU_RADIO|fltk::MENU_DIVIDER},
-    {"00",	0,	0, (void *)1, fltk::MENU_RADIO},
-    {"000",	0,	0, (void *)1, fltk::MENU_RADIO},
+    {"&Alpha",	0,	0, (void *)1, gnui::MENU_RADIO},
+    {"&Beta",	0,	0, (void *)2, gnui::MENU_RADIO},
+    {"&Gamma",	0,	0, (void *)3, gnui::MENU_RADIO},
+    {"&Delta",	0,	0, (void *)4, gnui::MENU_RADIO|FL_MENU_VALUE},
+    {"&Epsilon",0,	0, (void *)5, gnui::MENU_RADIO},
+    {"&Pi",	0,	0, (void *)6, gnui::MENU_RADIO},
+    {"&Mu",	0,	0, (void *)7, gnui::MENU_RADIO|gnui::MENU_DIVIDER},
+    {"Red",	0,	0, (void *)1, gnui::MENU_RADIO},
+    {"Black",	0,	0, (void *)1, gnui::MENU_RADIO|gnui::MENU_DIVIDER},
+    {"00",	0,	0, (void *)1, gnui::MENU_RADIO},
+    {"000",	0,	0, (void *)1, gnui::MENU_RADIO},
     {0},
   {"&Font",0,0,0,FL_SUBMENU},
     {"Normal",	0, 0},
@@ -176,18 +176,18 @@ Fl_Menu_Item menutable[] = {
   // these buttons demonstrates that the menubar can be used as a "toolbar"
   {"@[]"}, {"@<->"}, {"@+"},
   // it would be nice if checkmarks worked, but they don't:
-  //{"toggle",0, 0, 0, fltk::MENU_TOGGLE},
+  //{"toggle",0, 0, 0, gnui::MENU_TOGGLE},
   {0}
 };
 
 Fl_Menu_Item pulldown[] = {
-  {"Red",	fltk::ACCELERATOR+'r'},
-  {"Green",	fltk::ACCELERATOR+'g'},
-  {"Blue",	fltk::ACCELERATOR+'b'},
-  {"Strange",	fltk::ACCELERATOR+'s'},
-  {"&Charm",	fltk::ACCELERATOR+'c'},
-  {"Truth",	fltk::ACCELERATOR+'t'},
-  {"Beauty",	fltk::ACCELERATOR+'b'},
+  {"Red",	gnui::ACCELERATOR+'r'},
+  {"Green",	gnui::ACCELERATOR+'g'},
+  {"Blue",	gnui::ACCELERATOR+'b'},
+  {"Strange",	gnui::ACCELERATOR+'s'},
+  {"&Charm",	gnui::ACCELERATOR+'c'},
+  {"Truth",	gnui::ACCELERATOR+'t'},
+  {"Beauty",	gnui::ACCELERATOR+'b'},
   {0}
 };
 
@@ -202,51 +202,51 @@ int main(int argc, char **argv)
     hugemenu[i].text = newstring(buf);
   }
 
-  fltk::Window window(WIDTH,400);
-  window.color(fltk::WHITE);
+  gnui::Window window(WIDTH,400);
+  window.color(gnui::WHITE);
   window.tooltip("Press right button\nfor a pop-up menu");
   window.begin();
 
-  fltk::MenuBar menubar(0,0,WIDTH,HEIGHT); menubar.menu(menutable);
-  menubar.find("&Font/Normal")->labelfont(fltk::HELVETICA);
-  menubar.find("&Font/Bold")->labelfont(fltk::HELVETICA_BOLD);
-  menubar.find("&Font/Italic")->labelfont(fltk::HELVETICA_ITALIC);
-  menubar.find("&Font/BoldItalic")->labelfont(fltk::HELVETICA_BOLD_ITALIC);
+  gnui::MenuBar menubar(0,0,WIDTH,HEIGHT); menubar.menu(menutable);
+  menubar.find("&Font/Normal")->labelfont(gnui::HELVETICA);
+  menubar.find("&Font/Bold")->labelfont(gnui::HELVETICA_BOLD);
+  menubar.find("&Font/Italic")->labelfont(gnui::HELVETICA_ITALIC);
+  menubar.find("&Font/BoldItalic")->labelfont(gnui::HELVETICA_BOLD_ITALIC);
   menubar.find("&Font/Small")->labelsize(10);
   menubar.find("&Font/Large")->labelsize(24);
-  menubar.find("&Font/Emboss")->labeltype(fltk::EMBOSSED_LABEL);
-  menubar.find("&Font/Engrave")->labeltype(fltk::ENGRAVED_LABEL);
-  menubar.find("&Font/Shadow")->labeltype(fltk::SHADOW_LABEL);
-  menubar.find("&Font/@->")->labeltype(fltk::SYMBOL_LABEL);
-  menubar.find("&Checkbox/Red")->labelcolor(fltk::RED); // label text red
-  menubar.find("&Checkbox/Red")->selection_textcolor(fltk::RED); // label text red when selected
-  menubar.find("&Checkbox/Red")->textcolor(fltk::RED); // check mark red
-  menubar.find("&Checkbox/Black")->labelcolor(fltk::BLACK);
-  menubar.find("&Checkbox/Black")->selection_textcolor(fltk::BLACK);
-  menubar.find("&Checkbox/Black")->textcolor(fltk::BLACK);
-  menubar.find("&Radio/Red")->labelcolor(fltk::RED);
-  menubar.find("&Radio/Red")->selection_textcolor(fltk::RED);
-  menubar.find("&Radio/Red")->textcolor(fltk::RED);
-  menubar.find("&Radio/Black")->labelcolor(fltk::BLACK);
-  menubar.find("&Radio/Black")->selection_textcolor(fltk::BLACK);
-  menubar.find("&Radio/Black")->textcolor(fltk::BLACK);
+  menubar.find("&Font/Emboss")->labeltype(gnui::EMBOSSED_LABEL);
+  menubar.find("&Font/Engrave")->labeltype(gnui::ENGRAVED_LABEL);
+  menubar.find("&Font/Shadow")->labeltype(gnui::SHADOW_LABEL);
+  menubar.find("&Font/@->")->labeltype(gnui::SYMBOL_LABEL);
+  menubar.find("&Checkbox/Red")->labelcolor(gnui::RED); // label text red
+  menubar.find("&Checkbox/Red")->selection_textcolor(gnui::RED); // label text red when selected
+  menubar.find("&Checkbox/Red")->textcolor(gnui::RED); // check mark red
+  menubar.find("&Checkbox/Black")->labelcolor(gnui::BLACK);
+  menubar.find("&Checkbox/Black")->selection_textcolor(gnui::BLACK);
+  menubar.find("&Checkbox/Black")->textcolor(gnui::BLACK);
+  menubar.find("&Radio/Red")->labelcolor(gnui::RED);
+  menubar.find("&Radio/Red")->selection_textcolor(gnui::RED);
+  menubar.find("&Radio/Red")->textcolor(gnui::RED);
+  menubar.find("&Radio/Black")->labelcolor(gnui::BLACK);
+  menubar.find("&Radio/Black")->selection_textcolor(gnui::BLACK);
+  menubar.find("&Radio/Black")->textcolor(gnui::BLACK);
   //menubar.find("&Huge/item 69")->deactivate();
   menubar.callback(test_cb);
   menubar.tooltip("This is a menu bar");
   menus[0] = &menubar;
 
-  fltk::PopupMenu mb1(100,100,120,25,"&menubutton"); mb1.menu(pulldown);
+  gnui::PopupMenu mb1(100,100,120,25,"&menubutton"); mb1.menu(pulldown);
   mb1.callback(test_cb);
   mb1.tooltip("This is a menu button");
   menus[1] = &mb1;
 
-  fltk::Choice ch(300,100,90,25,"&choice:"); ch.menu(pulldown);
+  gnui::Choice ch(300,100,90,25,"&choice:"); ch.menu(pulldown);
   ch.callback(test_cb);
   ch.tooltip("This is a choice");
   menus[2] = &ch;
 
-  fltk::PopupMenu mb(0,25,WIDTH,400-HEIGHT/*,"&popup"*/);
-  mb.type(fltk::PopupMenu::POPUP3);
+  gnui::PopupMenu mb(0,25,WIDTH,400-HEIGHT/*,"&popup"*/);
+  mb.type(gnui::PopupMenu::POPUP3);
   mb.menu(menutable);
   mb.callback(test_cb);
   menus[3] = &mb;
@@ -257,35 +257,35 @@ int main(int argc, char **argv)
   window.show(argc, argv);
 
 #ifdef __APPLE__
-  fltk::SystemMenuBar sysmb(0, 0, 1, 1);
+  gnui::SystemMenuBar sysmb(0, 0, 1, 1);
   sysmb.menu(menutable);
-  sysmb.find("&Font/Normal")->labelfont(fltk::HELVETICA);
-  sysmb.find("&Font/Bold")->labelfont(fltk::HELVETICA_BOLD);
-  sysmb.find("&Font/Italic")->labelfont(fltk::HELVETICA_ITALIC);
-  sysmb.find("&Font/BoldItalic")->labelfont(fltk::HELVETICA_BOLD_ITALIC);
+  sysmb.find("&Font/Normal")->labelfont(gnui::HELVETICA);
+  sysmb.find("&Font/Bold")->labelfont(gnui::HELVETICA_BOLD);
+  sysmb.find("&Font/Italic")->labelfont(gnui::HELVETICA_ITALIC);
+  sysmb.find("&Font/BoldItalic")->labelfont(gnui::HELVETICA_BOLD_ITALIC);
   sysmb.find("&Font/Small")->labelsize(10);
   sysmb.find("&Font/Large")->labelsize(24);
-  sysmb.find("&Font/Emboss")->labeltype(fltk::EMBOSSED_LABEL);
-  sysmb.find("&Font/Engrave")->labeltype(fltk::ENGRAVED_LABEL);
-  sysmb.find("&Font/Shadow")->labeltype(fltk::SHADOW_LABEL);
-  sysmb.find("&Font/@->")->labeltype(fltk::SYMBOL_LABEL);
-  sysmb.find("&Checkbox/Red")->labelcolor(fltk::RED); // label text red
-  sysmb.find("&Checkbox/Red")->selection_textcolor(fltk::RED); // label text red when selected
-  sysmb.find("&Checkbox/Red")->textcolor(fltk::RED); // check mark red
-  sysmb.find("&Checkbox/Black")->labelcolor(fltk::BLACK);
-  sysmb.find("&Checkbox/Black")->selection_textcolor(fltk::BLACK);
-  sysmb.find("&Checkbox/Black")->textcolor(fltk::BLACK);
-  sysmb.find("&Radio/Red")->labelcolor(fltk::RED);
-  sysmb.find("&Radio/Red")->selection_textcolor(fltk::RED);
-  sysmb.find("&Radio/Red")->textcolor(fltk::RED);
-  sysmb.find("&Radio/Black")->labelcolor(fltk::BLACK);
-  sysmb.find("&Radio/Black")->selection_textcolor(fltk::BLACK);
-  sysmb.find("&Radio/Black")->textcolor(fltk::BLACK);
+  sysmb.find("&Font/Emboss")->labeltype(gnui::EMBOSSED_LABEL);
+  sysmb.find("&Font/Engrave")->labeltype(gnui::ENGRAVED_LABEL);
+  sysmb.find("&Font/Shadow")->labeltype(gnui::SHADOW_LABEL);
+  sysmb.find("&Font/@->")->labeltype(gnui::SYMBOL_LABEL);
+  sysmb.find("&Checkbox/Red")->labelcolor(gnui::RED); // label text red
+  sysmb.find("&Checkbox/Red")->selection_textcolor(gnui::RED); // label text red when selected
+  sysmb.find("&Checkbox/Red")->textcolor(gnui::RED); // check mark red
+  sysmb.find("&Checkbox/Black")->labelcolor(gnui::BLACK);
+  sysmb.find("&Checkbox/Black")->selection_textcolor(gnui::BLACK);
+  sysmb.find("&Checkbox/Black")->textcolor(gnui::BLACK);
+  sysmb.find("&Radio/Red")->labelcolor(gnui::RED);
+  sysmb.find("&Radio/Red")->selection_textcolor(gnui::RED);
+  sysmb.find("&Radio/Red")->textcolor(gnui::RED);
+  sysmb.find("&Radio/Black")->labelcolor(gnui::BLACK);
+  sysmb.find("&Radio/Black")->selection_textcolor(gnui::BLACK);
+  sysmb.find("&Radio/Black")->textcolor(gnui::BLACK);
   sysmb.callback(test_cb);
   sysmb.layout();
 #endif
 
-  return fltk::run();
+  return gnui::run();
 }
 
 //

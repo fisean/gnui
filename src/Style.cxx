@@ -32,9 +32,9 @@
 #include <config.h>
 #include <ctype.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Style
+/*! \class gnui::Style
 
   Each widget has a pointer to an instance of Style. Usually
   many widgets share pointers to the same one. Styles are linked
@@ -102,33 +102,33 @@ int Style::wheel_scroll_lines_ = 3;
 /*! \fn Box* Style::box() const
   The type of box to draw around the outer edge of the widget (for the
   majority of widgets, some classes ignore this or use it to draw only
-  text fields inside the widget). The default is fltk::DOWN_BOX.
+  text fields inside the widget). The default is gnui::DOWN_BOX.
 */
 
 /*! \fn Box* Style::buttonbox()	const
   The type of box to draw buttons internal the widget (notice that
-  fltk::Button uses box, however). The default is fltk::UP_BOX.
+  gnui::Button uses box, however). The default is gnui::UP_BOX.
 */
 
 /*! \fn Box* Style::focusbox() const;
   The type of box to draw when a widget takes focus. The default is
-  fltk::DEFAULT_FOCUS_BOX
+  gnui::DEFAULT_FOCUS_BOX
 */
 
 /*! \fn Symbol* Style::glyph() const;
 
   A small image that some Widgets use to draw part of themselves.
-  For instance the fltk::CheckButton class has this set to a Symbol
+  For instance the gnui::CheckButton class has this set to a Symbol
   that draws the white box and the checkmark if VALUE is true.
 
-  Im most cases the fltk::drawflags() are examined to decide between
+  Im most cases the gnui::drawflags() are examined to decide between
   different symbols. The default value draws empty squares and arrow
   buttons if ALIGN flags are on, see Widget::default_glpyh.
 
 */
 
 /*! \fn Font* Style::labelfont() const;
-  The font used to draw the label. Default is fltk::HELVETICA. 
+  The font used to draw the label. Default is gnui::HELVETICA. 
 */
 
 /*! \fn float Style::labelsize() const;
@@ -137,7 +137,7 @@ int Style::wheel_scroll_lines_ = 3;
 
 /*! \fn Font* Style::textfont() const;
   Font to use to draw information inside the widget, such as the text
-  in a text editor or menu or browser. Default is fltk::HELVETICA. 
+  in a text editor or menu or browser. Default is gnui::HELVETICA. 
 */
 
 /*! \fn float Style::textsize() const;
@@ -147,38 +147,38 @@ int Style::wheel_scroll_lines_ = 3;
 
 /*! \fn float Style::leading() const;
   Extra spacing added between text lines or other things that are
-  stacked vertically. The default is 2. The function fltk::drawtext() 
+  stacked vertically. The default is 2. The function gnui::drawtext() 
   will use the value from Widget::default_style, but text editors
   and browsers and menus and similar widgets will use the local value.
 */
 
 /*! \fn LabelType* Style::labeltype() const;
   How to draw the label. This provides things like inset, shadow, and
-  the symbols. fltk::NORMAL_LABEL.
+  the symbols. gnui::NORMAL_LABEL.
 */
 
 /*! \fn Color Style::color() const;
 
-  Color of the widgets. The default is fltk::WHITE. You may think most
+  Color of the widgets. The default is gnui::WHITE. You may think most
   widgets are gray, but this is because Group and Window have their
-  own Style with this set to fltk::GRAY75, and also because many parts
+  own Style with this set to gnui::GRAY75, and also because many parts
   of widgets are drawn with the buttoncolor().
 
   If you want to change the overall color of all the gray parts of the
-  interface you want to call fltk::set_background(color) instead, as this
-  will set the entry for fltk::GRAY75 and also set the "gray ramp" so
+  interface you want to call gnui::set_background(color) instead, as this
+  will set the entry for gnui::GRAY75 and also set the "gray ramp" so
   that the edges of buttons are the same color.
 */
 
 /*! \fn Color Style::textcolor() const;
   Color to draw text inside the widget. Default is black. This is also
   used by many widgets to control the color when they draw the glyph(),
-  thus it can control the color of checkmarks in fltk::CheckButton.
+  thus it can control the color of checkmarks in gnui::CheckButton.
 */
 
 /*! \fn Color Style::selection_color() const;
   Color drawn behind selected text in inputs, or selected browser or
-  menu items, or lit light buttons. The default is fltk::WINDOWS_BLUE.
+  menu items, or lit light buttons. The default is gnui::WINDOWS_BLUE.
 */
 
 /*! \fn Color Style::selection_textcolor() const;
@@ -199,7 +199,7 @@ int Style::wheel_scroll_lines_ = 3;
   The default value is zero, which indicates that highlighting is disabled.  */
 
 /*! \fn Color Style::labelcolor() const;
-  Color used to draw labels. Default is fltk::BLACK.  */
+  Color used to draw labels. Default is gnui::BLACK.  */
 
 /*! \fn Color Style::highlight_textcolor() const;
   Color used to draw the labels or text when the background is drawn
@@ -209,11 +209,11 @@ int Style::wheel_scroll_lines_ = 3;
 */
 
 /*! \fn Color Style::buttoncolor() const;
-  Color used when drawing buttons. Default is fltk::GRAY75.  */
+  Color used when drawing buttons. Default is gnui::GRAY75.  */
 
 /*! \fn unsigned char Style::scrollbar_align() const;
   Where to place scrollbars around a Browser or other scrolling widget.
-  The default is fltk::ALIGN_RIGHT|fltk::ALIGN_BOTTOM.
+  The default is gnui::ALIGN_RIGHT|gnui::ALIGN_BOTTOM.
 */
 
 /*! \fn unsigned char Style::scrollbar_width() const;
@@ -230,7 +230,7 @@ int Style::wheel_scroll_lines_ = 3;
 
 /*! \fn bool Style::draw_boxes_inactive() const
   If false then most of the built-in box types draw the same even if
-  fltk::INACTIVE_R is passed to them. This repliates Windows appearance.
+  gnui::INACTIVE_R is passed to them. This repliates Windows appearance.
   If true (the default) then the boxes themselves gray out.
 */
 
@@ -364,9 +364,9 @@ void Widget::highlight_textcolor(Color v) {
 }
 #endif
 
-const Style* fltk::drawstyle_ = Widget::default_style;
+const Style* gnui::drawstyle_ = Widget::default_style;
 
-/** \fn const Style* fltk::drawstyle()
+/** \fn const Style* gnui::drawstyle()
   Return the last style sent to drawstyle(s,f). Some drawing functions
   (such as glyphs) look in this for box types. If this has not been
   called it is Widget::default_style.
@@ -392,7 +392,7 @@ const Style* fltk::drawstyle_ = Widget::default_style;
 
     It then further modifies fg so that it contrasts with the bg.
 */
-void fltk::drawstyle(const Style* style, Flags flags) {
+void gnui::drawstyle(const Style* style, Flags flags) {
   drawstyle_ = style;
   drawflags_ = flags;
   // this is not correct! It should search the styles in order and
@@ -413,7 +413,7 @@ void fltk::drawstyle(const Style* style, Flags flags) {
   else setfont(style->textfont(), style->textsize());
 }
 
-/*! \class fltk::NamedStyle
+/*! \class gnui::NamedStyle
 
   Typically a widget class will define a single NamedStyle that is
   used by all instances of that widget. A "theme" can locate this
@@ -429,7 +429,7 @@ void fltk::drawstyle(const Style* style, Flags flags) {
 
   The "revert" function is mostly provided to make it easy to initialize
   the fields even though C++ does not allow a structure constant.
-  It is also used to undo theme changes when fltk::reset_theme()
+  It is also used to undo theme changes when gnui::reset_theme()
   is called.  */
 
 static void plainrevert(Style*) {}
@@ -493,23 +493,23 @@ Style* Style::find(const char* name) {
   the correct function by name from a plugin, if you would like to
   write a scheme where the appearance is controlled by plugins.  Fltk
   provides a convienence function to portably load plugins called
-  fltk::load_plugin() that you may want to use if you are writing such
+  gnui::load_plugin() that you may want to use if you are writing such
   a system.
 */
 
-/*! \fn fltk::theme()
+/*! \fn gnui::theme()
   Returns the current Theme function. By default this points at
   fltk_theme().
 */
 
-/*! \fn fltk::theme(Theme)
+/*! \fn gnui::theme(Theme)
 
   Change what function fltk should call to set the appearance. If you
   change this after any windows may have been shown, you should call
   reload_theme().
 */
 
-Theme fltk::theme_ = fltk_theme;
+Theme gnui::theme_ = fltk_theme;
 
 Color fl_bg_switch = 0; // set by -bg in arg.cxx
 
@@ -521,7 +521,7 @@ static char theme_loaded;
   Window::show() is done. You need to call this earlier to
   execute code such as measuring labels that may depend on the theme.
 */
-void fltk::load_theme() {
+void gnui::load_theme() {
   if (theme_loaded) return;
   theme_loaded = 2; // signal reset_theme to do nothing
   theme_();
@@ -540,19 +540,19 @@ void fltk::load_theme() {
   FLTK will call this automatically when it gets a message from the
   system indicating the user's preferences have changed.
 */
-void fltk::reload_theme() {
+void gnui::reload_theme() {
   if (theme_loaded != 1) return;
   reset_theme();
   theme_();
   if (fl_bg_switch) set_background(fl_bg_switch);
-  fltk::redraw();
+  gnui::redraw();
 }
 
 /*! Change the theme to the compiled-in default by calling the revert
   function of all NamedStyle structures. A theme() function may want
   to call this to clear the previous settings.
 */
-bool fltk::reset_theme() {
+bool gnui::reset_theme() {
   // Don't waste time if the themes are just starting up:
   if (theme_loaded==2) return false;
   // revert to compiled defaults:
@@ -572,12 +572,12 @@ bool fltk::reset_theme() {
 ///////////////////////////////////////////////////////////////
 
 /*!
-  fltk::GRAY75 is replaced with the passed color, and all the other
-  fltk::GRAY* colors are replaced with a color ramp (or sometimes
+  gnui::GRAY75 is replaced with the passed color, and all the other
+  gnui::GRAY* colors are replaced with a color ramp (or sometimes
   a straight line) so that using them for highlighted edges of
   raised buttons looks correct.
 */
-void fltk::set_background(Color c) {
+void gnui::set_background(Color c) {
   uchar r, g, b;
   split_color( c, r, g, b );
   int i;

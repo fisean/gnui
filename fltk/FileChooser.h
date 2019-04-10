@@ -41,11 +41,11 @@
 #include <fltk/ReturnButton.h>
 #include <fltk/ask.h>
 
-namespace fltk  {
+namespace gnui  {
 
 class FL_API FileChooser  {
 private:
-  static fltk::Preferences prefs_;
+  static gnui::Preferences prefs_;
   void (*callback_)(FileChooser*, void *);
   void *data_;
   char directory_[1024];
@@ -53,7 +53,7 @@ private:
   char preview_text_[2048];
   int type_;
   void favoritesButtonCB();
-  void favoritesCB(fltk::Widget *w);
+  void favoritesCB(gnui::Widget *w);
   void fileListCB();
   void fileNameCB();
   void newdir();
@@ -67,94 +67,94 @@ private:
   void directory(const char *d, bool);
 
   // FileChooser window
-  fltk::DoubleBufferWindow *window;
-  inline void cb_window_i(fltk::DoubleBufferWindow*, void*);
-  static void cb_window(fltk::DoubleBufferWindow*, void*);
+  gnui::DoubleBufferWindow *window;
+  inline void cb_window_i(gnui::DoubleBufferWindow*, void*);
+  static void cb_window(gnui::DoubleBufferWindow*, void*);
 
   // Show button
-  fltk::Choice *showChoice;
-  inline void cb_showChoice_i(fltk::Choice*, void*);
-  static void cb_showChoice(fltk::Choice*, void*);
+  gnui::Choice *showChoice;
+  inline void cb_showChoice_i(gnui::Choice*, void*);
+  static void cb_showChoice(gnui::Choice*, void*);
 
   // Favorites button
-  fltk::PopupMenu *favoritesButton;
-  inline void cb_favoritesButton_i(fltk::PopupMenu*, void*);
-  static void cb_favoritesButton(fltk::PopupMenu*, void*);
+  gnui::PopupMenu *favoritesButton;
+  inline void cb_favoritesButton_i(gnui::PopupMenu*, void*);
+  static void cb_favoritesButton(gnui::PopupMenu*, void*);
 
   // "New" button
-  inline void cb_newButton_i(fltk::Button*, void*);
-  static void cb_newButton(fltk::Button*, void*);
+  inline void cb_newButton_i(gnui::Button*, void*);
+  static void cb_newButton(gnui::Button*, void*);
 
   // Default callback (update_preview())
-  inline void cb__i(fltk::TiledGroup*, void*);
-  static void cb_(fltk::TiledGroup*, void*);
+  inline void cb__i(gnui::TiledGroup*, void*);
+  static void cb_(gnui::TiledGroup*, void*);
 
   // List of files in the directory
-  fltk::FileBrowser *fileList;
-  inline void cb_fileList_i(fltk::FileBrowser*, void*);
-  static void cb_fileList(fltk::FileBrowser*, void*);
+  gnui::FileBrowser *fileList;
+  inline void cb_fileList_i(gnui::FileBrowser*, void*);
+  static void cb_fileList(gnui::FileBrowser*, void*);
 
   // Preview box
-  fltk::InvisibleBox *previewBox;
-  inline void cb_previewButton_i(fltk::CheckButton*, void*);
-  static void cb_previewButton(fltk::CheckButton*, void*);
+  gnui::InvisibleBox *previewBox;
+  inline void cb_previewButton_i(gnui::CheckButton*, void*);
+  static void cb_previewButton(gnui::CheckButton*, void*);
 
   // Show "hidden" files
-  inline void cb_showHiddenButton_i(fltk::CheckButton*, void*);
-  static void cb_showHiddenButton(fltk::CheckButton*, void*);
+  inline void cb_showHiddenButton_i(gnui::CheckButton*, void*);
+  static void cb_showHiddenButton(gnui::CheckButton*, void*);
 
   // Filename (input section)
-  fltk::FileInput *fileName;
-  inline void cb_fileName_i(fltk::FileInput*, void*);
-  static void cb_fileName(fltk::FileInput*, void*);
+  gnui::FileInput *fileName;
+  inline void cb_fileName_i(gnui::FileInput*, void*);
+  static void cb_fileName(gnui::FileInput*, void*);
 
   // "OK" button
-  fltk::ReturnButton *okButton;
-  inline void cb_okButton_i(fltk::ReturnButton*, void*);
-  static void cb_okButton(fltk::ReturnButton*, void*);
+  gnui::ReturnButton *okButton;
+  inline void cb_okButton_i(gnui::ReturnButton*, void*);
+  static void cb_okButton(gnui::ReturnButton*, void*);
 
   // "Cancel" button
-  fltk::Button *cancelButton;
-  inline void cb_cancelButton_i(fltk::Button*, void*);
-  static void cb_cancelButton(fltk::Button*, void*);
+  gnui::Button *cancelButton;
+  inline void cb_cancelButton_i(gnui::Button*, void*);
+  static void cb_cancelButton(gnui::Button*, void*);
 
   // Window for favorite directories
-  fltk::DoubleBufferWindow *favWindow;
+  gnui::DoubleBufferWindow *favWindow;
 
   // List of favorite directories.
-  fltk::FileBrowser *favList;
-  inline void cb_favList_i(fltk::FileBrowser*, void*);
-  static void cb_favList(fltk::FileBrowser*, void*);
+  gnui::FileBrowser *favList;
+  inline void cb_favList_i(gnui::FileBrowser*, void*);
+  static void cb_favList(gnui::FileBrowser*, void*);
 
   // Favorites menu "Up" button
-  fltk::Button *favUpButton;
-  inline void cb_favUpButton_i(fltk::Button*, void*);
-  static void cb_favUpButton(fltk::Button*, void*);
+  gnui::Button *favUpButton;
+  inline void cb_favUpButton_i(gnui::Button*, void*);
+  static void cb_favUpButton(gnui::Button*, void*);
 
   // Favorites menu "Delete" button
-  fltk::Button *favDeleteButton;
-  inline void cb_favDeleteButton_i(fltk::Button*, void*);
-  static void cb_favDeleteButton(fltk::Button*, void*);
+  gnui::Button *favDeleteButton;
+  inline void cb_favDeleteButton_i(gnui::Button*, void*);
+  static void cb_favDeleteButton(gnui::Button*, void*);
 
   // Favorites menu "Down" button
-  fltk::Button *favDownButton;
-  inline void cb_favDownButton_i(fltk::Button*, void*);
-  static void cb_favDownButton(fltk::Button*, void*);
+  gnui::Button *favDownButton;
+  inline void cb_favDownButton_i(gnui::Button*, void*);
+  static void cb_favDownButton(gnui::Button*, void*);
 
   // Favorites menu "Cancel" button
-  fltk::Button *favCancelButton;
-  inline void cb_favCancelButton_i(fltk::Button*, void*);
-  static void cb_favCancelButton(fltk::Button*, void*);
+  gnui::Button *favCancelButton;
+  inline void cb_favCancelButton_i(gnui::Button*, void*);
+  static void cb_favCancelButton(gnui::Button*, void*);
 
   // Favorites menu "OK" button
-  fltk::ReturnButton *favOkButton;
-  inline void cb_favOkButton_i(fltk::ReturnButton*, void*);
-  static void cb_favOkButton(fltk::ReturnButton*, void*);
+  gnui::ReturnButton *favOkButton;
+  inline void cb_favOkButton_i(gnui::ReturnButton*, void*);
+  static void cb_favOkButton(gnui::ReturnButton*, void*);
 
   // Sort button
-  fltk::PopupMenu *sortButton;
-  void cb_sortButton_i(fltk::PopupMenu*, void*);
-  static void cb_sortButton(fltk::PopupMenu*, void*);
+  gnui::PopupMenu *sortButton;
+  void cb_sortButton_i(gnui::PopupMenu*, void*);
+  static void cb_sortButton(gnui::PopupMenu*, void*);
 
 public:
   enum { SINGLE = 0, MULTI = 1, CREATE = 2, DIRECTORY = 4 };
@@ -219,9 +219,9 @@ public:
   static const char *show_label;
   static FileSortF *sort;
 
-  fltk::Button *newButton;
-  fltk::CheckButton *previewButton;
-  fltk::CheckButton *showHiddenButton;
+  gnui::Button *newButton;
+  gnui::CheckButton *previewButton;
+  gnui::CheckButton *showHiddenButton;
 };
 
 }

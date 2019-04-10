@@ -45,7 +45,7 @@ static int utf8len(char cc) {
   else return 1;
 }
 
-using namespace fltk;
+using namespace gnui;
 
 /* Initial size for the buffer gap (empty space
    in the buffer where text might be inserted
@@ -415,7 +415,7 @@ void TextBuffer::insert_column(int column, int startpos, const char *s,
   deleted_text = text_range(linestartpos, linestartpos + ndeleted);
   insert_column_(column, linestartpos, s, &insertdeleted, &ninserted, &cursorposhint_);
   if (ndeleted != insertdeleted)
-    fltk::warning("TextBuffer::insert_column(): internal consistency check ins1 failed");
+    gnui::warning("TextBuffer::insert_column(): internal consistency check ins1 failed");
   call_modify_callbacks(linestartpos, ndeleted, ninserted, 0, deleted_text);
   free(deleted_text);
   if (chars_inserted != NULL)
@@ -446,7 +446,7 @@ void TextBuffer::overlay_rectangular(int startpos, int rectstart,
   overlay_rectangular_(linestartpos, rectstart, rectend, s, &insertdeleted,
                        &ninserted, &cursorposhint_ );
   if ( ndeleted != insertdeleted )
-    fltk::warning("TextBuffer::overlay_rectangle(): internal consistency check ovly1 failed");
+    gnui::warning("TextBuffer::overlay_rectangle(): internal consistency check ovly1 failed");
   call_modify_callbacks(linestartpos, ndeleted, ninserted, 0, deleted_text);
   free(deleted_text);
   if (chars_inserted != NULL)
@@ -514,7 +514,7 @@ void TextBuffer::replace_rectangular(int start, int end, int rectstart,
   
   /* Figure out how many chars were inserted and call modify callbacks */
   if (insertdeleted != deleteinserted + lines_padded)
-    fltk::warning("TextBuffer::replace_rectangular(): internal consistency check repl1 failed");
+    gnui::warning("TextBuffer::replace_rectangular(): internal consistency check repl1 failed");
   call_modify_callbacks(start, end-start, insertinserted, 0, deleted_text);
   free(deleted_text);
 }
@@ -751,7 +751,7 @@ void TextBuffer::remove_modify_callback(Text_Modify_Cb bufModifiedCB, void *cbAr
     }
   }
   if (toRemove == -1) {
-    fltk::warning("TextBuffer::remove_modify_callback(): Can't find modify CB to remove");
+    gnui::warning("TextBuffer::remove_modify_callback(): Can't find modify CB to remove");
     return;
   }
 
@@ -822,7 +822,7 @@ void TextBuffer::remove_predelete_callback(Text_Predelete_Cb bufPreDeleteCB, voi
     	}
     }
     if (toRemove == -1) {
-      fltk::warning("TextBuffer::remove_predelete_callback(): Can't find pre-delete CB to remove");
+      gnui::warning("TextBuffer::remove_predelete_callback(): Can't find pre-delete CB to remove");
     	return;
     }
     

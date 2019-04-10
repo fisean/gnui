@@ -28,7 +28,7 @@
 
 #include "Dial.h"
 
-namespace fltk {
+namespace gnui {
 
 /*! Dial but the constructor sets type() to LINE, so it draws a
   pointer rather than a dot. */

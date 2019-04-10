@@ -27,7 +27,7 @@
 
 #include <fltk/Widget.h>
 
-class DrawingArea : public fltk::Widget {
+class DrawingArea : public gnui::Widget {
   void draw();
 public:
   uchar *buffer;
@@ -50,7 +50,7 @@ public:
     MAX_ITERATIONS = 14,
     DEFAULT_ITERATIONS = 7
   };
-  DrawingArea(int x, int y, int w, int h) : fltk::Widget(x, y, w, h) {
+  DrawingArea(int x, int y, int w, int h) : gnui::Widget(x, y, w, h) {
     buffer = 0;
     W = w - 6;
     H = h - 8;

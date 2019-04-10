@@ -3,11 +3,11 @@
 
 #include <fltk/ask.h>
 
-#define fl_message	fltk::message
-#define fl_alert	fltk::alert
-#define fl_ask		fltk::ask
-#define fl_choice	fltk::choice
-#define fl_input	fltk::input
-#define fl_password	fltk::password
+#define fl_message	gnui::message
+#define fl_alert	gnui::alert
+#define fl_ask		gnui::ask
+#define fl_choice	gnui::choice
+#define fl_input	gnui::input
+#define fl_password	gnui::password
 
 #endif

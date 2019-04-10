@@ -35,7 +35,7 @@
 #include "Group.h"
 #include "Scrollbar.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ScrollGroup : public Group {
 

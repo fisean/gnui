@@ -34,11 +34,11 @@
 
 #if !HAVE_GL
 
-class shape_window : public fltk::Widget {
+class shape_window : public gnui::Widget {
 public:	
   int sides;
   shape_window(int x,int y,int w,int h,const char *l=0)
-    :fltk::Widget(x,y,w,h,l){
+    :gnui::Widget(x,y,w,h,l){
       label("This demo does\nnot work without GL");
   }
 };
@@ -46,7 +46,7 @@ public:
 #include <fltk/gl.h>
 #include <fltk/GlWindow.h>
 
-class shape_window : public fltk::GlWindow {
+class shape_window : public gnui::GlWindow {
   void draw();
   void draw_overlay();
 public:
@@ -56,7 +56,7 @@ public:
 };
 
 shape_window::shape_window(int x,int y,int w,int h,const char *l)
-  : fltk::GlWindow(x,y,w,h,l)
+  : gnui::GlWindow(x,y,w,h,l)
 {
   sides = overlay_sides = 3;
 }
@@ -81,13 +81,13 @@ void shape_window::draw() {
     glVertex3f(cos(ang),sin(ang),0);
   }
   glEnd();
-  fltk::glsetcolor(fltk::WHITE);
-  fltk::glsetfont(labelfont(), labelsize());
+  gnui::glsetcolor(gnui::WHITE);
+  gnui::glsetfont(labelfont(), labelsize());
   static int count = 0;
   count++;
   char buffer[40];
   sprintf(buffer, "normal draw %d", count);
-  fltk::gldrawtext(buffer, .1, .5);
+  gnui::gldrawtext(buffer, .1, .5);
 }
 
 void shape_window::draw_overlay() {
@@ -99,49 +99,49 @@ void shape_window::draw_overlay() {
     glViewport(0,0,w(),h());
   }
 // draw an amazing graphic:
-  fltk::glsetcolor(fltk::RED);
+  gnui::glsetcolor(gnui::RED);
   glBegin(GL_LINE_LOOP);
   for (int i=0; i<overlay_sides; i++) {
     double ang = i*2*M_PI/overlay_sides;
     glVertex3f(cos(ang),sin(ang),0);
   }
   glEnd();
-  fltk::glsetfont(labelfont(), labelsize());
+  gnui::glsetfont(labelfont(), labelsize());
   static int count = 0;
   count++;
   char buffer[40];
   sprintf(buffer, "overlay draw %d", count);
-  fltk::gldrawtext(buffer, .1, .6);
+  gnui::gldrawtext(buffer, .1, .6);
 }
 #endif
 
 // when you change the data, as in this callback, you must call redraw():
-void sides_cb(fltk::Widget *o, void *p) {
+void sides_cb(gnui::Widget *o, void *p) {
   shape_window *sw = (shape_window *)p;
-  sw->sides = int(((fltk::Slider *)o)->value());
+  sw->sides = int(((gnui::Slider *)o)->value());
   sw->redraw();
 }
 
 #if HAVE_GL
-void overlay_sides_cb(fltk::Widget *o, void *p) {
+void overlay_sides_cb(gnui::Widget *o, void *p) {
   shape_window *sw = (shape_window *)p;
-  sw->overlay_sides = int(((fltk::Slider *)o)->value());
+  sw->overlay_sides = int(((gnui::Slider *)o)->value());
   sw->redraw_overlay();
 }
 #endif
 
 int main(int argc, char **argv) {
 
-  fltk::Window window(300, 370);
+  gnui::Window window(300, 370);
   window.begin();
 
   shape_window sw(10, 75, window.w()-20, window.h()-90);
 //sw.mode(FLTK::RGB);
   window.resizable(&sw);
 
-  fltk::Slider oslider(60, 5, window.w()-70, 30, "Overlay:");
-  oslider.clear_flag(fltk::ALIGN_MASK);
-  oslider.set_flag(fltk::ALIGN_LEFT);
+  gnui::Slider oslider(60, 5, window.w()-70, 30, "Overlay:");
+  oslider.clear_flag(gnui::ALIGN_MASK);
+  oslider.set_flag(gnui::ALIGN_LEFT);
 #if HAVE_GL
   oslider.callback(overlay_sides_cb,&sw);
   oslider.value(sw.overlay_sides);
@@ -150,9 +150,9 @@ int main(int argc, char **argv) {
   oslider.range(3,40);
   oslider.tooltip("Move this slider to make overlay redraw");
 
-  fltk::Slider slider(60, 40, window.w()-70, 30, "Normal:");
-  slider.clear_flag(fltk::ALIGN_MASK);
-  slider.set_flag(fltk::ALIGN_LEFT);
+  gnui::Slider slider(60, 40, window.w()-70, 30, "Normal:");
+  slider.clear_flag(gnui::ALIGN_MASK);
+  slider.set_flag(gnui::ALIGN_LEFT);
   slider.callback(sides_cb,&sw);
   slider.value(sw.sides);
   slider.step(1);
@@ -165,13 +165,13 @@ int main(int argc, char **argv) {
 #if HAVE_GL
   sw.tooltip(sw.can_do_overlay() ?
 
-"The red image is drawn by implementing fltk::GlWindow::draw_overlay().\n"
+"The red image is drawn by implementing gnui::GlWindow::draw_overlay().\n"
 "\n"
 "Hardware overlays may be unable to draw some "
 "colors or may exhibit bugs. If you see the red outline but no red text "
 "this is a known bug on Windows."
 :
-"The red image is drawn by implementing fltk::GlWindow::draw_overlay().\n"
+"The red image is drawn by implementing gnui::GlWindow::draw_overlay().\n"
 "\n"
 "You do not have OpenGL overlay hardware, so fltk "
 "simulates it. To work on all OpenGl hardware the simulation is very "
@@ -188,7 +188,7 @@ int main(int argc, char **argv) {
   sw.show();
 #endif
 
-  return fltk::run();
+  return gnui::run();
 }
 
 //

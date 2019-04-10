@@ -37,7 +37,7 @@
 #include <fltk/Font.h>
 #include <fltk/xpmImage.h>
 
-using namespace fltk;
+using namespace gnui;
 
 ToggleButton *leftb,*rightb,*topb,*bottomb,*insideb,*centerb,*clipb,*wrapb;
 Widget *textbox;
@@ -107,11 +107,11 @@ void engraved_cb(Widget *,void *) {
 
 static void load_menu(Choice* c) {
   c->begin();
-      new fltk::Item("NORMAL_LABEL",0,normal_cb);
-      new fltk::Item("SYMBOL_LABEL",0,symbol_cb);
-      new fltk::Item("SHADOW_LABEL",0,shadow_cb);
-      new fltk::Item("ENGRAVED_LABEL",0,engraved_cb);
-      new fltk::Item("EMBOSSED_LABEL",0,embossed_cb);
+      new gnui::Item("NORMAL_LABEL",0,normal_cb);
+      new gnui::Item("SYMBOL_LABEL",0,symbol_cb);
+      new gnui::Item("SHADOW_LABEL",0,shadow_cb);
+      new gnui::Item("ENGRAVED_LABEL",0,engraved_cb);
+      new gnui::Item("EMBOSSED_LABEL",0,embossed_cb);
   c->end();
 }
 

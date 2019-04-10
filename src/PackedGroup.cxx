@@ -24,9 +24,9 @@
 #include <fltk/PackedGroup.h>
 #include <fltk/layout.h>
 #include <fltk/Box.h>
-using namespace fltk;
+using namespace gnui;
 
-/** \class fltk::PackedGroup
+/** \class gnui::PackedGroup
 
   Resizes all the child widgets to be the full width and stacks them.
   All widgets before the resizable() (or all of them if there is no

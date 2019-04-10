@@ -34,7 +34,7 @@
 #include <fltk/Style.h>
 #include <fltk/draw.h>
 #include <string.h>
-using namespace fltk;
+using namespace gnui;
 
 // Circle with an edge pattern like FrameBox:
 class RoundBox : public FrameBox {
@@ -163,10 +163,10 @@ void RoundBox::_draw(const Rectangle& r) const
 
 static RoundBox roundDownBox("round_down", "WWMMPPAA");
 /** Inset oval or circle. */
-Box* const fltk::ROUND_DOWN_BOX = &roundDownBox;
+Box* const gnui::ROUND_DOWN_BOX = &roundDownBox;
 static RoundBox roundUpBox("round_up", "AAWWMMTT", &roundDownBox);
 /** Raised oval or circle. */
-Box* const fltk::ROUND_UP_BOX = &roundUpBox;
+Box* const gnui::ROUND_UP_BOX = &roundUpBox;
 
 //
 // End of "$Id$".

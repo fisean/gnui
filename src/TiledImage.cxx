@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::TiledImage
+/*! \class gnui::TiledImage
 
   Draws the image supplied to it's constructor repeatedly to cover
   the area provided to draw(). Clips the images as necessary to
@@ -30,7 +30,7 @@
 
 #include <fltk/TiledImage.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
 /*! \fn TiledImage::TiledImage(Symbol*)
 

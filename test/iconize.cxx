@@ -29,7 +29,7 @@
 #include <fltk/Button.h>
 #include <stdio.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
 void hide_cb(Widget *, void *v) {
   Window *w = (Window *)v;
@@ -133,7 +133,7 @@ int main(int argc, char **argv) {
   control.end();
   control.show();
   control.callback(window_cb);
-  while (fltk::wait()) {
+  while (gnui::wait()) {
     static int oldarray[6] = {0,0,0,0,0,0};
     int array[6];
     array[0] = mainw.x();
@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
     if (print) {
       printf("window is %d %d %d %d, visible %d, iconic %d\n",
 	     array[0], array[1], array[2], array[3], array[4], array[5]);
-//       fltk::Rectangle r; mainw.borders(&r);
+//       gnui::Rectangle r; mainw.borders(&r);
 //       printf("borders %d %d %d %d\n", r.x(),r.y(),r.r(),r.b());
     }
   }

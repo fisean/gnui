@@ -32,7 +32,7 @@
 #include "Valuator.h"
 #endif
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ThumbWheel : public Valuator {
 public:

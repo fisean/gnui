@@ -35,7 +35,7 @@
 #include <fltk/layout.h>
 #include <fltk/Cursor.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
 // Drag the edges that were initially at oldx,oldy to newx,newy:
 // pass zero as oldx or oldy to disable drag in that direction:

@@ -9,7 +9,7 @@
 #include <fltk/Button.h>
 #include <fltk/Input.h>
 
-namespace fltk  {
+namespace gnui  {
 
 class FL_IMAGES_API HelpDialog  {
   int index_;
@@ -20,27 +20,27 @@ class FL_IMAGES_API HelpDialog  {
 public:
   HelpDialog();
 private:
-  fltk::DoubleBufferWindow *window_;
-    fltk::HelpView *view_;
-    inline void cb_view__i(fltk::HelpView*, void*);
-    static void cb_view_(fltk::HelpView*, void*);
-      inline void cb_Close_i(fltk::Button*, void*);
-      static void cb_Close(fltk::Button*, void*);
-      fltk::Button *back_;
-      inline void cb_back__i(fltk::Button*, void*);
-      static void cb_back_(fltk::Button*, void*);
-      fltk::Button *forward_;
-      inline void cb_forward__i(fltk::Button*, void*);
-      static void cb_forward_(fltk::Button*, void*);
-      fltk::Button *smaller_;
-      inline void cb_smaller__i(fltk::Button*, void*);
-      static void cb_smaller_(fltk::Button*, void*);
-      fltk::Button *larger_;
-      inline void cb_larger__i(fltk::Button*, void*);
-      static void cb_larger_(fltk::Button*, void*);
-        fltk::Input *find_;
-        inline void cb_find__i(fltk::Input*, void*);
-        static void cb_find_(fltk::Input*, void*);
+  gnui::DoubleBufferWindow *window_;
+    gnui::HelpView *view_;
+    inline void cb_view__i(gnui::HelpView*, void*);
+    static void cb_view_(gnui::HelpView*, void*);
+      inline void cb_Close_i(gnui::Button*, void*);
+      static void cb_Close(gnui::Button*, void*);
+      gnui::Button *back_;
+      inline void cb_back__i(gnui::Button*, void*);
+      static void cb_back_(gnui::Button*, void*);
+      gnui::Button *forward_;
+      inline void cb_forward__i(gnui::Button*, void*);
+      static void cb_forward_(gnui::Button*, void*);
+      gnui::Button *smaller_;
+      inline void cb_smaller__i(gnui::Button*, void*);
+      static void cb_smaller_(gnui::Button*, void*);
+      gnui::Button *larger_;
+      inline void cb_larger__i(gnui::Button*, void*);
+      static void cb_larger_(gnui::Button*, void*);
+        gnui::Input *find_;
+        inline void cb_find__i(gnui::Input*, void*);
+        static void cb_find_(gnui::Input*, void*);
 public:
   ~HelpDialog();
   int h();

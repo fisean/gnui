@@ -4,7 +4,7 @@
 
 #include "Fl_Button.H"
 #include <fltk/LightButton.h>
-typedef fltk::LightButton Fl_Toggle_Light_Button;
+typedef gnui::LightButton Fl_Toggle_Light_Button;
 
 #endif
 

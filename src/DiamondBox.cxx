@@ -36,7 +36,7 @@
 #include <fltk/draw.h>
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 // Diamond with an edge pattern like FrameBox:
 class DiamondBox : public Box {
@@ -97,11 +97,11 @@ void DiamondBox::_draw(const Rectangle& r) const
 static DiamondBox diamondDownBox("diamond_down", "2WWMMPPAA");
 
 /** Diamond shape used to draw Motif-style checkboxes. */
-Box* const fltk::DIAMOND_DOWN_BOX = &diamondDownBox;
+Box* const gnui::DIAMOND_DOWN_BOX = &diamondDownBox;
 static DiamondBox diamondUpBox("diamond_up", "2AAWWMMTT", &diamondDownBox);
 
 /** Raised diamond shape used to draw Motif-style checkboxes. */
-Box* const fltk::DIAMOND_UP_BOX = &diamondUpBox;
+Box* const gnui::DIAMOND_UP_BOX = &diamondUpBox;
 
 //
 // End of "$Id$".

@@ -3,6 +3,6 @@
 
 #include "Fl_Menu_.H"
 #include <fltk/MenuBar.h>
-typedef fltk::MenuBar Fl_Menu_Bar;
+typedef gnui::MenuBar Fl_Menu_Bar;
 
 #endif

@@ -31,7 +31,7 @@
 #include <fltk/draw.h>
 #include <fltk/ToggleButton.h>
 
-using namespace fltk;
+using namespace gnui;
 
 float xy[10] = {
   20,20, 50,200, 100,20, 200,200, 0, 0};

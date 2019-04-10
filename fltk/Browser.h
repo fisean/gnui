@@ -27,7 +27,7 @@
 #include "Menu.h"
 #include "Scrollbar.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Browser : public Menu {
 public:
@@ -66,7 +66,7 @@ public:
       colour) of the item
   */
   class FL_API Mark {
-    friend class fltk::Browser;
+    friend class gnui::Browser;
     unsigned level; //!< depth in hierarchy of the item
     unsigned open_level; //!< depth of highest closed parent
     int position;  //!< distance in pixels from top of browser

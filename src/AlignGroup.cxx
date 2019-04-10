@@ -32,7 +32,7 @@
 #include <fltk/Flags.h>
 #include <fltk/AlignGroup.h>
 
-using namespace fltk;
+using namespace gnui;
 
 void AlignGroup::layout() {
   Widget::layout();

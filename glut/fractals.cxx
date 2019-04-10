@@ -88,7 +88,7 @@ int Rebuild = 1,        /* Rebuild display list in next display? */
 
 int DrawAxes = 0;       
 
-using namespace fltk;
+using namespace gnui;
 
 /***************************************************************/
 /************************* VECTOR JUNK *************************/
@@ -756,8 +756,8 @@ int main(int argc, char** argv)
 
   // create a bunch of buttons:
   Group *g = new Group(50,50,400-110,30,"Level:");
-  g->clear_flag(fltk::ALIGN_MASK);
-  g->set_flag(fltk::ALIGN_LEFT);
+  g->clear_flag(gnui::ALIGN_MASK);
+  g->set_flag(gnui::ALIGN_LEFT);
   g->begin();
   Button *b;
   b = new RadioButton(  0,0,30,25,"0"); b->callback(setlevel,(void*)0);

@@ -25,7 +25,7 @@
 //    http://www.fltk.org/str.php
 //
 
-/*! \class fltk::Window
+/*! \class gnui::Window
 
 This widget produces an actual window. This can either be a main
 window, with a border and title and all the window management
@@ -37,14 +37,14 @@ historic fltk reasons.
 
 Once you create a window, you usually add children Widgets to it by
 using add(child) or by using begin() and then constructing the
-children. See fltk::Group for more information on how to add and
+children. See gnui::Group for more information on how to add and
 remove children.
 
-There are several subclasses of fltk::Window that provide
+There are several subclasses of gnui::Window that provide
 double-buffering, overlay, menu, and OpenGL support.
 
 The window's callback is done if the user tries to close a window
-using the window manager and fltk::modal() is zero or equal to the
+using the window manager and gnui::modal() is zero or equal to the
 window. Window has a default callback that calls Window::hide() and
 calls exit(0) if this is the last top-level window.
 
@@ -64,12 +64,12 @@ If you don't change it then that key will close the window.
 #include <fltk/layout.h>
 #include <fltk/run.h>
 #include <fltk/x.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! Return a pointer to the fltk::Window this widget is in.
+/*! Return a pointer to the gnui::Window this widget is in.
   (it will skip any and all parent widgets between this and
   the window).  Returns NULL if none.  Note: for an
-  fltk::Window, this returns the \e parent window (if any),
+  gnui::Window, this returns the \e parent window (if any),
   not \e this window.
 */
 Window *Widget::window() const {
@@ -98,14 +98,14 @@ void Window::default_callback(Window* window, void*) {
   // if (!first()) exit(0);
 }
 
-static void revert(fltk::Style* s) {
+static void revert(gnui::Style* s) {
   s->color_ = GRAY75;
   s->box_ = FLAT_BOX;
 }
 static NamedStyle style("Window", revert, &Window::default_style);
 /*! By default a window has box() set to \c FLAT_BOX, and the color()
   set to \c GRAY75, which is a special color cell that is altered by
-  fltk::set_background().
+  gnui::set_background().
 
   If you plan to turn the border() off you may want to change
   the box() to \c UP_BOX. You can also produce something that looks
@@ -195,9 +195,9 @@ Window::Window(int W, int H, const char *l)
   these changes are communicated to the window server (which may
   refuse that size and cause a further resize). If shown() is false,
   the size and position are used when show() is called. See
-  fltk::Group for the effect of resizing on the child widgets.
+  gnui::Group for the effect of resizing on the child widgets.
 
-  The special value fltk::USEDEFAULT may be used for x and y indicate
+  The special value gnui::USEDEFAULT may be used for x and y indicate
   that the system should choose the window's position. This will only
   work before show() is called.
 
@@ -232,7 +232,7 @@ bool fl_show_iconic; // set by iconize() or by -i arg switch
 // will not happen when they destroy or hide the window. To avoid this
 // all the calls are delayed by putting this in this queue and are
 // executed when fltk calls GetMessage next. This will delay the callback
-// to WndProc to the time programs expect it (inside fltk::wait()).
+// to WndProc to the time programs expect it (inside gnui::wait()).
 
 enum DeferredCallType {
   NOTHING, SHOW_WINDOW, KEEP_ACTIVE, OPEN_ICON, RAISE_WINDOW, DESTROY_WINDOW
@@ -424,7 +424,7 @@ int Window::handle(int event) {
     or ~Window(). hide() will "unmap" the system window.
 
     The first time show() is called on any window is when fltk will
-    call fltk::open_display() and fltk::load_theme(), unless you have
+    call gnui::open_display() and gnui::load_theme(), unless you have
     already called them. This allows these expensive operations to be
     deferred as long as possible, and allows fltk programs to be
     written that will run without an X server as long as they don't
@@ -568,7 +568,7 @@ void Window::show() {
 
   If you want a dialog that blocks interaction with the other windows
   of your application or with all other applications, you need to look
-  at exec() (or possibly fltk::modal()). */
+  at exec() (or possibly gnui::modal()). */
 void Window::child_of(const Window* parent) {
   if (contains(parent)) return;
   while (parent && parent->parent()) parent = parent->window();
@@ -594,20 +594,20 @@ void Window::show(const Window* parent) {
 */
 void Window::make_exec_return(bool return_value) {
   if (return_value) set_flag(STATE);
-  fltk::exit_modal();
+  gnui::exit_modal();
 }
 
 /*!
 
   The window is popped up and this function does not return until
   make_exec_return() is called, or the window is destroyed or hide()
-  is called, or fltk::exit_modal() is called.  During this time events
+  is called, or gnui::exit_modal() is called.  During this time events
   to other windows in this application are either thrown away or
   redirected to this window.
 
   This does child_of(parent) (using first() if parent is null), so
   this window is a floating panel that is kept above the parent.  It
-  then uses fltk::modal(this,grab) to make all events go to this
+  then uses gnui::modal(this,grab) to make all events go to this
   window.
 
   The return value is the argument to make_exec_return(), or false
@@ -617,13 +617,13 @@ void Window::make_exec_return(bool return_value) {
   the parent. This is convenient for popups that appear in response to
   a mouse or key click.
 
-  See fltk::modal() for what grab does. This is useful for popup menus.
+  See gnui::modal() for what grab does. This is useful for popup menus.
 */
 bool Window::exec(const Window* parent, bool grab) {
   clear_flag(STATE);
   child_of(parent ? parent : first());
-  Widget* saved_modal = fltk::modal(); bool saved_grab = fltk::grab();
-  fltk::modal(this, grab);
+  Widget* saved_modal = gnui::modal(); bool saved_grab = gnui::grab();
+  gnui::modal(this, grab);
   show();
   while (modal() && !exit_modal_flag()) wait();
   hide();
@@ -663,7 +663,7 @@ void Window::show_inside(const Window* frame) {
 
 /*! Indicates that a rectangular region is damaged. draw() will be
   called later with damage() set to
-  fltk::DAMAGE_ALL|fltk::DAMAGE_EXPOSE and with FLTK's clipping set to
+  gnui::DAMAGE_ALL|gnui::DAMAGE_EXPOSE and with FLTK's clipping set to
   at least the given rectangle. Normally this is called more than once
   and the clip region will be the union of all these calls. In
   addition damage from the operating system (ie from overlapping
@@ -673,15 +673,15 @@ void Window::show_inside(const Window* frame) {
   many overlapping and changing objects. Even if you do nothing else
   about it, it is usually faster to do a drawing operation that is
   clipped than one that appears, so display will be faster. You can
-  also check to see if anything by testing fltk::not_clipped(x,y,w,h)
-  or fltk::clip_box(...) and skipping unnecessary drawing calls
+  also check to see if anything by testing gnui::not_clipped(x,y,w,h)
+  or gnui::clip_box(...) and skipping unnecessary drawing calls
   completely. Also if your normal drawing causes blinking (due to
   overlapping objects) this can make the display look much better by
   limiting the blinking to the small area that is actually changing.  */
-void Widget::redraw(const fltk::Rectangle& r1) {
+void Widget::redraw(const gnui::Rectangle& r1) {
   // go up to the window, clipping to each widget's area, quit if empty:
   Widget* window = this;
-  fltk::Rectangle r(r1);
+  gnui::Rectangle r(r1);
   for (;;) {
     if (r.x() < 0) r.set_x(0);
     if (r.y() < 0) r.set_y(0);
@@ -703,7 +703,7 @@ void Widget::redraw(const fltk::Rectangle& r1) {
 // window is damaged we switch to a DAMAGE_ALL mode which will
 // avoid drawing it twice:
 //+++ verify port to FLTK2
-void CreatedWindow::expose(const fltk::Rectangle& r) {
+void CreatedWindow::expose(const gnui::Rectangle& r) {
   // Ignore if window already marked as completely damaged:
   if (window->damage() & DAMAGE_ALL) ;
   // Detect expose events that cover the entire window:
@@ -739,7 +739,7 @@ void CreatedWindow::expose(const fltk::Rectangle& r) {
 #endif
   }
   // make flush() search for this window:
-  fltk::damage(1); // make flush() do something
+  gnui::damage(1); // make flush() do something
 }
 
 /*! \fn bool Window::double_buffer() const
@@ -797,7 +797,7 @@ void Window::redraw_overlay() {
   if (i) {
     i->overlay = true;
     set_damage(damage()|DAMAGE_OVERLAY);
-    fltk::damage(1);
+    gnui::damage(1);
   }
 }
 
@@ -809,7 +809,7 @@ void Window::erase_overlay() {
   if (i && i->overlay) {
     i->overlay = false;
     set_damage(damage()|DAMAGE_OVERLAY);
-    fltk::damage(1);
+    gnui::damage(1);
   }
 }
 
@@ -876,7 +876,7 @@ void Window::destroy() {
   if (x->region) DeleteObject(x->region);
 #elif USE_QUARTZ
   //+++Q: this should probably call 'stop_drawing' as well...
-  fltk::release_quartz_context(x);
+  gnui::release_quartz_context(x);
   if (x->region) DisposeRgn(x->region);
   DisposeWindow(x->xid);
 #endif

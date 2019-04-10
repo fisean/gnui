@@ -30,13 +30,13 @@
 #include <fltk/run.h>
 
 UI::UI() {
-  fltk::DoubleBufferWindow* w;
-   {fltk::DoubleBufferWindow* o = window = new fltk::DoubleBufferWindow(195, 176);
+  gnui::DoubleBufferWindow* w;
+   {gnui::DoubleBufferWindow* o = window = new gnui::DoubleBufferWindow(195, 176);
     w = o;
     o->type(241);
     o->user_data((void*)(this));
     o->begin();
-    fltk::Button *b = new fltk::LightButton(25, 25, 68, 20, "button");
+    gnui::Button *b = new gnui::LightButton(25, 25, 68, 20, "button");
     o->end();
     o->size_range(0,0,195,0);
   }
@@ -45,6 +45,6 @@ UI::UI() {
 int main() {
   UI ui;
   ui.window->show();
-  return fltk::run();
+  return gnui::run();
 }
 // End of "$Id$"

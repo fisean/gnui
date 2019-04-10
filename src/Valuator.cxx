@@ -29,12 +29,12 @@
 #include <fltk/math.h>
 #include <stdio.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Valuator
+/*! \class gnui::Valuator
 
   Base class for sliders and all other one-value "knobs".The
-  fltk::Valuator class controls a single floating-point value and
+  gnui::Valuator class controls a single floating-point value and
   provides a consistent interface to set the value(), range(), and
   step(), and insures that callbacks are done the same for every
   object.
@@ -45,14 +45,14 @@ using namespace fltk;
 
   For most subclasses you can call when() to get some other callback
   behaviors:
-  - fltk::WHEN_CHANGED: this is the default, callback is done on
+  - gnui::WHEN_CHANGED: this is the default, callback is done on
     any change.
-  - fltk::WHEN_RELEASE: it will only do the callback when the user
+  - gnui::WHEN_RELEASE: it will only do the callback when the user
     moves the slider and then lets it go on a different value than it
     started.
-  - fltk::WHEN_RELEASE_ALWAYS: will do the callback when
+  - gnui::WHEN_RELEASE_ALWAYS: will do the callback when
     the user lets go of the slider whether or not the value changed.
-  - fltk::WHEN_NEVER: do not do the callback, instead it will turn
+  - gnui::WHEN_NEVER: do not do the callback, instead it will turn
     on the changed() flag.
 
   There are probably more of these classes in FLTK than any others: 
@@ -63,7 +63,7 @@ using namespace fltk;
   are further differentiated by setting the type() of the widget to
   the symbolic value labeling the widget. The ones labelled "0" are
   the default versions with a type(0). For consistency the symbol
-  fltk::VERTICAL is defined as zero.
+  gnui::VERTICAL is defined as zero.
 
 */
 

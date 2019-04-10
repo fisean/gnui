@@ -2,50 +2,50 @@
 
 #include "mandelbrot_ui.h"
 
-inline void DrawingWindow::cb_x_input_i(fltk::FloatInput* o, void*) {
+inline void DrawingWindow::cb_x_input_i(gnui::FloatInput* o, void*) {
   d->X = o->fvalue();
   d->new_display();
 }
-void DrawingWindow::cb_x_input(fltk::FloatInput* o, void* v) {
+void DrawingWindow::cb_x_input(gnui::FloatInput* o, void* v) {
   ((DrawingWindow*)(o->parent()->user_data()))->cb_x_input_i(o, v);
 }
 
-inline void DrawingWindow::cb_y_input_i(fltk::FloatInput* o, void*) {
+inline void DrawingWindow::cb_y_input_i(gnui::FloatInput* o, void*) {
   d->Y = o->fvalue();
   d->new_display();
 }
-void DrawingWindow::cb_y_input(fltk::FloatInput* o, void* v) {
+void DrawingWindow::cb_y_input(gnui::FloatInput* o, void* v) {
   ((DrawingWindow*)(o->parent()->user_data()))->cb_y_input_i(o, v);
 }
 
-inline void DrawingWindow::cb_w_input_i(fltk::FloatInput* o, void*) {
+inline void DrawingWindow::cb_w_input_i(gnui::FloatInput* o, void*) {
   d->scale = o->fvalue();
   d->new_display();
 }
-void DrawingWindow::cb_w_input(fltk::FloatInput* o, void* v) {
+void DrawingWindow::cb_w_input(gnui::FloatInput* o, void* v) {
   ((DrawingWindow*)(o->parent()->user_data()))->cb_w_input_i(o, v);
 }
 
-inline void DrawingWindow::cb_brightness_i(fltk::Slider* o, void*) {
+inline void DrawingWindow::cb_brightness_i(gnui::Slider* o, void*) {
   d->brightness = int(o->value());
   d->new_display();
 }
-void DrawingWindow::cb_brightness(fltk::Slider* o, void* v) {
+void DrawingWindow::cb_brightness(gnui::Slider* o, void* v) {
   ((DrawingWindow*)(o->parent()->user_data()))->cb_brightness_i(o, v);
 }
 
-inline void DrawingWindow::cb_iterations_i(fltk::Slider* o, void*) {
+inline void DrawingWindow::cb_iterations_i(gnui::Slider* o, void*) {
   d->iterations = 1 << int(o->value());
   d->new_display();
 }
-void DrawingWindow::cb_iterations(fltk::Slider* o, void* v) {
+void DrawingWindow::cb_iterations(gnui::Slider* o, void* v) {
   ((DrawingWindow*)(o->parent()->user_data()))->cb_iterations_i(o, v);
 }
 
 void DrawingWindow::make_window() {
-  fltk::Window* w;
+  gnui::Window* w;
   {
-    fltk::Window* o = window = new fltk::Window(430, 510);
+    gnui::Window* o = window = new gnui::Window(430, 510);
     w = o;
     o->set_vertical();
     o->user_data((void*)(this));
@@ -53,83 +53,83 @@ void DrawingWindow::make_window() {
     {
       DrawingArea* o = d = new DrawingArea(10, 70, 410, 430);
       o->set_vertical();
-      o->box(fltk::DOWN_BOX);
-      o->color((fltk::Color)56);
-      o->selection_color((fltk::Color)47);
+      o->box(gnui::DOWN_BOX);
+      o->color((gnui::Color)56);
+      o->selection_color((gnui::Color)47);
       o->user_data((void*)(this));
-      fltk::Group::current()->resizable(o);
+      gnui::Group::current()->resizable(o);
       o->tooltip("Left-click will zoom out by 2.\nLeft-drag will select a region to zoom in to.\
                  \nRight-click will create the Julia set viewer and set it to that point.");
     }
     {
-      fltk::FloatInput* o = x_input = new fltk::FloatInput(10, 10, 130, 25, "x");
+      gnui::FloatInput* o = x_input = new gnui::FloatInput(10, 10, 130, 25, "x");
       o->type(1);
-      o->labelfont(fltk::HELVETICA_ITALIC);
-      o->textfont(fltk::HELVETICA_BOLD);
+      o->labelfont(gnui::HELVETICA_ITALIC);
+      o->textfont(gnui::HELVETICA_BOLD);
       o->labelsize(10);
-      o->callback((fltk::Callback*)cb_x_input);
-      o->align(fltk::ALIGN_LEFT | fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)cb_x_input);
+      o->align(gnui::ALIGN_LEFT | gnui::ALIGN_INSIDE);
       o->tooltip("x coordinate of window center");
-      o->when(fltk::WHEN_ENTER_KEY | fltk::WHEN_RELEASE);
+      o->when(gnui::WHEN_ENTER_KEY | gnui::WHEN_RELEASE);
     }
     {
-      fltk::FloatInput* o = y_input = new fltk::FloatInput(150, 10, 130, 25, "y");
+      gnui::FloatInput* o = y_input = new gnui::FloatInput(150, 10, 130, 25, "y");
       o->type(1);
-      o->labelfont(fltk::HELVETICA_ITALIC);
-      o->textfont(fltk::HELVETICA_BOLD);
+      o->labelfont(gnui::HELVETICA_ITALIC);
+      o->textfont(gnui::HELVETICA_BOLD);
       o->labelsize(10);
-      o->callback((fltk::Callback*)cb_y_input);
-      o->align(fltk::ALIGN_LEFT | fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)cb_y_input);
+      o->align(gnui::ALIGN_LEFT | gnui::ALIGN_INSIDE);
       o->tooltip("y coordinate of window center");
-      o->when(fltk::WHEN_ENTER_KEY | fltk::WHEN_RELEASE);
+      o->when(gnui::WHEN_ENTER_KEY | gnui::WHEN_RELEASE);
     }
     {
-      fltk::FloatInput* o = w_input = new fltk::FloatInput(290, 10, 130, 25, "w");
+      gnui::FloatInput* o = w_input = new gnui::FloatInput(290, 10, 130, 25, "w");
       o->type(1);
-      o->labelfont(fltk::HELVETICA_ITALIC);
-      o->textfont(fltk::HELVETICA_BOLD);
+      o->labelfont(gnui::HELVETICA_ITALIC);
+      o->textfont(gnui::HELVETICA_BOLD);
       o->labelsize(10);
-      o->callback((fltk::Callback*)cb_w_input);
-      o->align(fltk::ALIGN_LEFT | fltk::ALIGN_INSIDE);
+      o->callback((gnui::Callback*)cb_w_input);
+      o->align(gnui::ALIGN_LEFT | gnui::ALIGN_INSIDE);
       o->tooltip("width of the window");
-      o->when(fltk::WHEN_ENTER_KEY | fltk::WHEN_RELEASE);
+      o->when(gnui::WHEN_ENTER_KEY | gnui::WHEN_RELEASE);
     }
     {
-      fltk::Slider* o = new fltk::Slider(70, 40, 160, 15, "brightness:");
-      o->box(fltk::THIN_DOWN_BOX);
+      gnui::Slider* o = new gnui::Slider(70, 40, 160, 15, "brightness:");
+      o->box(gnui::THIN_DOWN_BOX);
       o->labelsize(10);
       o->step(1);
       o->slider_size(16);
-      o->callback((fltk::Callback*)cb_brightness);
-      o->align(fltk::ALIGN_LEFT);
+      o->callback((gnui::Callback*)cb_brightness);
+      o->align(gnui::ALIGN_LEFT);
       o->tooltip("Change mapping from iteration count to gray level so that details are visible\
                  .");
       o->range(0, d->MAX_BRIGHTNESS);
       o->value(d->DEFAULT_BRIGHTNESS);
-      o->box(fltk::DOWN_BOX);
+      o->box(gnui::DOWN_BOX);
       o->step(1 / d->MAX_BRIGHTNESS);
     }
     {
-      fltk::InvisibleBox* o = new fltk::InvisibleBox(240, 40, 180, 26, "FLTK Mandelbrot Viewer");
-      o->box(fltk::EMBOSSED_BOX);
-      o->labelfont(fltk::HELVETICA_BOLD);
+      gnui::InvisibleBox* o = new gnui::InvisibleBox(240, 40, 180, 26, "FLTK Mandelbrot Viewer");
+      o->box(gnui::EMBOSSED_BOX);
+      o->labelfont(gnui::HELVETICA_BOLD);
       o->labelsize(10);
-      o->align(fltk::ALIGN_RIGHT | fltk::ALIGN_INSIDE);
+      o->align(gnui::ALIGN_RIGHT | gnui::ALIGN_INSIDE);
       o->deactivate();
     }
     {
-      fltk::Slider* o = new fltk::Slider(70, 55, 160, 15, "iterations:");
-      o->box(fltk::THIN_DOWN_BOX);
+      gnui::Slider* o = new gnui::Slider(70, 55, 160, 15, "iterations:");
+      o->box(gnui::THIN_DOWN_BOX);
       o->labelsize(10);
       o->step(1);
       o->slider_size(16);
-      o->callback((fltk::Callback*)cb_iterations);
-      o->align(fltk::ALIGN_LEFT);
+      o->callback((gnui::Callback*)cb_iterations);
+      o->align(gnui::ALIGN_LEFT);
       o->tooltip("Set number of iterations before it colors the pixel black. Higher values make\
                  it more accurate.");
       o->range(1, d->MAX_ITERATIONS);
       o->value(d->DEFAULT_ITERATIONS);
-      o->box(fltk::DOWN_BOX);
+      o->box(gnui::DOWN_BOX);
       o->step(1 / d->MAX_ITERATIONS);
     }
     o->end();

@@ -34,66 +34,66 @@ int N = 0;
 #define H 50
 #define ROWS 6
 
-fltk::Widget* bt(const char *name, fltk::Box* type, int square=0) {
+gnui::Widget* bt(const char *name, gnui::Box* type, int square=0) {
     int x = N%4;
     int y = N/4;
     N++;
     x = x*W+10;
     y = y*H+10;
-    fltk::Widget *b = new fltk::InvisibleBox(type,x,y,square ? H-20 : W-20,H-20,name);
+    gnui::Widget *b = new gnui::InvisibleBox(type,x,y,square ? H-20 : W-20,H-20,name);
     b->labelsize(11);
     if (square) {
-	b->clear_flag(fltk::ALIGN_MASK);
-	b->set_flag(fltk::ALIGN_RIGHT);
+	b->clear_flag(gnui::ALIGN_MASK);
+	b->set_flag(gnui::ALIGN_RIGHT);
     }
     return b;
 }
 
 int main(int argc, char ** argv) {
-    fltk::Window window(4*W,ROWS*H);
+    gnui::Window window(4*W,ROWS*H);
     window.color(12);// light blue
     window.begin();
-    bt("fltk::NO_BOX",fltk::NO_BOX);
-    bt("fltk::FLAT_BOX",fltk::FLAT_BOX);
+    bt("gnui::NO_BOX",gnui::NO_BOX);
+    bt("gnui::FLAT_BOX",gnui::FLAT_BOX);
     //  N += 2; // go to start of next row to line up boxes & frames
-    bt("fltk::UP_BOX",fltk::UP_BOX);
-    bt("fltk::DOWN_BOX",fltk::DOWN_BOX);
-    //  bt("fltk::UP_FRAME",fltk::UP_FRAME);
-    //  bt("fltk::DOWN_FRAME",fltk::DOWN_FRAME);
-    bt("fltk::THIN_UP_BOX",fltk::THIN_UP_BOX);
-    bt("fltk::THIN_DOWN_BOX",fltk::THIN_DOWN_BOX);
-    //  bt("fltk::THIN_UP_FRAME",fltk::THIN_UP_FRAME);
-    //  bt("fltk::THIN_DOWN_FRAME",fltk::THIN_DOWN_FRAME);
-    bt("fltk::ENGRAVED_BOX",fltk::ENGRAVED_BOX);
-    bt("fltk::EMBOSSED_BOX",fltk::EMBOSSED_BOX);
-    //  bt("fltk::ENGRAVED_FRAME",fltk::ENGRAVED_FRAME);
-    //  bt("fltk::EMBOSSED_FRAME",fltk::EMBOSSED_FRAME);
-    bt("fltk::ROUND_UP_BOX",fltk::ROUND_UP_BOX);
-    bt("fltk::ROUND_DOWN_BOX",fltk::ROUND_DOWN_BOX);
-    bt("fltk::DIAMOND_UP_BOX",fltk::DIAMOND_UP_BOX);
-    bt("fltk::DIAMOND_DOWN_BOX",fltk::DIAMOND_DOWN_BOX);
-    //  bt("fltk::BORDER_FRAME",fltk::BORDER_FRAME);
-    //  bt("fltk::SHADOW_FRAME",fltk::SHADOW_FRAME);
-    bt("fltk::BORDER_BOX",fltk::BORDER_BOX);
-    bt("fltk::ROUNDED_BOX",fltk::ROUNDED_BOX);
-    bt("fltk::RSHADOW_BOX",fltk::RSHADOW_BOX);
-    //  bt("fltk::ROUNDED_FRAME",fltk::ROUNDED_FRAME);
-    bt("fltk::RFLAT_BOX",fltk::RFLAT_BOX);
-    bt("fltk::SHADOW_BOX",fltk::SHADOW_BOX);
-    bt("fltk::OVAL_BOX",fltk::OVAL_BOX);
-    bt("fltk::OSHADOW_BOX",fltk::OSHADOW_BOX);
-    //  bt("fltk::OVAL_FRAME",fltk::OVAL_FRAME);
-    bt("fltk::OFLAT_BOX",fltk::OFLAT_BOX);
-    //    bt("fltk::PLASTIC_UP_BOX", fltk::PLASTIC_UP_BOX);
-    //    bt("fltk::PLASTIC_DOWN_BOX", fltk::PLASTIC_DOWN_BOX);
-    //    bt("fltk::FOCUS_FRAME", fltk::FOCUS_FRAME);
-    bt("fltk::BORDER_FRAME", fltk::BORDER_FRAME);
-    bt("fltk::PLASTIC_UP_BOX", fltk::PLASTIC_UP_BOX)->color(12);
-    bt("fltk::PLASTIC_DOWN_BOX", fltk::PLASTIC_DOWN_BOX)->color(12);
+    bt("gnui::UP_BOX",gnui::UP_BOX);
+    bt("gnui::DOWN_BOX",gnui::DOWN_BOX);
+    //  bt("gnui::UP_FRAME",gnui::UP_FRAME);
+    //  bt("gnui::DOWN_FRAME",gnui::DOWN_FRAME);
+    bt("gnui::THIN_UP_BOX",gnui::THIN_UP_BOX);
+    bt("gnui::THIN_DOWN_BOX",gnui::THIN_DOWN_BOX);
+    //  bt("gnui::THIN_UP_FRAME",gnui::THIN_UP_FRAME);
+    //  bt("gnui::THIN_DOWN_FRAME",gnui::THIN_DOWN_FRAME);
+    bt("gnui::ENGRAVED_BOX",gnui::ENGRAVED_BOX);
+    bt("gnui::EMBOSSED_BOX",gnui::EMBOSSED_BOX);
+    //  bt("gnui::ENGRAVED_FRAME",gnui::ENGRAVED_FRAME);
+    //  bt("gnui::EMBOSSED_FRAME",gnui::EMBOSSED_FRAME);
+    bt("gnui::ROUND_UP_BOX",gnui::ROUND_UP_BOX);
+    bt("gnui::ROUND_DOWN_BOX",gnui::ROUND_DOWN_BOX);
+    bt("gnui::DIAMOND_UP_BOX",gnui::DIAMOND_UP_BOX);
+    bt("gnui::DIAMOND_DOWN_BOX",gnui::DIAMOND_DOWN_BOX);
+    //  bt("gnui::BORDER_FRAME",gnui::BORDER_FRAME);
+    //  bt("gnui::SHADOW_FRAME",gnui::SHADOW_FRAME);
+    bt("gnui::BORDER_BOX",gnui::BORDER_BOX);
+    bt("gnui::ROUNDED_BOX",gnui::ROUNDED_BOX);
+    bt("gnui::RSHADOW_BOX",gnui::RSHADOW_BOX);
+    //  bt("gnui::ROUNDED_FRAME",gnui::ROUNDED_FRAME);
+    bt("gnui::RFLAT_BOX",gnui::RFLAT_BOX);
+    bt("gnui::SHADOW_BOX",gnui::SHADOW_BOX);
+    bt("gnui::OVAL_BOX",gnui::OVAL_BOX);
+    bt("gnui::OSHADOW_BOX",gnui::OSHADOW_BOX);
+    //  bt("gnui::OVAL_FRAME",gnui::OVAL_FRAME);
+    bt("gnui::OFLAT_BOX",gnui::OFLAT_BOX);
+    //    bt("gnui::PLASTIC_UP_BOX", gnui::PLASTIC_UP_BOX);
+    //    bt("gnui::PLASTIC_DOWN_BOX", gnui::PLASTIC_DOWN_BOX);
+    //    bt("gnui::FOCUS_FRAME", gnui::FOCUS_FRAME);
+    bt("gnui::BORDER_FRAME", gnui::BORDER_FRAME);
+    bt("gnui::PLASTIC_UP_BOX", gnui::PLASTIC_UP_BOX)->color(12);
+    bt("gnui::PLASTIC_DOWN_BOX", gnui::PLASTIC_DOWN_BOX)->color(12);
     window.resizable(window);
     window.end();
     window.show(argc,argv);
-    return fltk::run();
+    return gnui::run();
 }
 
 //

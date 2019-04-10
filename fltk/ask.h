@@ -28,7 +28,7 @@
 #include "FL_API.h"
 #include "Style.h"
 
-namespace fltk {
+namespace gnui {
 
 class Widget;
 

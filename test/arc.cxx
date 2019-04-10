@@ -37,7 +37,7 @@
 float dargs[7] = {90, 90, 100, 100, 0, 360, 0};
 const char* name[7] = {"X", "Y", "W", "H", "start", "end", "rotate"};
 
-using namespace fltk;
+using namespace gnui;
 
 class Drawing : public Widget {
   void draw() {
@@ -57,7 +57,7 @@ class Drawing : public Widget {
     fillstrokepath(WHITE);
     // draw a hardware circle to see how well rotations match:
     setcolor(GRAY33);
-    fltk::Rectangle r(20,20,(int)(dargs[2]+1),(int)(dargs[3]+1));
+    gnui::Rectangle r(20,20,(int)(dargs[2]+1),(int)(dargs[3]+1));
     addchord(r,dargs[4],dargs[5]);
     fillstrokepath(WHITE);
     // now draw non-rotated hardware circle to check if it inscribes:

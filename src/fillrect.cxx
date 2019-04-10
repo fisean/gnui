@@ -30,10 +30,10 @@
 #include <fltk/draw.h>
 #include <fltk/x.h>
 #include <fltk/math.h>
-using namespace fltk;
+using namespace gnui;
 
 /*! Fill the rectangle with the current color. */
-void fltk::fillrect(int x, int y, int w, int h) {
+void gnui::fillrect(int x, int y, int w, int h) {
   if (getcolor() < 0) return; 
   if (w <= 0 || h <= 0) return;
   transform(x,y,w,h);
@@ -62,7 +62,7 @@ void fltk::fillrect(int x, int y, int w, int h) {
   Draw a line \e inside this bounding box (currently correct only for
   0-thickness lines).
 */
-void fltk::strokerect(int x, int y, int w, int h) {
+void gnui::strokerect(int x, int y, int w, int h) {
   if (w <= 0 || h <= 0) return;
   transform(x,y,w,h);
 #if USE_CAIRO
@@ -105,7 +105,7 @@ void fltk::strokerect(int x, int y, int w, int h) {
   It also may not produce consistent results if the ctm is not an
   integer translation or if the line is not horizontal or vertical.
 */
-void fltk::drawline(int x, int y, int x1, int y1) {
+void gnui::drawline(int x, int y, int x1, int y1) {
   transform(x,y);
   transform(x1,y1);
 #if USE_CAIRO
@@ -144,7 +144,7 @@ void fltk::drawline(int x, int y, int x1, int y1) {
 }
 
 /*! Draw a straight line between the two points. */
-void fltk::drawline(float x, float y, float x1, float y1) {
+void gnui::drawline(float x, float y, float x1, float y1) {
   transform(x,y);
   transform(x1,y1);
 #if USE_CAIRO
@@ -183,7 +183,7 @@ void fltk::drawline(float x, float y, float x1, float y1) {
   single pixel to the lower-right of x,y. If line_width() is non-zero
   this is a dot drawn with the current pen and line caps.
 */
-void fltk::drawpoint(int x, int y) {
+void gnui::drawpoint(int x, int y) {
   if (!line_width_) {
   transform(x,y);
 #if USE_CAIRO
@@ -206,7 +206,7 @@ void fltk::drawpoint(int x, int y) {
   is a dot drawn with the current pen and line caps (currently
   draws nothing in some api's unless the line_style has CAP_ROUND).
 */
-void fltk::drawpoint(float X, float Y) {
+void gnui::drawpoint(float X, float Y) {
   if (!line_width_) {
   transform(X,Y); 
   int x = int(floorf(X)); int y = int(floorf(Y));

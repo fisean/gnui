@@ -9,9 +9,9 @@
 #include <fltk/draw.h>
 #include <fltk/Box.h>
 #include <fltk/run.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::ValueOutput
+/*! \class gnui::ValueOutput
 
   A valuator that displays the number like a text box. This is
   indended for showing the user a number, there is no way for the user
@@ -57,7 +57,7 @@ int ValueOutput::handle(int event) {
 //    case PUSH:
 //      take_focus();
 //      // copy it to selection for middle-mouse paste:
-//      {char buf[40]; fltk::copy(buf, format(buf), false);}
+//      {char buf[40]; gnui::copy(buf, format(buf), false);}
 //      return true;
 //    case DRAG:
 //    case RELEASE:
@@ -66,7 +66,7 @@ int ValueOutput::handle(int event) {
 //    case KEY:
 //      if (event_state(CTRL) && (event_key() == 'x' || event_key() == 'c')) {
 //        // copy it to clipboard for normal paste:
-//        {char buf[40]; fltk::copy(buf, format(buf), true);}
+//        {char buf[40]; gnui::copy(buf, format(buf), true);}
 //        return true;
 //      } else return false;
   default:

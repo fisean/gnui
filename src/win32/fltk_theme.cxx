@@ -38,7 +38,7 @@
 #include <limits.h>
 #include <wchar.h>
 
-using namespace fltk;
+using namespace gnui;
 
 extern int has_unicode();
 
@@ -83,7 +83,7 @@ extern "C" bool fltk_theme() {
 // Windows doesn't seem to honor this one
 // Color slider_background = win_color(GetSysColor(COLOR_SCROLLBAR));
 
-  fltk::set_background(background);
+  gnui::set_background(background);
   Widget::default_style->labelcolor_ = foreground;
   Widget::default_style->highlight_textcolor_ = foreground;
   Widget::default_style->color_ = text_background;
@@ -159,7 +159,7 @@ extern "C" bool fltk_theme() {
     // get font info for regular widgets from LOGFONT structure
     name = ncm.lfMessageFont.lfFaceName;
     utf8fromwc(buffer, BUFLEN, name, wcslen(name));
-    font = fltk::font(buffer,
+    font = gnui::font(buffer,
 		     (ncm.lfMessageFont.lfWeight >= 600 ? BOLD : 0) +
 		     (ncm.lfMessageFont.lfItalic ? ITALIC : 0));
     size = float(win_fontsize(ncm.lfMessageFont.lfHeight));
@@ -172,7 +172,7 @@ extern "C" bool fltk_theme() {
     // get font info for menu items from LOGFONT structure
     name = ncm.lfMenuFont.lfFaceName;
     utf8fromwc(buffer, BUFLEN, name, wcslen(name));
-    font = fltk::font(buffer,
+    font = gnui::font(buffer,
 		     (ncm.lfMenuFont.lfWeight >= 600 ? BOLD : 0) +
 		     (ncm.lfMenuFont.lfItalic ? ITALIC : 0));
     size = float(win_fontsize(ncm.lfMenuFont.lfHeight));
@@ -185,7 +185,7 @@ extern "C" bool fltk_theme() {
       name = ncm.lfStatusFont.lfFaceName;
       utf8fromwc(buffer, BUFLEN, name, wcslen(name));
       // get font info for tooltips from LOGFONT structure
-      font = fltk::font(buffer,
+      font = gnui::font(buffer,
 		       (ncm.lfStatusFont.lfWeight >= 600 ? BOLD : 0) +
 		       (ncm.lfStatusFont.lfItalic ? ITALIC : 0));
       size = float(win_fontsize(ncm.lfStatusFont.lfHeight));
@@ -207,7 +207,7 @@ extern "C" bool fltk_theme() {
 
     // get font info for regular widgets from LOGFONT structure
     name = ncm.lfMessageFont.lfFaceName;
-    font = fltk::font(name,
+    font = gnui::font(name,
 		     (ncm.lfMessageFont.lfWeight >= 600 ? BOLD : 0) +
 		     (ncm.lfMessageFont.lfItalic ? ITALIC : 0));
     size = float(win_fontsize(ncm.lfMessageFont.lfHeight));
@@ -219,7 +219,7 @@ extern "C" bool fltk_theme() {
 
     // get font info for menu items from LOGFONT structure
     name = ncm.lfMenuFont.lfFaceName;
-    font = fltk::font(name,
+    font = gnui::font(name,
 		     (ncm.lfMenuFont.lfWeight >= 600 ? BOLD : 0) +
 		     (ncm.lfMenuFont.lfItalic ? ITALIC : 0));
     size = float(win_fontsize(ncm.lfMenuFont.lfHeight));
@@ -231,7 +231,7 @@ extern "C" bool fltk_theme() {
     if ((style = Style::find("Tooltip"))) {
       name = ncm.lfStatusFont.lfFaceName;
       // get font info for tooltips from LOGFONT structure
-      font = fltk::font(name,
+      font = gnui::font(name,
 		       (ncm.lfStatusFont.lfWeight >= 600 ? BOLD : 0) +
 		       (ncm.lfStatusFont.lfItalic ? ITALIC : 0));
       size = float(win_fontsize(ncm.lfStatusFont.lfHeight));

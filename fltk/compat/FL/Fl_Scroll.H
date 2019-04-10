@@ -4,11 +4,11 @@
 #include "Fl_Group.H"
 #include <fltk/ScrollGroup.h>
 
-class Fl_Scroll : public fltk::ScrollGroup {
+class Fl_Scroll : public gnui::ScrollGroup {
 
 public:
   Fl_Scroll(int x, int y, int w, int h, const char*l = 0)
-    : fltk::ScrollGroup(x,y,w,h,l) {begin();}
+    : gnui::ScrollGroup(x,y,w,h,l) {begin();}
 };
 
 #endif

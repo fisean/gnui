@@ -39,7 +39,7 @@
 static FILE *code_file;
 static FILE *header_file;
 
-using namespace fltk;
+using namespace gnui;
 
 // return true if c can be in a C identifier.  I needed this so
 // it is not messed up by locale settings:

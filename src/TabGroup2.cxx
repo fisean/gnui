@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::TabGroupPager 
+/*! \class gnui::TabGroupPager 
     This Helper class defines generically the TabGroup behavior when 
     there is more tabs than available horizontal width, 
     i.e it can generates a popup menu or shrink 
@@ -38,7 +38,7 @@
 #include <fltk/MenuBuild.h>
 #include <fltk/ask.h>
 
-using namespace fltk;
+using namespace gnui;
 
 const int BORDER = 10;
 const int TABSLOPE = 5;
@@ -253,7 +253,7 @@ int MenuTabPager::which(TabGroup* g, int event_x,int event_y) {
 bool MenuTabPager::draw_tabs(TabGroup* g, int selected, int* p, int* w) {
     int i;
     int H = g->tab_height();
-    fltk::Widget *v = g->selected_child();
+    gnui::Widget *v = g->selected_child();
     int r = available_width(g);
     bool want_extension=false;
     
@@ -286,9 +286,9 @@ bool MenuTabPager::draw_tabs(TabGroup* g, int selected, int* p, int* w) {
 	    g->draw_tab(p[i], p[i]+w[i], w[i], H, g->child(i), TAB_SELECTED);
     } else {
 	// draw the edge when no selection:
-	fltk::setcolor(H >= 0 ? GRAY99 : GRAY33);
+	gnui::setcolor(H >= 0 ? GRAY99 : GRAY33);
 	int b = H >= 0 ? H : g->h() + H;
-	fltk::drawline(0, b, g->w(), b);
+	gnui::drawline(0, b, g->w(), b);
     }
     if (want_extension) {
 	createExtMenu(g);
@@ -305,7 +305,7 @@ bool MenuTabPager::draw_tabs(TabGroup* g, int selected, int* p, int* w) {
 static void btnCb(Widget * w, void * data) {
     Widget * wi = (Widget * ) ((Menu*) w)->get_item()->user_data();
     TabGroup * g =  (TabGroup*) wi->parent();
-    //fltk::message("%s, %08p",wi->label(), wi);
+    //gnui::message("%s, %08p",wi->label(), wi);
     g->pager()->shift(0);
     g->selected_child(wi);
     g->redraw();

@@ -8,7 +8,7 @@
 #include <fltk/InvisibleBox.h>
 #include <fltk/TiledImage.h>
 #include <fltk/SharedImage.h>
-using namespace fltk;
+using namespace gnui;
 
 void beepcb(Widget *, void *) {
   printf("\007"); fflush(stdout);

@@ -31,7 +31,7 @@
 #include <fltk/x.h>
 #include <fltk/string.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
 #define Region RgnHandle
 
@@ -59,7 +59,7 @@ int fl_clip_state_number = 0; // used by code that needs to update clip regions
 /*! Return the current region as a system-specific structure. You must
   include <fltk/x.h> to use this. Returns null if there is no clipping.
 */
-Region fltk::clip_region() {
+Region gnui::clip_region() {
   return rstack[rstackptr];
 }
 
@@ -78,30 +78,30 @@ void fl_restore_clip() {
       if ( r )
         SectRgn( portClip, r, portClip );
       Rect portRect; GetPortBounds(port, &portRect);
-      fltk::clear_quartz_clipping();
+      gnui::clear_quartz_clipping();
       ClipCGContextToRegion(quartz_gc, &portRect, portClip );
-      fltk::fill_quartz_context();
+      gnui::fill_quartz_context();
       DisposeRgn( portClip );
     }
   }
 }
 
 /*! Replace the top of the clip stack. */
-void fltk::clip_region(Region r) {
+void gnui::clip_region(Region r) {
   Region oldr = rstack[rstackptr];
   if (oldr) DisposeRgn(oldr);
   rstack[rstackptr] = r;
   fl_restore_clip();
 }
 // fabien : this code would merit inlining wouldn't it ?
-void fltk::push_clip(const Rectangle& r) {
+void gnui::push_clip(const Rectangle& r) {
   push_clip(r.x(), r.y(), r.w(), r.h());
 }
 
 /*!
   Pushes the \e intersection of the current region and this rectangle
   onto the clip stack. */
-void fltk::push_clip(int x, int y, int w, int  h) {
+void gnui::push_clip(int x, int y, int w, int  h) {
  #if USE_CAIRO
     transform(x,y);
     cairo_rectangle(cr, x,y,w,h);
@@ -130,7 +130,7 @@ void fltk::push_clip(int x, int y, int w, int  h) {
   Some graphics backends (OpenGL and Cairo, at least) do not support
   non-rectangular clip regions. This call does nothing on those.
 */
-void fltk::clipout(const Rectangle& r1) {
+void gnui::clipout(const Rectangle& r1) {
   if (r1.empty()) return; // do not even construct r if r1 is empty
   Rectangle r; transform(r1, r);
   Region current = rstack[rstackptr];
@@ -147,17 +147,17 @@ void fltk::clipout(const Rectangle& r1) {
   only be used to temporarily ignore the clip region to draw into
   an offscreen area.
 */
-void fltk::push_no_clip() {
+void gnui::push_no_clip() {
   pushregion(0);
   fl_restore_clip();
 }
 
 /*! 
-  Restore the previous clip region. You must call fltk::pop_clip()
-  exactly once for every time you call fltk::push_clip(). If you return to
+  Restore the previous clip region. You must call gnui::pop_clip()
+  exactly once for every time you call gnui::push_clip(). If you return to
   FLTK with the clip stack not empty unpredictable results occur.
 */
-void fltk::pop_clip() {
+void gnui::pop_clip() {
 #if USE_CAIRO
  cairo_reset_clip(cr);
 #else
@@ -175,7 +175,7 @@ void fltk::pop_clip() {
 /*! Returns true if any or all of the Rectangle is inside the
   clip region.
 */
-bool fltk::not_clipped(const Rectangle& r1) {
+bool gnui::not_clipped(const Rectangle& r1) {
   Rectangle r; transform(r1, r);
   // first check against the window so we get rid of coordinates
   // outside the 16-bit range the X/Win32 calls take:
@@ -203,7 +203,7 @@ bool fltk::not_clipped(const Rectangle& r1) {
     entirely inside or equal to the clip region)
   - 2 if it is partially clipped.
 */
-int fltk::intersect_with_clip(Rectangle& r) {
+int gnui::intersect_with_clip(Rectangle& r) {
   Region region = rstack[rstackptr];
   if (!region) return 1;
   // Test against the window to get 16-bit values:

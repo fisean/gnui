@@ -3,9 +3,9 @@
 #include <fltk/Box.h>
 #include <fltk/draw.h>
 #include <stdio.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::ProgressBar
+/*! \class gnui::ProgressBar
 
   ProgressBar is a widget meant to display progress of some operation.
   maximum() and optionally minimum() values should be set, and for

@@ -33,14 +33,14 @@
 #include <fltk/draw.h>
 #include <fltk/math.h>
 #include <fltk/x.h>
-using namespace fltk;
+using namespace gnui;
 
 /*!
   Add a series of points on a Bezier spline to the path. The curve
   ends (and two of the points) are at \a x,y and \a x3,y3. The "handles"
   are at \a x1,y1 and \a x2,y2.
 */
-void fltk::addcurve(float x0, float y0,
+void gnui::addcurve(float x0, float y0,
 		    float x1, float y1,
 		    float x2, float y2,
 		    float x3, float y3) {

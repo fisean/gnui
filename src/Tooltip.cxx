@@ -23,7 +23,7 @@
 
 // Try to keep this code from bloating up, as it is always linked in.
 
-/** \class fltk::Tooltip
+/** \class gnui::Tooltip
 
   This is the class of window that pops up to display a tooltip
   (with the yellow color and 1-pixel border).
@@ -47,7 +47,7 @@
 #include <fltk/run.h>
 #include <fltk/draw.h>
 #include <fltk/Box.h>
-using namespace fltk;
+using namespace gnui;
 
 float		Tooltip::delay_ = 1.0f;
 bool		Tooltip::enabled_ = true;
@@ -142,7 +142,7 @@ void Tooltip::tooltip_timeout(void*) {
     instance_->redraw();
     instance_->show();
   }
-  fltk::remove_timeout(recent_timeout);
+  gnui::remove_timeout(recent_timeout);
   recent_tooltip = true;
   recursion = false;
 }
@@ -162,7 +162,7 @@ void Tooltip::tooltip_timeout(void*) {
   tooltip \a generator is called with the widget and \a data as
   arguments, and it should return a pointer to a static buffer
   containing the tooltip text. You can use '@' commands to insert
-  arbitrary fltk::Symbol graphics into it. If \a generator returns
+  arbitrary gnui::Symbol graphics into it. If \a generator returns
   NULL no tooltip will be popped up.
 */
 void Tooltip::enter(Widget* widget, const Rectangle& rectangle,
@@ -175,8 +175,8 @@ void Tooltip::enter(Widget* widget, const Rectangle& rectangle,
   if (widget == current_widget_ &&
       generator == current_generator_ &&
       data == current_data_) return;
-  fltk::remove_timeout(tooltip_timeout);
-  fltk::remove_timeout(recent_timeout);
+  gnui::remove_timeout(tooltip_timeout);
+  gnui::remove_timeout(recent_timeout);
   // remember it:
   current_widget_ = widget;
   current_rectangle_ = rectangle;
@@ -191,7 +191,7 @@ void Tooltip::enter(Widget* widget, const Rectangle& rectangle,
     tooltip_timeout(0);
   } else {
     hide_tooltip();
-    fltk::add_timeout(delay(), tooltip_timeout);
+    gnui::add_timeout(delay(), tooltip_timeout);
   }
 }
 
@@ -262,14 +262,14 @@ void Tooltip::current(Widget* w) {
 void Tooltip::exit() {
   if (!current_widget_) return;
   current_widget_ = 0;
-  fltk::remove_timeout(tooltip_timeout);
-  fltk::remove_timeout(recent_timeout);
+  gnui::remove_timeout(tooltip_timeout);
+  gnui::remove_timeout(recent_timeout);
   hide_tooltip();
   if (recent_tooltip) {
     if (event_state() & ANY_BUTTON)
       recent_tooltip = 0;
     else
-      fltk::add_timeout(.2f, recent_timeout);
+      gnui::add_timeout(.2f, recent_timeout);
   }
 }
 

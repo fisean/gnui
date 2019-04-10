@@ -26,7 +26,7 @@
 
 #include "Button.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ReturnButton : public Button {
 public:

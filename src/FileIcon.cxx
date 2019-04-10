@@ -70,7 +70,7 @@
 #  define S_ISLNK(m) (((m) & S_IFMT) == S_IFLNK)
 #endif /* !S_ISDIR */
 
-using namespace fltk;
+using namespace gnui;
 
 //
 // Icon cache...
@@ -281,7 +281,7 @@ void FileIcon::_draw(const Rectangle& r) const {
   push_matrix();
   translate(0.5f * (r.w() - scale),
 	       0.5f * (r.h() + scale));
-  fltk::scale(scale, -scale);
+  gnui::scale(scale, -scale);
 
   // Loop through the array until we see an unmatched END...
   d    = data_;
@@ -290,9 +290,9 @@ void FileIcon::_draw(const Rectangle& r) const {
   Color	c, ic;
   bool active = !drawflags(INACTIVE_R);
   if (active && (!on_select_ || drawflags(SELECTED))  ) 
-    ic = fltk::YELLOW;
+    ic = gnui::YELLOW;
   else
-    ic = fltk::GRAY90 /* light2 */; 
+    ic = gnui::GRAY90 /* light2 */; 
   c = ic;
   setcolor(ic);
   while (*d != END || prim)

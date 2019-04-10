@@ -31,11 +31,11 @@
 #include <fltk/Box.h>
 #include <fltk/draw.h>
 #include <fltk/math.h>
-using namespace fltk;
+using namespace gnui;
 
 #define horizontal() (!flag(LAYOUT_VERTICAL)||(type()&1))
 
-/*! \class fltk::ThumbWheel
+/*! \class gnui::ThumbWheel
 
   A control similar to SGI's Inventor toolkit, commonly used to move 3D
   objects or control zoom.

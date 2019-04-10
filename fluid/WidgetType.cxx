@@ -45,11 +45,11 @@
 #include "coding_style.h"
 #include "undo.h"
 
-using namespace fltk;
+using namespace gnui;
 
 int WidgetType::is_widget() const {return 1;}
 
-const char *WidgetType::type_name() const {return "fltk::Widget";}
+const char *WidgetType::type_name() const {return "gnui::Widget";}
 
 Widget *WidgetType::widget(int x,int y,int w, int h) {
   return new Widget(x,y,w,h,"label");
@@ -72,8 +72,8 @@ const char* WidgetType::subclass() const {
 
 // Make an WidgetType subclass instance.
 // It figures out the automatic size and parent of the new widget,
-// creates the fltk::Widget (by calling the virtual function _make),
-// adds it to the fltk::Widget hierarchy, creates a new FluidType
+// creates the gnui::Widget (by calling the virtual function _make),
+// adds it to the gnui::Widget hierarchy, creates a new FluidType
 // instance, sets the widget pointers, and makes all the display
 // update correctly...
 
@@ -81,15 +81,15 @@ extern int reading_file;
 int force_parent;
 
 #include <fltk/StyleSet.h>
-extern fltk::StyleSet* fluid_style_set;
-extern fltk::StyleSet* style_set;
+extern gnui::StyleSet* fluid_style_set;
+extern gnui::StyleSet* style_set;
 
 FluidType *WidgetType::make() {
   // Find the current widget, or widget to copy:
   FluidType *qq = FluidType::current;
   while (qq && !qq->is_widget()) qq = qq->parent;
   if (!qq) {
-    fltk::message("Please select a widget");
+    gnui::message("Please select a widget");
     return 0;
   }
   WidgetType* q = (WidgetType*)qq;
@@ -140,7 +140,7 @@ FluidType *WidgetType::make() {
   WidgetType *t = _make();
   if (!o) o = widget(0,0,100,100); // create template widget
   t->factory = this;
-  // Construct the fltk::Widget:
+  // Construct the gnui::Widget:
   t->o = widget(X,Y,W,H);
   if (H>W) t->o->set_vertical();
   fluid_style_set->make_current();
@@ -148,7 +148,7 @@ FluidType *WidgetType::make() {
   else if (t->o->label()) t->label(t->o->label()); // allow editing
   t->o->user_data((void*)t);
   // Put it in the parent:
-  //  ((fltk::Group *)(p->o))->add(t->o); (done by FluidType::add())
+  //  ((gnui::Group *)(p->o))->add(t->o); (done by FluidType::add())
   // add to browser:
   t->add(p);
   t->redraw();
@@ -187,7 +187,7 @@ WidgetType::WidgetType() {
 WidgetType::~WidgetType() {
   if (o) {
     o->hide();
-    if (o->parent()) ((fltk::Group*)o->parent())->remove(*o);
+    if (o->parent()) ((gnui::Group*)o->parent())->remove(*o);
     delete o;
   }
 }
@@ -218,11 +218,11 @@ void sort(FluidType *parent) {
     sort(f);
     FluidType* next = f->next_brother;
     if (f->selected() && (f->is_widget() && !f->is_menu_item())) {
-      fltk::Widget* fw = ((WidgetType*)f)->o;
+      gnui::Widget* fw = ((WidgetType*)f)->o;
       FluidType *g; // we will insert before this
       for (g = parent->first_child; g != f; g = g->next_brother) {
 	if (!g->selected()) continue;
-	fltk::Widget* gw = ((WidgetType*)g)->o;
+	gnui::Widget* gw = ((WidgetType*)g)->o;
 	if (gw->y() >= fw->y()+fw->h()) break;
 	if (gw->y()+gw->h() > fw->y() && gw->x() >= fw->x()+fw->w()) break;
 	if (gw->y() >= fw->y() && gw->x() > fw->x()) break;
@@ -249,9 +249,9 @@ void sort(FluidType *parent) {
 WidgetType *current_widget; // one of the selected ones
 static int numselected; // number selected
 static int haderror;
-static fltk::Window *the_panel;
+static gnui::Window *the_panel;
 
-void name_cb(fltk::Input* o, void *v) {
+void name_cb(gnui::Input* o, void *v) {
   if (v == LOAD) {
     if (numselected != 1) {
       static char buf[16];
@@ -272,8 +272,8 @@ void name_cb(fltk::Input* o, void *v) {
       // o->window()->label(current_widget->title());
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (current_widget->name() && *(current_widget->name())) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (current_widget->name() && *(current_widget->name())) c = gnui::RED;
   if (o->labelcolor() != c)
     { o->labelcolor(c); o->redraw_label(); }
 }
@@ -282,7 +282,7 @@ void name_cb(fltk::Input* o, void *v) {
 for (FluidType *o = FluidType::first; o; o = o->walk()) \
   if (o->selected() && o->is_widget())
 
-void name_public_cb(fltk::CheckButton* i, void* v) {
+void name_public_cb(gnui::CheckButton* i, void* v) {
   if (v == LOAD) {
     i->value(current_widget->public_);
   } else {
@@ -291,15 +291,15 @@ void name_public_cb(fltk::CheckButton* i, void* v) {
       ((WidgetType*)o)->public_ = i->value();
     } 	
   }
-  if (!i->value()) i->labelcolor(fltk::RED);
-  else i->labelcolor(fltk::BLACK);
+  if (!i->value()) i->labelcolor(gnui::RED);
+  else i->labelcolor(gnui::BLACK);
   i->redraw();
 }    
 
 static char* oldlabel;
 static unsigned oldlabellen;
 
-void label_cb(fltk::Input* i, void *v) {
+void label_cb(gnui::Input* i, void *v) {
   if (v == LOAD) {
     i->static_value(current_widget->label());
     if (strlen(i->value()) >= oldlabellen) {
@@ -310,8 +310,8 @@ void label_cb(fltk::Input* i, void *v) {
   } else {
     for_all_selected_widgets() o->label(i->value());
   }
-  fltk::Color c = fltk::BLACK;
-  if (current_widget->label() && *(current_widget->label())) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (current_widget->label() && *(current_widget->label())) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
@@ -319,7 +319,7 @@ void label_cb(fltk::Input* i, void *v) {
 static char* oldtooltip;
 static unsigned oldtooltiplen;
 
-void tooltip_cb(fltk::WordwrapInput* i, void *v) {
+void tooltip_cb(gnui::WordwrapInput* i, void *v) {
   if (v == LOAD) {
     //if (current_widget->o->is_window()) { i->hide(); return; }
     i->show();
@@ -332,13 +332,13 @@ void tooltip_cb(fltk::WordwrapInput* i, void *v) {
   } else {
     for_all_selected_widgets() o->tooltip(i->value());
   }
-  fltk::Color c = fltk::BLACK;
-  if (current_widget->tooltip() && *(current_widget->tooltip())) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (current_widget->tooltip() && *(current_widget->tooltip())) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void x_cb(fltk::ValueInput* i, void *v) {
+void x_cb(gnui::ValueInput* i, void *v) {
   int x;
   if (v != LOAD) {
     x = int(i->value());
@@ -354,7 +354,7 @@ void x_cb(fltk::ValueInput* i, void *v) {
   i->value(x);
 }
 
-void y_cb(fltk::ValueInput* i, void *v) {
+void y_cb(gnui::ValueInput* i, void *v) {
   int y;
   if (v != LOAD) {
     y = int(i->value());
@@ -370,7 +370,7 @@ void y_cb(fltk::ValueInput* i, void *v) {
   i->value (y);
 }
 
-void width_cb(fltk::ValueInput* i, void *v) {
+void width_cb(gnui::ValueInput* i, void *v) {
   int width;
   if (v != LOAD) {
     width = int(i->value());
@@ -390,7 +390,7 @@ void width_cb(fltk::ValueInput* i, void *v) {
   i->value (width);
 }
 
-void height_cb(fltk::ValueInput* i, void *v) {
+void height_cb(gnui::ValueInput* i, void *v) {
   int height;
   if (v != LOAD) {
     height = int(i->value());
@@ -410,7 +410,7 @@ void height_cb(fltk::ValueInput* i, void *v) {
   i->value (height);
 }
 
-void set_xy_cb(fltk::CheckButton* i, void *v) {
+void set_xy_cb(gnui::CheckButton* i, void *v) {
   if (v == LOAD) {
     if (current_widget->is_window()) i->show(); else i->hide();
     i->value(current_widget->set_xy);
@@ -425,51 +425,51 @@ void set_xy_cb(fltk::CheckButton* i, void *v) {
     widget_x->activate ();
     widget_y->activate ();  
   }
-  if (i->value()) i->labelcolor(fltk::RED);
-  else i->labelcolor(fltk::BLACK);  
+  if (i->value()) i->labelcolor(gnui::RED);
+  else i->labelcolor(gnui::BLACK);  
   i->redraw();
 }
 
 ////////////////////////////////////////////////////////////////
 
 static const Enumeration boxmenu[] = {
-{"None",	"NO_BOX",	(void *)fltk::NO_BOX},
-{"Up",		"UP_BOX",	(void *)fltk::UP_BOX},
-{"Down",	"DOWN_BOX",	(void *)fltk::DOWN_BOX},
-{"Thin Up",	"THIN_UP_BOX",	(void *)fltk::THIN_UP_BOX},
-{"Thin Down",	"THIN_DOWN_BOX",(void *)fltk::THIN_DOWN_BOX},
-{"Flat",	"FLAT_BOX",	(void *)fltk::FLAT_BOX},
-{"Border",	"BORDER_BOX",	(void *)fltk::BORDER_BOX},
-{"Frame",	"BORDER_FRAME",	(void *)fltk::BORDER_FRAME},
-{"Engraved",	"ENGRAVED_BOX",	(void *)fltk::ENGRAVED_BOX},
-{"Embossed",	"EMBOSSED_BOX",	(void *)fltk::EMBOSSED_BOX},
-{"Highlight",	"HIGHLIGHT_UP_BOX",(void *)fltk::HIGHLIGHT_UP_BOX},
-{"Highlight Down","HIGHLIGHT_DOWN_BOX",(void *)fltk::HIGHLIGHT_DOWN_BOX},
-{"Round",	"ROUND_UP_BOX",	(void *)fltk::ROUND_UP_BOX},
-{"Round Down",	"ROUND_DOWN_BOX",(void *)fltk::ROUND_DOWN_BOX},
-{"Diamond",	"DIAMOND_UP_BOX",(void *)fltk::DIAMOND_UP_BOX},
-{"Diamond Down","DIAMOND_DOWN_BOX",(void *)fltk::DIAMOND_DOWN_BOX},
-{"Shadow",	"SHADOW_BOX",	(void *)fltk::SHADOW_BOX},
-{"Rounded",	"ROUNDED_BOX",	(void *)fltk::ROUNDED_BOX},
-{"Rounded Shadow","RSHADOW_BOX",(void *)fltk::RSHADOW_BOX},
-{"Rounded Flat","RFLAT_BOX",	(void *)fltk::RFLAT_BOX},
-{"Oval",	"OVAL_BOX",	(void *)fltk::OVAL_BOX},
-{"Oval Shadow",	"OSHADOW_BOX",	(void *)fltk::OSHADOW_BOX},
-{"Oval Flat",	"OFLAT_BOX",	(void *)fltk::OFLAT_BOX},
-{"Plastic Up",	"PLASTIC_UP_BOX",	(void *)fltk::PLASTIC_UP_BOX},
-{"Plastic Down",	"PLASTIC_DOWN_BOX",	(void *)fltk::PLASTIC_DOWN_BOX},
+{"None",	"NO_BOX",	(void *)gnui::NO_BOX},
+{"Up",		"UP_BOX",	(void *)gnui::UP_BOX},
+{"Down",	"DOWN_BOX",	(void *)gnui::DOWN_BOX},
+{"Thin Up",	"THIN_UP_BOX",	(void *)gnui::THIN_UP_BOX},
+{"Thin Down",	"THIN_DOWN_BOX",(void *)gnui::THIN_DOWN_BOX},
+{"Flat",	"FLAT_BOX",	(void *)gnui::FLAT_BOX},
+{"Border",	"BORDER_BOX",	(void *)gnui::BORDER_BOX},
+{"Frame",	"BORDER_FRAME",	(void *)gnui::BORDER_FRAME},
+{"Engraved",	"ENGRAVED_BOX",	(void *)gnui::ENGRAVED_BOX},
+{"Embossed",	"EMBOSSED_BOX",	(void *)gnui::EMBOSSED_BOX},
+{"Highlight",	"HIGHLIGHT_UP_BOX",(void *)gnui::HIGHLIGHT_UP_BOX},
+{"Highlight Down","HIGHLIGHT_DOWN_BOX",(void *)gnui::HIGHLIGHT_DOWN_BOX},
+{"Round",	"ROUND_UP_BOX",	(void *)gnui::ROUND_UP_BOX},
+{"Round Down",	"ROUND_DOWN_BOX",(void *)gnui::ROUND_DOWN_BOX},
+{"Diamond",	"DIAMOND_UP_BOX",(void *)gnui::DIAMOND_UP_BOX},
+{"Diamond Down","DIAMOND_DOWN_BOX",(void *)gnui::DIAMOND_DOWN_BOX},
+{"Shadow",	"SHADOW_BOX",	(void *)gnui::SHADOW_BOX},
+{"Rounded",	"ROUNDED_BOX",	(void *)gnui::ROUNDED_BOX},
+{"Rounded Shadow","RSHADOW_BOX",(void *)gnui::RSHADOW_BOX},
+{"Rounded Flat","RFLAT_BOX",	(void *)gnui::RFLAT_BOX},
+{"Oval",	"OVAL_BOX",	(void *)gnui::OVAL_BOX},
+{"Oval Shadow",	"OSHADOW_BOX",	(void *)gnui::OSHADOW_BOX},
+{"Oval Flat",	"OFLAT_BOX",	(void *)gnui::OFLAT_BOX},
+{"Plastic Up",	"PLASTIC_UP_BOX",	(void *)gnui::PLASTIC_UP_BOX},
+{"Plastic Down",	"PLASTIC_DOWN_BOX",	(void *)gnui::PLASTIC_DOWN_BOX},
 {0}};
 
 #define NOT_DEFAULT(W, what) (W->o->what() != ((WidgetType*)(W->factory))->o->what())
 
-void box_cb(fltk::Choice* i, void *v) {
+void box_cb(gnui::Choice* i, void *v) {
   if (v == LOAD) {
     set_menu(i, boxmenu);
     const Enumeration* e = from_value((void*)(current_widget->o->box()), boxmenu);
     i->value(e ? e-boxmenu : 0);
   } else {
     int m = i->value();
-    fltk::Box* n = (fltk::Box*)(boxmenu[m].compiled);
+    gnui::Box* n = (gnui::Box*)(boxmenu[m].compiled);
     if (!n) return; // should not happen
     for_all_selected_widgets() {
       modflag = 1;
@@ -478,22 +478,22 @@ void box_cb(fltk::Choice* i, void *v) {
       q->redraw();
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, box)) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, box)) c = gnui::RED;
   if (i->labelcolor() != c) {
     i->labelcolor(c);
     i->redraw_label();
   }
 }
 
-void button_box_cb(fltk::Choice* i, void *v) {
+void button_box_cb(gnui::Choice* i, void *v) {
   if (v == LOAD) {
     set_menu(i, boxmenu);
     const Enumeration* e = from_value((void*)(current_widget->o->buttonbox()), boxmenu);
     i->value(e ? e-boxmenu : 0);
   } else {
     int m = i->value();
-    fltk::Box* n = (fltk::Box*)(boxmenu[m].compiled);
+    gnui::Box* n = (gnui::Box*)(boxmenu[m].compiled);
     if (!n) return; // should not happen
     for_all_selected_widgets() {
       modflag = 1;
@@ -502,8 +502,8 @@ void button_box_cb(fltk::Choice* i, void *v) {
       q->redraw();
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, buttonbox)) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, buttonbox)) c = gnui::RED;
   if (i->labelcolor() != c) {
     i->labelcolor(c);
     i->redraw_label();
@@ -513,16 +513,16 @@ void button_box_cb(fltk::Choice* i, void *v) {
 ////////////////////////////////////////////////////////////////
 
 static const Enumeration whenmenu[] = {
-  {"never",	"NEVER",	(void*)fltk::WHEN_NEVER},
-  {"Changed",	"CHANGED",	(void*)fltk::WHEN_CHANGED},
-  {"Release",	"RELEASE",	(void*)fltk::WHEN_RELEASE},
-  {"Release always","RELEASE_ALWAYS",(void*)fltk::WHEN_RELEASE_ALWAYS},
-  {"Enter key",	"ENTER_KEY",	(void*)fltk::WHEN_ENTER_KEY},
-  {"Enter key always","ENTER_KEY_ALWAYS",(void*)fltk::WHEN_ENTER_KEY_ALWAYS},
+  {"never",	"NEVER",	(void*)gnui::WHEN_NEVER},
+  {"Changed",	"CHANGED",	(void*)gnui::WHEN_CHANGED},
+  {"Release",	"RELEASE",	(void*)gnui::WHEN_RELEASE},
+  {"Release always","RELEASE_ALWAYS",(void*)gnui::WHEN_RELEASE_ALWAYS},
+  {"Enter key",	"ENTER_KEY",	(void*)gnui::WHEN_ENTER_KEY},
+  {"Enter key always","ENTER_KEY_ALWAYS",(void*)gnui::WHEN_ENTER_KEY_ALWAYS},
   {0}
 };
 
-void when_cb(fltk::Choice* i, void *v) {
+void when_cb(gnui::Choice* i, void *v) {
   if (v == LOAD) {
     if (current_widget->is_menu_item()) {i->hide(); return;}
     set_menu(i, whenmenu);
@@ -542,7 +542,7 @@ void when_cb(fltk::Choice* i, void *v) {
   i->redraw();
 }
 
-void when_button_cb(fltk::CheckButton*, void *) {} // delete this!
+void when_button_cb(gnui::CheckButton*, void *) {} // delete this!
 
 bool WidgetType::resizable() const {
   if (is_window()) return ((Window*)o)->resizable() != 0;
@@ -569,7 +569,7 @@ void WidgetType::resizable(bool v) {
   }
 }
 
-void resizable_cb(fltk::CheckButton* i,void* v) {
+void resizable_cb(gnui::CheckButton* i,void* v) {
   if (v == LOAD) {
     if (current_widget->is_menu_item()) {i->deactivate(); return;}
     if (numselected > 1) {i->deactivate(); return;}
@@ -579,12 +579,12 @@ void resizable_cb(fltk::CheckButton* i,void* v) {
     current_widget->resizable(i->value());
     modflag=1;
   }
-  if (current_widget->resizable()) i->labelcolor(fltk::RED);
-  else i->labelcolor(fltk::BLACK);
+  if (current_widget->resizable()) i->labelcolor(gnui::RED);
+  else i->labelcolor(gnui::BLACK);
   i->redraw();
 }
 
-void hotspot_cb(fltk::CheckButton* i,void* v) {
+void hotspot_cb(gnui::CheckButton* i,void* v) {
   if (v == LOAD) {
     if (numselected > 1 || current_widget->is_menu_item()) {i->hide(); return;}
     i->show();
@@ -602,12 +602,12 @@ void hotspot_cb(fltk::CheckButton* i,void* v) {
       }
     }
   }
-  if (current_widget->hotspot()) i->labelcolor(fltk::RED);
-  else i->labelcolor(fltk::BLACK);  
+  if (current_widget->hotspot()) i->labelcolor(gnui::RED);
+  else i->labelcolor(gnui::BLACK);  
   i->redraw();
 }
 
-void visible_cb(fltk::CheckButton* i, void* v) {
+void visible_cb(gnui::CheckButton* i, void* v) {
   if (v == LOAD) {
     i->value(current_widget->o->visible());
   } else {
@@ -619,12 +619,12 @@ void visible_cb(fltk::CheckButton* i, void* v) {
       q->redraw();
     }
   }
-  if (!i->value()) i->labelcolor(fltk::RED);
-  else i->labelcolor(fltk::BLACK);
+  if (!i->value()) i->labelcolor(gnui::RED);
+  else i->labelcolor(gnui::BLACK);
   i->redraw();
 }
 
-void active_cb(fltk::CheckButton* i, void* v) {
+void active_cb(gnui::CheckButton* i, void* v) {
   if (v == LOAD) {
     i->value(current_widget->o->active());
   } else {
@@ -636,41 +636,41 @@ void active_cb(fltk::CheckButton* i, void* v) {
       q->redraw();
     }
   }
-  if (!i->value()) i->labelcolor(fltk::RED);
-  else i->labelcolor(fltk::BLACK);  
+  if (!i->value()) i->labelcolor(gnui::RED);
+  else i->labelcolor(gnui::BLACK);  
   i->redraw();
 }
 
 ////////////////////////////////////////////////////////////////
 
 static const Enumeration fontmenu[] = {
-  {"Helvetica",		"HELVETICA",		(void*)fltk::HELVETICA},
-  {"Helvetica bold",	"HELVETICA_BOLD",	(void*)fltk::HELVETICA_BOLD},
-  {"Helvetica italic",	"HELVETICA_ITALIC",	(void*)fltk::HELVETICA_ITALIC},
-  {"Helvetica bold italic","HELVETICA_BOLD_ITALIC",(void*)fltk::HELVETICA_BOLD_ITALIC},
-  {"Courier",		"COURIER",		(void*)fltk::COURIER},
-  {"Courier bold",	"COURIER_BOLD",		(void*)fltk::COURIER_BOLD},
-  {"Courier italic",	"COURIER_ITALIC",	(void*)fltk::COURIER_ITALIC},
-  {"Courier bold italic","COURIER_BOLD_ITALIC",	(void*)fltk::COURIER_BOLD_ITALIC},
-  {"Times",		"TIMES",		(void*)fltk::TIMES},
-  {"Times bold",	"TIMES_BOLD",		(void*)fltk::TIMES_BOLD},
-  {"Times italic",	"TIMES_ITALIC",		(void*)fltk::TIMES_ITALIC},
-  {"Times bold italic",	"TIMES_BOLD_ITALIC",	(void*)fltk::TIMES_BOLD_ITALIC},
-  {"Symbol",		"SYMBOL_FONT",		(void*)fltk::SYMBOL_FONT},
-  {"Terminal",		"SCREEN_FONT",		(void*)fltk::SCREEN_FONT},
-  {"Terminal Bold",	"SCREEN_BOLD_FONT",	(void*)fltk::SCREEN_BOLD_FONT},
-  {"Zapf Dingbats",	"ZAPF_DINGBATS",	(void*)fltk::ZAPF_DINGBATS},
+  {"Helvetica",		"HELVETICA",		(void*)gnui::HELVETICA},
+  {"Helvetica bold",	"HELVETICA_BOLD",	(void*)gnui::HELVETICA_BOLD},
+  {"Helvetica italic",	"HELVETICA_ITALIC",	(void*)gnui::HELVETICA_ITALIC},
+  {"Helvetica bold italic","HELVETICA_BOLD_ITALIC",(void*)gnui::HELVETICA_BOLD_ITALIC},
+  {"Courier",		"COURIER",		(void*)gnui::COURIER},
+  {"Courier bold",	"COURIER_BOLD",		(void*)gnui::COURIER_BOLD},
+  {"Courier italic",	"COURIER_ITALIC",	(void*)gnui::COURIER_ITALIC},
+  {"Courier bold italic","COURIER_BOLD_ITALIC",	(void*)gnui::COURIER_BOLD_ITALIC},
+  {"Times",		"TIMES",		(void*)gnui::TIMES},
+  {"Times bold",	"TIMES_BOLD",		(void*)gnui::TIMES_BOLD},
+  {"Times italic",	"TIMES_ITALIC",		(void*)gnui::TIMES_ITALIC},
+  {"Times bold italic",	"TIMES_BOLD_ITALIC",	(void*)gnui::TIMES_BOLD_ITALIC},
+  {"Symbol",		"SYMBOL_FONT",		(void*)gnui::SYMBOL_FONT},
+  {"Terminal",		"SCREEN_FONT",		(void*)gnui::SCREEN_FONT},
+  {"Terminal Bold",	"SCREEN_BOLD_FONT",	(void*)gnui::SCREEN_BOLD_FONT},
+  {"Zapf Dingbats",	"ZAPF_DINGBATS",	(void*)gnui::ZAPF_DINGBATS},
   {0}
 };
 
-int fontnumber(fltk::Font* f) {
+int fontnumber(gnui::Font* f) {
   for (int n = 0; ; n++) {
     if (n > 15) return 0;
     if (f == fontmenu[n].compiled) return n;
   }
 }
 
-void label_font_cb(fltk::Choice* i, void *v) {
+void label_font_cb(gnui::Choice* i, void *v) {
   if (v == LOAD) {
     set_menu(i, fontmenu);
     i->value(fontnumber(current_widget->o->labelfont()));
@@ -679,17 +679,17 @@ void label_font_cb(fltk::Choice* i, void *v) {
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
-      q->o->labelfont(fltk::font(n));
+      q->o->labelfont(gnui::font(n));
       q->redraw();
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, labelfont)) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, labelfont)) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void label_size_cb(fltk::ValueInput* i, void *v) {
+void label_size_cb(gnui::ValueInput* i, void *v) {
   float n;
   if (v == LOAD) {
     n = current_widget->o->labelsize();
@@ -704,13 +704,13 @@ void label_size_cb(fltk::ValueInput* i, void *v) {
     }
   }
   i->value(n);
-  fltk::Color c = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, labelsize)) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, labelsize)) c = gnui::RED;
   if (i->textcolor() != c)
     { i->textcolor(c); i->redraw();}
 }
 
-void image_cb(fltk::Button *a, void * v) {
+void image_cb(gnui::Button *a, void * v) {
   if (v != LOAD) {
     Fluid_Image *i = ui_find_image(current_widget->image);
     if (i == current_widget->image) return; // user hit "Cancel"
@@ -724,29 +724,29 @@ void image_cb(fltk::Button *a, void * v) {
     current_widget->image->name() : 0;
   if (s != image_button->label()) 
     {image_button->label(s); image_button->redraw();}
-  fltk::Color c = fltk::BLACK;
-  if (current_widget->image) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (current_widget->image) c = gnui::RED;
   if (image_button->labelcolor() != c)
     { image_button->labelcolor(c); image_button->redraw();}
 }
 
 static const Enumeration labelstylemenu[] = {
-  {"Normal",	"NORMAL_LABEL",	(void*)fltk::NORMAL_LABEL},
-  {"Symbol",	"SYMBOL_LABEL",	(void*)fltk::SYMBOL_LABEL},
-  {"Shadow",	"SHADOW_LABEL",	(void*)fltk::SHADOW_LABEL},
-  {"Engraved",	"ENGRAVED_LABEL",(void*)fltk::ENGRAVED_LABEL},
-  {"Embossed",	"EMBOSSED_LABEL",(void*)fltk::EMBOSSED_LABEL},
-  {"None",	"NO_LABEL",	(void*)(fltk::NO_LABEL)},
+  {"Normal",	"NORMAL_LABEL",	(void*)gnui::NORMAL_LABEL},
+  {"Symbol",	"SYMBOL_LABEL",	(void*)gnui::SYMBOL_LABEL},
+  {"Shadow",	"SHADOW_LABEL",	(void*)gnui::SHADOW_LABEL},
+  {"Engraved",	"ENGRAVED_LABEL",(void*)gnui::ENGRAVED_LABEL},
+  {"Embossed",	"EMBOSSED_LABEL",(void*)gnui::EMBOSSED_LABEL},
+  {"None",	"NO_LABEL",	(void*)(gnui::NO_LABEL)},
 {0}};
 
-void label_style_cb(fltk::Choice* i, void *v) {
+void label_style_cb(gnui::Choice* i, void *v) {
   if (v == LOAD) {
     set_menu(i, labelstylemenu);
     const Enumeration* e = from_value((void*)(current_widget->o->labeltype()), labelstylemenu);
     i->value(e ? e-labelstylemenu : 0);
   } else {
     int m = i->value();
-    fltk::LabelType* n = (fltk::LabelType*)(labelstylemenu[m].compiled);
+    gnui::LabelType* n = (gnui::LabelType*)(labelstylemenu[m].compiled);
     if (!n) return; // should not happen
     for_all_selected_widgets() {
       modflag = 1;
@@ -755,20 +755,20 @@ void label_style_cb(fltk::Choice* i, void *v) {
       p->redraw();
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, labeltype)) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, labeltype)) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
 ////////////////////////////////////////////////////////////////
 
-void color_cb(fltk::LightButton* i, void *v) {
-  fltk::Color c = current_widget->o->color();
+void color_cb(gnui::LightButton* i, void *v) {
+  gnui::Color c = current_widget->o->color();
   if (v == LOAD) {
     i->show();
   } else {
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -777,17 +777,17 @@ void color_cb(fltk::LightButton* i, void *v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, color) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, color) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
-void selection_color_cb(fltk::LightButton* i, void *v) {
-  fltk::Color c = current_widget->o->selection_color();
+void selection_color_cb(gnui::LightButton* i, void *v) {
+  gnui::Color c = current_widget->o->selection_color();
   if (v == LOAD) {
     i->label("Selection Color");
     i->show();
   } else {
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -796,16 +796,16 @@ void selection_color_cb(fltk::LightButton* i, void *v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, selection_color) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, selection_color) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
-void button_color_cb(fltk::LightButton* i, void *v) {
-  fltk::Color c = current_widget->o->buttoncolor();
+void button_color_cb(gnui::LightButton* i, void *v) {
+  gnui::Color c = current_widget->o->buttoncolor();
   if (v == LOAD) {
     i->show();
   } else {
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -814,14 +814,14 @@ void button_color_cb(fltk::LightButton* i, void *v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, buttoncolor) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, buttoncolor) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
-void label_color_cb(fltk::LightButton* i, void *v) {
-  fltk::Color c = current_widget->o->labelcolor();
+void label_color_cb(gnui::LightButton* i, void *v) {
+  gnui::Color c = current_widget->o->labelcolor();
   if (v != LOAD) {
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -832,12 +832,12 @@ void label_color_cb(fltk::LightButton* i, void *v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, labelcolor) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, labelcolor) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
-void text_font_cb(fltk::Choice* i, void* v) {
-  fltk::Font* n;
+void text_font_cb(gnui::Choice* i, void* v) {
+  gnui::Font* n;
   if (v == LOAD) {
     set_menu(i, fontmenu);
     if (current_widget->is_menu_item()) i->label("Shortcut Font:");
@@ -845,7 +845,7 @@ void text_font_cb(fltk::Choice* i, void* v) {
     i->show();
     i->value(fontnumber(current_widget->o->textfont()));
   } else {
-    n = fltk::font(i->value());
+    n = gnui::font(i->value());
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -853,13 +853,13 @@ void text_font_cb(fltk::Choice* i, void* v) {
       q->redraw();
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, textfont)) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, textfont)) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void text_size_cb(fltk::ValueInput* i, void* v) {
+void text_size_cb(gnui::ValueInput* i, void* v) {
   float n;
   if (v == LOAD) {
     n = current_widget->o->textsize();
@@ -875,20 +875,20 @@ void text_size_cb(fltk::ValueInput* i, void* v) {
     }
   }
   i->value(n);
-  fltk::Color c = fltk::BLACK;
-  if (NOT_DEFAULT(current_widget, textsize)) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (NOT_DEFAULT(current_widget, textsize)) c = gnui::RED;
   if (i->textcolor() != c)
     { i->textcolor(c); i->redraw(); }
 }
 
-void text_color_cb(fltk::LightButton* i, void* v) {
-  fltk::Color c;
+void text_color_cb(gnui::LightButton* i, void* v) {
+  gnui::Color c;
   if (v == LOAD) {
     c = current_widget->o->textcolor();
     i->show();
   } else {
     c = i->selection_color();
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -898,19 +898,19 @@ void text_color_cb(fltk::LightButton* i, void* v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, textcolor) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, textcolor) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
-void selected_text_color_cb(fltk::LightButton* i, void* v) {
-  fltk::Color c;
+void selected_text_color_cb(gnui::LightButton* i, void* v) {
+  gnui::Color c;
   if (v == LOAD) {
     i->label("Selected Text Color");
     c = current_widget->o->selection_textcolor();
     i->show();
   } else {
     c = i->selection_color();
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -920,19 +920,19 @@ void selected_text_color_cb(fltk::LightButton* i, void* v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, selection_textcolor) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, selection_textcolor) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
-void highlight_color_cb(fltk::LightButton* i, void *v) {
-  fltk::Color c = fltk::BLACK;
+void highlight_color_cb(gnui::LightButton* i, void *v) {
+  gnui::Color c = gnui::BLACK;
   if (v == LOAD) {
     c = current_widget->o->highlight_color();
     if (!c) c = current_widget->o->buttoncolor();
     i->show();
   } else {
     c = i->selection_color();
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -941,12 +941,12 @@ void highlight_color_cb(fltk::LightButton* i, void *v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, highlight_color) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, highlight_color) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
-void highlight_label_color_cb(fltk::LightButton* i, void *v) {
-  fltk::Color c = fltk::BLACK;
+void highlight_label_color_cb(gnui::LightButton* i, void *v) {
+  gnui::Color c = gnui::BLACK;
   if (v == LOAD) {
     i->label("Highlight Label Color");
     c = current_widget->o->highlight_textcolor();
@@ -954,7 +954,7 @@ void highlight_label_color_cb(fltk::LightButton* i, void *v) {
     i->show();
   } else {
     c = i->selection_color();
-    if (!fltk::color_chooser(i->label(), c)) return;
+    if (!gnui::color_chooser(i->label(), c)) return;
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
@@ -963,33 +963,33 @@ void highlight_label_color_cb(fltk::LightButton* i, void *v) {
   }
   i->color(c);
   i->selection_color(c);
-  i->labelcolor(NOT_DEFAULT(current_widget, highlight_textcolor) ? fltk::RED : fltk::BLACK);
+  i->labelcolor(NOT_DEFAULT(current_widget, highlight_textcolor) ? gnui::RED : gnui::BLACK);
   i->redraw();
 }
 
 static const Enumeration alignmenu[] = {
-  {"x", "fltk::ALIGN_CENTER",	(void*)(fltk::ALIGN_CENTER)},
-  {"x", "fltk::ALIGN_TOP",	(void*)(fltk::ALIGN_TOP)},
-  {"x", "fltk::ALIGN_BOTTOM",	(void*)(fltk::ALIGN_BOTTOM)},
-  {"x", "fltk::ALIGN_LEFT",	(void*)(fltk::ALIGN_LEFT)},
-  {"x", "fltk::ALIGN_RIGHT",	(void*)(fltk::ALIGN_RIGHT)},
-  {"x", "fltk::ALIGN_INSIDE",	(void*)(fltk::ALIGN_INSIDE)},
-  {"x", "fltk::ALIGN_CLIP",	(void*)(fltk::ALIGN_CLIP)},
-  {"x", "fltk::ALIGN_WRAP",	(void*)(fltk::ALIGN_WRAP)},
+  {"x", "gnui::ALIGN_CENTER",	(void*)(gnui::ALIGN_CENTER)},
+  {"x", "gnui::ALIGN_TOP",	(void*)(gnui::ALIGN_TOP)},
+  {"x", "gnui::ALIGN_BOTTOM",	(void*)(gnui::ALIGN_BOTTOM)},
+  {"x", "gnui::ALIGN_LEFT",	(void*)(gnui::ALIGN_LEFT)},
+  {"x", "gnui::ALIGN_RIGHT",	(void*)(gnui::ALIGN_RIGHT)},
+  {"x", "gnui::ALIGN_INSIDE",	(void*)(gnui::ALIGN_INSIDE)},
+  {"x", "gnui::ALIGN_CLIP",	(void*)(gnui::ALIGN_CLIP)},
+  {"x", "gnui::ALIGN_WRAP",	(void*)(gnui::ALIGN_WRAP)},
 {0}};
 
-void align_cb(fltk::Button* i, void *v) {
-  fltk::Flags b = fltk::Flags(i->argument());
+void align_cb(gnui::Button* i, void *v) {
+  gnui::Flags b = gnui::Flags(i->argument());
   // fabien: I don't understand how colors codification
   // should work here i get strange results once i propagate the load events
   // bill if you read these lines please specify how you intented it to work.
 
   if (v == LOAD) {
     i->value((current_widget->o->flags() & b) != 0);
-    fltk::Flags tplate = ((WidgetType*)(current_widget->factory))->o->flags();
-    fltk::Color c = fltk::BLACK;
-    fltk::Color d = fltk::RED;
-    if (tplate & b) {c = fltk::RED; d = fltk::BLACK;}
+    gnui::Flags tplate = ((WidgetType*)(current_widget->factory))->o->flags();
+    gnui::Color c = gnui::BLACK;
+    gnui::Color d = gnui::RED;
+    if (tplate & b) {c = gnui::RED; d = gnui::BLACK;}
     if (i->labelcolor() != c) {i->labelcolor(c); i->redraw();}
     i->selection_textcolor(d);
     i->selection_color(i->color());
@@ -998,7 +998,7 @@ void align_cb(fltk::Button* i, void *v) {
 
     for_all_selected_widgets() {
       WidgetType* q = (WidgetType*)o;
-      int x = q->o->flags() & fltk::ALIGN_MASK;
+      int x = q->o->flags() & gnui::ALIGN_MASK;
       int y;
       if (i->value()) {
 	y = x | b;
@@ -1010,7 +1010,7 @@ void align_cb(fltk::Button* i, void *v) {
   }
 }
 
-void image_inlined_cb(fltk::CheckButton* i, void *v) {
+void image_inlined_cb(gnui::CheckButton* i, void *v) {
   if (v==LOAD) { // for now all images are inlined or none is.
     if (current_widget->image) {
       i->activate();
@@ -1029,39 +1029,39 @@ void image_inlined_cb(fltk::CheckButton* i, void *v) {
 
 ////////////////////////////////////////////////////////////////
 
-void callback_cb(fltk::MultiLineInput* i, void *v) {
+void callback_cb(gnui::MultiLineInput* i, void *v) {
   if (v == LOAD) {
     i->static_value(current_widget->callback());
   } else {
     const char *c = i->value();
     const char *d = c_check(c);
-    if (d) {fltk::message("Error in callback: %s",d); haderror = 1; return;}
+    if (d) {gnui::message("Error in callback: %s",d); haderror = 1; return;}
     for_all_selected_widgets() o->callback(c);
   }
-  fltk::Color c = fltk::BLACK;
-  if (current_widget->callback()) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (current_widget->callback()) c = gnui::RED;
   if (i->labelcolor() != c) {
     i->labelcolor(c);
     i->redraw_label();
   }
 }
 
-void user_data_cb(fltk::Input *i, void *v) {
+void user_data_cb(gnui::Input *i, void *v) {
   if (v == LOAD) {
     i->static_value(current_widget->user_data());
   } else {
     const char *c = i->value();
     const char *d = c_check(c);
-    if (d) {fltk::message("Error in user_data: %s",d); haderror = 1; return;}
+    if (d) {gnui::message("Error in user_data: %s",d); haderror = 1; return;}
     for_all_selected_widgets() o->user_data(c);
   }
-  fltk::Color c = fltk::BLACK;
-  if (current_widget->user_data()) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (current_widget->user_data()) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void user_data_type_cb(fltk::Input *i, void *v) {
+void user_data_type_cb(gnui::Input *i, void *v) {
   static const char *dflt = "void*";
   if (v == LOAD) {
     const char *c = current_widget->user_data_type();
@@ -1076,34 +1076,34 @@ void user_data_type_cb(fltk::Input *i, void *v) {
       if (c && *c && c[strlen(c)-1] != '*' && strcmp(c,"long"))
 	d = "must be pointer or long";
     }
-    if (d) {fltk::message("Error in type: %s",d); haderror = 1; return;}
+    if (d) {gnui::message("Error in type: %s",d); haderror = 1; return;}
     for_all_selected_widgets() o->user_data_type(c);
   }
-  fltk::Color c = fltk::BLACK;
-  if (strcmp(i->value(), "void*")) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (strcmp(i->value(), "void*")) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void extra_code_input_cb(fltk::MultiLineInput* i, void* v) {
+void extra_code_input_cb(gnui::MultiLineInput* i, void* v) {
   if (v == LOAD) {
     i->static_value(current_widget->extra_code());
   } else {
     const char *c = i->value();
     const char *d = c_check(c&&c[0]=='#' ? c+1 : c);
-    if (d) {fltk::message("Error in %s: %s",i->label(),d); haderror = 1; return;}
+    if (d) {gnui::message("Error in %s: %s",i->label(),d); haderror = 1; return;}
     for_all_selected_widgets() {
       WidgetType *t = (WidgetType*)o;
       t->extra_code(c);
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (i->value() && *i->value()) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (i->value() && *i->value()) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void user_class_cb(fltk::Input* i, void* v) {
+void user_class_cb(gnui::Input* i, void* v) {
   if (v == LOAD) {
     const char* s = 0;
     for_all_selected_widgets() {
@@ -1122,8 +1122,8 @@ void user_class_cb(fltk::Input* i, void* v) {
       if (*c && strcmp(c, t->subclass())) t->user_class(c);
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (current_widget->user_class()) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (current_widget->user_class()) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
@@ -1131,117 +1131,117 @@ void user_class_cb(fltk::Input* i, void* v) {
 ////////////////////////////////////////////////////////////////
 // Kludges to the panel for subclasses:
 
-void slider_size_cb(fltk::ValueInput* i, void* v) {
+void slider_size_cb(gnui::ValueInput* i, void* v) {
   if (v == LOAD) {
     if (current_widget->is_valuator()!=2) {i->hide(); return;}
     i->show();
-    i->value(((fltk::Slider*)(current_widget->o))->slider_size());
+    i->value(((gnui::Slider*)(current_widget->o))->slider_size());
   } else {
     int n = int(i->value());
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
       if (q->is_valuator()==2) {
-	((fltk::Slider*)(q->o))->slider_size(n);
+	((gnui::Slider*)(q->o))->slider_size(n);
 	q->redraw();
       }
     }
   }
 }
 
-void min_cb(fltk::ValueInput* i, void* v) {
+void min_cb(gnui::ValueInput* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_valuator()) {i->hide(); return;}
     i->show();
-    i->value(((fltk::Valuator*)(current_widget->o))->minimum());
+    i->value(((gnui::Valuator*)(current_widget->o))->minimum());
   } else {
     double n = i->value();
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
       if (q->is_valuator()) {
-	((fltk::Valuator*)(q->o))->minimum(n);
+	((gnui::Valuator*)(q->o))->minimum(n);
 	q->redraw();
       }
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (i->value() != 0.0) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (i->value() != 0.0) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void max_cb(fltk::ValueInput* i, void* v) {
+void max_cb(gnui::ValueInput* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_valuator()) {i->hide(); return;}
     i->show();
-    i->value(((fltk::Valuator*)(current_widget->o))->maximum());
+    i->value(((gnui::Valuator*)(current_widget->o))->maximum());
   } else {
     double n = i->value();
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
       if (q->is_valuator()) {
-	((fltk::Valuator*)(q->o))->maximum(n);
+	((gnui::Valuator*)(q->o))->maximum(n);
 	q->redraw();
       }
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (i->value() != 1.0) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (i->value() != 1.0) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void step_cb(fltk::ValueInput* i, void* v) {
+void step_cb(gnui::ValueInput* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_valuator()) {i->hide(); return;}
     i->show();
-    i->value(((fltk::Valuator*)(current_widget->o))->step());
+    i->value(((gnui::Valuator*)(current_widget->o))->step());
   } else {
     double n = i->value();
     for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
       if (q->is_valuator()) {
-	((fltk::Valuator*)(q->o))->step(n);
+	((gnui::Valuator*)(q->o))->step(n);
 	q->redraw();
       }
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (i->value() != 0.0) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (i->value() != 0.0) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void line_cb(fltk::ValueInput* i, void* v) {
+void line_cb(gnui::ValueInput* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_valuator()) {i->hide(); return;}
     i->show();
-    i->value(((fltk::Valuator*)(current_widget->o))->linesize());
+    i->value(((gnui::Valuator*)(current_widget->o))->linesize());
   } else {
     int n = int(i->value());
     if (n >= 0) for_all_selected_widgets() {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
       if (q->is_valuator()) {
-	((fltk::Valuator*)(q->o))->linesize(n);
+	((gnui::Valuator*)(q->o))->linesize(n);
 	q->redraw();
       }
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (i->value() != 1.0) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (i->value() != 1.0) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
 
-void value_cb(fltk::ValueInput* i, void* v) {
+void value_cb(gnui::ValueInput* i, void* v) {
   if (v == LOAD) {
     if (current_widget->is_valuator()) {
       i->show();
-      i->value(((fltk::Valuator*)(current_widget->o))->value());
+      i->value(((gnui::Valuator*)(current_widget->o))->value());
     } else if (current_widget->is_button()) {
       i->show();
       i->value(current_widget->o->state());
@@ -1253,15 +1253,15 @@ void value_cb(fltk::ValueInput* i, void* v) {
       modflag = 1;
       WidgetType* q = (WidgetType*)o;
       if (q->is_valuator()) {
-	((fltk::Valuator*)(q->o))->value(n);
+	((gnui::Valuator*)(q->o))->value(n);
       } else {
 	q->o->state(n != 0);
 	if (q->is_menu_item()) q->redraw();
       }
     }
   }
-  fltk::Color c = fltk::BLACK;
-  if (i->value() != 0.0) c = fltk::RED;
+  gnui::Color c = gnui::BLACK;
+  if (i->value() != 0.0) c = gnui::RED;
   if (i->labelcolor() != c)
     { i->labelcolor(c); i->redraw_label(); }
 }
@@ -1272,7 +1272,7 @@ void value_cb(fltk::ValueInput* i, void* v) {
 
 const Enumeration *WidgetType::subtypes() const {return 0;}
 
-void subtype_cb(fltk::Choice* i, void* v) {
+void subtype_cb(gnui::Choice* i, void* v) {
   if (v == LOAD) {
     const Enumeration* table = current_widget->subtypes();
     if (!table) {i->hide(); return;}
@@ -1300,17 +1300,17 @@ void subtype_cb(fltk::Choice* i, void* v) {
  * callback to only the changed widgets, and recursively call
  * themselves:
  */
-void propagate_group(fltk::Group* g, void* v) {
+void propagate_group(gnui::Group* g, void* v) {
   if (v == LOAD) {
     for (int i=g->children(); i--;) {
-      fltk::Widget* o = g->child(i);
+      gnui::Widget* o = g->child(i);
       o->do_callback(o,LOAD);
     }
   } else {
     for (int i=g->children(); i--;) {
-      fltk::Widget* o = g->child(i);
-      if (o->changed() || o->callback()==(fltk::Callback*)propagate_group ||
-          o->callback()==(fltk::Callback*)propagate_tabs)
+      gnui::Widget* o = g->child(i);
+      if (o->changed() || o->callback()==(gnui::Callback*)propagate_group ||
+          o->callback()==(gnui::Callback*)propagate_tabs)
       {
 	o->do_callback();
 	if (haderror) return;
@@ -1324,7 +1324,7 @@ void propagate_group(fltk::Group* g, void* v) {
  * Fluid insists on giving the correct type to arguments so we need
  * a different call for the tabs:
  */
-void propagate_tabs(fltk::TabGroup* g, void* v) {
+void propagate_tabs(gnui::TabGroup* g, void* v) {
   propagate_group(g, v);
 }
 
@@ -1335,7 +1335,7 @@ inline Fluid_Plugin** next_panel(Fluid_Plugin** pp, Fluid_Plugin* &p)
   return pp;
 }
 
-void set_cb(fltk::Button*, void*) {
+void set_cb(gnui::Button*, void*) {
   haderror = 0;
   propagate_group(the_panel, 0);
   Fluid_Plugin *p = 0, **pp;
@@ -1343,7 +1343,7 @@ void set_cb(fltk::Button*, void*) {
     if(p->panel_is_orphan) propagate_group(p->panel, 0);
 }
 
-void ok_cb(fltk::ReturnButton* o, void* v) {
+void ok_cb(gnui::ReturnButton* o, void* v) {
   set_cb(o,v);
   if (!haderror)
     the_panel->hide();
@@ -1351,21 +1351,21 @@ void ok_cb(fltk::ReturnButton* o, void* v) {
 
 static void load_panel();
 
-void default_cb(fltk::Button*, void* v) {
+void default_cb(gnui::Button*, void* v) {
   if (v == LOAD) return;
-  const fltk::Style* default_style =
+  const gnui::Style* default_style =
     ((WidgetType*)(current_widget->factory))->o->style();
-  fltk::Style* s1 = (fltk::Style*)(current_widget->o->style());
+  gnui::Style* s1 = (gnui::Style*)(current_widget->o->style());
   if (s1 == default_style) return;
   // Delete the style:
   delete s1;
   // this just assigns the pointer:
-  current_widget->o->style((fltk::Style*)default_style);
+  current_widget->o->style((gnui::Style*)default_style);
   load_panel();
   current_widget->redraw();
 }
 
-void revert_cb(fltk::Button*, void*) {
+void revert_cb(gnui::Button*, void*) {
   if (!current_widget) return;
   // We have to revert all dynamically changing fields:
   // but for now only the first label works...
@@ -1376,13 +1376,13 @@ void revert_cb(fltk::Button*, void*) {
     if(p->panel_is_orphan) propagate_group(p->panel, LOAD);
 }
 
-void cancel_cb(fltk::Button* o, void* v) {
+void cancel_cb(gnui::Button* o, void* v) {
   revert_cb(o, v);
   the_panel->hide();
 }
 
-void toggle_overlays(fltk::Widget *,void *); // in WindowType.C
-void overlay_cb(fltk::CheckButton*o,void *v) {
+void toggle_overlays(gnui::Widget *,void *); // in WindowType.C
+void overlay_cb(gnui::CheckButton*o,void *v) {
   toggle_overlays(o,v);
 }
 
@@ -1392,7 +1392,7 @@ void overlay_cb(fltk::CheckButton*o,void *v) {
 static void load_panel() {
   if (!the_panel) return;
 
-  // find all the fltk::Widget subclasses currently selected:
+  // find all the gnui::Widget subclasses currently selected:
   numselected = 0;
   current_widget = 0;
   if (FluidType::current) {
@@ -1543,7 +1543,7 @@ const char* WidgetType::array_name() const {
 
 void WidgetType::write_static() {
   const char* subclass = this->subclass();
-  if (!user_class() || !strncmp(subclass, "fltk::", 6)) 
+  if (!user_class() || !strncmp(subclass, "gnui::", 6)) 
     ::write_declare("#include <fltk/%s.h>", subclass+6);
   if (extra_code()) write_includes_from_code((char*)extra_code());
   if (callback()) {
@@ -1649,7 +1649,7 @@ void WidgetType::write_code1() {
   if (varused) write_c("%s%s* o = ", get_opening_brace(0), subclass);
   if (name()) write_c("%s = ", name());
   if (is_window()) {
-    // Handle special case where user is faking a fltk::Group type as a window,
+    // Handle special case where user is faking a gnui::Group type as a window,
     // there is no 2-argument constructor in that case:
     if (set_xy)
       write_c("new %s(%d, %d, %d, %d", subclass, o->x(),o->y(),o->w(),o->h());
@@ -1672,14 +1672,14 @@ void WidgetType::write_code1() {
   if (varused) write_widget_code();
 }
 
-static void write_color(const char* function, fltk::Color c) {
-  if (c > 255) write_c("%so->%s((fltk::Color)0x%x);\n", indent(), function, c);
-  else write_c("%so->%s((fltk::Color)%i);\n", indent(), function, c);
+static void write_color(const char* function, gnui::Color c) {
+  if (c > 255) write_c("%so->%s((gnui::Color)0x%x);\n", indent(), function, c);
+  else write_c("%so->%s((gnui::Color)%i);\n", indent(), function, c);
 }
 
 // this is split from write_code1() for WindowType:
 void WidgetType::write_widget_code() {
-  fltk::Widget* tplate = ((WidgetType*)factory)->o;
+  gnui::Widget* tplate = ((WidgetType*)factory)->o;
 
   if (o->type() != tplate->type()) {
     const Enumeration* e = subtypes();
@@ -1695,15 +1695,15 @@ void WidgetType::write_widget_code() {
   if (image) image->write_code();
 
   if (o->box() != tplate->box())
-    write_c("%so->box(fltk::%s);\n",indent(),to_text((void*)(o->box()),boxmenu));
+    write_c("%so->box(gnui::%s);\n",indent(),to_text((void*)(o->box()),boxmenu));
   if (o->buttonbox() != tplate->buttonbox())
-    write_c("%so->buttonbox(fltk::%s);\n", indent(), to_text((void*)(o->buttonbox()),boxmenu));
+    write_c("%so->buttonbox(gnui::%s);\n", indent(), to_text((void*)(o->buttonbox()),boxmenu));
   if (o->labelfont() != tplate->labelfont())
-    write_c("%so->labelfont(fltk::%s);\n", indent(), fontmenu[fontnumber(o->labelfont())].symbol);
+    write_c("%so->labelfont(gnui::%s);\n", indent(), fontmenu[fontnumber(o->labelfont())].symbol);
   if (o->textfont() != tplate->textfont())
-    write_c("%so->textfont(fltk::%s);\n", indent(), fontmenu[fontnumber(o->textfont())].symbol);
+    write_c("%so->textfont(gnui::%s);\n", indent(), fontmenu[fontnumber(o->textfont())].symbol);
   if (o->labeltype() != tplate->labeltype())
-    write_c("%so->labeltype(fltk::%s);\n", indent(),
+    write_c("%so->labeltype(gnui::%s);\n", indent(),
 	    to_text((void*)(o->labeltype()),labelstylemenu));
   if (o->color() != tplate->color())
     write_color("color", o->color());
@@ -1726,13 +1726,13 @@ void WidgetType::write_widget_code() {
   if (o->textsize() != tplate->textsize())
     write_c("%so->textsize(%g);\n", indent(), o->textsize());
   if (o->state() && !tplate->state())
-    write_c("%so->set_flag(fltk::STATE);\n", indent());
+    write_c("%so->set_flag(gnui::STATE);\n", indent());
   if (o->shortcut())
     write_c("%so->shortcut(0x%x);\n", indent(), o->shortcut());
 
   if (is_valuator()) {
-    fltk::Valuator* v = (fltk::Valuator*)o;
-    fltk::Valuator* f = (fltk::Valuator*)(tplate);
+    gnui::Valuator* v = (gnui::Valuator*)o;
+    gnui::Valuator* f = (gnui::Valuator*)(tplate);
     if (v->minimum()!=f->minimum())
       write_c("%so->minimum(%g);\n", indent(), v->minimum());
     if (v->maximum()!=f->maximum())
@@ -1744,8 +1744,8 @@ void WidgetType::write_widget_code() {
     if (v->value())
       write_c("%so->value(%g);\n", indent(), v->value());
     if (is_valuator()==2) {
-      double x = ((fltk::Slider*)v)->slider_size();
-      double y = ((fltk::Slider*)f)->slider_size();
+      double x = ((gnui::Slider*)v)->slider_size();
+      double y = ((gnui::Slider*)f)->slider_size();
       if (x != y) write_c("%so->slider_size(%g);\n", indent(), x);
     }
   }
@@ -1753,7 +1753,7 @@ void WidgetType::write_widget_code() {
   const char* ud = user_data();
   if (member_of() && !parent->is_widget()) ud = "this";
   if (callback()) {
-    write_c("%so->callback((fltk::Callback*)%s", indent(), callback_name());
+    write_c("%so->callback((gnui::Callback*)%s", indent(), callback_name());
     if (ud)
       write_c(", (void*)(%s));\n", ud);
     else
@@ -1761,8 +1761,8 @@ void WidgetType::write_widget_code() {
   } else if (ud) {
     write_c("%so->user_data((void*)(%s));\n", indent(), ud);
   }
-  if ((o->flags()&fltk::ALIGN_MASK) != (tplate->flags()&fltk::ALIGN_MASK)) {
-    fltk::Flags i = o->flags() & fltk::ALIGN_MASK;
+  if ((o->flags()&gnui::ALIGN_MASK) != (tplate->flags()&gnui::ALIGN_MASK)) {
+    gnui::Flags i = o->flags() & gnui::ALIGN_MASK;
     write_c("%so->align(", indent());
     bool first = true;
     for (int n = 0; n < 8; n++) if (i & (1<<n)) {
@@ -1770,20 +1770,20 @@ void WidgetType::write_widget_code() {
       first = false;
       write_c(number_to_text(1<<n, alignmenu));
     }
-    if (first) write_c("fltk::ALIGN_CENTER");
+    if (first) write_c("gnui::ALIGN_CENTER");
     write_c(");\n");
   }
   if (o->when() != tplate->when())
-    write_c("%so->when(fltk::WHEN_%s);\n", indent(), number_to_text(o->when(), whenmenu));
+    write_c("%so->when(gnui::WHEN_%s);\n", indent(), number_to_text(o->when(), whenmenu));
   if (!o->visible() && o->parent())
     write_c("%so->hide();\n", indent());
   if (!o->active())
     write_c("%so->deactivate();\n", indent());
   if (!is_group() && resizable())
-    write_c("%sfltk::Group::current()->resizable(o);\n",indent());
+    write_c("%sgnui::Group::current()->resizable(o);\n",indent());
   if (hotspot()) {
-    write_c("%s((fltk::Window*)(o", indent());
-    fltk::Widget* p = o->parent();
+    write_c("%s((gnui::Window*)(o", indent());
+    gnui::Widget* p = o->parent();
     while (p) { p = p->parent(); write_c("->parent()"); }
     write_c("))->hotspot(o);\n");
   }
@@ -1812,7 +1812,7 @@ void WidgetType::write_code() {
 
 ////////////////////////////////////////////////////////////////
 
-static void save_color(const char* name, fltk::Color color) {
+static void save_color(const char* name, gnui::Color color) {
   if (color > 255) write_string("%s 0x%x", name, color);
   else write_string("%s %u", name, color);
 }
@@ -1826,7 +1826,7 @@ void WidgetType::write_properties() {
   if (!public_) write_string("private");
   if (!is_menu_item())
     write_string("xywh {%d %d %d %d}", o->x(), o->y(), o->w(), o->h());
-  fltk::Widget* tplate = ((WidgetType*)factory)->o;
+  gnui::Widget* tplate = ((WidgetType*)factory)->o;
   if (o->type() != tplate->type()) {
     write_string("type");
     write_word(number_to_text(o->type(), subtypes()));
@@ -1893,8 +1893,8 @@ void WidgetType::write_properties() {
     write_string("value 1");
 
   if (is_valuator()) {
-    fltk::Valuator* v = (fltk::Valuator*)o;
-    fltk::Valuator* f = (fltk::Valuator*)(tplate);
+    gnui::Valuator* v = (gnui::Valuator*)o;
+    gnui::Valuator* f = (gnui::Valuator*)(tplate);
     if (v->minimum()!=f->minimum()) write_string("minimum %g",v->minimum());
     if (v->maximum()!=f->maximum()) write_string("maximum %g",v->maximum());
     if (v->step()!=f->step()) write_string("step %g",v->step());
@@ -1902,8 +1902,8 @@ void WidgetType::write_properties() {
       write_string("linesize %d",v->linesize());
     if (v->value()!=0.0) write_string("value %g",v->value());
     if (is_valuator()==2) {
-      double x = ((fltk::Slider*)v)->slider_size();
-      double y = ((fltk::Slider*)f)->slider_size();
+      double x = ((gnui::Slider*)v)->slider_size();
+      double y = ((gnui::Slider*)f)->slider_size();
       if (x != y) write_string("slider_size %g", x);
     }
   }
@@ -1923,7 +1923,7 @@ void WidgetType::write_properties() {
 int pasteoffset;
 
 void WidgetType::read_property(const char *c) {
-  fltk::Widget* o = this->o;
+  gnui::Widget* o = this->o;
   int x,y,w,h;
   if (!strcmp(c,"private")) {
     public_ = 0;
@@ -1933,7 +1933,7 @@ void WidgetType::read_property(const char *c) {
       y += pasteoffset;
       // adjust for older relative coordinates:
       if (read_version < 2.0001 && !is_menu_item() && o->parent()) {
-	fltk::Group* p = o->parent();
+	gnui::Group* p = o->parent();
 	while (p->parent()) {x -= p->x(); y -= p->y(); p = p->parent();}
       }
       o->x(x); o->y(y); o->w(w); o->h(h);
@@ -1946,7 +1946,7 @@ void WidgetType::read_property(const char *c) {
     o->set_vertical();
   } else if (!strcmp(c,"type")) {
     const char* c = read_word();
-    // Strip off leading "VERTICAL|fltk::Type::" written by older fltk2 fluid:
+    // Strip off leading "VERTICAL|gnui::Type::" written by older fltk2 fluid:
     if (!strncmp(c,"VERTICAL",8)) c += 8;
     else if (!strncmp(c,"HORIZONTAL",10)) c += 10;
     if (*c == '|') {
@@ -1977,19 +1977,19 @@ void WidgetType::read_property(const char *c) {
   } else if (!strcmp(c,"box") || !strcmp(c,"text_box") || !strcmp(c, "window_box")) {
     const char* value = read_word();
     const Enumeration* e = from_text(value, boxmenu);
-    if (e) o->box((fltk::Box*)(e->compiled));
+    if (e) o->box((gnui::Box*)(e->compiled));
     else read_error("Box* '%s' not found", value);
   } else if (!strcmp(c,"buttonbox") || !strcmp(c,"button_box") || !strcmp(c,"glyph_box")) {
     const char* value = read_word();
     const Enumeration* e = from_text(value, boxmenu);
-    if (e) o->buttonbox((fltk::Box*)(e->compiled));
+    if (e) o->buttonbox((gnui::Box*)(e->compiled));
     else read_error("Box* '%s' not found", value);
   } else if (!strcmp(c, "down_box")) { // ignore this fltk 1.0 item
     read_word();
   } else if (!strcmp(c,"labelfont") || !strcmp(c,"label_font")) {
-    if (sscanf(read_word(),"%d",&x) == 1) o->labelfont(fltk::font(x));
+    if (sscanf(read_word(),"%d",&x) == 1) o->labelfont(gnui::font(x));
   } else if (!strcmp(c,"textfont") || !strcmp(c,"text_font")) {
-    if (sscanf(read_word(),"%d",&x) == 1) o->textfont(fltk::font(x));
+    if (sscanf(read_word(),"%d",&x) == 1) o->textfont(gnui::font(x));
   } else if (!strcmp(c,"labeltype") || !strcmp(c,"label_type")
 	     || !strcmp(c,"label_style")) {
     c = read_word();
@@ -2003,11 +2003,11 @@ void WidgetType::read_property(const char *c) {
       if (!strcmp(c,"image_file")) {
         c = read_word();
         if (i && c[0]=='d') i->inlined = 0;
-        // if (c[1]=='t') do something here to make it fltk::Tiled_Image
+        // if (c[1]=='t') do something here to make it gnui::Tiled_Image
       }
     } else {
       const Enumeration* e = from_text(c, labelstylemenu);
-      if (e) o->labeltype((fltk::LabelType*)(e->compiled));
+      if (e) o->labeltype((gnui::LabelType*)(e->compiled));
     }
 
   } else if (!strcmp(c,"image") || !strcmp(c,"image1")) {
@@ -2038,43 +2038,43 @@ void WidgetType::read_property(const char *c) {
   } else if (!strcmp(c,"color") || !strcmp(c,"text_background")
 	     || !strcmp(c,"off_color") || !strcmp(c,"window_color")) {
     char* p;
-    o->color((fltk::Color)strtoul(read_word(),&p,0));
+    o->color((gnui::Color)strtoul(read_word(),&p,0));
     // back compatability with very old fluid versions that wrote 2 numbers:
-    if (*p) o->selection_color((fltk::Color)strtoul(p,0,0));
+    if (*p) o->selection_color((gnui::Color)strtoul(p,0,0));
   } else if (!strcmp(c,"labelcolor") || !strcmp(c,"label_color")) {
-    o->labelcolor((fltk::Color)strtoul(read_word(),0,0));
+    o->labelcolor((gnui::Color)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"selection_color")) {
-    o->selection_color((fltk::Color)strtoul(read_word(),0,0));
+    o->selection_color((gnui::Color)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"selection_textcolor") ||
 	     !strcmp(c,"selected_text_color") || !strcmp(c,"selected_textcolor")) {
-    o->selection_textcolor((fltk::Color)strtoul(read_word(),0,0));
+    o->selection_textcolor((gnui::Color)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"buttoncolor") ||
 	     !strcmp(c,"button_color") || !strcmp(c,"off_color")) {
-    o->buttoncolor((fltk::Color)strtoul(read_word(),0,0));
+    o->buttoncolor((gnui::Color)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"highlight_color")) {
-    o->highlight_color((fltk::Color)strtoul(read_word(),0,0));
+    o->highlight_color((gnui::Color)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"highlight_textcolor") ||
 	     !strcmp(c,"highlight_labelcolor") ||
 	     !strcmp(c,"highlight_label_color")) {
-    o->highlight_textcolor((fltk::Color)strtoul(read_word(),0,0));
+    o->highlight_textcolor((gnui::Color)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"textcolor") || !strcmp(c,"text_color")) {
-    o->textcolor((fltk::Color)strtoul(read_word(),0,0));
+    o->textcolor((gnui::Color)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"labelsize") || !strcmp(c,"label_size")) {
     o->labelsize((float)strtoul(read_word(),0,0));
   } else if (!strcmp(c,"textsize") || !strcmp(c,"text_size")) {
     o->textsize((float)strtoul(read_word(),0,0));
 
   } else if (!strcmp(c,"minimum") && is_valuator()) {
-    ((fltk::Valuator*)o)->minimum(strtod(read_word(),0));
+    ((gnui::Valuator*)o)->minimum(strtod(read_word(),0));
   } else if (!strcmp(c,"maximum") && is_valuator()) {
-    ((fltk::Valuator*)o)->maximum(strtod(read_word(),0));
+    ((gnui::Valuator*)o)->maximum(strtod(read_word(),0));
   } else if (!strcmp(c,"step") && is_valuator()) {
-    ((fltk::Valuator*)o)->step(strtod(read_word(),0));
+    ((gnui::Valuator*)o)->step(strtod(read_word(),0));
   } else if (!strcmp(c,"linesize") && is_valuator()) {
-    ((fltk::Valuator*)o)->linesize(strtod(read_word(),0));
+    ((gnui::Valuator*)o)->linesize(strtod(read_word(),0));
   } else if (!strcmp(c,"value")) {
     if (is_valuator()) {
-      ((fltk::Valuator*)o)->value(strtod(read_word(),0));
+      ((gnui::Valuator*)o)->value(strtod(read_word(),0));
     } else {
       const char* value = read_word();
       o->state(value[0]!=0 && value[0]!='0');
@@ -2082,9 +2082,9 @@ void WidgetType::read_property(const char *c) {
   } else if ((!strcmp(c,"slider_size")||!strcmp(c,"size"))&&is_valuator()==2) {
     double v = strtod(read_word(),0);
     if (v < 1.0)
-      ((fltk::Slider*)o)->slider_size(int(v*o->w()));
+      ((gnui::Slider*)o)->slider_size(int(v*o->w()));
     else
-      ((fltk::Slider*)o)->slider_size(int(v));
+      ((gnui::Slider*)o)->slider_size(int(v));
 
   } else if (!strcmp(c, "extra_code")) {
     extra_code(read_word());
@@ -2105,23 +2105,23 @@ void WidgetType::read_property(const char *c) {
 
 static const Enumeration boxmenu1[] = {
   // these extra ones are for looking up fdesign saved strings:
-  {"x", "NO_FRAME",		(void *)fltk::NO_BOX},
-  {"x", "ROUNDED3D_UPBOX",	(void *)fltk::ROUND_UP_BOX},
-  {"x", "ROUNDED3D_DOWNBOX",	(void *)fltk::ROUND_DOWN_BOX},
-  {"x", "OVAL3D_UPBOX",		(void *)fltk::ROUND_UP_BOX},
-  {"x", "OVAL3D_DOWNBOX",	(void *)fltk::ROUND_DOWN_BOX},
-  {"x", "0",			(void *)fltk::NO_BOX},
-  {"x", "1",			(void *)fltk::UP_BOX},
-  {"x", "2",			(void *)fltk::DOWN_BOX},
-  {"x", "3",			(void *)fltk::FLAT_BOX},
-  {"x", "4",			(void *)fltk::BORDER_BOX},
-  {"x", "5",			(void *)fltk::SHADOW_BOX},
-  {"x", "6",			(void *)fltk::ENGRAVED_BOX},
-  {"x", "7",			(void *)fltk::ROUNDED_BOX},
-  {"x", "8",			(void *)fltk::RFLAT_BOX},
-  {"x", "9",			(void *)fltk::RSHADOW_BOX},
-  {"x", "10",			(void *)fltk::UP_BOX},
-  {"x", "11",			(void *)fltk::DOWN_BOX},
+  {"x", "NO_FRAME",		(void *)gnui::NO_BOX},
+  {"x", "ROUNDED3D_UPBOX",	(void *)gnui::ROUND_UP_BOX},
+  {"x", "ROUNDED3D_DOWNBOX",	(void *)gnui::ROUND_DOWN_BOX},
+  {"x", "OVAL3D_UPBOX",		(void *)gnui::ROUND_UP_BOX},
+  {"x", "OVAL3D_DOWNBOX",	(void *)gnui::ROUND_DOWN_BOX},
+  {"x", "0",			(void *)gnui::NO_BOX},
+  {"x", "1",			(void *)gnui::UP_BOX},
+  {"x", "2",			(void *)gnui::DOWN_BOX},
+  {"x", "3",			(void *)gnui::FLAT_BOX},
+  {"x", "4",			(void *)gnui::BORDER_BOX},
+  {"x", "5",			(void *)gnui::SHADOW_BOX},
+  {"x", "6",			(void *)gnui::ENGRAVED_BOX},
+  {"x", "7",			(void *)gnui::ROUNDED_BOX},
+  {"x", "8",			(void *)gnui::RFLAT_BOX},
+  {"x", "9",			(void *)gnui::RSHADOW_BOX},
+  {"x", "10",			(void *)gnui::UP_BOX},
+  {"x", "11",			(void *)gnui::DOWN_BOX},
 {0}};
 
 extern int fdesign_flip;
@@ -2145,7 +2145,7 @@ int WidgetType::read_fdesign(const char* name, const char* value) {
     }
   } else if (!strcmp(name,"label")) {
     label(value);
-    if (value[0] == '@') o->labeltype(fltk::SYMBOL_LABEL);
+    if (value[0] == '@') o->labeltype(gnui::SYMBOL_LABEL);
   } else if (!strcmp(name,"name")) {
     this->name(value);
   } else if (!strcmp(name,"callback")) {
@@ -2158,9 +2158,9 @@ int WidgetType::read_fdesign(const char* name, const char* value) {
       extra_code(buf);
     }
   } else if (!strcmp(name,"style")) {
-    if (!strncmp(value,"fltk::NORMAL",9)) return 1;
+    if (!strncmp(value,"gnui::NORMAL",9)) return 1;
     if (!lookup_fdesign(value,v,1)) return 0;
-    o->labelfont(fltk::font(v)); o->labeltype((fltk::LabelType*)(v>>8));
+    o->labelfont(gnui::font(v)); o->labeltype((gnui::LabelType*)(v>>8));
   } else if (!strcmp(name,"size")) {
       if (!lookup_fdesign(value,v,1)) return 0;
     o->labelsize((float)v);
@@ -2175,19 +2175,19 @@ int WidgetType::read_fdesign(const char* name, const char* value) {
     o->labelcolor(v);
   } else if (!strcmp(name,"return")) {
     if (!lookup_fdesign(value,v,0)) return 0;
-    o->when(v|fltk::WHEN_RELEASE);
+    o->when(v|gnui::WHEN_RELEASE);
   } else if (!strcmp(name,"alignment")) {
     if (!lookup_fdesign(value,v)) {
       // convert old numeric values:
       int v1 = strtol(value,0,0); if (v1 <= 0 && strcmp(value,"0")) return 0;
       v = 0;
-      if (v1 >= 5) {v = fltk::ALIGN_INSIDE; v1 -= 5;}
+      if (v1 >= 5) {v = gnui::ALIGN_INSIDE; v1 -= 5;}
       switch (v1) {
-      case 0: v += fltk::ALIGN_TOP; break;
-      case 1: v += fltk::ALIGN_BOTTOM; break;
-      case 2: v += fltk::ALIGN_LEFT; break;
-      case 3: v += fltk::ALIGN_RIGHT; break;
-      case 4: v += fltk::ALIGN_CENTER; break;
+      case 0: v += gnui::ALIGN_TOP; break;
+      case 1: v += gnui::ALIGN_BOTTOM; break;
+      case 2: v += gnui::ALIGN_LEFT; break;
+      case 3: v += gnui::ALIGN_RIGHT; break;
+      case 4: v += gnui::ALIGN_CENTER; break;
       default: return 0;
       }
     }
@@ -2203,15 +2203,15 @@ int WidgetType::read_fdesign(const char* name, const char* value) {
       *p=' '; return 0;}
     o->color(v); o->selection_color(v1);
   } else if (!strcmp(name,"resize")) {
-    return !strcmp(value,"fltk::RESIZE_ALL");
+    return !strcmp(value,"gnui::RESIZE_ALL");
   } else if (!strcmp(name,"gravity")) {
     return !strcmp(value,"Fl_NoGravity Fl_NoGravity");
   } else if (!strcmp(name,"boxtype")) {
   TRY_BOXTYPE:
     const Enumeration* e = from_text(value, boxmenu);
     if (!e) {e = from_text(value, boxmenu1); if (!e) return 0;}
-    fltk::Box* x = (fltk::Box*)(e->compiled);
-    if (x == fltk::NO_BOX) {
+    gnui::Box* x = (gnui::Box*)(e->compiled);
+    if (x == gnui::NO_BOX) {
       if (o->box() != ((WidgetType*)factory)->o->box()) return 1; // kludge for frame
     }
     o->box(x);
@@ -2250,8 +2250,8 @@ void live_mode_cb(LightButton*o,void *v) {
 	// create main live mode Window, green backgnd no border
         live_window = new DoubleBufferWindow(w+20, h+55, "Fluid Live Mode Widget");
 	live_window->begin();
-        live_window->box(fltk::FLAT_BOX);
-        live_window->color(fltk::GREEN);
+        live_window->box(gnui::FLAT_BOX);
+        live_window->color(gnui::GREEN);
         Button *btn = new Button(10, h+20, 100, 25, "Exit Live Mode");
         btn->labelsize(12);
         btn->callback(leave_live_mode_cb);
@@ -2291,7 +2291,7 @@ void leave_live_mode_cb(Widget*, void*) {
   live_mode_cb(0, 0);
 }
 
-fltk::Widget *WidgetType::enter_live_mode(int top) {
+gnui::Widget *WidgetType::enter_live_mode(int top) {
   live_widget = widget(o->x(), o->y(), o->w(), o->h());
   if (live_widget)
     copy_properties();
@@ -2362,8 +2362,8 @@ void WidgetType::copy_properties() {
     w->parent()->resizable(o);
 }
 
-int WidgetType::textstuff(int w, fltk::Font* f, float& s, fltk::Color c) {
-  fltk::Widget *myo = (fltk::Widget *)(w==4 ? ((WidgetType*)factory)->o : o);
+int WidgetType::textstuff(int w, gnui::Font* f, float& s, gnui::Color c) {
+  gnui::Widget *myo = (gnui::Widget *)(w==4 ? ((WidgetType*)factory)->o : o);
   switch (w) {
     case 4:
     case 0: f = myo->textfont(); s = myo->textsize(); c = myo->textcolor(); break;

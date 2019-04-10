@@ -5,7 +5,7 @@
 #include <fltk/ValueOutput.h>
 #include <fltk/Slider.h>
 
-using namespace fltk;
+using namespace gnui;
 
 double cps = 24.0;
 double period = 1.0/24.0;
@@ -25,10 +25,10 @@ int timing_period = 1;
 void timeout_callback(void* v) {
   ticks++;
   ((Slider*)v)->value(ticks%SLIDER_TICKS);
-  fltk::repeat_timeout(period, timeout_callback, v);
+  gnui::repeat_timeout(period, timeout_callback, v);
 
   if (ticks-prevticks > cps*timing_period) {
-    double now = fltk::get_time_secs();
+    double now = gnui::get_time_secs();
     actual->value((ticks-prevticks)/(now-starttime));
     starttime = now;
     prevticks = ticks;
@@ -40,9 +40,9 @@ void fps_callback(Widget* w, void* v) {
   cps = ((ValueInput*)w)->value();
   //((Slider*)v)->maximum(SLIDER_TICKS-1);
   period = 1.0/cps;
-  fltk::remove_timeout(timeout_callback, v);
-  fltk::add_timeout(period, timeout_callback, v);
-  starttime = fltk::get_time_secs();
+  gnui::remove_timeout(timeout_callback, v);
+  gnui::add_timeout(period, timeout_callback, v);
+  starttime = gnui::get_time_secs();
   prevticks = ticks;
   timing_period = 1;
 }
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
 
   Window window(300,200);
   window.begin();
-  Widget box(0, 0, 300, 100, "fltk::repeat_timeout() test");
+  Widget box(0, 0, 300, 100, "gnui::repeat_timeout() test");
   box.labelsize(20); //box.labelfont(HELVETICA_BOLD);
   box.align(ALIGN_WRAP);
   window.resizable(box);
@@ -66,10 +66,10 @@ int main(int argc, char** argv) {
   ::actual = &actual;
 
   window.show(argc, argv);
-  fltk::wait();
+  gnui::wait();
 
-  fltk::add_timeout(period, timeout_callback, &ticker);
-  starttime = fltk::get_time_secs();
+  gnui::add_timeout(period, timeout_callback, &ticker);
+  starttime = gnui::get_time_secs();
 
-  return fltk::run();
+  return gnui::run();
 }

@@ -40,14 +40,14 @@ DrawingWindow mbrot;
 DrawingWindow jbrot;
 
 void idle() {
-  if (!mbrot.d->idle() && !(jbrot.d && jbrot.d->idle())) fltk::set_idle(0);
+  if (!mbrot.d->idle() && !(jbrot.d && jbrot.d->idle())) gnui::set_idle(0);
 }
 
 void set_idle() {
-  fltk::set_idle(idle);
+  gnui::set_idle(idle);
 }
 
-static void window_callback(fltk::Widget*, void*) {
+static void window_callback(gnui::Widget*, void*) {
   exit(0);
 }
 
@@ -58,12 +58,12 @@ int main(int argc, char **argv) {
   mbrot.d->scale = 2.5;
   mbrot.update_label();
   int i = 0;
-  if (fltk::args(argc, argv, i) < argc)
-    fltk::fatal(fltk::help);
-  fltk::visual(fltk::RGB);
+  if (gnui::args(argc, argv, i) < argc)
+    gnui::fatal(gnui::help);
+  gnui::visual(gnui::RGB);
   mbrot.window->callback(window_callback);
   mbrot.window->show(argc, argv);
-  return fltk::run();
+  return gnui::run();
 }
 
 void DrawingWindow::update_label() {
@@ -85,8 +85,8 @@ int DrawingArea::idle() {
     make_current(); // deleted window-> from this for fltk2.0
     int yy = drawn + 4;
     if (yy >= sy && yy <= sy + sh) erase_box();
-    fltk::drawimage(buffer + drawn*W, fltk::MONO, fltk::Rectangle(3, yy, W, 1), W);
-    //fltk::draw_image_mono(buffer+drawn*W, 3,yy,W,1,1,W);
+    gnui::drawimage(buffer + drawn*W, gnui::MONO, gnui::Rectangle(3, yy, W, 1), W);
+    //gnui::draw_image_mono(buffer+drawn*W, 3,yy,W,1,1,W);
     drawn++;
     return 1;
   }
@@ -123,7 +123,7 @@ int DrawingArea::idle() {
 
 void DrawingArea::erase_box() {
   make_current();
-  fltk::overlay_clear();
+  gnui::overlay_clear();
 }
 
 // For fltk2.0, all the occurances of x() and y() were replaced by 0:
@@ -134,18 +134,18 @@ int DrawingArea::handle(int event) {
   static int button;
   int x2, y2;
   switch (event) {
-    case fltk::PUSH:
+    case gnui::PUSH:
       erase_box();
-      ix = fltk::event_x(); if (ix < 0) ix = 0; if (ix >= w()) ix = w() - 1;
-      iy = fltk::event_y(); if (iy < 0) iy = 0; if (iy >= h()) iy = h() - 1;
+      ix = gnui::event_x(); if (ix < 0) ix = 0; if (ix >= w()) ix = w() - 1;
+      iy = gnui::event_y(); if (iy < 0) iy = 0; if (iy >= h()) iy = h() - 1;
       dragged = 0;
-      button = fltk::event_button();
+      button = gnui::event_button();
       return 1;
-    case fltk::DRAG:
+    case gnui::DRAG:
       dragged = 1;
       erase_box();
-      x2 = fltk::event_x(); if (x2 < 0) x2 = 0; if (x2 >= w()) x2 = w() - 1;
-      y2 = fltk::event_y(); if (y2 < 0) y2 = 0; if (y2 >= h()) y2 = h() - 1;
+      x2 = gnui::event_x(); if (x2 < 0) x2 = 0; if (x2 >= w()) x2 = w() - 1;
+      y2 = gnui::event_y(); if (y2 < 0) y2 = 0; if (y2 >= h()) y2 = h() - 1;
       if (button != 1) {
         ix = x2; iy = y2; return 1;
       }
@@ -160,9 +160,9 @@ int DrawingArea::handle(int event) {
         sy = y2; sh = iy - y2;
       }
       make_current();
-      fltk::overlay_rect(sx, sy, sw, sh);
+      gnui::overlay_rect(sx, sy, sw, sh);
       return 1;
-    case fltk::RELEASE:
+    case gnui::RELEASE:
       if (button == 1) {
         erase_box();
         if (dragged && sw > 3 && sh > 3) {
@@ -218,7 +218,7 @@ void DrawingArea::new_display() {
 #include <fltk/layout.h> // added for fltk2.0
 
 void DrawingArea::layout() {
-  if (layout_damage() & fltk::LAYOUT_WH) {
+  if (layout_damage() & gnui::LAYOUT_WH) {
     W = w() - 6;
     H = h() - 8;
     if (buffer) {

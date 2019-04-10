@@ -27,24 +27,24 @@
 #include <fltk/visual.h>
 #include <fltk/x.h>
 
-/*! \fn bool fltk::visual(int);
+/*! \fn bool gnui::visual(int);
 
   X-specific crap to allow you to force the "visual" used by
   fltk to one you like, rather than the "default visual" which
   in many cases has less capabilities than your machine really
-  has! For instance fltk::visual(fltk::RGB_COLOR) will get you a full
+  has! For instance gnui::visual(gnui::RGB_COLOR) will get you a full
   color display instead of an 8-bit colormap, if possible.
 
   You must call this before you show() any windows. The integer
   argument is an 'or' of the following:
-  - fltk::INDEXED_COLOR indicates that a colormapped visual is ok. This call
+  - gnui::INDEXED_COLOR indicates that a colormapped visual is ok. This call
     will normally fail if a TrueColor visual cannot be found.
-  - fltk::RGB_COLOR this value is zero and may be passed to indicate that
-    fltk::INDEXED_COLOR is \e not wanted.
-  - fltk::RGB24_COLOR indicates that the visual must have at least
+  - gnui::RGB_COLOR this value is zero and may be passed to indicate that
+    gnui::INDEXED_COLOR is \e not wanted.
+  - gnui::RGB24_COLOR indicates that the visual must have at least
     8 bits of red, green, and blue (Windows calls this "millions of
     colors").
-  - fltk::DOUBLE_BUFFER indicates that hardware accelerated double buffering
+  - gnui::DOUBLE_BUFFER indicates that hardware accelerated double buffering
     is wanted.
   - Other bits used by glVisual() and GlWindow::mode() are ignored by this.
 
@@ -64,7 +64,7 @@
 #undef Window
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 static int test_visual(XVisualInfo& v, int flags) {
   if (v.screen != xscreen) return 0;
@@ -102,7 +102,7 @@ static int test_visual(XVisualInfo& v, int flags) {
   return 1;
 }
 
-bool fltk::visual(int flags) {
+bool gnui::visual(int flags) {
   open_display();
   // always use default if possible:
   if (test_visual(*xvisual, flags)) return true;
@@ -125,7 +125,7 @@ bool fltk::visual(int flags) {
 
 #elif defined(_WIN32)
 
-bool fltk::visual(int flags) {
+bool gnui::visual(int flags) {
   if (flags & DOUBLE_BUFFER) return false;
   bool ret = true;
   HDC screen = GetDC(0);
@@ -138,7 +138,7 @@ bool fltk::visual(int flags) {
 #else
 // all other systems we assumme are rgb-always:
 
-bool fltk::visual(int flags) {
+bool gnui::visual(int flags) {
   // INDEXED_COLOR probably should return false, but who really cares...
   return true;
 }

@@ -3,6 +3,6 @@
 
 #include "Fl_Menu_.H"
 #include <fltk/Choice.h>
-typedef fltk::Choice Fl_Choice;
+typedef gnui::Choice Fl_Choice;
 
 #endif

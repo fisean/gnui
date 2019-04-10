@@ -44,10 +44,10 @@ int				// O - Exit status
 main(int  argc,			// I - Number of command-line arguments
      char *argv[])		// I - Command-line arguments
 {
-  fltk::HelpDialog	*help;		// Help dialog
+  gnui::HelpDialog	*help;		// Help dialog
 
 
-  help = new fltk::HelpDialog;
+  help = new gnui::HelpDialog;
 
   if (argc < 2)
     help->load("../documentation/index.html");
@@ -56,7 +56,7 @@ main(int  argc,			// I - Number of command-line arguments
 
   help->show();
 
-  fltk::run();
+  gnui::run();
 
   delete help;
 

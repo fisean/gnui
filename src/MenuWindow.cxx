@@ -29,9 +29,9 @@
 #include <fltk/x.h>
 #include <fltk/draw.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::MenuWindow
+/*! \class gnui::MenuWindow
 
   This is the window type used by Menu to make the pop-ups, and for
   tooltip popups. It will send special information to the window server
@@ -104,7 +104,7 @@ void MenuWindow::flush() {
   CreatedWindow *i = CreatedWindow::find(this);
   xwindow = i->xid;
   if (!menugc) menugc = XCreateGC(xdisplay, i->xid, 0, 0);
-  fltk::gc = menugc;
+  gnui::gc = menugc;
   fl_overlay = true;
   current_ = this;
   bool expose =

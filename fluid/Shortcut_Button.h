@@ -30,13 +30,13 @@
 
 #include <fltk/Button.h>
 
-class Shortcut_Button : public fltk::Button {
+class Shortcut_Button : public gnui::Button {
 public:
   unsigned svalue;
   int handle(int);
   void draw();
   Shortcut_Button(int x, int y, int w, int h, const char* l = 0) :
-    fltk::Button(x,y,w,h,l) {svalue = 0;}
+    gnui::Button(x,y,w,h,l) {svalue = 0;}
 };
 
 //

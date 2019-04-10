@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::xbmImage
+/*! \class gnui::xbmImage
 
   Image based on a 1-bit bitmap from memory. This matches the very
   first type of image provided with X10 in 1980 or so. To use an
@@ -40,7 +40,7 @@ static xbmImage image_name(image_name_bits, image_name_width, image_name_height)
 
 #include <fltk/xbmImage.h>
 
-using namespace fltk;
+using namespace gnui;
 
 bool xbmImage::fetch() {
   // See the x11/Image.cxx for some code that is faster if the scale

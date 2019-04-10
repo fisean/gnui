@@ -67,20 +67,20 @@ static uchar* store_datas_from_file(const char *filename, size_t &size)
 
 class generic_image : public Fluid_Image {
 protected:
-  fltk::SharedImage *p;
+  gnui::SharedImage *p;
   int *linelength;
-  fltk::ImageType* filetype;
+  gnui::ImageType* filetype;
 public:
   generic_image(const char *name);
   ~generic_image();
-  virtual const fltk::Symbol* symbol() {return p;}
+  virtual const gnui::Symbol* symbol() {return p;}
   virtual void write_static();
   virtual void write_code();
   static int test_file(char *buffer);
 };
 
 int generic_image::test_file(char *buffer) {
-  fltk::ImageType* ft = fltk::guess_image("", (uchar*)buffer);
+  gnui::ImageType* ft = gnui::guess_image("", (uchar*)buffer);
   return ft->name != 0;
 }
 
@@ -99,7 +99,7 @@ void generic_image::write_static() {
     size_t l=0;
     if (filetype->name && !strcasecmp(filetype->name, "xpm")) {
       write_c("static const char *%s[] = {\n",
-	      unique_id(this, "datas", fltk::filename_name(name()), 0));
+	      unique_id(this, "datas", gnui::filename_name(name()), 0));
       FILE* fp = fopen(name(), "rb");
       if(fp) {
 	indentation += 2;
@@ -119,7 +119,7 @@ void generic_image::write_static() {
       d = store_datas_from_file(name(), l);
       if(d) {
 #if 1
-	write_c("static const unsigned char %s[%d] = {\n", unique_id(this, "datas", fltk::filename_name(name()), 0), l);
+	write_c("static const unsigned char %s[%d] = {\n", unique_id(this, "datas", gnui::filename_name(name()), 0), l);
 	write_carray((const char*)d, l);
 	write_c("};\n");
 #else
@@ -139,9 +139,9 @@ void generic_image::write_code() {
   if (0 && inlined) {
     write_c("%so->image(%s%s", indent(),
 	(filetype->name && !strcasecmp(filetype->name, "xpm")) ? 
-	"(const char*const *)" : "", unique_id(this, "datas", fltk::filename_name(name()), 0) );
+	"(const char*const *)" : "", unique_id(this, "datas", gnui::filename_name(name()), 0) );
   } else {
-    write_c("%so->image(fltk::SharedImage::get(\"%s\"", indent(), name());
+    write_c("%so->image(gnui::SharedImage::get(\"%s\"", indent(), name());
   }
 
   write_c("));\n");
@@ -149,7 +149,7 @@ void generic_image::write_code() {
 }
 
 generic_image::generic_image(const char *name ) : Fluid_Image(name) {
-  filetype = fltk::guess_image(fltk::SharedImage::get_filename(name));
+  filetype = gnui::guess_image(gnui::SharedImage::get_filename(name));
   p = filetype->get((char*) name, 0);
   inlined = 1;
 }
@@ -161,11 +161,11 @@ generic_image::~generic_image() {
 #include <fltk/xbmImage.h>
 
 class bitmap_image : public Fluid_Image {
-  fltk::xbmImage *p;
+  gnui::xbmImage *p;
 public:
   ~bitmap_image();
   bitmap_image(const char *name, FILE *);
-  virtual const fltk::Symbol* symbol() {return p;}
+  virtual const gnui::Symbol* symbol() {return p;}
   virtual void write_static();
   virtual void write_code();
   static int test_file(char *buffer);
@@ -190,25 +190,25 @@ void bitmap_image::write_static() {
   int n = ((w+7)/8)*h;
 #if 1 // older one
   write_c("static const unsigned char %s[%d] = {\n",
-	  unique_id(this, "bits", fltk::filename_name(name()), 0), n);
+	  unique_id(this, "bits", gnui::filename_name(name()), 0), n);
   write_carray((const char*)(p->array), n);
   write_c("};\n");
 #else // this seems to produce slightly shorter c++ files
   write_c("static const unsigned char %s[] =\n",
-	  unique_id(this, "bits", fltk::filename_name(name()), 0));
+	  unique_id(this, "bits", gnui::filename_name(name()), 0));
   write_cstring((const char*)(p->array), n);
   write_c(";\n");
 #endif
-  write_c("static fltk::xbmImage %s(%s, %d, %d);\n",
-	  unique_id(this, "xbmImage", fltk::filename_name(name()), 0),
-	  unique_id(this, "bits", fltk::filename_name(name()), 0),
+  write_c("static gnui::xbmImage %s(%s, %d, %d);\n",
+	  unique_id(this, "xbmImage", gnui::filename_name(name()), 0),
+	  unique_id(this, "bits", gnui::filename_name(name()), 0),
 	  w, h);
 }
 
 void bitmap_image::write_code() {
   if (!p) return;
   write_c("%so->image(%s);\n", indent(),
-	  unique_id(this, "xbmImage", fltk::filename_name(name()), 0));
+	  unique_id(this, "xbmImage", gnui::filename_name(name()), 0));
 }
 
 #define ns_width 16
@@ -217,7 +217,7 @@ static unsigned char ns_bits[] = {
    0x00, 0x00, 0x80, 0x01, 0xc0, 0x03, 0xe0, 0x07, 0x80, 0x01, 0x80, 0x01,
    0x80, 0x01, 0x80, 0x01, 0x80, 0x01, 0x80, 0x01, 0x80, 0x01, 0x80, 0x01,
    0xe0, 0x07, 0xc0, 0x03, 0x80, 0x01, 0x00, 0x00};
-static fltk::xbmImage nosuch_bitmap(ns_bits, ns_width, ns_height);
+static gnui::xbmImage nosuch_bitmap(ns_bits, ns_width, ns_height);
 
 bitmap_image::bitmap_image(const char *name, FILE *f) : Fluid_Image(name) {
   p = &nosuch_bitmap; // if any problems with parse we exit with this
@@ -251,7 +251,7 @@ bitmap_image::bitmap_image(const char *name, FILE *f) : Fluid_Image(name) {
       while (*a && *a++ != ',');
     }
   }
-  p = new fltk::xbmImage(data,wh[0],wh[1]);
+  p = new gnui::xbmImage(data,wh[0],wh[1]);
 }
 
 bitmap_image::~bitmap_image() {
@@ -284,7 +284,7 @@ Fluid_Image* Fluid_Image::find(const char *name) {
 
   Fluid_Image *ret = 0;
 
-  const char* realname = fltk::SharedImage::get_filename(name);
+  const char* realname = gnui::SharedImage::get_filename(name);
   FILE *f = fopen(realname,"rb");
 
   if (!f) {
@@ -352,7 +352,7 @@ Fluid_Image::~Fluid_Image() {
 #include <fltk/file_chooser.h>
 
 Fluid_Image *ui_find_image(Fluid_Image *old) {
-  const char *name = fltk::file_chooser("Image", "*.{bm|xbm|xpm|gif|png|bmp|jpg|jpeg}",
+  const char *name = gnui::file_chooser("Image", "*.{bm|xbm|xpm|gif|png|bmp|jpg|jpeg}",
 				     old ? old->name() : 0, 0, 0);
   Fluid_Image *ret = (name && *name) ? Fluid_Image::find(name) : 0;
   return ret;
@@ -371,17 +371,17 @@ extern void fix_images_dir();
 
 void browse_dir_cb()
 {
-  const char *f = fltk::file_chooser("Images directory","",
+  const char *f = gnui::file_chooser("Images directory","",
 				     images_dir_input->value(), 0, 0);
   if (f) images_dir_input->value(f);
 }
 
-void set_images_dir_cb(fltk::Widget *, void *) {
+void set_images_dir_cb(gnui::Widget *, void *) {
   if(!images_dir_window) make_images_dir_window();
   images_dir_input->value(images_dir);
   images_dir_window->show();
   cancel=0; modal=1;
-  while(modal) fltk::wait();
+  while(modal) gnui::wait();
   if (!cancel) {
     images_dir = images_dir_input->value();
     if (!*images_dir) images_dir = 0;

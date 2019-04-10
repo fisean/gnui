@@ -43,9 +43,9 @@
 // WAS: I removed the namespace as fluid tries to include the fltk
 // header for any classes with fltk in their name. However it is
 // quite likely that this class sould be made part of fltk...
-//namespace fltk {
+//namespace gnui {
 
-  class CodeEditor : public fltk::TextEditor {
+  class CodeEditor : public gnui::TextEditor {
     static TextDisplay::StyleTableEntry styletable[];
     static const char * const code_keywords[];
     static const char * const code_types[];
@@ -83,7 +83,7 @@
     int handle(int ev) { return TextDisplay::handle(ev); }
   };
 
-  //} // namespace fltk
+  //} // namespace gnui
 
 #endif // !CodeEditor_h
 

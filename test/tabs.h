@@ -3,7 +3,7 @@
 #ifndef tabs_h
 #define tabs_h
 #include <fltk/Window.h>
-extern fltk::Window* foo_window;
+extern gnui::Window* foo_window;
 #include <fltk/TabGroup.h>
 #include <fltk/Group.h>
 #include <fltk/Input.h>

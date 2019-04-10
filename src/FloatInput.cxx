@@ -28,9 +28,9 @@
 #include <fltk/FloatInput.h>
 #include <string.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::FloatInput
+/*! \class gnui::FloatInput
 
   A subclass of NumericInput that only allows the user to type
   floating point numbers (sign, digits, decimal point, more digits,
@@ -42,10 +42,10 @@ using namespace fltk;
   You may want a ValueInput widget instead. It has up/down buttons
   (what is called a "Spinner" in some toolkits).
 
-  If you change when() to fltk::WHEN_ENTER_KEY the callback is only
+  If you change when() to gnui::WHEN_ENTER_KEY the callback is only
   done when the user hits the up/down arrow keys or when the user
   types the Enter key. This may be more useful than the default
-  setting of fltk::WHEN_CHANGED which can make the callback happen
+  setting of gnui::WHEN_CHANGED which can make the callback happen
   when partially-edited numbers are in the field.
 
   The type() can either be either FloatInput::FLOAT or
@@ -76,7 +76,7 @@ bool FloatInput::replace(int b, int e, const char* text, int ilen) {
   return Input::replace(b,e,text,ilen);
 }
 
-/*! \class fltk::IntInput
+/*! \class gnui::IntInput
   NumericInput modified to only allow integers (in decimal, or in hex
   if preceeded by "0x") to by typed. Currently this is implemented by
   FloatInput by checking type() but this may change in the future.  */

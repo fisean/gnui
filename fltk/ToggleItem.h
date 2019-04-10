@@ -27,7 +27,7 @@
 
 #include "Item.h"
 
-namespace fltk {
+namespace gnui {
 
 /** This widget makes a checkmark in a popup or pulldown Menu.
     It's behavior in a Browser or MultiBrowser is that it changes its status on multiple clicks (e.g. double click). */

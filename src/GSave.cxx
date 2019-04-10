@@ -27,10 +27,10 @@
 
 #include <config.h>
 #include <fltk/x.h>
-namespace fltk {class Image;}
-using namespace fltk;
+namespace gnui {class Image;}
+using namespace gnui;
 
-/*! \class fltk::GSave
+/*! \class gnui::GSave
 
   The constructor does a "gsave" and the destructor does a "grestore",
   and this object provides the memory to store the current graphics
@@ -60,7 +60,7 @@ using namespace fltk;
 #ifdef _WIN32
 extern HDC fl_bitmap_dc;
 #endif
-extern fltk::Image* fl_current_Image;
+extern gnui::Image* fl_current_Image;
 extern int fl_clip_w, fl_clip_h;
 
 GSave::GSave() {
@@ -96,7 +96,7 @@ GSave::~GSave() {
   quartz_window = (WindowPtr)data[0];
   quartz_gc = (CGContextRef)data[1];
 #endif
-  fl_current_Image = (fltk::Image*)data[2];
+  fl_current_Image = (gnui::Image*)data[2];
   pop_clip();
   pop_matrix();
 }

@@ -29,7 +29,7 @@
 #include <fltk/Browser.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
 /** Adds the contents of a file to a browser, splitting at newlines.
     This is useful if the browser was storing items that should be saved

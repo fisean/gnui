@@ -25,7 +25,7 @@
 // This is the default fltk_theme() function for fltk on X. It
 // reads the "INI" style files written by KDE 1,2,3 and extracts some
 // appearance information for fltk from them. It also installs a
-// handler for KDE style change messages and calls fltk::reload_theme
+// handler for KDE style change messages and calls gnui::reload_theme
 // when they come in.
 
 // Original KDE theme code by Carl Thompson (clip@home.net)
@@ -39,7 +39,7 @@
   This attempts to read information from the KDE files
   "~/.kde/share/config/kdeglobals" and "/usr/share/config/kdeglobals".
   If these exist it also installs an event handler to listen for KDE
-  style-change events and call fltk::reload_theme() on them. Fltk does
+  style-change events and call gnui::reload_theme() on them. Fltk does
   not even bother trying to look at the xrdb databases, nobody seems
   to use that any more.
 */
@@ -59,9 +59,9 @@
 # define PATH_MAX 1024
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
-//kdewin_menu_text_box("kde windows menu window", "2AAUUIIXX", &fltk::downBox);
+//kdewin_menu_text_box("kde windows menu window", "2AAUUIIXX", &gnui::downBox);
 
 ////////////////////////////////////////////////////////////////
 #if USE_X11
@@ -78,8 +78,8 @@ enum KIPCMessage {
 };
 
 static int x_event_handler(int,Window*) {
-  if (fltk::xevent.type != ClientMessage) return 0; // not a Client message
-  XClientMessageEvent* cm = (XClientMessageEvent*)&fltk::xevent;
+  if (gnui::xevent.type != ClientMessage) return 0; // not a Client message
+  XClientMessageEvent* cm = (XClientMessageEvent*)&gnui::xevent;
   static bool sawKIPC = false;
   if (cm->message_type == KIPC) {
     sawKIPC = true;
@@ -92,7 +92,7 @@ static int x_event_handler(int,Window*) {
   else if (cm->message_type == ChangePalette) ;
   //else if (cm->message_type == ChangeStyle) ;
   else return 0;
-  fltk::reload_theme();
+  gnui::reload_theme();
 
   return 1;
 }
@@ -111,7 +111,7 @@ static void add_event_handler() {
     //ChangeStyle = XInternAtom(xdisplay, "KDEChangeStyle", false);
     ChangePalette = XInternAtom(xdisplay, "KDEChangePalette", false);
     KIPC = XInternAtom(xdisplay, "KIPC_COMM_ATOM", false);
-    fltk::add_event_handler(x_event_handler);
+    gnui::add_event_handler(x_event_handler);
   }
 }
 
@@ -262,7 +262,7 @@ void INIFile::clear() {
 // there is a number that may be the Windows number, or x from iso8859-x?
 // Sometimes it is zero. Currently I ignore this.
 
-static fltk::Font* grok_font(const char* s, float& fontsize, char* fontencoding)
+static gnui::Font* grok_font(const char* s, float& fontsize, char* fontencoding)
 {
   char* sv; // to save strtok_r() state
   const char* p;
@@ -313,7 +313,7 @@ static fltk::Font* grok_font(const char* s, float& fontsize, char* fontencoding)
   p = strtok_r(0, ",", &sv);
   if (p && atoi(p) > 0 ) attrib |= ITALIC;
 
-  return fltk::font(fontname, attrib);
+  return gnui::font(fontname, attrib);
 }
 
 ////////////////////////////////////////////////////////////////
@@ -390,9 +390,9 @@ extern "C" bool fltk_theme() {
 
   if ((s=f.get("General", "font"))) {
     float fontsize; static char fontencoding[32];
-    fltk::Font* font = grok_font(s, fontsize, fontencoding);
+    gnui::Font* font = grok_font(s, fontsize, fontencoding);
     if (font) {
-// CET - FIXME    if (*fontencoding) fltk::encoding(fontencoding);
+// CET - FIXME    if (*fontencoding) gnui::encoding(fontencoding);
       Widget::default_style->labelfont(font);
       Widget::default_style->textfont(font);
     }
@@ -402,7 +402,7 @@ extern "C" bool fltk_theme() {
 
   if ((s=f.get("General", "menuFont"))) {
     float fontsize; static char fontencoding[32];
-    fltk::Font* font = grok_font(s, fontsize, fontencoding);
+    gnui::Font* font = grok_font(s, fontsize, fontencoding);
     Style* style;
     if ((style = Style::find("Menu"))) {
       if (font) style->textfont(font);
@@ -417,7 +417,7 @@ extern "C" bool fltk_theme() {
 //    style->highlight_textcolor(NO_COLOR);
 
   if (background)
-    fltk::set_background(background);
+    gnui::set_background(background);
 
   if (foreground) {
     style->labelcolor(foreground);
@@ -448,7 +448,7 @@ extern "C" bool fltk_theme() {
 // Don't bother.  KDE gets it wrong.
 //  if ((style = Style::find("scrollbar"))) {
 //    if (background && window_background)
-//      style->color(fltk::lerp(background, window_background, 0.5));
+//      style->color(gnui::lerp(background, window_background, 0.5));
 //  }
 
 /* looks better for dark backgrounds

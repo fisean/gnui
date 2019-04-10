@@ -58,7 +58,7 @@ static void declare_now(void*) { }
 #include <fltk/draw.h>
 #include <fltk/SharedImage.h>
 
-using namespace fltk;
+using namespace gnui;
 
 bool pngImage::test(const uchar* datas, unsigned size)
 {

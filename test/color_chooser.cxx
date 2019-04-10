@@ -45,40 +45,40 @@
   #include "list_visuals.cxx"
 #endif
 
-class GrayLines : public fltk::Widget {
+class GrayLines : public gnui::Widget {
 public:
   GrayLines(int X, int Y, int W, int H, const char* L)
-    : fltk::Widget(X,Y,W,H,L) { }
+    : gnui::Widget(X,Y,W,H,L) { }
   
   void draw() {
     // Use every color in the gray ramp:
     for (int i = 0; i < 3*8; i++) {
-      fltk::setcolor((fltk::Color)(fltk::GRAY00+i));
-      fltk::drawline(i, 0, i, h());
+      gnui::setcolor((gnui::Color)(gnui::GRAY00+i));
+      gnui::drawline(i, 0, i, h());
     }
   }
 };
 
-#define freecolor_cell (fltk::FREE_COLOR)
+#define freecolor_cell (gnui::FREE_COLOR)
 
-// Callback function for "fltk::show_colormap" button
-static void colormap_cb(fltk::Widget *w, void *v) {
+// Callback function for "gnui::show_colormap" button
+static void colormap_cb(gnui::Widget *w, void *v) {
   uchar r, g, b;
-  fltk::Color c = fltk::show_colormap(w->parent()->color());
-  fltk::split_color(c, r,g,b);
+  gnui::Color c = gnui::show_colormap(w->parent()->color());
+  gnui::split_color(c, r,g,b);
   // Set new color to our free color index
-  fltk::set_color_index(freecolor_cell, fltk::color(r,g,b));
+  gnui::set_color_index(freecolor_cell, gnui::color(r,g,b));
   // Redraw parent box
   w->parent()->redraw();
 }
 
-// Callback function for "fltk::choose_color" button
-static void choose_color_cb(fltk::Widget *w, void *v) {
+// Callback function for "gnui::choose_color" button
+static void choose_color_cb(gnui::Widget *w, void *v) {
   uchar r,g,b;
-  fltk::split_color(w->parent()->color(),r,g,b);
-  if (!fltk::color_chooser("New color:", r,g,b)) return;
+  gnui::split_color(w->parent()->color(),r,g,b);
+  if (!gnui::color_chooser("New color:", r,g,b)) return;
   // Set new color to our free color index
-  fltk::set_color_index(freecolor_cell, fltk::color(r,g,b));
+  gnui::set_color_index(freecolor_cell, gnui::color(r,g,b));
   // Redraw parent box
   w->parent()->redraw();
 }
@@ -87,40 +87,40 @@ static void choose_color_cb(fltk::Widget *w, void *v) {
 int main(int argc, char **argv) 
 {
   // Set default color for our free color index
-  fltk::set_color_index(freecolor_cell, fltk::color(145,159,170));
+  gnui::set_color_index(freecolor_cell, gnui::color(145,159,170));
   
   // Create window
-  fltk::Window window(200, 170, "color_chooser test");  
+  gnui::Window window(200, 170, "color_chooser test");  
   window.begin();
 
   // Create widget container group
-  fltk::Group gbox(10, 10, window.w()-20, window.h()-20);
-  gbox.box(fltk::THIN_DOWN_BOX);
+  gnui::Group gbox(10, 10, window.w()-20, window.h()-20);
+  gbox.box(gnui::THIN_DOWN_BOX);
   gbox.color(freecolor_cell);
   gbox.begin();
 
   // Create button
-  fltk::Button button1(50,20,120,30, "fltk::show_colormap");
+  gnui::Button button1(50,20,120,30, "gnui::show_colormap");
   button1.callback(colormap_cb);
 
   // Create button
-  fltk::Button button2(50,60,120,30, "fltk::choose_color");
+  gnui::Button button2(50,60,120,30, "gnui::choose_color");
   button2.callback(choose_color_cb);
 
   // Create lines widget
   GrayLines lines(10,20,3*8,120, "Lines");
-  lines.align(fltk::ALIGN_TOP);
+  lines.align(gnui::ALIGN_TOP);
 
   // We're done with the group
   gbox.end();
 
   // Test command line options
   int i = 1;
-  if (!fltk::args(argc, argv, i) || i != argc-1) {
+  if (!gnui::args(argc, argv, i) || i != argc-1) {
     printf("usage: %s <switches> visual-number\n"
 	   " - : default visual\n"
-	   " r : call fltk::visual(fltk::RGB_COLOR)\n"
-	   " c : call fltk::own_colormap()\n",argv[0]);
+	   " r : call gnui::visual(gnui::RGB_COLOR)\n"
+	   " c : call gnui::own_colormap()\n",argv[0]);
 #if USE_X11
     printf(" # : use this visual with an empty colormap:\n");
     list_visuals();
@@ -130,26 +130,26 @@ int main(int argc, char **argv)
 
   // Parse command line options  
   if (argc > 1 && argv[i][0] == 'r') {
-    if (!fltk::visual(fltk::RGB_COLOR)) fltk::fatal("fltk::visual(fltk::RGB_COLOR) returned false.\n");
+    if (!gnui::visual(gnui::RGB_COLOR)) gnui::fatal("gnui::visual(gnui::RGB_COLOR) returned false.\n");
   } 
   else if (argc > 1 && argv[i][0] == 'c') {
-    fltk::own_colormap();
+    gnui::own_colormap();
   } 
   else if (argc > 1 && argv[i][0] != '-') {
 #if USE_X11
     int visid = atoi(argv[i]);
-    fltk::open_display();
+    gnui::open_display();
     XVisualInfo templt; int num;
     templt.visualid = visid;
-    fltk::xvisual= XGetVisualInfo(fltk::xdisplay, VisualIDMask, &templt, &num);
-    if (!fltk::xvisual) fltk::fatal("No visual with id %d",visid);
-    fltk::xcolormap = XCreateColormap(fltk::xdisplay, RootWindow(fltk::xdisplay,fltk::xscreen),
-				  fltk::xvisual->visual, AllocNone);
+    gnui::xvisual= XGetVisualInfo(gnui::xdisplay, VisualIDMask, &templt, &num);
+    if (!gnui::xvisual) gnui::fatal("No visual with id %d",visid);
+    gnui::xcolormap = XCreateColormap(gnui::xdisplay, RootWindow(gnui::xdisplay,gnui::xscreen),
+				  gnui::xvisual->visual, AllocNone);
 # if !USE_CAIRO
-    fltk::xpixel(fltk::BLACK); // make sure black is allocated
+    gnui::xpixel(gnui::BLACK); // make sure black is allocated
 # endif
 #else
-    fltk::fatal("Visual id's not supported on this platform");
+    gnui::fatal("Visual id's not supported on this platform");
 #endif
   }
 
@@ -157,7 +157,7 @@ int main(int argc, char **argv)
   window.show(argc, argv);
 
   // Run FLTK event loop
-  return fltk::run();
+  return gnui::run();
 }
 
 //

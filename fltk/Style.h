@@ -30,7 +30,7 @@
 
 #include "Color.h"
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/Style.h
 //@{

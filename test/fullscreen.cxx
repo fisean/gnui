@@ -74,7 +74,7 @@
 #include <fltk/visual.h>
 #include <fltk/GlWindow.h>
 
-class shape_window : public fltk::GlWindow {
+class shape_window : public gnui::GlWindow {
   void draw();
 public:
   int sides;
@@ -82,7 +82,7 @@ public:
 };
 
 shape_window::shape_window(int x,int y,int w,int h,const char *l) :
-fltk::GlWindow(x,y,w,h,l) {
+gnui::GlWindow(x,y,w,h,l) {
   sides = 3;
 }
 
@@ -103,16 +103,16 @@ void shape_window::draw() {
   }
   glEnd();
 
-  fltk::glsetcolor(fltk::WHITE);
-  fltk::glsetfont(fltk::HELVETICA, 12); 
-  fltk::gldrawtext("Using OpenGL", -.9, -.9);
+  gnui::glsetcolor(gnui::WHITE);
+  gnui::glsetfont(gnui::HELVETICA, 12); 
+  gnui::gldrawtext("Using OpenGL", -.9, -.9);
 }
 
 #else
 
 #include <fltk/draw.h>
 
-class shape_window : public fltk::Window {
+class shape_window : public gnui::Window {
   void draw();
 public:
   int sides;
@@ -120,47 +120,47 @@ public:
 };
 
 shape_window::shape_window(int x,int y,int w,int h,const char *l)
-: fltk::Window(x,y,w,h,l) {
+: gnui::Window(x,y,w,h,l) {
   sides = 3;
 }
 
 void shape_window::draw() {
   printf("drawing size %d %d\n",w(),h());
-  fltk::setcolor(fltk::BLACK);
-  fltk::fillrect(0,0,w(),h());
+  gnui::setcolor(gnui::BLACK);
+  gnui::fillrect(0,0,w(),h());
 
-  fltk::setcolor(fltk::BLUE);
-  fltk::push_matrix();
-  fltk::translate(w()/2, h()/2);
-  fltk::scale(w()/2, h()/2);    
+  gnui::setcolor(gnui::BLUE);
+  gnui::push_matrix();
+  gnui::translate(w()/2, h()/2);
+  gnui::scale(w()/2, h()/2);    
   for (int i=0; i<sides; i++) {
     double ang = i*2*M_PI/sides;
-    fltk::addvertex((float)cos(ang), (float)sin(ang));
+    gnui::addvertex((float)cos(ang), (float)sin(ang));
   }
-  fltk::closepath();
-  fltk::pop_matrix();
-  fltk::fillstrokepath(fltk::WHITE);
+  gnui::closepath();
+  gnui::pop_matrix();
+  gnui::fillstrokepath(gnui::WHITE);
 
-  fltk::setcolor(fltk::WHITE);
-  fltk::setfont(fltk::HELVETICA, 12); 
-  fltk::drawtext("Not using OpenGL",1,fltk::getascent());
+  gnui::setcolor(gnui::WHITE);
+  gnui::setfont(gnui::HELVETICA, 12); 
+  gnui::drawtext("Not using OpenGL",1,gnui::getascent());
 }
 
 #endif
 
-void sides_cb(fltk::Widget *o, void *p) {
+void sides_cb(gnui::Widget *o, void *p) {
   shape_window *sw = (shape_window *)p;
-  sw->sides = int(((fltk::Slider *)o)->value());
+  sw->sides = int(((gnui::Slider *)o)->value());
   sw->redraw();
 }
 
-fltk::Window *control_win = 0;
+gnui::Window *control_win = 0;
 
-void double_cb(fltk::Widget *o, void *p) {
+void double_cb(gnui::Widget *o, void *p) {
   shape_window *sw = (shape_window *)p;
-  int d = ((fltk::Button *)o)->value();
+  int d = ((gnui::Button *)o)->value();
 #if HAVE_GL
-  sw->mode(d ? (fltk::DOUBLE_BUFFER|fltk::RGB_COLOR) : fltk::RGB_COLOR);
+  sw->mode(d ? (gnui::DOUBLE_BUFFER|gnui::RGB_COLOR) : gnui::RGB_COLOR);
   // We must show "control_win" if running in 2 window mode.
   // GlWindow::mode will destroy GL window and also control window, 
   // cause it's "child_of()" GL window. 
@@ -172,19 +172,19 @@ void double_cb(fltk::Widget *o, void *p) {
 }
 
 // This is useless in current FLTK2...
-void border_cb(fltk::Widget *o, void *p) {
-  //fltk::Window *w = (fltk::Window *)p;
-  //int d = ((fltk::Button *)o)->value();
+void border_cb(gnui::Widget *o, void *p) {
+  //gnui::Window *w = (gnui::Window *)p;
+  //int d = ((gnui::Button *)o)->value();
   //w->setborder(d);
 }
 
 int px,py,pw,ph;
-fltk::Button *border_button;
-fltk::Window *fullscreen = 0;
+gnui::Button *border_button;
+gnui::Window *fullscreen = 0;
 
-void fullscreen_cb(fltk::Widget *o, void *p) {
-  fltk::Window *w = (fltk::Window *)p;
-  int d = ((fltk::Button *)o)->value();
+void fullscreen_cb(gnui::Widget *o, void *p) {
+  gnui::Window *w = (gnui::Window *)p;
+  int d = ((gnui::Button *)o)->value();
   if (d) {
     // Store current geometry of the window
     px = w->x(); py = w->y();
@@ -198,12 +198,12 @@ void fullscreen_cb(fltk::Widget *o, void *p) {
   }
 }
 
-void maximize_cb(fltk::Widget *o, void *p) {
-  fltk::Window *w = (fltk::Window *)p;
+void maximize_cb(gnui::Widget *o, void *p) {
+  gnui::Window *w = (gnui::Window *)p;
   w->maximize();
 }
 
-void exit_cb(fltk::Widget *, void *) {
+void exit_cb(gnui::Widget *, void *) {
   // Turn fullscreen off when exit
   if(fullscreen)
     fullscreen->fullscreen_off(px,py,pw,ph);
@@ -223,10 +223,10 @@ int arg(int, char **argv, int &i) {
 int main(int argc, char **argv) {
 
   int i=0;
-  if (fltk::args(argc,argv,i,arg) < argc)
-    fltk::fatal("Options are:\n -2 = 2 windows\n -f = startup fullscreen\n%s", fltk::help);
+  if (gnui::args(argc,argv,i,arg) < argc)
+    gnui::fatal("Options are:\n -2 = 2 windows\n -f = startup fullscreen\n%s", gnui::help);
 
-  fltk::Window window(300, (twowindow?10:300)+30*NUMB); window.end();
+  gnui::Window window(300, (twowindow?10:300)+30*NUMB); window.end();
   window.callback(exit_cb);
   
   if(twowindow)
@@ -234,13 +234,13 @@ int main(int argc, char **argv) {
 
   shape_window sw(10, 10, window.w()-20, (twowindow?400:window.h())-30*NUMB-20);
 #if HAVE_GL
-  sw.mode(fltk::RGB_COLOR);
+  sw.mode(gnui::RGB_COLOR);
 #endif
 
-  fltk::Window *w;
+  gnui::Window *w;
   if (twowindow) {	// make it's own window
     sw.resizable(&sw);
-    w = (fltk::Window*)(&sw); // cast added for fltk2.0
+    w = (gnui::Window*)(&sw); // cast added for fltk2.0
     window.child_of(w); // makes controls stay on top when fullscreen pushed
     argc--;
     sw.show();
@@ -253,33 +253,33 @@ int main(int argc, char **argv) {
   window.begin();
 
   int y = window.h()-30*NUMB-5;
-  fltk::Slider slider(50,y,window.w()-60,30,"Sides:");
-  slider.align(fltk::ALIGN_LEFT);
+  gnui::Slider slider(50,y,window.w()-60,30,"Sides:");
+  slider.align(gnui::ALIGN_LEFT);
   slider.callback(sides_cb,&sw);
   slider.value(sw.sides);
   slider.step(1);
   slider.range(3,40);
   y+=30;
 
-  fltk::LightButton b1(50,y,window.w()-60,30,"Double Buffered");
+  gnui::LightButton b1(50,y,window.w()-60,30,"Double Buffered");
   b1.callback(double_cb,&sw);
   y+=30;
 
-  /*fltk::LightButton b2(50,y,window.w()-60,30,"Border");
+  /*gnui::LightButton b2(50,y,window.w()-60,30,"Border");
   b2.callback(border_cb,w);
   b2.set();
   border_button = &b2;
   y+=30;*/
 
-  fltk::LightButton b3(50,y,window.w()-60,30,"FullScreen");
+  gnui::LightButton b3(50,y,window.w()-60,30,"FullScreen");
   b3.callback(fullscreen_cb,w);
   y+=30;
 
-  fltk::Button btnMaximize(50,y,window.w()-60,30,"Maximize me!");
+  gnui::Button btnMaximize(50,y,window.w()-60,30,"Maximize me!");
   btnMaximize.callback(maximize_cb,&window);
   y+=30;
 
-  fltk::Button eb(50,y,window.w()-60,30,"Exit");
+  gnui::Button eb(50,y,window.w()-60,30,"Exit");
   eb.callback(exit_cb);
   y+=30;
 
@@ -288,7 +288,7 @@ int main(int argc, char **argv) {
   window.end();
   window.show(argc,argv);
 
-  return fltk::run();
+  return gnui::run();
 }
 
 //

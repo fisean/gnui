@@ -32,7 +32,7 @@
 #include "Color.h"
 #include "Symbol.h"
 
-namespace fltk {
+namespace gnui {
 
 class Widget;
 

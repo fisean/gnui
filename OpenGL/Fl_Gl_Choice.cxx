@@ -32,7 +32,7 @@
 #include <fltk/visual.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static GlChoice* first;
 
@@ -234,7 +234,7 @@ static void destructor() {
 }
 #endif
 
-GLContext fltk::create_gl_context(XVisualInfo* vis) {
+GLContext gnui::create_gl_context(XVisualInfo* vis) {
   GLContext context;
 #if 0 // enable OpenGL3 support if possible
   // This is disabled because it does not work on SUSE11 with NVidia cards.
@@ -290,7 +290,7 @@ GLContext fltk::create_gl_context(XVisualInfo* vis) {
 
 #elif defined(_WIN32)
 
-GLContext fltk::create_gl_context(const Window* window, const GlChoice* g, int layer) {
+GLContext gnui::create_gl_context(const Window* window, const GlChoice* g, int layer) {
   CreatedWindow* i = CreatedWindow::find(window);
   SetPixelFormat(i->dc, g->pixelFormat, &g->pfd);
   GLContext context =
@@ -305,7 +305,7 @@ GLContext fltk::create_gl_context(const Window* window, const GlChoice* g, int l
 #elif defined(__APPLE__)
 
 // warning: the Quartz version should probably use Core GL (CGL) instead of AGL
-GLContext fltk::create_gl_context(const Window* window, const GlChoice* g, int layer) {
+GLContext gnui::create_gl_context(const Window* window, const GlChoice* g, int layer) {
   GLContext context;
   context = aglCreateContext(g->pixelformat, first_context);
   if (!context) return 0;
@@ -318,7 +318,7 @@ GLContext fltk::create_gl_context(const Window* window, const GlChoice* g, int l
 GLContext fl_current_glcontext;
 static const Window* cached_window;
 
-void fltk::set_gl_context(const Window* window, GLContext context) {
+void gnui::set_gl_context(const Window* window, GLContext context) {
   if (context != fl_current_glcontext || window != cached_window) {
     fl_current_glcontext = context;
     cached_window = window;
@@ -333,7 +333,7 @@ void fltk::set_gl_context(const Window* window, GLContext context) {
       // Unfortunatly this controls the origin as well as the drawable
       // area, so only clipping on the top and right is supported.
       //++ this gets called a lot if we have more than one GL buffer... .
-      fltk::Rectangle r(*window);
+      gnui::Rectangle r(*window);
       Widget* p = window->parent();
       for (;; p = p->parent()) {
 	if (r.y() < 0) r.set_y(0); // clip top
@@ -359,7 +359,7 @@ void fltk::set_gl_context(const Window* window, GLContext context) {
   }
 }
 
-void fltk::no_gl_context() {
+void gnui::no_gl_context() {
 #if USE_X11
   glXMakeCurrent(xdisplay, 0, 0);
 #elif defined(_WIN32)
@@ -372,7 +372,7 @@ void fltk::no_gl_context() {
   cached_window = 0;
 }
 
-void fltk::delete_gl_context(GLContext context) {
+void gnui::delete_gl_context(GLContext context) {
   if (fl_current_glcontext == context) no_gl_context();
   if (context != first_context) {
 #if USE_X11

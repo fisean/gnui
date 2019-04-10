@@ -28,7 +28,7 @@
 #include <fltk/Box.h>
 #include <fltk/Style.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
 #define SIZE 3
 
@@ -59,7 +59,7 @@ public:
   ShadowBox(const char* n) : Box(n) {}
 };
 static ShadowBox shadowBox("shadow_box");
-Box* const fltk::SHADOW_BOX = &shadowBox;
+Box* const gnui::SHADOW_BOX = &shadowBox;
 
 //
 // End of "$Id$".

@@ -46,90 +46,90 @@
 #include <fltk/run.h>
 
 // these are used to identify which buttons are which:
-void key_cb(fltk::Button*, void*) {}
-void shift_cb(fltk::Button*, void*) {}
+void key_cb(gnui::Button*, void*) {}
+void shift_cb(gnui::Button*, void*) {}
 
 static struct {int n; const char* text;} table[] = {
-  {fltk::EscapeKey, "fltk::EscapeKey"},
-  {fltk::BackSpaceKey, "fltk::BackSpaceKey"},
-  {fltk::TabKey, "fltk::TabKey"},
-  {fltk::ReturnKey, "fltk::ReturnKey"},
-  {fltk::PrintKey, "fltk::PrintKey"},
-  {fltk::ScrollLockKey, "fltk::ScrollLockKey"},
-  {fltk::PauseKey, "fltk::PauseKey"},
-  {fltk::InsertKey, "fltk::InsertKey"},
-  {fltk::HomeKey, "fltk::HomeKey"},
-  {fltk::PageUpKey, "fltk::PageUpKey"},
-  {fltk::DeleteKey, "fltk::DeleteKey"},
-  {fltk::EndKey, "fltk::EndKey"},
-  {fltk::PageDownKey, "fltk::PageDownKey"},
-  {fltk::LeftKey, "fltk::LeftKey"},
-  {fltk::UpKey, "fltk::UpKey"},
-  {fltk::RightKey, "fltk::RightKey"},
-  {fltk::DownKey, "fltk::DownKey"},
-  {fltk::LeftShiftKey, "fltk::LeftShiftKey"},
-  {fltk::RightShiftKey, "fltk::RightShiftKey"},
-  {fltk::LeftCtrlKey, "fltk::LeftCtrlKey"},
-  {fltk::RightCtrlKey, "fltk::RightCtrlKey"},
-  {fltk::CapsLockKey, "fltk::CapsLockKey"},
-  {fltk::LeftAltKey, "fltk::LeftAltKey"},
-  {fltk::RightAltKey, "fltk::RightAltKey"},
-  {fltk::LeftMetaKey, "fltk::LeftMetaKey"},
-  {fltk::RightMetaKey, "fltk::RightMetaKey"},
-  {fltk::MenuKey, "fltk::MenuKey"},
-  {fltk::NumLockKey, "fltk::NumLockKey"},
-  {fltk::KeypadEnter, "fltk::KeypadEnter"},
-  {fltk::MultiplyKey, "fltk::MultiplyKey"},
-  {fltk::AddKey, "fltk::AddKey"},
-  {fltk::SubtractKey, "fltk::SubtractKey"},
-  {fltk::DecimalKey, "fltk::DecimalKey"},
-  {fltk::DivideKey, "fltk::DivideKey"},
-  {fltk::Keypad0, "fltk::Keypad0"},
-  {fltk::Keypad1, "fltk::Keypad1"},
-  {fltk::Keypad2, "fltk::Keypad2"},
-  {fltk::Keypad3, "fltk::Keypad3"},
-  {fltk::Keypad4, "fltk::Keypad4"},
-  {fltk::Keypad5, "fltk::Keypad5"},
-  {fltk::Keypad6, "fltk::Keypad6"},
-  {fltk::Keypad7, "fltk::Keypad7"},
-  {fltk::Keypad8, "fltk::Keypad8"},
-  {fltk::Keypad9, "fltk::Keypad9"},
-  {fltk::SpaceKey,"fltk::SpaceKey (' ')"}
+  {gnui::EscapeKey, "gnui::EscapeKey"},
+  {gnui::BackSpaceKey, "gnui::BackSpaceKey"},
+  {gnui::TabKey, "gnui::TabKey"},
+  {gnui::ReturnKey, "gnui::ReturnKey"},
+  {gnui::PrintKey, "gnui::PrintKey"},
+  {gnui::ScrollLockKey, "gnui::ScrollLockKey"},
+  {gnui::PauseKey, "gnui::PauseKey"},
+  {gnui::InsertKey, "gnui::InsertKey"},
+  {gnui::HomeKey, "gnui::HomeKey"},
+  {gnui::PageUpKey, "gnui::PageUpKey"},
+  {gnui::DeleteKey, "gnui::DeleteKey"},
+  {gnui::EndKey, "gnui::EndKey"},
+  {gnui::PageDownKey, "gnui::PageDownKey"},
+  {gnui::LeftKey, "gnui::LeftKey"},
+  {gnui::UpKey, "gnui::UpKey"},
+  {gnui::RightKey, "gnui::RightKey"},
+  {gnui::DownKey, "gnui::DownKey"},
+  {gnui::LeftShiftKey, "gnui::LeftShiftKey"},
+  {gnui::RightShiftKey, "gnui::RightShiftKey"},
+  {gnui::LeftCtrlKey, "gnui::LeftCtrlKey"},
+  {gnui::RightCtrlKey, "gnui::RightCtrlKey"},
+  {gnui::CapsLockKey, "gnui::CapsLockKey"},
+  {gnui::LeftAltKey, "gnui::LeftAltKey"},
+  {gnui::RightAltKey, "gnui::RightAltKey"},
+  {gnui::LeftMetaKey, "gnui::LeftMetaKey"},
+  {gnui::RightMetaKey, "gnui::RightMetaKey"},
+  {gnui::MenuKey, "gnui::MenuKey"},
+  {gnui::NumLockKey, "gnui::NumLockKey"},
+  {gnui::KeypadEnter, "gnui::KeypadEnter"},
+  {gnui::MultiplyKey, "gnui::MultiplyKey"},
+  {gnui::AddKey, "gnui::AddKey"},
+  {gnui::SubtractKey, "gnui::SubtractKey"},
+  {gnui::DecimalKey, "gnui::DecimalKey"},
+  {gnui::DivideKey, "gnui::DivideKey"},
+  {gnui::Keypad0, "gnui::Keypad0"},
+  {gnui::Keypad1, "gnui::Keypad1"},
+  {gnui::Keypad2, "gnui::Keypad2"},
+  {gnui::Keypad3, "gnui::Keypad3"},
+  {gnui::Keypad4, "gnui::Keypad4"},
+  {gnui::Keypad5, "gnui::Keypad5"},
+  {gnui::Keypad6, "gnui::Keypad6"},
+  {gnui::Keypad7, "gnui::Keypad7"},
+  {gnui::Keypad8, "gnui::Keypad8"},
+  {gnui::Keypad9, "gnui::Keypad9"},
+  {gnui::SpaceKey,"gnui::SpaceKey (' ')"}
 };
 
 int main(int argc, char** argv) {
-  fltk::Window *window = make_window();
+  gnui::Window *window = make_window();
   window->show(argc,argv);
   for (;;) {
-    fltk::wait();
+    gnui::wait();
     if (!window->visible()) break;
 
     // update all the buttons with the current key and shift state:
     for (int i = 0; i < window->children(); i++) {
-      fltk::Widget* b = window->child(i);
-      if (b->callback() == (fltk::Callback*)key_cb) {
+      gnui::Widget* b = window->child(i);
+      if (b->callback() == (gnui::Callback*)key_cb) {
 	unsigned i = (unsigned)b->argument();
 	if (!i) i = tolower(b->label()[0]);
-	((fltk::Button*)b)->value(fltk::event_key_state(i));
-	if (i == fltk::event_key()) ((fltk::Button*)b)->take_focus();
-      } else if (b->callback() == (fltk::Callback*)shift_cb) {
+	((gnui::Button*)b)->value(gnui::event_key_state(i));
+	if (i == gnui::event_key()) ((gnui::Button*)b)->take_focus();
+      } else if (b->callback() == (gnui::Callback*)shift_cb) {
 	unsigned i = (unsigned)b->argument();
-	((fltk::Button*)b)->value(fltk::event_state(i));
+	((gnui::Button*)b)->value(gnui::event_state(i));
       }
     }
 
     // figure out the keyname:
     char buffer[100];
     const char *keyname = buffer;
-    int k = fltk::event_key();
+    int k = gnui::event_key();
     if (!k) {
       keyname = "0";
     } else if (k <= 7) {
       sprintf(buffer, "(mouse button %d)", k);
     } else if (k < 256 && k != 32) {
       sprintf(buffer, "'%c'", k);
-    } else if (k >= fltk::F0Key && k <= fltk::LastFunctionKey) {
-      sprintf(buffer, "fltk::F%dKey", k - fltk::F0Key);
+    } else if (k >= gnui::F0Key && k <= gnui::LastFunctionKey) {
+      sprintf(buffer, "gnui::F%dKey", k - gnui::F0Key);
     } else {
       sprintf(buffer, "0x%04x", k);
       for (int i = 0; i < int(sizeof(table)/sizeof(*table)); i++)
@@ -137,10 +137,10 @@ int main(int argc, char** argv) {
     }
     key_output->value(keyname);
 
-    if (fltk::event_text()[0] == 32)
+    if (gnui::event_text()[0] == 32)
       text_output->value("\" \"");
-    else if (fltk::event_text()[0])
-      text_output->value(fltk::event_text());
+    else if (gnui::event_text()[0])
+      text_output->value(gnui::event_text());
     else
       text_output->value("\"\"");
   }

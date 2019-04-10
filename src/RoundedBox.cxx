@@ -28,7 +28,7 @@
 #include <fltk/Box.h>
 #include <fltk/Style.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
 static void rbox(const Rectangle& r, Color fill, Color line) {
   // figure out diameter of circles for corners:
@@ -55,7 +55,7 @@ public:
 };
 static RoundedBox roundedBox("rounded");
 /** Round-cornered rectangle with a black border. */
-Box* const fltk::ROUNDED_BOX = &roundedBox;
+Box* const gnui::ROUNDED_BOX = &roundedBox;
 
 class RShadowBox : public Box {
 public:
@@ -81,7 +81,7 @@ public:
 };
 static RShadowBox rshadowBox("rshadow");
 /** Round-cornered rectangle with a black border and gray shadow. */
-Box* const fltk::RSHADOW_BOX = &rshadowBox;
+Box* const gnui::RSHADOW_BOX = &rshadowBox;
 
 class RFlatBox : public Box {
 public:
@@ -95,7 +95,7 @@ public:
 };
 static RFlatBox rflatBox("rflat");
 /** Round-cornered rectangle with no border. */
-Box* const fltk::RFLAT_BOX = &rflatBox;
+Box* const gnui::RFLAT_BOX = &rflatBox;
 
 //
 // End of "$Id$".

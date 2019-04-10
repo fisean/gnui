@@ -30,7 +30,7 @@
 #include <fltk/draw.h>
 #include <fltk/string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static void revert(Style* s) {
 #if MOTIF_STYLE
@@ -58,7 +58,7 @@ ComboBox::ComboBox(int x,int y,int w,int h, const char *l) :
   Group *g = current();
   current(0);
   input_ = new Input(x, y, w-w1, h);
-  input_->box(fltk::NO_BOX);
+  input_->box(gnui::NO_BOX);
   input_->parent(this);
   input_->callback(input_cb);
   current(g);
@@ -79,11 +79,11 @@ void ComboBox::draw() {
   }
   input_->set_damage(damage()|input_->damage());
   if (input_->damage()) {
-    fltk::push_matrix();
-    fltk::translate(input_->x(), input_->y());
+    gnui::push_matrix();
+    gnui::translate(input_->x(), input_->y());
     input_->color(color());
     input_->draw();
-    fltk::pop_matrix();
+    gnui::pop_matrix();
     input_->set_damage(0);
   }
 }

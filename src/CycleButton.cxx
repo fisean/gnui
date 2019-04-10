@@ -30,9 +30,9 @@
 #include <fltk/Box.h>
 #include <fltk/Item.h>
 #include <fltk/draw.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::CycleButton
+/*! \class gnui::CycleButton
 
   This widget lets the user select one of a set of choices by clicking
   on it. Each click cycles to the next choice. Holding down any shift

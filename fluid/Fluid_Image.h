@@ -49,7 +49,7 @@ public:
   static Fluid_Image* find(const char *);
   void decrement(); // reference counting & automatic free
   void increment();
-  virtual const fltk::Symbol* symbol() = 0; // return the fltk Symbol object
+  virtual const gnui::Symbol* symbol() = 0; // return the fltk Symbol object
   virtual void write_static() = 0;
   virtual void write_code() = 0;
   const char *name() const {return name_;}

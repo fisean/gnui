@@ -31,29 +31,29 @@
 
 int main(int argc, char **argv) {
 
-  fltk::args(argc, argv);
+  gnui::args(argc, argv);
 
-  if(!fltk::ask("Do you want to disable beep sounds ?", "continue"))
-      fltk::beep_on_dialog(true);
-  fltk::message("Spelling check sucessfull, %d errors found with %g%% confidence",
+  if(!gnui::ask("Do you want to disable beep sounds ?", "continue"))
+      gnui::beep_on_dialog(true);
+  gnui::message("Spelling check sucessfull, %d errors found with %g%% confidence",
 	     1002, 100*(15/77.0));
 
-  fltk::alert("Quantum fluctuations in the space-time continuum detected, "
+  gnui::alert("Quantum fluctuations in the space-time continuum detected, "
 	   "you have %g seconds to comply.", 10.0);
 
-  printf("fltk::ask returned %d\n",
-    fltk::ask("Do you really want to %s?", "continue"));
+  printf("gnui::ask returned %d\n",
+    gnui::ask("Do you really want to %s?", "continue"));
 
-  printf("fltk::choice returned %d\n",
-    fltk::choice("Choose one of the following:","choice0","choice1","choice2"));
+  printf("gnui::choice returned %d\n",
+    gnui::choice("Choose one of the following:","choice0","choice1","choice2"));
   const char *r;
 
-  r = fltk::input("Please enter a string for '%s':", "this is the default value",
+  r = gnui::input("Please enter a string for '%s':", "this is the default value",
 	       "testing");
-  printf("fltk::input returned \"%s\"\n", r ? r : "NULL");
+  printf("gnui::input returned \"%s\"\n", r ? r : "NULL");
 
-  r = fltk::password("Enter %s's password:", 0, "somebody");
-  printf("fltk::password returned \"%s\"\n", r ? r : "NULL");
+  r = gnui::password("Enter %s's password:", 0, "somebody");
+  printf("gnui::password returned \"%s\"\n", r ? r : "NULL");
 
   return 0;
 }

@@ -46,7 +46,7 @@
 #include <stdlib.h>
 #include <config.h>
 #include "IFont.h"
-using namespace fltk;
+using namespace gnui;
 
 // return dash number N, or pointer to ending null if none:
 static const char* font_word(const char* p, int n) {
@@ -118,8 +118,8 @@ static int sort_function(const void *aa, const void *bb) {
 }
 }
 
-int fltk::list_fonts(fltk::Font**& arrayp) {
-  static fltk::Font** font_array = 0;
+int gnui::list_fonts(gnui::Font**& arrayp) {
+  static gnui::Font** font_array = 0;
   static int num_fonts = 0;
   if (font_array) {arrayp = font_array; return num_fonts;}
 
@@ -166,7 +166,7 @@ int fltk::list_fonts(fltk::Font**& arrayp) {
       }
       // see if it is one of our built-in fonts:
       // if so, set the list of x fonts, since we have it anyway
-      IFont* match = (IFont*)(fltk::font(j));
+      IFont* match = (IFont*)(gnui::font(j));
       if (!strncmp(skip_foundry, match->system_name+2, length)) {
 	newfont = match;
 	if (!newfont->xlist) {
@@ -190,7 +190,7 @@ int fltk::list_fonts(fltk::Font**& arrayp) {
       strcpy(family_name, newname);
       if (num_fonts >= array_size) {
 	array_size = 2*array_size+128;
-	font_array = (fltk::Font**)realloc(font_array, array_size*sizeof(fltk::Font*));
+	font_array = (gnui::Font**)realloc(font_array, array_size*sizeof(gnui::Font*));
       }
       font_array[num_fonts++] = &(newfont->f);
     }
@@ -203,7 +203,7 @@ int fltk::list_fonts(fltk::Font**& arrayp) {
 
 ////////////////////////////////////////////////////////////////
 
-int fltk::Font::encodings(const char**& arrayp) {
+int gnui::Font::encodings(const char**& arrayp) {
   IFont* t = (IFont*)this;
   if (!t->xlist) {
     open_display();
@@ -238,7 +238,7 @@ int fltk::Font::encodings(const char**& arrayp) {
 
 ////////////////////////////////////////////////////////////////
 
-int fltk::Font::sizes(int*& sizep) {
+int gnui::Font::sizes(int*& sizep) {
   IFont* t = (IFont*)this;
   if (!t->xlist) {
     open_display();

@@ -34,7 +34,7 @@
 #include <fltk/x.h>
 #include <fltk/draw.h>
 #include <fltk/math.h>
-using namespace fltk;
+using namespace gnui;
 
 /*!
   Add a series of points to the current path on the arc of an
@@ -44,7 +44,7 @@ using namespace fltk;
   end is less than start then it draws the arc in a clockwise
   direction.
 */
-void fltk::addarc(float l, float t, float w, float h, float start, float end)
+void gnui::addarc(float l, float t, float w, float h, float start, float end)
 {
 #if USE_CAIRO
   cairo_save(cr);

@@ -28,7 +28,7 @@
 #ifndef fluid_undo_h
 # define fluid_undo_h
 
-namespace fltk {class Widget;}
+namespace gnui {class Widget;}
 
 class Undo {
   static int  current;  	// Current undo level in buffer
@@ -50,8 +50,8 @@ class Undo {
   static const char *filename(int level, char *buf, int bufsize);
   static void remove_last();
 
-  static void redo_cb(fltk::Widget *, void *);  // Redo menu callback
-  static void undo_cb(fltk::Widget *, void *);  // Undo menu callback
+  static void redo_cb(gnui::Widget *, void *);  // Redo menu callback
+  static void undo_cb(gnui::Widget *, void *);  // Undo menu callback
 };
 
 #endif // !undo_h

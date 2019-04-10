@@ -2,7 +2,7 @@
 #define Fl_Int_Input_H
 
 #include <fltk/IntInput.h>
-typedef fltk::IntInput Fl_Int_Input;
+typedef gnui::IntInput Fl_Int_Input;
 
 #endif
 

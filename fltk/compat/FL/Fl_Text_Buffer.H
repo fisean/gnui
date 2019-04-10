@@ -3,6 +3,6 @@
 
 #include "Fl_Widget.H"
 #include <fltk/TextBuffer.h>
-typedef fltk::TextBuffer Fl_Text_Buffer;
+typedef gnui::TextBuffer Fl_Text_Buffer;
 
 #endif

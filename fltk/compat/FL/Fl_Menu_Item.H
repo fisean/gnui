@@ -1,8 +1,8 @@
 //
 // "$Id$"
 //
-// Back-compatability menu items for FLTK.  The new fltk::Menu class
-// converts these tables into child fltk::Item and fltk::ItemGroup widgets.
+// Back-compatability menu items for FLTK.  The new gnui::Menu class
+// converts these tables into child gnui::Item and gnui::ItemGroup widgets.
 // You should not use this for new programs.
 //
 // Copyright 1998-2006 by Bill Spitzak and others.
@@ -44,29 +44,29 @@ enum { // values for flags:
   FL_MENU_HORIZONTAL = 0x100 // not used!
 };
 
-namespace fltk {
+namespace gnui {
   class FL_API Menu;
 }
 
 struct FL_API Fl_Menu_Item {
   const char *text;
   int shortcut_;
-  fltk::Callback *callback_;
+  gnui::Callback *callback_;
   void *user_data_;
   int flags;
-  fltk::LabelType* labeltype_;
-  fltk::Font* labelfont_;
+  gnui::LabelType* labeltype_;
+  gnui::Font* labelfont_;
   unsigned labelsize_;
-  fltk::Color labelcolor_;
+  gnui::Color labelcolor_;
 
-  // Used to add or set an fltk::Menu widget:
-  void add_to(fltk::Menu*, void* data = 0) const;
+  // Used to add or set an gnui::Menu widget:
+  void add_to(gnui::Menu*, void* data = 0) const;
 
-  // popup menus without using an fltk::Menu widget:
+  // popup menus without using an gnui::Menu widget:
   // Warning: this is now quite expensive, as it creates a temporary
-  // fltk::Menu and child widgets!  These also do not match the fltk 1.0
+  // gnui::Menu and child widgets!  These also do not match the fltk 1.0
   // calls, if there is any callback it is called directly (with the
-  // dummy fltk::Menu as an argument).
+  // dummy gnui::Menu as an argument).
   const Fl_Menu_Item*
 	pulldown(int X, int Y, int W, int H,
 		 const Fl_Menu_Item* picked = 0,
@@ -87,11 +87,11 @@ struct FL_API Fl_Menu_Item {
     return (Fl_Menu_Item*)(((const Fl_Menu_Item*)this)->next(i));}
 
   const char* label() const {return text;}
-  fltk::LabelType* labeltype() const {return labeltype_;}
-  fltk::Color labelcolor() const {return labelcolor_;}
-  fltk::Font* labelfont() const {return labelfont_;}
+  gnui::LabelType* labeltype() const {return labeltype_;}
+  gnui::Color labelcolor() const {return labelcolor_;}
+  gnui::Font* labelfont() const {return labelfont_;}
   unsigned labelsize() const {return labelsize_;}
-  fltk::Callback_p callback() const {return callback_;}
+  gnui::Callback_p callback() const {return callback_;}
   void* user_data() const {return user_data_;}
   long argument() const {return (long)user_data_;}
   int shortcut() const {return shortcut_;}
@@ -104,15 +104,15 @@ struct FL_API Fl_Menu_Item {
   int activevisible() const {return !(flags&0x11);}
 
   void label(const char* a) {text=a;}
-  void label(fltk::LabelType* a,const char* b) {labeltype_ = a; text = b;}
-  void labeltype(fltk::LabelType* a) {labeltype_ = a;}
+  void label(gnui::LabelType* a,const char* b) {labeltype_ = a; text = b;}
+  void labeltype(gnui::LabelType* a) {labeltype_ = a;}
   void labelcolor(uchar a) {labelcolor_ = a;}
-  void labelfont(fltk::Font* a) {labelfont_ = a;}
+  void labelfont(gnui::Font* a) {labelfont_ = a;}
   void labelsize(uchar a) {labelsize_ = a;}
-  void callback(fltk::Callback* c, void* p) {callback_=c; user_data_=p;}
-  void callback(fltk::Callback* c) {callback_=c;}
-  void callback(fltk::Callback0*c) {callback_=(fltk::Callback*)c;}
-  void callback(fltk::Callback1*c, long p=0) {callback_=(fltk::Callback*)c; user_data_=(void*)p;}
+  void callback(gnui::Callback* c, void* p) {callback_=c; user_data_=p;}
+  void callback(gnui::Callback* c) {callback_=c;}
+  void callback(gnui::Callback0*c) {callback_=(gnui::Callback*)c;}
+  void callback(gnui::Callback1*c, long p=0) {callback_=(gnui::Callback*)c; user_data_=(void*)p;}
   void user_data(void* v) {user_data_ = v;}
   void argument(long v) {user_data_ = (void*)v;}
   void shortcut(int s) {shortcut_ = s;}
@@ -126,9 +126,9 @@ struct FL_API Fl_Menu_Item {
 
   const Fl_Menu_Item* find_shortcut(int *ip=0) const;
 
-  void do_callback(fltk::Widget* o) const {callback_(o, user_data_);}
-  void do_callback(fltk::Widget* o,void* arg) const {callback_(o, arg);}
-  void do_callback(fltk::Widget* o,long arg) const {callback_(o, (void*)arg);}
+  void do_callback(gnui::Widget* o) const {callback_(o, user_data_);}
+  void do_callback(gnui::Widget* o,void* arg) const {callback_(o, arg);}
+  void do_callback(gnui::Widget* o,long arg) const {callback_(o, (void*)arg);}
 
   // back-compatability, do not use:
   int checked() const {return flags&FL_MENU_VALUE;}
@@ -136,10 +136,10 @@ struct FL_API Fl_Menu_Item {
   void uncheck() {flags &= ~FL_MENU_VALUE;}
 
 #if 0
-  int add(const char*, int shortcut, fltk::Callback*, void* =0, int = 0);
-  int add(const char*a, const char* b, fltk::Callback* c,
+  int add(const char*, int shortcut, gnui::Callback*, void* =0, int = 0);
+  int add(const char*a, const char* b, gnui::Callback* c,
 	  void* d = 0, int e = 0) {
-    return add(a,fltk::old_shortcut(b),c,d,e);}
+    return add(a,gnui::old_shortcut(b),c,d,e);}
 #endif
 };
 

@@ -6,7 +6,7 @@
 #include <fltk/Button.h>
 #include <fltk/IntInput.h>
 #include <stdlib.h>
-using namespace fltk;
+using namespace gnui;
 
 IntInput* intinput;
 

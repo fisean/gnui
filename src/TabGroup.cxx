@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::TabGroup
+/*! \class gnui::TabGroup
 
 This is the "file card tabs" interface to allow you to put lots and
 lots of buttons and switches in a panel. This first appeared in
@@ -64,7 +64,7 @@ to the children.
 #include <fltk/Tooltip.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 // return the left edges of each tab (plus a fake left edge for a tab
 // past the right-hand one).  These position are actually of the left
@@ -130,11 +130,11 @@ int TabGroup::handle(int event) {
   case FOCUS_CHANGE:
     // this is called to indicate that some child got the focus
     if (focus_index() < 0) redraw(DAMAGE_VALUE);
-    focus_index(fltk::focus() == this ? -1 : 0);
+    focus_index(gnui::focus() == this ? -1 : 0);
     return true;
 
   case FOCUS:
-    if (fltk::focus() == this) goto GOTO_TABS;
+    if (gnui::focus() == this) goto GOTO_TABS;
     switch (navigation_key()) {
     case LeftKey:
     case UpKey:
@@ -150,7 +150,7 @@ int TabGroup::handle(int event) {
       if (selected) {
 	int n = selected->handle(FOCUS);
 	if (n) {
-	  if (!selected->contains(fltk::focus())) fltk::focus(selected);
+	  if (!selected->contains(gnui::focus())) gnui::focus(selected);
 	  return n;
 	}
       }
@@ -199,7 +199,7 @@ int TabGroup::handle(int event) {
     return 1;}
 
   case KEY:
-    if (fltk::focus()==this) {
+    if (gnui::focus()==this) {
       switch (event_key()) {
       case SpaceKey:
       case RightKey:
@@ -225,7 +225,7 @@ int TabGroup::handle(int event) {
     case UpKey:
       if (tab_height()<0) goto DOWN_CASE;
     UP_CASE:
-      if (focus_index() >= 0) {fltk::focus(this); return 1;}
+      if (focus_index() >= 0) {gnui::focus(this); return 1;}
       else return 0;
     }
     // fall through to SHORTCUT case:
@@ -304,7 +304,7 @@ bool TabGroup::value(int n) {
   descendent of this, the last child is selected.
 */
 bool TabGroup::selected_child(Widget *newvalue) {
-  int setfocus = !focused() && contains(fltk::focus());
+  int setfocus = !focused() && contains(gnui::focus());
   int numchildren = children();
   for (int i=0; i < numchildren; i++) {
     Widget* o = child(i);
@@ -511,9 +511,9 @@ NamedStyle* TabGroup::default_style = &::style;
 
 /*! Creates a new TabGroup widget using the given position, size, and
 label string. Use add(widget) to add each child. Each child is
-probably an fltk::Group widget containing the actual widgets the user
+probably an gnui::Group widget containing the actual widgets the user
 sees. The children should be sized to stay away from the top or bottom
-edge of the <TT>fltk::Tabs</TT>, which is where the tabs are drawn.
+edge of the <TT>gnui::Tabs</TT>, which is where the tabs are drawn.
 */
 TabGroup::TabGroup(int X,int Y,int W, int H, const char *l,bool begin)
   : Group(X,Y,W,H,l,begin),

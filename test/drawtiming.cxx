@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
-class TestWindow : public fltk::Window {
+class TestWindow : public gnui::Window {
   int test;
   int iter;
 public:
@@ -38,7 +38,7 @@ void TestWindow::draw() {
       fillrect(X,Y,W,H);
       if (y < 11) {
 	setcolor(WHITE);
-	setfont(fltk::HELVETICA,12);
+	setfont(gnui::HELVETICA,12);
 	drawtext(buffer,X+3,Y+16);
       }
       pop_clip();
@@ -56,7 +56,7 @@ void TestWindow::draw() {
       fillrect(X,Y,W,H);
       if (y < 11) {
 	setcolor(WHITE);
-	setfont(fltk::HELVETICA,12);
+	setfont(gnui::HELVETICA,12);
 	drawtext(buffer,X+3,Y+16);
       }
       pop_clip();
@@ -69,14 +69,14 @@ void TestWindow::draw() {
 }
 
 int main(int argc, char** argv) {
-  int m; int n = fltk::args(argc, argv, m);
+  int m; int n = gnui::args(argc, argv, m);
   if (n != argc-2) {
     fprintf(stderr, "%s\nAdd test number and number of interations:\n"
 	    " 0 = single buffer + clip out\n"
 	    " 1 = double buffer + clip out\n"
 	    " 2 = single buffer with overlapping rectangles\n"
 	    " 3 = double buffer with overlapping rectangles\n",
-	    fltk::help);
+	    gnui::help);
     exit(1);
   }
   TestWindow window(atoi(argv[n]));
@@ -84,10 +84,10 @@ int main(int argc, char** argv) {
   double dt = get_time_secs();
   printf("iterations = %d\n", iterations);
   window.show(argc, argv);
-  while (window.damage()) fltk::wait();
+  while (window.damage()) gnui::wait();
   for (int i=0; i < iterations; i++) {
     window.redraw();
-    fltk::check();
+    gnui::check();
   }
   dt = get_time_secs() - dt;
   printf("time elapsed = %4.6lf secs\n",dt);

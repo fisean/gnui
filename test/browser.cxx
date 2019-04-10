@@ -52,7 +52,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 xpmImage folderSmall(folder_small);
 xpmImage folderSmall2(folder_small2);
@@ -70,7 +70,7 @@ void cb_test(Widget* browser, void*) {
   if (event_clicks()) printf(", Double Click");
   printf("\n");
   if (b->selected_column()!= Browser::NO_COLUMN_SELECTED )
-      fltk::message("Column %d selected\n", b->selected_column()+1);
+      gnui::message("Column %d selected\n", b->selected_column()+1);
 }
 
 void cb_remove(Widget*, void* ptr) {
@@ -108,7 +108,7 @@ void cb_multi(Button* w, void* ptr) {
 static Group* current_group(Browser* tree) {
   Widget* w = tree->goto_focus();
   if (!w) return tree;
-  if (w->is_group() && w->flag(fltk::OPENED)) return (Group*)w;
+  if (w->is_group() && w->flag(gnui::OPENED)) return (Group*)w;
   return w->parent() ? w->parent() : tree;
 }
 
@@ -127,33 +127,33 @@ void cb_add_paper(Widget*, void* ptr) {
 void cb_when_changed(Button* b, void* ptr) {
   Browser* tree = (Browser*)ptr;
   if (b->value())
-    tree->when(tree->when()|fltk::WHEN_CHANGED);
+    tree->when(tree->when()|gnui::WHEN_CHANGED);
   else
-    tree->when(tree->when()&~fltk::WHEN_CHANGED);
+    tree->when(tree->when()&~gnui::WHEN_CHANGED);
 }
 
 void cb_when_release(Button* b, void* ptr) {
   Browser* tree = (Browser*)ptr;
   if (b->value())
-    tree->when(tree->when()|fltk::WHEN_RELEASE);
+    tree->when(tree->when()|gnui::WHEN_RELEASE);
   else
-    tree->when(tree->when()&~fltk::WHEN_RELEASE);
+    tree->when(tree->when()&~gnui::WHEN_RELEASE);
 }
 
 void cb_when_not_changed(Button* b, void* ptr) {
   Browser* tree = (Browser*)ptr;
   if (b->value())
-    tree->when(tree->when()|fltk::WHEN_NOT_CHANGED);
+    tree->when(tree->when()|gnui::WHEN_NOT_CHANGED);
   else
-    tree->when(tree->when()&~fltk::WHEN_NOT_CHANGED);
+    tree->when(tree->when()&~gnui::WHEN_NOT_CHANGED);
 }
 
 void cb_when_enter_key(Button* b, void* ptr) {
   Browser* tree = (Browser*)ptr;
   if (b->value())
-    tree->when(tree->when()|fltk::WHEN_ENTER_KEY);
+    tree->when(tree->when()|gnui::WHEN_ENTER_KEY);
   else
-    tree->when(tree->when()&~fltk::WHEN_ENTER_KEY);
+    tree->when(tree->when()&~gnui::WHEN_ENTER_KEY);
 }
 
 void button_cb(Widget* b, void *) {
@@ -258,7 +258,7 @@ int main(int argc,char** argv) {
 
   CheckButton when_release_button(88, 260, 160, 20, "WHEN_RELEASE");
   when_release_button.callback((Callback*)cb_when_release, (void *)&tree);
-  when_release_button.set_flag(fltk::STATE);
+  when_release_button.set_flag(gnui::STATE);
 
   CheckButton when_enter_key_button(88, 280, 160, 20, "WHEN_ENTER_KEY");
   when_enter_key_button.callback((Callback*)cb_when_enter_key, (void *)&tree);

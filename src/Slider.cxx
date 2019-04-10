@@ -32,9 +32,9 @@
 #include <config.h>
 #include <stdio.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Slider
+/*! \class gnui::Slider
 
   This widget contains a sliding "knob" that controls a
   single floating-point value. Moving the box all the way to the left
@@ -59,12 +59,12 @@ using namespace fltk;
   than horizontally.
 
   The following bits may be or'd together and given to type():
-  - fltk::Slider::TICK_ABOVE : Put tick marks above the horizontal slider.
-  - fltk::Slider::TICK_LEFT : Put tick marks to the left of a vertical slider (same value as TICK_ABOVE)
-  - fltk::Slider::TICK_BELOW : Put tick marks below the horizontal slider.
-  - fltk::Slider::TICK_RIGHT : Put tick marks to the right of a vertical slider (same value as TICK_BELOW)
-  - fltk::Slider::TICK_BOTH : Put tick marks on both sides of the slider.
-  - fltk::Slider::LOG : Use a logarithimic or power scale for the slider.
+  - gnui::Slider::TICK_ABOVE : Put tick marks above the horizontal slider.
+  - gnui::Slider::TICK_LEFT : Put tick marks to the left of a vertical slider (same value as TICK_ABOVE)
+  - gnui::Slider::TICK_BELOW : Put tick marks below the horizontal slider.
+  - gnui::Slider::TICK_RIGHT : Put tick marks to the right of a vertical slider (same value as TICK_BELOW)
+  - gnui::Slider::TICK_BOTH : Put tick marks on both sides of the slider.
+  - gnui::Slider::LOG : Use a logarithimic or power scale for the slider.
 
   The tick marks are placed the slider_size() or more apart (they are
   also no closer than the step() value). The color of the tick marks

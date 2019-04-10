@@ -34,9 +34,9 @@
 #include <fltk/events.h>
 #include <stdlib.h>
 #include <string.h>
-using namespace fltk;
+using namespace gnui;
 
-/** \class fltk::GlWindow
+/** \class gnui::GlWindow
 
 Provides an area in which the draw() method can use OpenGL to draw.
 This widget sets things up so OpenGL works, and also keeps an OpenGL
@@ -129,7 +129,7 @@ static char SWAP_TYPE = 0; // 0 = determine it from environment variable
 
 /** \fn bool GlWindow::can_do() const
   Returns true if the hardware supports the current value of mode().
-  If false, attempts to show or draw this window will cause an fltk::error().
+  If false, attempts to show or draw this window will cause an gnui::error().
 */
 
 /**
@@ -152,7 +152,7 @@ void GlWindow::create() {
 #else
   CreatedWindow::create(this, gl_choice->vis, gl_choice->colormap, -1);
   //if (overlay && overlay != this) ((GlWindow*)overlay)->show();
-  //fltk::flush(); glXWaitGL(); glXWaitX();
+  //gnui::flush(); glXWaitGL(); glXWaitX();
 #endif
 }
 
@@ -188,29 +188,29 @@ void GlWindow::invalidate() {
 Set or change the OpenGL capabilites of the window.  The value can be 
 any of the symbols from \link visual.h <fltk/visual.h> \endlink OR'd together:
 
-- fltk::INDEXED_COLOR indicates that a colormapped visual is ok. This call
+- gnui::INDEXED_COLOR indicates that a colormapped visual is ok. This call
   will normally fail if a TrueColor visual cannot be found.
-- fltk::RGB_COLOR this value is zero and may be passed to indicate that
-  fltk::INDEXED_COLOR is \e not wanted.
-- fltk::RGB24_COLOR indicates that the visual must have at least
+- gnui::RGB_COLOR this value is zero and may be passed to indicate that
+  gnui::INDEXED_COLOR is \e not wanted.
+- gnui::RGB24_COLOR indicates that the visual must have at least
   8 bits of red, green, and blue (Windows calls this "millions of
   colors").
-- fltk::DOUBLE_BUFFER indicates that double buffering is wanted.
-- fltk::SINGLE_BUFFER is zero and can be used to indicate that double
+- gnui::DOUBLE_BUFFER indicates that double buffering is wanted.
+- gnui::SINGLE_BUFFER is zero and can be used to indicate that double
   buffering is \a not wanted.
-- fltk::ACCUM_BUFFER makes the accumulation buffer work
-- fltk::ALPHA_BUFFER makes an alpha buffer
-- fltk::DEPTH_BUFFER makes a depth/Z buffer
-- fltk::STENCIL_BUFFER makes a stencil buffer
-- fltk::MULTISAMPLE makes it multi-sample antialias if possible (X only)
-- fltk::STEREO stereo if possible
+- gnui::ACCUM_BUFFER makes the accumulation buffer work
+- gnui::ALPHA_BUFFER makes an alpha buffer
+- gnui::DEPTH_BUFFER makes a depth/Z buffer
+- gnui::STENCIL_BUFFER makes a stencil buffer
+- gnui::MULTISAMPLE makes it multi-sample antialias if possible (X only)
+- gnui::STEREO stereo if possible
 - NO_AUTO_SWAP disables the automatic call to swap_buffers() after draw().
 - NO_ERASE_OVERLAY if overlay hardware is used, don't call glClear before
   calling draw_overlay().
 
 If the desired combination cannot be done, FLTK will try turning
 off MULTISAMPLE and STERERO.  If this also fails then attempts to create
-the context will cause fltk::error() to be called, aborting the program.
+the context will cause gnui::error() to be called, aborting the program.
 Use can_do() to check for this and try other combinations.
 
 You can change the mode while the window is displayed.  This is most 

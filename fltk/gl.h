@@ -78,7 +78,7 @@ FL_GL_API void glWindowPos2i(int x, int y);
 #endif
 #endif
 
-namespace fltk {
+namespace gnui {
 
 struct Font;
 

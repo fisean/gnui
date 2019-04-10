@@ -47,23 +47,23 @@
 #include "fluid_menus.h"
 #include "undo.h"
 
-using namespace fltk;
+using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 const Enumeration buttontype_menu[] = {
   {"Normal", 0,		(void*)0},
-  {"Toggle", "TOGGLE",	(void*)fltk::Button::TOGGLE},
-  {"Radio",  "RADIO",	(void*)fltk::Button::RADIO},
+  {"Toggle", "TOGGLE",	(void*)gnui::Button::TOGGLE},
+  {"Radio",  "RADIO",	(void*)gnui::Button::RADIO},
   {0}};
 
 const Enumeration input_type_menu[] = {
   {"Normal",	0,	(void*)Input::NORMAL},
-  {"Numeric",	0,	(void*)6,			"fltk::NumericInput"},
-  {"Float",	0,	(void*)1,			"fltk::FloatInput"},
-  {"Int",	0,	(void*)2,			"fltk::IntInput"},
-  {"Secret",	0,	(void*)Input::SECRET,		"fltk::SecretInput"},
-  {"Multiline",	0,	(void*)Input::MULTILINE,	"fltk::MultiLineInput"},
-  {"Wordwrap",	0,	(void*)Input::WORDWRAP,		"fltk::WordwrapInput"},
+  {"Numeric",	0,	(void*)6,			"gnui::NumericInput"},
+  {"Float",	0,	(void*)1,			"gnui::FloatInput"},
+  {"Int",	0,	(void*)2,			"gnui::IntInput"},
+  {"Secret",	0,	(void*)Input::SECRET,		"gnui::SecretInput"},
+  {"Multiline",	0,	(void*)Input::MULTILINE,	"gnui::MultiLineInput"},
+  {"Wordwrap",	0,	(void*)Input::WORDWRAP,		"gnui::WordwrapInput"},
   {0}};
 
 const Enumeration dial_type_menu[] = {
@@ -73,26 +73,26 @@ const Enumeration dial_type_menu[] = {
   {0}};
 
 const Enumeration slider_type_menu[] = {
-  {"Linear No ticks",	"LINEAR",	(void*)(fltk::Slider::LINEAR)},
-  {"Linear Top/left ticks","TICK_ABOVE",(void*)(fltk::Slider::TICK_ABOVE)},
-  {"Linear Bottom/right ticks","TICK_BELOW",(void*)(fltk::Slider::TICK_BELOW)},
-  {"Linear Both ticks","TICK_BOTH", (void*)(fltk::Slider::TICK_BOTH)},
+  {"Linear No ticks",	"LINEAR",	(void*)(gnui::Slider::LINEAR)},
+  {"Linear Top/left ticks","TICK_ABOVE",(void*)(gnui::Slider::TICK_ABOVE)},
+  {"Linear Bottom/right ticks","TICK_BELOW",(void*)(gnui::Slider::TICK_BELOW)},
+  {"Linear Both ticks","TICK_BOTH", (void*)(gnui::Slider::TICK_BOTH)},
 
-  {"Log No ticks",	"LOG",	(void*)(fltk::Slider::LOG)},
-  {"Log Top/left ticks","LOG|fltk::Slider::TICK_ABOVE",(void*)(fltk::Slider::LOG|fltk::Slider::TICK_ABOVE)},
-  {"Log Bottom/right ticks","LOG|fltk::Slider::TICK_BELOW",(void*)(fltk::Slider::LOG|fltk::Slider::TICK_BELOW)},
-  {"Log Both ticks","LOG|fltk::Slider::TICK_BOTH", (void*)(fltk::Slider::LOG|fltk::Slider::TICK_BOTH)},
+  {"Log No ticks",	"LOG",	(void*)(gnui::Slider::LOG)},
+  {"Log Top/left ticks","LOG|gnui::Slider::TICK_ABOVE",(void*)(gnui::Slider::LOG|gnui::Slider::TICK_ABOVE)},
+  {"Log Bottom/right ticks","LOG|gnui::Slider::TICK_BELOW",(void*)(gnui::Slider::LOG|gnui::Slider::TICK_BELOW)},
+  {"Log Both ticks","LOG|gnui::Slider::TICK_BOTH", (void*)(gnui::Slider::LOG|gnui::Slider::TICK_BOTH)},
   {0}};
 
 const Enumeration output_type_menu[] = {
-  {"Normal",	0,	(void*)fltk::Output::NORMAL},
-  {"Multiline",	0,	(void*)fltk::Output::MULTILINE, "fltk::MultiLineOutput"},
-  {"Wordwrap",	0,	(void*)fltk::Output::WORDWRAP, "fltk::WordwrapOutput"},
+  {"Normal",	0,	(void*)gnui::Output::NORMAL},
+  {"Multiline",	0,	(void*)gnui::Output::MULTILINE, "gnui::MultiLineOutput"},
+  {"Wordwrap",	0,	(void*)gnui::Output::WORDWRAP, "gnui::WordwrapOutput"},
   {0}};
 
 ////////////////////////////////////////////////////////////////
-int TextEditorType::textstuff(int w, fltk::Font* f, int& s, fltk::Color c) {
-    fltk::TextEditor *myo = (fltk::TextEditor*)(w==4 ? ((WidgetType*)factory)->o : o);
+int TextEditorType::textstuff(int w, gnui::Font* f, int& s, gnui::Color c) {
+    gnui::TextEditor *myo = (gnui::TextEditor*)(w==4 ? ((WidgetType*)factory)->o : o);
     switch (w) {
     case 4:
     case 0: f = myo->textfont(); s = (int) myo->textsize(); c = myo->textcolor(); break;
@@ -103,8 +103,8 @@ int TextEditorType::textstuff(int w, fltk::Font* f, int& s, fltk::Color c) {
     return 1;
 }
 
-int TextDisplayType::textstuff(int w, fltk::Font* f, int& s, fltk::Color c) {
-  fltk::TextDisplay *myo = (fltk::TextDisplay*)(w==4 ? ((WidgetType*)factory)->o : o);
+int TextDisplayType::textstuff(int w, gnui::Font* f, int& s, gnui::Color c) {
+  gnui::TextDisplay *myo = (gnui::TextDisplay*)(w==4 ? ((WidgetType*)factory)->o : o);
   switch (w) {
     case 4:
     case 0: f = myo->textfont(); s = (int) myo->textsize(); c = myo->textcolor(); break;
@@ -115,8 +115,8 @@ int TextDisplayType::textstuff(int w, fltk::Font* f, int& s, fltk::Color c) {
   return 1;
 }
 
-int FileInputType::textstuff(int w, fltk::Font* f, int& s, fltk::Color c) {
-    fltk::FileInput *myo = (fltk::FileInput*)(w==4 ? ((WidgetType*)factory)->o : o);
+int FileInputType::textstuff(int w, gnui::Font* f, int& s, gnui::Color c) {
+    gnui::FileInput *myo = (gnui::FileInput*)(w==4 ? ((WidgetType*)factory)->o : o);
   switch (w) {
     case 4:
     case 0: f = myo->textfont(); s = (int) myo->textsize(); c = myo->textcolor(); break;
@@ -131,7 +131,7 @@ int FileInputType::textstuff(int w, fltk::Font* f, int& s, fltk::Color c) {
 
 extern void select(FluidType *,int);
 
-using namespace fltk;
+using namespace gnui;
 
 
 //////////////////////////////////////////////////////////////////////
@@ -139,9 +139,9 @@ using namespace fltk;
 int reading_file;
 
 // Recursive function for searching submenus:
-static FluidType *FluidType_make(const char *tn, fltk::ItemGroup * menu) {
+static FluidType *FluidType_make(const char *tn, gnui::ItemGroup * menu) {
   FluidType *r = 0;
-  fltk::Item * m=0;
+  gnui::Item * m=0;
   char menuName[128];
   int n;
 
@@ -151,10 +151,10 @@ static FluidType *FluidType_make(const char *tn, fltk::ItemGroup * menu) {
       return 0;
 
   for (n = menu->children(); n--;) {
-    fltk::Widget* w = menu->child(n);
+    gnui::Widget* w = menu->child(n);
     if (w->label() && w->is_group() && tn && *tn) {
 	snprintf(menuName,sizeof(menuName),"%s/%s",w->label(),tn);
-	m = (fltk::Item *) menu->find(menuName);
+	m = (gnui::Item *) menu->find(menuName);
 	if (m)  break;
       }
   }
@@ -167,26 +167,26 @@ static FluidType *FluidType_make(const char *tn, fltk::ItemGroup * menu) {
 }
 
 static struct {const char* oldname; const char* newname;} ntable[] = {
-  {"submenu",		"fltk::ItemGroup"},
-  {"menuitem",		"fltk::Item"},
-  {"Fl_Counter",	"fltk::ValueInput"},
-  {"Fl_Spinner",	"fltk::ValueInput"},
-  {"Fl_Tabs",		"fltk::TabGroup"},
-  {"Fl_Return_Button",	"fltk::ReturnButton"},
-  {"fltk::EnterButton",	"fltk::ReturnButton"},
-  {"Fl_Menu_Button",	"fltk::PopupMenu"},
-  {"Fl_Box",		"fltk::InvisibleBox"},
-  {"Fl_Boxtype",	"fltk::InvisibleBoxType"},
-  {"Fl_Round_Button",	"fltk::RadioButton"},
-  {"Fl_Pack",		"fltk::PackedGroup"},
-  {"Fl_Tabs",		"fltk::TabGroup"},
-  {"Fl_Scroll",		"fltk::ScrollGroup"},
-  {"Fl_Bar",		"fltk::BarGroup"},
-  {"Fl_Roller",		"fltk::ThumbWheel"},
-  {"Fl_File_Browser",	"fltk::FileBrowser"},
-  {"Fl_Text_Display",	"fltk::TextDisplay"},
-  {"Fl_Text_Editor",	"fltk::TextEditor"},
-  {"Fl_Tile",		"fltk::TiledGroup"}
+  {"submenu",		"gnui::ItemGroup"},
+  {"menuitem",		"gnui::Item"},
+  {"Fl_Counter",	"gnui::ValueInput"},
+  {"Fl_Spinner",	"gnui::ValueInput"},
+  {"Fl_Tabs",		"gnui::TabGroup"},
+  {"Fl_Return_Button",	"gnui::ReturnButton"},
+  {"gnui::EnterButton",	"gnui::ReturnButton"},
+  {"Fl_Menu_Button",	"gnui::PopupMenu"},
+  {"Fl_Box",		"gnui::InvisibleBox"},
+  {"Fl_Boxtype",	"gnui::InvisibleBoxType"},
+  {"Fl_Round_Button",	"gnui::RadioButton"},
+  {"Fl_Pack",		"gnui::PackedGroup"},
+  {"Fl_Tabs",		"gnui::TabGroup"},
+  {"Fl_Scroll",		"gnui::ScrollGroup"},
+  {"Fl_Bar",		"gnui::BarGroup"},
+  {"Fl_Roller",		"gnui::ThumbWheel"},
+  {"Fl_File_Browser",	"gnui::FileBrowser"},
+  {"Fl_Text_Display",	"gnui::TextDisplay"},
+  {"Fl_Text_Editor",	"gnui::TextEditor"},
+  {"Fl_Tile",		"gnui::TiledGroup"}
 };
 
 // Create a new type by name.
@@ -201,7 +201,7 @@ FluidType* FluidType::make(const char *tn) {
   // Now try cooking old names into new ones:
   if (!p && !strncmp(tn, "Fl_", 3)) {
     p = buffer;
-    strcpy(buffer, "fltk::");
+    strcpy(buffer, "gnui::");
     char* q = buffer+6;
     for (const char* r = tn+3; *r; r++) if (*r != '_') *q++ = *r;
     *q = 0;
@@ -222,24 +222,24 @@ FluidType* FluidType::make(const char *tn) {
 struct symbol {const char *name; int value;};
 
 static symbol table[] = {
-  {"BLACK",	fltk::BLACK},
-  {"RED",	fltk::RED},
-  {"GREEN",	fltk::GREEN},
-  {"YELLOW",	fltk::YELLOW},
-  {"BLUE",	fltk::BLUE},
-  {"MAGENTA",	fltk::MAGENTA},
-  {"CYAN",	fltk::CYAN},
-  {"WHITE",	fltk::WHITE},
+  {"BLACK",	gnui::BLACK},
+  {"RED",	gnui::RED},
+  {"GREEN",	gnui::GREEN},
+  {"YELLOW",	gnui::YELLOW},
+  {"BLUE",	gnui::BLUE},
+  {"MAGENTA",	gnui::MAGENTA},
+  {"CYAN",	gnui::CYAN},
+  {"WHITE",	gnui::WHITE},
 
-  {"LCOL",		fltk::BLACK},
-  {"COL1",		fltk::GRAY75},
+  {"LCOL",		gnui::BLACK},
+  {"COL1",		gnui::GRAY75},
   {"MCOL",		51},
   {"LEFT_BCOL",		55},
   {"TOP_BCOL",		53},
   {"BOTTOM_BCOL",	45},
   {"RIGHT_BCOL",	39},
-  {"INACTIVE",		fltk::GRAY66},
-  {"INACTIVE_COL",	fltk::GRAY66},
+  {"INACTIVE",		gnui::GRAY66},
+  {"INACTIVE_COL",	gnui::GRAY66},
   {"FREE_COL1",		16},
   {"FREE_COL2",		17},
   {"FREE_COL3",		18},
@@ -266,31 +266,31 @@ static symbol table[] = {
   {"DARKTOMATO",	113},
   {"WHEAT",		174},
 
-  {"ALIGN_CENTER",	fltk::ALIGN_CENTER},
-  {"ALIGN_TOP",		fltk::ALIGN_TOP},
-  {"ALIGN_BOTTOM",	fltk::ALIGN_BOTTOM},
-  {"ALIGN_LEFT",	fltk::ALIGN_LEFT},
-  {"ALIGN_RIGHT",	fltk::ALIGN_RIGHT},
-  {"ALIGN_INSIDE",	fltk::ALIGN_INSIDE},
-  {"ALIGN_TOP_LEFT",	 fltk::ALIGN_TOP | fltk::ALIGN_LEFT},
-  {"ALIGN_TOP_RIGHT",	 fltk::ALIGN_TOP | fltk::ALIGN_RIGHT},
-  {"ALIGN_BOTTOM_LEFT",	 fltk::ALIGN_BOTTOM | fltk::ALIGN_LEFT},
-  {"ALIGN_BOTTOM_RIGHT", fltk::ALIGN_BOTTOM | fltk::ALIGN_RIGHT},
-  {"ALIGN_CENTER|FL_ALIGN_INSIDE",	fltk::ALIGN_CENTER|fltk::ALIGN_INSIDE},
-  {"ALIGN_TOP|FL_ALIGN_INSIDE",		fltk::ALIGN_TOP|fltk::ALIGN_INSIDE},
-  {"ALIGN_BOTTOM|FL_ALIGN_INSIDE",	fltk::ALIGN_BOTTOM|fltk::ALIGN_INSIDE},
-  {"ALIGN_LEFT|FL_ALIGN_INSIDE",	fltk::ALIGN_LEFT|fltk::ALIGN_INSIDE},
-  {"ALIGN_RIGHT|FL_ALIGN_INSIDE",	fltk::ALIGN_RIGHT|fltk::ALIGN_INSIDE},
-  {"ALIGN_INSIDE|FL_ALIGN_INSIDE",	fltk::ALIGN_INSIDE|fltk::ALIGN_INSIDE},
-  {"ALIGN_TOP_LEFT|FL_ALIGN_INSIDE",	fltk::ALIGN_TOP|fltk::ALIGN_LEFT|fltk::ALIGN_INSIDE},
-  {"ALIGN_TOP_RIGHT|FL_ALIGN_INSIDE",	fltk::ALIGN_TOP|fltk::ALIGN_RIGHT|fltk::ALIGN_INSIDE},
-  {"ALIGN_BOTTOM_LEFT|FL_ALIGN_INSIDE",	fltk::ALIGN_BOTTOM|fltk::ALIGN_LEFT|fltk::ALIGN_INSIDE},
-  {"ALIGN_BOTTOM_RIGHT|FL_ALIGN_INSIDE",fltk::ALIGN_BOTTOM|fltk::ALIGN_RIGHT|fltk::ALIGN_INSIDE},
+  {"ALIGN_CENTER",	gnui::ALIGN_CENTER},
+  {"ALIGN_TOP",		gnui::ALIGN_TOP},
+  {"ALIGN_BOTTOM",	gnui::ALIGN_BOTTOM},
+  {"ALIGN_LEFT",	gnui::ALIGN_LEFT},
+  {"ALIGN_RIGHT",	gnui::ALIGN_RIGHT},
+  {"ALIGN_INSIDE",	gnui::ALIGN_INSIDE},
+  {"ALIGN_TOP_LEFT",	 gnui::ALIGN_TOP | gnui::ALIGN_LEFT},
+  {"ALIGN_TOP_RIGHT",	 gnui::ALIGN_TOP | gnui::ALIGN_RIGHT},
+  {"ALIGN_BOTTOM_LEFT",	 gnui::ALIGN_BOTTOM | gnui::ALIGN_LEFT},
+  {"ALIGN_BOTTOM_RIGHT", gnui::ALIGN_BOTTOM | gnui::ALIGN_RIGHT},
+  {"ALIGN_CENTER|FL_ALIGN_INSIDE",	gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE},
+  {"ALIGN_TOP|FL_ALIGN_INSIDE",		gnui::ALIGN_TOP|gnui::ALIGN_INSIDE},
+  {"ALIGN_BOTTOM|FL_ALIGN_INSIDE",	gnui::ALIGN_BOTTOM|gnui::ALIGN_INSIDE},
+  {"ALIGN_LEFT|FL_ALIGN_INSIDE",	gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
+  {"ALIGN_RIGHT|FL_ALIGN_INSIDE",	gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
+  {"ALIGN_INSIDE|FL_ALIGN_INSIDE",	gnui::ALIGN_INSIDE|gnui::ALIGN_INSIDE},
+  {"ALIGN_TOP_LEFT|FL_ALIGN_INSIDE",	gnui::ALIGN_TOP|gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
+  {"ALIGN_TOP_RIGHT|FL_ALIGN_INSIDE",	gnui::ALIGN_TOP|gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
+  {"ALIGN_BOTTOM_LEFT|FL_ALIGN_INSIDE",	gnui::ALIGN_BOTTOM|gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
+  {"ALIGN_BOTTOM_RIGHT|FL_ALIGN_INSIDE",gnui::ALIGN_BOTTOM|gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
 
-  {"ALIGN_LEFT_TOP",	 fltk::ALIGN_TOP | fltk::ALIGN_LEFT},
-  {"ALIGN_RIGHT_TOP",	 fltk::ALIGN_TOP | fltk::ALIGN_RIGHT},
-  {"ALIGN_LEFT_BOTTOM",	 fltk::ALIGN_BOTTOM | fltk::ALIGN_LEFT},
-  {"ALIGN_RIGHT_BOTTOM", fltk::ALIGN_BOTTOM | fltk::ALIGN_RIGHT},
+  {"ALIGN_LEFT_TOP",	 gnui::ALIGN_TOP | gnui::ALIGN_LEFT},
+  {"ALIGN_RIGHT_TOP",	 gnui::ALIGN_TOP | gnui::ALIGN_RIGHT},
+  {"ALIGN_LEFT_BOTTOM",	 gnui::ALIGN_BOTTOM | gnui::ALIGN_LEFT},
+  {"ALIGN_RIGHT_BOTTOM", gnui::ALIGN_BOTTOM | gnui::ALIGN_RIGHT},
   {"INVALID_STYLE",	 255},
   {"NORMAL_STYLE",	 0},
   {"BOLD_STYLE",	 1},
@@ -327,21 +327,21 @@ static symbol table[] = {
   {"RETURN_CHANGED",	1},
   {"RETURN_END",	2},
   {"RETURN_ALWAYS",	3},
-  {"PUSH_BUTTON",	fltk::Button::TOGGLE},
-  {"RADIO_BUTTON",	fltk::Button::RADIO},
-  {"HIDDEN_BUTTON",	fltk::Button::HIDDEN},
-  {"SELECT_BROWSER",	fltk::Browser::NORMAL},
-  {"HOLD_BROWSER",	fltk::Browser::NORMAL},
-  {"MULTI_BROWSER",	fltk::Browser::MULTI},
-  //  {"SIMPLE_COUNTER",	fltk::Counter::SIMPLE},
-  {"LINE_DIAL",		fltk::Dial::LINE},
-  {"FILL_DIAL",		fltk::Dial::FILL},
-  {"VERT_SLIDER",	fltk::Slider::LINEAR},
-  {"HOR_SLIDER",	fltk::Slider::LINEAR},
-  {"VERT_FILL_SLIDER",	fltk::Slider::LINEAR},
-  {"HOR_FILL_SLIDER",	fltk::Slider::LINEAR},
-  {"VERT_NICE_SLIDER",	fltk::Slider::LINEAR},
-  {"HOR_NICE_SLIDER",	fltk::Slider::LINEAR},
+  {"PUSH_BUTTON",	gnui::Button::TOGGLE},
+  {"RADIO_BUTTON",	gnui::Button::RADIO},
+  {"HIDDEN_BUTTON",	gnui::Button::HIDDEN},
+  {"SELECT_BROWSER",	gnui::Browser::NORMAL},
+  {"HOLD_BROWSER",	gnui::Browser::NORMAL},
+  {"MULTI_BROWSER",	gnui::Browser::MULTI},
+  //  {"SIMPLE_COUNTER",	gnui::Counter::SIMPLE},
+  {"LINE_DIAL",		gnui::Dial::LINE},
+  {"FILL_DIAL",		gnui::Dial::FILL},
+  {"VERT_SLIDER",	gnui::Slider::LINEAR},
+  {"HOR_SLIDER",	gnui::Slider::LINEAR},
+  {"VERT_FILL_SLIDER",	gnui::Slider::LINEAR},
+  {"HOR_FILL_SLIDER",	gnui::Slider::LINEAR},
+  {"VERT_NICE_SLIDER",	gnui::Slider::LINEAR},
+  {"HOR_NICE_SLIDER",	gnui::Slider::LINEAR},
 };
 
 #include <stdlib.h>

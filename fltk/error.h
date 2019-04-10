@@ -9,7 +9,7 @@
 
 #include "FL_API.h"
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/error.h
 //@{

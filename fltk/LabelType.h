@@ -34,7 +34,7 @@
 #include "Flags.h"
 #include "Rectangle.h"
 
-namespace fltk {
+namespace gnui {
 
 class Style;
 

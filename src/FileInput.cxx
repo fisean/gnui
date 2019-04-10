@@ -54,7 +54,7 @@
 
 #define DAMAGE_BAR	0x10
 
-using namespace fltk;
+using namespace gnui;
 //
 // 'FileInput::FileInput()' - Create a FileInput widget.
 //
@@ -66,7 +66,7 @@ FileInput::FileInput(int X, int Y, int W, int H, const char *l)
     ok_entry_   = 1;
     pressed_    = -1;
     set_damage(DAMAGE_ALL);
-    box(fltk::UP_BOX);
+    box(gnui::UP_BOX);
 }
 
 //
@@ -74,7 +74,7 @@ FileInput::FileInput(int X, int Y, int W, int H, const char *l)
 //
 
 void FileInput::draw_boxes(bool pressed,const Rectangle& r) {
-    box(pressed ? fltk::DOWN_BOX : fltk::UP_BOX);
+    box(pressed ? gnui::DOWN_BOX : gnui::UP_BOX);
     draw_box(r);
 }
 
@@ -131,7 +131,7 @@ FileInput::update_buttons() {
     float  ts = textsize();
     Font * f = textfont();
     //textfont(f);  textsize(ts);
-    fltk::setfont(f,ts);
+    gnui::setfont(f,ts);
     // Loop through the value string, setting widths...
     for (i = 0, start = text();
     start && i < (int)(sizeof(buttons_) / sizeof(buttons_[0]) - 1);
@@ -196,7 +196,7 @@ void FileInput::draw() {
 	draw_buttons();
     // this flag keeps Input_::drawtext from drawing a bogus box!
     char must_trick_Input_ =
-	fltk::focus()!=this && !size() && !(damage()&DAMAGE_ALL);
+	gnui::focus()!=this && !size() && !(damage()&DAMAGE_ALL);
 
     if (!must_trick_Input_) {
       Rectangle r(0,DIR_HEIGHT,w(),h()-DIR_HEIGHT);
@@ -210,7 +210,7 @@ void FileInput::draw() {
 	  const float leading = this->leading();
 	  int height = line_spacing(leading);
 	  float desc = line_ascent(leading);
-	  fltk::setfont(labelfont(), labelsize());
+	  gnui::setfont(labelfont(), labelsize());
 	  float width = getwidth(label());
 	  label_width = int(width+getwidth(":")+2.5);
           Color color = this->color();
@@ -266,7 +266,7 @@ FileInput::handle(int event)		// I - Event
     case KEY:
     case KEYUP:
 	if (Input::handle(event)) {
-	    fltk::damage(DAMAGE_BAR);
+	    gnui::damage(DAMAGE_BAR);
 	    if (when()&(WHEN_CHANGED|WHEN_ENTER_KEY_ALWAYS |WHEN_ENTER_KEY_ALWAYS) ) {
 		clear_changed(); do_callback();
 	    }
@@ -275,7 +275,7 @@ FileInput::handle(int event)		// I - Event
       return 0;
     default :
 	if (Input::handle(event)) {
-	    fltk::damage(DAMAGE_BAR);
+	    gnui::damage(DAMAGE_BAR);
 	    return 1;
 	}
 
@@ -336,8 +336,8 @@ FileInput::handle_button(int event)		// I - Event
     if (i < 0) {
 	char c = *start; // possibly start == basename
 	const char *basename = 0;
-	if (!fltk::filename_isdir(newtext))
-	    if (!*(basename = fltk::filename_name(newtext)))
+	if (!gnui::filename_isdir(newtext))
+	    if (!*(basename = gnui::filename_name(newtext)))
 		basename = 0;
 
 	// Found the end; truncate the text and update the buttons...
@@ -349,7 +349,7 @@ FileInput::handle_button(int event)		// I - Event
 	    memmove(start, basename, strlen(basename)+1);
 	    // Should have some 'ftype_' field to reflect the caller's
 	    // intentions, but for now we get along without...
-	    //if (!(ftype_ & CREATE) && !fltk::filename_isfile(newtext))
+	    //if (!(ftype_ & CREATE) && !gnui::filename_isfile(newtext))
 		//*start = 0;
 	    //else
 		if (start == basename) i = 0; // unchanged!

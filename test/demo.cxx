@@ -48,42 +48,42 @@
 
 /* The form description */
 
-void doexit(fltk::Widget *, void *);
-void doback(fltk::Widget *, void *);
-void dobut(fltk::Widget *, long);
+void doexit(gnui::Widget *, void *);
+void doback(gnui::Widget *, void *);
+void dobut(gnui::Widget *, long);
 
-fltk::Window *form;
-fltk::Button *but[9];
+gnui::Window *form;
+gnui::Button *but[9];
 
 void create_the_forms() {
-  fltk::Widget *obj;
-  form = new fltk::Window(370, 450);
+  gnui::Widget *obj;
+  form = new gnui::Window(370, 450);
   form->begin();
-  obj = new fltk::Widget(20,20,330,40,"fltk Demonstration");
-  obj->box(fltk::ENGRAVED_BOX);
-  obj->color(fltk::GRAY60);
+  obj = new gnui::Widget(20,20,330,40,"fltk Demonstration");
+  obj->box(gnui::ENGRAVED_BOX);
+  obj->color(gnui::GRAY60);
   obj->labelsize(24);
-  obj->labelfont(fltk::HELVETICA_BOLD);
-  obj->labeltype(fltk::ENGRAVED_LABEL);
-  obj = new fltk::Widget(20,70,330,330,0);
-  obj->box(fltk::ENGRAVED_BOX);
-  obj->color(fltk::GRAY50);
-  obj = new fltk::Button(20,20,330,380); obj->type(fltk::Button::HIDDEN);
+  obj->labelfont(gnui::HELVETICA_BOLD);
+  obj->labeltype(gnui::ENGRAVED_LABEL);
+  obj = new gnui::Widget(20,70,330,330,0);
+  obj->box(gnui::ENGRAVED_BOX);
+  obj->color(gnui::GRAY50);
+  obj = new gnui::Button(20,20,330,380); obj->type(gnui::Button::HIDDEN);
   obj->callback(doback);
-  obj = but[0] = new fltk::Button(40,90,90,90);
-  obj = but[1] = new fltk::Button(140,90,90,90);
-  obj = but[2] = new fltk::Button(240,90,90,90);
-  obj = but[3] = new fltk::Button(40,190,90,90);
-  obj = but[4] = new fltk::Button(140,190,90,90);
-  obj = but[5] = new fltk::Button(240,190,90,90);
-  obj = but[6] = new fltk::Button(40,290,90,90);
-  obj = but[7] = new fltk::Button(140,290,90,90);
-  obj = but[8] = new fltk::Button(240,290,90,90);
+  obj = but[0] = new gnui::Button(40,90,90,90);
+  obj = but[1] = new gnui::Button(140,90,90,90);
+  obj = but[2] = new gnui::Button(240,90,90,90);
+  obj = but[3] = new gnui::Button(40,190,90,90);
+  obj = but[4] = new gnui::Button(140,190,90,90);
+  obj = but[5] = new gnui::Button(240,190,90,90);
+  obj = but[6] = new gnui::Button(40,290,90,90);
+  obj = but[7] = new gnui::Button(140,290,90,90);
+  obj = but[8] = new gnui::Button(240,290,90,90);
   for (int i=0; i<9; i++) {
-    but[i]->set_flag(fltk::ALIGN_WRAP);
+    but[i]->set_flag(gnui::ALIGN_WRAP);
     but[i]->callback(dobut, i);
   }
-  obj = new fltk::Button(130,410,110,30,"Exit");
+  obj = new gnui::Button(130,410,110,30,"Exit");
   obj->callback(doexit);
   form->end();
 }
@@ -199,7 +199,7 @@ void pop_menu()
 
 /* The callback Routines */
 
-void dobut(fltk::Widget *, long arg)
+void dobut(gnui::Widget *, long arg)
 /* handles a button push */
 {
   int men = find_menu(stack[stsize-1]);
@@ -274,9 +274,9 @@ void dobut(fltk::Widget *, long arg)
   }
 }
 
-void doback(fltk::Widget *, void *) {pop_menu();}
+void doback(gnui::Widget *, void *) {pop_menu();}
 
-void doexit(fltk::Widget *, void *) {exit(0);}
+void doexit(gnui::Widget *, void *) {exit(0);}
 
 int load_the_menu(const char fname[])
 /* Loads the menu file. Returns whether successful. */
@@ -287,7 +287,7 @@ int load_the_menu(const char fname[])
   fin = fopen(fname,"r");
   if (fin == NULL)
   {
-//    fltk::show_message("ERROR","","Cannot read the menu description file.");
+//    gnui::show_message("ERROR","","Cannot read the menu description file.");
     return 0;
   }
   for (;;) {
@@ -326,21 +326,21 @@ int main(int argc, char **argv) {
   char buf[256];
   if (argv[0] && *argv[0]) strcpy(buf, argv[0]);
   else                     strcpy(buf, "demo");
-  char *epos = (char*)fltk::filename_ext(buf);
+  char *epos = (char*)gnui::filename_ext(buf);
   if (tolower(*(epos-1))=='d') epos--; // Handle the debug 'demod' case
   strcpy(epos,".menu");
   const char *fname = buf;
   int i = 0;
-  if (!fltk::args(argc,argv,i) || i < argc-1)
-    fltk::fatal("Usage: %s <switches> <menufile>\n%s",fltk::help);
+  if (!gnui::args(argc,argv,i) || i < argc-1)
+    gnui::fatal("Usage: %s <switches> <menufile>\n%s",gnui::help);
   if (i < argc) fname = argv[i];
-  if (!load_the_menu(fname)) fltk::fatal("Can't open %s",fname);
+  if (!load_the_menu(fname)) gnui::fatal("Can't open %s",fname);
   strcpy(buf,fname);
-  const char *c = fltk::filename_name(buf);
+  const char *c = gnui::filename_name(buf);
   if (c > buf) {buf[c-buf] = 0; if(chdir(buf)){/*Kill the warn_unused_result error*/};}
   push_menu("@main");
   form->show(argc,argv);
-  fltk::run();
+  gnui::run();
   return 0;
 }
 

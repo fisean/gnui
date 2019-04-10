@@ -3,13 +3,13 @@
 
 #include "Fl_Widget.H"
 #include <fltk/Button.h>
-typedef fltk::Button Fl_Button;
+typedef gnui::Button Fl_Button;
 
 enum {
   FL_NORMAL_BUTTON	= 0,
-  FL_TOGGLE_BUTTON	= fltk::Button::TOGGLE,
-  FL_RADIO_BUTTON	= fltk::Button::RADIO,
-  FL_HIDDEN_BUTTON	= fltk::Button::HIDDEN // may not work in 2.0
+  FL_TOGGLE_BUTTON	= gnui::Button::TOGGLE,
+  FL_RADIO_BUTTON	= gnui::Button::RADIO,
+  FL_HIDDEN_BUTTON	= gnui::Button::HIDDEN // may not work in 2.0
 };
 
 #endif

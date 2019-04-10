@@ -4,7 +4,7 @@
 #include <fltk/ask.h>
 #include <config.h>
 #include <stdio.h>
-using namespace fltk;
+using namespace gnui;
 
 #ifdef HAVE_EXCEPTIONS
 

@@ -28,14 +28,14 @@
 // This file does not compile independently, it is included by color.cxx
 
 /** The color picked by the most recent setcolor(Color). */
-COLORREF	fltk::current_xpixel;
+COLORREF	gnui::current_xpixel;
 
 /**
 If non-zero this is the palette alloced by fltk on an 8-bit
 screen. Hopefully you can ignore this, I'm not even sure it
 works anymore.
 */
-HPALETTE	fltk::xpalette;
+HPALETTE	gnui::xpalette;
 
 static HBRUSH	current_brush;
 static COLORREF	brush_for_color;
@@ -48,7 +48,7 @@ static HDC	pen_for_dc;
 #undef USE_STOCK_BRUSH
 #define USE_STOCK_BRUSH 1
 
-COLORREF fltk::xpixel(Color i) {
+COLORREF gnui::xpixel(Color i) {
   int index = i;
   COLORREF rgb;
   // this is the same as nearest_color(i) but it also sets rgb:
@@ -82,7 +82,7 @@ static void free_pen()
   current_pen = 0;
 }
 
-void fltk::line_style(int style, float width, const char* dashes) {
+void gnui::line_style(int style, float width, const char* dashes) {
   line_style_ = style;
   line_width_ = width;
   line_dashes_ = dashes;
@@ -141,7 +141,7 @@ static void load_dc_funcs()
     and line_style() calls. This is stupid-expensive on Windows so
     we defer it until the pen is needed.
 */
-HPEN fltk::setpen() {
+HPEN gnui::setpen() {
 #if USE_STOCK_BRUSH
   if (!lstyle && line_width_i <= 1) {
     if (!dc_funcs_init) load_dc_funcs();
@@ -185,7 +185,7 @@ static void free_brush()
     and line_style() calls. This is stupid-expensive on Windows so
     we defer it until the brush is needed.
 */
-HBRUSH fltk::setbrush() {
+HBRUSH gnui::setbrush() {
 #if USE_STOCK_BRUSH
   if (!dc_funcs_init) load_dc_funcs();
   if (__SetDCBrushColor) {
@@ -209,7 +209,7 @@ HBRUSH fltk::setbrush() {
   return current_brush;
 }
 
-void fltk::setcolor(Color i) {
+void gnui::setcolor(Color i) {
   if (current_color_ != i) {
     current_color_ = i;
     current_xpixel = xpixel(i);
@@ -217,7 +217,7 @@ void fltk::setcolor(Color i) {
 }
 
 // alpha color is not implemented
-void fltk::setcolor_alpha(Color color, float alpha) {
+void gnui::setcolor_alpha(Color color, float alpha) {
   setcolor(color);
 }
 

@@ -39,7 +39,7 @@
 #  include <fltk/draw.h>
 #  include <fltk/SharedImage.h>
 
-namespace fltk {
+namespace gnui {
 
 /** HelpFunc type - link callback function for files... */
 typedef const char *(HelpFunc) (Widget *, const char *);
@@ -81,7 +81,7 @@ struct HelpTarget {
 
 /** HelpView class.
 
-The fltk::HelpView widget displays HTML text. Most HTML 2.0 elements
+The gnui::HelpView widget displays HTML text. Most HTML 2.0 elements
 are supported, as well as a primitive implementation of tables.
 GIF, JPEG and PNG images are displayed inline. This may change though!
 
@@ -290,7 +290,7 @@ public:
   int find (const char *s,int p);
 };
 
-} // namespace fltk
+} // namespace gnui
 
 #endif // !HelpView_H
 

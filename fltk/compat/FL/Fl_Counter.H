@@ -2,10 +2,10 @@
 #define Fl_Counter_H
 
 #include <fltk/ValueInput.h>
-class Fl_Counter : public fltk::ValueInput {
+class Fl_Counter : public gnui::ValueInput {
 public:
   Fl_Counter(int x, int y, int w, int h, const char* l = 0)
-    : fltk::ValueInput(x,y,w,h,l) {align(fltk::ALIGN_BOTTOM);}
+    : gnui::ValueInput(x,y,w,h,l) {align(gnui::ALIGN_BOTTOM);}
 };
 
 // these don't do anything:

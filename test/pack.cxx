@@ -2,7 +2,7 @@
 #include <fltk/Window.h>
 #include <fltk/BarGroup.h>
 #include <fltk/PackedGroup.h>
-using namespace fltk;
+using namespace gnui;
 
 BarGroup* makebar(const char* name, int w, int h, bool vertical) {
   BarGroup* b = new BarGroup(0,0,w,h,name);

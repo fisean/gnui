@@ -31,7 +31,7 @@
 #include "Choice.h"
 #include "Input.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ComboBox : public Choice {
 public:

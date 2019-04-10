@@ -7,7 +7,7 @@
 
 #include <pthread.h>
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/Threads.h
 //@{
@@ -134,7 +134,7 @@ public:
 # undef min
 # undef near
 
-namespace fltk {
+namespace gnui {
 
 typedef unsigned long Thread;
 
@@ -180,9 +180,9 @@ typedef Mutex RecursiveMutex;
    the destructor ~Guard() does an unlock().
 
 \code
-   static fltk::Mutex mutex;
+   static gnui::Mutex mutex;
    function() {
-     fltk::Guard guard(mutex);
+     gnui::Guard guard(mutex);
      do_stuff;
      throw_exceptions;
      if (test()) return;

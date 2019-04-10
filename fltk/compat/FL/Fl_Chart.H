@@ -50,7 +50,7 @@ struct FL_FORMS_API FL_CHART_ENTRY {
    char str[FL_CHART_LABEL_MAX+1];
 };
 
-class FL_FORMS_API Fl_Chart : public fltk::Widget {
+class FL_FORMS_API Fl_Chart : public gnui::Widget {
 public:
   Fl_Chart(int,int,int,int,const char * = 0);
   ~Fl_Chart();

@@ -39,7 +39,7 @@
 #include <fltk/error.h>
 
 int main(int, char**) {
-  fltk::fatal("Only X has this sillyness.");
+  gnui::fatal("Only X has this sillyness.");
   return 1;
 }
 
@@ -109,8 +109,8 @@ static void print_mask(XVisualInfo* p) {
 }
 
 void list_visuals() {
-  using namespace fltk;
-  fltk::open_display();
+  using namespace gnui;
+  gnui::open_display();
   XVisualInfo vTemplate;
   int num;
   XVisualInfo *visualList = XGetVisualInfo(xdisplay,0,&vTemplate,&num);
@@ -216,7 +216,7 @@ void list_visuals() {
 #include <fltk/run.h>
 int main(int argc, char **argv) {
   if (argc == 1);
-  else if (argc == 2 && argv[1][0]!='-') fltk::display(argv[1]);
+  else if (argc == 2 && argv[1][0]!='-') gnui::display(argv[1]);
   else {fprintf(stderr,"usage: %s <display>\n",argv[0]); exit(1);}
   list_visuals();
   return 0;

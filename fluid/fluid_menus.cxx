@@ -34,7 +34,7 @@
 #include "fluid_img.h"
 #include "undo.h"
 
-using namespace fltk;
+using namespace gnui;
 
 DECL_MENUCBV(new_cb);
 DECL_MENUCBV(open_cb);
@@ -140,7 +140,7 @@ ItemGroup* newMenu;
 
 //////////////////////////////////////////////////////////////////////
 
-static void cb(fltk::Widget *, void *v) {
+static void cb(gnui::Widget *, void *v) {
   Undo::checkpoint();
   Undo::suspend();
   FluidType *t = ((FluidType*)v)->make();

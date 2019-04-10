@@ -31,7 +31,7 @@
 
 #include "Browser.h"
 
-namespace fltk {
+namespace gnui {
 
 // This class is entirely inline.  If that changes, add FL_API to its declaration
 class MultiBrowser : public Browser {

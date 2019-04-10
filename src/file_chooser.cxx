@@ -32,7 +32,7 @@
 #include <fltk/string.h>
 #include <fltk/utf.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static FileChooser	*fc = (FileChooser *)0;
 static void default_callback(const char*) {}
@@ -55,24 +55,24 @@ static void callback(FileChooser *, void*) {
 /*! This function is called every time the user navigates to a new file
   or directory in the file chooser. It can be used to preview the result
   in the main window. */
-void fltk::file_chooser_callback(void (*cb)(const char*)) {
+void gnui::file_chooser_callback(void (*cb)(const char*)) {
   current_callback = cb ? cb : default_callback;
 }
 
 
 // Set the "OK" button label
-void fltk::file_chooser_ok_label(const char *l) {
+void gnui::file_chooser_ok_label(const char *l) {
   if (l) current_label = l;
   else current_label = "Ok";
 }
 
 
 //
-// 'fltk::dir_chooser()' - Show a file chooser dialog and get a directory.
+// 'gnui::dir_chooser()' - Show a file chooser dialog and get a directory.
 //
 
 const char *					// O - Directory or NULL
-fltk::dir_chooser(const char *message,	// I - Message for titlebar
+gnui::dir_chooser(const char *message,	// I - Message for titlebar
                const char *fname,	// I - Initial directory name
 	       int        relative)	// I - 0 for absolute
 {
@@ -92,11 +92,11 @@ fltk::dir_chooser(const char *message,	// I - Message for titlebar
   }
 
   //fc->show();
-  // while (fc->visible()) fltk::wait();
+  // while (fc->visible()) gnui::wait();
   fc->exec(0, true);
 
   if (fc->value() && relative) {
-      fltk::filename_relative(retname, sizeof(retname), fc->value());
+      gnui::filename_relative(retname, sizeof(retname), fc->value());
 
     return retname;
   } else if (fc->value()) return (char *)fc->value();
@@ -108,7 +108,7 @@ static bool use_system_fc = false;
   API instead of using the one constructed in fltk. Ignored on other
   systems.
 */
-void fltk::use_system_file_chooser(bool useit) {use_system_fc = useit;}
+void gnui::use_system_file_chooser(bool useit) {use_system_fc = useit;}
 
 #ifdef _WIN32
 # include <windows.h>
@@ -162,7 +162,7 @@ void fltk::use_system_file_chooser(bool useit) {use_system_fc = useit;}
   \todo Add a "flags" variable that allows the user to override flags.
 */
 
-const char * fltk::file_chooser(const char *message, const char *pattern,
+const char * gnui::file_chooser(const char *message, const char *pattern,
 				const char *fname, bool save,
 				int        relative) {
   static char	retname[1024];		// Returned filename
@@ -267,11 +267,11 @@ const char * fltk::file_chooser(const char *message, const char *pattern,
   fc->exec(0, true);
   
   if (fc->value() && relative) {
-    fltk::filename_relative(retname, sizeof(retname), fc->value());
+    gnui::filename_relative(retname, sizeof(retname), fc->value());
     
     return retname;
   } else if (fc->value()) {
-    fltk::filename_absolute(retname, sizeof(retname), fc->value());
+    gnui::filename_absolute(retname, sizeof(retname), fc->value());
     return retname;
   }
   else return 0;

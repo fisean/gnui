@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-using namespace fltk;
+using namespace gnui;
 
 // Bitmap used when we couldn't guess the filetype
 #define nosuch_width 16
@@ -48,12 +48,12 @@ static xbmImage nosuch_bitmap(nosuch_bits, nosuch_width, nosuch_height);
 class UnknownImage {
 public:
   static bool test(const uchar*, unsigned =0) { return 1; };
-  static fltk::SharedImage* get(const char*, const uchar* = 0) {
-    return (fltk::SharedImage*)(void*)&nosuch_bitmap;
+  static gnui::SharedImage* get(const char*, const uchar* = 0) {
+    return (gnui::SharedImage*)(void*)&nosuch_bitmap;
   };
 };
 
-ImageType fltk::image_filetypes[] = {
+ImageType gnui::image_filetypes[] = {
   { "xpm", xpmFileImage::test, xpmFileImage::get},
   { "gif", gifImage::test, gifImage::get},
   { "png", pngImage::test, pngImage::get},
@@ -62,7 +62,7 @@ ImageType fltk::image_filetypes[] = {
   { 0, UnknownImage::test, UnknownImage::get }
 };
 
-FL_IMAGES_API ImageType* fltk::guess_image(const char* name, const uchar* datas)
+FL_IMAGES_API ImageType* gnui::guess_image(const char* name, const uchar* datas)
 {
   uchar* read_data = 0;
   const uchar* test_data = datas;

@@ -27,7 +27,7 @@
 #include "FL_API.h"
 #include "Color.h"
 
-namespace fltk {
+namespace gnui {
 FL_API Color show_colormap(Color oldcol);
 }
 

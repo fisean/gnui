@@ -56,9 +56,9 @@ static int utf8seqlen(char cc) {
   else return 1;
 }
 
-using namespace fltk;
+using namespace gnui;
 
-extern void fl_set_spot(fltk::Font *f, Widget *w, int x, int y);
+extern void fl_set_spot(gnui::Font *f, Widget *w, int x, int y);
 
 #undef min
 #undef max
@@ -281,10 +281,10 @@ void TextDisplay::layout() {
                 area.w()-LEFT_MARGIN-RIGHT_MARGIN,
                 area.h()-TOP_MARGIN-BOTTOM_MARGIN);
 
-  fltk::setfont(textfont(), textsize());
-  maxAscent = (int)fltk::getascent();
-  maxDescent = (int)fltk::getdescent();
-  stdfontwidth_ = (int)fltk::getwidth("W"); /* 'W' as standard font */
+  gnui::setfont(textfont(), textsize());
+  maxAscent = (int)gnui::getascent();
+  maxDescent = (int)gnui::getdescent();
+  stdfontwidth_ = (int)gnui::getwidth("W"); /* 'W' as standard font */
 
   if (linenumwidth_ != 0) {
     linenumleft_ = text_area.x();
@@ -297,11 +297,11 @@ void TextDisplay::layout() {
   for (i=0; i<numstyles_; i++) {
       Font *styleFont = styletable_[i].font;
       if (styleFont != NULL) {
-        fltk::setfont(styleFont, styletable_[i].size);
-        if ((int)fltk::getascent() > maxAscent)
-          maxAscent = (int)fltk::getascent();
-        if ((int)fltk::getdescent() > maxDescent)
-          maxDescent = (int)fltk::getdescent();
+        gnui::setfont(styleFont, styletable_[i].size);
+        if ((int)gnui::getascent() > maxAscent)
+          maxAscent = (int)gnui::getascent();
+        if ((int)gnui::getdescent() > maxDescent)
+          maxDescent = (int)gnui::getdescent();
       }
   }
   ascent_ = maxAscent;
@@ -309,17 +309,17 @@ void TextDisplay::layout() {
   maxsize_ = (ascent_ + descent_);
   
   /* If all of the current fonts are fixed and match in width, compute */
-  fltk::setfont(textfont(), textsize());
-  fontWidth = (int)fltk::getwidth("i");
+  gnui::setfont(textfont(), textsize());
+  fontWidth = (int)gnui::getwidth("i");
   if (fontWidth != stdfontwidth_)
     fontWidth = -1;
   else {
     for (i=0; i<numstyles_; i++) {
         Font *styleFont = styletable_[i].font;
         if (styleFont != NULL) {
-          fltk::setfont(styleFont, styletable_[i].size);
-          int styleFontWidth = (int)fltk::getwidth("i"); 
-          int styleFontWidthW = (int)fltk::getwidth("W");
+          gnui::setfont(styleFont, styletable_[i].size);
+          int styleFontWidth = (int)gnui::getwidth("i"); 
+          int styleFontWidthW = (int)gnui::getwidth("W");
           if (styleFontWidth != styleFontWidthW ||
               fontWidth != styleFontWidthW) {
             fontWidth = -1;
@@ -367,7 +367,7 @@ void TextDisplay::layout() {
     // figure the scrollbars
     if (scrollbar_width()) {
       /* Decide if the vertical scroll bar needs to be visible */
-      if (scrollbar_align() & (fltk::ALIGN_LEFT|fltk::ALIGN_RIGHT) &&
+      if (scrollbar_align() & (gnui::ALIGN_LEFT|gnui::ALIGN_RIGHT) &&
           bufferlines_cnt_ >= visiblelines_cnt_ - 1)
       {
         if (!vscrollbar->visible()) {
@@ -376,7 +376,7 @@ void TextDisplay::layout() {
             again = 1;
         }
         
-        if (scrollbar_align() & fltk::ALIGN_LEFT) {
+        if (scrollbar_align() & gnui::ALIGN_LEFT) {
           text_area.x(area.x()+scrollbar_width()+LEFT_MARGIN);
           text_area.w(area.w()-scrollbar_width()-LEFT_MARGIN-RIGHT_MARGIN);
           vscrollbar->resize(area.x(), text_area.y()-TOP_MARGIN, scrollbar_width(),
@@ -412,14 +412,14 @@ void TextDisplay::layout() {
 	 you first see a line that is too wide in the window, but then
 	 don't turn it off (ie mix both of your solutions). */
       if ((!continuous_wrap_ || (continuous_wrap_ && wrapmargin_)) &&
-          scrollbar_align() & (fltk::ALIGN_TOP|fltk::ALIGN_BOTTOM) && 
+          scrollbar_align() & (gnui::ALIGN_TOP|gnui::ALIGN_BOTTOM) && 
           (vscrollbar->visible() || longestvline > text_area.w()))
       {
         if (!hscrollbar->visible()) {
           hscrollbar->set_visible();
           again = 1; // loop again to see if we now need vert. & recalc sizes
         }
-        if (scrollbar_align() & fltk::ALIGN_TOP) {
+        if (scrollbar_align() & gnui::ALIGN_TOP) {
           text_area.y(area.y() + scrollbar_width()+TOP_MARGIN);
           text_area.h(area.h() - scrollbar_width()-TOP_MARGIN-BOTTOM_MARGIN);
           hscrollbar->resize(text_area.x()-LEFT_MARGIN, area.y(),
@@ -879,7 +879,7 @@ void TextDisplay::display_insert() {
   } 
 
   if (topLine < 1) {
-    fltk::warning("TextDisplay::display_insert(): internal consistency check tl1 failed\n");
+    gnui::warning("TextDisplay::display_insert(): internal consistency check tl1 failed\n");
     topLine = 1;
   }
 
@@ -1386,7 +1386,7 @@ bool TextDisplay::position_to_line(int pos, int *lineNum) {
     if (empty_vlines()) {
       if (lastchar_ < buffer_->length()) {
 	if (!position_to_line(lastchar_, lineNum)) {
-	  fltk::warning("TextDisplay::position_to_line(): Consistency check ptvl failed");
+	  gnui::warning("TextDisplay::position_to_line(): Consistency check ptvl failed");
 	  return false;
 	}
 	return ++(*lineNum) <= visiblelines_cnt_ - 1;
@@ -1656,19 +1656,19 @@ void TextDisplay::draw_string( int style, int X, int Y, int toX,
     foreground = textcolor();
   }
 
-  fltk::setcolor(background);
-  fltk::fillrect(X, Y, toX - X, maxsize_);
+  gnui::setcolor(background);
+  gnui::fillrect(X, Y, toX - X, maxsize_);
   
   if (!(style & BG_ONLY_MASK) && !(attr & ATTR_HIDDEN)) {
-    fltk::setcolor(foreground);
-    fltk::setfont(font, fsize);
-    fltk::drawtext(string, nChars, (float)X, (float)(Y + maxsize_ - fltk::getdescent()));
+    gnui::setcolor(foreground);
+    gnui::setfont(font, fsize);
+    gnui::drawtext(string, nChars, (float)X, (float)(Y + maxsize_ - gnui::getdescent()));
   }
 
   /* Underline if style is secondary TextSelection */
   if (style & SECONDARY_MASK || (attr & ATTR_UNDERLINE)) {
-    fltk::setcolor(foreground);
-    fltk::drawline((int)X, (int)(Y + ascent_), (int)(toX - 1), (int)(Y + fltk::getascent()));
+    gnui::setcolor(foreground);
+    gnui::drawline((int)X, (int)(Y + ascent_), (int)(toX - 1), (int)(Y + gnui::getascent()));
   }
 }
 
@@ -1688,19 +1688,19 @@ void TextDisplay::clear_rect( int style, int X, int Y,
 
   if (!focused()) {
     if (style & (HIGHLIGHT_MASK | PRIMARY_MASK)) {
-      fltk::setcolor(lerp(color(), selection_color(), 0.5f));
+      gnui::setcolor(lerp(color(), selection_color(), 0.5f));
     } else {
-      fltk::setcolor(color());
+      gnui::setcolor(color());
     }
     //setcolor(MAGENTA);
   } else if (style & HIGHLIGHT_MASK) {
-    fltk::setcolor(contrast(textcolor(), color()));
+    gnui::setcolor(contrast(textcolor(), color()));
   } else if (style & PRIMARY_MASK) {
-    fltk::setcolor(selection_color());
+    gnui::setcolor(selection_color());
   } else {
-    fltk::setcolor(color());
+    gnui::setcolor(color());
   }
-  fltk::fillrect(X, Y, width, height);
+  gnui::fillrect(X, Y, width, height);
 }
 
 /*
@@ -1719,11 +1719,11 @@ void TextDisplay::draw_cursor(int X, int Y) {
   if (Y < text_area.y() - 1 || bot > text_area.y() + text_area.h())
     return;
 
-  fltk::setcolor(cursor_color_);
+  gnui::setcolor(cursor_color_);
 
-  fltk::push_no_clip();
+  gnui::push_no_clip();
 #if 1
-  fltk::fillrect(X, Y, 2, bot-Y);
+  gnui::fillrect(X, Y, 2, bot-Y);
 #else
 
   /* For cursors other than the block, make them around 2/3 of a character
@@ -1777,7 +1777,7 @@ void TextDisplay::draw_cursor(int X, int Y) {
   }
 #endif
 
-  fltk::pop_clip();
+  gnui::pop_clip();
 
   /* Save the last position drawn */
   cursor_oldx_ = X;
@@ -1854,8 +1854,8 @@ int TextDisplay::string_width(const char *string, int length, int style) {
     font  = textfont();
     fsize = textsize();
   }
-  fltk::setfont(font, fsize);
-  return (int)fltk::getwidth(string, length);
+  gnui::setfont(font, fsize);
+  return (int)gnui::getwidth(string, length);
 }
 
 /**
@@ -2276,20 +2276,20 @@ void TextDisplay::draw_line_numbers(bool clearAll) {
   box()->inset(clipRect);
   clipRect.w(linenumwidth_);
   
-  fltk::push_clip(clipRect);
+  gnui::push_clip(clipRect);
   
   // Erase background
-  Color bg = fltk::lerp(color(), fltk::BLACK, .1f);
-  fltk::setcolor(bg);
-  fltk::fillrect(clipRect);
+  Color bg = gnui::lerp(color(), gnui::BLACK, .1f);
+  gnui::setcolor(bg);
+  gnui::fillrect(clipRect);
 
   // Draw separator line
-  fltk::setcolor(fltk::lerp(color(), fltk::BLACK, .5f));
-  fltk::drawline(clipRect.r()-1, clipRect.y(), clipRect.r()-1, clipRect.b());
+  gnui::setcolor(gnui::lerp(color(), gnui::BLACK, .5f));
+  gnui::drawline(clipRect.r()-1, clipRect.y(), clipRect.r()-1, clipRect.b());
 
   // Draw text
-  fltk::setcolor(fltk::contrast(color(), bg));
-  fltk::setfont(textfont(), textsize());
+  gnui::setcolor(gnui::contrast(color(), bg));
+  gnui::setfont(textfont(), textsize());
 
   /* Draw the line numbers, aligned to the text */
   nCols = linenumwidth_ / charWidth - 1;
@@ -2299,7 +2299,7 @@ void TextDisplay::draw_line_numbers(bool clearAll) {
     lineStart = linestarts_[visLine];
     if (lineStart != -1 && (lineStart==0 || buffer()->character(lineStart-1)=='\n')) {
       int lineNumStringLen = sprintf(lineNumString, "%*d", nCols, line);
-      fltk::drawtext(lineNumString, lineNumStringLen, (float)linenumleft_, (float)(Y + ascent_));
+      gnui::drawtext(lineNumString, lineNumStringLen, (float)linenumleft_, (float)(Y + ascent_));
       line++;
     } else {
       if (visLine == 0)
@@ -2307,7 +2307,7 @@ void TextDisplay::draw_line_numbers(bool clearAll) {
     }
     Y += lineHeight;
   }
-  fltk::pop_clip();
+  gnui::pop_clip();
 }
 
 /*
@@ -2339,7 +2339,7 @@ int TextDisplay::measure_vline( int visLineNum) {
       len = buffer_->expand_character(lineStartPos + i,
 	      			      charCount, expandedChar);
       setfont(textfont(), textsize());
-      width += (int)fltk::getwidth(expandedChar, len);
+      width += (int)gnui::getwidth(expandedChar, len);
       charCount += len;
     }
   } else {
@@ -2354,7 +2354,7 @@ int TextDisplay::measure_vline( int visLineNum) {
 	style = numstyles_ - 1;
       }
       setfont(styletable_[style].font, styletable_[style].size);
-      width += (int)fltk::getwidth(expandedChar, len);
+      width += (int)gnui::getwidth(expandedChar, len);
       charCount += len;
     }
   }
@@ -2377,8 +2377,8 @@ int TextDisplay::empty_vlines() {
 void TextDisplay::blank_cursor_protrusions()
 {
   if (cursor_oldx_ >= 0 && cursor_oldy_ >= 0) {
-    fltk::setcolor(color());
-    fltk::fillrect(cursor_oldx_-1, cursor_oldy_, 2, maxsize_);
+    gnui::setcolor(color());
+    gnui::fillrect(cursor_oldx_-1, cursor_oldy_, 2, maxsize_);
     cursor_oldx_ = cursor_oldy_ = -100;
   }
 }
@@ -2980,10 +2980,10 @@ void TextDisplay::draw(void) {
   }
 
   if (damage() & (DAMAGE_ALL | DAMAGE_EXPOSE)) {
-    fltk::push_clip(text_area);
+    gnui::push_clip(text_area);
     // draw all of the text
     draw_text(text_area.x(), text_area.y(), text_area.w(), text_area.h());
-    fltk::pop_clip();
+    gnui::pop_clip();
 
     // draw the line numbers if exposed area includes them
     if (linenumwidth_ != 0) {
@@ -2991,7 +2991,7 @@ void TextDisplay::draw(void) {
     }
   }
   else if (damage() & DAMAGE_SCROLL) {
-    fltk::push_clip(text_area);
+    gnui::push_clip(text_area);
     // draw some lines of text
     draw_range(damage_range1_start, damage_range1_end);
     if (damage_range2_end != -1) {
@@ -2999,7 +2999,7 @@ void TextDisplay::draw(void) {
     }
     damage_range1_start = damage_range1_end = -1;
     damage_range2_start = damage_range2_end = -1;
-    fltk::pop_clip();
+    gnui::pop_clip();
   }
 }
 
@@ -3100,7 +3100,7 @@ int TextDisplay::handle(int event) {
 
     char *copy = buffer()->selection_text();
     if (*copy) {
-      fltk::copy(copy, strlen(copy), 0);
+      gnui::copy(copy, strlen(copy), 0);
     }
     free(copy);
     return 1;
@@ -3126,7 +3126,7 @@ int TextDisplay::handle(int event) {
       if (buffer()->selected()) {
         char *copy = buffer()->selection_text();
         if (*copy) {
-          fltk::copy(copy, strlen(copy), 1);
+          gnui::copy(copy, strlen(copy), 1);
         }
         free(copy);
       }

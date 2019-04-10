@@ -36,13 +36,13 @@
 #include <fltk/x.h>
 #include <fltk/string.h>
 #include <fltk/math.h>
-using namespace fltk;
+using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 
 // Maybe this should be a public fltk method?
-void drawFocusRect(const fltk::Rectangle& r1) {
-  fltk::Rectangle r; transform(r1,r);
+void drawFocusRect(const gnui::Rectangle& r1) {
+  gnui::Rectangle r; transform(r1,r);
 #if USE_X11
   // X version uses stipple pattern because there seem to be too many
   // servers with bugs when drawing dotted lines:
@@ -141,9 +141,9 @@ void drawFocusRect(const fltk::Rectangle& r1) {
   The default version draws a dotted line around the edge, using
   a system-specific XOR mode, if the FOCUSED flag is on in drawflags().
 */
-void Symbol::draw_symbol_overlay(const fltk::Rectangle& r1) const {
+void Symbol::draw_symbol_overlay(const gnui::Rectangle& r1) const {
   if (!drawflags(FOCUSED)) return;
-  fltk::Rectangle r(r1);
+  gnui::Rectangle r(r1);
   inset(r);
   if (r.w() > 12) {r.move_x(1); r.move_r(-1);}
   else if (r.w() <= 3) return;
@@ -154,19 +154,19 @@ void Symbol::draw_symbol_overlay(const fltk::Rectangle& r1) const {
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::DefaultFocusBox
+/*! \class gnui::DefaultFocusBox
     Draws the default focus box under a specific theme. Currently
 	only works under the Windows XP theme, but is here for users to easily be able to create their own themes
 */
 class DefaultFocusBox : public Symbol {
   public:
     DefaultFocusBox(const char* name) : Box(name) {};
-	void _draw(const fltk::Rectangle& r) const;
+	void _draw(const gnui::Rectangle& r) const;
 };
 
-void DefaultFocusBox::_draw(const fltk::Rectangle& r) const {
+void DefaultFocusBox::_draw(const gnui::Rectangle& r) const {
   if (!drawflags(FOCUSED)) return;
-  fltk::Rectangle R(r);
+  gnui::Rectangle R(r);
   inset(R);
   if (R.w() > 12) { R.move_x(1); R.move_r(-1); }
   else if (R.w() <= 3) return;
@@ -180,13 +180,13 @@ DefaultFocusBox defaultFocusBox("DEFAULT_FOCUS_BOX");
 /*!
   Draws a standard box based on the current theme
 */
-Box* const fltk::DEFAULT_FOCUS_BOX = &defaultFocusBox;
+Box* const gnui::DEFAULT_FOCUS_BOX = &defaultFocusBox;
 
 ////////////////////////////////////////////////////////////////
 
 class NoBox : public Box {
 public:
-  void _draw(const fltk::Rectangle&) const {}
+  void _draw(const gnui::Rectangle&) const {}
   NoBox(const char* name) : Box(name) {}
 };
 static NoBox noBox("none");
@@ -197,15 +197,15 @@ static NoBox noBox("none");
   Also some widgets check specifically for this and change their
   behavior or drawing methods.
 */
-Box* const fltk::NO_BOX = &noBox;
+Box* const gnui::NO_BOX = &noBox;
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::FlatBox
+/*! \class gnui::FlatBox
   Draws a rectangle filled with getbgcolor(). This is a useful
   base class for some box types.
 */
-void FlatBox::_draw(const fltk::Rectangle& r) const
+void FlatBox::_draw(const gnui::Rectangle& r) const
 {
   if (drawflags(INVISIBLE)) return;
   if (r.empty()) return;
@@ -222,11 +222,11 @@ static FlatBox flatBox("flat");
 /*!
   Draws a flat rectangle of getbgcolor().
 */
-Box* const fltk::FLAT_BOX = &flatBox;
+Box* const gnui::FLAT_BOX = &flatBox;
 
 ////////////////////////////////////////////////////////////////
 
-/** \class fltk::FrameBox
+/** \class gnui::FrameBox
     This box class interprets a small string stored in data() to
     indicate the gray shades to draw around the edge of the box
     and can be used to draw simple bezels.
@@ -258,7 +258,7 @@ Box* const fltk::FLAT_BOX = &flatBox;
 
   Emulates the fltk1 fl_frame2() function
 */
-void fltk::drawframe(const char* s, int x, int y, int w, int h) {
+void gnui::drawframe(const char* s, int x, int y, int w, int h) {
   if (h > 0 && w > 0) for (;*s;) {
     // draw bottom line:
     setcolor(*s++ + (GRAY00-'A'));
@@ -285,7 +285,7 @@ void fltk::drawframe(const char* s, int x, int y, int w, int h) {
 
   Emulates the fltk1 fl_frame() function
 */
-void fltk::drawframe2(const char* s, int x, int y, int w, int h) {
+void gnui::drawframe2(const char* s, int x, int y, int w, int h) {
   if (h > 0 && w > 0) for (;*s;) {
     // draw top line:
     setcolor(*s++ + (GRAY00-'A'));
@@ -312,7 +312,7 @@ void fl_to_inactive(const char* s, char* to) {
   *to = 0;
 }
 
-void FrameBox::_draw(const fltk::Rectangle& R) const
+void FrameBox::_draw(const gnui::Rectangle& R) const
 {
   if (drawflags(PUSHED|STATE) && down_) {
     down_->draw(R);
@@ -340,7 +340,7 @@ void FrameBox::_draw(const fltk::Rectangle& R) const
     Constructor where you give the thickness of the borders used by inset().
 */
 
-void FrameBox::inset(fltk::Rectangle& r) const {
+void FrameBox::inset(gnui::Rectangle& r) const {
   if (drawflags(PUSHED|STATE) && down_) {
     down_->inset(r);
   } else {
@@ -355,7 +355,7 @@ static FrameBox downBox("down_", 2,2,4,4, "WWNNRRAA");
 /*!
   Inset box in fltk's standard theme
 */
-Box* const fltk::DOWN_BOX = &downBox;
+Box* const gnui::DOWN_BOX = &downBox;
 
 // The normal pushable button:
 static FrameBox downBox2("down_", 2,2,3,3, "2NNWWAA");
@@ -363,45 +363,45 @@ static FrameBox upBox("up", 1,1,3,3, "AAWWNN", &downBox2);
 /*!
   A up button in fltk's standard theme.
 */
-Box* const fltk::UP_BOX = &upBox;
+Box* const gnui::UP_BOX = &upBox;
 
 static FrameBox thinDownBox("thin_down", 1,1,2,2, "WWII");
 /*!
   1-pixel-thick inset box.
 */
-Box* const fltk::THIN_DOWN_BOX = &thinDownBox;
+Box* const gnui::THIN_DOWN_BOX = &thinDownBox;
 
 static FrameBox thinUpBox("thin_up", 1,1,2,2, "IIWW", &thinDownBox);
 /*!
   1-pixel-thick raised box.
 */
-Box* const fltk::THIN_UP_BOX = &thinUpBox;
+Box* const gnui::THIN_UP_BOX = &thinUpBox;
 
 // in fltk 1.0 these used to point at each other as a "down_" version:
 static FrameBox engravedBox("engraved", 2,2,4,4, "2IIWWWWII", &downBox);
 /*!
   2-pixel thick engraved line around edge.
 */
-Box* const fltk::ENGRAVED_BOX = &engravedBox;
+Box* const gnui::ENGRAVED_BOX = &engravedBox;
 
 static FrameBox embossedBox("embossed", 2,2,4,4, "IIWWWWII", &downBox);
 /*!
   2-pixel thick raised line around edge.
 */
-Box* const fltk::EMBOSSED_BOX = &embossedBox;
+Box* const gnui::EMBOSSED_BOX = &embossedBox;
 
 static FrameBox borderBox("border", 1,1,2,2, "KKLL", &downBox);
 /*!
   1-pixel thick gray line around rectangle.
 */
-Box* const fltk::BORDER_BOX = &borderBox;
+Box* const gnui::BORDER_BOX = &borderBox;
 
 ////////////////////////////////////////////////////////////////
 // Deprecated "frame" box, appaently needed for fltk 1.0 compatability?
 
 class BorderFrame : public Box {
 public:
-  void _draw(const fltk::Rectangle& r) const
+  void _draw(const gnui::Rectangle& r) const
   {
     strokerect(r);
   }
@@ -411,18 +411,18 @@ static BorderFrame borderFrame("border_frame");
 /*!
   Obsolete. Draws colored edge and draws nothing inside rectangle.
 */
-Box* const fltk::BORDER_FRAME = &borderFrame;
+Box* const gnui::BORDER_FRAME = &borderFrame;
 
 ////////////////////////////////////////////////////////////////
 // draw a box only when highlighted or selected:
 
-/*! \class fltk::HighlightBox
+/*! \class gnui::HighlightBox
   Draws nothing normally, this can draw as any other box
   (passed to the constructor) when HIGHLIGHT, STATE, or PUSHED
   is turned on in the flags. This can be used to make frames appear
   when the mouse points at widgets or when the widget is turned on.
 */
-void HighlightBox::_draw(const fltk::Rectangle& r) const
+void HighlightBox::_draw(const gnui::Rectangle& r) const
 {
   if (drawflags(HIGHLIGHT|STATE|PUSHED))
     down_->draw(r);
@@ -440,13 +440,13 @@ static HighlightBox highlightUpBox("highlight_up", THIN_UP_BOX);
   Draws nothing normally, and as THIN_UP_BOX when the mouse
   pointer points at it or the value of the widget is turned on.
 */
-Box* const fltk::HIGHLIGHT_UP_BOX = &highlightUpBox;
+Box* const gnui::HIGHLIGHT_UP_BOX = &highlightUpBox;
 static HighlightBox highlightDownBox("highlight_down", THIN_DOWN_BOX);
 /*!
   Draws nothing normally, and as THIN_DOWN_BOX when the mouse
   pointer points at it or the value of the widget is turned on.
 */
-Box* const fltk::HIGHLIGHT_DOWN_BOX = &highlightDownBox;
+Box* const gnui::HIGHLIGHT_DOWN_BOX = &highlightDownBox;
 
 //
 // End of "$Id$".

@@ -33,7 +33,7 @@
 
 #include "TextDisplay.h"
 
-namespace fltk {
+namespace gnui {
 
 // key will match in any state
 #define TEXT_EDITOR_ANY_STATE  (-1L)
@@ -111,7 +111,7 @@ protected:
   Key_Func default_key_function_;
 };
 
-} /* namespace fltk */
+} /* namespace gnui */
 
 #endif
 

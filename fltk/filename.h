@@ -101,7 +101,7 @@ struct dirent {char d_name[1];};
 #endif
 ////////////////////////////////////////////////////////////////
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/filename.h
 /// Some functions to manipulate filenames, to make portable programs.

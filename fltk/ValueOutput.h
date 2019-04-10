@@ -26,7 +26,7 @@
 
 #include "Valuator.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ValueOutput : public Valuator {
 public:

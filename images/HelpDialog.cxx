@@ -4,9 +4,9 @@
 // Code for //\n// "$Id: HelpDialog.fl 4721 2005-12-19 16:52:...
 #include <fltk/string.h>
 #include <fltk/ask.h>
-using namespace fltk;
+using namespace gnui;
 
-inline void HelpDialog::cb_view__i(fltk::HelpView*, void*) {
+inline void HelpDialog::cb_view__i(gnui::HelpView*, void*) {
   if (view_->filename())
   {
     if (view_->changed())
@@ -47,18 +47,18 @@ inline void HelpDialog::cb_view__i(fltk::HelpView*, void*) {
     forward_->deactivate();
   }
 ;}
-void HelpDialog::cb_view_(fltk::HelpView* o, void* v) {
+void HelpDialog::cb_view_(gnui::HelpView* o, void* v) {
   ((HelpDialog*)(o->parent()->user_data()))->cb_view__i(o,v);
 }
 
-inline void HelpDialog::cb_Close_i(fltk::Button*, void*) {
+inline void HelpDialog::cb_Close_i(gnui::Button*, void*) {
   window_->hide();
 }
-void HelpDialog::cb_Close(fltk::Button* o, void* v) {
+void HelpDialog::cb_Close(gnui::Button* o, void* v) {
   ((HelpDialog*)(o->parent()->parent()->user_data()))->cb_Close_i(o,v);
 }
 
-inline void HelpDialog::cb_back__i(fltk::Button*, void*) {
+inline void HelpDialog::cb_back__i(gnui::Button*, void*) {
   if (index_ > 0)
     index_ --;
 
@@ -74,11 +74,11 @@ inline void HelpDialog::cb_back__i(fltk::Button*, void*) {
 
   view_->topline(l);
 }
-void HelpDialog::cb_back_(fltk::Button* o, void* v) {
+void HelpDialog::cb_back_(gnui::Button* o, void* v) {
   ((HelpDialog*)(o->parent()->parent()->user_data()))->cb_back__i(o,v);
 }
 
-inline void HelpDialog::cb_forward__i(fltk::Button*, void*) {
+inline void HelpDialog::cb_forward__i(gnui::Button*, void*) {
   if (index_ < max_)
     index_ ++;
 
@@ -94,11 +94,11 @@ inline void HelpDialog::cb_forward__i(fltk::Button*, void*) {
 
   view_->topline(l);
 }
-void HelpDialog::cb_forward_(fltk::Button* o, void* v) {
+void HelpDialog::cb_forward_(gnui::Button* o, void* v) {
   ((HelpDialog*)(o->parent()->parent()->user_data()))->cb_forward__i(o,v);
 }
 
-inline void HelpDialog::cb_smaller__i(fltk::Button*, void*) {
+inline void HelpDialog::cb_smaller__i(gnui::Button*, void*) {
   if (view_->textsize() > 8)
     view_->textsize(view_->textsize() - 2);
 
@@ -106,11 +106,11 @@ inline void HelpDialog::cb_smaller__i(fltk::Button*, void*) {
     smaller_->deactivate();
   larger_->activate();
 }
-void HelpDialog::cb_smaller_(fltk::Button* o, void* v) {
+void HelpDialog::cb_smaller_(gnui::Button* o, void* v) {
   ((HelpDialog*)(o->parent()->parent()->user_data()))->cb_smaller__i(o,v);
 }
 
-inline void HelpDialog::cb_larger__i(fltk::Button*, void*) {
+inline void HelpDialog::cb_larger__i(gnui::Button*, void*) {
   if (view_->textsize() < 18)
     view_->textsize(view_->textsize() + 2);
 
@@ -118,74 +118,74 @@ inline void HelpDialog::cb_larger__i(fltk::Button*, void*) {
     larger_->deactivate();
   smaller_->activate();
 }
-void HelpDialog::cb_larger_(fltk::Button* o, void* v) {
+void HelpDialog::cb_larger_(gnui::Button* o, void* v) {
   ((HelpDialog*)(o->parent()->parent()->user_data()))->cb_larger__i(o,v);
 }
 
-inline void HelpDialog::cb_find__i(fltk::Input*, void*) {
+inline void HelpDialog::cb_find__i(gnui::Input*, void*) {
   find_pos_ = view_->find(find_->text(), find_pos_);
 }
-void HelpDialog::cb_find_(fltk::Input* o, void* v) {
+void HelpDialog::cb_find_(gnui::Input* o, void* v) {
   ((HelpDialog*)(o->parent()->parent()->parent()->user_data()))->cb_find__i(o,v);
 }
 
 HelpDialog::HelpDialog() {
-   {fltk::DoubleBufferWindow* o = window_ = new fltk::DoubleBufferWindow(530, 385, "Help Dialog");
+   {gnui::DoubleBufferWindow* o = window_ = new gnui::DoubleBufferWindow(530, 385, "Help Dialog");
     o->type(241);
     o->user_data((void*)(this));
     o->begin();
-     {fltk::HelpView* o = view_ = new fltk::HelpView(10, 10, 505, 330);
-      o->box(fltk::DOWN_BOX);
-      o->selection_color((fltk::Color)15);
-      o->callback((fltk::Callback*)cb_view_);
+     {gnui::HelpView* o = view_ = new gnui::HelpView(10, 10, 505, 330);
+      o->box(gnui::DOWN_BOX);
+      o->selection_color((gnui::Color)15);
+      o->callback((gnui::Callback*)cb_view_);
     }
-     {fltk::Group* o = new fltk::Group(10, 348, 510, 27);
+     {gnui::Group* o = new gnui::Group(10, 348, 510, 27);
       o->begin();
-       {fltk::Button* o = new fltk::Button(446, 2, 64, 25, "Close");
-	o->callback((fltk::Callback*)cb_Close);
+       {gnui::Button* o = new gnui::Button(446, 2, 64, 25, "Close");
+	o->callback((gnui::Callback*)cb_Close);
 	o->label("Close");
       }
-       {fltk::Button* o = back_ = new fltk::Button(376, 2, 25, 25, "@<-");
-	o->labelcolor((fltk::Color)2);
+       {gnui::Button* o = back_ = new gnui::Button(376, 2, 25, 25, "@<-");
+	o->labelcolor((gnui::Color)2);
 	o->shortcut(0xff51);
-	o->callback((fltk::Callback*)cb_back_);
+	o->callback((gnui::Callback*)cb_back_);
 	o->tooltip("Show the previous help page.");
       }
-       {fltk::Button* o = forward_ = new fltk::Button(411, 2, 25, 25, "@->");
-	o->labelcolor((fltk::Color)2);
+       {gnui::Button* o = forward_ = new gnui::Button(411, 2, 25, 25, "@->");
+	o->labelcolor((gnui::Color)2);
 	o->shortcut(0xff53);
-	o->callback((fltk::Callback*)cb_forward_);
+	o->callback((gnui::Callback*)cb_forward_);
 	o->tooltip("Show the next help page.");
       }
-       {fltk::Button* o = smaller_ = new fltk::Button(306, 2, 25, 25, "F");
-	o->labelfont(fltk::HELVETICA_BOLD);
+       {gnui::Button* o = smaller_ = new gnui::Button(306, 2, 25, 25, "F");
+	o->labelfont(gnui::HELVETICA_BOLD);
 	o->labelsize(10);
-	o->callback((fltk::Callback*)cb_smaller_);
+	o->callback((gnui::Callback*)cb_smaller_);
 	o->tooltip("Make the help text smaller.");
       }
-       {fltk::Button* o = larger_ = new fltk::Button(341, 2, 25, 25, "F");
-	o->labelfont(fltk::HELVETICA_BOLD);
+       {gnui::Button* o = larger_ = new gnui::Button(341, 2, 25, 25, "F");
+	o->labelfont(gnui::HELVETICA_BOLD);
 	o->labelsize(16);
-	o->callback((fltk::Callback*)cb_larger_);
+	o->callback((gnui::Callback*)cb_larger_);
 	o->tooltip("Make the help text larger.");
       }
-       {fltk::Group* o = new fltk::Group(0, 2, 296, 25);
-	o->box(fltk::DOWN_BOX);
-	o->color((fltk::Color)7);
+       {gnui::Group* o = new gnui::Group(0, 2, 296, 25);
+	o->box(gnui::DOWN_BOX);
+	o->color((gnui::Color)7);
 	o->begin();
-	 {fltk::Input* o = find_ = new fltk::Input(25, 2, 268, 21, "@search");
-	  o->box(fltk::FLAT_BOX);
+	 {gnui::Input* o = find_ = new gnui::Input(25, 2, 268, 21, "@search");
+	  o->box(gnui::FLAT_BOX);
 	  o->labelsize(13);
-	  o->callback((fltk::Callback*)cb_find_);
-	  o->when(fltk::WHEN_ENTER_KEY_ALWAYS);
-	  fltk::Group::current()->resizable(o);
+	  o->callback((gnui::Callback*)cb_find_);
+	  o->when(gnui::WHEN_ENTER_KEY_ALWAYS);
+	  gnui::Group::current()->resizable(o);
 	  o->tooltip("find text in document");
 	}
 	o->end();
-	fltk::Group::current()->resizable(o);
+	gnui::Group::current()->resizable(o);
       }
       o->end();
-      fltk::Group::current()->resizable(o);
+      gnui::Group::current()->resizable(o);
     }
     o->end();
   }
@@ -196,7 +196,7 @@ HelpDialog::HelpDialog() {
   max_      = 0;
   find_pos_ = 0;
   window_->resizable(view_);
-  fltk::register_images();
+  gnui::register_images();
 }
 
 HelpDialog::~HelpDialog() {

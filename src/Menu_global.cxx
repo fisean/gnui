@@ -27,7 +27,7 @@
 #include <fltk/Menu.h>
 #include <fltk/Window.h>
 
-using namespace fltk;
+using namespace gnui;
 
 static Menu* the_widget;
 
@@ -39,8 +39,8 @@ static int handler(int e, Window*) {
 
 /*!
   Make the shortcuts for this menu work no matter what window has the
-  focus when you type it (as long as fltk::modal() is off). This is
-  done by using fltk::add_handler(). This fltk::Menu widget does not
+  focus when you type it (as long as gnui::modal() is off). This is
+  done by using gnui::add_handler(). This gnui::Menu widget does not
   have to be visible (ie the window it is in can be hidden, or it does
   not have to be put in a window at all).
 

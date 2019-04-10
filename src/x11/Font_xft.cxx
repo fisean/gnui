@@ -51,7 +51,7 @@ typedef struct _XftMatrix {
 #endif
 #include <stdlib.h>
 
-using namespace fltk;
+using namespace gnui;
 
 // One of these is made for each combination of font+size:
 struct FontSize {
@@ -66,20 +66,20 @@ struct FontSize {
 
 // The xft font implementation adds the xft name and the above list:
 struct IFont {
-  fltk::Font f;
+  gnui::Font f;
   int attribute_mask; // attributes that can still be turned on
   unsigned numsizes;
   FontSize* fontsizes;
 };
 
 // We store the attributes in neat blocks of 2^n:
-fltk::Font* fltk::Font::plus(int x) {
+gnui::Font* gnui::Font::plus(int x) {
   IFont* font = (IFont*)this;
   x &= font->attribute_mask;
   return &((font+x)->f);
 }
 
-const char* fltk::Font::system_name() {
+const char* gnui::Font::system_name() {
   return name_;
 }
 
@@ -109,7 +109,7 @@ static XftFont* fontopen(const char* name, int attributes, float size, bool core
 		     (void*)0);
 }
 
-void fltk::setfont(fltk::Font* font, float size) {
+void gnui::setfont(gnui::Font* font, float size) {
 #ifndef XFT_MAJOR
   // Older Xft craps out with tiny sizes and returns null for the font
   if (size < 2) size = 2;
@@ -179,13 +179,13 @@ FontSize::~FontSize() {
 }
 #endif
 
-XftFont* fltk::xftfont() {
+XftFont* gnui::xftfont() {
   return current->font;
 }
 
 // This is for back compatability with fltk1 programs, implements the
 // former variable fl_xfont:
-XFontStruct* fltk::xfont() {
+XFontStruct* gnui::xfont() {
 #if XFT_MAJOR > 1
   // kludge!
   static XFontStruct* ret = 0;
@@ -215,12 +215,12 @@ XFontStruct* fltk::xfont() {
 #endif
 }
 
-const char* fltk::Font::current_name() {
+const char* gnui::Font::current_name() {
   return current_font_->name_;
 }
 
-float fltk::getascent()  { return current->font->ascent; }
-float fltk::getdescent() { return current->font->descent; }
+float gnui::getascent()  { return current->font->ascent; }
+float gnui::getdescent() { return current->font->descent; }
 
 // Unfortunatly the Xft UTF-8 interface barfs on error sequences and
 // does not print anything. This is very annoying. Alternative version
@@ -231,7 +231,7 @@ float fltk::getdescent() { return current->font->descent; }
 // pain to track down!
 #define WCBUFLEN 256
 
-float fltk::getwidth(const char *str, int n) {
+float gnui::getwidth(const char *str, int n) {
   XGlyphInfo i;
 #if 0
   XftTextExtentsUtf8(xdisplay, current->font, (XftChar8*)str, n, &i);
@@ -255,7 +255,7 @@ float fltk::getwidth(const char *str, int n) {
 
 ////////////////////////////////////////////////////////////////
 
-void fltk::drawtext_transformed(const char *str, int n, float x, float y) {
+void gnui::drawtext_transformed(const char *str, int n, float x, float y) {
 
   // Use fltk's color allocator, copy the results to match what
   // XftCollorAllocValue returns:
@@ -314,25 +314,25 @@ static IFont fonts [] = {
   {{"wingdings",0},	0,	0},
 };
 
-fltk::Font* const fltk::HELVETICA		= &(fonts[0].f);
-fltk::Font* const fltk::HELVETICA_BOLD		= &(fonts[1].f);
-fltk::Font* const fltk::HELVETICA_ITALIC	= &(fonts[2].f);
-fltk::Font* const fltk::HELVETICA_BOLD_ITALIC	= &(fonts[3].f);
-fltk::Font* const fltk::COURIER			= &(fonts[4].f);
-fltk::Font* const fltk::COURIER_BOLD		= &(fonts[5].f);
-fltk::Font* const fltk::COURIER_ITALIC		= &(fonts[6].f);
-fltk::Font* const fltk::COURIER_BOLD_ITALIC	= &(fonts[7].f);
-fltk::Font* const fltk::TIMES			= &(fonts[8].f);
-fltk::Font* const fltk::TIMES_BOLD		= &(fonts[9].f);
-fltk::Font* const fltk::TIMES_ITALIC		= &(fonts[10].f);
-fltk::Font* const fltk::TIMES_BOLD_ITALIC	= &(fonts[11].f);
-fltk::Font* const fltk::SYMBOL_FONT		= &(fonts[12].f);
-fltk::Font* const fltk::SCREEN_FONT		= &(fonts[4].f);
-fltk::Font* const fltk::SCREEN_BOLD_FONT	= &(fonts[5].f);
-fltk::Font* const fltk::ZAPF_DINGBATS		= &(fonts[13].f);
+gnui::Font* const gnui::HELVETICA		= &(fonts[0].f);
+gnui::Font* const gnui::HELVETICA_BOLD		= &(fonts[1].f);
+gnui::Font* const gnui::HELVETICA_ITALIC	= &(fonts[2].f);
+gnui::Font* const gnui::HELVETICA_BOLD_ITALIC	= &(fonts[3].f);
+gnui::Font* const gnui::COURIER			= &(fonts[4].f);
+gnui::Font* const gnui::COURIER_BOLD		= &(fonts[5].f);
+gnui::Font* const gnui::COURIER_ITALIC		= &(fonts[6].f);
+gnui::Font* const gnui::COURIER_BOLD_ITALIC	= &(fonts[7].f);
+gnui::Font* const gnui::TIMES			= &(fonts[8].f);
+gnui::Font* const gnui::TIMES_BOLD		= &(fonts[9].f);
+gnui::Font* const gnui::TIMES_ITALIC		= &(fonts[10].f);
+gnui::Font* const gnui::TIMES_BOLD_ITALIC	= &(fonts[11].f);
+gnui::Font* const gnui::SYMBOL_FONT		= &(fonts[12].f);
+gnui::Font* const gnui::SCREEN_FONT		= &(fonts[4].f);
+gnui::Font* const gnui::SCREEN_BOLD_FONT	= &(fonts[5].f);
+gnui::Font* const gnui::ZAPF_DINGBATS		= &(fonts[13].f);
 
 // Turn an fltk1 integer font id into a predefined font:
-fltk::Font* fltk::font(int i) {
+gnui::Font* gnui::font(int i) {
   i = i & 15;
   switch (i) {
   case 13: i = 4; break; // "screen"
@@ -348,14 +348,14 @@ fltk::Font* fltk::font(int i) {
 
 extern "C" {
 static int sort_function(const void *aa, const void *bb) {
-  fltk::Font* a = *(fltk::Font**)aa;
-  fltk::Font* b = *(fltk::Font**)bb;
+  gnui::Font* a = *(gnui::Font**)aa;
+  gnui::Font* b = *(gnui::Font**)bb;
   int ret = strcasecmp(a->name_, b->name_); if (ret) return ret;
   return a->attributes_ - b->attributes_;
 }}
 
-int fltk::list_fonts(fltk::Font**& arrayp) {
-  static fltk::Font** font_array = 0;
+int gnui::list_fonts(gnui::Font**& arrayp) {
+  static gnui::Font** font_array = 0;
   static int num_fonts = 0;
   if (font_array) { arrayp = font_array; return num_fonts; }
 
@@ -378,7 +378,7 @@ int fltk::list_fonts(fltk::Font**& arrayp) {
   FcPatternDestroy (fnt_pattern);
 
   num_fonts = fnt_set->nfont;
-  font_array = new fltk::Font*[num_fonts];
+  font_array = new gnui::Font*[num_fonts];
 
   // For each family we make 4 fonts for bold,italic combinations
   // The families could be smaller if there is no bold or italic, but
@@ -430,7 +430,7 @@ static int int_sort(const void *aa, const void *bb) {
 // Return all the point sizes supported by this font:
 // Suprisingly enough Xft works exactly like fltk does and returns
 // the same list. Except there is no way to tell if the font is scalable.
-int fltk::Font::sizes(int*& sizep) {
+int gnui::Font::sizes(int*& sizep) {
   open_display();
   XftFontSet* fs = XftListFonts(xdisplay, xscreen,
 				XFT_FAMILY, XftTypeString, name_, (void*)0,
@@ -461,7 +461,7 @@ int fltk::Font::sizes(int*& sizep) {
 ////////////////////////////////////////////////////////////////
 // Return all the encodings for this font:
 
-int fltk::Font::encodings(const char**& arrayp) {
+int gnui::Font::encodings(const char**& arrayp) {
   open_display();
   // we need to keep the previous return value around so the strings are
   // not destroyed.

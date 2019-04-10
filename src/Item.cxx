@@ -31,11 +31,11 @@
 #include <fltk/events.h>
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Item
+/*! \class gnui::Item
 
-  This widget is designed to be put into fltk::Menu and fltk::Browser widgets
+  This widget is designed to be put into gnui::Menu and gnui::Browser widgets
   and draw plain-text items. All events are ignored, thus causing
   the menu and browser to set/clear the SELECTED flag on these
   widgets. If they are selected they draw in the selection_color(),
@@ -211,19 +211,19 @@ int Item::handle(int event) {
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::ItemGroup
+/*! \class gnui::ItemGroup
 
   This widget describes a set of items that are to be put inside a
-  fltk::Menu or fltk::Browser widget. It indicates the title of a
+  gnui::Menu or gnui::Browser widget. It indicates the title of a
   submenu, or a level of hierarchy in the browser. Any child widgets
   are the items in that submenu, or the items under this parent in the
   browser.
 
-  If this widget is told to draw, it draws just like fltk::Item
+  If this widget is told to draw, it draws just like gnui::Item
   draws. See that for more details. The triangle indicating a submenu
   is not drawn by this, it is drawn by the parent menu.
 
-  Because this is an fltk::Menu subclass, you can also call popup()
+  Because this is an gnui::Menu subclass, you can also call popup()
   and add() and other methods to manipulate the items inside it.
 
   In a Browser, the value() indicates if the widget is open or not. In
@@ -307,7 +307,7 @@ int ItemGroup::handle(int) {return 0;}
 
 ////////////////////////////////////////////////////////////////
 
-/*! \class fltk::Divider
+/*! \class gnui::Divider
   This widget is designed to go into Menu and Browser widgets and draw
   an inset horizontal line across them. It has the OUTPUT flag set
   so the user cannot choose it.

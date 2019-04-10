@@ -25,15 +25,15 @@
 //    http://www.fltk.org/str.php
 //
 
-/*! \class fltk::Group
+/*! \class gnui::Group
 
-The fltk::Group class is the FLTK container widget. It maintains an
+The gnui::Group class is the FLTK container widget. It maintains an
 array of child widgets. These children can themselves be any widget
-including fltk::Group, nesting groups allows much more control over
+including gnui::Group, nesting groups allows much more control over
 layout and resize behavior. Nested groups are also necessary to group
 radio buttons together.
 
-By default fltk::Group preserves the positions and sizes of all it's
+By default gnui::Group preserves the positions and sizes of all it's
 children, they do not move no matter what sizes or other children are
 added or removed.
 
@@ -41,17 +41,17 @@ Setting resizable() will change the layout behavior so that it
 responds to resizing by moving or resizing the children to fit. See
 below for details.
 
-You may want to use an fltk::Pack or a fltk::Scroll to get other
+You may want to use an gnui::Pack or a gnui::Scroll to get other
 common layout behavior that can respond to changes in the sizes of
 child widgets.
 
-The most-used subclass of fltk::Group is fltk::Window, all the rules
+The most-used subclass of gnui::Group is gnui::Window, all the rules
 about resizing apply to windows. Setting resizable() on a window will
 allow the user to resize it. If you want different behavior (such as
-from fltk::Pack) for your window you should make the window have that
+from gnui::Pack) for your window you should make the window have that
 as a single resizable child that fills it.
 
-fltk::Menu is a subclass and thus all menus and browsers are groups
+gnui::Menu is a subclass and thus all menus and browsers are groups
 and the items in them are widgets.
 
 */
@@ -66,7 +66,7 @@ and the items in them are widgets.
 #include <stdlib.h>
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 
@@ -82,8 +82,8 @@ extern NamedStyle* group_style;
 static NamedStyle the_style(0, revert, &group_style);
 NamedStyle* group_style = &the_style;
 
-/*! Creates a new fltk::Group widget using the given position, size,
-  and label string. The default boxtype is fltk::NO_BOX. */
+/*! Creates a new gnui::Group widget using the given position, size,
+  and label string. The default boxtype is gnui::NO_BOX. */
 Group::Group(int X,int Y,int W,int H,const char *l,bool begin)
 : Widget(X,Y,W,H,l),
   children_(0),
@@ -178,7 +178,7 @@ void Group::insert(Widget &o, int index) {
 }
 
 /*! \fn Group * Group::current()
-  Returns the group being currently built. The fltk::Widget
+  Returns the group being currently built. The gnui::Widget
   constructor automatically does current()->add(widget) if this is not
   null. To prevent new widgets from being added to a group, call
   Group::current(0).
@@ -281,12 +281,12 @@ int Group::find(const Widget* widget) const {
   this before the group is displayed. Changing it while it is
   displayed does not work, use widget->take_focus() instead.
 
-  For some subclasses such as fltk::TabGroup, a negative number indicates
+  For some subclasses such as gnui::TabGroup, a negative number indicates
   that the group itself has the focus. In most cases any illegal value
   means it will search for any widget that accepts focus.
 
-  This is also used by fltk::Menu to locate the item selected by
-  the user. See fltk::Menu::get_item().
+  This is also used by gnui::Menu to locate the item selected by
+  the user. See gnui::Menu::get_item().
 */
 
 /*! Turn Tab into Right or Left for keyboard navigation */
@@ -314,7 +314,7 @@ int Group::handle(int event) {
 
   case FOCUS_CHANGE:
     // The focus is being changed to some widget inside this.
-    focus_index_ = find(fltk::focus());
+    focus_index_ = find(gnui::focus());
     return true;
 
   case FOCUS:
@@ -451,7 +451,7 @@ int Group::handle(int event) {
 
   It is possible to achieve any type of resize behavior by using an
   InvisibleBox as the resizable and/or by using a hierarchy of child
-  fltk::Group's.
+  gnui::Group's.
 */
 
 /** Indicate that all the remembered child sizes should be reinitialized.

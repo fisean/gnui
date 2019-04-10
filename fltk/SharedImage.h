@@ -21,7 +21,7 @@
 //
 //    http://www.fltk.org/str.php
 
-/*! \class fltk::SharedImage
+/*! \class gnui::SharedImage
 
 Subclass of Image that can read a file or block of compressed data.
 This provides several useful functions:
@@ -45,7 +45,7 @@ data and create the correct subclass.
 
 #include "Image.h"
 
-namespace fltk {
+namespace gnui {
 
 struct FL_IMAGES_API ImageType;
 

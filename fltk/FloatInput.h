@@ -32,7 +32,7 @@
 
 #include "NumericInput.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API FloatInput : public NumericInput {
   virtual bool replace(int, int, const char*, int);

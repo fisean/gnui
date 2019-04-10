@@ -3,7 +3,7 @@
 //
 // Window type code for the Fast Light Tool Kit (FLTK).
 //
-// The widget describing an fltk::Window.  This is also all the code
+// The widget describing an gnui::Window.  This is also all the code
 // for interacting with the overlay, which allows the user to
 // select, move, and resize the children widgets.
 //
@@ -51,12 +51,12 @@
 #include "fluid_menus.h"
 #include "undo.h"
 
-using namespace fltk;
+using namespace gnui;
 
 bool include_H_from_C = true;
 
 
-void alignment_cb(fltk::Input *i, long v) {
+void alignment_cb(gnui::Input *i, long v) {
   int n = (int)strtol(i->value(),0,0);
   if (n < 0) n = 0;
   switch (v) {
@@ -100,34 +100,34 @@ void show_preferences_cb(Widget *, void * tabnum) {
   preferences_window->show();
 }
 
-void header_input_cb(fltk::Input* i, void*) {
+void header_input_cb(gnui::Input* i, void*) {
   header_file_name = i->value();
 }
-void code_input_cb(fltk::Input* i, void*) {
+void code_input_cb(gnui::Input* i, void*) {
   code_file_name = i->value();
 }
 
-void include_H_from_C_button_cb(fltk::CheckButton* b, void*) {
+void include_H_from_C_button_cb(gnui::CheckButton* b, void*) {
   include_H_from_C = b->value();
 }
 
 ////////////////////////////////////////////////////////////////
 
-const char* WindowType::type_name() const {return "fltk::Window";}
+const char* WindowType::type_name() const {return "gnui::Window";}
 
 static const Enumeration window_type_menu[] = {
-  {"Single", 0, (void*)fltk::Widget::WINDOW_TYPE},
-  {"Double", 0, (void*)(fltk::Widget::WINDOW_TYPE+1), "fltk::DoubleBufferWindow"},
+  {"Single", 0, (void*)gnui::Widget::WINDOW_TYPE},
+  {"Double", 0, (void*)(gnui::Widget::WINDOW_TYPE+1), "gnui::DoubleBufferWindow"},
   {0}};
 
 const Enumeration* WindowType::subtypes() const {return window_type_menu;}
 
 bool overlays_invisible;
 
-// The following fltk::Widget is used to simulate the windows.  It has
-// an overlay for the fluid ui, and special-cases the fltk::NO_BOX.
+// The following gnui::Widget is used to simulate the windows.  It has
+// an overlay for the fluid ui, and special-cases the gnui::NO_BOX.
 
-class Overlay_Window : public fltk::Window {
+class Overlay_Window : public gnui::Window {
   void layout();
   void draw();
   void draw_overlay();
@@ -135,27 +135,27 @@ public:
   WindowType *window;
   int handle(int);
   void resize(int X,int Y,int W,int H);
-  Overlay_Window(int w,int h) : fltk::Window(w,h) {fltk::Group::current(0);}
+  Overlay_Window(int w,int h) : gnui::Window(w,h) {gnui::Group::current(0);}
 };
 void Overlay_Window::layout() {
   // Don't rearrange children unless use is resizing the window itself:
-  if (!(layout_damage()&fltk::LAYOUT_XYWH)) init_sizes();
+  if (!(layout_damage()&gnui::LAYOUT_XYWH)) init_sizes();
   Window::layout();
 }
 void Overlay_Window::draw() {
   const int CHECKSIZE = 8;
   // see if box is clear or a frame or rounded:
-  if ((damage()&fltk::DAMAGE_ALL) && !box()->fills_rectangle()) {
+  if ((damage()&gnui::DAMAGE_ALL) && !box()->fills_rectangle()) {
     // if so, draw checkerboard so user can see what areas are clear:
     for (int y = 0; y < h(); y += CHECKSIZE) 
       for (int x = 0; x < w(); x += CHECKSIZE) {
-	fltk::setcolor(((y/(2*CHECKSIZE))&1) != ((x/(2*CHECKSIZE))&1) ?
-		 fltk::WHITE : fltk::BLACK);
-	fltk::fillrect(x,y,CHECKSIZE,CHECKSIZE);
+	gnui::setcolor(((y/(2*CHECKSIZE))&1) != ((x/(2*CHECKSIZE))&1) ?
+		 gnui::WHITE : gnui::BLACK);
+	gnui::fillrect(x,y,CHECKSIZE,CHECKSIZE);
       }
   }
 #ifdef __sgi
-  fltk::Window::draw();
+  gnui::Window::draw();
 #else
   Window::draw();
 #endif
@@ -200,8 +200,8 @@ int Overlay_Window::handle(int e) {
 }
 
 #include <fltk/StyleSet.h>
-extern fltk::StyleSet* fluid_style_set;
-extern fltk::StyleSet* style_set;
+extern gnui::StyleSet* fluid_style_set;
+extern gnui::StyleSet* style_set;
 
 void WindowType::make_fltk_window() {
   Overlay_Window *w = new Overlay_Window(100,100);
@@ -213,14 +213,14 @@ FluidType *WindowType::make() {
   FluidType *p = FluidType::current;
   while (p && !p->is_code_block()) p = p->parent;
   if (!p) {
-    fltk::message("Please select a function");
+    gnui::message("Please select a function");
     return 0;
   }
   style_set->make_current();
   WindowType *o = new WindowType();
   if (!this->o) {// template widget
-    this->o = new fltk::Window(100,100);
-    fltk::Group::current(0);
+    this->o = new gnui::Window(100,100);
+    gnui::Group::current(0);
   }
   o->factory = this;
   o->drag = 0;
@@ -242,22 +242,22 @@ WindowType::WindowType() {
 
 void WindowType::add_child(FluidType* cc, FluidType* before) {
   WidgetType* c = (WidgetType*)cc;
-  fltk::Widget* b = before ? ((WidgetType*)before)->o : 0;
-  ((fltk::Window*)o)->insert(*(c->o), b);
+  gnui::Widget* b = before ? ((WidgetType*)before)->o : 0;
+  ((gnui::Window*)o)->insert(*(c->o), b);
   o->redraw();
 }
 
 void WindowType::remove_child(FluidType* cc) {
   WidgetType* c = (WidgetType*)cc;
-  ((fltk::Window*)o)->remove(c->o);
+  ((gnui::Window*)o)->remove(c->o);
   o->redraw();
 }
 
 void WindowType::move_child(FluidType* cc, FluidType* before) {
   WidgetType* c = (WidgetType*)cc;
-  ((fltk::Window*)o)->remove(c->o);
-  fltk::Widget* b = before ? ((WidgetType*)before)->o : 0;
-  ((fltk::Window*)o)->insert(*(c->o), b);
+  ((gnui::Window*)o)->remove(c->o);
+  gnui::Widget* b = before ? ((WidgetType*)before)->o : 0;
+  ((gnui::Window*)o)->insert(*(c->o), b);
   o->redraw();
 }
 
@@ -280,7 +280,7 @@ void WindowType::open() {
 // control panel items:
 #include "widget_panel.h"
 
-void modal_cb(fltk::CheckButton* i, void* v) {
+void modal_cb(gnui::CheckButton* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_window()) {i->hide(); return;}
     i->show();
@@ -290,7 +290,7 @@ void modal_cb(fltk::CheckButton* i, void* v) {
   }
 }
 
-void non_modal_cb(fltk::CheckButton* i, void* v) {
+void non_modal_cb(gnui::CheckButton* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_window()) {i->hide(); return;}
     i->show();
@@ -300,7 +300,7 @@ void non_modal_cb(fltk::CheckButton* i, void* v) {
   }
 }
 
-void border_cb(fltk::CheckButton* i, void* v) {
+void border_cb(gnui::CheckButton* i, void* v) {
   if (v == LOAD) {
     if (!current_widget->is_window()) {i->hide(); return;}
     i->show();
@@ -313,7 +313,7 @@ void border_cb(fltk::CheckButton* i, void* v) {
 ////////////////////////////////////////////////////////////////
 
 void WindowType::setlabel(const char *n) {
-  if (o) ((fltk::Window *)o)->label(n);
+  if (o) ((gnui::Window *)o)->label(n);
 }
 
 // make() is called on this widget when user picks window off New menu:
@@ -322,7 +322,7 @@ void WindowType::setlabel(const char *n) {
 // nearest multiple of gridsize, and snap to original position
 void WindowType::newdx() {
   int dx, dy;
-  if (fltk::event_state(fltk::ALT) || drag == BOX) {
+  if (gnui::event_state(gnui::ALT) || drag == BOX) {
     dx = mx-x1;
     dy = my-y1;
   } else {
@@ -366,7 +366,7 @@ void WindowType::newposition(WidgetType *o,int &X,int &Y,int &R,int &T) {
     T += dy;
   } else {
     int ox = 0; int oy = 0;
-    fltk::Group* p = o->o->parent();
+    gnui::Group* p = o->o->parent();
     while (p->parent()) {ox += p->x(); oy += p->y(); p = p->parent();}
     if (drag&LEFT) {if (X+ox==bx) X += dx; else if (X<bx+dx-ox) X = bx+dx-ox;}
     if (drag&BOTTOM) {if (Y+oy==by) Y += dy; else if (Y<by+dy-oy) Y = by+dy-oy;}
@@ -384,9 +384,9 @@ void WindowType::draw_overlay() {
     for (FluidType* q = first_child; q; q = q->walk(this)) {
       if (q->selected() && q->is_widget() && !q->is_menu_item()) {
 	numselected++;
-	fltk::Widget* o = ((WidgetType*)q)->o;
+	gnui::Widget* o = ((WidgetType*)q)->o;
 	int x = o->x(); int y = o->y();
-	fltk::Group* p = o->parent();
+	gnui::Group* p = o->parent();
 	while (p->parent()) {x += p->x(); y += p->y(); p = p->parent();}
 	if (x < bx) bx = x;
 	if (y < by) by = y;
@@ -396,14 +396,14 @@ void WindowType::draw_overlay() {
     }
     recalc = 0;
   }
-  fltk::setcolor(fltk::RED);
+  gnui::setcolor(gnui::RED);
   if (drag==BOX && (x1 != mx || y1 != my)) {
     int x = x1; int r = mx; if (x > r) {x = mx; r = x1;}
     int y = y1; int b = my; if (y > b) {y = my; b = y1;}
-    fltk::strokerect(x,y,r-x,b-y);
+    gnui::strokerect(x,y,r-x,b-y);
   }
   if (overlays_invisible && !drag) return;
-  if (selected()) fltk::strokerect(0,0,o->w(),o->h());
+  if (selected()) gnui::strokerect(0,0,o->w(),o->h());
   if (!numselected) return;
   int bx,by,br,bt;
   bx = o->w(); by = o->h(); br = 0; bt = 0;
@@ -411,29 +411,29 @@ void WindowType::draw_overlay() {
     if (q->selected() && q->is_widget() && !q->is_menu_item()) {
       int x,y,r,t;
       newposition((WidgetType*)q,x,y,r,t);
-      fltk::Widget* o = ((WidgetType*)q)->o;
-      fltk::Group* p = o->parent();
+      gnui::Widget* o = ((WidgetType*)q)->o;
+      gnui::Group* p = o->parent();
       while (p->parent()) {
 	x += p->x(); r += p->x();
 	y += p->y(); t += p->y();
 	p = p->parent();
       }
       int hidden = (!o->visible_r());
-      if (hidden) fltk::line_style(fltk::DASH);
-      fltk::strokerect(x,y,r-x,t-y);
+      if (hidden) gnui::line_style(gnui::DASH);
+      gnui::strokerect(x,y,r-x,t-y);
       if (x < bx) bx = x;
       if (y < by) by = y;
       if (r > br) br = r;
       if (t > bt) bt = t;
-      if (hidden) fltk::line_style(fltk::SOLID);
+      if (hidden) gnui::line_style(gnui::SOLID);
     }
   }
   if (selected()) return;
-  if (numselected>1) fltk::strokerect(bx,by,br-bx,bt-by);
-  fltk::fillrect(bx,by,5,5);
-  fltk::fillrect(br-5,by,5,5);
-  fltk::fillrect(br-5,bt-5,5,5);
-  fltk::fillrect(bx,bt-5,5,5);
+  if (numselected>1) gnui::strokerect(bx,by,br-bx,bt-by);
+  gnui::fillrect(bx,by,5,5);
+  gnui::fillrect(br-5,by,5,5);
+  gnui::fillrect(br-5,bt-5,5,5);
+  gnui::fillrect(bx,bt-5,5,5);
 }
 
 // Calculate new bounding box of selected widgets:
@@ -449,9 +449,9 @@ void redraw_overlays() {
 }
 
 #include <fltk/MenuBar.h>
-extern fltk::MenuBar* menubar;
+extern gnui::MenuBar* menubar;
 
-void toggle_overlays(fltk::Widget *,void *) {
+void toggle_overlays(gnui::Widget *,void *) {
   ishow_overlay->state(overlays_invisible);
   if (overlaybutton) overlaybutton->value(overlays_invisible);
   overlays_invisible = !overlays_invisible;
@@ -502,20 +502,20 @@ void WindowType::moveallchildren()
 // find the innermost item clicked on:
 WidgetType* WindowType::clicked_widget() {
   WidgetType* selection = this;
-  int x = fltk::event_x(); int y = fltk::event_y();
+  int x = gnui::event_x(); int y = gnui::event_y();
   for (;;) {
     WidgetType* inner_selection = 0;
     for (FluidType* i = selection->first_child; i; i = i->next_brother) {
       if (i->is_widget() && !i->is_menu_item()) {
 	WidgetType* o = (WidgetType*)i;
-	fltk::Widget* w = o->o;
+	gnui::Widget* w = o->o;
 	if (w->visible_r() && w->Rectangle::contains(x,y))
 	  inner_selection = o;
       }
     }
     if (inner_selection) {
       selection = inner_selection;
-      fltk::Widget* w = inner_selection->o;
+      gnui::Widget* w = inner_selection->o;
       x -= w->x();
       y -= w->y();
     } else {
@@ -528,20 +528,20 @@ WidgetType* WindowType::clicked_widget() {
 int WindowType::handle(int event) {
   static FluidType* selection;
   switch (event) {
-  case fltk::PUSH:
-    x1 = mx = fltk::event_x();
-    y1 = my = fltk::event_y();
+  case gnui::PUSH:
+    x1 = mx = gnui::event_x();
+    y1 = my = gnui::event_y();
     drag = 0;
     // test for popup menu:
-    if (fltk::event_button() >= 3) {
+    if (gnui::event_button() >= 3) {
       in_this_only = this; // modifies how some menu items work.
-      newMenu->popup(fltk::Rectangle(mx,my,0,0),"New");
+      newMenu->popup(gnui::Rectangle(mx,my,0,0),"New");
       in_this_only = 0;
       return 1;
     }
     selection = clicked_widget();
     // see if user grabs edges of selected region:
-    if (numselected && !(fltk::event_state(fltk::SHIFT)) &&
+    if (numselected && !(gnui::event_state(gnui::SHIFT)) &&
 	mx<=br+prefs.snap() && mx>=bx-prefs.snap() && 
 	my<=bt+prefs.snap() && my>=by-prefs.snap()) {
       int snap1 = prefs.snap()>5 ? prefs.snap () : 5;
@@ -557,8 +557,8 @@ int WindowType::handle(int event) {
     {FluidType* t = selection->click_test(mx, my);
     if (t) {
       //if (t == selection) return 1; // indicates mouse eaten w/o change
-      if (fltk::event_state(fltk::SHIFT)) {
-	fltk::event_is_click(0);
+      if (gnui::event_state(gnui::SHIFT)) {
+	gnui::event_is_click(0);
 	select(t, !t->selected());
       } else {
 	select_only(t);
@@ -570,34 +570,34 @@ int WindowType::handle(int event) {
       if (!drag) drag = BOX; // if all else fails, start a new selection region
     }}
     return 1;
-  case fltk::DRAG:
+  case gnui::DRAG:
     if (!drag) return 0;
-    mx = fltk::event_x();
-    my = fltk::event_y();
+    mx = gnui::event_x();
+    my = gnui::event_y();
     newdx();
     return 1;
-  case fltk::RELEASE:
+  case gnui::RELEASE:
     if (!drag) return 0;
-    mx = fltk::event_x();
-    my = fltk::event_y();
+    mx = gnui::event_x();
+    my = gnui::event_y();
     newdx();
-    if (drag != BOX && (dx || dy || !fltk::event_is_click())) {
+    if (drag != BOX && (dx || dy || !gnui::event_is_click())) {
       if (dx || dy) moveallchildren();
-    } else if ((fltk::event_clicks() || fltk::event_state(fltk::CTRL))) {
+    } else if ((gnui::event_clicks() || gnui::event_state(gnui::CTRL))) {
       WidgetType::open();
     } else {
       if (mx<x1) {int t = x1; x1 = mx; mx = t;}
       if (my<y1) {int t = y1; y1 = my; my = t;}
       int n = 0;
-      int toggle = fltk::event_state(fltk::SHIFT);
-      if (toggle) fltk::event_is_click(0);
+      int toggle = gnui::event_state(gnui::SHIFT);
+      if (toggle) gnui::event_is_click(0);
 
       // select everything in box:
       for (FluidType* i = first_child; i; i = i->walk(this)) {
 	if (i->is_widget() && !i->is_menu_item()) {
-	  fltk::Widget* o = ((WidgetType*)i)->o;
+	  gnui::Widget* o = ((WidgetType*)i)->o;
 	  int x = o->x(); int y = o->y();
-	  fltk::Group* p = o->parent(); if (!p->visible_r()) continue;
+	  gnui::Group* p = o->parent(); if (!p->visible_r()) continue;
 	  while (p->parent()) {x += p->x(); y += p->y(); p = p->parent();}
 	  if (x >= x1 && y > y1 && x+o->w() < mx && y+o->h() < my) {
 	    if (toggle) select(i, !i->selected());
@@ -628,20 +628,20 @@ int WindowType::handle(int event) {
       }
     return 1;
 
-  case fltk::FOCUS:
-  case fltk::UNFOCUS:
+  case gnui::FOCUS:
+  case gnui::UNFOCUS:
     return 1;
 
-  case fltk::KEY: {
+  case gnui::KEY: {
 
-    switch (fltk::event_key()) {
+    switch (gnui::event_key()) {
 
-    case fltk::EscapeKey:
-      ((fltk::Window*)o)->hide();
+    case gnui::EscapeKey:
+      ((gnui::Window*)o)->hide();
       return 1;
 
-    case fltk::TabKey: {
-      int backtab = (fltk::event_state(fltk::SHIFT));
+    case gnui::TabKey: {
+      int backtab = (gnui::event_state(gnui::SHIFT));
       // see if the current item is in this window:
       FluidType *i = FluidType::current;
       while (i && i->parent != this) i = i->parent;
@@ -669,14 +669,14 @@ int WindowType::handle(int event) {
       select_only(i);
       return 1;}
 
-    case fltk::LeftKey:  dx = -1; dy = 0; goto ARROW;
-    case fltk::RightKey: dx = +1; dy = 0; goto ARROW;
-    case fltk::UpKey:    dx = 0; dy = -1; goto ARROW;
-    case fltk::DownKey:  dx = 0; dy = +1; goto ARROW;
+    case gnui::LeftKey:  dx = -1; dy = 0; goto ARROW;
+    case gnui::RightKey: dx = +1; dy = 0; goto ARROW;
+    case gnui::UpKey:    dx = 0; dy = -1; goto ARROW;
+    case gnui::DownKey:  dx = 0; dy = +1; goto ARROW;
     ARROW:
       // for some reason BOTTOM/TOP are swapped... should be fixed...
-      drag = (fltk::event_state(fltk::SHIFT)) ? (RIGHT|TOP) : DRAG;
-      if (fltk::event_state(fltk::CTRL)) {dx *= prefs.gridx(); dy *= prefs.gridy();}
+      drag = (gnui::event_state(gnui::SHIFT)) ? (RIGHT|TOP) : DRAG;
+      if (gnui::event_state(gnui::CTRL)) {dx *= prefs.gridx(); dy *= prefs.gridy();}
       moveallchildren();
       drag = 0;
       return 1;
@@ -689,7 +689,7 @@ int WindowType::handle(int event) {
       return 0;
     }}
 
-  case fltk::SHORTCUT: {
+  case gnui::SHORTCUT: {
     in_this_only = this; // modifies how some menu items work.
     bool found = Main_Menu->test_shortcut();
     in_this_only = 0;
@@ -699,7 +699,7 @@ int WindowType::handle(int event) {
 #ifdef _WIN32
     return ((Overlay_Window *)o)->Window::handle(event);
 #else
-    return ((Overlay_Window *)o)->fltk::Window::handle(event);
+    return ((Overlay_Window *)o)->gnui::Window::handle(event);
 #endif
   }
 }
@@ -720,7 +720,7 @@ void WindowType::write_code() {
   if (modal) write_c("%so->set_modal();\n", indent());
   else if (non_modal) write_c("%so->set_non_modal();\n", indent());
   if (!border) write_c("%so->clear_border();\n", indent());
-  if (((fltk::Window*)o)->resizable() == o)
+  if (((gnui::Window*)o)->resizable() == o)
     write_c("%so->resizable(o);\n", indent());
   write_block_close();
 }
@@ -740,7 +740,7 @@ void WindowType::read_property(const char *c) {
   } else if (!strcmp(c,"non_modal")) {
     non_modal = 1;
   } else if (!strcmp(c, "visible")) {
-    if (fltk::Window::first()) open(); // only if we are using user interface
+    if (gnui::Window::first()) open(); // only if we are using user interface
   } else if (!strcmp(c,"noborder")) {
     border = 0;
   } else if (!strcmp(c,"xclass")) {
@@ -757,7 +757,7 @@ void WindowType::read_property(const char *c) {
 
 int WindowType::read_fdesign(const char* name, const char* value) {
   int x;
-  o->box(fltk::NO_BOX); // because fdesign always puts an fltk::Box next
+  o->box(gnui::NO_BOX); // because fdesign always puts an gnui::Box next
   if (!strcmp(name,"Width")) {
     if (sscanf(value,"%d",&x) == 1) o->resize(x,o->h());
   } else if (!strcmp(name,"Height")) {

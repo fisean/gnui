@@ -41,7 +41,7 @@
 #include "Rectangle.h"
 #include "PixelType.h"
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/draw.h
 //@{

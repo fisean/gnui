@@ -27,7 +27,7 @@
 
 // we need to remember some settings for the current context
 
-namespace fltk {
+namespace gnui {
 
 static float quartz_line_width_ = 1.0f;
 static enum CGLineCap quartz_line_cap_ = kCGLineCapButt;
@@ -45,7 +45,7 @@ void restore_quartz_line_style() {
 
 } // end of namespace
 
-void fltk::setcolor(Color color) {
+void gnui::setcolor(Color color) {
   current_color_ = color;
   if (!quartz_gc) return; // no context yet? We will assign the color later.
   uchar r,g,b; split_color(color,r,g,b);
@@ -56,7 +56,7 @@ void fltk::setcolor(Color color) {
   CGContextSetRGBStrokeColor(quartz_gc, fr, fg, fb, 1.0f);
 }
 
-void fltk::setcolor_alpha(Color color, float alpha) {
+void gnui::setcolor_alpha(Color color, float alpha) {
   current_color_ = color;
   if (!quartz_gc) return; // no context yet? We will assign the color later.
   uchar r,g,b; split_color(color,r,g,b);
@@ -75,7 +75,7 @@ static enum CGLineJoin Join[4] = {
   kCGLineJoinMiter, kCGLineJoinMiter, kCGLineJoinRound, kCGLineJoinBevel
 };
 
-void fltk::line_style(int style, float  width, const char* dashes) {
+void gnui::line_style(int style, float  width, const char* dashes) {
   line_style_ = style;
   line_width_ = width;
   line_dashes_ = dashes;

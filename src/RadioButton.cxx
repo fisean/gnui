@@ -28,9 +28,9 @@
 #include <fltk/RadioButton.h>
 #include <fltk/draw.h>
 #include <fltk/Box.h>
-using namespace fltk;
+using namespace gnui;
 
-/** \class fltk::RadioButton
+/** \class gnui::RadioButton
 
   This button turns the value() on when clicked, and turns all other
   RadioButton widgets in the same group off.  It displays a round dot

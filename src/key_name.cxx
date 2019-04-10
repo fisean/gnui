@@ -35,7 +35,7 @@
 #if USE_X11
 #include <fltk/x.h>
 #endif
-using namespace fltk;
+using namespace gnui;
 
 // This table must be in numeric order by fltk (X) keysym number.
 // On X the table is much shorter as it is only the names that
@@ -62,7 +62,7 @@ static Keyname table[] = {
   {EndKey,	"End"},
   {PrintKey,	"Print"},
   {InsertKey,	"Insert"},
-  {fltk::MenuKey,"Menu"},
+  {gnui::MenuKey,"Menu"},
   {NumLockKey,	"NumLock"},
   {KeypadEnter,	"KeypadEnter"},
   {LeftShiftKey,"LeftShift"},
@@ -80,15 +80,15 @@ static Keyname table[] = {
 
 /*!
 
-  Unparse a fltk::Widget::shortcut(), an fltk::event_key(), or an
-  fltk::event_key() or'd with fltk::event_state().  Returns a pointer
+  Unparse a gnui::Widget::shortcut(), an gnui::event_key(), or an
+  gnui::event_key() or'd with gnui::event_state().  Returns a pointer
   to a human-readable string like "Alt+N". If \a hotkey is zero an
   empty string is returned. The return value points at a static buffer
   that is overwritten with each call.
 
-  The opposite function is fltk::key().
+  The opposite function is gnui::key().
 */
-const char* fltk::key_name(unsigned hotkey) {
+const char* gnui::key_name(unsigned hotkey) {
   static char buf[20];
   char *p = buf;
   if (!hotkey) {*p = 0; return buf;}
@@ -145,54 +145,54 @@ const char* fltk::key_name(unsigned hotkey) {
 }
 
 /*!
-  Turn a string into a fltk::event_key() value or'd with
-  fltk::event_shift() flags. The returned value can be used by by
-  fltk::Widget::add_shortcut().  Any error, or a null or zero-length
+  Turn a string into a gnui::event_key() value or'd with
+  gnui::event_shift() flags. The returned value can be used by by
+  gnui::Widget::add_shortcut().  Any error, or a null or zero-length
   string, returns 0.
 
   Currently this understands prefixes of "Alt+", "Shift+", and "Ctrl+"
-  to turn on fltk::ALT, fltk::SHIFT, and fltk::CTRL. Case is ignored
+  to turn on gnui::ALT, gnui::SHIFT, and gnui::CTRL. Case is ignored
   and the '+' can be a '-' instead and the prefixes can be in any
   order.  You can also use '#' instead of "Alt+", '+' instead of
   "Shift+", and '^' instead of Ctrl+.
 
   After the shift prefixes there can either be a single ASCII letter,
   "Fn" where n is a number to indicate a function key, or "0xnnnn"
-  to get an arbitrary fltk::event_key() enumeration value.
+  to get an arbitrary gnui::event_key() enumeration value.
 
-  The inverse function to turn a number into a string is fltk::key_name().
-  Currently this function does not parse some strings fltk::key_name() can
+  The inverse function to turn a number into a string is gnui::key_name().
+  Currently this function does not parse some strings gnui::key_name() can
   return, such as the names of arrow keys!
 */
-unsigned fltk::key(const char* name) {
+unsigned gnui::key(const char* name) {
   if (!name || !*name) return 0;
   // read all the shift prefixes:
   int shifts = 0;
   while (name[0] && name[1]) {
     if (*name == '#') {
-      shifts |= fltk::ALT; name++;
+      shifts |= gnui::ALT; name++;
     } else if (*name == '+') {
-      shifts |= fltk::SHIFT; name++;
+      shifts |= gnui::SHIFT; name++;
     } else if (*name == '^') {
-      shifts |= fltk::COMMAND; name++; // ctrl on win/linux, meta on os/x
+      shifts |= gnui::COMMAND; name++; // ctrl on win/linux, meta on os/x
     } else if (!strncasecmp(name, "alt",  3) && (name[3]=='-'||name[3]=='+')) {
-      shifts |= fltk::ALT; name += 4;
+      shifts |= gnui::ALT; name += 4;
     } else if (!strncasecmp(name, "shift",5) && (name[5]=='-'||name[5]=='+')) {
-      shifts |= fltk::SHIFT; name += 6;
+      shifts |= gnui::SHIFT; name += 6;
     } else if (!strncasecmp(name, "ctrl", 4) && (name[4]=='-'||name[4]=='+')) {
-      shifts |= fltk::CTRL; name += 5;
+      shifts |= gnui::CTRL; name += 5;
     } else if (!strncasecmp(name, "meta", 4) && (name[4]=='-'||name[4]=='+')) {
-      shifts |= fltk::META; name += 5;
+      shifts |= gnui::META; name += 5;
 //     } else if (!strncasecmp(name,"accelerator",11)&& (name[11]=='-'||name[11]=='+')) {
-//       shifts |= fltk::ACCELERATOR; name += 12;
+//       shifts |= gnui::ACCELERATOR; name += 12;
     } else if (!strncasecmp(name, "cmd", 3) && (name[3]=='-'||name[3]=='+')) {
-      shifts |= fltk::COMMAND; name += 4; // ctrl on win/linux, meta on os/x
+      shifts |= gnui::COMMAND; name += 4; // ctrl on win/linux, meta on os/x
     } else break;
   }
   if (!*name) return 0;
   if (name[1]) {
     if (name[0]=='F' || name[0]=='f')
-      return shifts | (fltk::F0Key+(int)strtol(name+1,0,0));
+      return shifts | (gnui::F0Key+(int)strtol(name+1,0,0));
     return shifts | (int)strtol(name,0,0); // allow 0xf00 to get any key
   }
   return shifts | *name;

@@ -15,7 +15,7 @@
 #include <fltk/visual.h>
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 const char cdata[16*16+1] =
 "                "
@@ -40,7 +40,7 @@ const char cdata[16*16+1] =
 // Tester for drawimage() call:
 class Dtest : public Widget {
 public:
-  fltk::PixelType pixeltype;
+  gnui::PixelType pixeltype;
   const unsigned char* data;
   void draw() {
     push_matrix();
@@ -53,7 +53,7 @@ public:
     box(NO_BOX);
     align(ALIGN_BOTTOM);
     labelsize(10);
-    tooltip("fltk::drawimage()");
+    tooltip("gnui::drawimage()");
   }
 };
 
@@ -65,7 +65,7 @@ public:
     box(new rgbImage(d, pt, 16*SCALE, 16*SCALE));
     align(ALIGN_BOTTOM);
     labelsize(10);
-    tooltip("Instance of fltk::rgbImage used as widget->box()");
+    tooltip("Instance of gnui::rgbImage used as widget->box()");
   }
 };
 
@@ -74,7 +74,7 @@ class Insetimage : public rgbImage {
 public:
   Insetimage(const unsigned char* d, PixelType pt, int w, int h) :
     rgbImage(d,pt,w,h) {}
-  void inset(fltk::Rectangle& r) const {r.inset(16);}
+  void inset(gnui::Rectangle& r) const {r.inset(16);}
 };
 
 class Insettest : public Widget {
@@ -204,17 +204,17 @@ int arg(int argc, char **argv, int &i) {
 #endif
 
 void bgcallback(Widget* w, void *v) {
-  fltk::Color c = fltk::Color(((Slider*)w)->value());
+  gnui::Color c = gnui::Color(((Slider*)w)->value());
   ((Window*)v)->color(c);
-  fltk::Widget::default_style->buttoncolor(c);
-  fltk::redraw();
+  gnui::Widget::default_style->buttoncolor(c);
+  gnui::redraw();
 }
 
 void fgcallback(Widget* w, void *v) {
-  fltk::Color c = fltk::Color(((Slider*)w)->value());
-  fltk::Widget::default_style->labelcolor(c);
-  fltk::Widget::default_style->textcolor(c);
-  fltk::redraw();
+  gnui::Color c = gnui::Color(((Slider*)w)->value());
+  gnui::Widget::default_style->labelcolor(c);
+  gnui::Widget::default_style->textcolor(c);
+  gnui::redraw();
 }
 
 void activecallback(Widget* w, void* v) {
@@ -226,19 +226,19 @@ bool checker = false;
 
 void checkercallback(Widget* w, void*) {
   checker = ((Button*)w)->value();
-  fltk::redraw();
+  gnui::redraw();
 }
 
 class CheckGroup : public Group {
 public:
   void draw() {
     if (checker) {
-      fltk::setcolor(GRAY50);
+      gnui::setcolor(GRAY50);
       int x1 = 0;
       for (int y = 0; y < h(); y += 10) {
 	x1 = 10-x1;
 	for (int x = x1; x < w(); x += 20)
-	  fltk::fillrect(x,y,10,10);
+	  gnui::fillrect(x,y,10,10);
       }
     }
     Group::draw();
@@ -268,7 +268,7 @@ int main(int argc, char** argv) {
     xcolormap = XCreateColormap(xdisplay, RootWindow(xdisplay,xscreen),
 				xvisual->visual, AllocNone);
 # if !USE_CAIRO
-    fltk::xpixel(fltk::BLACK); // make sure black is allocated
+    gnui::xpixel(gnui::BLACK); // make sure black is allocated
 # endif
   } else {
     visual(RGB_COLOR);
@@ -291,62 +291,62 @@ int main(int argc, char** argv) {
 
   Widget* w;
 
-  w = new Dtest(fltk::MONO, x, y, "MONO", builddata(1, monopixels));
+  w = new Dtest(gnui::MONO, x, y, "MONO", builddata(1, monopixels));
   nextxy();
 
-  w = new Itest(fltk::MONO, x, y, "MONOimage", builddata(1, monopixels));
+  w = new Itest(gnui::MONO, x, y, "MONOimage", builddata(1, monopixels));
   nextxy();
 
-  w = new Dtest(fltk::RGB, x, y, "RGB", builddata(3, rgbpixels));
+  w = new Dtest(gnui::RGB, x, y, "RGB", builddata(3, rgbpixels));
   nextxy();
 
-  w = new Itest(fltk::RGB, x, y, "RGB image", builddata(3, rgbpixels));
+  w = new Itest(gnui::RGB, x, y, "RGB image", builddata(3, rgbpixels));
   nextxy();
 
-  w = new Dtest(fltk::RGB32, x, y, "RGB32", builddata(4, (uchar*)argbpixels));
+  w = new Dtest(gnui::RGB32, x, y, "RGB32", builddata(4, (uchar*)argbpixels));
   nextxy();
 
-  w = new Itest(fltk::RGB32, x, y, "RGB32image", builddata(4, (uchar*)argbpixels));
+  w = new Itest(gnui::RGB32, x, y, "RGB32image", builddata(4, (uchar*)argbpixels));
   nextxy();
 
-  w = new Dtest(fltk::RGBx, x, y, "RGBx", builddata(4, rgbapixels));
+  w = new Dtest(gnui::RGBx, x, y, "RGBx", builddata(4, rgbapixels));
   w->tooltip("drawimage() of an rgb image except the pixels are 4 apart, "
 	      "some drivers will screw up and not skip the 4th byte");
   nextxy();
 
-  w = new Itest(fltk::RGBx, x, y, "RGBx image", builddata(4, rgbapixels));
+  w = new Itest(gnui::RGBx, x, y, "RGBx image", builddata(4, rgbapixels));
   nextxy();
 
-  w = new Dtest(fltk::RGBA, x, y, "RGBA", builddata(4, rgbapixels));
+  w = new Dtest(gnui::RGBA, x, y, "RGBA", builddata(4, rgbapixels));
   w->tooltip("drawimage() of 4-byte rgba. Should be transparent, not black");
   nextxy();
 
-  w = new Itest(fltk::RGBA, x, y, "RGBAimage", builddata(4, rgbapixels));
+  w = new Itest(gnui::RGBA, x, y, "RGBAimage", builddata(4, rgbapixels));
   nextxy();
 
-  w = new Dtest(fltk::ARGB32, x, y, "ARGB32", builddata(4, (uchar*)argbpixels));
+  w = new Dtest(gnui::ARGB32, x, y, "ARGB32", builddata(4, (uchar*)argbpixels));
   nextxy();
 
-  w = new Itest(fltk::ARGB32, x, y, "ARGB32image", builddata(4, (uchar*)argbpixels));
+  w = new Itest(gnui::ARGB32, x, y, "ARGB32image", builddata(4, (uchar*)argbpixels));
   nextxy();
 
-  w = new Dtest(fltk::RGBM, x, y, "RGBM", builddata(4, rgbmpixels));
+  w = new Dtest(gnui::RGBM, x, y, "RGBM", builddata(4, rgbmpixels));
   w->tooltip("drawimage() of 4-byte @i;unpremultiplied@n; rgba. Should be transparent, not white");
   nextxy();
 
-  w = new Itest(fltk::RGBM, x, y, "RGBMimage", builddata(4, rgbmpixels));
+  w = new Itest(gnui::RGBM, x, y, "RGBMimage", builddata(4, rgbmpixels));
   nextxy();
 
-  w = new Dtest(fltk::MRGB32, x, y, "MRGB32", builddata(4, (uchar*)mrgbpixels));
+  w = new Dtest(gnui::MRGB32, x, y, "MRGB32", builddata(4, (uchar*)mrgbpixels));
   nextxy();
 
-  w = new Itest(fltk::MRGB32, x, y, "MRGB32image", builddata(4, (uchar*)mrgbpixels));
+  w = new Itest(gnui::MRGB32, x, y, "MRGB32image", builddata(4, (uchar*)mrgbpixels));
   nextxy();
 
-  w = new Dtest(fltk::MASK, x, y, "MASK", builddata(1, monopixels));
+  w = new Dtest(gnui::MASK, x, y, "MASK", builddata(1, monopixels));
   nextxy();
 
-  w = new Itest(fltk::MASK, x, y, "MASKimage", builddata(1, monopixels));
+  w = new Itest(gnui::MASK, x, y, "MASKimage", builddata(1, monopixels));
   nextxy();
 
   w = new Xtest(x, y, "mask xpmImage", recycle_xpm);
@@ -356,7 +356,7 @@ int main(int argc, char** argv) {
 
   w = new Btest(x, y, "xbmImage");
   w->tooltip("In older versions of FLTK, the only MASK style image was "
-	     "the fltk::xbmImage object, which only had 1 bit for pixel. "
+	     "the gnui::xbmImage object, which only had 1 bit for pixel. "
 	     "This should continue to work and display the same colors "
 	     "as maskXPM and MASK.");
   nextxy();
@@ -366,7 +366,7 @@ int main(int argc, char** argv) {
 	     "was from XPM and GIF images. This should continue to work.");
   nextxy();
 
-  w = new Insettest(fltk::RGBx, x, y, "Insetimage", builddata(4, rgbapixels));
+  w = new Insettest(gnui::RGBx, x, y, "Insetimage", builddata(4, rgbapixels));
   nextxy();
 
   group.end(); y = group.h();
@@ -385,14 +385,14 @@ int main(int argc, char** argv) {
   s->tooltip("background color, change this to see transparency");
   s->range(1,255);
   s->step(1);
-  s->value(fltk::GRAY75);
+  s->value(gnui::GRAY75);
   s->align(ALIGN_LEFT);
   s->callback(bgcallback, &window);
   s = new Slider(20,y+20,window.w()-30,20,"fg");
   s->tooltip("labelcolor, change this to see if MASK works");
   s->range(1,255);
   s->step(1);
-  s->value(fltk::BLACK);
+  s->value(gnui::BLACK);
   s->callback(fgcallback, &window);
   s->align(ALIGN_LEFT);
 
@@ -421,5 +421,5 @@ int main(int argc, char** argv) {
 
   window.show(argc, argv);
 
-  return fltk::run();
+  return gnui::run();
 }

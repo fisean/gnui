@@ -34,26 +34,26 @@
 
 /**
   Turn a string into a color. If \a name is null this returns NO_COLOR.
-  Otherwise it returns fltk::parsecolor(name, strlen(name)).
+  Otherwise it returns gnui::parsecolor(name, strlen(name)).
 */
-fltk::Color fltk::color(const char* name) {
+gnui::Color gnui::color(const char* name) {
   if (!name) return NO_COLOR;
   return parsecolor(name, strlen(name));
 }
 
-// Returns fltk::color(r,g,b) but returns BLACK instead of zero for 0,0,0:
-static fltk::Color ccolor(unsigned r, unsigned g, unsigned b) {
+// Returns gnui::color(r,g,b) but returns BLACK instead of zero for 0,0,0:
+static gnui::Color ccolor(unsigned r, unsigned g, unsigned b) {
   if (r || g || b)
-    return fltk::color(r,g,b);
+    return gnui::color(r,g,b);
   else
-    return fltk::BLACK;
+    return gnui::BLACK;
 }
 
 /* fabien: const char* const invalid in a struct (even const) in VC6 */
-static const struct {const char* name; fltk::Color color;}
+static const struct {const char* name; gnui::Color color;}
 web_safe[] = { // must be in alphabetical order!
   {"aqua",	0x00ffff00},
-  {"black",	fltk::BLACK},
+  {"black",	gnui::BLACK},
   {"blue",	0x0000ff00},
   {"fuchsia",	0xff00ff00},
   {"gray",	0x80808000},
@@ -89,7 +89,7 @@ web_safe[] = { // must be in alphabetical order!
   - If FLTK is compiled to use X11, then XParseColor() is tried
   - all other strings return NO_COLOR.
 */
-fltk::Color fltk::parsecolor(const char* name, unsigned length) {
+gnui::Color gnui::parsecolor(const char* name, unsigned length) {
   if (!length)
     return NO_COLOR;
 
@@ -100,7 +100,7 @@ fltk::Color fltk::parsecolor(const char* name, unsigned length) {
 
   if (length < 3) {
     sscanf(name, "%u%n", &r, &n);
-    if (n == length) return fltk::Color(r);
+    if (n == length) return gnui::Color(r);
   }
 
   if (length > 2 && name[0]=='0' && (name[1]=='x' || name[1]=='X')) {

@@ -26,7 +26,7 @@
 //
 
 // Each object created by Fluid is a subclass of FluidType. The majority
-// of these are going to describe fltk::Widgets, so you will see the word
+// of these are going to describe gnui::Widgets, so you will see the word
 // "widget" used a lot instead of FluidType. But there are also functions
 // and lines of code and anything else that can go into the browser.
 //
@@ -62,7 +62,7 @@
 #include "undo.h"
 #include "WidgetType.h"
 
-using namespace fltk;
+using namespace gnui;
 
 extern StatusBarGroup * status_bar;
 ////////////////////////////////////////////////////////////////
@@ -71,31 +71,31 @@ FluidType *FluidType::first=0;
 FluidType *FluidType::current=0;
 int FluidType::selected_count_=0;
 
-class Widget_List : public fltk::List {
-  virtual int children(const fltk::Menu*, const int* indexes, int level);
-  virtual fltk::Widget* child(const fltk::Menu*, const int* indexes, int level);
-  virtual void flags_changed(const fltk::Menu*, fltk::Widget*);
+class Widget_List : public gnui::List {
+  virtual int children(const gnui::Menu*, const int* indexes, int level);
+  virtual gnui::Widget* child(const gnui::Menu*, const int* indexes, int level);
+  virtual void flags_changed(const gnui::Menu*, gnui::Widget*);
   public:
     virtual ~Widget_List() {}
 };
 
 static Widget_List widgetlist;
 
-extern fltk::Browser *widget_browser;
+extern gnui::Browser *widget_browser;
 
 extern void deselect();
 
 extern int compile_only; 
 
-static void Widget_Browser_callback(fltk::Widget * w,void *) {
-    if (fltk::event()==fltk::PUSH )  {
-	if ( ( (fltk::Browser*) w)->item()==0) 
+static void Widget_Browser_callback(gnui::Widget * w,void *) {
+    if (gnui::event()==gnui::PUSH )  {
+	if ( ( (gnui::Browser*) w)->item()==0) 
 	    deselect();
     }
-    else if (fltk::event()==fltk::WHEN_ENTER_KEY || fltk::event_clicks()) { // double_click open the widget editor
+    else if (gnui::event()==gnui::WHEN_ENTER_KEY || gnui::event_clicks()) { // double_click open the widget editor
 	if (FluidType::current) FluidType::current->open();
     }
-    if(fltk::event()!=fltk::RELEASE) refresh_browser_views();
+    if(gnui::event()!=gnui::RELEASE) refresh_browser_views();
 }
 
 
@@ -126,16 +126,16 @@ void refresh_browser_views() {
 }
 
 // make the widget browser in the main fluid window, items use the list method defined by widgetlist
-fltk::Widget *make_widget_browser(int x,int y,int w,int h) {
-  widget_browser = new fltk::MultiBrowser(x,y,w,h);
+gnui::Widget *make_widget_browser(int x,int y,int w,int h) {
+  widget_browser = new gnui::MultiBrowser(x,y,w,h);
   widget_browser->list(&widgetlist);
   widget_browser->callback(Widget_Browser_callback);
-  widget_browser->when(fltk::WHEN_ENTER_KEY|fltk::WHEN_CHANGED);
+  widget_browser->when(gnui::WHEN_ENTER_KEY|gnui::WHEN_CHANGED);
   widget_browser->indented(1);
   return widget_browser;
 }
 
-int Widget_List::children(const fltk::Menu*, const int* indexes, int level) {
+int Widget_List::children(const gnui::Menu*, const int* indexes, int level) {
   FluidType* item = FluidType::first;
   if (!item) return 0;
   for (int l = 0; l < level; l++) {
@@ -159,7 +159,7 @@ static const char * get_item_fullname(FluidType* item) {
     return buffer;
 }
 
-fltk::Widget* Widget_List::child(const fltk::Menu*, const int* indexes, int level) {
+gnui::Widget* Widget_List::child(const gnui::Menu*, const int* indexes, int level) {
   FluidType* item = FluidType::first;
   if (!item) return 0;
   for (int l = 0;; l++) {
@@ -168,10 +168,10 @@ fltk::Widget* Widget_List::child(const fltk::Menu*, const int* indexes, int leve
     if (l >= level) break;
     item = item->first_child;
   }
-  static fltk::Widget* widget;
+  static gnui::Widget* widget;
   if (!widget) {
-    fltk::Group::current(0);
-    widget = new fltk::Item();
+    gnui::Group::current(0);
+    widget = new gnui::Item();
   }
   widget->user_data(item);
   if (item->selected()) widget->set_selected();
@@ -187,7 +187,7 @@ fltk::Widget* Widget_List::child(const fltk::Menu*, const int* indexes, int leve
   return widget;
 }
 
-void Widget_List::flags_changed(const fltk::Menu*, fltk::Widget* w) {
+void Widget_List::flags_changed(const gnui::Menu*, gnui::Widget* w) {
   FluidType* item = (FluidType*)(w->user_data());
   item->open_ = w->state();
   item->new_selected = w->selected();
@@ -471,7 +471,7 @@ void select_none_cb(Widget *,void *) {
   }
 }
 
-void select_all_cb(fltk::Widget *,void *) {
+void select_all_cb(gnui::Widget *,void *) {
   FluidType *parent = FluidType::current ? FluidType::current->parent : 0;
   if (in_this_only) {
     // make sure we don't select outside the current window
@@ -517,7 +517,7 @@ void FluidType::move_before(FluidType* g) {
 }
 
 // move selected widgets in their parent's list:
-void earlier_cb(fltk::Widget*,void*) {
+void earlier_cb(gnui::Widget*,void*) {
   bool canundo = false;
   FluidType *parent = FluidType::current ? FluidType::current->parent : 0;
   Undo::checkpoint();
@@ -532,7 +532,7 @@ void earlier_cb(fltk::Widget*,void*) {
   if (!canundo) Undo::remove_last();
 }
 
-void later_cb(fltk::Widget*,void*) {
+void later_cb(gnui::Widget*,void*) {
   bool canundo = false;
   FluidType *parent = FluidType::current ? FluidType::current->parent : 0;
   FluidType *f;
@@ -633,7 +633,7 @@ int FluidType::read_fdesign(const char*, const char*) {return 0;}
  * \return a widget pointer that the live mode initiator can 'show()'
  * \see leave_live_mode()
  */
-fltk::Widget *FluidType::enter_live_mode(int top) {
+gnui::Widget *FluidType::enter_live_mode(int top) {
   return 0L;
 }
 

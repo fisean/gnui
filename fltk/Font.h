@@ -27,7 +27,7 @@
 
 #include "Style.h"
 
-namespace fltk {
+namespace gnui {
 
 enum {  // values for attributes:
   BOLD = 1,

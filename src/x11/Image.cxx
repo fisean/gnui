@@ -58,7 +58,7 @@ static Bool use_xshm_pixmaps;
 # include <stdlib.h>
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 /// Converter functions:
 static void (*converter[9])(const uchar *from, uchar *to, int w);
@@ -723,9 +723,9 @@ static void mrgb32_to_argb32(const uchar* from, uchar* to, int w) {
 }
 #endif
 
-void fl_xrender_draw_image(XWindow source, fltk::PixelType type,
-                           const fltk::Rectangle& from,
-                           const fltk::Rectangle& to)
+void fl_xrender_draw_image(XWindow source, gnui::PixelType type,
+                           const gnui::Rectangle& from,
+                           const gnui::Rectangle& to)
 {
   XTransform xtransform;
   if (!fl_get_invert_matrix(xtransform)) return; // give up if we can't invert
@@ -1015,7 +1015,7 @@ static int xerror_handler(Display* d, XErrorEvent* e) {
 }
 #endif
 
-struct fltk::Picture {
+struct gnui::Picture {
   int w, h, linedelta;
   Bool draw_target; // whether the image is used with draw_into()
   unsigned long n; // bytes used
@@ -1316,8 +1316,8 @@ void Image::fetch_if_needed() const {
 #endif
     // kludge to refetch if fg/bg colors change
     if (pixeltype_==MASK) {
-      U32 fg = (fltk::get_color_index(fltk::getcolor())+
-                fltk::get_color_index(fltk::getbgcolor()))&0xffffff00;
+      U32 fg = (gnui::get_color_index(gnui::getcolor())+
+                gnui::get_color_index(gnui::getbgcolor()))&0xffffff00;
       if ((flags & 0xffffff00) != fg)
         thisimage->flags = (flags&0xff&~FETCHED)|fg;
     }
@@ -1329,7 +1329,7 @@ void Image::fetch_if_needed() const {
 
 void fl_restore_clip(); // in clip.cxx
 
-void Image::draw(const fltk::Rectangle& from, const fltk::Rectangle& to) const {
+void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
   fetch_if_needed();
   if (!picture) {fillrect(to); return;}
 

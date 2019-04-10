@@ -4,10 +4,10 @@
 #include "Fl_Valuator.H"
 #include <fltk/ThumbWheel.h>
 
-class Fl_Roller : public fltk::ThumbWheel {
+class Fl_Roller : public gnui::ThumbWheel {
 public:
   Fl_Roller(int x, int y, int w, int h, const char*l = 0)
-    : fltk::ThumbWheel(x,y,w,h,l) {set_vertical();}
+    : gnui::ThumbWheel(x,y,w,h,l) {set_vertical();}
 };
 
 #endif

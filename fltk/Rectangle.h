@@ -35,7 +35,7 @@
 //#define FLTK_CENTER_X(coord, length)  (coord + (length>>1))
 //#define FLTK_CENTER_Y(coord, length)  (coord + (length>>1))
 
-namespace fltk {
+namespace gnui {
 
 class FL_API Rectangle {
   int x_, y_, w_, h_;

@@ -36,7 +36,7 @@
 #include <fltk/FileIcon.h>
 #include <fltk/filename.h>
 
-namespace fltk {
+namespace gnui {
 
 
 //
@@ -72,7 +72,7 @@ public:
   /** \returns The filter pattern */
   const char	*filter() const { return (pattern_); };
 
-  int		load(const char *directory, FileSortF *sort = (FileSortF*) fltk::numericsort);
+  int		load(const char *directory, FileSortF *sort = (FileSortF*) gnui::numericsort);
   
   /** \returns the current Browser's textsize */
   float		textsize() const { return (Browser::textsize()); };

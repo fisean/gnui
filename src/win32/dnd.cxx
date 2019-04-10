@@ -150,7 +150,7 @@ public:
  * - create a selection first using: 
  *     copy(const char *stuff, int len, 0)
  */
-bool fltk::dnd()
+bool gnui::dnd()
 {
   DWORD dropEffect;
   ReleaseCapture();
@@ -166,13 +166,13 @@ bool fltk::dnd()
   fds->Release();
 
   // Windows handled the mouse release, remember that:
-  fltk::pushed_ = 0;
-  fltk::e_state &= ~fltk::ANY_BUTTON;
+  gnui::pushed_ = 0;
+  gnui::e_state &= ~gnui::ANY_BUTTON;
 
   return ret==DRAGDROP_S_DROP; // or DD_S_CANCEL
 }
 #else
-bool fltk::dnd()
+bool gnui::dnd()
 {
   // Always indicate DnD failed when using GCC < 3...
   return false;

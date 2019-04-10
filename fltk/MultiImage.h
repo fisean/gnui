@@ -32,7 +32,7 @@
 #include "Symbol.h"
 #include <stdarg.h>
 
-namespace fltk {
+namespace gnui {
 
 class FL_API MultiImage : public Symbol
 {

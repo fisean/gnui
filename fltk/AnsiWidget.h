@@ -30,7 +30,7 @@
 #include <fltk/draw.h>
 #include <fltk/Image.h>
 
-using namespace fltk;
+using namespace gnui;
 
 class AnsiWidget : public Widget {
     public:

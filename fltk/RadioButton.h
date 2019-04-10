@@ -31,7 +31,7 @@
 
 #include "CheckButton.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API RadioButton : public CheckButton {
 public:

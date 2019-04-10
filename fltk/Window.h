@@ -29,7 +29,7 @@
 
 #include "Group.h"
 
-namespace fltk {
+namespace gnui {
 
 // value for x,y to indicate window system places window
 const int USEDEFAULT = ((int)0x80000000); // same as Win32 value

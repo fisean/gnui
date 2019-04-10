@@ -1,7 +1,7 @@
 #ifndef fltk_damage_h
 #define fltk_damage_h
 
-namespace fltk {
+namespace gnui {
 
 /*!
   Values of the bits stored in Widget::damage().
@@ -21,12 +21,12 @@ MyClass::handle(int event) {
 }
 
 MyClass::draw() {
-  if (damage() & fltk::DAMAGE_ALL) {
+  if (damage() & gnui::DAMAGE_ALL) {
     ... draw frame/box and other static stuff ...
   }
-  if (damage() & (fltk::DAMAGE_ALL | 1)) draw_part1();
-  if (damage() & (fltk::DAMAGE_ALL | 2)) draw_part2();
-  if (damage() & (fltk::DAMAGE_ALL | 4)) draw_part3();
+  if (damage() & (gnui::DAMAGE_ALL | 1)) draw_part1();
+  if (damage() & (gnui::DAMAGE_ALL | 2)) draw_part2();
+  if (damage() & (gnui::DAMAGE_ALL | 4)) draw_part3();
 }
 \endcode
 

@@ -29,7 +29,7 @@
 
 #include "Valuator.h"
 
-namespace fltk {
+namespace gnui {
 /** This valuator is provided for back-compatability ONLY.
   This may be removed before the final version!
   3-button "slider", made for Nuke

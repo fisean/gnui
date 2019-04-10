@@ -33,7 +33,7 @@
 #include "FL_API.h"
 #include "Flags.h"
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/Color.h
 //@{
@@ -42,13 +42,13 @@ typedef unsigned Color;
 
 /*! Symbolic names for some of the indexed colors.
 
-  The 24-entry "gray ramp" is modified by fltk::set_background() so
-  that the color fltk::GRAY75 is the background color, and the others
+  The 24-entry "gray ramp" is modified by gnui::set_background() so
+  that the color gnui::GRAY75 is the background color, and the others
   are a nice range from black to a lighter version of the gray. These
   are used to draw box edges. The gray levels are chosen to be evenly
   spaced, listed here is the actual 8-bit and decimal gray level
   assigned by default.  Also listed here is the letter used for
-  fltk::FrameBox and the old fltk1.1 names used for these levels.
+  gnui::FrameBox and the old fltk1.1 names used for these levels.
 
   The remiander of the colormap is a 5x8x5 color cube. This cube is
   used to dither images on 8-bit screens X colormaps to reduce the

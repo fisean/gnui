@@ -3,11 +3,11 @@
 #ifndef image_file_panel_h
 #define image_file_panel_h
 #include <fltk/Window.h>
-extern fltk::Window* images_dir_window;
+extern gnui::Window* images_dir_window;
 #include <fltk/Input.h>
-extern fltk::Input* images_dir_input;
+extern gnui::Input* images_dir_input;
 #include <fltk/Button.h>
 #include <fltk/Widget.h>
 #include <fltk/ReturnButton.h>
-fltk::Window* make_images_dir_window();
+gnui::Window* make_images_dir_window();
 #endif

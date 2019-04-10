@@ -28,9 +28,9 @@
 #include <fltk/damage.h>
 #include <fltk/draw.h>
 #include <fltk/xbmImage.h>
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::Adjuster
+/*! \class gnui::Adjuster
 
   Valuator widget that displays three buttons. The user pushes down
   the button and drags left/right to adjust, or clicks the button to

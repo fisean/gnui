@@ -37,7 +37,7 @@
 #include <fltk/ValueSlider.h>
 #include <fltk/Font.h>
 
-using namespace fltk;
+using namespace gnui;
 
 Output *text;
 MultiLineOutput *text2;
@@ -73,26 +73,26 @@ int main(int argc, char **argv) {
   window->begin();
   text = new Output(100,90,200,30,"Output");
   text->value(initial_value);
-  text->clear_flag(fltk::ALIGN_MASK);
-  text->set_flag(fltk::ALIGN_BOTTOM);
+  text->clear_flag(gnui::ALIGN_MASK);
+  text->set_flag(gnui::ALIGN_BOTTOM);
 
   text2 = new MultiLineOutput(100,150,200,100,"MultiLineOutput");
   text2->value(initial_value);
-  text2->clear_flag(fltk::ALIGN_MASK);
-  text2->set_flag(fltk::ALIGN_BOTTOM);
+  text2->clear_flag(gnui::ALIGN_MASK);
+  text2->set_flag(gnui::ALIGN_BOTTOM);
   window->resizable(text2);
 
   fonts = new ValueSlider(50,325,350,25,"Font");
-  fonts->clear_flag(fltk::ALIGN_MASK);
-  fonts->set_flag(fltk::ALIGN_LEFT);
+  fonts->clear_flag(gnui::ALIGN_MASK);
+  fonts->set_flag(gnui::ALIGN_LEFT);
   fonts->range(0,15);
   fonts->step(1);
   fonts->value(0);
   fonts->callback(font_cb);
 
   sizes = new ValueSlider(50,350,350,25,"Size");
-  sizes->clear_flag(fltk::ALIGN_MASK);
-  sizes->set_flag(fltk::ALIGN_LEFT);
+  sizes->clear_flag(gnui::ALIGN_MASK);
+  sizes->set_flag(gnui::ALIGN_LEFT);
   sizes->range(1,64);
   sizes->step(1);
   sizes->value(14);
@@ -100,12 +100,12 @@ int main(int argc, char **argv) {
 
   input = new Input(50,375,350,25);
   input->static_value(initial_value);
-  input->when(fltk::WHEN_CHANGED);
+  input->when(gnui::WHEN_CHANGED);
   input->callback(input_cb);
 
   window->end();
   window->show(argc,argv);
-  return fltk::run();
+  return gnui::run();
 }
 
 //

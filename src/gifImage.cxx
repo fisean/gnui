@@ -1,6 +1,6 @@
 // "$Id$"
 
-/*! \class fltk::gifImage
+/*! \class gnui::gifImage
 
   This can either display an image from a .gif image file, or from a
   block of data that is the contents of the image file. By using a
@@ -51,7 +51,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-using namespace fltk;
+using namespace gnui;
 
 #define NEXTBYTE (dat? *dat++ : getc(GifFile))
 #define GETSHORT(var) var = NEXTBYTE; var += NEXTBYTE << 8
@@ -309,7 +309,7 @@ bool gifImage::fetch()
 
   setsize(Width,Height);
   if (has_transparent) colormap[transparent_pixel] = 0;
-  setpixeltype(has_transparent ? fltk::ARGB32 : fltk::RGB32);
+  setpixeltype(has_transparent ? gnui::ARGB32 : gnui::RGB32);
   for (int y=0; y<Height; y++) {
     U32* to = (U32*)(linebuffer(y));
     p = Image+y*Width;

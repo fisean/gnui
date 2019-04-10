@@ -87,7 +87,7 @@
 #define BACKGROUND2_COLOR (Color(7))
 #define SELECTION_COLOR (Color(15))
 
-using namespace fltk;
+using namespace gnui;
 
 //
 // Typedef the C API sort function type the only way I know how...
@@ -316,9 +316,9 @@ int HelpView::do_align(HelpBlock *block, int line, int xx, int a, int& l) {
 
 
 
-static void fltk_line(int x0,int y0, int x1,int y1) {fltk::drawline(x0,y0,x1,y1);}
+static void fltk_line(int x0,int y0, int x1,int y1) {gnui::drawline(x0,y0,x1,y1);}
 static void fltk_xyline(int x, int y, int x1) {
-  fltk::drawline(x,y,x1,y);
+  gnui::drawline(x,y,x1,y);
 }
 
 /** Draws a block of text in the HelpView
@@ -400,7 +400,7 @@ void HelpView::draw() {
     tmp.h(tmp.h() - hscrollbar_->h());
 
   b->inset(tmp);
-  fltk::push_clip(tmp);
+  gnui::push_clip(tmp);
 
   setcolor(textcolor_);
 
@@ -2231,8 +2231,8 @@ const char* HelpView::get_attr(const char *p, const char *n, char *buf, int bufs
 
 /** Get a colour's alignment attribute.
   \param n Colour name
-  \param c Default fltk::Color value
-  \return The fltk::Color corresponding to this allignment attribute
+  \param c Default gnui::Color value
+  \return The gnui::Color corresponding to this allignment attribute
 */
 Color HelpView::get_color(const char *n, Color c) {
   int	i;				// Looping var
@@ -2278,11 +2278,11 @@ Color HelpView::get_color(const char *n, Color c) {
       g = ((rgb >> 4) & 15) * 17;
       b = (rgb & 15) * 17;
     }
-    return fltk::color(r, g, b);
+    return gnui::color(r, g, b);
   } else {
     for (i = 0; i < (int)(sizeof(colors) / sizeof(colors[0])); i ++)
       if (!strcasecmp(n, colors[i].name)) {
-	  return fltk::color(colors[i].r, colors[i].g, colors[i].b);
+	  return gnui::color(colors[i].r, colors[i].g, colors[i].b);
       }
     return c;
   }
@@ -2489,7 +2489,7 @@ void HelpView::popfont (Font *&f, int &s) {
 }
 
 /** Sets the current (or default) text colour
- \param c the fltk::Color of the new color
+ \param c the gnui::Color of the new color
 */
 void HelpView::textcolor (Color c) {
 if (textcolor_ == defcolor_)
@@ -2498,7 +2498,7 @@ defcolor_ = c;
 }
 
 /** Sets the current text font and reformats the HelpView
-  \param f A pointer to a fltk::Font structure
+  \param f A pointer to a gnui::Font structure
 */
 void HelpView::textfont (Font *f) {
 textfont_ = f;

@@ -45,12 +45,12 @@ private:    type p##_[size];
 #define FluidPropertyGroup(group, type, p, name) \
 public:	    type p() const {return p##_;} \
 	    type * p##Ptr() {return &p##_;} \
-            void p(const type v) {p##_=v; if(autosave_) {fltk::Preferences g(this, group); g.set(name, p##_);}} \
+            void p(const type v) {p##_=v; if(autosave_) {gnui::Preferences g(this, group); g.set(name, p##_);}} \
 private:    type p##_
 
 #define FluidPropVectGroup(type, size, p, name) \
 public:	    const type* p() const {return p##_;} \
-    void p(const type* v) {memcpy(p##_,v,size); if(autosave_) {fltk::Preferences g(this, group); g.set(name, p##_);}} \
+    void p(const type* v) {memcpy(p##_,v,size); if(autosave_) {gnui::Preferences g(this, group); g.set(name, p##_);}} \
 private:    type p##_[size];
 
 /** \class PrefsData
@@ -65,7 +65,7 @@ private:    type p##_[size];
   it also greatly simplifies the design.
   All important persistant fluid data should be declared here.
 */
-class PrefsData : public fltk::Preferences {
+class PrefsData : public gnui::Preferences {
     // 1. define your persistent property here
     FluidProperty(int, gridx,"gridx");
     FluidProperty(int, gridy,"gridy");
@@ -108,12 +108,12 @@ class PrefsData : public fltk::Preferences {
       get("show_statusbar", show_statusbar_, 1);
       get("show_splash",show_splash_,1);
 
-      fltk::Preferences s(this, "sourceview");
+      gnui::Preferences s(this, "sourceview");
       s.get("autorefresh",sv_autorefresh_,1);
       s.get("autoposition",sv_autoposition_,1);
       s.get("tab",sv_tab_,0);
 
-      fltk::Preferences g(this,"tabs");
+      gnui::Preferences g(this,"tabs");
       g.get("tabcolor",tabcolor_, 1);
       g.get("tabcolor1",tabcolor1_, 0x14aef700);
       g.get("tabcolor2",tabcolor2_, 0xd4b38d00);

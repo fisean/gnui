@@ -29,7 +29,7 @@
 #include <fltk/draw.h>
 #include <fltk/visual.h>
 #include <fltk/gl.h>
-using namespace fltk;
+using namespace gnui;
 
 #ifdef _WIN32
 static GlChoice* gl_choice;
@@ -40,7 +40,7 @@ static GlChoice *gl_choice;
 #endif
 
 /**
-  Same as fltk::visual(int) except choose a visual that is also capable
+  Same as gnui::visual(int) except choose a visual that is also capable
   of drawing OpenGL. On modern X servers this is true by default, but
   on older ones OpenGL will crash if the visual is not selected with
   this.
@@ -48,7 +48,7 @@ static GlChoice *gl_choice;
   \a mode is the same bitflags accepted by GlWindow::mode(). This
   causes all windows (and thus glstart()) to have these capabilities.
 */
-bool fltk::glVisual(int mode) {
+bool gnui::glVisual(int mode) {
   GlChoice *c = GlChoice::find(mode);
   if (!c) return false;
 #ifdef _WIN32
@@ -88,7 +88,7 @@ static int pw, ph;
 
   Do \e not call glstart()/glfinish() when drawing into a GlWindow!
 */
-void fltk::glstart() {
+void gnui::glstart() {
   if (!context) {
 #ifdef _WIN32
     if (!gl_choice) glVisual(0);
@@ -130,7 +130,7 @@ void fltk::glstart() {
   Turn off the effects of a previous glstart(). You must call this before
   using normal fltk drawing methods.
 */
-void fltk::glfinish() {
+void gnui::glfinish() {
   glFlush();
 #ifdef _WIN32
   ;

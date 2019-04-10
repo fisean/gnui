@@ -55,7 +55,7 @@ int XParseGeometry(const char*, int*, int*, unsigned int*, unsigned int*);
 #define YNegative 	0x0020
 #endif
 
-using namespace fltk;
+using namespace gnui;
 
 // This fixes linkage problem in VC++ 6.0
 #if defined(_MSC_VER)
@@ -89,7 +89,7 @@ extern Color fl_bg_switch;	// in Style.cxx
   that you call it or even acknoledge it's existence, if you prefer to
   use your own code to parse switches.
 */
-int fltk::arg(int argc, char **argv, int &i) {
+int gnui::arg(int argc, char **argv, int &i) {
   arg_called = true;
 
   const char *s = argv[i];
@@ -139,7 +139,7 @@ int fltk::arg(int argc, char **argv, int &i) {
 
 /*! Consume all switches from argv.
 
-  To use the switch parser, call fltk::args(argc,argv) near the start of
+  To use the switch parser, call gnui::args(argc,argv) near the start of
   your program. This does not open the display, instead switches that
   need the display open are stashed into static variables. Then you
   must display your first window by calling window->show(argc,argv),
@@ -179,7 +179,7 @@ int fltk::arg(int argc, char **argv, int &i) {
   - \c -background \e color is the same as -bg color
 
 */
-int fltk::args(int argc, char** argv, int& i, int (*cb)(int,char**,int&)) {
+int gnui::args(int argc, char** argv, int& i, int (*cb)(int,char**,int&)) {
   arg_called = true;
   i = 1; // skip argv[0]
   while (i < argc) {
@@ -190,9 +190,9 @@ int fltk::args(int argc, char** argv, int& i, int (*cb)(int,char**,int&)) {
 }
 
 /*!
-  This must be called after fltk::args(argc,argv) to show the "main"
+  This must be called after gnui::args(argc,argv) to show the "main"
   window, this indicates which window should be affected by any
-  -geometry switch. In addition if fltk::args() has not been called
+  -geometry switch. In addition if gnui::args() has not been called
   yet this does so, this is a useful shortcut for the main window in a
   small program.
 */
@@ -256,7 +256,7 @@ static const char * const helpmsg =
 " -bg color";
 
 /*!
-  This is a portion of the string printed by fltk::args() detects
+  This is a portion of the string printed by gnui::args() detects
   an invalid argument on the command-line. You can add this to your
   own error or help message to show the fltk switches. It's value is
   (no newline at start or the end):
@@ -268,14 +268,14 @@ static const char * const helpmsg =
  -bg color
 \endcode
 */
-const char * const fltk::help = helpmsg+13;
+const char * const gnui::help = helpmsg+13;
 
 /*!
-  The second form of fltk::args() is useful if your program does not
+  The second form of gnui::args() is useful if your program does not
   have command line switches of its own. It parses all the switches,
-  and if any are not recognized it calls fltk::fatal(fltk::help).
+  and if any are not recognized it calls gnui::fatal(gnui::help).
 */
-void fltk::args(int argc, char **argv) {
+void gnui::args(int argc, char **argv) {
   int i; if (args(argc,argv,i) < argc) error(helpmsg);
 }
 

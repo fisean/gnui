@@ -42,62 +42,62 @@
 #include <fltk/SharedImage.h>
 #include <fltk/TiledImage.h>
 
-class fltk::Image_Box : public fltk::Boxtype_ {
-  fltk::Flags mask;
+class gnui::Image_Box : public gnui::Boxtype_ {
+  gnui::Flags mask;
 public:
-  void draw(const int,int,int,int, fltk::Color, fltk::Flags) const;
-  fltk::Tiled_Image* normal_img;
-  fltk::Tiled_Image* down_img;
-  fltk::Tiled_Image* highlight_img;
-  fltk::Image_Box(const char*, const char*, const char*, fltk::Flags = 0);
+  void draw(const int,int,int,int, gnui::Color, gnui::Flags) const;
+  gnui::Tiled_Image* normal_img;
+  gnui::Tiled_Image* down_img;
+  gnui::Tiled_Image* highlight_img;
+  gnui::Image_Box(const char*, const char*, const char*, gnui::Flags = 0);
 };
 
-void fltk::Image_Box::draw(int x, int y, int w, int h,
-			fltk::Color color, fltk::Flags flags) const
+void gnui::Image_Box::draw(int x, int y, int w, int h,
+			gnui::Color color, gnui::Flags flags) const
 {
-  fltk::Tiled_Image* img;
+  gnui::Tiled_Image* img;
 
-  if (flags&fltk::VALUE) img = down_img;
-  else if (flags&fltk::HIGHLIGHT) img = highlight_img;
+  if (flags&gnui::VALUE) img = down_img;
+  else if (flags&gnui::HIGHLIGHT) img = highlight_img;
   else img = normal_img;
 
-  fltk::up_box.draw(x,y,w,h,0,(flags|fltk::INACTIVE)&(~mask));
-  if (!(flags&fltk::INACTIVE)) {
-    fltk::up_box.inset(x,y,w,h);
+  gnui::up_box.draw(x,y,w,h,0,(flags|gnui::INACTIVE)&(~mask));
+  if (!(flags&gnui::INACTIVE)) {
+    gnui::up_box.inset(x,y,w,h);
     img->draw(x,y,w,h);
   }
 }
 
-fltk::Image_Box::fltk::Image_Box(const char* normal_b, const char* down_b, const char* highlight_b, fltk::Flags m) :
-fltk::Boxtype_(0), mask(m) {
-  dx_ = fltk::up_box.dx();
-  dy_ = fltk::up_box.dy();
-  dw_ = fltk::up_box.dw();
-  dh_ = fltk::up_box.dh();
+gnui::Image_Box::gnui::Image_Box(const char* normal_b, const char* down_b, const char* highlight_b, gnui::Flags m) :
+gnui::Boxtype_(0), mask(m) {
+  dx_ = gnui::up_box.dx();
+  dy_ = gnui::up_box.dy();
+  dw_ = gnui::up_box.dw();
+  dh_ = gnui::up_box.dh();
   fills_rectangle_ = true;
   char buffer[256];
   normal_img =
-    new fltk::Tiled_Image(fltk::JPEG_Image::get(fltk::find_config_file(buffer,256,normal_b)));
+    new gnui::Tiled_Image(gnui::JPEG_Image::get(gnui::find_config_file(buffer,256,normal_b)));
   down_img =
-    new fltk::Tiled_Image(fltk::JPEG_Image::get(fltk::find_config_file(buffer,256,down_b)));
+    new gnui::Tiled_Image(gnui::JPEG_Image::get(gnui::find_config_file(buffer,256,down_b)));
   highlight_img =
-    new fltk::Tiled_Image(fltk::JPEG_Image::get(fltk::find_config_file(buffer,256,highlight_b)));
+    new gnui::Tiled_Image(gnui::JPEG_Image::get(gnui::find_config_file(buffer,256,highlight_b)));
 }
 
-class fltk::Image_NoBorderBox : public fltk::Image_Box {
-  void draw(int,int,int,int, fltk::Color, fltk::Flags) const;
+class gnui::Image_NoBorderBox : public gnui::Image_Box {
+  void draw(int,int,int,int, gnui::Color, gnui::Flags) const;
 public:
-  fltk::Image_NoBorderBox(const char*a, const char*b, const char*c, fltk::Flags m = 0) : fltk::Image_Box(a,b,c,m) {dx_=dy_=dw_=dh_=0;}
+  gnui::Image_NoBorderBox(const char*a, const char*b, const char*c, gnui::Flags m = 0) : gnui::Image_Box(a,b,c,m) {dx_=dy_=dw_=dh_=0;}
 };
 
-void fltk::Image_NoBorderBox::draw(int x, int y, int w, int h,
-                                fltk::Color color, fltk::Flags flags) const
+void gnui::Image_NoBorderBox::draw(int x, int y, int w, int h,
+                                gnui::Color color, gnui::Flags flags) const
 {
-  if (flags&(fltk::SELECTED|fltk::HIGHLIGHT)) {
-    fltk::Image_Box::draw(x,y,w,h, color, flags);
+  if (flags&(gnui::SELECTED|gnui::HIGHLIGHT)) {
+    gnui::Image_Box::draw(x,y,w,h, color, flags);
     return;
   }
-  if (!(flags&fltk::INACTIVE)) {
+  if (!(flags&gnui::INACTIVE)) {
     normal_img->draw(x, y, w, h);
   }
 }
@@ -105,45 +105,45 @@ void fltk::Image_NoBorderBox::draw(int x, int y, int w, int h,
 extern "C" bool fltk_theme()
 {
 
-  //  fltk::background(0xD0D0E000); // it would be nice to figure out color from image
-  fltk::Boxtype flat1 = new fltk::Image_NoBorderBox("bg.jpeg", "bg2.jpeg", "bg3.jpeg");
-  fltk::Boxtype flat2 = new fltk::Image_NoBorderBox("bg2.jpeg", "bg3.jpeg", "bg3.jpeg", fltk::VALUE);
-  fltk::Boxtype box1 = new fltk::Image_Box("bg2.jpeg", "bg3.jpeg", "bg3.jpeg");
-  //fltk::Boxtype box2 = new fltk::Image_Box("bg.jpeg", "bg.jpeg", "bg.jpeg");
-  fltk::Boxtype box3 = new fltk::Image_Box("bg2.jpeg", "bg3.jpeg", "bg3.jpeg", fltk::VALUE);
-  fltk::Widget::default_style->box = box1;
-  fltk::Widget::default_style->button_box = box3;
-  fltk::Widget::default_style->highlight_color = fltk::LIGHT2;
-  fltk::Style* s;
-  if ((s = fltk::Style::find("window"))) {
+  //  gnui::background(0xD0D0E000); // it would be nice to figure out color from image
+  gnui::Boxtype flat1 = new gnui::Image_NoBorderBox("bg.jpeg", "bg2.jpeg", "bg3.jpeg");
+  gnui::Boxtype flat2 = new gnui::Image_NoBorderBox("bg2.jpeg", "bg3.jpeg", "bg3.jpeg", gnui::VALUE);
+  gnui::Boxtype box1 = new gnui::Image_Box("bg2.jpeg", "bg3.jpeg", "bg3.jpeg");
+  //gnui::Boxtype box2 = new gnui::Image_Box("bg.jpeg", "bg.jpeg", "bg.jpeg");
+  gnui::Boxtype box3 = new gnui::Image_Box("bg2.jpeg", "bg3.jpeg", "bg3.jpeg", gnui::VALUE);
+  gnui::Widget::default_style->box = box1;
+  gnui::Widget::default_style->button_box = box3;
+  gnui::Widget::default_style->highlight_color = gnui::LIGHT2;
+  gnui::Style* s;
+  if ((s = gnui::Style::find("window"))) {
     s->box = flat1;
   }
-  if ((s = fltk::Style::find("group"))) {
-    s->box = fltk::NO_BOX;
+  if ((s = gnui::Style::find("group"))) {
+    s->box = gnui::NO_BOX;
   }
-  if ((s = fltk::Style::find("menu"))) {
-    s->selection_text_color = fltk::BLACK;
+  if ((s = gnui::Style::find("menu"))) {
+    s->selection_text_color = gnui::BLACK;
     s->box = flat1;
     s->button_box = flat2;
   }
-  if ((s = fltk::Style::find("menu bar"))) {
-    s->highlight_color = fltk::GRAY;
-    s->highlight_label_color = fltk::BLACK;
+  if ((s = gnui::Style::find("menu bar"))) {
+    s->highlight_color = gnui::GRAY;
+    s->highlight_label_color = gnui::BLACK;
     s->box = flat2;
-    s->selection_text_color = fltk::BLACK;
+    s->selection_text_color = gnui::BLACK;
     s->button_box = flat2;
   }
-  if ((s = fltk::Style::find("highlight button"))) {
+  if ((s = gnui::Style::find("highlight button"))) {
     s->box = flat2;
   }
-  if ((s = fltk::Style::find("button"))) {
-    s->selection_text_color = fltk::BLACK;
+  if ((s = gnui::Style::find("button"))) {
+    s->selection_text_color = gnui::BLACK;
     s->box = box3;
   }
-  if ((s = fltk::Style::find("tabs"))) {
+  if ((s = gnui::Style::find("tabs"))) {
     s->box = box1;
   }
-  if ((s = fltk::Style::find("light button"))) {
+  if ((s = gnui::Style::find("light button"))) {
     s->box = box3;
   }
   return true;

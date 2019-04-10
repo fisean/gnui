@@ -55,7 +55,7 @@ the X version of these is described here.
 
 ////////////////////////////////////////////////////////////////
 
-namespace fltk {
+namespace gnui {
 
 /// \name fltk/osx.h
 //@{
@@ -98,7 +98,7 @@ extern FL_API void end_quartz_image();
 
 // When fltk tells X about a window, one of these objects is created.
 // Warning: this object is highly subject to change!  It's definition
-// is only here so that fltk::xid(Window) can be declared inline:
+// is only here so that gnui::xid(Window) can be declared inline:
 
 class FL_API CreatedWindow {
 public:

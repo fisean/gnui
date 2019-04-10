@@ -27,9 +27,9 @@
 #include <fltk/Box.h>
 #include <fltk/draw.h>
 
-using namespace fltk;
+using namespace gnui;
 
-/*! \class fltk::CheckButton
+/*! \class gnui::CheckButton
   This button turns the value() on and off each release of a click
   inside of it, and displays a checkmark to show the user this:
 

@@ -31,7 +31,7 @@
 
 #include "Widget.h"
 
-namespace fltk {
+namespace gnui {
 
 class FL_API ProgressBar : public Widget {
 protected:

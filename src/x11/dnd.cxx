@@ -35,7 +35,7 @@
 #include <fltk/events.h>
 #include <fltk/Cursor.h>
 #include <fltk/x.h>
-using namespace fltk;
+using namespace gnui;
 
 extern Atom XdndAware;
 extern Atom XdndSelection;
@@ -102,17 +102,17 @@ static bool local_handle(int event, Window* window) {
   return ret;
 }
 
-extern fltk::Cursor fl_drop_ok_cursor;
+extern gnui::Cursor fl_drop_ok_cursor;
 
 /*!
-  Drag and drop the data set by the most recent fltk::copy() (with the
+  Drag and drop the data set by the most recent gnui::copy() (with the
   clipboard argument false). Returns true if the data was dropped on
   something that accepted it.
 
   By default only blocks of text are dragged. You can use
   system-specific variables to change the type of data.
 */
-bool fltk::dnd() {
+bool gnui::dnd() {
   // Remember any user presets for the action and types:
   Atom* types;
   Atom action;
