@@ -1,7 +1,7 @@
 #
 # "$Id$"
 #
-# Make include file for the Fast Light Tool Kit (FLTK).
+# Make include file for the Fast Light Tool Kit (gnui).
 # @configure_input@
 #
 # Copyright 1998-2003 by Bill Spitzak and others.
@@ -23,14 +23,14 @@
 #
 # Please report all bugs and problems to the following page:
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 prefix		= @prefix@
 exec_prefix	= @exec_prefix@
 bindir		= @bindir@
 datadir		= @datadir@
-docdir		= @datadir@/doc/fltk
+docdir		= @datadir@/doc/gnui
 includedir	= @includedir@
 libdir		= @libdir@
 mandir		= @mandir@
@@ -81,11 +81,11 @@ ZLIBINC		= @ZLIBINC@
 # libraries to link with:
 LDLIBS = @LDFLAGS@ @LIBS@
 GLDLIBS = @LDFLAGS@ @GLLIB@ @LIBS@
-LINKFLTK = -L../lib @LINKFLTK@
-LINKFLTKGL = -L../lib @LINKFLTKGL@ @LINKFLTK@
-LINKFLTKFORMS = -L../lib -lfltk2_forms @LINKFLTK@
+LINKgnui = -L../lib @LINKgnui@
+LINKgnuiGL = -L../lib @LINKgnuiGL@ @LINKgnui@
+LINKgnuiFORMS = -L../lib -lgnui_forms @LINKgnui@
 LOCAL_IMAGELIBS = @LOCAL_IMAGELIBS@
-LINKFLTKIMG = -L../lib -lfltk2_images @LINKFLTK@ $(LOCAL_IMAGELIBS) $(IMAGELIBS)
+LINKgnuiIMG = -L../lib -lgnui_images @LINKgnui@ $(LOCAL_IMAGELIBS) $(IMAGELIBS)
 LINKSHARED = @DSOLINK@ @LINKSHARED@ $(IMAGELIBS)
 IMAGELIBS = @IMAGELIBS@
 
@@ -124,16 +124,16 @@ CAT3EXT		= @CAT3EXT@
 
 .o$(EXEEXT):
 	echo Linking $@...
-	$(CXX) -I.. -I../fltk/compat $(CXXFLAGS) $< $(LINKFLTK) $(LDLIBS) -o $@
-	$(POSTBUILD) $@ ../fltk/mac.r
+	$(CXX) -I.. -I../gnui/compat $(CXXFLAGS) $< $(LINKgnui) $(LDLIBS) -o $@
+	$(POSTBUILD) $@ ../gnui/mac.r
 
 .c.o:
 	echo Compiling $<...
-	$(CC) -I.. -I../fltk/compat $(CFLAGS) -c $<
+	$(CC) -I.. -I../gnui/compat $(CFLAGS) -c $<
 
 .cxx.o:
 	echo Compiling $<...
-	$(CXX) -I.. -I../fltk/compat $(CXXFLAGS) -c $<
+	$(CXX) -I.. -I../gnui/compat $(CXXFLAGS) -c $<
 
 .man.0 .man.1 .man.3:
 	echo Formatting $<...

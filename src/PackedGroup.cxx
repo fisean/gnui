@@ -19,11 +19,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/PackedGroup.h>
-#include <fltk/layout.h>
-#include <fltk/Box.h>
+#include <gnui/PackedGroup.h>
+#include <gnui/layout.h>
+#include <gnui/Box.h>
 using namespace gnui;
 
 /** \class gnui::PackedGroup

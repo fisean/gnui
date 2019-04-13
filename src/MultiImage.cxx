@@ -58,9 +58,9 @@
 
 */
 
-#include <fltk/MultiImage.h>
-#include <fltk/draw.h>
-#include <fltk/string.h>
+#include <gnui/MultiImage.h>
+#include <gnui/draw.h>
+#include <gnui/string.h>
 #include <stdarg.h>
 
 using namespace gnui;

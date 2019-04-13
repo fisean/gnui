@@ -19,19 +19,19 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 #include <config.h>
 #if HAVE_GL
 
 #include "GlChoice.h"
-#include <fltk/GlWindow.h>
-#include <fltk/damage.h>
-#include <fltk/error.h>
-#include <fltk/visual.h>
-#include <fltk/layout.h>
-#include <fltk/run.h>
-#include <fltk/events.h>
+#include <gnui/GlWindow.h>
+#include <gnui/damage.h>
+#include <gnui/error.h>
+#include <gnui/visual.h>
+#include <gnui/layout.h>
+#include <gnui/run.h>
+#include <gnui/events.h>
 #include <stdlib.h>
 #include <string.h>
 using namespace gnui;
@@ -50,7 +50,7 @@ viewport and lights and other things by checking valid() at the start
 of draw() and only doing the initialization if it is false.
 
 draw() can \e only use OpenGL calls.  Do not attempt to call any of
-the functions in &lt;fltk/draw.h&gt;, or X or GDI32 or any other
+the functions in &lt;gnui/draw.h&gt;, or X or GDI32 or any other
 drawing api.  Do not call glstart() or glfinish().
 
 <h2>Double Buffering</h2>
@@ -186,7 +186,7 @@ void GlWindow::invalidate() {
 
 /**
 Set or change the OpenGL capabilites of the window.  The value can be 
-any of the symbols from \link visual.h <fltk/visual.h> \endlink OR'd together:
+any of the symbols from \link visual.h <gnui/visual.h> \endlink OR'd together:
 
 - gnui::INDEXED_COLOR indicates that a colormapped visual is ok. This call
   will normally fail if a TrueColor visual cannot be found.

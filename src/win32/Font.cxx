@@ -22,15 +22,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/x.h>
-#include <fltk/Font.h>
+#include <gnui/x.h>
+#include <gnui/Font.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include <fltk/math.h>
-#include <fltk/utf.h>
+#include <gnui/math.h>
+#include <gnui/utf.h>
 
 using namespace gnui;
 
@@ -145,7 +145,7 @@ void fl_font_rid() {
 
 ////////////////////////////////////////////////////////////////
 
-// The predefined fonts that fltk has:
+// The predefined fonts that gnui has:
 static IFont fonts [] = {
   {{"Arial",	0},	3,	0},
   {{"Arial",	1},	3,	0},
@@ -180,7 +180,7 @@ gnui::Font* const gnui::SCREEN_FONT		= &(fonts[4].f);
 gnui::Font* const gnui::SCREEN_BOLD_FONT	= &(fonts[5].f);
 gnui::Font* const gnui::ZAPF_DINGBATS		= &(fonts[13].f);
 
-// Turn an fltk1 integer font id into a predefined font:
+// Turn an gnui1 integer font id into a predefined font:
 gnui::Font* gnui::font(int i) {
   i = i & 15;
   switch (i) {

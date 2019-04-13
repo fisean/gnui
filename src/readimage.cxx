@@ -20,12 +20,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/x.h>
-#include <fltk/draw.h>
+#include <gnui/x.h>
+#include <gnui/draw.h>
 
 /** \fn uchar *gnui::readimage(uchar* p, PixelType type, const Rectangle&rectangle, int linedelta);
 

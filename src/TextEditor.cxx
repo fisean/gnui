@@ -22,16 +22,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include <fltk/events.h>
-#include <fltk/TextEditor.h>
-#include <fltk/ask.h>
+#include <gnui/events.h>
+#include <gnui/TextEditor.h>
+#include <gnui/ask.h>
 
 using namespace gnui;
 

@@ -20,7 +20,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Implementation of message, ask, choice, input
@@ -28,16 +28,16 @@
 // mostly.  In most cases it is easier to get a multi-line message
 // by putting newlines in the message.
 
-#include <fltk/Window.h>
-#include <fltk/x.h>
+#include <gnui/Window.h>
+#include <gnui/x.h>
 
-#include <fltk/ask.h>
-#include <fltk/run.h>
-#include <fltk/draw.h>
-#include <fltk/ReturnButton.h>
-#include <fltk/SecretInput.h>
-#include <fltk/TextDisplay.h>
-#include <fltk/string.h>
+#include <gnui/ask.h>
+#include <gnui/run.h>
+#include <gnui/draw.h>
+#include <gnui/ReturnButton.h>
+#include <gnui/SecretInput.h>
+#include <gnui/TextDisplay.h>
+#include <gnui/string.h>
 
 #ifdef WIN32
 # include <windows.h>
@@ -315,13 +315,13 @@ float gnui::message_window_timeout= 0;
 /*! When this is set to true, then (all) message windows will use scrollbars if the given message is too long. */
 bool gnui::message_window_scrollable = 0;
 
-/*! You can change this string to convert fltk to a foreign language. */
+/*! You can change this string to convert gnui to a foreign language. */
 const char* gnui::no = "&No";
-/*! You can change this string to convert fltk to a foreign language. */
+/*! You can change this string to convert gnui to a foreign language. */
 const char* gnui::yes= "&Yes";
-/*! You can change this string to convert fltk to a foreign language. */
+/*! You can change this string to convert gnui to a foreign language. */
 const char* gnui::ok = "&OK";
-/*! You can change this string to convert fltk to a foreign language. */
+/*! You can change this string to convert gnui to a foreign language. */
 const char* gnui::cancel= "&Cancel";
 
 // beep on dialogs state

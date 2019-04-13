@@ -20,17 +20,17 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/visual.h>
-#include <fltk/x.h>
+#include <gnui/visual.h>
+#include <gnui/x.h>
 
 /*! \fn bool gnui::visual(int);
 
   X-specific crap to allow you to force the "visual" used by
-  fltk to one you like, rather than the "default visual" which
+  gnui to one you like, rather than the "default visual" which
   in many cases has less capabilities than your machine really
   has! For instance gnui::visual(gnui::RGB_COLOR) will get you a full
   color display instead of an 8-bit colormap, if possible.
@@ -71,12 +71,12 @@ static int test_visual(XVisualInfo& v, int flags) {
 #if USE_COLORMAP
   if (!(flags & INDEXED_COLOR)) {
     if (v.c_class != StaticColor && v.c_class != TrueColor) return 0;
-    if (v.depth <= 8) return 0; // fltk will work better in colormap mode
+    if (v.depth <= 8) return 0; // gnui will work better in colormap mode
   }
   if (flags & RGB24_COLOR) {
     if (v.depth < 24) return 0;
   }
-  // for now, fltk does not like colormaps of more than 8 bits:
+  // for now, gnui does not like colormaps of more than 8 bits:
   if ((v.c_class&1) && v.depth > 8) return 0;
 #else
   // simpler if we can't use colormapped visuals at all:

@@ -20,12 +20,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/events.h>
-#include <fltk/NumericInput.h>
-#include <fltk/math.h>
-#include <fltk/string.h>
+#include <gnui/events.h>
+#include <gnui/NumericInput.h>
+#include <gnui/math.h>
+#include <gnui/string.h>
 
 using namespace gnui;
 
@@ -55,7 +55,7 @@ using namespace gnui;
   Patent Pending!
 
   License is ONLY granted to implement this algorithim as GPL, LGPL, or
-  FLTK licensed code. Note that by using fltk you may use this in a
+  FLTK licensed code. Note that by using gnui you may use this in a
   closed-source program.
 
   License to use this technology in other cases may be available:<br>

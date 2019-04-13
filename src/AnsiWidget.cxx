@@ -22,34 +22,34 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
 
-#include <fltk/layout.h>
-#include <fltk/Image.h>
-#include <fltk/rgbImage.h>
-#include <fltk/events.h>
-#include <fltk/draw.h>
-#include <fltk/Font.h>
-#include <fltk/Rectangle.h>
-#include <fltk/Group.h>
-#include <fltk/ask.h>
+#include <gnui/layout.h>
+#include <gnui/Image.h>
+#include <gnui/rgbImage.h>
+#include <gnui/events.h>
+#include <gnui/draw.h>
+#include <gnui/Font.h>
+#include <gnui/Rectangle.h>
+#include <gnui/Group.h>
+#include <gnui/ask.h>
 
 #if defined(WIN32) 
-#include <fltk/win32.h>
+#include <gnui/win32.h>
 #include <wingdi.h>
 extern HDC fl_bitmap_dc;
 #else
-#include <fltk/x.h>
+#include <gnui/x.h>
 #endif
 
 #define INITXY 2
 
-#include <fltk/AnsiWidget.h>
+#include <gnui/AnsiWidget.h>
 
 using namespace gnui;
 

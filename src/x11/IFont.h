@@ -3,10 +3,10 @@
 // by fl_list_fonts_x.cxx.
 //
 // It contains the crap needed to figure out fonts on X. This is only
-// used for the plain X implementation of fltk, not for any other
+// used for the plain X implementation of gnui, not for any other
 // system and not for Xft. THIS IS NOT A PUBLIC DATA STRUCTURE!
 
-#include <fltk/Font.h>
+#include <gnui/Font.h>
 struct FontSize;
 struct IFont {
   gnui::Font f;

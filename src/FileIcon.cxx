@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 // Contents:
 //
@@ -39,10 +39,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <fltk/string.h>
-#include <fltk/Item.h>
-#include <fltk/Browser.h>
-#include <fltk/utf.h>
+#include <gnui/string.h>
+#include <gnui/Item.h>
+#include <gnui/Browser.h>
+#include <gnui/utf.h>
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -52,11 +52,11 @@
 #else
 # include <unistd.h>
 #endif
-#include <fltk/FileIcon.h>
-#include <fltk/Widget.h>
-#include <fltk/draw.h>
-#include <fltk/Box.h>
-#include <fltk/filename.h>
+#include <gnui/FileIcon.h>
+#include <gnui/Widget.h>
+#include <gnui/draw.h>
+#include <gnui/Box.h>
+#include <gnui/filename.h>
 
 //
 // Define missing POSIX/XPG4 macros as needed...
@@ -220,7 +220,7 @@ FileIcon::find(const char *filename,	// I - Name of file */
 
   // Get file information if needed...
   if (filetype == ANY)
-    if (!fltk_stat(filename, &fileinfo))
+    if (!gnui_stat(filename, &fileinfo))
     {
       if (S_ISDIR(fileinfo.st_mode))
 	filetype = DIRECTORY;

@@ -22,14 +22,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/x.h>
+#include <gnui/x.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include <fltk/string.h>
+#include <gnui/string.h>
 
 using namespace gnui;
 
@@ -53,7 +53,7 @@ int Font::sizes(int*& sizep) {
 }
 
 #if 0
-// Code used by fltk1.1:
+// Code used by gnui1.1:
 static int array[128];
 int Fl::get_font_sizes(Fl_Font fnum, int*& sizep) {
   Fl_Fontdesc *s = fl_fonts+fnum;

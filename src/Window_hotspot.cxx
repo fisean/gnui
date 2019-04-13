@@ -22,14 +22,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/Window.h>
-#include <fltk/Monitor.h>
+#include <gnui/events.h>
+#include <gnui/Window.h>
+#include <gnui/Monitor.h>
 #if defined(_WIN32)
-# include <fltk/x.h>
+# include <gnui/x.h>
 #endif
 
 using namespace gnui;

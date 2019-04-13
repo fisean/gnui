@@ -19,19 +19,19 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // It appears that "ATSUI" is the correct interface to use to get
 // Unicode. Unfortunatly the API is complex...
 
-#include <fltk/x.h>
-#include <fltk/Font.h>
+#include <gnui/x.h>
+#include <gnui/Font.h>
 #include <ctype.h>
 #include <stdlib.h>
-#include <fltk/utf.h>
-#include <fltk/math.h>
-#include <fltk/string.h>
-#include <fltk/Window.h>
+#include <gnui/utf.h>
+#include <gnui/math.h>
+#include <gnui/string.h>
+#include <gnui/Window.h>
 
 #include <Carbon/Carbon.h>
 
@@ -103,7 +103,7 @@ FL_API void fl_set_font_opengl_id(unsigned v) {findsize()->opengl_id = v;}
 
 ////////////////////////////////////////////////////////////////
 
-// The predefined fonts that fltk has:
+// The predefined fonts that gnui has:
 //#define DEFFONT "Helvetica"
 #define DEFFONT "Lucida Grande"
 static IFont fonts [] = {

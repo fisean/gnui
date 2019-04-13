@@ -19,16 +19,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // Draw an image that is stored compressed in a file or in memory. 
 // Keep uncompressed images in memory for later use. 
 // WAS: why? it's already in the Pixmap, ready for drawing!
 
 #include <config.h>
-#include <fltk/SharedImage.h>
-#include <fltk/xbmImage.h>
-#include <fltk/string.h>
+#include <gnui/SharedImage.h>
+#include <gnui/xbmImage.h>
+#include <gnui/string.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>

@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Change the current cursor.
@@ -35,15 +35,15 @@
 // portable to other systems.
 
 #include <config.h>
-#include <fltk/Cursor.h>
-#include <fltk/Window.h>
-#include <fltk/x.h>
+#include <gnui/Cursor.h>
+#include <gnui/Window.h>
+#include <gnui/x.h>
 #if defined(USE_X11) && defined(USE_XCURSOR)
 #include <X11/Xcursor/Xcursor.h>
 #endif
-#include <fltk/draw.h>
-#include <fltk/Color.h>
-#include <fltk/Image.h>
+#include <gnui/draw.h>
+#include <gnui/Color.h>
+#include <gnui/Image.h>
 
 using namespace gnui;
 

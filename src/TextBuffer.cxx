@@ -22,17 +22,17 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <fltk/string.h>
+#include <gnui/string.h>
 #include <ctype.h>
-#include <fltk/events.h>
-#include <fltk/ask.h>
-#include <fltk/error.h>
-#include <fltk/TextBuffer.h>
+#include <gnui/events.h>
+#include <gnui/ask.h>
+#include <gnui/error.h>
+#include <gnui/TextBuffer.h>
 
 // Return number of bytes that a legal UTF-8 encoding starting with cc
 // will use. Returns 1 if cc cannot start an encoding.
@@ -155,7 +155,7 @@ TextBuffer::~TextBuffer() {
  * temporary and will only be usable until the next time the text is
  * altered.
  *
- * Unlike previous versions of fltk, DO NOT FREE THE RETURNED RESULT!
+ * Unlike previous versions of gnui, DO NOT FREE THE RETURNED RESULT!
  */
 const char *TextBuffer::text() {
   if (!gapstart_ && length_) {

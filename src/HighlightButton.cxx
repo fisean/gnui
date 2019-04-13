@@ -20,11 +20,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/HighlightButton.h>
+#include <gnui/events.h>
+#include <gnui/HighlightButton.h>
 
 using namespace gnui;
 

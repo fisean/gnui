@@ -24,7 +24,7 @@ You will need
 --- DO IT ---
 Execute this long command:
 
-make clean ; autoconf ; ./configure --build="i586-mingw32msvc" --host="i586-mingw32msvc"  --target="i586-mingw32msvc" --prefix="/home/DEVEL/packs/fltk2/cross_win32" ; make -j 4 ; make install   
+make clean ; autoconf ; ./configure --build="i586-mingw32msvc" --host="i586-mingw32msvc"  --target="i586-mingw32msvc" --prefix="/home/DEVEL/packs/gnui/cross_win32" ; make -j 4 ; make install   
 
 You will see information like:
 checking for gcc... i586-mingw32msvc-gcc
@@ -42,9 +42,9 @@ Use:
 file lib/*.a
 
 if it displays:
-	lib/libfltk2.a:        current ar archive
-	lib/libfltk2_gl.a:     current ar archive
-	lib/libfltk2_png.a:    current ar archive
+	lib/libgnui.a:        current ar archive
+	lib/libgnui_gl.a:     current ar archive
+	lib/libgnui_png.a:    current ar archive
 	(...)
 then the lib is builded
 
@@ -59,7 +59,7 @@ Create the directory mentioned in --prefix above (or start over with another pre
 make install
 
 After this you will be able to crossbuild programs by calling i586-..-g++ 
-with proper flags (returned by fltk-config)
+with proper flags (returned by gnui-config)
 
 TODO (finish this document!) --Rafal
 

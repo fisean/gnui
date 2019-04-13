@@ -22,15 +22,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/FileChooser.h>
-#include <fltk/file_chooser.h>
-#include <fltk/run.h>
-#include <fltk/string.h>
-#include <fltk/utf.h>
+#include <gnui/FileChooser.h>
+#include <gnui/file_chooser.h>
+#include <gnui/run.h>
+#include <gnui/string.h>
+#include <gnui/utf.h>
 
 using namespace gnui;
 
@@ -105,7 +105,7 @@ gnui::dir_chooser(const char *message,	// I - Message for titlebar
 
 static bool use_system_fc = false;
 /*! On Windows this makes file_chooser() call the Win32 file chooser
-  API instead of using the one constructed in fltk. Ignored on other
+  API instead of using the one constructed in gnui. Ignored on other
   systems.
 */
 void gnui::use_system_file_chooser(bool useit) {use_system_fc = useit;}
@@ -186,7 +186,7 @@ const char * gnui::file_chooser(const char *message, const char *pattern,
     *fnameW = 0;
     utf8towc(fname, strlen(fname), fnameW, length + 1);
 
-    // convert the fltk filename pattern to a windows pattern
+    // convert the gnui filename pattern to a windows pattern
     patternW = patternToWin(pattern, strlen(pattern)+1);
 
     // set up the wreq struct. This sets the appropriate pattern(s),

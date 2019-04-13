@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 // Contents:
 //
@@ -39,14 +39,14 @@
 // Include necessary header files...
 //
 
-#include <fltk/FileBrowser.h>
-#include <fltk/Browser.h>
-#include <fltk/Item.h>
-#include <fltk/draw.h>
-#include <fltk/Color.h>
-#include <fltk/Flags.h>
-#include <fltk/Font.h>
-#include <fltk/string.h>
+#include <gnui/FileBrowser.h>
+#include <gnui/Browser.h>
+#include <gnui/Item.h>
+#include <gnui/draw.h>
+#include <gnui/Color.h>
+#include <gnui/Flags.h>
+#include <gnui/Font.h>
+#include <gnui/string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -324,7 +324,7 @@ void FileBrowser::filter(const char *pattern)	{
 
 ////////////////////////////////////////////////////////////////
 //#include <pixmaps/file_small.xpm>
-//#include <fltk/xpmImage.h>
+//#include <gnui/xpmImage.h>
 class FileItem : public Item {
 public:
     FileItem(const char * label, FileIcon * icon);

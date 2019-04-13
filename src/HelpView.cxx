@@ -23,7 +23,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 // Contents:
 //
@@ -55,17 +55,17 @@
 // Include necessary header files...
 //
 
-#include <fltk/HelpView.h>
-#include <fltk/Box.h>
-#include <fltk/Font.h>
-#include <fltk/xpmImage.h>
-#include <fltk/draw.h>
-#include <fltk/damage.h>
-#include <fltk/events.h>
-#include <fltk/Cursor.h>
+#include <gnui/HelpView.h>
+#include <gnui/Box.h>
+#include <gnui/Font.h>
+#include <gnui/xpmImage.h>
+#include <gnui/draw.h>
+#include <gnui/damage.h>
+#include <gnui/events.h>
+#include <gnui/Cursor.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <fltk/string.h>
+#include <gnui/string.h>
 #include <ctype.h>
 #include <errno.h>
 #include <math.h>
@@ -316,8 +316,8 @@ int HelpView::do_align(HelpBlock *block, int line, int xx, int a, int& l) {
 
 
 
-static void fltk_line(int x0,int y0, int x1,int y1) {gnui::drawline(x0,y0,x1,y1);}
-static void fltk_xyline(int x, int y, int x1) {
+static void gnui_line(int x0,int y0, int x1,int y1) {gnui::drawline(x0,y0,x1,y1);}
+static void gnui_xyline(int x, int y, int x1) {
   gnui::drawline(x,y,x1,y);
 }
 
@@ -332,7 +332,7 @@ static void fltk_xyline(int x, int y, int x1) {
 void HelpView::write_text (const char * buf, const char * ptr, int X, int Y, int X1, int underline) {
     drawtext (buf, (float) X, (float) Y);
     if (underline) {
-      fltk_xyline(X, Y+1, X+X1);
+      gnui_xyline(X, Y+1, X+X1);
     }
 }
 
@@ -445,7 +445,7 @@ void HelpView::draw() {
             xtra_ww = isspace(*ptr)?(int)getwidth(" ",1):0;
             write_text(buf, ptr, xx - leftline_, yy,ww+xtra_ww, underline);
 /*	    if (underline) {
-              fltk_xyline(xx - leftline_, yy + 1,
+              gnui_xyline(xx - leftline_, yy + 1,
 	                xx - leftline_ + ww + xtra_ww);
             }*/
 
@@ -465,7 +465,7 @@ void HelpView::draw() {
                 s = buf;
 
                 write_text (buf, ptr, xx - leftline_, yy, (int)getwidth(buf), underline);
-/*		if (underline) fltk_xyline(xx - leftline_, yy + 1,
+/*		if (underline) gnui_xyline(xx - leftline_, yy + 1,
 	                        	 xx - leftline_ + (int)getwidth(buf));*/
 
 		if (line < 31)
@@ -496,7 +496,7 @@ void HelpView::draw() {
 
 	      drawtext (buf, float(xx - leftline_), float(yy));
 	      ww = (int)getwidth(buf);
-	      if (underline) fltk_xyline(xx - leftline_, yy + 1,
+	      if (underline) gnui_xyline(xx - leftline_, yy + 1,
 	                               xx - leftline_ + ww);
               xx += ww;
 	    }
@@ -557,7 +557,7 @@ void HelpView::draw() {
 	  }
 	  else if (strcasecmp(buf, "HR") == 0)
 	  {
-	    fltk_line(block->x, yy, block->w, yy);
+	    gnui_line(block->x, yy, block->w, yy);
 
 	    if (line < 31)
 	      line ++;
@@ -867,7 +867,7 @@ void HelpView::draw() {
       if (s > buf && !head)
       {
         drawtext(buf, (float) xx - leftline_, (float) yy );
-	if (underline) fltk_xyline(xx - leftline_, yy + 1,
+	if (underline) gnui_xyline(xx - leftline_, yy + 1,
 	                         xx - leftline_ + ww);
       }
     }
@@ -2596,7 +2596,7 @@ HelpView::~HelpView()
 
 
 /** Load the specified file.
-  \param f Filename to load (which may also be a target, like http://www.fltk.org/)
+  \param f Filename to load (which may also be a target, like http://www.gnui.org/)
   \return 0 on success or -1 for an error
 */
 int HelpView::load(const char *f) {

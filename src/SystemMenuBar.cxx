@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 
 /**
@@ -52,14 +52,14 @@
 
 #if defined(__APPLE__)
 
-#include <fltk/osx.h>
-#include <fltk/events.h>
-#include <fltk/SystemMenuBar.h>
-#include <fltk/Font.h>
-#include <fltk/Item.h>
-#include <fltk/ItemGroup.h>
+#include <gnui/osx.h>
+#include <gnui/events.h>
+#include <gnui/SystemMenuBar.h>
+#include <gnui/Font.h>
+#include <gnui/Item.h>
+#include <gnui/ItemGroup.h>
 
-#include <fltk/string.h>
+#include <gnui/string.h>
 
 using namespace gnui;
 

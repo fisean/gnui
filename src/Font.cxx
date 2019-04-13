@@ -21,13 +21,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 #include <config.h>
-#include <fltk/Font.h>
-#include <fltk/draw.h>
-#include <fltk/x.h>
-#include <fltk/string.h>
+#include <gnui/Font.h>
+#include <gnui/draw.h>
+#include <gnui/x.h>
+#include <gnui/string.h>
 
 /** \class gnui::Font
 
@@ -35,7 +35,7 @@ Identifies a font. You can create these with gnui::font(name) or
 with gnui::list_fonts(). Do not attempt to create your instances
 or modify it.
 
-This is a struct so that fltk can initialize a table internally
+This is a struct so that gnui can initialize a table internally
 with constants. Don't use the undocumented fields.
 */
 

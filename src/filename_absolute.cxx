@@ -14,12 +14,12 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
- * Please report all bugs and problems to http://www.fltk.org/str.php
+ * Please report all bugs and problems to http://www.gnui.org/str.php
  */
 
 #include <config.h>
-#include <fltk/filename.h>
-#include <fltk/string.h>
+#include <gnui/filename.h>
+#include <gnui/string.h>
 #include <stdlib.h>
 #include <assert.h>
 #if defined(WIN32) && !defined(__CYGWIN__)

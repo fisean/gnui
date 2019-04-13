@@ -23,12 +23,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 #include <config.h>
-#include <fltk/filename.h>
-#include <fltk/string.h>
-#include <fltk/utf.h>
+#include <gnui/filename.h>
+#include <gnui/string.h>
+#include <gnui/utf.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #if defined(_WIN32) && !defined(__CYGWIN__)
@@ -48,10 +48,10 @@ static bool last_result = false;
 /** Portably calls the system's stat() function, to deal with
     native Unicode filenames.
     Has the same return values and use as the system's stat.
-    The string passed to fltk_stat \b must be UTF8 (note that ASCII is
+    The string passed to gnui_stat \b must be UTF8 (note that ASCII is
     a subset of UTF8)
 */
-int gnui::fltk_stat(const char* name, struct stat *buffer) {
+int gnui::gnui_stat(const char* name, struct stat *buffer) {
 #if defined(_WIN32) && !defined (__CYGWIN__)
   wchar_t * nativeFilename = NULL;
   int length = utf8towc(name, strlen(name), NULL, 0);
@@ -83,7 +83,7 @@ static bool fill_stat(const char *name) {
   // on _WIN32 && !__CYGWIN__, all strings into this file will be UTF-8
 
 #endif// _WIN32 || __EMX__
-  last_result = (gnui::fltk_stat(name, &last_stat)==0);
+  last_result = (gnui::gnui_stat(name, &last_stat)==0);
   return last_result;
 }
 

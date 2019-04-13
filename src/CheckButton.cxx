@@ -20,12 +20,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/CheckButton.h>
-#include <fltk/Group.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
+#include <gnui/CheckButton.h>
+#include <gnui/Group.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
 
 using namespace gnui;
 

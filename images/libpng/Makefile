@@ -22,7 +22,7 @@
 #
 # Please report all bugs and problems to the following page:
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 #
@@ -44,7 +44,7 @@ CFILES	= png.c pngerror.c pngget.c pngmem.c pngread.c pngpread.c pngrio.c \
 		pngrtran.c pngrutil.c pngset.c pngtrans.c pngwio.c pngwrite.c \
 		pngwtran.c pngwutil.c
 
-LIBNAME	=	$(LIBPREFIX)fltk2_png$(LIBSUFFIX)
+LIBNAME	=	$(LIBPREFIX)gnui_png$(LIBSUFFIX)
 OBJECTS =	$(CPPFILES:.cxx=.o) $(CFILES:.c=.o)
 
 #

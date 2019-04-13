@@ -1,0 +1,15 @@
+#ifndef Fl_Tabs_H
+#define Fl_Tabs_H
+
+#include "Fl_Group.H"
+#include <gnui/TabGroup.h>
+
+class Fl_Tabs : public gnui::TabGroup {
+
+public:
+  Fl_Tabs(int x, int y, int w, int h, const char*l = 0)
+    : gnui::TabGroup(x,y,w,h,l) {begin();}
+};
+
+#endif
+

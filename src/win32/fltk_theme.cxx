@@ -20,21 +20,21 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-// This is the default fltk_theme() function on Windows. It reads
+// This is the default gnui_theme() function on Windows. It reads
 // colors and font sizes from standard Windows95 interfaces.
 
-#include <fltk/Widget.h>
-#include <fltk/draw.h>
-#include <fltk/Monitor.h>
-#include <fltk/Font.h>
-#include <fltk/events.h>
+#include <gnui/Widget.h>
+#include <gnui/draw.h>
+#include <gnui/Monitor.h>
+#include <gnui/Font.h>
+#include <gnui/events.h>
 #include <stdio.h>
-#include <fltk/string.h>
-#include <fltk/utf.h>
-#include <fltk/x.h>
+#include <gnui/string.h>
+#include <gnui/utf.h>
+#include <gnui/x.h>
 #include <limits.h>
 #include <wchar.h>
 
@@ -67,7 +67,7 @@ static int win_fontsize(int winsize) {
   return winsize*3/4; // cellsize: convert to charsize
 }
 
-extern "C" bool fltk_theme() {
+extern "C" bool gnui_theme() {
 
   Color background = win_color(GetSysColor(COLOR_BTNFACE));
   Color foreground = win_color(GetSysColor(COLOR_BTNTEXT));

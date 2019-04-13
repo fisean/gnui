@@ -20,13 +20,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/ReturnButton.h>
-#include <fltk/events.h>
-#include <fltk/draw.h>
-#include <fltk/Symbol.h>
+#include <gnui/ReturnButton.h>
+#include <gnui/events.h>
+#include <gnui/draw.h>
+#include <gnui/Symbol.h>
 using namespace gnui;
 
 /*! \class gnui::ReturnButton

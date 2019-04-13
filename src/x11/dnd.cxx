@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // If this is set true, try to emulate drop on old programs by doing
@@ -30,11 +30,11 @@
 // with this, so the cursor is misleading.
 #define FAKE_DROP 0
 
-#include <fltk/Window.h>
-#include <fltk/run.h>
-#include <fltk/events.h>
-#include <fltk/Cursor.h>
-#include <fltk/x.h>
+#include <gnui/Window.h>
+#include <gnui/run.h>
+#include <gnui/events.h>
+#include <gnui/Cursor.h>
+#include <gnui/x.h>
 using namespace gnui;
 
 extern Atom XdndAware;
@@ -92,7 +92,7 @@ static bool grabfunc(int event) {
 
 extern bool (*fl_local_grab)(int); // in Fl.cxx
 
-// send an event to an fltk window belonging to this program:
+// send an event to an gnui window belonging to this program:
 static bool local_handle(int event, Window* window) {
   fl_local_grab = 0;
   e_x = e_x_root-window->x();

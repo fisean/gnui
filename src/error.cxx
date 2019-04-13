@@ -22,15 +22,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // This method is in it's own source file so that stdlib and stdio
 // do not need to be included in Fl.C:
 // You can also override this by redefining all of these.
 
-#include <fltk/error.h>
-#include <fltk/string.h>
+#include <gnui/error.h>
+#include <gnui/string.h>
 #include <stdarg.h>
 #include <stdlib.h>
 
@@ -57,8 +57,8 @@ static void error(const char *format, ...) {
 
 #else
 
-#include <fltk/x.h>
-#include <fltk/utf.h>
+#include <gnui/x.h>
+#include <gnui/utf.h>
 
 static void warning(const char *format, ...) {
   va_list args;
@@ -89,14 +89,14 @@ static void error(const char *format, ...) {
 // are put first like this:
 
 /*! \var void (*gnui::warning)(const char* format, ...)
-  fltk will call this when it wants to report a recoverable problem.
+  gnui will call this when it wants to report a recoverable problem.
   The display may be messed up but the user can probably keep
   working. (all X protocol errors call this). The default version on
   Unix prints a message to stderr, on Windows it pops up a MessageBox.
 */
 
 /*! \var void (*gnui::error)(const char* format, ...)
-  fltk will call this when it wants to report a recoverable problem.
+  gnui will call this when it wants to report a recoverable problem.
   but in this case the display is so messed up it is unlikely the user
   can continue. Very little calls this now. The default version on
   Unix prints a message to stderr, on Windows it pops up a MessageBox,
@@ -107,8 +107,8 @@ static void error(const char *format, ...) {
 */
 
 /*! \var void (*gnui::fatal)(const char* format, ...)
-  fltk will call this when it wants to report a problem that it cannot
-  recover from. You must not make any fltk calls again. The default
+  gnui will call this when it wants to report a problem that it cannot
+  recover from. You must not make any gnui calls again. The default
   version is the same function as error().
 */
 

@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Internal interface to set up OpenGL.
@@ -51,26 +51,26 @@
 //
 // This code is used by GlWindow, glStart(), and glVisual()
 
-#ifndef fltk_GlChoice_h
-#define fltk_GlChoice_h
+#ifndef gnui_GlChoice_h
+#define gnui_GlChoice_h
 
 #include <config.h>
-#include <fltk/Window.h> // force CreatedWindow to be defined by x.h
+#include <gnui/Window.h> // force CreatedWindow to be defined by x.h
 
 // Warning: whatever GLContext is defined to must take exactly the same
 // space in a structure as a void*!!!
 #ifdef _WIN32
-# include <fltk/x.h>
-# include <fltk/gl.h>
+# include <gnui/x.h>
+# include <gnui/gl.h>
 # define GLContext HGLRC
 #elif defined(__APPLE__)
 // warning: the Quartz version should probably use Core GL (CGL) instead of AGL
-# include <fltk/gl.h>
+# include <gnui/gl.h>
 # include <AGL/agl.h>
 # define GLContext AGLContext
-# include <fltk/x.h>
+# include <gnui/x.h>
 #else
-# include <fltk/x.h>
+# include <gnui/x.h>
 # define Window XWindow
 # if USE_GLEW
 #  include <GL/glxew.h>

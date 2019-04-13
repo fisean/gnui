@@ -19,14 +19,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/ScrollGroup.h>
-#include <fltk/events.h>
-#include <fltk/layout.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
+#include <gnui/ScrollGroup.h>
+#include <gnui/events.h>
+#include <gnui/layout.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
 #include <config.h>
 using namespace gnui;
 
@@ -49,7 +49,7 @@ placeholders.
 This can be used to pan around a large drawing by making a single
 child widget "canvas".  This child widget should be of your own class,
 with a draw() method that draws everything. The scrolling is done by
-changing the x() and y() of the widget and drawing it with the fltk
+changing the x() and y() of the widget and drawing it with the gnui
 clip region set to the newly exposed rectangles. You can speed things
 up by using gnui::not_clipped() or gnui::intersect_with_clip() to
 detect and skip the clipped portions of the drawing.

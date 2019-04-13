@@ -20,17 +20,17 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 
 // Shortcuts are stored in the association table
 
 #include <config.h>
-#include <fltk/events.h>
-#include <fltk/Widget.h>
-#include <fltk/WidgetAssociation.h>
-#include <fltk/string.h>
+#include <gnui/events.h>
+#include <gnui/Widget.h>
+#include <gnui/WidgetAssociation.h>
+#include <gnui/string.h>
 #include <ctype.h>
 
 using namespace gnui;
@@ -50,7 +50,7 @@ static shortcutAssociationType shortcutAssociation;
   is zero or the assignment already exists this does nothing and
   returns false.
 
-  There can be any number of shortcut assignments, fltk stores them in
+  There can be any number of shortcut assignments, gnui stores them in
   internal tables shared by all widgets. A widget can have any number
   of shortcuts (though most have zero or one), and a given shortcut
   value can be assigned to more than one widget.
@@ -302,7 +302,7 @@ f() {
 
   If \a widget is not null, only do assignments for that widget,
   this is much faster than searching the entire list. This is useful
-  for drawing the shortcuts on a widget (though most fltk widgets only
+  for drawing the shortcuts on a widget (though most gnui widgets only
   draw the first one).
 */
 unsigned gnui::foreachShortcut(const Widget* widget, ShortcutFunctor& f) {

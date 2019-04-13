@@ -22,10 +22,10 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 
-#include <fltk/SharedImage.h>
-#include <fltk/string.h>
+#include <gnui/SharedImage.h>
+#include <gnui/string.h>
 
 using namespace gnui;
 
@@ -47,7 +47,7 @@ static SharedImage *check(const char *name, uchar *header, int headerlen) {
 }
 
 /*! Makes it so SharedImage can identify image files of the types
-  compiled into fltk. These are XPM, PNG, and Jpeg images. */
+  compiled into gnui. These are XPM, PNG, and Jpeg images. */
 void gnui::register_images() {
   static bool been_here = false;
   if (been_here) return ;

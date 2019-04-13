@@ -26,22 +26,22 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <string.h>
-#include <fltk/MenuWindow.h>
-#include <fltk/Menu.h>
-#include <fltk/Box.h>
-#include <fltk/LabelType.h>
-#include <fltk/draw.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/run.h>
-#include <fltk/Monitor.h>
+#include <gnui/MenuWindow.h>
+#include <gnui/Menu.h>
+#include <gnui/Box.h>
+#include <gnui/LabelType.h>
+#include <gnui/draw.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/run.h>
+#include <gnui/Monitor.h>
 #include <ctype.h>
 
-#include <fltk/Item.h> // for TOGGLE, RADIO
+#include <gnui/Item.h> // for TOGGLE, RADIO
 #define checkmark(item) (item->type()>=Item::TOGGLE && item->type()<=Item::RADIO)
 
 using namespace gnui;
@@ -1067,7 +1067,7 @@ Widget* Menu::try_popup(const Rectangle& r, const char* title, bool menubar)
   If there is a selected item in the menu (as determined by get_item())
   then submenus are opened and all of them are positioned intitially
   so the mouse cursor is pointing at the selected item. This is
-  incredibly useful and one of the main features of fltk that is missing
+  incredibly useful and one of the main features of gnui that is missing
   from other toolkits.
 
   \a x,y,w,h describe a rectangle that the current menu item should be

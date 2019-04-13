@@ -1,7 +1,7 @@
 /** \file Threads.h
 
   Inline classes to provide a "toy" interface for threads and mutexes.
-  These are used by the fltk demo programs. They have been improved
+  These are used by the gnui demo programs. They have been improved
   quite a bit and may be useful for non-toy programs, too.  <i>This
   file is optional</i>, you can use pthreads or any other
   multithreading library if you want more control over multithreading.
@@ -32,7 +32,7 @@
   the next event comes in, making your program look very sluggish
   or broken.
 
-  Non-main threads cannot call all fltk functions. In particular any
+  Non-main threads cannot call all gnui functions. In particular any
   functions that wait for events (including gnui::Window::exec(),
   gnui::check(), and gnui::ask()) do not work. The function
   gnui::in_main_thread() can be used to check if your code is in the
@@ -49,7 +49,7 @@
 
   \code
   main() {
-    gnui::lock(); // ALWAYS call before any fltk calls
+    gnui::lock(); // ALWAYS call before any gnui calls
     create_widgets();
     Thread t1; create_thread(t1, func, data1);
     Thread t2; create_thread(t2, func, data2);
@@ -77,7 +77,7 @@
 
 /*! \fn void gnui::lock()
 
-  A multi-threaded fltk program must surround all calls to any fltk
+  A multi-threaded gnui program must surround all calls to any gnui
   functions with lock() and unlock() pairs. This is a "recursive
   lock", a thread can call lock() n times, and it must call
   unlock() n times before it really is unlocked.
@@ -85,11 +85,11 @@
   If another thread calls lock() while it is locked, it will block
   (not return from lock()) until the first thread unlocks.
 
-  The main thread must call lock() once before \e any call to fltk to
+  The main thread must call lock() once before \e any call to gnui to
   initialize the thread system.
 
-  The X11 version of fltk uses XInitThreads(), XLockDisplay(), and
-  XUnlockDisplay(). This should allow an fltk program to cooperate
+  The X11 version of gnui uses XInitThreads(), XLockDisplay(), and
+  XUnlockDisplay(). This should allow an gnui program to cooperate
   with other packages updating the display using Xlib calls.
 */
 
@@ -126,11 +126,11 @@
 /*! \fn bool gnui::in_main_thread()
 
   Returns true if the current thread is the main thread, i.e. the one
-  that called wait() first. Many fltk calls such as wait() will not
+  that called wait() first. Many gnui calls such as wait() will not
 
   work correctly if this is not true. This function must be surrounded
-  by lock() and unlock() just like all other fltk functions, the
-  return value is wrong if you don't hold the fltk lock!
+  by lock() and unlock() just like all other gnui functions, the
+  return value is wrong if you don't hold the gnui lock!
 
   Warning: in_main_thread() is wrong if the main thread calls
   gnui::unlock() and another thread calls gnui::lock() (the
@@ -140,13 +140,13 @@
 \code
   gnui::in_main_thread_ = false;
   gnui::unlock();
-  wait_for_something_without_calling_fltk_wait();
+  wait_for_something_without_calling_gnui_wait();
   gnui::lock();
   gnui::in_main_thread_ = true;
 \endcode
 */
 
-#include <fltk/run.h>
+#include <gnui/run.h>
 #include <config.h>
 
 // Define the mutex-init value needed by gnui::RecursiveMutex:
@@ -154,7 +154,7 @@
 # ifndef __USE_GNU
 #  define __USE_GNU // makes the RECURSIVE stuff appear on Linux
 # endif
-# include <fltk/Threads.h>
+# include <gnui/Threads.h>
 
 # if defined(PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP) && !defined(__CYGWIN__)
 static pthread_mutexattr_t recursive_attrib = {{PTHREAD_MUTEX_RECURSIVE_NP}};
@@ -195,10 +195,10 @@ extern void (*fl_unlock_function)();
 static void init_function();
 static void (*init_or_lock_function)() = init_function;
 
-static gnui::RecursiveMutex fltkmutex;
+static gnui::RecursiveMutex gnuimutex;
 
-static void lock_function() { fltkmutex.lock(); }
-static void unlock_function() { fltkmutex.unlock(); }
+static void lock_function() { gnuimutex.lock(); }
+static void unlock_function() { gnuimutex.unlock(); }
 
 static pthread_t main_thread_id;
 

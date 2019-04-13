@@ -3,7 +3,7 @@ BUILDING FLTK UNDER MICROSOFT WINDOWS
     There are three ways to build FLTK under Microsoft Windows.  The
     first is to use the Microsoft Visual C++ 6.0 project files under
     the "ide/visualc" directory.  Just open (or double-click on) the
-    "fltk.dsw" file to get the whole shebang.  Use ide/vcnet/fltk.sln
+    "gnui.dsw" file to get the whole shebang.  Use ide/vcnet/gnui.sln
     for Visual C++ 2008, and change the build type of the subprojects
     to remove Cairo if you don't use it.
 

@@ -20,15 +20,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // Aqua-like boxes. This needs some significant rewrite so they are faster.
 // I also think they should be put into the themes, but it looks like too
-// many fltk 1.1 programs use them.
+// many gnui 1.1 programs use them.
 
-#include <fltk/Box.h>
-#include <fltk/Style.h>
-#include <fltk/draw.h>
+#include <gnui/Box.h>
+#include <gnui/Style.h>
+#include <gnui/draw.h>
 #include <string.h>
 using namespace gnui;
 

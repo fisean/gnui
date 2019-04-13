@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 #include <config.h>
 
@@ -27,10 +27,10 @@
 # include "osx/clip.cxx"
 #else
 
-#include <fltk/Window.h>
-#include <fltk/draw.h>
-#include <fltk/x.h>
-#include <fltk/string.h>
+#include <gnui/Window.h>
+#include <gnui/draw.h>
+#include <gnui/x.h>
+#include <gnui/string.h>
 #include <stdlib.h>
 using namespace gnui;
 
@@ -66,7 +66,7 @@ int fl_clip_state_number = 0; // used by code that needs to update clip regions
 
 /**
   Return the current region as a system-specific structure. You must
-  include <fltk/x.h> to use this. Returns null if there is no clipping.
+  include <gnui/x.h> to use this. Returns null if there is no clipping.
 */
 Region gnui::clip_region() {
   return rstack[rstackptr];

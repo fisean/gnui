@@ -20,12 +20,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/Window.h>
-#include <fltk/x.h>
+#include <gnui/Window.h>
+#include <gnui/x.h>
 using namespace gnui;
 
 extern bool fl_show_iconic; // in x.C/win32.C

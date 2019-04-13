@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /*! \class gnui::Choice
 
@@ -59,13 +59,13 @@ unfortunately.
 
 */
 
-#include <fltk/Choice.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/Item.h>
-#include <fltk/draw.h>
-#include <fltk/run.h>
+#include <gnui/Choice.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/Item.h>
+#include <gnui/draw.h>
+#include <gnui/run.h>
 using namespace gnui;
 
 // The dimensions for the glyph in this and the PopupMenu are exactly

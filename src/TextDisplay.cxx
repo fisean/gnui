@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 
 #include <stdio.h>
@@ -30,17 +30,17 @@
 #include <limits.h>
 #include <ctype.h>
 #include <string.h>
-#include <fltk/error.h>
-#include <fltk/draw.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/TextBuffer.h>
-#include <fltk/TextDisplay.h>
-#include <fltk/Window.h>
-#include <fltk/layout.h>
-#include <fltk/utf.h>
-#include <fltk/Input.h>
+#include <gnui/error.h>
+#include <gnui/draw.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/TextBuffer.h>
+#include <gnui/TextDisplay.h>
+#include <gnui/Window.h>
+#include <gnui/layout.h>
+#include <gnui/utf.h>
+#include <gnui/Input.h>
 
 // Similar to utf8len in TextBuffer except it returns zero for characters
 // that are illegal. Code here seems to rely on this and does not work

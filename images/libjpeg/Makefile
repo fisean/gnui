@@ -22,7 +22,7 @@
 #
 # Please report all bugs and problems to the following page:
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 #
@@ -48,7 +48,7 @@ CFILES	= jaricom.c jmemnobs.c \
 		jidctflt.c jidctfst.c jidctint.c jquant1.c jcarith.c jdarith.c \
 		jquant2.c jutils.c # jmemmac.c jmemdos.c
 
-LIBNAME	=	$(LIBPREFIX)fltk2_jpeg$(LIBSUFFIX)
+LIBNAME	=	$(LIBPREFIX)gnui_jpeg$(LIBSUFFIX)
 OBJECTS =	$(CPPFILES:.cxx=.o) $(CFILES:.c=.o)
 
 #

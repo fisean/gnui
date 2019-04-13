@@ -16,10 +16,10 @@
  *
  * Please report all bugs and problems to the following page:
  *
- *    http://www.fltk.org/str.php
+ *    http://www.gnui.org/str.php
  */
 
-#include <fltk/filename.h>
+#include <gnui/filename.h>
 
 /*!
   Returns a pointer to the last period in filename_name(f), or a

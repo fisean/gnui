@@ -1,6 +1,6 @@
 # data file for the FLTK User Interface Designer (FLUID)
 version 2.0100 
-header_name {../fltk/HelpDialog.h} 
+header_name {../gnui/HelpDialog.h} 
 code_name {.cxx} 
 gridx 5 
 gridy 5 
@@ -29,15 +29,15 @@ comment {//
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //} {in_source in_header
 } 
 
 decl {\#include "flstring.h"} {} 
 
-decl {\#include <fltk/ask.h>} {} 
+decl {\#include <gnui/ask.h>} {} 
 
-namespace fltk {open
+namespace gnui {open
 } {
   class FL_API HelpDialog {open
   } {
@@ -48,11 +48,11 @@ namespace fltk {open
     decl {int find_pos_;} {}
     Function {HelpDialog()} {open
     } {
-      {fltk::Window} window_ {
+      {gnui::Window} window_ {
         label {Help Dialog} open
         private xywh {398 65 530 385} type Double resizable visible
       } {
-        {fltk::Group} view_ {
+        {gnui::Group} view_ {
           callback {if (view_->filename())
 {
   if (view_->changed())
@@ -93,19 +93,19 @@ namespace fltk {open
   forward_->deactivate();
 }}
           private xywh {10 10 505 330} box DOWN_BOX selection_color 15
-          extra_code {\#include <fltk/HelpView.h>}
-          class {fltk::HelpView}
+          extra_code {\#include <gnui/HelpView.h>}
+          class {gnui::HelpView}
         } {}
-        {fltk::Group} {} {open
+        {gnui::Group} {} {open
           xywh {10 348 510 27} resizable
         } {
-          {fltk::Button} {} {
+          {gnui::Button} {} {
             label Close
             callback {window_->hide();}
             private xywh {446 2 64 25}
             extra_code {o->label("Close");}
           }
-          {fltk::Button} back_ {
+          {gnui::Button} back_ {
             label {@<-}
             callback {if (index_ > 0)
   index_ --;
@@ -124,7 +124,7 @@ view_->topline(l);}
             tooltip {Show the previous help page.}
             private xywh {376 2 25 25} labelcolor 2 shortcut 0xff51
           }
-          {fltk::Button} forward_ {
+          {gnui::Button} forward_ {
             label {@->}
             callback {if (index_ < max_)
   index_ ++;
@@ -143,7 +143,7 @@ view_->topline(l);}
             tooltip {Show the next help page.}
             private xywh {411 2 25 25} labelcolor 2 shortcut 0xff53
           }
-          {fltk::Button} smaller_ {
+          {gnui::Button} smaller_ {
             label F
             callback {if (view_->textsize() > 8)
   view_->textsize(view_->textsize() - 2);
@@ -154,7 +154,7 @@ larger_->activate();}
             tooltip {Make the help text smaller.}
             private xywh {306 2 25 25} labelfont 1 labelsize 10
           }
-          {fltk::Button} larger_ {
+          {gnui::Button} larger_ {
             label F
             callback {if (view_->textsize() < 18)
   view_->textsize(view_->textsize() + 2);
@@ -165,10 +165,10 @@ smaller_->activate();}
             tooltip {Make the help text larger.}
             private xywh {341 2 25 25} labelfont 1 labelsize 16
           }
-          {fltk::Group} {} {open
+          {gnui::Group} {} {open
             xywh {0 2 296 25} resizable box DOWN_BOX color 7
           } {
-            {fltk::Input} find_ {
+            {gnui::Input} find_ {
               label {@search}
               callback {find_pos_ = view_->find(find_->value(), find_pos_);}
               tooltip {find text in document}

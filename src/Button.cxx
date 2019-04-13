@@ -20,14 +20,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Button.h>
-#include <fltk/Group.h>
-#include <fltk/Box.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Button.h>
+#include <gnui/Group.h>
+#include <gnui/Box.h>
 #include <stdlib.h>
 using namespace gnui;
 
@@ -168,7 +168,7 @@ int Button::handle(int event, const Rectangle& rectangle) {
 
 ////////////////////////////////////////////////////////////////
 
-#include <fltk/draw.h>
+#include <gnui/draw.h>
 
 extern Widget* fl_did_clipping;
 

@@ -22,13 +22,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/Preferences.h>
-#include <fltk/filename.h>
-#include <fltk/string.h>
+#include <gnui/Preferences.h>
+#include <gnui/filename.h>
+#include <gnui/string.h>
 
 #include <ctype.h>
 #include <stdarg.h>
@@ -110,7 +110,7 @@ public:
  * - application: vendor unique application name, i.e. "PreferencesTest"
  *     multiple preferences files can be created per application.
  *     Must be a valid file name.
- * example: Preferences base( Preferences::USER, "fltk.org", "test01");
+ * example: Preferences base( Preferences::USER, "gnui.org", "test01");
  */
 Preferences::Preferences( Root root, const char *vendor, const char *application )
 {
@@ -717,15 +717,15 @@ Preferences::RootNode::RootNode( Preferences *prefs, Root root, const char *vend
 	strlcpy(filename, e, sizeof(filename));
 
 	if (filename[strlen(filename)-1] != '/') {
-	  strlcat(filename, "/.fltk/", sizeof(filename));
+	  strlcat(filename, "/.gnui/", sizeof(filename));
 	} else {
-	  strlcat(filename, ".fltk/", sizeof(filename));
+	  strlcat(filename, ".gnui/", sizeof(filename));
 	}
 	break;
       }
 
     case SYSTEM:
-      strcpy(filename, "/etc/fltk/");
+      strcpy(filename, "/etc/gnui/");
       break;
   }
 

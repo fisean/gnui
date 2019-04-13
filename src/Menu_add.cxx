@@ -22,25 +22,25 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Methods to create/destroy the items in an Menu widget.  Used to
 // emulate XForms and to provide convienence functions for building
 // menus and browsers.
 
-// These functions are provided for fltk 1.0 compatability and probably
+// These functions are provided for gnui 1.0 compatability and probably
 // should be avoided in new programs. For new programs either create the
 // widgets directly, or use List to return menu or browser items out
 // of your own data.
 
-// Compatability with fltk 1.0 and with XForms is only partial!
+// Compatability with gnui 1.0 and with XForms is only partial!
 
-#include <fltk/Menu.h>
-#include <fltk/Item.h>
-#include <fltk/ItemGroup.h>
-#include <fltk/Divider.h>
-#include <fltk/string.h>
+#include <gnui/Menu.h>
+#include <gnui/Item.h>
+#include <gnui/ItemGroup.h>
+#include <gnui/Divider.h>
+#include <gnui/string.h>
 #include <ctype.h>
 #include "ARRAY.h"
 
@@ -73,8 +73,8 @@ static Widget* append(
   o->copy_label(buf);
   if (flags & MENU_RADIO) o->type(Item::RADIO);
   else if (flags & MENU_TOGGLE) o->type(Item::TOGGLE);
-  // Shift the old flags values over to where they are in fltk,
-  // but also allow new fltk flag values (this was done so RAW_LABEL
+  // Shift the old flags values over to where they are in gnui,
+  // but also allow new gnui flag values (this was done so RAW_LABEL
   // could be put in there for flwm)
   o->set_flag(((flags<<8)&(INACTIVE|STATE|INVISIBLE))|(flags&~0x1ff));
   if (insert_here) g->insert(*o, insert_here-1);
@@ -284,7 +284,7 @@ Widget* Menu::add(
 
 /*! Split label at '/' characters and add or replace a hierachial Item.
 
-    This is what menu::add() did in fltk 1.
+    This is what menu::add() did in gnui 1.
 
     Same rules as add() except if the item already exists it is changed
     to this new data, instead of a second item with the same label being
@@ -379,7 +379,7 @@ static Widget* flat_innards(
 
 /*! Create a new Item and add it to the top-level of the hierarchy.
 
-    This matches add() from the Browser in fltk1.
+    This matches add() from the Browser in gnui1.
 
     Unlike the add() with more arguments, this one does *not* split
     the label at '/' characters. The label is used unchanged.
@@ -390,7 +390,7 @@ Widget* Menu::add(const char* label, void* data) {
 
 /*! Create a new Item and add it to the top-level of the hierarchy.
 
-    This matches insert() from the Browser in fltk1, except the
+    This matches insert() from the Browser in gnui1, except the
     index is 1 less than before (first item is zero, not 1)
 
     Unlike the insert() with more arguments, this one does *not* split

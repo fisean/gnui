@@ -22,12 +22,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/RadioButton.h>
-#include <fltk/draw.h>
-#include <fltk/Box.h>
+#include <gnui/RadioButton.h>
+#include <gnui/draw.h>
+#include <gnui/Box.h>
 using namespace gnui;
 
 /** \class gnui::RadioButton

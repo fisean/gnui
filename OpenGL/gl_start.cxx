@@ -19,16 +19,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 #include <config.h>
 #if HAVE_GL
 
-#include <fltk/Window.h>
+#include <gnui/Window.h>
 #include "GlChoice.h"
-#include <fltk/draw.h>
-#include <fltk/visual.h>
-#include <fltk/gl.h>
+#include <gnui/draw.h>
+#include <gnui/visual.h>
+#include <gnui/gl.h>
 using namespace gnui;
 
 #ifdef _WIN32
@@ -68,12 +68,12 @@ static int pw, ph;
 
 /**
   Set up an OpenGL context to draw into the current window being
-  drawn by fltk. This will allow you to use OpenGL to update a
+  drawn by gnui. This will allow you to use OpenGL to update a
   normal window. The current transformation is reproduced, and
   the current clipping is simulated with glScissor() calls (which
   can only do a rectangle).
 
-  You must use glfinish() to exit this mode before any normal fltk
+  You must use glfinish() to exit this mode before any normal gnui
   drawing calls are done.
 
   You should call glvisual() at program startup if you intend to
@@ -128,7 +128,7 @@ void gnui::glstart() {
 
 /**
   Turn off the effects of a previous glstart(). You must call this before
-  using normal fltk drawing methods.
+  using normal gnui drawing methods.
 */
 void gnui::glfinish() {
   glFlush();

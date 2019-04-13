@@ -10,7 +10,7 @@ BUILDING AND INSTALLING FLTK UNDER LINUX AND UNIX
     Make sure that they are in the standard include/library locations.
     If they aren't you need to define the CFLAGS, CXXFLAGS, and LDFLAGS
     environment variables. Ubuntu users should make sure they install
-    the jpeg, png, and zlib "dev" packages to avoid fltk compiling it's
+    the jpeg, png, and zlib "dev" packages to avoid gnui compiling it's
     own copy of these.
 
     If you aren't using the GNU compilers or a compiler / platform
@@ -38,7 +38,7 @@ BUILDING AND INSTALLING FLTK UNDER LINUX AND UNIX
 
     To install the library, become root and type "make install".  This
     will copy the "fluid" executable to "bindir", the header files to
-    "includedir"/fltk, and the library files to "libdir".
+    "includedir"/gnui, and the library files to "libdir".
 
 For crosscompiling see also README.mingw32_cross
 

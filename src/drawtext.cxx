@@ -20,25 +20,25 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/draw.h>
-#include <fltk/math.h>
-#include <fltk/Font.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
+#include <gnui/Font.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 using namespace gnui;
 
 /* These are for getting the default leading: */
-#include <fltk/Widget.h>
-#include <fltk/Style.h>
+#include <gnui/Widget.h>
+#include <gnui/Style.h>
 
 ////////////////////////////////////////////////////////////////
 // @-sign commands
 
-#include <fltk/Symbol.h>
+#include <gnui/Symbol.h>
 
 static Font* normal_font;
 static float normal_size;
@@ -224,12 +224,12 @@ public:
 };
 static const RightSymbol rightsymbol;
 
-/* Other symbols supported in fltk1.1:
+/* Other symbols supported in gnui1.1:
 
    @l = set size to 24
    @m = set size to 18
    @s = set size to 11 // could be emulated when no number
-   @Fnumber = set to fltk font n
+   @Fnumber = set to gnui font n
    @N = set to grayed-out color
    @- = draw an inset divider line
    @u or @_ = underscore rest of text
@@ -535,7 +535,7 @@ static float split(
 
 /*!
   This is the fancy string-drawing function that is used to draw all
-  labels in fltk. The string is formatted and aligned inside the
+  labels in gnui. The string is formatted and aligned inside the
   passed rectangle. This also:
   - Breaks the text into lines at \\n characters. Word-wraps (if
     flags has gnui::ALIGN_WRAP set) so the words fit in the

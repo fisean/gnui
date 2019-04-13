@@ -20,15 +20,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Item.h>
-#include <fltk/Group.h>
-#include <fltk/Box.h>
-#include <fltk/CheckButton.h>
-#include <fltk/draw.h>
-#include <fltk/events.h>
+#include <gnui/Item.h>
+#include <gnui/Group.h>
+#include <gnui/Box.h>
+#include <gnui/CheckButton.h>
+#include <gnui/draw.h>
+#include <gnui/events.h>
 #include <string.h>
 
 using namespace gnui;
@@ -232,8 +232,8 @@ int Item::handle(int event) {
 
 */
 
-#include <fltk/ItemGroup.h>
-#include <fltk/damage.h>
+#include <gnui/ItemGroup.h>
+#include <gnui/damage.h>
 
 /** Unlike other widgets the constructor does not take any dimensions,
   since it is assummed the container widget will size this
@@ -313,7 +313,7 @@ int ItemGroup::handle(int) {return 0;}
   so the user cannot choose it.
 */
 
-#include <fltk/Divider.h>
+#include <gnui/Divider.h>
 
 /** Unlike other widgets the constructor does not take any dimensions,
   since it is assummed the container widget will size this

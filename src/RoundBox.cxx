@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Box drawing code for an obscure box type.
@@ -30,9 +30,9 @@
 // in if not used.
 
 #include <config.h>
-#include <fltk/Box.h>
-#include <fltk/Style.h>
-#include <fltk/draw.h>
+#include <gnui/Box.h>
+#include <gnui/Style.h>
+#include <gnui/draw.h>
 #include <string.h>
 using namespace gnui;
 

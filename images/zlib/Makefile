@@ -22,7 +22,7 @@
 #
 # Please report all bugs and problems to the following page:
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 #
@@ -41,7 +41,7 @@ CFILES	= adler32.c compress.c crc32.c deflate.c gzclose.c gzlib.c \
 		gzread.c gzwrite.c infback.c inffast.c inflate.c \
 		inftrees.c trees.c uncompr.c zutil.c
 
-LIBNAME	=	$(LIBPREFIX)fltk2_z$(LIBSUFFIX)
+LIBNAME	=	$(LIBPREFIX)gnui_z$(LIBSUFFIX)
 OBJECTS =	$(CPPFILES:.cxx=.o) $(CFILES:.c=.o)
 
 #

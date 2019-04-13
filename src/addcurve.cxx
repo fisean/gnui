@@ -20,7 +20,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Utility for drawing Bezier curves, adding the points to
@@ -30,9 +30,9 @@
 // If anybody has a better algorithim, please send it!
 
 #include <config.h>
-#include <fltk/draw.h>
-#include <fltk/math.h>
-#include <fltk/x.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
+#include <gnui/x.h>
 using namespace gnui;
 
 /*!

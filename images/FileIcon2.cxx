@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 // Contents:
 //
@@ -32,7 +32,7 @@
 
 #define TEST_RASTER 0
 #if TEST_RASTER
-# include <fltk/xpmImage.h>
+# include <gnui/xpmImage.h>
 # include <pixmaps/folder_small2.xpm>
 # include <pixmaps/file_small2.xpm>
 #endif
@@ -41,17 +41,17 @@
 // Include necessary header files...
 //
 
-#include <fltk/FileIcon.h>
-#include <fltk/filename.h>
-#include <fltk/draw.h>
-#include <fltk/SharedImage.h>
-#include <fltk/Color.h>
-#include <fltk/run.h>
+#include <gnui/FileIcon.h>
+#include <gnui/filename.h>
+#include <gnui/draw.h>
+#include <gnui/SharedImage.h>
+#include <gnui/Color.h>
+#include <gnui/run.h>
 #include <config.h>
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <fltk/string.h>
+#include <gnui/string.h>
 #include <ctype.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -76,7 +76,7 @@ using namespace gnui;
 static void	load_kde_icons(const char *directory, const char *icondir);
 static void	load_kde_mimelnk(const char *filename, const char *icondir);
 static void	load_gnome_icons(const char *directory, const char *icondir);
-static char	*kde_to_fltk_pattern(const char *kdepattern);
+static char	*kde_to_gnui_pattern(const char *kdepattern);
 static char	*get_kde_val(char *str, const char *key);
 
 static const char *kdedir = NULL;
@@ -579,7 +579,7 @@ load_kde_mimelnk(const char *filename,	// I - mimelnk filename
   pattern[0]      = '\0';
   iconfilename[0] = '\0';
 
-  if ((fp = fltk_fopen(filename, "rb")) != NULL) {
+  if ((fp = gnui_fopen(filename, "rb")) != NULL) {
     while (fgets(tmp, sizeof(tmp), fp)) {
       if ((val = get_kde_val(tmp, "Icon")) != NULL)
 	strlcpy(iconfilename, val, sizeof(iconfilename));
@@ -685,7 +685,7 @@ load_kde_mimelnk(const char *filename,	// I - mimelnk filename
 	  icon = new FileIcon("*", FileIcon::FIFO);
 	else return;
       } else {
-        icon = new FileIcon(kde_to_fltk_pattern(pattern),
+        icon = new FileIcon(kde_to_gnui_pattern(pattern),
                                 FileIcon::PLAIN);
       }
 
@@ -726,11 +726,11 @@ load_gnome_icons(const char* directory,
 }
 
 //
-// 'kde_to_fltk_pattern()' - Convert a KDE pattern to a FLTK pattern.
+// 'kde_to_gnui_pattern()' - Convert a KDE pattern to a FLTK pattern.
 //
 
 static char *
-kde_to_fltk_pattern(const char *kdepattern) {
+kde_to_gnui_pattern(const char *kdepattern) {
   char	*pattern,
 	*patptr;
 

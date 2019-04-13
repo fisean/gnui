@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /*! \class gnui::xbmImage
 
@@ -38,7 +38,7 @@ static xbmImage image_name(image_name_bits, image_name_width, image_name_height)
   not a multiple of 8 each line starts at the start of the next byte.
 */
 
-#include <fltk/xbmImage.h>
+#include <gnui/xbmImage.h>
 
 using namespace gnui;
 

@@ -37,8 +37,8 @@
  *
  * AUTOMATICALLY GENERATED FILE, DO NOT EDIT !!! (unicode/convmap.pl)
  */
-#include <fltk/x.h>
-#include <fltk/utf.h>
+#include <gnui/x.h>
+#include <gnui/utf.h>
 #if HAVE_ICONV
 #  include <errno.h>
 #  include <iconv.h>

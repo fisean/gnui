@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // Emulation of posix scandir() call
 // This source file is #include'd by scandir.c
@@ -27,7 +27,7 @@
 #include <string.h>
 #include <windows.h>
 #include <stdlib.h>
-#include <fltk/utf.h>
+#include <gnui/utf.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -22,22 +22,22 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-// Return the current state of a key.  Keys are named by fltk symbols,
+// Return the current state of a key.  Keys are named by gnui symbols,
 // which are actually X keysyms.  So this has to translate to macOS
 // symbols.
 
-#include <fltk/events.h>
-#include <fltk/x.h>
+#include <gnui/events.h>
+#include <gnui/x.h>
 using namespace gnui;
 
 // convert an FLTK (X) keysym to a MacOS symbol:
 // See also the inverse converter in mac.cxx
 // This table is in numeric order by FLTK symbol order for binary search:
 
-static const struct {unsigned short vk, fltk;} vktab[] = {
+static const struct {unsigned short vk, gnui;} vktab[] = {
   { 49, ' ' }, { 39, '\'' }, { 43, ',' }, { 27, '-' },
   { 47, '.' }, { 44, '/' }, 
   { 29, '0' }, { 18, '1'  }, { 19, '2'  }, { 20, '3'  }, 
@@ -72,14 +72,14 @@ static const struct {unsigned short vk, fltk;} vktab[] = {
   { 58, LeftAltKey }, { 58, RightAltKey }, {117, DeleteKey }
 };
 
-static unsigned short fltk2mac(unsigned fltk) {
-  if (fltk >= 'a' && fltk <= 'z') fltk-=('a'-'A');
+static unsigned short gnuimac(unsigned gnui) {
+  if (gnui >= 'a' && gnui <= 'z') gnui-=('a'-'A');
   int a = 0;
   int b = sizeof(vktab)/sizeof(*vktab);
   while (a < b) {
     int c = (a+b)/2;
-    if (vktab[c].fltk == fltk) return vktab[c].vk;
-    if (vktab[c].fltk < fltk) a = c+1; else b = c;
+    if (vktab[c].gnui == gnui) return vktab[c].vk;
+    if (vktab[c].gnui < gnui) a = c+1; else b = c;
   }
   return 127;
 }
@@ -102,7 +102,7 @@ bool gnui::get_key_state(unsigned k) {
   printf("%08x %08x %08x %08x\n", (ulong*)(foo)[3], (ulong*)(foo)[2], (ulong*)(foo)[1], (ulong*)(foo)[0]);
  }
 #endif
-  int i = fltk2mac(k);
+  int i = gnuimac(k);
   unsigned char *b = (unsigned char*)foo;
   return (b[i>>3]>>(i&7))&1;
 }

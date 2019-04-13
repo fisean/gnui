@@ -24,14 +24,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/SharedImage.h> // defines bmpImage.h
-#include <fltk/events.h>
-#include <fltk/error.h>
-#include <fltk/x.h>
+#include <gnui/SharedImage.h> // defines bmpImage.h
+#include <gnui/events.h>
+#include <gnui/error.h>
+#include <gnui/x.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

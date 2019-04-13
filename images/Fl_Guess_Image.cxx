@@ -22,14 +22,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/draw.h>
-#include <fltk/SharedImage.h>
-#include <fltk/xbmImage.h>
-#include <fltk/x.h>
+#include <gnui/draw.h>
+#include <gnui/SharedImage.h>
+#include <gnui/xbmImage.h>
+#include <gnui/x.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

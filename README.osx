@@ -28,7 +28,7 @@ BUILDING AND INSTALLING FLTK UNDER APPLE OS X
      - Pie and Arc code draws additional lines.
      - Text editor does not support fractional character lengths.
      - UTF 8 is not supported.
-     - fltk::Window as a subwindow is not supported.
+     - gnui::Window as a subwindow is not supported.
  
 
     Matthias Melcher

@@ -19,21 +19,21 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-// Functions from <fltk/gl.h>
+// Functions from <gnui/gl.h>
 // See also GlWindow and gl_start.C
 
 #include <config.h>
 #if HAVE_GL
 
-#include <fltk/draw.h>
-#include <fltk/Font.h>
-#include <fltk/gl.h>
-#include <fltk/utf.h>
-#include <fltk/math.h>
-#include <fltk/string.h>
+#include <gnui/draw.h>
+#include <gnui/Font.h>
+#include <gnui/gl.h>
+#include <gnui/utf.h>
+#include <gnui/math.h>
+#include <gnui/string.h>
 #include "GlChoice.h"
 
 #if USE_XFT && !MAKEDEPEND

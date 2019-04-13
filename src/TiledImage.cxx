@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /*! \class gnui::TiledImage
 
@@ -28,8 +28,8 @@
   fit them in the rectangle.
 */
 
-#include <fltk/TiledImage.h>
-#include <fltk/draw.h>
+#include <gnui/TiledImage.h>
+#include <gnui/draw.h>
 using namespace gnui;
 
 /*! \fn TiledImage::TiledImage(Symbol*)

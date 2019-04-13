@@ -20,16 +20,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/CycleButton.h>
-#include <fltk/Button.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/Item.h>
-#include <fltk/draw.h>
+#include <gnui/CycleButton.h>
+#include <gnui/Button.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/Item.h>
+#include <gnui/draw.h>
 using namespace gnui;
 
 /*! \class gnui::CycleButton

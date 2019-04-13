@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 /*! \class gnui::Group
@@ -57,12 +57,12 @@ and the items in them are widgets.
 */
 
 #include <config.h>
-#include <fltk/Window.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
-#include <fltk/events.h>
-#include <fltk/layout.h>
-#include <fltk/damage.h>
+#include <gnui/Window.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
+#include <gnui/events.h>
+#include <gnui/layout.h>
+#include <gnui/damage.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -782,10 +782,10 @@ void Group::update_child(Widget& w) const {
 
 /** If this is a Group and not a Window, subtract x() and y() from the
     position of all children. This will fix the positions of widgets
-    created for fltk1.1 that are inside a group.
+    created for gnui1.1 that are inside a group.
 */
 void Group::fix_old_positions() {
-  if (is_window()) return; // in fltk 1.0 children of windows were relative
+  if (is_window()) return; // in gnui 1.0 children of windows were relative
   for (int i = 0; i < children(); i++) {
     Widget& w = *(child(i));
     w.x(w.x()-x());

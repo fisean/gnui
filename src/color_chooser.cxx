@@ -22,19 +22,19 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/ColorChooser.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
-#include <fltk/Item.h>
-#include <fltk/math.h>
-#include <fltk/PopupMenu.h>
-#include <fltk/ValueInput.h>
-#include <fltk/layout.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/ColorChooser.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
+#include <gnui/Item.h>
+#include <gnui/math.h>
+#include <gnui/PopupMenu.h>
+#include <gnui/ValueInput.h>
+#include <gnui/layout.h>
 #include <stdio.h>
 
 using namespace gnui;
@@ -346,7 +346,7 @@ void ccValueBox::draw() {
 #define COLS 16
 
 FL_API Color fl_color_cells[ROWS*COLS] = {
-// first the 16 assignable fltk color indexes:
+// first the 16 assignable gnui color indexes:
 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
 16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,
 // then the closest gray ramps to 0,1/4,1/3,1/2,2/3,3/4,1:
@@ -473,9 +473,9 @@ bool ColorChooser::value(Color c) {
 ////////////////////////////////////////////////////////////////
 // color_chooser():
 
-#include <fltk/Window.h>
-#include <fltk/ReturnButton.h>
-#include <fltk/ask.h>
+#include <gnui/Window.h>
+#include <gnui/ReturnButton.h>
+#include <gnui/ask.h>
 
 class FL_API ccValueInput : public ValueInput {
 public:

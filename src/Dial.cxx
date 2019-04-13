@@ -22,16 +22,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Dial.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
+#include <gnui/Dial.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
 #include <stdlib.h>
-#include <fltk/math.h>
+#include <gnui/math.h>
 using namespace gnui;
 
 /*! \class gnui::Dial

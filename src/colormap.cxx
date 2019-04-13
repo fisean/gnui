@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // This program produces the contents of "colormap.h" as stdout
@@ -35,7 +35,7 @@
 
 // "full intensity colors" have been turned down some to make white
 // background less intense by default.  The hope is that this will make
-// fltk programs more friendly on color-adjusted screens.  If you want
+// gnui programs more friendly on color-adjusted screens.  If you want
 // pure colors you should get them out of the colormap.
 
 //#define III 244 // maximum intensity of the basic colors
@@ -62,13 +62,13 @@ static short cmap[256][3] = {
   {142, 56,142},	// purple, orchid, pale magenta
   { 56,142,142},	// cadet blue, aquamarine, pale cyan
 // The next location was always a dark gray and was used as the selection
-// color by fltk1. To make it look more like Windows this was changed to
+// color by gnui1. To make it look more like Windows this was changed to
 // blue. It appears that all newer versions have changed it back:
 //{  0,  0,128},	// Windows selection color
   {170,170,170},	// old 2/3 gray color
-// These next 16 are the FREE_COLOR area. In some versions of fltk
+// These next 16 are the FREE_COLOR area. In some versions of gnui
 // these were filled with random colors that a Irix 5.3 machine placed
-// in these locations. Other versions of fltk filled this with the 1/3
+// in these locations. Other versions of gnui filled this with the 1/3
 // gray above to discourage their use. This newest version uses colors
 // that NewTek has assigned for their GUI:
 #if 0
@@ -158,12 +158,12 @@ int main() {
   //for (i=16; i<32; i++) {cmap[i][0]=cmap[i][1]=cmap[i][2] = 85;}
 
   // fill in the gray ramp:
-  background(0xe0, 0xe0, 0xe0); // fltk2 new brighter default
-  // background(0xc0, 0xc0, 0xc0); // fltk1.1 colors, match windows 95
-  // copy the 1/3 and 2/3 gray to the closest locations in fltk1.1:
+  background(0xe0, 0xe0, 0xe0); // gnui new brighter default
+  // background(0xc0, 0xc0, 0xc0); // gnui1.1 colors, match windows 95
+  // copy the 1/3 and 2/3 gray to the closest locations in gnui1.1:
   //   cmap[39][0] = cmap[39][1] = cmap[39][2] = 85;
   //   cmap[47][0] = cmap[47][1] = cmap[47][2] = 170;
-  // background(170, 170, 170); // old fltk colors
+  // background(170, 170, 170); // old gnui colors
 
   // fill in the color cube
   i = 56;

@@ -22,13 +22,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Clock.h>
-#include <fltk/draw.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Clock.h>
+#include <gnui/draw.h>
 #include <math.h>
 #include <time.h>
 #ifndef _WIN32
@@ -38,7 +38,7 @@ using namespace gnui;
 
 /*! \class gnui::ClockOutput
   Base class of Clock, this one does not move, it just displays whatever
-  time  you set into it. The include file is <fltk/Clock.h>
+  time  you set into it. The include file is <gnui/Clock.h>
 
   type() may be set to SQUARE, ROUND, or DIGITAL (nyi).
 */
@@ -60,7 +60,7 @@ using namespace gnui;
   Design credits:
   Original clock display written by Paul Haeberli at SGI.\n
   Modifications by Mark Overmars for Forms\n
-  Further changes by Bill Spitzak for fltk\n
+  Further changes by Bill Spitzak for gnui\n
 */
 
 const float hourhand[4][2] = {{-0.5f, 0}, {0, 1.5f}, {0.5f, 0}, {0, -7.0f}};

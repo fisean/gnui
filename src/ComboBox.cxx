@@ -19,16 +19,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // single line input field with predefined choices via popup menu
 
-#include <fltk/ComboBox.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
-#include <fltk/string.h>
+#include <gnui/ComboBox.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
+#include <gnui/string.h>
 
 using namespace gnui;
 

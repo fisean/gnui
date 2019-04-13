@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Utility for drawing arcs and circles.  They are added to
@@ -31,9 +31,9 @@
 // Based on code donated by Jim Wilson
 
 #include <config.h>
-#include <fltk/x.h>
-#include <fltk/draw.h>
-#include <fltk/math.h>
+#include <gnui/x.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
 using namespace gnui;
 
 /*!

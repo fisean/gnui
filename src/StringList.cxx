@@ -1,5 +1,5 @@
-#include <fltk/StringList.h>
-#include <fltk/Item.h>
+#include <gnui/StringList.h>
+#include <gnui/Item.h>
 using namespace gnui;
 
 /*! \class gnui::StringHierarchy

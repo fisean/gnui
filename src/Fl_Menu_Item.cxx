@@ -2,7 +2,7 @@
 // "$Id$"
 //
 // The obsolete MenuItem structure.  This code should not be used
-// in new fltk programs.
+// in new gnui programs.
 //
 // Copyright 1998-2006 by Bill Spitzak and others.
 //
@@ -23,14 +23,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 #ifndef DOXYGEN
 #include <FL/Fl_Menu_Item.H>
-#include <fltk/Menu.h>
-#include <fltk/Item.h>
-#include <fltk/ItemGroup.h>
-#include <fltk/Divider.h>
+#include <gnui/Menu.h>
+#include <gnui/Item.h>
+#include <gnui/ItemGroup.h>
+#include <gnui/Divider.h>
 
 using namespace gnui;
 
@@ -92,8 +92,8 @@ static const Fl_Menu_Item* add(Group* g, const Fl_Menu_Item* m,void* data) {
     if (m->labelfont_) o->labelfont(m->labelfont_);
     if (m->labelsize_) o->labelsize((float)m->labelsize_);
     if (m->labelcolor_) o->labelcolor(m->labelcolor_);
-    // Shift the old flags values over to where they are in fltk,
-    // but also allow new fltk flag values (this was done so RAW_LABEL
+    // Shift the old flags values over to where they are in gnui,
+    // but also allow new gnui flag values (this was done so RAW_LABEL
     // could be put in there for flwm)
     o->set_flag(((m->flags<<8)&(INACTIVE|STATE|INVISIBLE))|(m->flags&~0x1ff));
     if (m->flags & FL_MENU_DIVIDER) new Divider();
@@ -108,8 +108,8 @@ void Fl_Menu_Item::add_to(Menu* menu, void* data) const {
 }
 
 /* Emulate old popup and test-shortcut methods on Fl_Menu_Item arrays: */
-#include <fltk/PopupMenu.h>
-#include <fltk/events.h>
+#include <gnui/PopupMenu.h>
+#include <gnui/events.h>
 
 const Fl_Menu_Item*
 Fl_Menu_Item::pulldown(int X, int Y, int W, int H,

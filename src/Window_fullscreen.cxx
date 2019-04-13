@@ -22,14 +22,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/Window.h>
-#include <fltk/Monitor.h>
-#include <fltk/events.h>
-#include <fltk/x.h>
+#include <gnui/Window.h>
+#include <gnui/Monitor.h>
+#include <gnui/events.h>
+#include <gnui/x.h>
 #include <string.h>
 
 using namespace gnui;
@@ -242,7 +242,7 @@ void Window::maximize() {
   first call to show(). There will be no border, similar to
   clear_border(). In addition, the window will get the exact position
   and size set by the program and will not have an entry in the task
-  bar. This is used by the fltk menus and tooltips.
+  bar. This is used by the gnui menus and tooltips.
 
   On X this causes "override redirect". On most X systems this is
   only a good idea for short-lived windows such as menus and tooltips,

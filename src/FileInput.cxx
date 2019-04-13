@@ -23,20 +23,20 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 
-#include <fltk/FileInput.h>
-#include <fltk/filename.h>
-#include <fltk/Window.h>
-#include <fltk/draw.h>
-#include <fltk/damage.h>
-#include <fltk/events.h>
-#include <fltk/Cursor.h>
-#include <fltk/Rectangle.h>
-#include <fltk/run.h>
-#include <fltk/Box.h>
-#include <fltk/string.h>
+#include <gnui/FileInput.h>
+#include <gnui/filename.h>
+#include <gnui/Window.h>
+#include <gnui/draw.h>
+#include <gnui/damage.h>
+#include <gnui/events.h>
+#include <gnui/Cursor.h>
+#include <gnui/Rectangle.h>
+#include <gnui/run.h>
+#include <gnui/Box.h>
+#include <gnui/string.h>
 
 // temporary for new 1.1.x button FileInput features to come
 //#define DIR_HEIGHT	10

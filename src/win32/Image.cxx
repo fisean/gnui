@@ -158,7 +158,7 @@ uchar* Image::linebuffer(int y) {
   return picture->data+y*picture->linedelta;
 }
 
-// Convert fltk pixeltypes to ARGB32:
+// Convert gnui pixeltypes to ARGB32:
 // Go backwards so the buffers can be shared
 static void convert(uchar* to, const uchar* from, PixelType type, int w) {
   U32* t = (U32*)to;

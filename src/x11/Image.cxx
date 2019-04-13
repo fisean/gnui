@@ -21,7 +21,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // This file is not independently compiled, it is included by ../Image.cxx
 
@@ -40,8 +40,8 @@
 // automatic destructors you create. Therefore this is Windows3.1-style
 // stupidity).
 
-#include <fltk/error.h>
-#include <fltk/math.h>
+#include <gnui/error.h>
+#include <gnui/math.h>
 #include "XColorMap.h"
 
 #if USE_XSHM

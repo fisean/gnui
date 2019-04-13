@@ -20,17 +20,17 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // SGI Inventor / Rapid-App style knob
 
-#include <fltk/ThumbWheel.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
-#include <fltk/math.h>
+#include <gnui/ThumbWheel.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
 using namespace gnui;
 
 #define horizontal() (!flag(LAYOUT_VERTICAL)||(type()&1))

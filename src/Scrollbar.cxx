@@ -22,16 +22,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/Scrollbar.h>
-#include <fltk/Image.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
+#include <gnui/Scrollbar.h>
+#include <gnui/Image.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>

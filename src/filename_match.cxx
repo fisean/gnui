@@ -16,11 +16,11 @@
  *
  * Please report all bugs and problems to the following page:
  *
- *    http://www.fltk.org/str.php
+ *    http://www.gnui.org/str.php
  */
 
 /* Adapted from Rich Salz. */
-#include <fltk/filename.h>
+#include <gnui/filename.h>
 #include <ctype.h>
 
 #define CASE_INSENSITIVE 1

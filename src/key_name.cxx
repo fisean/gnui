@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Turn a fltk (X) keysym + fltk shift flags into a human-readable string.
+// Turn a gnui (X) keysym + gnui shift flags into a human-readable string.
 //
 // Copyright 1998-2006 by Bill Spitzak and others.
 //
@@ -22,22 +22,22 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/events.h>
-#include <fltk/Widget.h>
-#include <fltk/draw.h>
-#include <fltk/string.h>
+#include <gnui/events.h>
+#include <gnui/Widget.h>
+#include <gnui/draw.h>
+#include <gnui/string.h>
 #include <ctype.h>
 #include <stdlib.h>
 #if USE_X11
-#include <fltk/x.h>
+#include <gnui/x.h>
 #endif
 using namespace gnui;
 
-// This table must be in numeric order by fltk (X) keysym number.
+// This table must be in numeric order by gnui (X) keysym number.
 // On X the table is much shorter as it is only the names that
 // are not returned correctly by XKeysymToString().
 struct Keyname {unsigned key; const char* name;};
@@ -46,7 +46,7 @@ static Keyname table[] = {
   {BackSpaceKey, "Backspace"},
   {TabKey,	"Tab"},
   {ClearKey,	"Clear"},
-  {ReturnKey,	"Return"}, // older fltk said "Enter"
+  {ReturnKey,	"Return"}, // older gnui said "Enter"
   {PauseKey,	"Pause"},
   {ScrollLockKey,"ScrollLock"},
   {EscapeKey,	"Escape"},

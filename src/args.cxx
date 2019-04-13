@@ -20,10 +20,10 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-// OPTIONAL initialization code for a program using fltk.
+// OPTIONAL initialization code for a program using gnui.
 // You do not need to call this!  Feel free to make up your own switches.
 // Optional argument initialization code for the Fast Light Tool Kit (FLTK).
 //
@@ -35,13 +35,13 @@
 #include <stdio.h>
 #include <limits.h>
 
-#include <fltk/run.h>
-#include <fltk/Window.h>
-#include <fltk/filename.h>
-#include <fltk/error.h>
-#include <fltk/Monitor.h>
+#include <gnui/run.h>
+#include <gnui/Window.h>
+#include <gnui/filename.h>
+#include <gnui/error.h>
+#include <gnui/Monitor.h>
 
-#include <fltk/x.h>
+#include <gnui/x.h>
 
 #if !USE_X11
 int XParseGeometry(const char*, int*, int*, unsigned int*, unsigned int*);
@@ -151,7 +151,7 @@ int gnui::arg(int argc, char **argv, int &i) {
   i. It should return non-zero if the switch is recognized, and add at
   least 1 to i (it can add more to consume words after the
   switch). This function is called before any other tests, so you can
-  override any FLTK switch (this is why fltk can use very short
+  override any FLTK switch (this is why gnui can use very short
   switches instead of the long ones all other toolkits force you to
   use).
 
@@ -258,7 +258,7 @@ static const char * const helpmsg =
 /*!
   This is a portion of the string printed by gnui::args() detects
   an invalid argument on the command-line. You can add this to your
-  own error or help message to show the fltk switches. It's value is
+  own error or help message to show the gnui switches. It's value is
   (no newline at start or the end):
 \code
  -d[isplay] host:n.n

@@ -20,17 +20,17 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Color.h>
-#include <fltk/draw.h>
+#include <gnui/Color.h>
+#include <gnui/draw.h>
 #include <config.h>
 #if defined(_WIN32) && USE_STOCK_BRUSH && _WIN32_WINNT<0x0500
 # undef _WIN32_WINNT
 # define _WIN32_WINNT 0x0500
 #endif
-#include <fltk/x.h>
+#include <gnui/x.h>
 
 using namespace gnui;
 
@@ -45,11 +45,11 @@ using namespace gnui;
   If the rgb is zero, the N is the color "index". This index is used
   to look up an gnui::Color in an internal table of 255 colors shown
   here.  All the indexed colors may be changed by using
-  set_color_index().  However fltk uses the ones between 32 and 255
+  set_color_index().  However gnui uses the ones between 32 and 255
   and assummes they are not changed from their default values.
 
   \image html fl_show_colormap.gif
-  (this is \e not the X colormap used by fltk)
+  (this is \e not the X colormap used by gnui)
 
   A Color of zero (gnui::NO_COLOR) will draw black but is
   ambiguous. It is returned as an error value or to indicate portions
@@ -111,7 +111,7 @@ Color gnui::inactive(Color fg) {
   return lerp(fg, current_bgcolor_, .5);
 }
 
-/*! Returns \a fg if fltk decides it can be seen well when drawn against
+/*! Returns \a fg if gnui decides it can be seen well when drawn against
   \a bg. Otherwise it returns either gnui::BLACK or gnui::WHITE. */
 Color gnui::contrast(Color fg, Color bg) {
   uchar r1,g1,b1; split_color(fg, r1,g1,b1);

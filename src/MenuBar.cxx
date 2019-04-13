@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 /*! \class gnui::MenuBar
@@ -36,15 +36,15 @@ in your work area and you will get the exact same menu as a vertical
 pop up menu.
 */
 
-#include <fltk/MenuBar.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/Item.h>
-#include <fltk/draw.h>
-#include <fltk/Tooltip.h>
+#include <gnui/MenuBar.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/Item.h>
+#include <gnui/draw.h>
+#include <gnui/Tooltip.h>
 #include <config.h>
-#include <fltk/Item.h> // for TOGGLE, RADIO
+#include <gnui/Item.h> // for TOGGLE, RADIO
 #define checkmark(item) (item->type()>=Item::TOGGLE && item->type()<=Item::RADIO)
 
 using namespace gnui;
