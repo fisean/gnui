@@ -1,9 +1,9 @@
-dnl 
+dnl
 dnl the "configure" script is made from this by running GNU "autoconf"
 dnl
 dnl "$Id$"
 dnl
-dnl Configuration script for the Fast Light Tool Kit (FLTK).
+dnl Configuration script for the Fast Light Tool Kit (GNUI).
 dnl
 dnl Copyright 1998-2003 by Bill Spitzak and others.
 dnl
@@ -23,8 +23,8 @@ dnl Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 dnl USA.
 dnl
 dnl Please report all bugs and problems to the following website:
-dnl 
-dnl     http://www.fltk.org/str.php
+dnl
+dnl     http://www.gnui.org/str.php
 dnl
 
 dnl We need at least autoconf 2.50...
@@ -33,7 +33,7 @@ dnl AC_PREREQ(2.50)
 dnl Required file in package...
 AC_INIT(src/Widget.cxx)
 
-dnl FLTK library versions...
+dnl GNUI library versions...
 FL_MAJOR_VERSION=2
 FL_MINOR_VERSION=0
 FL_PATCH_VERSION=0
@@ -100,13 +100,13 @@ GLDEMOS="gldemos"
 
 AC_SUBST(GLDEMOS)
 
-LINKFLTK="-lfltk2"
-LINKFLTKGL="-lfltk2_gl"
-LINKFLTKIMG="-lfltk2_images"
+LINKGNUI="-lgnui"
+LINKGNUIGL="-lgnui_gl"
+LINKGNUIIMG="-lgnui_images"
 
-AC_SUBST(LINKFLTK)
-AC_SUBST(LINKFLTKGL)
-AC_SUBST(LINKFLTKIMG)
+AC_SUBST(LINKGNUI)
+AC_SUBST(LINKGNUIGL)
+AC_SUBST(LINKGNUIIMG)
 
 LIBPREFIX="lib"
 LIBSUFFIX=".a"
@@ -229,16 +229,16 @@ if test x$enable_shared = xyes; then
 	    ;;
     esac
 
-#   LINKSHARED="-L../images -lfltk2_images$SHAREDSUFFIX -L../forms -lfltk2_forms$SHAREDSUFFIX -L../src -lfltk2$SHAREDSUFFIX"
-    LINKSHARED="-L../images -lfltk2_images$SHAREDSUFFIX -L../src -lfltk2$SHAREDSUFFIX"
+#   LINKSHARED="-L../images -lgnui_images$SHAREDSUFFIX -L../forms -lgnui_forms$SHAREDSUFFIX -L../src -lgnui$SHAREDSUFFIX"
+    LINKSHARED="-L../images -lgnui_images$SHAREDSUFFIX -L../src -lgnui$SHAREDSUFFIX"
 else
     DSOCOMMAND="echo"
     DSOLINK=""
     PICFLAG=0
     SHAREDSUFFIX=""
     FLUID="fluid2"
-#    LINKSHARED="-L../lib -lfltk2_images -lfltk2_forms -lfltk2"
-    LINKSHARED="-L../lib -lfltk2_images -lfltk2"
+#    LINKSHARED="-L../lib -lgnui_images -lgnui_forms -lgnui"
+    LINKSHARED="-L../lib -lgnui_images -lgnui"
 fi
 
 AC_SUBST(DSOCOMMAND)
@@ -440,12 +440,12 @@ AC_CHECK_FUNC(strncasecmp,AC_DEFINE(HAVE_STRNCASECMP),[
 AC_CHECK_FUNC(strlcat,AC_DEFINE(HAVE_STRLCAT))
 AC_CHECK_FUNC(strlcpy,AC_DEFINE(HAVE_STRLCPY))
 
-dnl FLTK library uses math library functions...
+dnl GNUI library uses math library functions...
 AC_SEARCH_LIBS(pow, m)
 
 dnl Check for image libraries...
 SAVELIBS="$LIBS"
-IMAGELIBS="-lfltk2_images"
+IMAGELIBS="-lgnui_images"
 
 AC_ARG_ENABLE(jpeg, [  --enable-jpeg           turn on JPEG support: auto,no,local (default=auto)])
 if test x$enable_jpeg != xno; then
@@ -459,10 +459,10 @@ if test x$enable_jpeg != xno; then
 	fi
         if test x$HAVE_LIBJPEG != x1; then
         	AC_DEFINE(HAVE_LIBJPEG)
-        	AC_DEFINE(HAVE_LOCAL_JPEG_H)                
-		LOCAL_IMAGELIBS="$LOCAL_IMAGELIBS ../lib/libfltk2_jpeg.a"
+        	AC_DEFINE(HAVE_LOCAL_JPEG_H)
+		LOCAL_IMAGELIBS="$LOCAL_IMAGELIBS ../lib/libgnui_jpeg.a"
         	LOCAL_IMAGETARGETS="$LOCAL_IMAGETARGETS images/libjpeg"
-		IMAGELIBS="$IMAGELIBS -lfltk2_jpeg"
+		IMAGELIBS="$IMAGELIBS -lgnui_jpeg"
         fi
 fi
 
@@ -482,10 +482,10 @@ if test x$enable_zlib != xno; then
         if test x$HAVE_LIBZ != x1; then
         	AC_DEFINE(HAVE_LIBZ)
         	ZLIBINC="../zlib"
-		LOCAL_IMAGELIBS="$LOCAL_IMAGELIBS ../lib/libfltk2_z.a"
+		LOCAL_IMAGELIBS="$LOCAL_IMAGELIBS ../lib/libgnui_z.a"
         	LOCAL_IMAGETARGETS="$LOCAL_IMAGETARGETS images/zlib"
-		# fltk_z should go before fltk2_jpeg and after fltk2_png
-		IMAGELIBS="-lfltk2_z $IMAGELIBS"
+		# gnui_z should go before gnui_jpeg and after gnui_png
+		IMAGELIBS="-lgnui_z $IMAGELIBS"
         fi
 fi
 
@@ -508,9 +508,9 @@ if test x$enable_png != xno; then
         if test x$HAVE_LIBPNG != x1; then
         	AC_DEFINE(HAVE_LIBPNG)
         	AC_DEFINE(HAVE_LOCAL_PNG_H)
-		LOCAL_IMAGELIBS="$LOCAL_IMAGELIBS ../lib/libfltk2_png.a"
+		LOCAL_IMAGELIBS="$LOCAL_IMAGELIBS ../lib/libgnui_png.a"
         	LOCAL_IMAGETARGETS="$LOCAL_IMAGETARGETS images/libpng"
-		IMAGELIBS=" -lfltk2_png $IMAGELIBS "
+		IMAGELIBS=" -lgnui_png $IMAGELIBS "
         fi
 fi
 
@@ -570,7 +570,7 @@ case $uname in
         	AC_DEFINE(HAVE_GL_GLU_H)
 		GLLIB="-lglu32 $GLLIB"])
 	else
-	    LINKFLTKGL=""
+	    LINKGNUIGL=""
 	    GLLIBNAME=""
 	    GLDSONAME=""
 	    GLDEMOS=""
@@ -599,7 +599,7 @@ case $uname in
             AC_DEFINE(HAVE_GL_GLU_H)
             GLLIB="-framework AGL -framework OpenGL"
         else
-	    LINKFLTKGL=""
+	    LINKGNUIGL=""
 	    GLLIBNAME=""
 	    GLDSONAME=""
 	    GLDEMOS=""
@@ -615,9 +615,9 @@ case $uname in
   	if test x$enable_cairo = xyes; then
     	   AC_DEFINE(USE_CAIRO)
 #   FIXME This part should be fixed so configure do not depend on
-#   we do not rely on pkg-config . 
+#   we do not rely on pkg-config .
        	  LIBS="$LIBS `pkg-config --libs cairo`"
-       	  CXXFLAGS="$CXXFLAGS `pkg-config --cflags cairo`" 
+       	  CXXFLAGS="$CXXFLAGS `pkg-config --cflags cairo`"
   	fi
 	;;
 
@@ -672,13 +672,13 @@ case $uname in
 		fi])
 
 	    if test x$ac_cv_lib_GL_glXMakeCurrent != xyes -a x$ac_cv_lib_MesaGL_glXMakeCurrent != xyes; then
-		    LINKFLTKGL=""
+		    LINKGNUIGL=""
 		    GLLIBNAME=""
 		    GLDSONAME=""
 		    GLDEMOS=""
 	    fi
 	else
-	    LINKFLTKGL=""
+	    LINKGNUIGL=""
 	    GLLIBNAME=""
 	    GLDSONAME=""
 	    GLDEMOS=""
@@ -689,9 +689,9 @@ case $uname in
 	if test x$enable_cairo = xyes; then
 	  AC_DEFINE(USE_CAIRO)
 	  dnl FIXME This part should be fixed so configure do not depend on
-	  dnl we do not rely on pkg-config . 
+	  dnl we do not rely on pkg-config .
 	  LIBS="$LIBS `pkg-config --libs cairo`"
-	  CXXFLAGS="$CXXFLAGS `pkg-config --cflags cairo`" 
+	  CXXFLAGS="$CXXFLAGS `pkg-config --cflags cairo`"
 	fi
 
 	dnl X11 multithreading
@@ -832,7 +832,7 @@ if test "$uname" = "IRIX" -a $uversion -ge 62 -a "$libdir" = "\${exec_prefix}/li
 fi
 
 dnl Define the command used to update the dependencies (this option
-dnl mainly for FLTK core developers - not necessary for users)
+dnl mainly for GNUI core developers - not necessary for users)
 dnl Command must write dependencies to stdout!
 MAKEDEPEND="\$(CXX) -MM -DMAKEDEPEND"
 AC_SUBST(MAKEDEPEND)
@@ -887,7 +887,7 @@ if test -n "$GCC"; then
         AC_MSG_CHECKING(if GCC supports -fno-exceptions)
         OLDCFLAGS="$CFLAGS"
         CFLAGS="$CFLAGS -fno-exceptions"
-        AC_TRY_COMPILE(,,            
+        AC_TRY_COMPILE(,,
     	    OPTIM="$OPTIM -fno-exceptions"
     	    AC_MSG_RESULT(yes),
     	    AC_MSG_RESULT(no))
@@ -902,7 +902,7 @@ if test -n "$GCC"; then
         AC_MSG_CHECKING(if GCC supports -fno-rtti)
         OLDCFLAGS="$CFLAGS"
         CFLAGS="$CFLAGS -fno-rtti"
-        AC_TRY_COMPILE(,,            
+        AC_TRY_COMPILE(,,
     	    OPTIM="$OPTIM -fno-rtti"
     	    AC_MSG_RESULT(yes),
     	    AC_MSG_RESULT(no))
@@ -950,7 +950,7 @@ if test -n "$GCC"; then
     # bugs in the X headers up through Solaris 7.
     #
     # Unlike the other compiler/optimization settings, this one is placed
-    # in CFLAGS and CXXFLAGS so that fltk2-config will provide the option
+    # in CFLAGS and CXXFLAGS so that gnui-config will provide the option
     # to clients - otherwise client apps will not compile properly...
     if test "$uname" = SunOS; then
 	AC_MSG_CHECKING(if GCC supports -fpermissive)
@@ -1048,47 +1048,47 @@ else
 		fi
 	    fi
 
-	    AC_MSG_WARN(The AIX C and C++ compilers are known not to correctly compile the FLTK library.)
+	    AC_MSG_WARN(The AIX C and C++ compilers are known not to correctly compile the GNUI library.)
 	    ;;
 	*)
 	    # Running some other operating system; inform the user they
 	    # should contribute the necessary options to the STR system...
-	    AC_MSG_WARN(Building FLTK with default compiler optimizations)
-	    AC_MSG_WARN(Contact the FLTK developers via http://www.fltk.org/str.php with uname and compiler options.)
+	    AC_MSG_WARN(Building GNUI with default compiler optimizations)
+	    AC_MSG_WARN(Contact the GNUI developers via http://www.gnui.org/str.php with uname and compiler options.)
 	    ;;
     esac
 fi
 
 OPTIM="$DEBUGFLAG $OPTIM"
 
-dnl Define the FLTK documentation directory...
+dnl Define the GNUI documentation directory...
 if test x$prefix = xNONE; then
-    AC_DEFINE_UNQUOTED(FLTK_DOCDIR, "/usr/local/share/doc/fltk")
+    AC_DEFINE_UNQUOTED(GNUI_DOCDIR, "/usr/local/share/doc/gnui")
 else
-    AC_DEFINE_UNQUOTED(FLTK_DOCDIR, "$prefix/share/doc/fltk")
+    AC_DEFINE_UNQUOTED(GNUI_DOCDIR, "$prefix/share/doc/gnui")
 fi
 
-dnl Define the FLTK data directory...
+dnl Define the GNUI data directory...
 if test x$prefix = xNONE; then
-    AC_DEFINE_UNQUOTED(FLTK_DATADIR, "/usr/local/share/fltk")
+    AC_DEFINE_UNQUOTED(GNUI_DATADIR, "/usr/local/share/gnui")
 else
-    AC_DEFINE_UNQUOTED(FLTK_DATADIR, "$prefix/share/fltk")
+    AC_DEFINE_UNQUOTED(GNUI_DATADIR, "$prefix/share/gnui")
 fi
 
 dnl Write all of the files...
 AC_CONFIG_HEADER(config.h:configh.in)
-dnl AC_CONFIG_HEADER(fltk/string.h)
-AC_OUTPUT(makeinclude fltk.list fltk2-config)
+dnl AC_CONFIG_HEADER(gnui/string.h)
+AC_OUTPUT(makeinclude gnui.list gnui-config)
 
-dnl Make sure the fltk2-config script is executable...
-chmod +x fltk2-config
+dnl Make sure the gnui-config script is executable...
+chmod +x gnui-config
 
 echo
 echo Libs:              $LIBS
 echo System image libs: $IMAGELIBS
 echo Local image libs:  $LOCAL_IMAGELIBS
 echo OpenGL libs:       $GLLIB
-echo 
+echo
 echo Build targets:     $LIBTARGET $DSOTARGET
 echo
 

@@ -2,7 +2,7 @@
 #
 # "$Id$"
 #
-# FLTK configuration utility.
+# GNUI configuration utility.
 #
 # Copyright 2000-2003 by Bill Spitzak and others.
 # Original version Copyright 2000 by James Dean Palmer
@@ -25,7 +25,7 @@
 #
 # Please report all bugs and problems to the website:
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 MAJOR_VERSION=@FL_MAJOR_VERSION@
@@ -34,7 +34,7 @@ PATCH_VERSION=@FL_PATCH_VERSION@
 VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
 APIVERSION="$MAJOR_VERSION.$MINOR_VERSION"
 
-### BEGIN fltk2-config
+### BEGIN gnui-config
 
 # First, we need to figure out where we are, in case we are in a non-installed invocation
 # BUT to do that we need to check if we were called via a symlink or not...
@@ -84,22 +84,22 @@ IMAGELIBS="@IMAGELIBS@"
 SHAREDSUFFIX="@SHAREDSUFFIX@"
 
 # Check for local invocation, and update paths accordingly...
-if test -e "$selfdir/fltk/Window.h"; then
+if test -e "$selfdir/gnui/Window.h"; then
   bindir="$selfdir/fluid"
   includedir="$selfdir"
   libdir="$selfdir/lib"
   prefix="$selfdir"
-	if test -f "$libdir/libfltk2_jpeg.a"; then
+	if test -f "$libdir/libgnui_jpeg.a"; then
 		CFLAGS="-I$includedir/images/jpeg $CFLAGS"
 		CXXFLAGS="-I$includedir/images/jpeg $CXXFLAGS"
 	fi
 
-	if test -f "$libdir/libfltk2_z.a"; then
+	if test -f "$libdir/libgnui_z.a"; then
 		CFLAGS="-I$includedir/images/zlib $CFLAGS"
 		CXXFLAGS="-I$includedir/images/zlib $CXXFLAGS"
 	fi
 
-	if test -f "$libdir/libfltk2_png.a"; then
+	if test -f "$libdir/libgnui_png.a"; then
 		CFLAGS="-I$includedir/images/png $CFLAGS"
 		CXXFLAGS="-I$includedir/images/png $CXXFLAGS"
 	fi
@@ -107,9 +107,9 @@ fi
 
 usage ()
 {
-    echo "Usage: fltk2-config [OPTIONS]
+    echo "Usage: gnui-config [OPTIONS]
 Options:
-	[--prefix[=DIR]]  return/set where FLTK is installed
+	[--prefix[=DIR]]  return/set where GNUI is installed
 	[--exec-prefix[=DIR]]
 	[--version]
 	[--api-version]
@@ -121,14 +121,14 @@ Options telling what we are doing:
 	[--use-forms]     use forms compatibility layer
 
 Options telling what information we request:
-	[--cflags]        return flags to compile C using FLTK
-	[--cxxflags]      return flags to compile C++ using FLTK
-	[--ldflags]       return flags to link against FLTK
-	[--ldstaticflags] return flags to link against static FLTK library
+	[--cflags]        return flags to compile C using GNUI
+	[--cxxflags]      return flags to compile C++ using GNUI
+	[--ldflags]       return flags to link against GNUI
+	[--ldstaticflags] return flags to link against static GNUI library
                                           even if there are DSOs installed
-	[--libs]          return FLTK libraries full path for dependencies
-	[--cxx]           return name of C++ compiler used to build FLTK
-	[--cc]            return name of C compiler used to build FLTK
+	[--libs]          return GNUI libraries full path for dependencies
+	[--cxx]           return name of C++ compiler used to build GNUI
+	[--cc]            return name of C compiler used to build GNUI
 
 Option to compile and link an application:
 	[-g]              compile the program with debugging information
@@ -166,7 +166,7 @@ do
               exec_prefix=$optarg
 	    fi
 ## FIXME
-#     This fixes --prefix=<path> bug - fltk2-config didn't return proper stuff
+#     This fixes --prefix=<path> bug - gnui-config didn't return proper stuff
       bindir=${exec_prefix}
       includedir=${prefix}/include
       libdir=${prefix}/lib
@@ -266,23 +266,23 @@ LDSTATIC_PATHS=$libs
 LDLIBS_PATHS=$libs
 
 # Calculate needed libraries
-LDSTATIC="$libdir/libfltk2.a $LDLIBS"
-LDLIBS="$libs -lfltk2$SHAREDSUFFIX $LDLIBS"
-LIBS="$LIBS $libdir/libfltk2.a"
+LDSTATIC="$libdir/libgnui.a $LDLIBS"
+LDLIBS="$libs -lgnui$SHAREDSUFFIX $LDLIBS"
+LIBS="$LIBS $libdir/libgnui.a"
 
 if test x$use_forms = xyes; then
-    LDLIBS="-lfltk2_forms$SHAREDSUFFIX $LDLIBS"
-    LDSTATIC="$libdir/libfltk2_forms.a $LDSTATIC"
-    LIBS="$LIBS $libdir/libfltk2_forms.a"
+    LDLIBS="-lgnui_forms$SHAREDSUFFIX $LDLIBS"
+    LDSTATIC="$libdir/libgnui_forms.a $LDSTATIC"
+    LIBS="$LIBS $libdir/libgnui_forms.a"
 fi
 if test x$use_gl = xyes; then
-    LDLIBS="-lfltk2_gl$SHAREDSUFFIX @GLLIB@ $LDLIBS"
-    LDSTATIC="$libdir/libfltk2_gl.a @GLLIB@ $LDSTATIC"
-    LIBS="$LIBS $libdir/libfltk2_gl.a"
+    LDLIBS="-lgnui_gl$SHAREDSUFFIX @GLLIB@ $LDLIBS"
+    LDSTATIC="$libdir/libgnui_gl.a @GLLIB@ $LDSTATIC"
+    LIBS="$LIBS $libdir/libgnui_gl.a"
 fi
 if test x$use_images = xyes; then
-    LDLIBS="-lfltk2_images$SHAREDSUFFIX $IMAGELIBS $LDLIBS"
-    LDSTATIC="$libdir/libfltk2_images.a $LDSTATIC $IMAGELIBS"
+    LDLIBS="-lgnui_images$SHAREDSUFFIX $IMAGELIBS $LDLIBS"
+    LDSTATIC="$libdir/libgnui_images.a $LDSTATIC $IMAGELIBS"
 fi
 
 LDLIBS="$DSOLINK $LDLIBS"
@@ -320,8 +320,8 @@ if test -n "$compile"; then
 fi
 
 if test -n "$post" -a "$POSTBUILD" != ":"; then
-    echo $POSTBUILD $post $includedir/fltk/mac.r
-    $POSTBUILD $post $includedir/fltk/mac.r
+    echo $POSTBUILD $post $includedir/gnui/mac.r
+    $POSTBUILD $post $includedir/gnui/mac.r
 fi
 
 if test "$echo_prefix" = "yes"; then

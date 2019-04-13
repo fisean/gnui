@@ -6,7 +6,8 @@ config.h
 config.log
 config.status
 configure
-fltk.list
-fltk2-config
+gnui.list
+gnui-config
 makedepend
 makeinclude
+lib/lib*
