@@ -1,7 +1,7 @@
-#include <fltk/ProgressBar.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
+#include <gnui/ProgressBar.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
 #include <stdio.h>
 using namespace gnui;
 

@@ -20,11 +20,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
-// This is the default fltk_theme() function for fltk on X. It
+// This is the default gnui_theme() function for gnui on X. It
 // reads the "INI" style files written by KDE 1,2,3 and extracts some
-// appearance information for fltk from them. It also installs a
+// appearance information for gnui from them. It also installs a
 // handler for KDE style change messages and calls gnui::reload_theme
 // when they come in.
 
@@ -44,16 +44,16 @@
   to use that any more.
 */
 
-#include <fltk/Widget.h>
-#include <fltk/draw.h>
-#include <fltk/Monitor.h>
-#include <fltk/events.h>
-#include <fltk/string.h>
+#include <gnui/Widget.h>
+#include <gnui/draw.h>
+#include <gnui/Monitor.h>
+#include <gnui/events.h>
+#include <gnui/string.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
 #if USE_X11
-# include <fltk/x.h>
+# include <gnui/x.h>
 #endif
 #ifndef PATH_MAX
 # define PATH_MAX 1024
@@ -318,7 +318,7 @@ static gnui::Font* grok_font(const char* s, float& fontsize, char* fontencoding)
 
 ////////////////////////////////////////////////////////////////
 
-extern "C" bool fltk_theme() {
+extern "C" bool gnui_theme() {
 
   const char* home = getenv("HOME");
   if (!home) return false;
@@ -595,7 +595,7 @@ static Color to_color(const char* p) {
   return p ? color(p) : 0;
 }
 
-extern "C" bool fltk_theme() {
+extern "C" bool gnui_theme() {
   open_display();
 
   Color color;

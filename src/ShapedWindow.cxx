@@ -20,7 +20,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /*! \class gnui::ShapedWindow
 
@@ -47,8 +47,8 @@ calling void Window::border(bool set).
 */
 
 #include <config.h>
-#include <fltk/ShapedWindow.h>
-#include <fltk/x.h>
+#include <gnui/ShapedWindow.h>
+#include <gnui/x.h>
 
 #if USE_X11
 # define Window XWindow

@@ -1,5 +1,5 @@
-#include <fltk/WidgetAssociation.h>
-#include <fltk/Widget.h>
+#include <gnui/WidgetAssociation.h>
+#include <gnui/Widget.h>
 
 #include <string.h>
 

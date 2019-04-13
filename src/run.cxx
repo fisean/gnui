@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /** \namespace gnui */
 
@@ -30,15 +30,15 @@
 
 #include <config.h>
 
-#include <fltk/run.h>
-#include <fltk/events.h>
-#include <fltk/error.h>
-#include <fltk/damage.h>
-#include <fltk/layout.h>
-#include <fltk/Window.h>
-#include <fltk/Style.h>
-#include <fltk/Tooltip.h>
-#include <fltk/filename.h>
+#include <gnui/run.h>
+#include <gnui/events.h>
+#include <gnui/error.h>
+#include <gnui/damage.h>
+#include <gnui/layout.h>
+#include <gnui/Window.h>
+#include <gnui/Style.h>
+#include <gnui/Tooltip.h>
+#include <gnui/filename.h>
 
 #if defined(__APPLE__)
 #include <sys/time.h>
@@ -50,11 +50,11 @@
 # define WINVER 0x0500
 #endif
 
-#include <fltk/x.h>
+#include <gnui/x.h>
 
 /* things that should be in different source files: */
-#include <fltk/FL_VERSION.h>
-#include <fltk/Monitor.h>
+#include <gnui/FL_VERSION.h>
+#include <gnui/Monitor.h>
 
 using namespace gnui;
 
@@ -112,7 +112,7 @@ static void fix_focus() {
 
 extern "C" {
 // This function is here because Window::label() uses it:
-// Make sure fltk/string.h is included above. Without it it appears
+// Make sure gnui/string.h is included above. Without it it appears
 // that VC++ will be unable to link to this. Adding FL_API does not fix it.
 /**
   Equivalent to strdup() except the C++ new[] operator is used. A
@@ -141,7 +141,7 @@ FL_API char* newstring(const char *from) {
   the focus to a widget. Returns true if the widget accepted the
   focus.
 
-  On current systems fltk does not force the window system to set
+  On current systems gnui does not force the window system to set
   the focus. If the window does not have focus it will usually switch
   back to the previous window when the user types a key.
 */
@@ -246,7 +246,7 @@ void gnui::add_timeout(float time, TimeoutHandler cb, void *arg) {
   caused this timeout to be called. This will result in far more
   accurate spacing of the timeout callbacks, it also has slightly less
   system call overhead. (It will also use all your machine time if
-  your timeout code and fltk's overhead take more than t seconds, as
+  your timeout code and gnui's overhead take more than t seconds, as
   the real timeout will be reduced to zero).
 
   Outside a timeout callback this acts like add_timeout().
@@ -315,8 +315,8 @@ static Check* first_check, *next_check, *free_check;
 
   Fltk will call this callback just before it flushes the display and
   waits for events. This is different than add_idle() because it
-  is only called once, then fltk calls the system and tells it not to
-  return until an event happens. If several checks have been added fltk
+  is only called once, then gnui calls the system and tells it not to
+  return until an event happens. If several checks have been added gnui
   calls them all, the most recently added one first.
 
   This can be used by code that wants to monitor the application's
@@ -395,12 +395,12 @@ static bool in_idle;
   Window::first() is null) this will return with zero. A program can
   also exit by having a callback call exit() or abort().
 
-  Most fltk programs will end main() with return gnui::run();.
+  Most gnui programs will end main() with return gnui::run();.
 */
 int gnui::run() {
   while (Window::first()) wait(FOREVER);
   return(0);
-// WAS: This was tried for fltk 2.0, and the callback for closing the last
+// WAS: This was tried for gnui 2.0, and the callback for closing the last
 // window in Window.C called exit(). This proved to be unpopular:
 //  for (;;) wait(FOREVER);
 }
@@ -943,7 +943,7 @@ void gnui::pushed(Widget *o) {
   more events, and also removes all global variables that point at the
   widget (not just the gnui::focus(), but the gnui::belowmouse(),
   gnui::modal(), and some internal pointers). Unlike older versions of
-  fltk, no events (i.e. gnui::LEAVE or gnui::UNFOCUS) are sent to the
+  gnui, no events (i.e. gnui::LEAVE or gnui::UNFOCUS) are sent to the
   widget.  */
 void Widget::throw_focus() {
   clear_flag(HIGHLIGHT|FOCUSED);
@@ -984,7 +984,7 @@ void Widget::throw_focus() {
  \a grab indicates that the modal widget should get events from
  anywhere on the screen. This is done by messing with the window
  system. If gnui::exit_modal() is called in response to an gnui::PUSH
- event (rather than waiting for the drag or release event) fltk will
+ event (rather than waiting for the drag or release event) gnui will
  "repost" the event so that it is handled after modal state is
  exited. This may also be done for keystrokes in the future. On both X
  and WIN32 grab will not work unless you have some visible window
@@ -1019,7 +1019,7 @@ void gnui::modal(Widget* widget, bool grab) {
   // start the new grab:
   // Both X and Win32 have the annoying requirement that a visible window
   // be used as a target for the events, and it cannot disappear while the
-  // grab is running. I just grab fltk's first window:
+  // grab is running. I just grab gnui's first window:
   if (grab && widget) {
 #if USE_X11
     Window* window = Window::first();
@@ -1129,8 +1129,8 @@ static const handler_link *handlers = 0;
     called with gnui::SHORTCUT. You can use this to implement global
     hotkeys.
   - Unrecognized X events cause this to be called with NO_EVENT. The
-    Window parameter is set if fltk can figure out the target window
-    and it is an fltk one. You can then use system specific code to
+    Window parameter is set if gnui can figure out the target window
+    and it is an gnui one. You can then use system specific code to
     access the event data and figure out what to do. This is not done
     on Windows due to the \e enormous number of garbage messages a
     program gets, you should instead use Windows pre-filtering
@@ -1138,8 +1138,8 @@ static const handler_link *handlers = 0;
   - Events it gets with a window id it does not recognize cause this
     to be called, with the Window parameter set to null. This can only
     happen on X, on Windows any unknown windows should have their
-    own message handling function that does not call fltk.
-  - This may be called with other event types when the widget fltk
+    own message handling function that does not call gnui.
+  - This may be called with other event types when the widget gnui
     wants to send it to returns zero. However the exact rules when
     this happens may change in future versions.
 */
@@ -1329,7 +1329,7 @@ bool gnui::handle(int event, Window* window)
   return false;
 }
 
-/*! \fn FILE* gnui::fltk_fopen(const char* name, const char* flags)
+/*! \fn FILE* gnui::gnui_fopen(const char* name, const char* flags)
   Portably calls the fopen() function for different systems.
   Note that ALL calls to this function MUST make sure the filename is
   UTF8 encoded.

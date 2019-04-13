@@ -20,17 +20,17 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // This file is seperate from Font.cxx due the historical reasons in
-// that on X11 significant code was saved by only using the fltk
+// that on X11 significant code was saved by only using the gnui
 // built-in fonts and not doing anything with named fonts. This
 // is probably irrelevant now and they could be merged.
 
 #include <config.h>
-#include <fltk/Font.h>
-#include <fltk/string.h>
+#include <gnui/Font.h>
+#include <gnui/string.h>
 
 #if USE_X11
 # include "x11/list_fonts.cxx"
@@ -60,7 +60,7 @@ using namespace gnui;
 
   Find a font with the given "nice" name. You can get bold and italic
   by adding a space and "bold" or "italic" (or both) to the name, or
-  by passing them as the attributes. Case is ignored and fltk will
+  by passing them as the attributes. Case is ignored and gnui will
   accept some variations in the font name.
 
   The current implementation calls gnui::list_fonts() and then does a
@@ -119,7 +119,7 @@ gnui::Font* gnui::font(const char* name, int attributes /* = 0 */) {
 
 /*! \fn gnui::Font* gnui::font(int i)
   \relates gnui::Font
-  Turn an fltk1 integer font id into a font.
+  Turn an gnui1 integer font id into a font.
 */
 
 /*! \fn int gnui::Font::sizes(int*& sizep);

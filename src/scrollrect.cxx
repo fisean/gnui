@@ -22,13 +22,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/Window.h>
-#include <fltk/x.h>
-#include <fltk/draw.h>
+#include <gnui/Window.h>
+#include <gnui/x.h>
+#include <gnui/draw.h>
 
 // Turn this off to stop using copy-area for scrolling:
 #define USE_SCROLL 1

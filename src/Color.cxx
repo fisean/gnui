@@ -20,14 +20,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/Color.h>
-#include <fltk/string.h>
+#include <gnui/Color.h>
+#include <gnui/string.h>
 #if USE_X11
-# include <fltk/x.h> // for XParseColor
+# include <gnui/x.h> // for XParseColor
 #endif
 #include <ctype.h>
 #include <stdio.h>
@@ -72,17 +72,17 @@ web_safe[] = { // must be in alphabetical order!
 };
 
 /*!
-  Turn the first n bytes of \a name into an fltk color. This allows
+  Turn the first n bytes of \a name into an gnui color. This allows
   you to parse a color out of the middle of a string.
 
   Recognized values are:
 
   - "" turns into NO_COLOR
-  - "0"-"99" decimal fltk color number, only works for indexed color range
-  - "0xnnn" hex value of any fltk color number
+  - "0"-"99" decimal gnui color number, only works for indexed color range
+  - "0xnnn" hex value of any gnui color number
   - "rgb" or "#rgb" three hex digits for rgb
   - "rrggbb" or "#rrggbb" 2 hex digits for each of rgb
-  - "rrggbbaa" or "#rrggbbaa" fltk color number in hex
+  - "rrggbbaa" or "#rrggbbaa" gnui color number in hex
   - "rrrgggbbb" or "#rrrgggbbb" 3 hex digits for each of rgb
   - "rrrrggggbbbb" or "#rrrrggggbbbb" 4 hex digits for each of rgb
   - 17 "web safe colors" as defined by CSS 2.1

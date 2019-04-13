@@ -17,11 +17,11 @@
  *
  * Please report all bugs and problems to the following page:
  *
- *    http://www.fltk.org/str.php
+ *    http://www.gnui.org/str.php
  */
 
 #include <config.h>
-#include <fltk/string.h>
+#include <gnui/string.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,7 +35,7 @@ extern "C" {
   or ISO-8859-1 is undefined!
 
   FLTK provides this function on systems that don't have it. Use
-  the <fltk/string.h> header to call this portably.
+  the <gnui/string.h> header to call this portably.
 */
 int strcasecmp(const char *s,	/* I - First string */
 	       const char *t)	/* I - Second string */
@@ -58,7 +58,7 @@ int strcasecmp(const char *s,	/* I - First string */
   \see strcasecmp()
 
   FLTK provides this function on systems that don't have it. Use
-  the <fltk/string.h> header file to call this.
+  the <gnui/string.h> header file to call this.
 */
 int				/* O - Result of comparison (<0, 0, or >0) */
 strncasecmp(const char *s,	/* I - First string */
@@ -89,7 +89,7 @@ strncasecmp(const char *s,	/* I - First string */
   retval+1.
 
   FLTK provides this function on systems that don't have it. Use
-  the <fltk/string.h> header to call this portably.
+  the <gnui/string.h> header to call this portably.
 */
 size_t				/* O - strlen(dst)+strlen(src) */
 strlcat(char *dst,		/* I - Destination buffer */
@@ -132,7 +132,7 @@ strlcat(char *dst,		/* I - Destination buffer */
   size retval+1.
 
   FLTK provides this function on systems that don't have it. Use
-  the <fltk/string.h> header to call this portably.
+  the <gnui/string.h> header to call this portably.
 */
 size_t				/* O - strlen(src) */
 strlcpy(char *dst,		/* I - Destination buffer */

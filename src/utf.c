@@ -16,12 +16,12 @@
  *
  * Please report all bugs and problems to the following page:
  *
- *    http://www.fltk.org/str.php
+ *    http://www.gnui.org/str.php
  */
 
 // Modified to obey rfc3629, which limits unicode to 0-0x10ffff
 
-#include <fltk/utf.h>
+#include <gnui/utf.h>
 #include <string.h>
 #include <stdlib.h>
 

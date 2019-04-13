@@ -20,16 +20,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Input.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
-#include <fltk/math.h>
-#include <fltk/utf.h>
+#include <gnui/Input.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
+#include <gnui/utf.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -676,7 +676,7 @@ void Input::up_down_position(int i, bool keepmark) {
   false it is put into the less-visible selection buffer that is used
   to do middle-mouse paste and drag & drop.
 
-  To paste the clipboard, call gnui::paste(true) and fltk will send
+  To paste the clipboard, call gnui::paste(true) and gnui will send
   the widget a gnui::PASTE event with the text, which will cause it to
   be inserted.
 */

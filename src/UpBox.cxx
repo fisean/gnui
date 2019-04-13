@@ -22,25 +22,25 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // These are the most common, square box types, which are always
 // linked in because the default styles use them.
 
 #include <config.h>
-#include <fltk/Box.h>
-#include <fltk/Style.h>
-#include <fltk/Widget.h>
-#include <fltk/draw.h>
-#include <fltk/x.h>
-#include <fltk/string.h>
-#include <fltk/math.h>
+#include <gnui/Box.h>
+#include <gnui/Style.h>
+#include <gnui/Widget.h>
+#include <gnui/draw.h>
+#include <gnui/x.h>
+#include <gnui/string.h>
+#include <gnui/math.h>
 using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 
-// Maybe this should be a public fltk method?
+// Maybe this should be a public gnui method?
 void drawFocusRect(const gnui::Rectangle& r1) {
   gnui::Rectangle r; transform(r1,r);
 #if USE_X11
@@ -256,7 +256,7 @@ Box* const gnui::FLAT_BOX = &flatBox;
   edge, which will reverse exactly which pixels are drawn in
   the corner.
 
-  Emulates the fltk1 fl_frame2() function
+  Emulates the gnui1 fl_frame2() function
 */
 void gnui::drawframe(const char* s, int x, int y, int w, int h) {
   if (h > 0 && w > 0) for (;*s;) {
@@ -283,7 +283,7 @@ void gnui::drawframe(const char* s, int x, int y, int w, int h) {
   Draw a spiral similar to drawframe(), but starts with the top
   edge and goes counter-clockwise.
 
-  Emulates the fltk1 fl_frame() function
+  Emulates the gnui1 fl_frame() function
 */
 void gnui::drawframe2(const char* s, int x, int y, int w, int h) {
   if (h > 0 && w > 0) for (;*s;) {
@@ -353,7 +353,7 @@ bool FrameBox::is_frame() const {return true;}
 
 static FrameBox downBox("down_", 2,2,4,4, "WWNNRRAA");
 /*!
-  Inset box in fltk's standard theme
+  Inset box in gnui's standard theme
 */
 Box* const gnui::DOWN_BOX = &downBox;
 
@@ -361,7 +361,7 @@ Box* const gnui::DOWN_BOX = &downBox;
 static FrameBox downBox2("down_", 2,2,3,3, "2NNWWAA");
 static FrameBox upBox("up", 1,1,3,3, "AAWWNN", &downBox2);
 /*!
-  A up button in fltk's standard theme.
+  A up button in gnui's standard theme.
 */
 Box* const gnui::UP_BOX = &upBox;
 
@@ -377,7 +377,7 @@ static FrameBox thinUpBox("thin_up", 1,1,2,2, "IIWW", &thinDownBox);
 */
 Box* const gnui::THIN_UP_BOX = &thinUpBox;
 
-// in fltk 1.0 these used to point at each other as a "down_" version:
+// in gnui 1.0 these used to point at each other as a "down_" version:
 static FrameBox engravedBox("engraved", 2,2,4,4, "2IIWWWWII", &downBox);
 /*!
   2-pixel thick engraved line around edge.
@@ -397,7 +397,7 @@ static FrameBox borderBox("border", 1,1,2,2, "KKLL", &downBox);
 Box* const gnui::BORDER_BOX = &borderBox;
 
 ////////////////////////////////////////////////////////////////
-// Deprecated "frame" box, appaently needed for fltk 1.0 compatability?
+// Deprecated "frame" box, appaently needed for gnui 1.0 compatability?
 
 class BorderFrame : public Box {
 public:

@@ -20,16 +20,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Based on Frametab V2 contributed by Curtis Edwards (curt1@trilec.com)
 
-#include <fltk/BarGroup.h>
-#include <fltk/Box.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/draw.h>
+#include <gnui/BarGroup.h>
+#include <gnui/Box.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/draw.h>
 using namespace gnui;
 
 static void revert(Style *s) {

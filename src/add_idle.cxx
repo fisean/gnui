@@ -20,13 +20,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Allows you to manage an arbitrary set of idle() callbacks.
 // Replaces the older set_idle() call (which is used to implement this)
 
-#include <fltk/run.h>
+#include <gnui/run.h>
 using namespace gnui;
 
 struct IdleCb {
@@ -62,7 +62,7 @@ static void call_idle() {
   gnui::ready() does not.
 
   The idle callback can call any FLTK functions, including
-  gnui::wait(), gnui::check(), and gnui::ready(). In this case fltk
+  gnui::wait(), gnui::check(), and gnui::ready(). In this case gnui
   will not recursively call the idle callback.
 */
 void gnui::add_idle(TimeoutHandler cb, void* data) {

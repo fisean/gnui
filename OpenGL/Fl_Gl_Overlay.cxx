@@ -22,15 +22,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
 #if HAVE_GL
 
 #include "GlChoice.h"
-#include <fltk/GlWindow.h>
-#include <fltk/damage.h>
+#include <gnui/GlWindow.h>
+#include <gnui/damage.h>
 using namespace gnui;
 
 #if !USE_GL_OVERLAY

@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Return an overlay visual, if any.  Also allocate a colormap and
@@ -33,8 +33,8 @@
 // This code must somehow be included if USE_OVERLAY or USE_GL_OVERLAY are
 // are set in config.h!
 
-#include <fltk/events.h>
-#include <fltk/x.h>
+#include <gnui/events.h>
+#include <gnui/x.h>
 using namespace gnui;
 
 // SERVER_OVERLAY_VISUALS property element:

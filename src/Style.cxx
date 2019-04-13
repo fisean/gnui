@@ -20,14 +20,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Widget.h>
-#include <fltk/string.h>
-#include <fltk/math.h>
-#include <fltk/run.h>
-#include <fltk/draw.h>
+#include <gnui/Widget.h>
+#include <gnui/string.h>
+#include <gnui/math.h>
+#include <gnui/run.h>
+#include <gnui/draw.h>
 #include <stdlib.h>
 #include <config.h>
 #include <ctype.h>
@@ -183,7 +183,7 @@ int Style::wheel_scroll_lines_ = 3;
 
 /*! \fn Color Style::selection_textcolor() const;
   The color to draw text atop the selection_color. The default of zero
-  indicates that fltk will choose a contrasting color (either the same
+  indicates that gnui will choose a contrasting color (either the same
   as the original color or white or black). I recommend you use the
   default if possible.
 */
@@ -203,7 +203,7 @@ int Style::wheel_scroll_lines_ = 3;
 
 /*! \fn Color Style::highlight_textcolor() const;
   Color used to draw the labels or text when the background is drawn
-  in the highlight_color. The default of zero indicates that fltk will
+  in the highlight_color. The default of zero indicates that gnui will
   choose a contrasting color (either the same as the original color or
   white or black). I recommend you use the default if possible.
 */
@@ -376,7 +376,7 @@ const Style* gnui::drawstyle_ = Widget::default_style;
   Draw using this style.  Set drawstyle() to this, drawflags() to \a
   flags, calls setcolor() and setbgcolor() with appropriate colors for
   this style and the given flags, and calls setfont().  This is called
-  by the draw() methods on most fltk widgets. The calling Widget picks
+  by the draw() methods on most gnui widgets. The calling Widget picks
   what flags to pass to the Symbols so that when they call this they
   get the correct colors for each part of the widget.
 
@@ -474,11 +474,11 @@ Style* Style::find(const char* name) {
 ////////////////////////////////////////////////////////////////
 // Themes:
 
-//extern "C" FL_API bool fltk_theme();
+//extern "C" FL_API bool gnui_theme();
 
 /*! \typedef Theme
 
-  A Theme is a function called by fltk just before it shows the first
+  A Theme is a function called by gnui just before it shows the first
   window, and also whenever it receives a signal from the operating
   system that the user's preferences have changed.
 
@@ -499,17 +499,17 @@ Style* Style::find(const char* name) {
 
 /*! \fn gnui::theme()
   Returns the current Theme function. By default this points at
-  fltk_theme().
+  gnui_theme().
 */
 
 /*! \fn gnui::theme(Theme)
 
-  Change what function fltk should call to set the appearance. If you
+  Change what function gnui should call to set the appearance. If you
   change this after any windows may have been shown, you should call
   reload_theme().
 */
 
-Theme gnui::theme_ = fltk_theme;
+Theme gnui::theme_ = gnui_theme;
 
 Color fl_bg_switch = 0; // set by -bg in arg.cxx
 

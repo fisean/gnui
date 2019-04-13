@@ -1,8 +1,8 @@
 //
 // "$Id: $"
 //
-// The fltk graphics clipping stack.  These routines are always
-// linked into an fltk program.
+// The gnui graphics clipping stack.  These routines are always
+// linked into an gnui program.
 //
 // Copyright 1998-2006 by Bill Spitzak and others.
 //
@@ -23,13 +23,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Window.h>
-#include <fltk/draw.h>
-#include <fltk/x.h>
-#include <fltk/string.h>
+#include <gnui/Window.h>
+#include <gnui/draw.h>
+#include <gnui/x.h>
+#include <gnui/string.h>
 #include <stdlib.h>
 using namespace gnui;
 
@@ -57,7 +57,7 @@ static inline void pushregion(Region r) {
 int fl_clip_state_number = 0; // used by code that needs to update clip regions
 
 /*! Return the current region as a system-specific structure. You must
-  include <fltk/x.h> to use this. Returns null if there is no clipping.
+  include <gnui/x.h> to use this. Returns null if there is no clipping.
 */
 Region gnui::clip_region() {
   return rstack[rstackptr];

@@ -22,16 +22,16 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Widget.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/layout.h>
-#include <fltk/Group.h>
-#include <fltk/run.h>
-#include <fltk/string.h> // for newstring
+#include <gnui/Widget.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/layout.h>
+#include <gnui/Group.h>
+#include <gnui/run.h>
+#include <gnui/string.h> // for newstring
 #include <stdlib.h> // for free
 #include <config.h>
 
@@ -269,7 +269,7 @@ void Widget::copy_label(const char* s) {
 /*! \fn Flags Widget::flags() const
   Each Widget, and most drawing functions, take a bitmask of
   flags that indicate the current state and exactly how to draw
-  things. See \link Flags.h <fltk/Flags.h> \endlink for values.
+  things. See \link Flags.h <gnui/Flags.h> \endlink for values.
   This is for copying the flag values, use flag(c) to test them.
 */
 
@@ -356,7 +356,7 @@ void Widget::copy_label(const char* s) {
 /**
   Virtual function to respond to layout_damage(), it should
   calculate the correct size of this widget and all it's children.
-  This function is called by fltk or by the layout() method in other
+  This function is called by gnui or by the layout() method in other
   widgets. User programs should not call it.
 
   A widget is allowed to alter it's own size in a layout() method, to
@@ -418,7 +418,7 @@ void Widget::relayout() {
 /* Cause layout() to be called later. Turns on the specified flags in
    layout_damage(), and turns on LAYOUT_CHILD in all parents of this
    widget. \a flags cannot be zero, the maaning of the flags is listed
-   under \link layout.h <fltk/layout.h> \endlink.
+   under \link layout.h <gnui/layout.h> \endlink.
 */
 void Widget::relayout(uchar flags) {
   //if (!(flags & ~layout_damage_)) return;
@@ -534,9 +534,9 @@ MyClass::layout() {
 New scheme to reduce the expense of calling redraw() on widgets.
 The loss here is that if a widget is changed and also gets exposed, it
 will be drawn twice. The gain is that region calculations are not done
-on every redraw(), restoring the speed we had in earlier fltk.
+on every redraw(), restoring the speed we had in earlier gnui.
 
-I renamed damage(n) to redraw(n) to match fltk method style. damage(n)
+I renamed damage(n) to redraw(n) to match gnui method style. damage(n)
 is reserved for changing damage_ but for now use set_damage(n) for this.
 
 Normal redraw(n) will turn on those damage bits in the widget and turn
@@ -656,7 +656,7 @@ void Widget::draw()
   Handle an event. Returns non-zero if the widget understood and used
   the event.
 
-  The event numbers are listed in \link events.h <fltk/events.h>
+  The event numbers are listed in \link events.h <gnui/events.h>
   \endlink.  All other information about the current event (like mouse
   position) is accessed by various functions listed in the same header
   file.
@@ -848,7 +848,7 @@ void Widget::remove_timeout() {
 */
 
 /*! Returns true if active() is true for this and all parent widgets.
-  This is actually the INACTIVE_R bit in flags(), fltk keeps this
+  This is actually the INACTIVE_R bit in flags(), gnui keeps this
   up to date as widgets are deactivated and/or added to inactive
   parents.
 */
@@ -952,7 +952,7 @@ void Widget::hide() {
   handle() method must also return non-zero for gnui::PUSH and for
   gnui::FOCUS events).
 
-  By default fltk only turns this on on certain widgets such as
+  By default gnui only turns this on on certain widgets such as
   gnui::Input. Turning this on on all widgets will make the user
   interface match Windows more closely.
 */
@@ -996,20 +996,20 @@ void Widget::hide() {
 
 /*!  Returns true if this is equal to gnui::pushed(), meaning it has
   responded to an gnui::PUSH event and the mouse is still held
-  down. Using this function avoids the need to include the <fltk/Fl.h>
+  down. Using this function avoids the need to include the <gnui/Fl.h>
   header file. */
 bool Widget::pushed() const {return this == gnui::pushed();}
 
 /*!  Returns true if this is equal to gnui::focus(), meaning it has
   the keyboard focus and gnui::KEY events will be sent to this
   widget. Using this function avoids the need to include the
-  <fltk/Fl.h> header file. */
+  <gnui/Fl.h> header file. */
 bool Widget::focused() const {return this == gnui::focus();}
 
 /*!  Returns true if this is equal to gnui::belowmouse(), meaning it
   has the keyboard focus and gnui::MOVE or gnui::PUSH events will be
   sent to this widget. Using this function avoids the need to include
-  the <fltk/Fl.h> header file. */
+  the <gnui/Fl.h> header file. */
 bool Widget::belowmouse() const {return this == gnui::belowmouse();}
 
 ////////////////////////////////////////////////////////////////

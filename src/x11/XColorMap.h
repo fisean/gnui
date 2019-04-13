@@ -21,13 +21,13 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA.
 //
-// Please report all bugs and problems to "fltk-bugs@easysw.com".
+// Please report all bugs and problems to "gnui-bugs@easysw.com".
 //
 
 #include <config.h>
 
 #if USE_COLORMAP
-// one of these for each color in fltk's "colormap":
+// one of these for each color in gnui's "colormap":
 // if overlays are enabled, another one for the overlay
 struct XColorMap {
   unsigned char r,g,b;	// actual color used by X

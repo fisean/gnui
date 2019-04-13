@@ -22,14 +22,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Drawing code for XForms style engraved & embossed labels
 
-#include <fltk/Widget.h>
-#include <fltk/LabelType.h>
-#include <fltk/draw.h>
+#include <gnui/Widget.h>
+#include <gnui/LabelType.h>
+#include <gnui/draw.h>
 using namespace gnui;
 
 // data is dx, dy, color triples

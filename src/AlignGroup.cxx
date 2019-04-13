@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // The AlignGroup overrides all group's children's label alignments to
@@ -28,9 +28,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <fltk/draw.h>
-#include <fltk/Flags.h>
-#include <fltk/AlignGroup.h>
+#include <gnui/draw.h>
+#include <gnui/Flags.h>
+#include <gnui/AlignGroup.h>
 
 using namespace gnui;
 

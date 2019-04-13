@@ -22,11 +22,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/Browser.h>
+#include <gnui/events.h>
+#include <gnui/Browser.h>
 #include <stdio.h>
 
 using namespace gnui;

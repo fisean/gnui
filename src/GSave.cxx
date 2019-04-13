@@ -22,11 +22,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/x.h>
+#include <gnui/x.h>
 namespace gnui {class Image;}
 using namespace gnui;
 

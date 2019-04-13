@@ -22,12 +22,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Box.h>
-#include <fltk/Style.h>
-#include <fltk/draw.h>
+#include <gnui/Box.h>
+#include <gnui/Style.h>
+#include <gnui/draw.h>
 using namespace gnui;
 
 #define SIZE 3

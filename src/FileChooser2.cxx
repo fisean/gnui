@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 // Contents:
 //
@@ -47,16 +47,16 @@
 //
 // Include necessary headers.
 //
-#include <fltk/FileChooser.h>
-#include <fltk/filename.h>
-#include <fltk/ask.h>
-#include <fltk/events.h>
-#include <fltk/run.h>
-#include <fltk/Cursor.h>
-#include <fltk/SharedImage.h>
-#include <fltk/Item.h>
-#include <fltk/string.h>
-#include <fltk/utf.h>
+#include <gnui/FileChooser.h>
+#include <gnui/filename.h>
+#include <gnui/ask.h>
+#include <gnui/events.h>
+#include <gnui/run.h>
+#include <gnui/Cursor.h>
+#include <gnui/SharedImage.h>
+#include <gnui/Item.h>
+#include <gnui/string.h>
+#include <gnui/utf.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -179,7 +179,7 @@ using namespace gnui;
 // File chooser label strings and sort function...
 //
 
-Preferences	FileChooser::prefs_(Preferences::USER, "fltk.org", "filechooser");
+Preferences	FileChooser::prefs_(Preferences::USER, "gnui.org", "filechooser");
 
 const char	*FileChooser::add_favorites_label = "Add to Favorites";
 const char	*FileChooser::all_files_label = "All Files (*)";

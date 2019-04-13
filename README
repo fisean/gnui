@@ -28,7 +28,7 @@ ON-LINE DOCUMENTATION
     point.  PostScript(tm) and PDF versions of this documentation is
     also available from the FLTK web site at:
 
-        http://www.fltk.org/documentation.html
+        http://www.gnui.org/documentation.html
 
 
 BUILDING AND INSTALLING FLTK
@@ -47,37 +47,37 @@ INTERNET RESOURCES
 
     FLTK is available on the 'net in a bunch of locations:
 
-	- WWW:   http://www.fltk.org
-	         http://www.fltk.org/php [for reporting bugs]
+	- WWW:   http://www.gnui.org
+	         http://www.gnui.org/php [for reporting bugs]
 
-	- CVS:	 http://fltk.sourceforge.net
+	- CVS:	 http://gnui.sourceforge.net
 
-	- FTP:   ftp://ftp.fltk.org/pub/fltk                 
-        	 ftp://ftp.funet.fi/pub/mirrors/ftp.easysw.com/ftp.easysw.com/pub/fltk/
+	- FTP:   ftp://ftp.gnui.org/pub/gnui                 
+        	 ftp://ftp.funet.fi/pub/mirrors/ftp.easysw.com/ftp.easysw.com/pub/gnui/
 
-	- EMail: fltk@fltk.org [see instructions below]
+	- EMail: gnui@gnui.org [see instructions below]
 
-    To send a message to the FLTK mailing list ("fltk@fltk.org") you
+    To send a message to the FLTK mailing list ("gnui@gnui.org") you
     must first join the list.  Non-member submissions are blocked to
     avoid problems with SPAM.
 
     To join the FLTK mailing list, send a message to
-    "majordomo@fltk.org" with "subscribe fltk" in the message body. 
+    "majordomo@gnui.org" with "subscribe gnui" in the message body. 
     A digest of this list is available by subscribing to the
-    "fltk-digest" mailing list.
+    "gnui-digest" mailing list.
 
 
 REPORTING BUGS
 
     To report a bug in FLTK, use the form available at:
 	
-        http://www.fltk.org/str.php
+        http://www.gnui.org/str.php
 
     Please include the FLTK version, operating system & version, and
     compiler that you are using when describing the bug or problem.
 
     For general support and questions, please use the FLTK mailing
-    list at "fltk@fltk.org".
+    list at "gnui@gnui.org".
 
 
 TRADEMARKS
@@ -98,7 +98,7 @@ COPYRIGHT
 	Robert Kesterson <robertk@robertk.com>
 	Matthias Melcher <matthias@mediaone.net>
 	Vincent Penne <vincent.penne@wanadoo.fr>
-        Michael Sweet <mike@fltk.org>
+        Michael Sweet <mike@gnui.org>
 	Carl Thompson <cet@carlthompson.net>
 
     This library is free software; you can redistribute it and/or

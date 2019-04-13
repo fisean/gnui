@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 //
@@ -55,8 +55,8 @@ static void read_data_fn(png_structp /*png_ptr*/,png_bytep d,png_size_t length)
 static void declare_now(void*) { }
 #endif
 
-#include <fltk/draw.h>
-#include <fltk/SharedImage.h>
+#include <gnui/draw.h>
+#include <gnui/SharedImage.h>
 
 using namespace gnui;
 

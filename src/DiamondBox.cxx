@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // A less-used boxtype, it is here so that it is not linked in if
@@ -30,10 +30,10 @@
 
 // The diamond box draws best if the area is square!
 
-#include <fltk/Box.h>
-#include <fltk/Style.h>
-#include <fltk/Widget.h>
-#include <fltk/draw.h>
+#include <gnui/Box.h>
+#include <gnui/Style.h>
+#include <gnui/Widget.h>
+#include <gnui/draw.h>
 #include <string.h>
 
 using namespace gnui;

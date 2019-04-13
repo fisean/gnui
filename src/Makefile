@@ -22,7 +22,7 @@
 #
 # Please report all bugs and problems to the following page:
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 #
@@ -85,7 +85,7 @@ CPPFILES = \
 	fillrect.cxx \
 	Fl_Menu_Item.cxx \
 	FloatInput.cxx \
-	fltk_theme.cxx \
+	gnui_theme.cxx \
 	Font.cxx \
 	gifImage.cxx \
 	Group.cxx \
@@ -177,9 +177,9 @@ CFILES	= scandir.c \
 	utf.c \
 	vsnprintf.c
 
-LIBNAME	=	$(LIBPREFIX)fltk2$(LIBSUFFIX)
-DSONAME	=	$(DSOPREFIX)fltk2$(DSOSUFFIX)
-DSOLINK = 	$(DSOPREFIX)fltk2$(DSOSYMLINK)
+LIBNAME	=	$(LIBPREFIX)gnui$(LIBSUFFIX)
+DSONAME	=	$(DSOPREFIX)gnui$(DSOSUFFIX)
+DSOLINK = 	$(DSOPREFIX)gnui$(DSOSYMLINK)
 OBJECTS =	$(CPPFILES:.cxx=.o) $(CFILES:.c=.o)
 
 
@@ -204,7 +204,7 @@ clean:
 	$(RM) core*
 	$(RM) ../lib/$(LIBNAME)
 	$(RM) ../lib/$(DSONAME)
-        ifeq ($(DSONAME), fltk.dll)
+        ifeq ($(DSONAME), gnui.dll)
 	$(RM) lib$(DSONAME).a $(DSONAME)
         endif
 
@@ -247,7 +247,7 @@ include makedepend
 # 
 
 install:
-	echo "Installing include files in $(includedir)/fltk..."
+	echo "Installing include files in $(includedir)/gnui..."
 	if [ ! -z $(DESTDIR) ]; then                            \
 		if [ -d $(DESTDIR) ]; then                          \
 	    	echo "$(DESTDIR) exists - will be overwritten"; \
@@ -256,22 +256,22 @@ install:
 		fi                                                  \
 	fi
 
-	$(RMDIR) $(DESTDIR)$(includedir)/fltk
-	$(MKDIR) $(DESTDIR)$(includedir)/fltk
-	$(CP) ../fltk/*.h ../fltk/*.r  $(DESTDIR)$(includedir)/fltk
-	$(CHMOD) 755 $(DESTDIR)$(includedir)/fltk
-	$(CHMOD) 644 $(DESTDIR)$(includedir)/fltk/*
-	echo "Installing FLTK1.1 emulation include files in $(includedir)/fltk..."
-	$(RMDIR) $(DESTDIR)$(includedir)/fltk/compat/FL
-	$(MKDIR) $(DESTDIR)$(includedir)/fltk/compat/FL
-	$(CP) ../fltk/compat/FL/*.H ../fltk/compat/FL/*.h  $(DESTDIR)$(includedir)/fltk/compat/FL
-	$(CHMOD) 755 $(DESTDIR)$(includedir)/fltk/compat/FL
-	$(CHMOD) 644 $(DESTDIR)$(includedir)/fltk/compat/FL/*
-        ifneq (,$(wildcard ../fltk2-config))
-	echo "Installing fltk2-config in $(bindir)..."
+	$(RMDIR) $(DESTDIR)$(includedir)/gnui
+	$(MKDIR) $(DESTDIR)$(includedir)/gnui
+	$(CP) ../gnui/*.h ../gnui/*.r  $(DESTDIR)$(includedir)/gnui
+	$(CHMOD) 755 $(DESTDIR)$(includedir)/gnui
+	$(CHMOD) 644 $(DESTDIR)$(includedir)/gnui/*
+	echo "Installing FLTK1.1 emulation include files in $(includedir)/gnui..."
+	$(RMDIR) $(DESTDIR)$(includedir)/gnui/compat/FL
+	$(MKDIR) $(DESTDIR)$(includedir)/gnui/compat/FL
+	$(CP) ../gnui/compat/FL/*.H ../gnui/compat/FL/*.h  $(DESTDIR)$(includedir)/gnui/compat/FL
+	$(CHMOD) 755 $(DESTDIR)$(includedir)/gnui/compat/FL
+	$(CHMOD) 644 $(DESTDIR)$(includedir)/gnui/compat/FL/*
+        ifneq (,$(wildcard ../gnui-config))
+	echo "Installing gnui-config in $(bindir)..."
 	$(MKDIR) $(DESTDIR)$(bindir)
-	$(CP) ../fltk2-config $(DESTDIR)$(bindir)
-	$(CHMOD) 755 $(DESTDIR)$(bindir)/fltk2-config
+	$(CP) ../gnui-config $(DESTDIR)$(bindir)
+	$(CHMOD) 755 $(DESTDIR)$(bindir)/gnui-config
         endif
         ifneq (,$(wildcard ../lib/$(LIBNAME)))
 	echo "Installing static core library in $(libdir)"
@@ -288,7 +288,7 @@ install:
 	$(CP) ../lib/$(DSONAME) $(DESTDIR)$(libdir)
 	$(LN) $(DSONAME) $(DESTDIR)$(libdir)/$(DSOLINK)
         endif
-        ifeq ($(DSONAME), fltk.dll)
+        ifeq ($(DSONAME), gnui.dll)
 	$(CP) lib$(DSONAME).a $(DESTDIR)$(libdir)
         endif
 
@@ -298,17 +298,17 @@ install:
 
 uninstall:
 	echo "Removing FLTK1.1 emulation include files from $(includedir)/FL..."
-	$(RMDIR) $(includedir)/fltk/compat/FL
-	echo "Removing include files from $(includedir)/fltk..."
-	$(RMDIR) $(includedir)/fltk
-	echo "Removing fltk2-config from $(bindir)..."
-	$(RM) $(bindir)/fltk2-config
+	$(RMDIR) $(includedir)/gnui/compat/FL
+	echo "Removing include files from $(includedir)/gnui..."
+	$(RMDIR) $(includedir)/gnui
+	echo "Removing gnui-config from $(bindir)..."
+	$(RM) $(bindir)/gnui-config
 	echo "Removing static core library from $(libdir)"
-	$(RM) $(libdir)/$(LIBPREFIX)fltk2$(LIBSUFFIX)
+	$(RM) $(libdir)/$(LIBPREFIX)gnui$(LIBSUFFIX)
 	echo "Removing shared core library from $(libdir)"
 	$(RM) $(libdir)/$(DSONAME)
 	$(RM) $(libdir)/$(DSOLINK)
-        ifeq ($(DSONAME), fltk2.dll)
+        ifeq ($(DSONAME), gnui.dll)
 	$(RM) $(libdir)/lib$(DSONAME).a
         endif
 

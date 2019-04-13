@@ -125,7 +125,7 @@ scandir (const char *dir, dirent ***namelist,
 
 #endif /* !_WIN32 */
 
-/* This function is not used by fltk, but is usually provided with scandir
+/* This function is not used by gnui, but is usually provided with scandir
    implementations: */
 
 int alphasort (struct dirent **a, struct dirent **b) {

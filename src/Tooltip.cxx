@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // Try to keep this code from bloating up, as it is always linked in.
 
@@ -40,13 +40,13 @@
 */
 
 #include <config.h>
-#include <fltk/Tooltip.h>
-#include <fltk/MenuWindow.h>
-#include <fltk/Monitor.h>
-#include <fltk/events.h>
-#include <fltk/run.h>
-#include <fltk/draw.h>
-#include <fltk/Box.h>
+#include <gnui/Tooltip.h>
+#include <gnui/MenuWindow.h>
+#include <gnui/Monitor.h>
+#include <gnui/events.h>
+#include <gnui/run.h>
+#include <gnui/draw.h>
+#include <gnui/Box.h>
 using namespace gnui;
 
 float		Tooltip::delay_ = 1.0f;

@@ -20,12 +20,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/Output.h>
-#include <fltk/draw.h>
+#include <gnui/events.h>
+#include <gnui/Output.h>
+#include <gnui/draw.h>
 
 using namespace gnui;
 

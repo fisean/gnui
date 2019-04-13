@@ -14,14 +14,14 @@
  *
  */
 
-#include <fltk/load_plugin.h>
+#include <gnui/load_plugin.h>
 #include <stdio.h>
 #include <config.h>
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
 
-# include <fltk/x.h>
-# include <fltk/utf.h>
+# include <gnui/x.h>
+# include <gnui/utf.h>
 # include <windows.h>
 # include <winbase.h>
 

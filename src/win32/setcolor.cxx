@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // This file does not compile independently, it is included by color.cxx
@@ -31,7 +31,7 @@
 COLORREF	gnui::current_xpixel;
 
 /**
-If non-zero this is the palette alloced by fltk on an 8-bit
+If non-zero this is the palette alloced by gnui on an 8-bit
 screen. Hopefully you can ignore this, I'm not even sure it
 works anymore.
 */
@@ -69,7 +69,7 @@ COLORREF gnui::xpixel(Color i) {
   return rgb;
 }
 
-// These are the fltk setting converted into Win32 versions:
+// These are the gnui setting converted into Win32 versions:
 static int lstyle = 0;
 static DWORD dash_pattern[16];
 static int dash_pattern_size = 0;

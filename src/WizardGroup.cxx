@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 // Contents:
 //
@@ -82,10 +82,10 @@ int main(int argc, char **argv) {
 // Include necessary header files...
 //
 
-#include <fltk/Window.h>
-#include <fltk/draw.h>
-#include <fltk/Cursor.h>
-#include <fltk/WizardGroup.h>
+#include <gnui/Window.h>
+#include <gnui/draw.h>
+#include <gnui/Cursor.h>
+#include <gnui/WizardGroup.h>
 
 using namespace gnui;
 

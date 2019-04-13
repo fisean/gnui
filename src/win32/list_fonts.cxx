@@ -22,12 +22,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/events.h>
-#include <fltk/utf.h>
-#include <fltk/x.h>
+#include <gnui/events.h>
+#include <gnui/utf.h>
+#include <gnui/x.h>
 #include <ctype.h>
 #include <wchar.h>
 #include <string.h>
@@ -129,7 +129,7 @@ static int CALLBACK enumcbW(CONST LOGFONTW* lplf,
 {
   // we need to do something about different encodings of the same font
   // in order to match X!  I can't tell if each different encoding is
-  // returned sepeartely or not.  This is what fltk 1.0 did:
+  // returned sepeartely or not.  This is what gnui 1.0 did:
   if (lplf->lfCharSet != ANSI_CHARSET) return 1;
   const wchar_t *name = lplf->lfFaceName;
   //const char *name = (const char*)(((ENUMLOGFONT *)lplf)->elfFullName);
@@ -156,7 +156,7 @@ static int CALLBACK enumcbA(CONST LOGFONT* lplf,
 {
   // we need to do something about different encodings of the same font
   // in order to match X!  I can't tell if each different encoding is
-  // returned sepeartely or not.  This is what fltk 1.0 did:
+  // returned sepeartely or not.  This is what gnui 1.0 did:
   //if (lplf->lfCharSet != ANSI_CHARSET) return 1;
   const char *name = lplf->lfFaceName;
   if (num_fonts >= array_size) {
@@ -198,7 +198,7 @@ int gnui::list_fonts(Font**& arrayp) {
 #if defined(WIN32) && !defined(__CYGWIN__)
 static const char* GetFontSubstitutes(const char* name,int& len)
 {
-  static char subst_name[1024]; //used BUFLEN from bool fltk_theme()
+  static char subst_name[1024]; //used BUFLEN from bool gnui_theme()
 
   if ( strstr(name,"MS Shell Dlg") ||  strstr(name,"Helv")  ||
        strstr(name,"Tms Rmn")) {

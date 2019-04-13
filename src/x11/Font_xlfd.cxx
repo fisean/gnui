@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 /* Donated code that selects from an alternative font if the character
@@ -27,15 +27,15 @@
   and it slows down normal printing a lot. */
 #define X_UTF8_FONT 0
 
-#include <fltk/draw.h>
-#include <fltk/error.h>
-#include <fltk/x.h>
-#include <fltk/math.h>
+#include <gnui/draw.h>
+#include <gnui/error.h>
+#include <gnui/x.h>
+#include <gnui/math.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fltk/utf.h>
+#include <gnui/utf.h>
 #include "IFont.h"
 using namespace gnui;
 
@@ -70,7 +70,7 @@ FL_API unsigned fl_font_opengl_id() {return current->opengl_id;}
 FL_API void fl_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
 
 /*! Returns the operating-system dependent structure defining the
-  current font. You must include <fltk/x.h> to use this. */
+  current font. You must include <gnui/x.h> to use this. */
 XFontStruct* gnui::xfont() {return current->font;}
 
 /*!
@@ -649,7 +649,7 @@ void gnui::setfont(Font* font, float psize) {
 
 ////////////////////////////////////////////////////////////////
 
-// The predefined fonts that fltk has:
+// The predefined fonts that gnui has:
 static IFont fonts [] = {
   {{"helvetica",0}, "-*-helvetica-medium-r-normal--*",	fonts+1, fonts+2},
   {{"helvetica",1}, "-*-helvetica-bold-r-normal--*", 	fonts+1, fonts+3},

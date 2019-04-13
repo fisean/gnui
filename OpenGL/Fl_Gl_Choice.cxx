@@ -22,14 +22,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
 #if HAVE_GL
 
 #include "GlChoice.h"
-#include <fltk/visual.h>
+#include <gnui/visual.h>
 #include <stdlib.h>
 
 using namespace gnui;

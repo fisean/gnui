@@ -18,7 +18,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /*! \class gnui::xpmFileImage
 
@@ -30,9 +30,9 @@
 
 */
 
-#include <fltk/SharedImage.h>
-#include <fltk/xpmImage.h>
-#include <fltk/events.h>
+#include <gnui/SharedImage.h>
+#include <gnui/xpmImage.h>
+#include <gnui/events.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>

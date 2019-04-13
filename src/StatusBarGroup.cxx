@@ -20,7 +20,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 /*! \class gnui::StatusBarGroup
@@ -50,13 +50,13 @@
 
 */
 
-#include <fltk/StatusBarGroup.h>
-#include <fltk/Box.h>
-#include <fltk/InvisibleBox.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/layout.h>
-#include <fltk/draw.h>
+#include <gnui/StatusBarGroup.h>
+#include <gnui/Box.h>
+#include <gnui/InvisibleBox.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/layout.h>
+#include <gnui/draw.h>
 #include <stdio.h>
 #include <stdarg.h>
 

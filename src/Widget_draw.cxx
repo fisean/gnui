@@ -20,19 +20,19 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // Originally this contained the definition of LabelType. It now
 // contains all the drawing code used by widgets.
 
-#include <fltk/LabelType.h>
-#include <fltk/Box.h>
-#include <fltk/Image.h>
-#include <fltk/Widget.h>
-#include <fltk/Window.h>
-#include <fltk/damage.h>
-#include <fltk/draw.h>
-#include <fltk/string.h>
+#include <gnui/LabelType.h>
+#include <gnui/Box.h>
+#include <gnui/Image.h>
+#include <gnui/Widget.h>
+#include <gnui/Window.h>
+#include <gnui/damage.h>
+#include <gnui/draw.h>
+#include <gnui/string.h>
 #include <config.h>
 using namespace gnui;
 
@@ -302,7 +302,7 @@ void Group::draw_outside_label(Widget& w) const {
   }
   flags = (flags & ~(HIGHLIGHT|PUSHED)) | OUTPUT;
   drawstyle(w.style(), flags);
-  //push_clip(X, Y, W, H); // this will break some old fltk programs
+  //push_clip(X, Y, W, H); // this will break some old gnui programs
   w.labeltype()->draw(w.label(), r, flags);
   //pop_clip();
 }

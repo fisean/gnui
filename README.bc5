@@ -6,8 +6,8 @@ BUILDING FLTK WITH BORLAND C++
     without the patches.  For BC5 version 5.0, you must at least
     update to 5.0B.
 
-    To compile the toolkit, open bc5/fltk.ide in Borland C++ and
+    To compile the toolkit, open bc5/gnui.ide in Borland C++ and
     select "Build All" from the "Project" menu.
 
     This has been tested under Windows only, it is unknown how to
-    compile fltk with the Linux version of BC++.
+    compile gnui with the Linux version of BC++.

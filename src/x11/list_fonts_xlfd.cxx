@@ -20,10 +20,10 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-// This horrible mess is to to provide fltk with a friendly font-naming
+// This horrible mess is to to provide gnui with a friendly font-naming
 // interface, despite the incredible stupidity in the X font mechanism.
 
 // The "X font name" is a long string that looks something like this:
@@ -31,16 +31,16 @@
 // -foundry-family-weight-slant-width1-style-8-180-75-75-p-104-iso8859-1
 
 // Fltk ignores the "foundry" and everything after the "style".  All X
-// fonts where the remainder matches are part of an fltk "family" of
+// fonts where the remainder matches are part of an gnui "family" of
 // fonts where the only differences are the size and encoding.
 
-// The fltk interface, and much of the innards of this, uses "nice"
+// The gnui interface, and much of the innards of this, uses "nice"
 // names.  This is a straght-forward translation of the X name of some
 // font in a family to compress it to a readable family name.  There is
 // no guarantee that all nice names are unique, and there is no reverse
 // translation other than to list all the fonts and find a match.
 
-#include <fltk/x.h>
+#include <gnui/x.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>

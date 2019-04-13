@@ -22,7 +22,7 @@
 #
 # Please report all bugs and problems on the following page
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 #
@@ -45,9 +45,9 @@ CPPFILES = \
 
 CFILES	=
 
-LIBNAME	=	$(LIBPREFIX)fltk2_gl$(LIBSUFFIX)
-DSONAME	=	$(DSOPREFIX)fltk2_gl$(DSOSUFFIX)
-DSOLINK = 	$(DSOPREFIX)fltk2_gl$(DSOSYMLINK)
+LIBNAME	=	$(LIBPREFIX)gnui_gl$(LIBSUFFIX)
+DSONAME	=	$(DSOPREFIX)gnui_gl$(DSOSUFFIX)
+DSOLINK = 	$(DSOPREFIX)gnui_gl$(DSOSYMLINK)
 OBJECTS =	$(CPPFILES:.cxx=.o) $(CFILES:.c=.o)
 
 #
@@ -71,7 +71,7 @@ clean:
 	$(RM) core*
 	$(RM) ../lib/$(LIBNAME)
 	$(RM) ../lib/$(DSONAME)
-        ifeq ($(DSONAME), fltk2_gl.dll)
+        ifeq ($(DSONAME), gnui_gl.dll)
 	$(RM) lib$(DSONAME).a $(DSONAME)
         endif
 
@@ -108,10 +108,10 @@ include makedepend
 	$(RM) ../lib/$(DSOLINK)
 	$(LN) $(DSONAME) ../lib/$(DSOLINK)
 
-../lib/fltk2_gl.dll: $(OBJECTS)
+../lib/gnui_gl.dll: $(OBJECTS)
 	echo $(DSOCOMMAND) $@ ...
 	$(DSOCOMMAND) $@ $(OBJECTS) $(IMAGELIBS) $(LOCAL_IMAGELIBS) $(LINKFLTK) $(GLDLIBS)
-	cp ../lib/fltk2_gl.dll ./
+	cp ../lib/gnui_gl.dll ./
 
 #
 # Install everything...
@@ -132,7 +132,7 @@ install:
 	$(CP) ../lib/$(DSONAME) $(DESTDIR)$(libdir)
 	$(LN) -s $(DSONAME) $(DESTDIR)$(libdir)/$(DSOLINK)
         endif
-        ifeq ($(DSONAME), fltk2_gl.dll)
+        ifeq ($(DSONAME), gnui_gl.dll)
 	$(CP) lib$(DSONAME).a $(DESTDIR)$(libdir)
         endif
 
@@ -146,7 +146,7 @@ uninstall:
 	echo "Removing shared OpenGL library from $(libdir)"
 	$(RM) $(libdir)/$(DSONAME)
 	$(RM) $(libdir)/$(DSOLINK)
-        ifeq ($(DSONAME), fltk2_gl.dll)
+        ifeq ($(DSONAME), gnui_gl.dll)
 	$(RM) $(libdir)/lib$(DSONAME).a
         endif
 

@@ -22,7 +22,7 @@
 #
 # Please report all bugs and problems to the following page:
 #
-#    http://www.fltk.org/str.php
+#    http://www.gnui.org/str.php
 #
 
 #
@@ -52,9 +52,9 @@ CPPFILES = \
 	xpmFileImage.cxx
 CFILES	=
 
-LIBNAME	=	$(LIBPREFIX)fltk2_images$(LIBSUFFIX)
-DSONAME	=	$(DSOPREFIX)fltk2_images$(DSOSUFFIX)
-DSOLINK = 	$(DSOPREFIX)fltk2_images$(DSOSYMLINK)
+LIBNAME	=	$(LIBPREFIX)gnui_images$(LIBSUFFIX)
+DSONAME	=	$(DSOPREFIX)gnui_images$(DSOSUFFIX)
+DSOLINK = 	$(DSOPREFIX)gnui_images$(DSOSYMLINK)
 OBJECTS =	$(CPPFILES:.cxx=.o) $(CFILES:.c=.o)
 
 #
@@ -77,7 +77,7 @@ clean:
 	$(RM) core*
 	$(RM) ../lib/$(LIBNAME)
 	$(RM) ../lib/$(DSONAME)
-        ifeq ($(DSONAME), fltk2_images.dll)
+        ifeq ($(DSONAME), gnui_images.dll)
 	$(RM) lib$(DSONAME).a $(DSONAME)
         endif
 
@@ -115,10 +115,10 @@ include makedepend
 	$(RM) ../lib/$(DSOLINK)
 	$(LN) $(DSONAME) ../lib/$(DSOLINK)
 
-../lib/fltk2_images.dll: $(OBJECTS)
+../lib/gnui_images.dll: $(OBJECTS)
 	echo $(DSOCOMMAND) $@ ...
 	$(DSOCOMMAND) $@ $(OBJECTS) $(IMAGELIBS) $(LOCAL_IMAGELIBS) $(LINKFLTK) $(LDLIBS)
-	cp ../lib/fltk2_images.dll ./
+	cp ../lib/gnui_images.dll ./
 
 #
 # Install everything...
@@ -131,9 +131,9 @@ install:
 	$(RM) $(DESTDIR)$(libdir)/$(LIBNAME)
 	$(CP) ../lib/$(LIBNAME) $(DESTDIR)$(libdir)
 	$(RANLIB) $(DESTDIR)$(libdir)/$(LIBNAME)
-	$(RM) -f $(DESTDIR)$(libdir)/$(LIBPREFIX)fltk2_z$(LIBSUFFIX)
-	$(RM) -f $(DESTDIR)$(libdir)/$(LIBPREFIX)fltk2_png$(LIBSUFFIX)
-	$(RM) -f $(DESTDIR)$(libdir)/$(LIBPREFIX)fltk2_jpeg$(LIBSUFFIX)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBPREFIX)gnui_z$(LIBSUFFIX)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBPREFIX)gnui_png$(LIBSUFFIX)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBPREFIX)gnui_jpeg$(LIBSUFFIX)
   ifneq (,$(LOCAL_IMAGELIBS))
 	  $(CP) $(LOCAL_IMAGELIBS) $(DESTDIR)$(libdir)
 	  $(RANLIB) $(DESTDIR)$(libdir)/$(LOCAL_IMAGELIBS)
@@ -147,7 +147,7 @@ install:
 	$(CP) ../lib/$(DSONAME) $(DESTDIR)$(libdir)
 	$(LN) -s $(DSONAME) $(DESTDIR)$(libdir)/$(DSOLINK)
         endif
-        ifeq ($(DSONAME), fltk2_images.dll)
+        ifeq ($(DSONAME), gnui_images.dll)
 	$(CP) lib$(DSONAME).a $(DESTDIR)$(libdir)
         endif
 #
@@ -160,7 +160,7 @@ uninstall:
 	echo "Removing shared images library from $(libdir)"
 	$(RM) $(libdir)/$(DSONAME)
 	$(RM) $(libdir)/$(DSOLINK)
-        ifeq ($(DSONAME), fltk2_images.dll)
+        ifeq ($(DSONAME), gnui_images.dll)
 	$(RM) $(libdir)/lib$(DSONAME).a
         endif
 

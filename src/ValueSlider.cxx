@@ -19,15 +19,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/ValueSlider.h>
-#include <fltk/Group.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
-#include <fltk/math.h>
+#include <gnui/ValueSlider.h>
+#include <gnui/Group.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
 #include <stdlib.h>
 using namespace gnui;
 
@@ -68,8 +68,8 @@ using namespace gnui;
 /* IMPLEMENTATION NOTE:
 
   This is *not* an Group even though it has a "child" widget, this
-  appears to be a good idea and fltk should support it.  However
-  Widget::parent() returns an Group, not an Widget like it did in fltk
+  appears to be a good idea and gnui should support it.  However
+  Widget::parent() returns an Group, not an Widget like it did in gnui
   1.1 so this may not be proper C++.
 */
 

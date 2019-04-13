@@ -19,14 +19,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 #include <config.h>
-#include <fltk/Image.h>
-#include <fltk/Widget.h>
-#include <fltk/events.h>
-#include <fltk/draw.h>
-#include <fltk/x.h>
+#include <gnui/Image.h>
+#include <gnui/Widget.h>
+#include <gnui/events.h>
+#include <gnui/draw.h>
+#include <gnui/x.h>
 
 /*! \class gnui::Image
 
@@ -98,7 +98,7 @@ unsigned long Image::memused_;
 // special flag to indicate if setimage was used:
 #define COPIED_DATA 32
 
-// Return the Cairo image type we will use for the given fltk image type
+// Return the Cairo image type we will use for the given gnui image type
 static cairo_format_t cairo_format(PixelType type) {
   switch (type) {
   case MASK:
@@ -117,7 +117,7 @@ static cairo_format_t cairo_format(PixelType type) {
   }
 }
 
-// Convert fltk pixeltypes to the Cairo image type
+// Convert gnui pixeltypes to the Cairo image type
 // Go backwards so the buffers can be shared
 static void convert(uchar* to, const uchar* from, PixelType type, int w) {
   U32* t = (U32*)to;
@@ -129,7 +129,7 @@ static void convert(uchar* to, const uchar* from, PixelType type, int w) {
       *--t = 0x1010101 * *--from;
     break;
   case MASK:
-    // fltk mask was designed for black letter images and is therefore
+    // gnui mask was designed for black letter images and is therefore
     // inverted from the more sensible usage that Cairo has.
     while (w--) *to++ = ~*from++;
     break;
@@ -544,7 +544,7 @@ Image::~Image() {
   created or after refetch() has been called.  This allows subclasses
   to defer reading files and calling setpixels() calls until the first
   draw() or measure(). This should return true if successful, false on
-  any error (though fltk does not do anything useful with errors).
+  any error (though gnui does not do anything useful with errors).
 
   The base class does nothing and returns true, thus leaving the
   image unchanged.
@@ -599,7 +599,7 @@ bool Image::fills_rectangle() const {
     pixeltype_ < ARGB32;
 }
 
-#include <fltk/Widget.h>
+#include <gnui/Widget.h>
 
 /**
   This is a 1.1 back-compatability function. It is the same as

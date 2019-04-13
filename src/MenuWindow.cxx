@@ -20,14 +20,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/damage.h>
-#include <fltk/MenuWindow.h>
-#include <fltk/x.h>
-#include <fltk/draw.h>
+#include <gnui/damage.h>
+#include <gnui/MenuWindow.h>
+#include <gnui/x.h>
+#include <gnui/draw.h>
 
 using namespace gnui;
 

@@ -2,7 +2,7 @@
 // "$Id$"
 //
 // Path construction and filling. I think this file is always linked
-// into any fltk program, so try to keep it reasonably small.
+// into any gnui program, so try to keep it reasonably small.
 // Also see arc.cxx and curve.cxx
 //
 // Copyright 2001 by Bill Spitzak and others.
@@ -24,14 +24,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/draw.h>
-#include <fltk/math.h>
-#include <fltk/x.h>
-#include <fltk/string.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
+#include <gnui/x.h>
+#include <gnui/string.h>
 #include <stdlib.h>
 using namespace gnui;
 
@@ -194,7 +194,7 @@ void gnui::translate(float x,float y) {
   want to call if you try passing doubles as arguments. To get it to
   compile, make sure you cast the arguments to float (add 'f' after
   floating-point constants). Use the 'f' versions (ie sinf(), cosf(),
-  etc) of the math functions from <fltk/math.h> to produce floats and
+  etc) of the math functions from <gnui/math.h> to produce floats and
   get maximum calculation speed.
 */
 void gnui::translate(int x, int y) {
@@ -244,7 +244,7 @@ void gnui::load_identity() {
 /**
 Replace \a x and \a y transformed into device coordinates.
 Device-specific code can use this to draw things using the
-fltk transformation matrix. If the backend is Cairo or another
+gnui transformation matrix. If the backend is Cairo or another
 API that does transformations, this may return xy unchagned.
 */
 void gnui::transform(float& x, float& y) {
@@ -419,7 +419,7 @@ void gnui::addvertex(float X, float Y) {
   want to call if you try passing doubles as arguments. To get it to
   compile, make sure you cast the arguments to float (add 'f' after
   floating-point constants). Use the 'f' versions (ie sinf(), cosf(),
-  etc) of the math functions from <fltk/math.h> to produce floats and
+  etc) of the math functions from <gnui/math.h> to produce floats and
   get maximum calculation speed.
 */
 void gnui::addvertex(int X, int Y) {
@@ -568,7 +568,7 @@ void gnui::addvertices_transformed(int n, const float array[][2]) {
 
 /**
   Similar to drawing another vertex back at the starting point, but
-  fltk knows the path is closed. The next addvertex() will start a
+  gnui knows the path is closed. The next addvertex() will start a
   new disconnected part of the shape.
 
   It is harmless to call gnui::closepath() several times in a row, or

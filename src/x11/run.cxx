@@ -23,18 +23,18 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#define CONSOLIDATE_MOTION 1 // this was 1 in fltk 1.0
+#define CONSOLIDATE_MOTION 1 // this was 1 in gnui 1.0
 
 #define DEBUG_SELECTIONS 0
 #define DEBUG_TABLET 0
 
 #include <config.h>
-#include <fltk/x.h>
-#include <fltk/Window.h>
-#include <fltk/Style.h>
+#include <gnui/x.h>
+#include <gnui/Window.h>
+#include <gnui/Style.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,10 +43,10 @@
 #include <sys/time.h>
 #include <limits.h>
 #include <locale.h>
-#include <fltk/visual.h>
-#include <fltk/Font.h>
-#include <fltk/Browser.h>
-#include <fltk/utf.h>
+#include <gnui/visual.h>
+#include <gnui/Font.h>
+#include <gnui/Browser.h>
+#include <gnui/utf.h>
 
 #include <X11/extensions/XInput.h>
 #include <X11/extensions/XI.h>
@@ -606,7 +606,7 @@ void gnui::open_display() {
 }
 
 /**
-You can make fltk "open" a display that has already been opened,
+You can make gnui "open" a display that has already been opened,
 perhaps by another GUI library.  Calling this will set
 xdisplay to the passed display and also read information
 FLTK needs from it. <i>Don't call this if the display is already open!</i>
@@ -722,7 +722,7 @@ const Monitor& Monitor::all() {
 
     // Try to get the work area from the X Desktop standard:
     // First find out what desktop we are on, as it allows the work area
-    // to be different (however fltk will return whatever the first answer
+    // to be different (however gnui will return whatever the first answer
     // is even if the user changes the desktop, so this is not exactly
     // right):
     XWindow root = RootWindow(xdisplay, xscreen);
@@ -969,7 +969,7 @@ static bool open_stylus_device(XDeviceInfo *list, int i, int n) {
   stylus_device[n] = XOpenDevice(xdisplay, stylus_device_id[n]);
   if ( !stylus_device[n] ) {
 #if DEBUG_TABLET
-    printf("fltk: could not open stylus device %d\n", n);
+    printf("gnui: could not open stylus device %d\n", n);
 #endif
     return false;
   }
@@ -999,7 +999,7 @@ bool gnui::enable_tablet_events() {
   version = XGetExtensionVersion(xdisplay, INAME);
   if (!version || (version==(XExtensionVersion*)NoSuchExtension)) {
 #if DEBUG_TABLET
-    printf("fltk: no XInput extension found\n");
+    printf("gnui: no XInput extension found\n");
 #endif
     return false;
   }
@@ -1024,7 +1024,7 @@ bool gnui::enable_tablet_events() {
 ////////////////////////////////////////////////////////////////
 
 /**
-The dnd_* variables allow your fltk program to use the
+The dnd_* variables allow your gnui program to use the
 Xdnd protocol to manipulate files and interact with file managers. You
 can ignore these if you just want to drag & drop blocks of text.  I
 have little information on how to use these, I just tried to clean up
@@ -1056,7 +1056,7 @@ for (int i = 0; dnd_source_types[i]; i++) {
 
 You can set this and #dnd_source_action before calling dnd() to change
 information about the source. You must set both of these, if you don't
-fltk will default to <tt>"text/plain"</tt> as the type and
+gnui will default to <tt>"text/plain"</tt> as the type and
 <tt>XdndActionCopy</tt> as the action. To set this change it to point
 at your own array. Only the first 3 types are sent. Also, FLTK has no
 support for reporting back what type the target requested, so all your
@@ -1222,7 +1222,7 @@ static void set_event_xy(bool push) {
   // Only the 1st to the 13th bit in XButtonEvent::state are
   // relevant to mouse buttons; the rest are a keymap mask,
   // which can cause problems for FLTK's 6th, 7th and 8th mouse buttons.
-  // If we bitwise & the state member with XSTATE_MASK (defined in fltk/x11.h)
+  // If we bitwise & the state member with XSTATE_MASK (defined in gnui/x11.h)
   // we remove the conflict.
   e_state = ((xevent.xbutton.state & XSTATE_MASK) << 16) | extra_state;
   event_time = xevent.xbutton.time;
@@ -2381,7 +2381,7 @@ static cairo_surface_t* surface;
 XftDraw* gnui::xftc;
 #endif
 
-/** Make the fltk drawing functions draw into this widget.
+/** Make the gnui drawing functions draw into this widget.
     The transformation is set so 0,0 is at the upper-left corner of
     the widget and 1 unit equals one pixel. The transformation stack
     is empied, and all other graphics state is left in unknown
@@ -2743,14 +2743,14 @@ void Window::layout() {
 }
 
 /**
- * Resizes the actual system window to match the current size of the fltk
+ * Resizes the actual system window to match the current size of the gnui
  * widget. You should call this in your layout() method if xywh have changed.
  * The layout_damage() flags must be on or it won't work.
  */
 void Window::system_layout() {
   if (i && (layout_damage()&LAYOUT_XYWH)) {
     // Fix the size/position we recorded for the X window if it is not
-    // the same as the fltk window. If we received CONFIGURE_NOTIFY
+    // the same as the gnui window. If we received CONFIGURE_NOTIFY
     // events and the application did not make any further changes to the
     // window size, this will already be correct and no X calls will
     // be made.
@@ -2793,7 +2793,7 @@ void Window::system_layout() {
   }
 }
 
-FILE* gnui::fltk_fopen(const char* name, const char* flags) {
+FILE* gnui::gnui_fopen(const char* name, const char* flags) {
   return fopen(name, flags);
 }
 

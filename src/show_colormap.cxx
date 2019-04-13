@@ -22,19 +22,19 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Select a color from the colormap.
 // Pretty much unchanged from Forms.
 
-#include <fltk/show_colormap.h>
-#include <fltk/MenuWindow.h>
-#include <fltk/Monitor.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
+#include <gnui/show_colormap.h>
+#include <gnui/MenuWindow.h>
+#include <gnui/Monitor.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
 using namespace gnui;
 
 #define BOXSIZE 14
@@ -141,7 +141,7 @@ int ColorMenu::handle(int e) {
 }
 
 /*!
-  Older style of color chooser that only chooses the "indexed" fltk
+  Older style of color chooser that only chooses the "indexed" gnui
   colors. This pops up a panel of the 256 colors you can access with
   "indexed" gnui::Color values and lets the user pick one of them.
 

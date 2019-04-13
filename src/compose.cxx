@@ -20,11 +20,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/events.h>
+#include <gnui/events.h>
 #include <stdio.h>
 
 using namespace gnui;
@@ -33,7 +33,7 @@ using namespace gnui;
 // The characters may be typed in either order after the compose key.
 // If the second character is a space then only the first character
 // needs to be typed.
-// I changed these slightly from fltk 1.0 to match X compose
+// I changed these slightly from gnui 1.0 to match X compose
 // sequences in cases when my version did not use the same characters
 // as the X sequence. Comments show the original versions.
 // I then changed them back because the X ones were stupid and the
@@ -271,7 +271,7 @@ extern int fl_actual_keysym;
 // X dead-key lookup table.  This turns a dead-key keysym into the
 // first of two characters for one of the compose sequences.  These
 // keysyms start at 0xFE50.
-// Win32 handles the dead keys before fltk can see them.  This is
+// Win32 handles the dead keys before gnui can see them.  This is
 // unfortunate, because you don't get the preview effect.
 static const char dead_keys[] = {
   '`',	// XK_dead_grave
@@ -295,7 +295,7 @@ static const char dead_keys[] = {
 #endif
 
 // For some reason DM C/C++ compiler complains about compose_state saying:
-// Error 42: Symbol Undefined ?compose_state@fltk@@3HA (int gnui::compose_state)
+// Error 42: Symbol Undefined ?compose_state@gnui@@3HA (int gnui::compose_state)
 // WAS: any idea why many dozens of other symbols, such as all the gnui::e_x
 // and similar in run.cxx, work?
 #if __DMC__

@@ -20,10 +20,10 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/run.h>
+#include <gnui/run.h>
 #include <stdlib.h>
 #include <string.h>
 

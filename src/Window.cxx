@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 /*! \class gnui::Window
@@ -33,7 +33,7 @@ controls, or a "subwindow" inside a window. This is controlled by
 whether or not the window has a parent(). Internally there are now
 significant differences between "main" windows and "subwindows" and
 these really should be different classes, they are the same for
-historic fltk reasons.
+historic gnui reasons.
 
 Once you create a window, you usually add children Widgets to it by
 using add(child) or by using begin() and then constructing the
@@ -58,12 +58,12 @@ If you don't change it then that key will close the window.
 // equivalent (but totally different) crap for MSWindows is in win32.C
 
 #include <config.h>
-#include <fltk/Window.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/layout.h>
-#include <fltk/run.h>
-#include <fltk/x.h>
+#include <gnui/Window.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/layout.h>
+#include <gnui/run.h>
+#include <gnui/x.h>
 using namespace gnui;
 
 /*! Return a pointer to the gnui::Window this widget is in.
@@ -93,7 +93,7 @@ void Window::iconlabel(const char *iname) {label(label(), iname);}
 void Window::default_callback(Window* window, void*) {
   window->hide();
   // if there are no visible windows we exit:
-  // Not anymore, it has been restored to fltk 1.0 behavior. Instead
+  // Not anymore, it has been restored to gnui 1.0 behavior. Instead
   // run() checks after each loop to see if all windows are closed.
   // if (!first()) exit(0);
 }
@@ -220,7 +220,7 @@ Window::Window(int W, int H, const char *l)
 
 // This is set by arg to argv[0], or the user can set it.
 // It is used by X to look up stuff in the X resource database:
-const char* Window::xclass_ = "fltk";
+const char* Window::xclass_ = "gnui";
 
 bool fl_show_iconic; // set by iconize() or by -i arg switch
 
@@ -231,7 +231,7 @@ bool fl_show_iconic; // set by iconize() or by -i arg switch
 // lots of code that assummes any side effects of draw() or handle()
 // will not happen when they destroy or hide the window. To avoid this
 // all the calls are delayed by putting this in this queue and are
-// executed when fltk calls GetMessage next. This will delay the callback
+// executed when gnui calls GetMessage next. This will delay the callback
 // to WndProc to the time programs expect it (inside gnui::wait()).
 
 enum DeferredCallType {
@@ -258,7 +258,7 @@ static void deferred_call(DeferredCallType what, HWND window, int arg=0) {
 extern HWND ignore_size_change_window;
 
 // Programs that never call wait() (because they are using another GUI
-// toolkit along with fltk) may need to call this occasionally:
+// toolkit along with gnui) may need to call this occasionally:
 void fl_do_deferred_calls() {
   static bool recurse = false;
   if (recurse) return;
@@ -418,15 +418,15 @@ int Window::handle(int event) {
     deiconize anyway).
 
     The first time this is called is when the actual "system" window
-    (ie the X window) is created. Before that an fltk window is simply
+    (ie the X window) is created. Before that an gnui window is simply
     an internal data structure and is not visible outside your
     program. To return to the non-system-window state call destroy()
     or ~Window(). hide() will "unmap" the system window.
 
-    The first time show() is called on any window is when fltk will
+    The first time show() is called on any window is when gnui will
     call gnui::open_display() and gnui::load_theme(), unless you have
     already called them. This allows these expensive operations to be
-    deferred as long as possible, and allows fltk programs to be
+    deferred as long as possible, and allows gnui programs to be
     written that will run without an X server as long as they don't
     actually show a window.
 */

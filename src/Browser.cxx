@@ -19,20 +19,20 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/Browser.h>
-#include <fltk/ItemGroup.h>
-#include <fltk/Item.h>
-#include <fltk/Button.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/layout.h>
-#include <fltk/Box.h>
-#include <fltk/Item.h>
-#include <fltk/draw.h>
-#include <fltk/error.h>
-#include <fltk/Cursor.h>
+#include <gnui/Browser.h>
+#include <gnui/ItemGroup.h>
+#include <gnui/Item.h>
+#include <gnui/Button.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/layout.h>
+#include <gnui/Box.h>
+#include <gnui/Item.h>
+#include <gnui/draw.h>
+#include <gnui/error.h>
+#include <gnui/Cursor.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -67,7 +67,7 @@ using namespace gnui;
 
   If you give the browser a callback you can find out what item was
   selected with value(), the first item is zero (this is different
-  from older versions of fltk that started at 1!), and will be
+  from older versions of gnui that started at 1!), and will be
   negative if no item is selected. You can change the selected item
   with value(new_value).
 
@@ -114,7 +114,7 @@ using namespace gnui;
 // Deal with it.
 
 #define DRAW_STRIPES 0 // draw Macintosh-style stripes
-#define TRIANGLE_GLYPH 0 // use Macintosh/fltk-style glyphs
+#define TRIANGLE_GLYPH 0 // use Macintosh/gnui-style glyphs
 
 /*! \fn int Browser::width() const
   \return The width of the longest item in the browser, measured in pixels. 
@@ -1501,7 +1501,7 @@ int Browser::handle(int event) {
     } else if (openclose_drag) return 1;
     if (event_clicks()) {
       // double clicks act like ReturnKey
-      //e_keysym = ReturnKey; // fltk1 did this
+      //e_keysym = ReturnKey; // gnui1 did this
       clear_changed();
       execute(item());
       return 1;
@@ -1801,7 +1801,7 @@ void Browser::column_click_cb_(Widget *ww, void *d) {
   w->do_callback();
   w->selected_column_ = NO_COLUMN_SELECTED;
 }
-#include <fltk/Font.h>
+#include <gnui/Font.h>
 class BButton : public Button {
   uchar sides; // bit 0 set: user can drag left side, bit 1: right side
 public:

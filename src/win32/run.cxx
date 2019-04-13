@@ -23,22 +23,22 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-// This file contains win32-specific code for fltk which is always linked
+// This file contains win32-specific code for gnui which is always linked
 // in.	Search other files for "_WIN32" or filenames ending in _win32.cxx
 // for other system-specific code.
 
 #include <config.h>
-#include <fltk/events.h>
-#include <fltk/layout.h>
-#include <fltk/Window.h>
-#include <fltk/Style.h>
-#include <fltk/win32.h>
-#include <fltk/filename.h>
-#include <fltk/utf.h>
-#include <fltk/Monitor.h>
+#include <gnui/events.h>
+#include <gnui/layout.h>
+#include <gnui/Window.h>
+#include <gnui/Style.h>
+#include <gnui/win32.h>
+#include <gnui/filename.h>
+#include <gnui/utf.h>
+#include <gnui/Monitor.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -78,7 +78,7 @@ namespace gnui {
 #include <commctrl.h>
 #include <ctype.h>
 #include <wchar.h>
-#include <fltk/math.h>
+#include <gnui/math.h>
 
 using namespace gnui;
 
@@ -1361,7 +1361,7 @@ static bool mouse_event(Window *window, int what, unsigned button,
 // convert a MSWindows VK_x to an Fltk (X) Keysym:
 // See also the inverse converter in get_key_win32.C
 // This table is in numeric order by VK:
-static const struct {unsigned short vk, fltk, extended;} vktab[] = {
+static const struct {unsigned short vk, gnui, extended;} vktab[] = {
   {VK_BACK,	BackSpaceKey},
   {VK_TAB,	TabKey},
   {VK_CLEAR,	Keypad5,	ClearKey},
@@ -1421,7 +1421,7 @@ static const struct {unsigned short vk, fltk, extended;} vktab[] = {
   {0xde,	'\''}
 };
 bool fl_last_was_extended;
-static inline int ms2fltk(int vk, LPARAM lParam) {
+static inline int ms2gnui(int vk, LPARAM lParam) {
   static unsigned short vklut[256];
   static unsigned short extendedlut[256];
   if (!vklut[1]) { // init the table
@@ -1430,7 +1430,7 @@ static inline int ms2fltk(int vk, LPARAM lParam) {
     for (i=VK_F1; i<=VK_F16; i++) vklut[i] = i+(F1Key-VK_F1);
     for (i=VK_NUMPAD0; i<=VK_NUMPAD9; i++) vklut[i] = i+(Keypad0-VK_NUMPAD0);
     for (i = 0; i < sizeof(vktab)/sizeof(*vktab); i++) {
-      vklut[vktab[i].vk] = vktab[i].fltk;
+      vklut[vktab[i].vk] = vktab[i].gnui;
       extendedlut[vktab[i].vk] = vktab[i].extended;
     }
     for (i = 0; i < 256; i++) if (!extendedlut[i]) extendedlut[i] = vklut[i];
@@ -1538,8 +1538,8 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     if (!window) break;
     CreatedWindow *i = CreatedWindow::find(window);
     i->wait_for_expose = false;
-    // Merge the region into whatever is accumulated by fltk. I do this
-    // by invalidating the fltk region and reading the resulting region
+    // Merge the region into whatever is accumulated by gnui. I do this
+    // by invalidating the gnui region and reading the resulting region
     // back:
     if (i->region) InvalidateRgn(hWnd, i->region, FALSE);
     else i->region = CreateRectRgn(0,0,0,0);
@@ -1570,7 +1570,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
   case WM_MOUSEMOVE:    mouse_event(window, 3, 0, wParam, lParam); return 0;
 
   case WM_MOUSELEAVE:
-    // In fltk2 we should only call handle(LEAVE) if the mouse is
+    // In gnui we should only call handle(LEAVE) if the mouse is
     // not pointing at a window belonging to the application. This seems
     // to work, probably because the enter event has already been done
     // and has changed xmousewin to some other window:
@@ -1592,7 +1592,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
   case WM_KEYUP:
   case WM_SYSKEYUP:
     // save the keysym until we figure out the characters:
-    e_keysym = ms2fltk(wParam,lParam);
+    e_keysym = ms2gnui(wParam,lParam);
     // See if TranslateMessage turned it into a WM_*CHAR message:
     if (__PeekMessage(&msg, hWnd, WM_CHAR, WM_SYSDEADCHAR, PM_REMOVE)) {
       uMsg = msg.message;
@@ -1729,7 +1729,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
   case WM_WINDOWPOSCHANGING:
     {
       if (!window || window->parent()) break; // ignore child windows
-      // fltk does not think making a window iconic is a size change, but
+      // gnui does not think making a window iconic is a size change, but
       // Windows does. This makes it ignore changes when the window is
       // made iconic, and the "ignore_size_change_window" is used to
       // ignore changes when it is de-iconized.
@@ -1974,7 +1974,7 @@ static void register_unicode(HICON smallicon, HICON bigicon)
   //wc.hbrBackground = (HBRUSH)CreateSolidBrush(RGB(r,g,b));
   wc.hbrBackground = NULL;
   wc.lpszMenuName = NULL;
-  wc.lpszClassName = L"fltk";
+  wc.lpszClassName = L"gnui";
   wc.cbSize = sizeof(wc);
   RegisterClassExW(&wc);
   // This is needed or multiple DLL's get confused (?):
@@ -1997,7 +1997,7 @@ static void register_ansi(HICON smallicon, HICON bigicon)
   //wc.hbrBackground = (HBRUSH)CreateSolidBrush(RGB(r,g,b));
   wc.hbrBackground = NULL;
   wc.lpszMenuName = NULL;
-  wc.lpszClassName = "fltk";
+  wc.lpszClassName = "gnui";
   wc.cbSize = sizeof(wc);
   RegisterClassExA(&wc);
   // This is needed or multiple DLL's get confused (?):
@@ -2111,7 +2111,7 @@ void CreatedWindow::create(Window* window) {
   // CreateWindowEx enters WndProc by sending many important msgs like WM_GETMINMAXINFO *before* the window handle (xid here) is set in the instance..
   sCreatedWindowPending=x; // start of hack
   x->xid = __CreateWindowExW(styleEx,
-			     L"fltk", ucs_name, style,
+			     L"gnui", ucs_name, style,
 			     xp, yp, wp, hp,
 			     parent,
 			     NULL, // menu
@@ -2594,7 +2594,7 @@ int WINAPI ansi_MessageBoxW(HWND hWnd, LPCWSTR lpText, LPCWSTR lpCaption, UINT u
 }; /* extern "C" */
 
 
-FILE* gnui::fltk_fopen(const char* name, const char* flags) {
+FILE* gnui::gnui_fopen(const char* name, const char* flags) {
 	wchar_t *wname, *wflags;
 	unsigned namelen, flaglen;
 

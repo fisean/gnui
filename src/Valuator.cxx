@@ -20,13 +20,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/Valuator.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/math.h>
+#include <gnui/Valuator.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/math.h>
 #include <stdio.h>
 #include <stdlib.h>
 using namespace gnui;

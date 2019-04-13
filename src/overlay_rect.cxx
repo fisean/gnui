@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Extremely limited "overlay" support.  You can use this to drag out
@@ -31,8 +31,8 @@
 // it.
 
 #include <config.h>
-#include <fltk/x.h>
-#include <fltk/draw.h>
+#include <gnui/x.h>
+#include <gnui/draw.h>
 using namespace gnui;
 
 static gnui::Rectangle pr(0,0,0,0);

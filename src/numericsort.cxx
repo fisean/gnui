@@ -22,7 +22,7 @@
  *
  * Please report all bugs and problems on the following page:
  *
- *     http://www.fltk.org/str.php
+ *     http://www.gnui.org/str.php
  */
 
 /* My own scandir sorting function, useful for the film industry where
@@ -33,7 +33,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
-#include <fltk/filename.h>
+#include <gnui/filename.h>
 
 #if !defined(WIN32) || defined(__CYGWIN__)
 #  ifdef HAVE_DIRENT_H

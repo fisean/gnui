@@ -22,15 +22,15 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-// Return the current state of a key.  Keys are named by fltk symbols,
+// Return the current state of a key.  Keys are named by gnui symbols,
 // which are actually X keysyms.  So this has to translate to MSWindows
 // VK_x symbols.
 
-#include <fltk/events.h>
-#include <fltk/x.h>
+#include <gnui/events.h>
+#include <gnui/x.h>
 #include <ctype.h>
 #ifndef VK_LWIN
 # define VK_LWIN 0x5B
@@ -40,7 +40,7 @@
 
 using namespace gnui;
 
-static const struct {unsigned short vk, fltk, ext;} vktab[] = {
+static const struct {unsigned short vk, gnui, ext;} vktab[] = {
   {VK_SPACE,	' '},
   {'1',		'!'},
   {0xde,	'\"'},
@@ -123,36 +123,36 @@ static const struct {unsigned short vk, fltk, ext;} vktab[] = {
 
 extern bool fl_last_was_extended;
 
-static unsigned short fltk2ms(unsigned fltk) {
-  if (fltk >= '0' && fltk <= '9') return fltk;
-  if (fltk >= 'A' && fltk <= 'Z') return fltk;
-  if (fltk >= 'a' && fltk <= 'z') return fltk-('a'-'A');
-  if (fltk >= F1Key && fltk <= LastFunctionKey) return fltk-F1Key+VK_F1;
+static unsigned short gnuims(unsigned gnui) {
+  if (gnui >= '0' && gnui <= '9') return gnui;
+  if (gnui >= 'A' && gnui <= 'Z') return gnui;
+  if (gnui >= 'a' && gnui <= 'z') return gnui-('a'-'A');
+  if (gnui >= F1Key && gnui <= LastFunctionKey) return gnui-F1Key+VK_F1;
   if (event_state(NUMLOCK) || fl_last_was_extended) {
-    if (fltk >= Keypad0 && fltk<=Keypad9) return fltk-Keypad0+VK_NUMPAD0;
-    if (fltk == DecimalKey) return VK_DECIMAL;
+    if (gnui >= Keypad0 && gnui<=Keypad9) return gnui-Keypad0+VK_NUMPAD0;
+    if (gnui == DecimalKey) return VK_DECIMAL;
   }
-  if (fltk == KeypadEnter && fl_last_was_extended)
+  if (gnui == KeypadEnter && fl_last_was_extended)
     return VK_RETURN;
   int a = 0;
   int b = sizeof(vktab)/sizeof(*vktab);
   while (a < b) {
     int c = (a+b)/2;
-    if (vktab[c].fltk == fltk) return vktab[c].vk;
-    if (vktab[c].fltk < fltk) a = c+1; else b = c;
+    if (vktab[c].gnui == gnui) return vktab[c].vk;
+    if (vktab[c].gnui < gnui) a = c+1; else b = c;
   }
   return 0;
 }
 
 bool gnui::event_key_state(unsigned k) {
-  return (GetKeyState(fltk2ms(k))&~1) != 0;
+  return (GetKeyState(gnuims(k))&~1) != 0;
 }
 
 bool gnui::get_key_state(unsigned k) {
-  return (GetAsyncKeyState(fltk2ms(k))&~1) != 0;
+  return (GetAsyncKeyState(gnuims(k))&~1) != 0;
 //    uchar foo[256];
 //    GetKeyboardState(foo);
-//    return (foo[fltk2ms(k)]&~1) != 0;
+//    return (foo[gnuims(k)]&~1) != 0;
 }
 
 //

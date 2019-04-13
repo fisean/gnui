@@ -45,8 +45,8 @@
  * (415) 336-1080 */
 
 #include <config.h>
-#include <fltk/SharedImage.h>
-#include <fltk/x.h>
+#include <gnui/SharedImage.h>
+#include <gnui/x.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

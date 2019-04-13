@@ -20,11 +20,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/StyleSet.h>
-#include <fltk/Widget.h>
+#include <gnui/StyleSet.h>
+#include <gnui/Widget.h>
 #include <string.h>
 #include <stdlib.h>
 using namespace gnui;
@@ -55,7 +55,7 @@ using namespace gnui;
 
 static StyleSet* current_set;
 
-extern "C" FL_API bool fltk_theme();
+extern "C" FL_API bool gnui_theme();
 
 /*! The \e first StyleSet you create is made into the current one and
   is made equal to the current settings of the styles. All subsequent
@@ -69,7 +69,7 @@ StyleSet::StyleSet() {
     return;
   }
   // Otherwise we must init to a blank set:
-  gnui::theme(fltk_theme);
+  gnui::theme(gnui_theme);
   background = 0xc0c0c000; // get_color_index(GRAY75); // 
   // Make all the named styles build copies of themselves and then
   // assign that list to this set:

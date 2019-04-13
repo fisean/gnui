@@ -2,7 +2,7 @@
 // "$Id$"
 //
 // Non-path routines from draw.h that are used by the standard boxtypes
-// and thus are always linked into an fltk program.
+// and thus are always linked into an gnui program.
 //
 // Copyright 1998-2006 by Bill Spitzak and others.
 //
@@ -23,13 +23,13 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/draw.h>
-#include <fltk/x.h>
-#include <fltk/math.h>
+#include <gnui/draw.h>
+#include <gnui/x.h>
+#include <gnui/math.h>
 using namespace gnui;
 
 /*! Fill the rectangle with the current color. */
@@ -98,7 +98,7 @@ void gnui::strokerect(int x, int y, int w, int h) {
   is moved between the first centers of pixels to the lower-right of
   the start and end points. Thus if y==y1 this will fill a rectangle
   with the corners x,y and x1+1,y+1. This may be 1 wider than you expect,
-  but is necessary for compatability with previous fltk versions (and
+  but is necessary for compatability with previous gnui versions (and
   is due to the original X11 behavior).
 
   If line_width() is not zero then the results depend on the back end.

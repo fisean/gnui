@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 //// From the inner edge of a MetroWerks CodeWarrior CD:
@@ -39,15 +39,15 @@
 // in the Land of MacOS X where the Drop-Shadows lie.
 
 #include <config.h>
-#include <fltk/events.h>
-#include <fltk/x.h>
-#include <fltk/Window.h>
-#include <fltk/SystemMenuBar.h>
-#include <fltk/Item.h>
-#include <fltk/ItemGroup.h>
-#include <fltk/Style.h>
-#include <fltk/utf.h>
-#include <fltk/Cursor.h>
+#include <gnui/events.h>
+#include <gnui/x.h>
+#include <gnui/Window.h>
+#include <gnui/SystemMenuBar.h>
+#include <gnui/Item.h>
+#include <gnui/ItemGroup.h>
+#include <gnui/Style.h>
+#include <gnui/utf.h>
+#include <gnui/Cursor.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -171,7 +171,7 @@ void gnui::remove_fd(int n, int events) {
   pthread_mutex_unlock(&select_mutex);
 }
 
-enum { kEventClassFLTK = 'fltk' };
+enum { kEventClassFLTK = 'gnui' };
 enum { kEventFLTKBreakLoop = 1, kEventFLTKDataReady };
 
 // Run select() and do the callbacks:
@@ -351,7 +351,7 @@ OSStatus HandleMenu( HICommand *cmd )
  It appears that every event passes through this function. This can
  probably be rewritten so all the "Handle" functions are instead right
  here in a single case statement, which would match the other platform
- implementations of fltk much more.
+ implementations of gnui much more.
 */
 static pascal OSStatus carbonDispatchHandler( EventHandlerCallRef nextHandler, EventRef event, void *userData )
 {
@@ -677,7 +677,7 @@ static pascal OSStatus carbonMousewheelHandler( EventHandlerCallRef nextHandler,
 }
 
 /*
- * convert the mouse button to fltk's keysym and state flags
+ * convert the mouse button to gnui's keysym and state flags
  */
 static void button_to_keysym( EventRef event ) {
   EventMouseButton btn;
@@ -967,7 +967,7 @@ void gnui::open_display() {
     default_cursor = &_default_cursor;
     current_cursor = default_cursor;
 
-    // This populates the menu bar, see fltk1 code:
+    // This populates the menu bar, see gnui1 code:
     //ClearMenuBar();
     //AppendResMenu( GetMenuHandle( 1 ), 'DRVR' );
     //DrawMenuBar();
@@ -1229,7 +1229,7 @@ void gnui::open_callback(void (*cb)(const char *)) {
 
 ////////////////////////////////////////////////////////////////
 
-#include <fltk/draw.h>
+#include <gnui/draw.h>
 
 static void show_drag(bool v, Widget* target, DragReference dragRef) {
   if (v) {
@@ -1239,7 +1239,7 @@ static void show_drag(bool v, Widget* target, DragReference dragRef) {
     target->cursor(CURSOR_DEFAULT);
     //HideDragHilight( dragRef );
   }
-  gnui::flush(); // make any fltk drawing get done
+  gnui::flush(); // make any gnui drawing get done
 }
 
 /*
@@ -1932,7 +1932,7 @@ WindowPtr gnui::xid(const Window*w) {
   return CreatedWindow::find(w)->xid;
 }
 
-FILE* gnui::fltk_fopen(const char* name, const char* flags) {
+FILE* gnui::gnui_fopen(const char* name, const char* flags) {
   return fopen(name, flags);
 }
 

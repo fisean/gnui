@@ -22,18 +22,18 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Group of 2 or 4 "tiles" that can be resized by dragging border
 // The size of the first child determines where the resize border is.
 // The resizebox is used to limit where the border can be dragged to.
 
-#include <fltk/TiledGroup.h>
-#include <fltk/Window.h>
-#include <fltk/events.h>
-#include <fltk/layout.h>
-#include <fltk/Cursor.h>
+#include <gnui/TiledGroup.h>
+#include <gnui/Window.h>
+#include <gnui/events.h>
+#include <gnui/layout.h>
+#include <gnui/Cursor.h>
 #include <stdlib.h>
 using namespace gnui;
 

@@ -20,12 +20,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 #include <config.h>
-#include <fltk/visual.h>
-#include <fltk/x.h>
+#include <gnui/visual.h>
+#include <gnui/x.h>
 
 /*! \fn void gnui::own_colormap();
 

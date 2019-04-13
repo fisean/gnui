@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // Wrapper for scandir with a prototype that matches on all systems and
@@ -33,9 +33,9 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdio.h>
-#include <fltk/string.h>
-#include <fltk/utf.h>
-#include <fltk/filename.h>
+#include <gnui/string.h>
+#include <gnui/utf.h>
+#include <gnui/filename.h>
 
 #if ! HAVE_SCANDIR
 extern "C" {

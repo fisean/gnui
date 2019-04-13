@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /*! \class gnui::TabGroupPager 
     This Helper class defines generically the TabGroup behavior when 
@@ -31,12 +31,12 @@
     and redefines the pure virtual methods of this template.
 */
 
-#include <fltk/Box.h>
-#include <fltk/draw.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
 
-#include <fltk/TabGroup.h>
-#include <fltk/MenuBuild.h>
-#include <fltk/ask.h>
+#include <gnui/TabGroup.h>
+#include <gnui/MenuBuild.h>
+#include <gnui/ask.h>
 
 using namespace gnui;
 
@@ -91,7 +91,7 @@ void TabGroup::default_pager(int factory_pager_index) {
       case PAGER_MENU:
 	  default_pager(new MenuTabPager);
 	  break;
-      case PAGER_SHRINK: // historically the first way to handle tabs in fltk2
+      case PAGER_SHRINK: // historically the first way to handle tabs in gnui
 	  default_pager(new ShrinkTabPager);
 	  break;
       }

@@ -3,12 +3,12 @@
 //
 // Copyright 1998-2006 by Bill Spitzak and others.
 
-#include <fltk/ValueOutput.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/draw.h>
-#include <fltk/Box.h>
-#include <fltk/run.h>
+#include <gnui/ValueOutput.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/draw.h>
+#include <gnui/Box.h>
+#include <gnui/run.h>
 using namespace gnui;
 
 /*! \class gnui::ValueOutput

@@ -19,12 +19,12 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/events.h>
-#include <fltk/Menu.h>
-#include <fltk/damage.h>
-#include <fltk/Item.h> // for TOGGLE, RADIO
+#include <gnui/events.h>
+#include <gnui/Menu.h>
+#include <gnui/damage.h>
+#include <gnui/Item.h> // for TOGGLE, RADIO
 
 #define checkmark(item) (item->type()>=Item::TOGGLE && item->type()<=Item::RADIO)
 
@@ -486,7 +486,7 @@ int Menu::handle_shortcut() {
 }
 
 /*! \fn int Menu::size() const
-  Returns children() (for back compatability with older versions of fltk).
+  Returns children() (for back compatability with older versions of gnui).
 */
 
 //

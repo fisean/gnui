@@ -19,11 +19,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/Widget.h>
-#include <fltk/Box.h>
-#include <fltk/draw.h>
+#include <gnui/Widget.h>
+#include <gnui/Box.h>
+#include <gnui/draw.h>
 using namespace gnui;
 
 static class DefaultGlyph : public Symbol {

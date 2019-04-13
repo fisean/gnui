@@ -22,7 +22,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 // Contents:
 //
@@ -33,10 +33,10 @@
 // Include necessary header files...
 //
 
-#include <fltk/run.h>
-#include <fltk/error.h>
-#include <fltk/pnmImage.h>
-#include <fltk/string.h>
+#include <gnui/run.h>
+#include <gnui/error.h>
+#include <gnui/pnmImage.h>
+#include <gnui/string.h>
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -20,7 +20,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 // Draw fonts using Keith Packard's Xft and Xrender extension. Yow!
 // Many thanks to Carl for making the original version of this.
@@ -31,13 +31,13 @@
 // itself. You should edit the ~/.xftconfig file to "fix" things, there
 // are several web pages of information on how to do this.
 
-#include <fltk/events.h>
-#include <fltk/Font.h>
-#include <fltk/draw.h>
-#include <fltk/math.h>
-#include <fltk/string.h>
-#include <fltk/utf.h>
-#include <fltk/x.h>
+#include <gnui/events.h>
+#include <gnui/Font.h>
+#include <gnui/draw.h>
+#include <gnui/math.h>
+#include <gnui/string.h>
+#include <gnui/utf.h>
+#include <gnui/x.h>
 
 // define some symbols missing from some Xft header files:
 #ifndef XFT_MINSPACE
@@ -183,7 +183,7 @@ XftFont* gnui::xftfont() {
   return current->font;
 }
 
-// This is for back compatability with fltk1 programs, implements the
+// This is for back compatability with gnui1 programs, implements the
 // former variable fl_xfont:
 XFontStruct* gnui::xfont() {
 #if XFT_MAJOR > 1
@@ -257,7 +257,7 @@ float gnui::getwidth(const char *str, int n) {
 
 void gnui::drawtext_transformed(const char *str, int n, float x, float y) {
 
-  // Use fltk's color allocator, copy the results to match what
+  // Use gnui's color allocator, copy the results to match what
   // XftCollorAllocValue returns:
   XftColor color;
 #if USE_CAIRO
@@ -296,7 +296,7 @@ void gnui::drawtext_transformed(const char *str, int n, float x, float y) {
 
 ////////////////////////////////////////////////////////////////
 
-// The predefined fonts that fltk has:
+// The predefined fonts that gnui has:
 static IFont fonts [] = {
   {{"sans",	0},	3,	0},
   {{"sans",	1},	2,	0},
@@ -331,7 +331,7 @@ gnui::Font* const gnui::SCREEN_FONT		= &(fonts[4].f);
 gnui::Font* const gnui::SCREEN_BOLD_FONT	= &(fonts[5].f);
 gnui::Font* const gnui::ZAPF_DINGBATS		= &(fonts[13].f);
 
-// Turn an fltk1 integer font id into a predefined font:
+// Turn an gnui1 integer font id into a predefined font:
 gnui::Font* gnui::font(int i) {
   i = i & 15;
   switch (i) {
@@ -428,7 +428,7 @@ static int int_sort(const void *aa, const void *bb) {
 }
 
 // Return all the point sizes supported by this font:
-// Suprisingly enough Xft works exactly like fltk does and returns
+// Suprisingly enough Xft works exactly like gnui does and returns
 // the same list. Except there is no way to tell if the font is scalable.
 int gnui::Font::sizes(int*& sizep) {
   open_display();

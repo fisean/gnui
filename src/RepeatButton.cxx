@@ -20,11 +20,11 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/RepeatButton.h>
-#include <fltk/events.h>
+#include <gnui/RepeatButton.h>
+#include <gnui/events.h>
 using namespace gnui;
 
 /*! \class gnui::RepeatButton

@@ -22,14 +22,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//     http://www.fltk.org/str.php
+//     http://www.gnui.org/str.php
 //
 
 
-#include <fltk/FileChooser.h>
-#include <fltk/draw.h>
-#include <fltk/run.h>
-#include <fltk/Cursor.h>
+#include <gnui/FileChooser.h>
+#include <gnui/draw.h>
+#include <gnui/run.h>
+#include <gnui/Cursor.h>
 using namespace gnui;
 
 inline void FileChooser::cb_window_i(gnui::DoubleBufferWindow*, void*) {
@@ -73,7 +73,7 @@ void FileChooser::cb_newButton(gnui::Button* o, void* v) {
   ((FileChooser*)(o->parent()->parent()->user_data()))->cb_newButton_i(o,v);
 }
 
-#include <fltk/xbmImage.h>
+#include <gnui/xbmImage.h>
 static const unsigned char bits_new[32] = {
 0,0,120,0,132,0,2,1,1,254,1,128,49,128,49,128,253,128,253,128,49,128,49,128,
 1,128,1,128,255,255,0,0};

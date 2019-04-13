@@ -19,7 +19,7 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
 /*! \class gnui::xpmImage
 
@@ -43,9 +43,9 @@ static xpmImage image_name(image_name_xpm);
 
 */
 
-#include <fltk/xpmImage.h>
-#include <fltk/draw.h>
-#include <fltk/string.h>
+#include <gnui/xpmImage.h>
+#include <gnui/draw.h>
+#include <gnui/string.h>
 #include <ctype.h>
 #include <config.h>
 using namespace gnui;
@@ -70,7 +70,7 @@ bool xpmImage::fetch(Image& i, const char * const * array) {
   U32 colors[256]; // ARGB32 colors
   U32* byte1[256]; // prefix for 2-byte xpm
 
-  if (ncolors < 0) {	// fltk (non standard) compressed colormap
+  if (ncolors < 0) {	// gnui (non standard) compressed colormap
     ncolors = -ncolors;
     chars_per_pixel = 1;
     const uchar *p = *data++;
@@ -129,7 +129,7 @@ bool xpmImage::fetch(Image& i, const char * const * array) {
 	C = color((const char*)previous_word);
       }
       if (C) {
-        *c = 0xff000000 | (C>>8); // convert fltk color to ARGB32
+        *c = 0xff000000 | (C>>8); // convert gnui color to ARGB32
         // test to see if rgb are different from each other:
         if ((((C>>16)^C)|((C>>8)^C)) & 0xff00) monochrome=false;
       } else { // assume "None" or "#transparent" for any errors

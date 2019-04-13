@@ -20,14 +20,14 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 
-#include <fltk/Adjuster.h>
-#include <fltk/Box.h>
-#include <fltk/events.h>
-#include <fltk/damage.h>
-#include <fltk/draw.h>
-#include <fltk/xbmImage.h>
+#include <gnui/Adjuster.h>
+#include <gnui/Box.h>
+#include <gnui/events.h>
+#include <gnui/damage.h>
+#include <gnui/draw.h>
+#include <gnui/xbmImage.h>
 using namespace gnui;
 
 /*! \class gnui::Adjuster

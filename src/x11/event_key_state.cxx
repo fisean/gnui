@@ -3,8 +3,8 @@
 // keys (mostly) by the X keysym.  So this turns the keysym into a keycode
 // and looks it up in the X key bit vector, which x.C keeps track of.
 
-#include <fltk/events.h>
-#include <fltk/x.h>
+#include <gnui/events.h>
+#include <gnui/x.h>
 
 extern char fl_key_vector[32]; // in x.C
 

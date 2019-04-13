@@ -24,14 +24,14 @@
 //
 // Please report all bugs and problems to the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
 // I believe this was written by Matthias Melcher, correct?
 
-#include <fltk/events.h>
-#include <fltk/Window.h>
-#include <fltk/x.h>
+#include <gnui/events.h>
+#include <gnui/Window.h>
+#include <gnui/x.h>
 
 // All of the following code requires GCC 3.x or a non-GNU compiler...
 #if !defined(__GNUC__) || __GNUC__ >= 3

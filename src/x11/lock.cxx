@@ -19,7 +19,7 @@ If you want this, edit config.h and set USE_X11_MULTITHREADING to 1.
 
 */
 
-#include <fltk/x.h>
+#include <gnui/x.h>
 #include <unistd.h>
 #include <fcntl.h>
 

@@ -22,20 +22,20 @@
 //
 // Please report all bugs and problems on the following page:
 //
-//    http://www.fltk.org/str.php
+//    http://www.gnui.org/str.php
 //
 
-#include <fltk/draw.h>
-#include <fltk/Symbol.h>
-#include <fltk/math.h>
-#include <fltk/error.h>
+#include <gnui/draw.h>
+#include <gnui/Symbol.h>
+#include <gnui/math.h>
+#include <gnui/error.h>
 #include <string.h>
 #include <ctype.h>
 using namespace gnui;
 
 /*! \class gnui::Symbol
 
-    All small reusable graphics drawn by fltk are based on this class.
+    All small reusable graphics drawn by gnui are based on this class.
     This includes bitmapped images, the boxes drawn around widgets,
     symbols drawn into buttons, small symbols drawn between the letters
     in labels, and a number of formatting symbols to change the color
@@ -226,7 +226,7 @@ const Symbol* Symbol::find(const char* name, const char* end) {
   const char* a = name;
 
   // for back-compatability a leading # is ignored:
-  // This was used in fltk1 and forms to indicate non-distored scaling:
+  // This was used in gnui1 and forms to indicate non-distored scaling:
   if (a[0] == '#') a++;
 
   // Remove any leading integer:
@@ -408,7 +408,7 @@ void gnui::add_symbol(const char *name, void (*drawit)(Color), int scalable)
 void SymbolSymbol::_draw(const Rectangle& r) const
 {
   const char* p = text();
-  if (*p == '#') p++; // ignore equalscale indicator from fltk1.1
+  if (*p == '#') p++; // ignore equalscale indicator from gnui1.1
   // move x,y to center of square:
   int x = r.center_x();
   int y = r.center_y();

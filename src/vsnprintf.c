@@ -16,11 +16,11 @@
  *
  * Please report all bugs and problems to the following page:
  *
- *    http://www.fltk.org/str.php
+ *    http://www.gnui.org/str.php
  */
 
 #include <config.h>
-#include <fltk/string.h>
+#include <gnui/string.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,7 +37,7 @@ extern "C" {
   the full result.
 
   FLTK provides an implementation of this function on the (few)
-  systems that don't provide it. Include the <fltk/string.h> header to
+  systems that don't provide it. Include the <gnui/string.h> header to
   call this portably. FLTK's emulation is rather poor and has the
   following bugs:
   - Field width & Precision is ignored for %%%, %%c, and %%s.
@@ -72,7 +72,7 @@ int snprintf(char* str, size_t size, const char* fmt, ...) {
   from another function that has a variable argument list.
 
   FLTK provides an implementation of this function on the (few)
-  systems that don't provide it. Include the <fltk/string.h> header to
+  systems that don't provide it. Include the <gnui/string.h> header to
   call this portably. See snprintf() for bugs with this emulation.
 */
 int vsnprintf(char* str, size_t size, const char* fmt, va_list ap) {
