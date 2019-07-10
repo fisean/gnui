@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API BarGroup : public Group {
+class GNUI_API BarGroup : public Group {
   bool open_;
   bool highlighted;
   bool pushed;

@@ -43,9 +43,9 @@ endif
 
 CPPFILES = \
 	FileIcon2.cxx \
-	Fl_Guess_Image.cxx \
-	fl_jpeg.cxx\
-	fl_png.cxx \
+	GNUI_Guess_Image.cxx \
+	gnui_jpeg.cxx\
+	gnui_png.cxx \
 	HelpDialog.cxx \
 	images_core.cxx \
 	pnmImage.cxx \

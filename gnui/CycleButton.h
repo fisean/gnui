@@ -36,7 +36,7 @@
 
 namespace gnui {
 
-class FL_API CycleButton : public Menu {
+class GNUI_API CycleButton : public Menu {
 public:
   int handle(int);
   CycleButton(int,int,int,int,const char * = 0);

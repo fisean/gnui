@@ -44,7 +44,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
-# ADD CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "NDEBUG" /D "FL_SHARED" /D "FL_LIBRARY" /D "FL_GL_LIBRARY" /D "FL_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
+# ADD CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "NDEBUG" /D "GNUI_SHARED" /D "GNUI_LIBRARY" /D "GNUI_GL_LIBRARY" /D "GNUI_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
 # SUBTRACT CPP /YX
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
@@ -72,7 +72,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /YX /FD /c
-# ADD CPP /nologo /MTd /W3 /Gm /Gi /GX /ZI /Od /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "_DEBUG" /D "FL_SHARED" /D "FL_LIBRARY" /D "FL_GL_LIBRARY" /D "FL_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /FR /c
+# ADD CPP /nologo /MTd /W3 /Gm /Gi /GX /ZI /Od /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "_DEBUG" /D "GNUI_SHARED" /D "GNUI_LIBRARY" /D "GNUI_GL_LIBRARY" /D "GNUI_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /FR /c
 # SUBTRACT CPP /YX
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o /win32 "NUL"
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o /win32 "NUL"
@@ -100,9 +100,9 @@ LINK32=link.exe
 # PROP Intermediate_Dir "fltkdll___Win32_Release_MinSize"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "NDEBUG" /D "FL_SHARED" /D "FL_LIBRARY" /D "FL_GL_LIBRARY" /D "FL_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
+# ADD BASE CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "NDEBUG" /D "GNUI_SHARED" /D "GNUI_LIBRARY" /D "GNUI_GL_LIBRARY" /D "GNUI_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
 # SUBTRACT BASE CPP /YX
-# ADD CPP /nologo /MD /O1 /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "NDEBUG" /D "FL_SHARED" /D "FL_LIBRARY" /D "FL_GL_LIBRARY" /D "FL_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /D "_MSC_DLL" /c
+# ADD CPP /nologo /MD /O1 /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /D "NDEBUG" /D "GNUI_SHARED" /D "GNUI_LIBRARY" /D "GNUI_GL_LIBRARY" /D "GNUI_GLUT_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /D "_MSC_DLL" /c
 # SUBTRACT CPP /YX
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
@@ -129,7 +129,7 @@ LINK32=link.exe
 SOURCE=..\..\src\add_idle.cxx
 DEP_CPP_ADD_I=\
 	"..\..\fltk\run.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -142,7 +142,7 @@ DEP_CPP_ADDAR=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -161,7 +161,7 @@ DEP_CPP_ADDCU=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -183,7 +183,7 @@ DEP_CPP_ADJUS=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -202,7 +202,7 @@ DEP_CPP_ALIGN=\
 	"..\..\fltk\aligngroup.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -224,7 +224,7 @@ DEP_CPP_ARGS_=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -251,7 +251,7 @@ DEP_CPP_BARGR=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -272,7 +272,7 @@ DEP_CPP_BMPIM=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -298,7 +298,7 @@ DEP_CPP_BROWS=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -325,7 +325,7 @@ DEP_CPP_BUTTO=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -344,7 +344,7 @@ DEP_CPP_CHECK=\
 	{$(INCLUDE)}"fltk\checkbutton.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -364,7 +364,7 @@ DEP_CPP_CHOIC=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -387,7 +387,7 @@ DEP_CPP_CLIP_=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -409,7 +409,7 @@ DEP_CPP_CLOCK=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -427,7 +427,7 @@ DEP_CPP_COLOR=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -452,7 +452,7 @@ DEP_CPP_COLOR_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\floatinput.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -486,7 +486,7 @@ DEP_CPP_COMBO=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\input.h"\
@@ -504,7 +504,7 @@ SOURCE=..\..\src\compose.cxx
 DEP_CPP_COMPO=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -517,7 +517,7 @@ DEP_CPP_CURSO=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -541,7 +541,7 @@ DEP_CPP_CYCLE=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -560,7 +560,7 @@ DEP_CPP_DEFAU=\
 	"..\..\fltk\box.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -580,7 +580,7 @@ DEP_CPP_DIAL_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -597,7 +597,7 @@ DEP_CPP_DIAMO=\
 	"..\..\fltk\box.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -621,7 +621,7 @@ DEP_CPP_DND_C=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -641,7 +641,7 @@ DEP_CPP_DRAWT=\
 	"..\..\fltk\math.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -662,7 +662,7 @@ DEP_CPP_ENGRA=\
 	"..\..\fltk\labeltype.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -681,7 +681,7 @@ DEP_CPP_ERROR=\
 	"..\..\fltk\x.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -703,7 +703,7 @@ DEP_CPP_EVENT=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -739,7 +739,7 @@ DEP_CPP_FILE_=\
 	{$(INCLUDE)}"fltk\checkbutton.h"\
 	{$(INCLUDE)}"fltk\choice.h"\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\input.h"\
@@ -768,7 +768,7 @@ DEP_CPP_FILEB=\
 	"..\..\fltk\string.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -806,7 +806,7 @@ DEP_CPP_FILEC=\
 	{$(INCLUDE)}"fltk\choice.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\image.h"\
@@ -849,7 +849,7 @@ DEP_CPP_FILECH=\
 	{$(INCLUDE)}"fltk\choice.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\image.h"\
@@ -881,7 +881,7 @@ DEP_CPP_FILEI=\
 	"..\..\fltk\string.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -909,7 +909,7 @@ DEP_CPP_FILEIN=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\input.h"\
@@ -928,7 +928,7 @@ DEP_CPP_FILEN=\
 	"..\..\fltk\filename.h"\
 	"..\..\fltk\string.h"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -936,7 +936,7 @@ DEP_CPP_FILEN=\
 SOURCE=..\..\src\filename_ext.cxx
 DEP_CPP_FILENA=\
 	"..\..\fltk\filename.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -947,7 +947,7 @@ DEP_CPP_FILENAM=\
 	"..\..\fltk\string.h"\
 	"..\..\fltk\utf.h"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -958,7 +958,7 @@ DEP_CPP_FILENAME=\
 	"..\..\fltk\string.h"\
 	"..\..\fltk\utf.h"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -966,7 +966,7 @@ DEP_CPP_FILENAME=\
 SOURCE=..\..\src\filename_match.cxx
 DEP_CPP_FILENAME_=\
 	"..\..\fltk\filename.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -974,7 +974,7 @@ DEP_CPP_FILENAME_=\
 SOURCE=..\..\src\filename_name.cxx
 DEP_CPP_FILENAME_N=\
 	"..\..\fltk\filename.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -987,7 +987,7 @@ DEP_CPP_FILLR=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -998,13 +998,13 @@ DEP_CPP_FILLR=\
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Fl_Menu_Item.cxx
-DEP_CPP_FL_ME=\
-	"..\..\fltk\compat\fl\fl_menu_item.h"\
+SOURCE=..\..\src\GNUI_Menu_Item.cxx
+DEP_CPP_GNUI_ME=\
+	"..\..\fltk\compat\fl\gnui_menu_item.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\divider.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -1022,7 +1022,7 @@ SOURCE=..\..\src\FloatInput.cxx
 DEP_CPP_FLOAT=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\floatinput.h"\
 	{$(INCLUDE)}"fltk\input.h"\
@@ -1046,7 +1046,7 @@ DEP_CPP_FLTK_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -1075,7 +1075,7 @@ DEP_CPP_FONT_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -1102,7 +1102,7 @@ DEP_CPP_GIFIM=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -1125,7 +1125,7 @@ DEP_CPP_GROUP=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1145,7 +1145,7 @@ DEP_CPP_GSAVE=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1166,7 +1166,7 @@ DEP_CPP_HELPV=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -1190,7 +1190,7 @@ DEP_CPP_HIGHL=\
 	{$(INCLUDE)}"fltk\button.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
 	{$(INCLUDE)}"fltk\style.h"\
@@ -1212,7 +1212,7 @@ DEP_CPP_IMAGE=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -1237,7 +1237,7 @@ DEP_CPP_INPUT=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\input.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1259,7 +1259,7 @@ DEP_CPP_INPUTB=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\input.h"\
@@ -1281,7 +1281,7 @@ DEP_CPP_INPUTB=\
 SOURCE=..\..\src\InvisibleWidget.cxx
 DEP_CPP_INVIS=\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\invisiblebox.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1300,7 +1300,7 @@ DEP_CPP_ITEM_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\divider.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -1324,7 +1324,7 @@ DEP_CPP_KEY_N=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1345,7 +1345,7 @@ DEP_CPP_LIGHT=\
 	{$(INCLUDE)}"fltk\checkbutton.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1369,7 +1369,7 @@ DEP_CPP_LIST_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -1394,7 +1394,7 @@ DEP_CPP_LOAD_=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1416,7 +1416,7 @@ DEP_CPP_LOCK_=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1436,7 +1436,7 @@ DEP_CPP_MENU_=\
 	"..\..\fltk\damage.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -1454,7 +1454,7 @@ DEP_CPP_MENU_A=\
 	"..\..\src\array.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\divider.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -1471,7 +1471,7 @@ SOURCE=..\..\src\Menu_global.cxx
 DEP_CPP_MENU_G=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\menu.h"\
@@ -1493,7 +1493,7 @@ DEP_CPP_MENU_P=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -1518,7 +1518,7 @@ DEP_CPP_MENUB=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -1543,7 +1543,7 @@ DEP_CPP_MENUW=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\menuwindow.h"\
@@ -1570,7 +1570,7 @@ DEP_CPP_MESSA=\
 	{$(INCLUDE)}"fltk\button.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\input.h"\
@@ -1592,7 +1592,7 @@ DEP_CPP_MULTI=\
 	"..\..\fltk\string.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1607,7 +1607,7 @@ DEP_CPP_NUMER=\
 	"..\..\fltk\string.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\input.h"\
 	{$(INCLUDE)}"fltk\numericinput.h"\
@@ -1622,7 +1622,7 @@ SOURCE=..\..\src\numericsort.cxx
 DEP_CPP_NUMERI=\
 	"..\..\fltk\filename.h"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -1633,7 +1633,7 @@ DEP_CPP_OUTPU=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\input.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1649,7 +1649,7 @@ DEP_CPP_OVALB=\
 	"..\..\fltk\box.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1666,7 +1666,7 @@ DEP_CPP_OVERL=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1685,7 +1685,7 @@ DEP_CPP_OWN_C=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1702,7 +1702,7 @@ DEP_CPP_PACKE=\
 	"..\..\fltk\layout.h"\
 	"..\..\fltk\packedgroup.h"\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1723,7 +1723,7 @@ DEP_CPP_PATH_=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1739,7 +1739,7 @@ DEP_CPP_PLAST=\
 	"..\..\fltk\box.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1756,7 +1756,7 @@ DEP_CPP_POPUP=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -1777,7 +1777,7 @@ DEP_CPP_PREFE=\
 	"..\..\fltk\Preferences.h"\
 	"..\..\fltk\string.h"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -1789,7 +1789,7 @@ DEP_CPP_PROGR=\
 	"..\..\fltk\progressbar.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1808,7 +1808,7 @@ DEP_CPP_RADIO=\
 	{$(INCLUDE)}"fltk\checkbutton.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1830,7 +1830,7 @@ DEP_CPP_READI=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -1847,7 +1847,7 @@ DEP_CPP_REPEA=\
 	{$(INCLUDE)}"fltk\button.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
 	{$(INCLUDE)}"fltk\style.h"\
@@ -1863,7 +1863,7 @@ DEP_CPP_RETUR=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1879,7 +1879,7 @@ DEP_CPP_ROUND=\
 	"..\..\fltk\box.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1894,7 +1894,7 @@ DEP_CPP_ROUNDE=\
 	"..\..\fltk\box.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1910,7 +1910,7 @@ DEP_CPP_RUN_C=\
 	"..\..\fltk\damage.h"\
 	"..\..\fltk\error.h"\
 	"..\..\fltk\filename.h"\
-	"..\..\fltk\FL_VERSION.h"\
+	"..\..\fltk\GNUI_VERSION.h"\
 	"..\..\fltk\fltk_cairo.h"\
 	"..\..\fltk\layout.h"\
 	"..\..\fltk\math.h"\
@@ -1928,7 +1928,7 @@ DEP_CPP_RUN_C=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -1961,7 +1961,7 @@ DEP_CPP_SCAND=\
 	"..\..\fltk\utf.h"\
 	"..\..\src\win32\scandir.c"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -1974,7 +1974,7 @@ DEP_CPP_SCROL=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -1998,7 +1998,7 @@ DEP_CPP_SCROLL=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -2020,7 +2020,7 @@ DEP_CPP_SCROLLR=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -2046,7 +2046,7 @@ DEP_CPP_SETCO=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -2061,7 +2061,7 @@ DEP_CPP_SETCO=\
 SOURCE=..\..\src\setdisplay.cxx
 DEP_CPP_SETDI=\
 	"..\..\fltk\run.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -2074,7 +2074,7 @@ DEP_CPP_SETVI=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -2090,7 +2090,7 @@ DEP_CPP_SHADO=\
 	"..\..\fltk\box.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2108,7 +2108,7 @@ DEP_CPP_SHAPE=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\image.h"\
@@ -2131,7 +2131,7 @@ DEP_CPP_SHARE=\
 	"..\..\fltk\string.h"\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -2149,7 +2149,7 @@ DEP_CPP_SHORT=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
 	{$(INCLUDE)}"fltk\style.h"\
@@ -2167,7 +2167,7 @@ DEP_CPP_SHOW_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\menuwindow.h"\
@@ -2190,7 +2190,7 @@ DEP_CPP_SLIDE=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2216,7 +2216,7 @@ DEP_CPP_STATU=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\invisiblebox.h"\
@@ -2233,7 +2233,7 @@ SOURCE=..\..\src\string.c
 DEP_CPP_STRIN=\
 	"..\..\fltk\string.h"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -2242,7 +2242,7 @@ SOURCE=..\..\src\StringList.cxx
 DEP_CPP_STRING=\
 	"..\..\fltk\stringlist.h"\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -2262,7 +2262,7 @@ DEP_CPP_STYLE=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2276,7 +2276,7 @@ SOURCE=..\..\src\StyleSet.cxx
 DEP_CPP_STYLES=\
 	"..\..\fltk\styleset.h"\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
 	{$(INCLUDE)}"fltk\style.h"\
@@ -2291,7 +2291,7 @@ DEP_CPP_SYMBO=\
 	"..\..\fltk\math.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2311,7 +2311,7 @@ DEP_CPP_TABGR=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\menuwindow.h"\
@@ -2336,7 +2336,7 @@ DEP_CPP_TABGRO=\
 	{$(INCLUDE)}"fltk\divider.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\item.h"\
@@ -2360,7 +2360,7 @@ DEP_CPP_TEXTB=\
 	"..\..\fltk\string.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\style.h"\
 	{$(INCLUDE)}"fltk\textbuffer.h"\
@@ -2378,7 +2378,7 @@ DEP_CPP_TEXTD=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -2405,7 +2405,7 @@ DEP_CPP_TEXTE=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\font.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -2431,7 +2431,7 @@ DEP_CPP_THUMB=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2450,7 +2450,7 @@ DEP_CPP_TILED=\
 	"..\..\fltk\tiledgroup.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2466,7 +2466,7 @@ DEP_CPP_TILEDI=\
 	"..\..\fltk\tiledimage.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2485,7 +2485,7 @@ DEP_CPP_TOOLT=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\menuwindow.h"\
@@ -2509,7 +2509,7 @@ DEP_CPP_UPBOX=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -2526,7 +2526,7 @@ DEP_CPP_UPBOX=\
 SOURCE=..\..\src\utf.c
 DEP_CPP_UTF_C=\
 	"..\..\fltk\utf.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -2537,7 +2537,7 @@ DEP_CPP_VALUA=\
 	"..\..\fltk\math.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
 	{$(INCLUDE)}"fltk\style.h"\
@@ -2556,7 +2556,7 @@ DEP_CPP_VALUE=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\floatinput.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -2581,7 +2581,7 @@ DEP_CPP_VALUEO=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2602,7 +2602,7 @@ DEP_CPP_VALUES=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\floatinput.h"\
 	{$(INCLUDE)}"fltk\group.h"\
@@ -2623,7 +2623,7 @@ SOURCE=..\..\src\vsnprintf.c
 DEP_CPP_VSNPR=\
 	"..\..\fltk\string.h"\
 	".\config.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	
 # End Source File
 # Begin Source File
@@ -2637,7 +2637,7 @@ DEP_CPP_WIDGE=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\rectangle.h"\
@@ -2656,7 +2656,7 @@ DEP_CPP_WIDGET=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\image.h"\
@@ -2681,7 +2681,7 @@ DEP_CPP_WINDO=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -2705,7 +2705,7 @@ DEP_CPP_WINDOW=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -2728,7 +2728,7 @@ DEP_CPP_WINDOW_=\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
 	{$(INCLUDE)}"fltk\events.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -2750,7 +2750,7 @@ DEP_CPP_WINDOW_I=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\osx.h"\
@@ -2775,7 +2775,7 @@ DEP_CPP_WIZAR=\
 	"..\..\fltk\WizardGroup.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -2790,7 +2790,7 @@ DEP_CPP_WIZAR=\
 SOURCE=..\..\src\xbmImage.cxx
 DEP_CPP_XBMIM=\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -2808,7 +2808,7 @@ DEP_CPP_XPMIM=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\

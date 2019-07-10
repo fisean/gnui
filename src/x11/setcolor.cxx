@@ -36,9 +36,9 @@
 // figure_out_visual() calculates masks & shifts for generating
 // pixels in TrueColor visuals.
 
-int fl_redbits, fl_greenbits, fl_bluebits;
-int fl_redshift, fl_greenshift, fl_blueshift, fl_extrashift;
-unsigned char fl_redmask, fl_greenmask, fl_bluemask;
+int gnui_redbits, gnui_greenbits, gnui_bluebits;
+int gnui_redshift, gnui_greenshift, gnui_blueshift, gnui_extrashift;
+unsigned char gnui_redmask, gnui_greenmask, gnui_bluemask;
 static uchar beenhere;
 
 static void figure_out_visual() {
@@ -46,10 +46,10 @@ static void figure_out_visual() {
   open_display();
   if (!xvisual->red_mask || !xvisual->green_mask || !xvisual->blue_mask){
 #if USE_COLORMAP
-    fl_redmask = 0;
+    gnui_redmask = 0;
     // make sure black & white are allocated:
-    fl_xmap(WHITE, 0xff, 0xff, 0xff);
-    fl_xmap(BLACK, 0, 0, 0);
+    gnui_xmap(WHITE, 0xff, 0xff, 0xff);
+    gnui_xmap(BLACK, 0, 0, 0);
     return;
 #else
     fatal("Requires TrueColor visual");
@@ -61,30 +61,30 @@ static void figure_out_visual() {
 
   for (i = 0, m = 1; m; i++, m<<=1) if (xvisual->red_mask & m) break;
   for (j = i; m; j++, m<<=1) if (!(xvisual->red_mask & m)) break;
-  fl_redshift = j-8;
-  fl_redbits = j-i; if (fl_redbits > 8) fl_redbits = 8;
-  fl_redmask = 0xff << (8-fl_redbits);
+  gnui_redshift = j-8;
+  gnui_redbits = j-i; if (gnui_redbits > 8) gnui_redbits = 8;
+  gnui_redmask = 0xff << (8-gnui_redbits);
 
   for (i = 0, m = 1; m; i++, m<<=1) if (xvisual->green_mask & m) break;
   for (j = i; m; j++, m<<=1) if (!(xvisual->green_mask & m)) break;
-  fl_greenshift = j-8;
-  fl_greenbits = j-i; if (fl_greenbits > 8) fl_greenbits = 8;
-  fl_greenmask = 0xff << (8-fl_greenbits);
+  gnui_greenshift = j-8;
+  gnui_greenbits = j-i; if (gnui_greenbits > 8) gnui_greenbits = 8;
+  gnui_greenmask = 0xff << (8-gnui_greenbits);
 
   for (i = 0, m = 1; m; i++, m<<=1) if (xvisual->blue_mask & m) break;
   for (j = i; m; j++, m<<=1) if (!(xvisual->blue_mask & m)) break;
-  fl_blueshift = j-8;
-  fl_bluebits = j-i; if (fl_bluebits > 8) fl_bluebits = 8;
-  fl_bluemask = 0xff << (8-fl_bluebits);
+  gnui_blueshift = j-8;
+  gnui_bluebits = j-i; if (gnui_bluebits > 8) gnui_bluebits = 8;
+  gnui_bluemask = 0xff << (8-gnui_bluebits);
 
-  i = fl_redshift;
-  if (fl_greenshift < i) i = fl_greenshift;
-  if (fl_blueshift < i) i = fl_blueshift;
+  i = gnui_redshift;
+  if (gnui_greenshift < i) i = gnui_greenshift;
+  if (gnui_blueshift < i) i = gnui_blueshift;
   if (i < 0) {
-    fl_extrashift = -i;
-    fl_redshift -= i; fl_greenshift -= i; fl_blueshift -= i;
+    gnui_extrashift = -i;
+    gnui_redshift -= i; gnui_greenshift -= i; gnui_blueshift -= i;
   } else {
-    fl_extrashift = 0;
+    gnui_extrashift = 0;
   }
 }
 
@@ -93,11 +93,11 @@ static void figure_out_visual() {
 #if USE_COLORMAP
 static XColorMap normal_xmap[256];
 #if USE_OVERLAY | USE_GL_OVERLAY
-bool fl_overlay = false;
+bool gnui_overlay = false;
 static XColorMap overlay_xmap[256];
-Colormap fl_overlay_colormap;
-XVisualInfo* fl_overlay_visual;
-ulong fl_transparent_pixel;
+Colormap gnui_overlay_colormap;
+XVisualInfo* gnui_overlay_visual;
+ulong gnui_transparent_pixel;
 #endif
 #endif
 
@@ -111,19 +111,19 @@ ulong gnui::xpixel(Color i) {
 
 #if USE_COLORMAP
 #if USE_OVERLAY | USE_GL_OVERLAY
-  if (fl_redmask && !fl_overlay)
+  if (gnui_redmask && !gnui_overlay)
 #else
-  if (fl_redmask)
+  if (gnui_redmask)
 #endif
     {
 #endif
     // return color for a TrueColor visual:
     if (!(i & 0xFFFFFF00)) i = (Color)cmap[i];
     return
-      ((((i>>24)& fl_redmask)  << fl_redshift)+
-       (((i>>16)& fl_greenmask)<< fl_greenshift)+
-       (((i>>8) & fl_bluemask) << fl_blueshift)
-       ) >> fl_extrashift;
+      ((((i>>24)& gnui_redmask)  << gnui_redshift)+
+       (((i>>16)& gnui_greenmask)<< gnui_greenshift)+
+       (((i>>8) & gnui_bluemask) << gnui_blueshift)
+       ) >> gnui_extrashift;
 #if USE_COLORMAP
     }
 
@@ -145,27 +145,27 @@ ulong gnui::xpixel(Color i) {
     g = i>>16;
     b = i>> 8;
   }
-  return fl_xmap(index,r,g,b).pixel;
+  return gnui_xmap(index,r,g,b).pixel;
 }
 
 // Return an entry from the current colormap, using the index.
 // If the color is not allocated, allocate it using the passed rgb values
-XColorMap& fl_xmap(uchar index, uchar r, uchar g, uchar b)
+XColorMap& gnui_xmap(uchar index, uchar r, uchar g, uchar b)
 {
   // see if we have already allocated it:
 #if USE_OVERLAY | USE_GL_OVERLAY
-  XColorMap &xmap = fl_overlay ? overlay_xmap[index] : normal_xmap[index];
+  XColorMap &xmap = gnui_overlay ? overlay_xmap[index] : normal_xmap[index];
 #else
   XColorMap &xmap = normal_xmap[index];
 #endif
   if (xmap.mapped) return xmap;
 
 #if USE_OVERLAY | USE_GL_OVERLAY
-  Colormap colormap = fl_overlay ? fl_overlay_colormap : xcolormap;
+  Colormap colormap = gnui_overlay ? gnui_overlay_colormap : xcolormap;
   static XColor* ac[2];
-  XColor*& allcolors = ac[fl_overlay];
+  XColor*& allcolors = ac[gnui_overlay];
   static int nc[2];
-  int& numcolors = nc[fl_overlay];
+  int& numcolors = nc[gnui_overlay];
 #else
   Colormap colormap = xcolormap;
   static XColor *allcolors;
@@ -195,7 +195,7 @@ XColorMap& fl_xmap(uchar index, uchar r, uchar g, uchar b)
     // of round-trips to the X server, even though other programs may alter
     // the colormap after this and make decisions here wrong:
 #if USE_OVERLAY | USE_GL_OVERLAY
-    if (fl_overlay) numcolors = fl_overlay_visual->colormap_size; else
+    if (gnui_overlay) numcolors = gnui_overlay_visual->colormap_size; else
 #endif
       numcolors = xvisual->colormap_size;
     if (!allcolors) allcolors = new XColor[numcolors];
@@ -208,7 +208,7 @@ XColorMap& fl_xmap(uchar index, uchar r, uchar g, uchar b)
   unsigned int bestmatch = 0;
   for (unsigned int n = numcolors; n--;) {
 #if USE_OVERLAY | USE_GL_OVERLAY
-    if (fl_overlay && n == fl_transparent_pixel) continue;
+    if (gnui_overlay && n == gnui_transparent_pixel) continue;
 #endif
     XColor &a = allcolors[n];
     int d, t;
@@ -267,7 +267,7 @@ static inline void free_color(Color i) {
 #if USE_OVERLAY | USE_GL_OVERLAY
   if (overlay_xmap[i].mapped) {
     if (overlay_xmap[i].mapped == 1)
-      XFreeColors(xdisplay, fl_overlay_colormap, &(overlay_xmap[i].pixel),1,0);
+      XFreeColors(xdisplay, gnui_overlay_colormap, &(overlay_xmap[i].pixel),1,0);
     overlay_xmap[i].mapped = 0;
   }
 #endif

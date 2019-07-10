@@ -51,11 +51,11 @@ extern Atom textplainutf;
 extern Atom textplain;
 extern Atom UTF8_STRING;
 //extern Atom XdndProxy;
-extern Atom *fl_incoming_dnd_source_types;
+extern Atom *gnui_incoming_dnd_source_types;
 
-extern bool fl_i_own_selection[2];
+extern bool gnui_i_own_selection[2];
 
-extern void fl_sendClientMessage(XWindow xwindow, Atom message,
+extern void gnui_sendClientMessage(XWindow xwindow, Atom message,
 				 unsigned long d0,
 				 unsigned long d1=0,
 				 unsigned long d2=0,
@@ -90,19 +90,19 @@ static bool grabfunc(int event) {
   return false;
 }
 
-extern bool (*fl_local_grab)(int); // in Fl.cxx
+extern bool (*gnui_local_grab)(int); // in Fl.cxx
 
 // send an event to an gnui window belonging to this program:
 static bool local_handle(int event, Window* window) {
-  fl_local_grab = 0;
+  gnui_local_grab = 0;
   e_x = e_x_root-window->x();
   e_y = e_y_root-window->y();
   int ret = handle(event,window);
-  fl_local_grab = grabfunc;
+  gnui_local_grab = grabfunc;
   return ret;
 }
 
-extern gnui::Cursor fl_drop_ok_cursor;
+extern gnui::Cursor gnui_drop_ok_cursor;
 
 /*!
   Drag and drop the data set by the most recent gnui::copy() (with the
@@ -117,7 +117,7 @@ bool gnui::dnd() {
   Atom* types;
   Atom action;
   Atom local_source_types[3] = {textplainutf, textplain, UTF8_STRING};
-  if (dnd_source_types == fl_incoming_dnd_source_types) {
+  if (dnd_source_types == gnui_incoming_dnd_source_types) {
     types = local_source_types;
     action = XdndActionCopy;
   } else {
@@ -128,7 +128,7 @@ bool gnui::dnd() {
   Window* source_window = Window::first();
   XWindow source_xwindow = xid(source_window);
 
-  fl_local_grab = grabfunc;
+  gnui_local_grab = grabfunc;
   XWindow target_window = 0;
   Window* local_window = 0;
   int version = 4; int dest_x, dest_y;
@@ -160,7 +160,7 @@ bool gnui::dnd() {
 	dnd_source_window = 0;
 	local_handle(DND_LEAVE, local_window);
       } else if (version) {
-	fl_sendClientMessage(target_window, XdndLeave, source_xwindow);
+	gnui_sendClientMessage(target_window, XdndLeave, source_xwindow);
       }
       version = new_version;
       target_window = new_window;
@@ -171,7 +171,7 @@ bool gnui::dnd() {
 	dnd_type = UTF8_STRING;
 	local_handle(DND_ENTER, local_window);
       } else if (version) {
-	fl_sendClientMessage(target_window, XdndEnter, source_xwindow,
+	gnui_sendClientMessage(target_window, XdndEnter, source_xwindow,
 			     version<<24,
 			     types[0], types[1], types[1] ? types[2] : 0);
       }
@@ -183,7 +183,7 @@ bool gnui::dnd() {
       drop_ok = local_handle(DND_DRAG, local_window);
     } else if (version) {
       if (moved)
-	fl_sendClientMessage(target_window, XdndPosition, source_xwindow,
+	gnui_sendClientMessage(target_window, XdndPosition, source_xwindow,
 			     0, (e_x_root<<16)|e_y_root, event_time,
 			     action);
     } else {
@@ -193,21 +193,21 @@ bool gnui::dnd() {
       drop_ok = false;
 #endif
     }
-    source_window->cursor(drop_ok ? &fl_drop_ok_cursor : CURSOR_NO);
+    source_window->cursor(drop_ok ? &gnui_drop_ok_cursor : CURSOR_NO);
     moved = false;
     wait();
   }
 
   if (!drop_ok) ;
   else if (local_window) {
-    fl_i_own_selection[0] = true;
+    gnui_i_own_selection[0] = true;
     if (local_handle(DND_RELEASE, local_window)) {
-      fl_local_grab = 0;
+      gnui_local_grab = 0;
       source_window->cursor(0);
       paste(*belowmouse(),false);
     }
   } else if (version) {
-    fl_sendClientMessage(target_window, XdndDrop, source_xwindow,
+    gnui_sendClientMessage(target_window, XdndDrop, source_xwindow,
 			 0, event_time);
 #if FAKE_DROP
   } else if (target_window) {
@@ -232,11 +232,11 @@ bool gnui::dnd() {
 #endif
   }
 
-  fl_local_grab = 0;
+  gnui_local_grab = 0;
   source_window->cursor(0);
 
   // reset the action and type:
-  dnd_source_types = fl_incoming_dnd_source_types;
+  dnd_source_types = gnui_incoming_dnd_source_types;
 
   return drop_ok;
 }

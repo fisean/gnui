@@ -70,7 +70,7 @@ using namespace gnui;
 
 ////////////////////////////////////////////////////////////////
 
-FL_API Group* Group::current_;
+GNUI_API Group* Group::current_;
 
 static void revert(Style* s) {
   s->color_ = GRAY75;
@@ -658,7 +658,7 @@ void Group::layout(const Rectangle& r, int layout_damage) {
 // widgets that want to be "invisible" (they turn this on but don't draw
 // anything). This is a pointer so if it is left on by a child widget
 // it does not fool this into thinking the clipping is done.
-Widget* fl_did_clipping;
+Widget* gnui_did_clipping;
 
 void Group::draw() {
   clear_flag(HIGHLIGHT); // we never draw the box with highlight colors
@@ -670,9 +670,9 @@ void Group::draw() {
     push_clip(0, 0, w(), h());
     int n; for (n = numchildren; n--;) {
       Widget& w = *child(n);
-      fl_did_clipping = 0;
+      gnui_did_clipping = 0;
       draw_child(w);
-      if (fl_did_clipping != &w) clipout(w.x(), w.y(), w.w(), w.h());
+      if (gnui_did_clipping != &w) clipout(w.x(), w.y(), w.w(), w.h());
     }
     draw_box();
     draw_label();
@@ -739,7 +739,7 @@ void Widget::draw_background() const {
   pop_clip();
 }
 
-extern void fl_window_flush(Window* window);
+extern void gnui_window_flush(Window* window);
 
 /*! Force a child to draw, by turning on DAMAGE_ALL and DAMAGE_EXPOSE,
   and calling it's draw() after temporarily translating so 0,0 in
@@ -750,7 +750,7 @@ void Group::draw_child(Widget& w) const {
     w.set_damage(DAMAGE_ALL|DAMAGE_EXPOSE);
     if (w.is_window()) {
       GSave gsave;
-      fl_window_flush((Window*)&w);
+      gnui_window_flush((Window*)&w);
     } else {
       push_matrix();
       translate(w.x(), w.y());

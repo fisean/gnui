@@ -36,7 +36,7 @@
 
 namespace gnui {
 
-class FL_API WizardGroup : public Group {
+class GNUI_API WizardGroup : public Group {
   Widget * value_;
 public:
   WizardGroup(int x,int y,int w,int h, const char * l = 0, bool begin=false)

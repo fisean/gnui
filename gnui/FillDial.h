@@ -31,7 +31,7 @@
 namespace gnui {
 
 /*! Dial but the constructor sets type() to FILL, so it draws a pie slice. */
-class FL_API FillDial : public Dial {
+class GNUI_API FillDial : public Dial {
 public:
     FillDial(int x,int y,int w,int h, const char *l = 0)
       : Dial(x,y,w,h,l) {type(FILL);}

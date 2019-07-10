@@ -23,7 +23,7 @@ this does something different:
 The window is exactly the same, but when you press the close box it
 will display this question box:
 
-\image html fl_ask.gif
+\image html gnui_ask.gif
 
 If the user hits the Yes button the window will be closed (by calling
 fltk::Window::hide()) and the program will exit (because fltk::run()

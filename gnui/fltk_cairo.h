@@ -35,13 +35,13 @@
 #ifndef gnui_cairo_h
 #define gnui_cairo_h
 
-#include <gnui/FL_API.h>
+#include <gnui/GNUI_API.h>
 #include <cairo.h>
 
 namespace gnui {
-  extern FL_API cairo_t * cr;
+  extern GNUI_API cairo_t * cr;
   class Window;
-  FL_API cairo_surface_t * cairo_create_surface(Window* w);
+  GNUI_API cairo_surface_t * cairo_create_surface(Window* w);
 }
 
 #endif

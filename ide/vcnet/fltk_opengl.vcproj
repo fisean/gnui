@@ -242,7 +242,7 @@
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 			>
 			<File
-				RelativePath="..\..\OpenGL\Fl_Gl_Choice.cxx"
+				RelativePath="..\..\OpenGL\GNUI_Gl_Choice.cxx"
 				>
 				<FileConfiguration
 					Name="Release MinSize|Win32"
@@ -273,7 +273,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\OpenGL\Fl_Gl_Overlay.cxx"
+				RelativePath="..\..\OpenGL\GNUI_Gl_Overlay.cxx"
 				>
 				<FileConfiguration
 					Name="Release MinSize|Win32"
@@ -304,7 +304,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\OpenGL\Fl_Gl_Window.cxx"
+				RelativePath="..\..\OpenGL\GNUI_Gl_Window.cxx"
 				>
 				<FileConfiguration
 					Name="Release MinSize|Win32"

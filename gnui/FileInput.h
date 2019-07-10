@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API FileInput : public Input {
+class GNUI_API FileInput : public Input {
   Color	errorcolor_;
   char		ok_entry_;
   short		buttons_[120];
@@ -63,7 +63,7 @@ public:
 };
 
 }
-#endif // !Fl_File_Input_H
+#endif // !GNUI_File_Input_H
 
 
 //

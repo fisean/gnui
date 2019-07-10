@@ -39,7 +39,7 @@ using namespace gnui;
   The gnui::Dial widget provides a circular dial to control a single
   floating point value.
 
-  \image html Fl_Dial.gif
+  \image html GNUI_Dial.gif
   Use type() to change how it draws:
   - Dial::NORMAL : Draws a normal dial with a knob.
   - Dial::LINE : Draws a dial with a line.

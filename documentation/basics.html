@@ -42,8 +42,8 @@ program by closing the window or pressing the ESCape key.
 </pre>
 
 <p>Each class in fltk has it's own header file. This sample program
-uses <a href=Fl_Window.html>Window</a> and <a
-href=Fl_Widget.html>Widget</a>. Often one header file includes another (for
+uses <a href=GNUI_Window.html>Window</a> and <a
+href=GNUI_Widget.html>Widget</a>. Often one header file includes another (for
 instance Widget.h is not needed here as Window.h included it),
 so you don't always need all of them, but it is usually good practice
 to do so.
@@ -63,7 +63,7 @@ your program, you may want to do this.
 window: 
 
 <pre>
-fltk::Window *window = new <A href=Fl_Window.html#Window>fltk::Window</A>(300,180);
+fltk::Window *window = new <A href=GNUI_Window.html#Window>fltk::Window</A>(300,180);
 </pre>
 
 <p>It then calls "begin" on it, which indicates that all widgets
@@ -77,7 +77,7 @@ window->begin();
 widget is made a "child" of the window we just created:
 
 <pre>
-fltk::Widget *box = new <A href=Fl_Widget.html#Widget>fltk::Widget</A>(20,40,260,100,"Hello, World!");
+fltk::Widget *box = new <A href=GNUI_Widget.html#Widget>fltk::Widget</A>(20,40,260,100,"Hello, World!");
 </pre>
 
 <p>For most widgets the arguments to the constructor are:
@@ -98,7 +98,7 @@ widget with or <tt>NULL</tt>. If not given it defaults to
 <tt>NULL</tt>. The string is not copied, FLTK assummes it resides in
 static storage. This is true of almost all interfaces in FLTK that
 take string constants, and greatly speeds up FLTK. (see <a
-href=Fl_Widget.html#copy_label>Widget::copy_label()</a> for a
+href=GNUI_Widget.html#copy_label>Widget::copy_label()</a> for a
 method that has more traditional behavior).
 
 <h3>Get/Set Methods</h3>
@@ -107,9 +107,9 @@ method that has more traditional behavior).
 
 <pre>
 box-&gt;box(fltk::UP_BOX);
-box-&gt;<A href=Fl_Widget.html#label_font>label_font</A>(fltk::HELVETICA_BOLD_ITALIC);
-box-&gt;<A href=Fl_Widget.html#label_size>label_size</A>(36);
-box-&gt;<A href=Fl_Widget.html#label_type>label_type</A>(fltk::SHADOW_LABEL);
+box-&gt;<A href=GNUI_Widget.html#label_font>label_font</A>(fltk::HELVETICA_BOLD_ITALIC);
+box-&gt;<A href=GNUI_Widget.html#label_size>label_size</A>(36);
+box-&gt;<A href=GNUI_Widget.html#label_type>label_type</A>(fltk::SHADOW_LABEL);
 </pre>
 
 <p><tt>box-&gt;box(fltk::UP_BOX)</tt> sets the type of box the box widget
@@ -135,13 +135,13 @@ reduces code size and execution time.  The only common exception is
 <p>Then we indicate we are done adding widgets to the window:
 
 <pre>
-window-&gt;<A href=Fl_Group.html#end>end</A>();
+window-&gt;<A href=GNUI_Group.html#end>end</A>();
 </pre>
 
-<p>The method <A href=Fl_Group.html#end>Group::end()</A> restores
+<p>The method <A href=GNUI_Group.html#end>Group::end()</A> restores
 the "current group" to the parent of itself, in this case it is set to
 null because the window has no parent.  You may also find it useful to
-call <a href=Fl_Group.html#current>fltk::Group::current(0)</a> to turn
+call <a href=GNUI_Group.html#current>fltk::Group::current(0)</a> to turn
 this off completely.
 
 <h3>Showing the Window</h3>
@@ -149,7 +149,7 @@ this off completely.
 <p>Then we cause the window to appear on the screen:
 
 <pre>
-window-&gt;<A href=Fl_Window.html#show>show</A>(argc, argv);
+window-&gt;<A href=GNUI_Window.html#show>show</A>(argc, argv);
 </pre>
 
 <p>For the first Window you can provide the command-line arguments,
@@ -173,7 +173,7 @@ return <A href=Fl.html#run>fltk::run</A>();
 control are closed (either by the user or your program).
 
 <p>When the user attempts to close the window, the <a
-href=Fl_Widget.html#callback>callback</a> for the window is
+href=GNUI_Widget.html#callback>callback</a> for the window is
 called. If you don't change it, the callback will remove the window
 from the screen.
 

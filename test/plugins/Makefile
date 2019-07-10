@@ -36,7 +36,7 @@ XTRAFLAGS = -I../../fluid -I../..
 
 include ../../makeinclude
 
-all: $(PROGRAM) Fl_NSlider.o
+all: $(PROGRAM) GNUI_NSlider.o
 
 $(PROGRAM) : $(OBJECTS) ../../lib/$(LIBNAME).a
 	$(DSOCOMMAND) $@ $(OBJECTS) $(DSOLIBS)

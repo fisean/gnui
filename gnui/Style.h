@@ -35,67 +35,67 @@ namespace gnui {
 /// \name gnui/Style.h
 //@{
 
-class FL_API Widget;
-class FL_API Rectangle;
-class FL_API Symbol;
+class GNUI_API Widget;
+class GNUI_API Rectangle;
+class GNUI_API Symbol;
 typedef Symbol Box;
 
-extern FL_API Box* const UP_BOX;
-extern FL_API Box* const DOWN_BOX;
-extern FL_API Box* const DEFAULT_FOCUS_BOX;
-extern FL_API Box* const THIN_UP_BOX;
-extern FL_API Box* const THIN_DOWN_BOX;
-extern FL_API Box* const ENGRAVED_BOX;
-extern FL_API Box* const EMBOSSED_BOX;
-extern FL_API Box* const BORDER_BOX;
-extern FL_API Box* const FLAT_BOX;
-extern FL_API Box* const HIGHLIGHT_UP_BOX;
-extern FL_API Box* const HIGHLIGHT_DOWN_BOX;
-extern FL_API Box* const ROUND_UP_BOX;
-extern FL_API Box* const ROUND_DOWN_BOX;
-extern FL_API Box* const DIAMOND_UP_BOX;
-extern FL_API Box* const DIAMOND_DOWN_BOX;
-extern FL_API Box* const NO_BOX;
-extern FL_API Box* const SHADOW_BOX;
-extern FL_API Box* const ROUNDED_BOX;
-extern FL_API Box* const RSHADOW_BOX;
-extern FL_API Box* const RFLAT_BOX;
-extern FL_API Box* const OVAL_BOX;
-extern FL_API Box* const OSHADOW_BOX;
-extern FL_API Box* const OFLAT_BOX;
-extern FL_API Box* const BORDER_FRAME;
-extern FL_API Box* const PLASTIC_UP_BOX;
-extern FL_API Box* const PLASTIC_DOWN_BOX;
+extern GNUI_API Box* const UP_BOX;
+extern GNUI_API Box* const DOWN_BOX;
+extern GNUI_API Box* const DEFAULT_FOCUS_BOX;
+extern GNUI_API Box* const THIN_UP_BOX;
+extern GNUI_API Box* const THIN_DOWN_BOX;
+extern GNUI_API Box* const ENGRAVED_BOX;
+extern GNUI_API Box* const EMBOSSED_BOX;
+extern GNUI_API Box* const BORDER_BOX;
+extern GNUI_API Box* const FLAT_BOX;
+extern GNUI_API Box* const HIGHLIGHT_UP_BOX;
+extern GNUI_API Box* const HIGHLIGHT_DOWN_BOX;
+extern GNUI_API Box* const ROUND_UP_BOX;
+extern GNUI_API Box* const ROUND_DOWN_BOX;
+extern GNUI_API Box* const DIAMOND_UP_BOX;
+extern GNUI_API Box* const DIAMOND_DOWN_BOX;
+extern GNUI_API Box* const NO_BOX;
+extern GNUI_API Box* const SHADOW_BOX;
+extern GNUI_API Box* const ROUNDED_BOX;
+extern GNUI_API Box* const RSHADOW_BOX;
+extern GNUI_API Box* const RFLAT_BOX;
+extern GNUI_API Box* const OVAL_BOX;
+extern GNUI_API Box* const OSHADOW_BOX;
+extern GNUI_API Box* const OFLAT_BOX;
+extern GNUI_API Box* const BORDER_FRAME;
+extern GNUI_API Box* const PLASTIC_UP_BOX;
+extern GNUI_API Box* const PLASTIC_DOWN_BOX;
 
 struct Font;
-extern FL_API Font* const HELVETICA;
-extern FL_API Font* const HELVETICA_BOLD;
-extern FL_API Font* const HELVETICA_ITALIC;
-extern FL_API Font* const HELVETICA_BOLD_ITALIC;
-extern FL_API Font* const COURIER;
-extern FL_API Font* const COURIER_BOLD;
-extern FL_API Font* const COURIER_ITALIC;
-extern FL_API Font* const COURIER_BOLD_ITALIC;
-extern FL_API Font* const TIMES;
-extern FL_API Font* const TIMES_BOLD;
-extern FL_API Font* const TIMES_ITALIC;
-extern FL_API Font* const TIMES_BOLD_ITALIC;
-extern FL_API Font* const SYMBOL_FONT;
-extern FL_API Font* const SCREEN_FONT;
-extern FL_API Font* const SCREEN_BOLD_FONT;
-extern FL_API Font* const ZAPF_DINGBATS;
+extern GNUI_API Font* const HELVETICA;
+extern GNUI_API Font* const HELVETICA_BOLD;
+extern GNUI_API Font* const HELVETICA_ITALIC;
+extern GNUI_API Font* const HELVETICA_BOLD_ITALIC;
+extern GNUI_API Font* const COURIER;
+extern GNUI_API Font* const COURIER_BOLD;
+extern GNUI_API Font* const COURIER_ITALIC;
+extern GNUI_API Font* const COURIER_BOLD_ITALIC;
+extern GNUI_API Font* const TIMES;
+extern GNUI_API Font* const TIMES_BOLD;
+extern GNUI_API Font* const TIMES_ITALIC;
+extern GNUI_API Font* const TIMES_BOLD_ITALIC;
+extern GNUI_API Font* const SYMBOL_FONT;
+extern GNUI_API Font* const SCREEN_FONT;
+extern GNUI_API Font* const SCREEN_BOLD_FONT;
+extern GNUI_API Font* const ZAPF_DINGBATS;
 
 class LabelType;
-extern FL_API LabelType* const NO_LABEL;
-extern FL_API LabelType* const NORMAL_LABEL;
-extern FL_API LabelType* const SYMBOL_LABEL; // same as NORMAL_LABEL
-extern FL_API LabelType* const SHADOW_LABEL;
-extern FL_API LabelType* const ENGRAVED_LABEL;
-extern FL_API LabelType* const EMBOSSED_LABEL;
+extern GNUI_API LabelType* const NO_LABEL;
+extern GNUI_API LabelType* const NORMAL_LABEL;
+extern GNUI_API LabelType* const SYMBOL_LABEL; // same as NORMAL_LABEL
+extern GNUI_API LabelType* const SHADOW_LABEL;
+extern GNUI_API LabelType* const ENGRAVED_LABEL;
+extern GNUI_API LabelType* const EMBOSSED_LABEL;
 
 class Style;
 
-class FL_API Style {
+class GNUI_API Style {
  public:
   // Everything is public for various back-compatability hacks:
   const Style* parent_;
@@ -186,7 +186,7 @@ class FL_API Style {
   static Style* find(const char* name);
 };
 
-struct FL_API NamedStyle : public Style {
+struct GNUI_API NamedStyle : public Style {
   const char* name;
   void  (*revertfunc)(Style*);
   NamedStyle** back_pointer; // used by StyleSet
@@ -196,17 +196,17 @@ struct FL_API NamedStyle : public Style {
 };
 
 extern "C" {typedef bool (*Theme)();}
-extern FL_API Theme theme_;
+extern GNUI_API Theme theme_;
 inline Theme theme() {return theme_;}
 inline void theme(Theme f) {theme_ = f;}
-FL_API void load_theme();
-FL_API void reload_theme();
-FL_API bool reset_theme();
+GNUI_API void load_theme();
+GNUI_API void reload_theme();
+GNUI_API bool reset_theme();
 
 }
 
-extern "C" FL_API bool gnui_theme();
-extern "C" FL_API bool xp_theme();
+extern "C" GNUI_API bool gnui_theme();
+extern "C" GNUI_API bool xp_theme();
 
 //@}
 

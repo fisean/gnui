@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API Input : public Widget {
+class GNUI_API Input : public Widget {
 public:
   enum { // values for type()
     NORMAL	= 0,

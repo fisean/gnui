@@ -23,7 +23,7 @@ can be done with other calls to FLTK.
 href="#args"><tt>fltk::args(...)</tt></a> near the start of your program.
 This does <I>not</I> open the display, instead switches that need the
 display open are stashed into static variables.  Then you <I>must</I>
-display your first window by calling <a href="Fl_Window.html#show">
+display your first window by calling <a href="GNUI_Window.html#show">
 window-&gt;show(argc,argv)</a>, which will do anything stored in the
 static variables.</p>
 
@@ -67,15 +67,15 @@ href="x.html#xclass">fltk::Window::xclass(string)</a> will be
 done to the window, possibly changing its icon.</li>
 
 <li><tt>-title string</tt> <a
-href="Fl_Window.html#label">fltk::Window::label(string)</a> will be done
+href="GNUI_Window.html#label">fltk::Window::label(string)</a> will be done
 to the window, changing both its title and the icontitle.</li>
 
 <li><tt>-iconic</tt> <a
-href="Fl_Window.html#iconize">fltk::Window::iconize()</a> will be done to
+href="GNUI_Window.html#iconize">fltk::Window::iconize()</a> will be done to
 the window.</li>
 
 <li><tt>-bg color</tt> XParseColor is used to lookup the passed color
-and then <a href="Fl_Color.html#background">fltk::background()</a> is
+and then <a href="GNUI_Color.html#background">fltk::background()</a> is
 done.  Under WIN32 only color names of the form &quot;#xxxxxx&quot;
 are understood.</li>
 
@@ -127,14 +127,14 @@ the command-line. It's value is:
 <BR> int fltk::color_chooser(const char *, uchar &amp;r, uchar &amp;g, uchar &amp;b)</A>
 </H4>
 
-<P ALIGN=CENTER><IMG src=./fl_color_chooser.jpg></p>
+<P ALIGN=CENTER><IMG src=./gnui_color_chooser.jpg></p>
 
 <p><tt>fltk::color_chooser()</tt> pops up a window to let the user pick
 an arbitrary RGB color.  They can pick the hue and saturation in the
 &quot;hue box&quot; on the left (hold down CTRL to just change the
 saturation), and the brighness using the vertical slider.  Or they can
 type the 8-bit numbers into the RGB <A
-href=Fl_Value_Input.html><tt>fltk::ValueInput</tt></A> fields, or drag
+href=GNUI_Value_Input.html><tt>fltk::ValueInput</tt></A> fields, or drag
 the mouse across them to adjust them.  The pull-down menu lets the
 user set the input fields to show RGB, HSV, or 8-bit RGB (0 to
 255).</p>
@@ -155,11 +155,11 @@ dithering.</p>
 <H4><A name=show_colormap>int fltk::show_colormap(int oldcol)</A></H4>
 
 <tt>fltk::show_colormap()</tt> pops up a panel of the 256 colors you can 
-access with "indexed" <A href=Fl_Color.html><tt>fltk::Color</tt></A>
+access with "indexed" <A href=GNUI_Color.html><tt>fltk::Color</tt></A>
 values and lets the user pick one of them.  It returns the new color
 index, or the old one if the user types ESC or clicks outside the window. 
 
-<P ALIGN=CENTER><IMG src=./fl_show_colormap.gif></p>
+<P ALIGN=CENTER><IMG src=./gnui_show_colormap.gif></p>
 
 <h2><a name=upopup>Popup messages and questions</a></h2>
 
@@ -170,13 +170,13 @@ waits for the user to hit the button.  The message will wrap to fit the
 window, or may be many lines by putting <tt>\n</tt> characters into it. 
 The enter key is a shortcut for the OK button. 
 
-<P ALIGN=CENTER><IMG src=./fl_message.gif></p>
+<P ALIGN=CENTER><IMG src=./gnui_message.gif></p>
 
 <H4><A name=alert>void fltk::alert(const char *, ...)</A></H4>
 
 Same as <tt>fltk::message()</tt> except for the &quot;!&quot; symbol. 
 
-<P ALIGN=CENTER><IMG src=./fl_alert.gif></p>
+<P ALIGN=CENTER><IMG src=./gnui_alert.gif></p>
 
 <H4><A name=ask>int fltk::ask(const char *, ...)</A></H4>
 
@@ -186,7 +186,7 @@ hit a button.  The return value is 1 if the user hits Yes, 0 if they
 pick No.  The enter key is a shortcut for Yes and ESC is a shortcut
 for No.
 
-<P ALIGN=CENTER><IMG src=./fl_ask.gif></p>
+<P ALIGN=CENTER><IMG src=./gnui_ask.gif></p>
 
 <H4><A name=choice>int fltk::choice(const char *q, const char *b0, 
 const char *b1, const char *b2, ...)</A></H4>
@@ -199,7 +199,7 @@ which is selected when the enter key is pressed.  ESC is a shortcut for
 button 0.  Notice the buttons are positioned &quot;backwards&quot; You
 can hide buttons by passing <tt>NULL</tt> as their labels.
 
-<P ALIGN=CENTER><IMG src=./fl_choice.gif></p>
+<P ALIGN=CENTER><IMG src=./gnui_choice.gif></p>
 
 <H4><A name=input>const char *fltk::input(const char *label, const char 
 *deflt = 0, ...)</A></H4>
@@ -210,15 +210,15 @@ returned pointer is only valid until the next time <tt>fltk::input()</tt>
 is called</I>.  Due to back-compatability, the arguments to any printf 
 commands in the label are after the default value. 
 
-<P ALIGN=CENTER><IMG src=./fl_input.gif></p>
+<P ALIGN=CENTER><IMG src=./gnui_input.gif></p>
 
 <H4><A name=password>const char *fltk::password(const char *label, 
 const char *deflt = 0, ...)</A></H4>
 
-Same as <tt>fltk::input()</tt> except an <A href=Fl_Secret_Input.html>
+Same as <tt>fltk::input()</tt> except an <A href=GNUI_Secret_Input.html>
 <tt>fltk::SecretInput</tt></A> field is used.
 
-<P ALIGN=CENTER><IMG src=./fl_password.gif></p>
+<P ALIGN=CENTER><IMG src=./gnui_password.gif></p>
 
 <H4><A name=message_font>void fltk::message_font(fltk::Font, int size)</A></H4>
 

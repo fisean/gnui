@@ -8,8 +8,8 @@
   can crash these threads.
 */
 
-#ifndef fl_ALLOC_h
-#define fl_ALLOC_h
+#ifndef gnui_ALLOC_h
+#define gnui_ALLOC_h
 #undef ARRAY
 
 #ifndef _COMPILER_VERSION

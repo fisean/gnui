@@ -38,7 +38,7 @@
 #undef HAVE_STRLCPY
 #undef HAVE_STRNCASECMP
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 #ifdef HAVE_STRING_H
 # include <string.h>
@@ -93,30 +93,30 @@
 extern "C" {
 #endif
 
-FL_API extern const char* newstring(const char *);
+GNUI_API extern const char* newstring(const char *);
 
 #if defined(DOXYGEN) || !defined(HAVE_STRCASECMP)
-FL_API extern int strcasecmp(const char *, const char *);
+GNUI_API extern int strcasecmp(const char *, const char *);
 #endif
 
 #if defined(DOXYGEN) || !defined(HAVE_STRNCASECMP)
-FL_API extern int strncasecmp(const char *, const char *, size_t);
+GNUI_API extern int strncasecmp(const char *, const char *, size_t);
 #endif
 
 #if defined(DOXYGEN) || !defined(HAVE_SNPRINTF)
-FL_API extern int snprintf(char *, size_t, const char *, ...);
+GNUI_API extern int snprintf(char *, size_t, const char *, ...);
 #endif
 
 #if defined(DOXYGEN) || !defined(HAVE_VSNPRINTF)
-FL_API extern int vsnprintf(char *, size_t, const char *, va_list ap);
+GNUI_API extern int vsnprintf(char *, size_t, const char *, va_list ap);
 #endif
 
 #if defined(DOXYGEN) || !defined(HAVE_STRLCAT)
-FL_API extern size_t strlcat(char *, const char *, size_t);
+GNUI_API extern size_t strlcat(char *, const char *, size_t);
 #endif
 
 #if defined(DOXYGEN) || !defined(HAVE_STRLCPY)
-FL_API extern size_t strlcpy(char *, const char *, size_t);
+GNUI_API extern size_t strlcpy(char *, const char *, size_t);
 #endif
 
 #ifdef __cplusplus

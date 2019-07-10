@@ -32,7 +32,7 @@
 
 namespace gnui {
 
-class FL_API HighlightButton : public Button {
+class GNUI_API HighlightButton : public Button {
 public:
   HighlightButton(int x,int y,int w,int h,const char *l=0);
   static NamedStyle* default_style;

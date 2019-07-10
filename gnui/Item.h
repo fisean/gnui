@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API Item : public Widget {
+class GNUI_API Item : public Widget {
 public:
 
   void draw();

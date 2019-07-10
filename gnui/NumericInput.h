@@ -35,7 +35,7 @@
 
 namespace gnui {
 
-class FL_API NumericInput : public Input {
+class GNUI_API NumericInput : public Input {
  protected:
   int handle_arrow(int);
  public:

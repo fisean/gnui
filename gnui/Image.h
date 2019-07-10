@@ -29,10 +29,10 @@
 
 namespace gnui {
 
-class FL_API Widget;
+class GNUI_API Widget;
 struct Picture; // secret internal system-specific data
 
-class FL_API Image : public Symbol {
+class GNUI_API Image : public Symbol {
 
   PixelType pixeltype_; int w_, h_;
   Picture* picture;

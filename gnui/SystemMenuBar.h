@@ -30,13 +30,13 @@
 
 #include "MenuBar.h"
 
-struct Fl_Menu_Item;
+struct GNUI_Menu_Item;
 
 namespace gnui {
 
 #ifdef __APPLE__
 
-class FL_API SystemMenuBar : public MenuBar {
+class GNUI_API SystemMenuBar : public MenuBar {
 protected:
   void draw();
 public:

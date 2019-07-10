@@ -269,11 +269,11 @@ SOURCE=..\..\fltk\FillSlider.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\fltk\fl_api.h
+SOURCE=..\..\fltk\gnui_api.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\fltk\FL_VERSION.h
+SOURCE=..\..\fltk\GNUI_VERSION.h
 # End Source File
 # Begin Source File
 
@@ -801,7 +801,7 @@ SOURCE=..\..\src\fillrect.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Fl_Menu_Item.cxx
+SOURCE=..\..\src\GNUI_Menu_Item.cxx
 # End Source File
 # Begin Source File
 

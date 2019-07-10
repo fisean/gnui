@@ -36,7 +36,7 @@
 
 namespace gnui {
 
-class FL_API Slider : public Valuator {
+class GNUI_API Slider : public Valuator {
 
   unsigned short slider_size_;
   unsigned short tick_size_;

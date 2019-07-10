@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API TiledGroup : public Group {
+class GNUI_API TiledGroup : public Group {
 protected:
   void layout();
 public:

@@ -37,7 +37,7 @@ larger than your window.  If the child widgets are larger than the size
 of this object then scrollbars will appear so that you can scroll over 
 to them:
 
-\image html Fl_Scroll.gif
+\image html GNUI_Scroll.gif
 
 The default type() will just scroll a whole arrangement of widgets and
 never resize them.  This is useful if you just want to get a big
@@ -82,7 +82,7 @@ objects.
 */
 
 #if USE_CLIPOUT
-extern Widget* fl_did_clipping;
+extern Widget* gnui_did_clipping;
 #endif
 
 void ScrollGroup::draw_clip(void* v, const Rectangle& r) {
@@ -106,9 +106,9 @@ void ScrollGroup::draw_clip(void* v, const Rectangle& r) {
 	save = w.damage();
     }
 #if USE_CLIPOUT
-    fl_did_clipping = 0;
+    gnui_did_clipping = 0;
     s->draw_child(w);
-    if (fl_did_clipping != &w) clipout(w);
+    if (gnui_did_clipping != &w) clipout(w);
 #else
     s->draw_child(w);
 #endif

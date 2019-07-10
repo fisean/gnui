@@ -148,7 +148,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit11]
-FileName=..\..\fluid\Fl_Function_Type.cxx
+FileName=..\..\fluid\GNUI_Function_Type.cxx
 CompileCpp=1
 Folder=Fluid
 Compile=1
@@ -158,7 +158,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit12]
-FileName=..\..\fluid\Fl_Group_Type.cxx
+FileName=..\..\fluid\GNUI_Group_Type.cxx
 CompileCpp=1
 Folder=Fluid
 Compile=1
@@ -168,7 +168,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit13]
-FileName=..\..\fluid\Fl_Menu_Type.cxx
+FileName=..\..\fluid\GNUI_Menu_Type.cxx
 CompileCpp=1
 Folder=Fluid
 Compile=1
@@ -178,7 +178,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit14]
-FileName=..\..\fluid\Fl_Type.cxx
+FileName=..\..\fluid\GNUI_Type.cxx
 CompileCpp=1
 Folder=Fluid
 Compile=1
@@ -188,7 +188,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit15]
-FileName=..\..\fluid\Fl_Widget_Type.cxx
+FileName=..\..\fluid\GNUI_Widget_Type.cxx
 CompileCpp=1
 Folder=Fluid
 Compile=1
@@ -198,7 +198,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit16]
-FileName=..\..\fluid\Fl_Window_Type.cxx
+FileName=..\..\fluid\GNUI_Window_Type.cxx
 CompileCpp=1
 Folder=Fluid
 Compile=1

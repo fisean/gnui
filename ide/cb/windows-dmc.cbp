@@ -170,11 +170,11 @@
 			<Option target="fltk-static-debug" />
 			<Option target="fltk-static-release" />
 		</Unit>
-		<Unit filename="..\..\fltk\FL_API.h">
+		<Unit filename="..\..\fltk\GNUI_API.h">
 			<Option target="fltk-static-debug" />
 			<Option target="fltk-static-release" />
 		</Unit>
-		<Unit filename="..\..\fltk\FL_VERSION.h">
+		<Unit filename="..\..\fltk\GNUI_VERSION.h">
 			<Option target="fltk-static-debug" />
 			<Option target="fltk-static-release" />
 		</Unit>
@@ -674,7 +674,7 @@
 			<Option target="fltk-static-debug" />
 			<Option target="fltk-static-release" />
 		</Unit>
-		<Unit filename="..\..\src\Fl_Menu_Item.cxx">
+		<Unit filename="..\..\src\GNUI_Menu_Item.cxx">
 			<Option target="fltk-static-debug" />
 			<Option target="fltk-static-release" />
 		</Unit>

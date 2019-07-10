@@ -6,7 +6,7 @@
 #include <gnui/events.h>
 #include <gnui/x.h>
 
-extern char fl_key_vector[32]; // in x.C
+extern char gnui_key_vector[32]; // in x.C
 
 bool gnui::event_key_state(unsigned keysym) {
   if (keysym > 0 && keysym <= 8)
@@ -46,11 +46,11 @@ bool gnui::event_key_state(unsigned keysym) {
       keycode = keysym & 0xff; // undo the |0x8000 done to unknown keycodes
   }
  DONE:
-  return (fl_key_vector[keycode/8] & (1 << (keycode%8))) != 0;
+  return (gnui_key_vector[keycode/8] & (1 << (keycode%8))) != 0;
 }
 
 bool gnui::get_key_state(unsigned key) {
   open_display();
-  XQueryKeymap(xdisplay, fl_key_vector);
+  XQueryKeymap(xdisplay, gnui_key_vector);
   return event_key_state(key);
 }

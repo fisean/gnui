@@ -208,7 +208,7 @@ Window::Window(int W, int H, const char *l)
 // SHOW events will normally create and map the window, HIDE will
 // unmap.  On both X and Win32 creating a window requires a lot of ugly
 // cruft, some of it is here and much of it is in the machine-specific
-// code like Fl_x.cxx.  There are also static variables (!) used to
+// code like GNUI_x.cxx.  There are also static variables (!) used to
 // modify how the window is created, such as to create it iconized or
 // to create it with a parent.
 
@@ -222,7 +222,7 @@ Window::Window(int W, int H, const char *l)
 // It is used by X to look up stuff in the X resource database:
 const char* Window::xclass_ = "gnui";
 
-bool fl_show_iconic; // set by iconize() or by -i arg switch
+bool gnui_show_iconic; // set by iconize() or by -i arg switch
 
 #if defined(_WIN32)
 
@@ -259,7 +259,7 @@ extern HWND ignore_size_change_window;
 
 // Programs that never call wait() (because they are using another GUI
 // toolkit along with gnui) may need to call this occasionally:
-void fl_do_deferred_calls() {
+void gnui_do_deferred_calls() {
   static bool recurse = false;
   if (recurse) return;
   recurse = true;
@@ -305,14 +305,14 @@ void fl_do_deferred_calls() {
   recurse = false;
 }
 
-void fl_prune_deferred_calls(HWND window) {
+void gnui_prune_deferred_calls(HWND window) {
   for (int n = 0; n < deferred_queue_size; n++)
     if (deferred_queue[n].window == window)
       deferred_queue[n].what = NOTHING;
 }
 #endif
 
-extern Window* fl_actual_window; // in Fl.cxx
+extern Window* gnui_actual_window; // in Fl.cxx
 
 bool Window::get_size_range( int *min_w, int *min_h, int *max_w, int *max_h )
 {
@@ -365,7 +365,7 @@ int Window::handle(int event) {
   case PUSH:
     // If we are in a modal state, see if the user is clicking on
     // another window. If so, just raise this (the modal) window.
-    if (modal()==this && fl_actual_window != this) {
+    if (modal()==this && gnui_actual_window != this) {
       show();
       return 0;
     }
@@ -494,7 +494,7 @@ void Window::show() {
     // the WinProc directly and that code wants this on:
     set_visible();
 
-    // map the window, making it iconized if fl_show_iconic is on:
+    // map the window, making it iconized if gnui_show_iconic is on:
 #if USE_X11
     // for X, iconic stuff was done by create()
     XMapRaised(xdisplay, i->xid);
@@ -502,8 +502,8 @@ void Window::show() {
     int showtype;
     if (parent())
       showtype = SW_SHOWNORMAL; //SW_RESTORE;
-    else if (!modal() && fl_show_iconic)
-      showtype = SW_SHOWMINNOACTIVE,fl_show_iconic = false;
+    else if (!modal() && gnui_show_iconic)
+      showtype = SW_SHOWMINNOACTIVE,gnui_show_iconic = false;
     // If we've captured the mouse, we don't want do activate any
     // other windows from the code, or we lose the capture.
     // Also, we don't want to activate the window for tooltips.
@@ -513,8 +513,8 @@ void Window::show() {
       showtype = SW_SHOWNORMAL;
     deferred_call(SHOW_WINDOW, i->xid, showtype);
 #elif USE_QUARTZ
-    if (!modal() && fl_show_iconic) {
-      fl_show_iconic = 0;
+    if (!modal() && gnui_show_iconic) {
+      gnui_show_iconic = 0;
       ::CollapseWindow( i->xid, true ); // \todo Mac ; untested
     } else {
       ::ShowWindow(i->xid);
@@ -647,11 +647,11 @@ bool Window::exec(const Window* parent, bool grab) {
   improvement over MDI!).
 */
 #if defined(_WIN32) && !USE_X11
-extern const Window* fl_mdi_window;
+extern const Window* gnui_mdi_window;
 void Window::show_inside(const Window* frame) {
-  fl_mdi_window = frame;
+  gnui_mdi_window = frame;
   show();
-  fl_mdi_window = 0;
+  gnui_mdi_window = 0;
 }
 #else
 void Window::show_inside(const Window* frame) {

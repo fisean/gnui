@@ -338,7 +338,7 @@ bool gnui::beep_on_dialog() {return sBeepOnDlg;}
 void gnui::beep_on_dialog(bool b) {sBeepOnDlg=b;}
 
 /*!
-  \image html fl_message.gif
+  \image html gnui_message.gif
   Displays a printf-style message in a pop-up box with an "OK" button,
   waits for the user to hit the button. The message will wrap to fit
   the window, or may be many lines by putting '\\n' characters into
@@ -354,7 +354,7 @@ void gnui::message(const char *fmt, ...) {
 }
 
 /*!
-  \image html fl_alert.gif
+  \image html gnui_alert.gif
   Same as gnui::message() except for the "!" symbol. 
 */
 void gnui::alert(const char *fmt, ...) {
@@ -366,7 +366,7 @@ void gnui::alert(const char *fmt, ...) {
 }
 
 /*!
-  \image html fl_ask.gif
+  \image html gnui_ask.gif
   Displays a printf-style message in a pop-up box with an "Yes" and
   "No" button and waits for the user to hit a button. The return value
   is 1 if the user hits Yes, 0 if they pick No. The enter key is a
@@ -385,7 +385,7 @@ int gnui::ask(const char *fmt, ...) {
 }
 
 /*!
-  \image html fl_choice.gif
+  \image html gnui_choice.gif
   Shows the message with three buttons below it marked with the
   strings b0, b1, and b2. Returns 0, 1, or 2 depending on which button
   is hit. If one of the strings begins with the special character '*'
@@ -426,7 +426,7 @@ static const char* input_innards(const char* fmt, va_list ap,
 }
 
 /*!
-  \image html fl_input.gif
+  \image html gnui_input.gif
   Pops up a window displaying a string, lets the user edit it, and
   return the new value. The cancel button returns NULL. The returned
   pointer is only valid until the next time gnui::input() is
@@ -446,7 +446,7 @@ const char* gnui::input(const char *fmt, const char *defstr, ...) {
 }
 
 /*!
-  \image html fl_password.gif
+  \image html gnui_password.gif
   Same as gnui::input() except an gnui::SecretInput field is used. 
 */
 const char *gnui::password(const char *fmt, const char *defstr, ...) {

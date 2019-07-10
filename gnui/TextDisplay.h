@@ -42,7 +42,7 @@ namespace gnui {
 typedef void (*UnfinishedStyleCb)(int, void *);
 
 /** TextDisplay */
-class FL_API TextDisplay: public Group {
+class GNUI_API TextDisplay: public Group {
 public:
   enum {
     NORMAL_CURSOR, CARET_CURSOR, DIM_CURSOR,

@@ -102,7 +102,7 @@ ings to resize the way you want.");
       o->labelcolor((gnui::Color)1);
       o->align(gnui::ALIGN_CLIP|gnui::ALIGN_WRAP);
       gnui::Group::current()->resizable(o);
-      o->tooltip("To make it invisible, use an Fl_Box with the default box(FL_NO_BOX) and no la\
+      o->tooltip("To make it invisible, use an GNUI_Box with the default box(GNUI_NO_BOX) and no la\
 bel.\n\nFltk sets the window's minimum size such that this widget's minimum si\
 ze is 100, unless it starts out smaller than that.  You can override this defa\
 ult by calling size_range() on the window.");

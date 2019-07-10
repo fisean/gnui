@@ -86,10 +86,10 @@ const char* gnui::Font::system_name() {
 static FontSize* current;
 
 // API to OpenGL/gl_draw.cxx:
-FL_API unsigned fl_font_opengl_id() {return current->opengl_id;}
-FL_API unsigned fl_font_opengl_texture() {return current->texture;}
-FL_API void fl_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
-FL_API void fl_set_font_opengl_texture(unsigned v) {current->texture = v;}
+GNUI_API unsigned gnui_font_opengl_id() {return current->opengl_id;}
+GNUI_API unsigned gnui_font_opengl_texture() {return current->texture;}
+GNUI_API void gnui_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
+GNUI_API void gnui_set_font_opengl_texture(unsigned v) {current->texture = v;}
 
 static XftFont* fontopen(const char* name, int attributes, float size, bool core) {
   open_display();
@@ -184,7 +184,7 @@ XftFont* gnui::xftfont() {
 }
 
 // This is for back compatability with gnui1 programs, implements the
-// former variable fl_xfont:
+// former variable gnui_xfont:
 XFontStruct* gnui::xfont() {
 #if XFT_MAJOR > 1
   // kludge!

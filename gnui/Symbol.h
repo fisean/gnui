@@ -25,7 +25,7 @@
 #ifndef gnui_Symbol_h
 #define gnui_Symbol_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 #include "Color.h"
 #include "Rectangle.h"
 #include "PixelType.h"
@@ -34,7 +34,7 @@ namespace gnui {
 
 class Style;
 
-class FL_API Symbol {
+class GNUI_API Symbol {
   const char* name_;
   Rectangle inset_;
 
@@ -86,7 +86,7 @@ class FL_API Symbol {
 };
 
 // Back-compatability constructor:
-FL_API void add_symbol(const char* name, void (*drawit)(Color), int scalable);
+GNUI_API void add_symbol(const char* name, void (*drawit)(Color), int scalable);
 
 }
 

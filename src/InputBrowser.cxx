@@ -53,7 +53,7 @@ InputBrowser::InputBrowser(int x, int y, int w, int h, const char *l)
   if (m_input.parent()) m_input.parent()->remove(m_input);
   m_input.parent(this);
   m_input.callback((Callback_p)input_cb, this);
-  m_input.when(gnui::WHEN_ENTER_KEY_CHANGED | gnui::WHEN_RELEASE); // FL_WHEN_CHANGED FL_WHEN_ENTER_KEY_ALWAYS
+  m_input.when(gnui::WHEN_ENTER_KEY_CHANGED | gnui::WHEN_RELEASE); // GNUI_WHEN_CHANGED GNUI_WHEN_ENTER_KEY_ALWAYS
 
   over_now = false; over_last = true;
 
@@ -107,7 +107,7 @@ InputBrowser::~InputBrowser()
 
 namespace gnui {
 
-class FL_API ComboBrowser : public Browser {
+class GNUI_API ComboBrowser : public Browser {
   public:
     int handle(int);
     ComboBrowser(int x, int y, int w, int h);

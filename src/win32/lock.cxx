@@ -2,8 +2,8 @@
 #include <process.h>
 
 // these pointers are in run.cxx:
-extern void (*fl_lock_function)();
-extern void (*fl_unlock_function)();
+extern void (*gnui_lock_function)();
+extern void (*gnui_unlock_function)();
 static void init_function();
 static void (*init_or_lock_function)() = init_function;
 
@@ -22,14 +22,14 @@ static DWORD main_thread_id;
 static void init_function() {
   InitializeCriticalSection(&cs);
   lock_function();
-  fl_lock_function = init_or_lock_function = lock_function;
-  fl_unlock_function = unlock_function;
+  gnui_lock_function = init_or_lock_function = lock_function;
+  gnui_unlock_function = unlock_function;
   main_thread_id = GetCurrentThreadId();
 }
 
 void gnui::lock() {init_or_lock_function();}
 
-void gnui::unlock() {fl_unlock_function();}
+void gnui::unlock() {gnui_unlock_function();}
 
 bool gnui::in_main_thread() {
   return init_or_lock_function == init_function || GetCurrentThreadId() == main_thread_id;

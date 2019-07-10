@@ -58,7 +58,7 @@ effect to the widget.
 
 using namespace gnui;
 
-extern Widget* fl_did_clipping;
+extern Widget* gnui_did_clipping;
 static PopupMenu* pushed;
 
 /*! The little down-arrow indicator can be replaced by setting a new
@@ -68,7 +68,7 @@ static PopupMenu* pushed;
 */
 void PopupMenu::draw() {
   if (type()&7) { // draw nothing for the popup types
-    fl_did_clipping = this;
+    gnui_did_clipping = this;
     return;
   }
   // set_item() does not cause a redraw:

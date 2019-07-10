@@ -1,5 +1,5 @@
 //
-// "$Id: fl_images_core.cxx 4288 2005-04-16 00:13:17Z mike $"
+// "$Id: gnui_images_core.cxx 4288 2005-04-16 00:13:17Z mike $"
 //
 // FLTK images library core.
 //
@@ -34,7 +34,7 @@ static SharedImage *check(const char *name, uchar *header, int headerlen) {
       return xpmFileImage::get(name);
 
 //if (header[0]=='P' && header[1]>='1' && header[1]<='7') // Portable anymap
-//  return new Fl_PNM_Image(name);
+//  return new GNUI_PNM_Image(name);
 
   if (memcmp(header, "\211PNG", 4) == 0)// PNG file
     return pngImage::get(name);
@@ -55,4 +55,4 @@ void gnui::register_images() {
   SharedImage::add_handler(check);
 }
 
-// End of "$Id: fl_images_core.cxx 4288 2005-04-16 00:13:17Z mike $".
+// End of "$Id: gnui_images_core.cxx 4288 2005-04-16 00:13:17Z mike $".

@@ -100,16 +100,16 @@ static void catMenuFont( const Widget *m, char *dst )
     strcat( dst, "<B" );
   if ( m->labelfont() == m->labelfont()->italic() )
     strcat( dst, "<I" );
-  //if ( m->labelfont_ & FL_UNDERLINE )
+  //if ( m->labelfont_ & GNUI_UNDERLINE )
   //  strcat( dst, "<U" );
   
-  //if ( m->labeltype_ == FL_EMBOSSED_LABEL )
+  //if ( m->labeltype_ == GNUI_EMBOSSED_LABEL )
   //    strcat( dst, "<U" );
-  //else if ( m->labeltype_ == FL_ENGRAVED_LABEL )
+  //else if ( m->labeltype_ == GNUI_ENGRAVED_LABEL )
   //    strcat( dst, "<O" );
- // else if ( m->labeltype_ == FL_SHADOW_LABEL )
+ // else if ( m->labeltype_ == GNUI_SHADOW_LABEL )
  //     strcat( dst, "<S" );
-  //else if ( m->labeltype_ == FL_SYMBOL_LABEL )
+  //else if ( m->labeltype_ == GNUI_SYMBOL_LABEL )
       ; // not supported
 }
 

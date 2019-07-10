@@ -28,7 +28,7 @@
 
 namespace gnui {
 
-class FL_API ReturnButton : public Button {
+class GNUI_API ReturnButton : public Button {
 public:
   ReturnButton(int x,int y,int w,int h,const char *l=0);
   static NamedStyle* default_style;

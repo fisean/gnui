@@ -47,13 +47,13 @@ I. FLTK2 Source Organisation
 
 2. gnui include filenames
 	a. gnui header all have a lowercase .h extension
-	b. No gnui header should have a Fl_ prefix,
+	b. No gnui header should have a GNUI_ prefix,
 	    if you find the case please report it
 	c. FL/Fl.H equivalent include is now gnui/run.h	
 
 3. gnui namespaces and naming conventions
 	a. all gnui widgets and most public functions
-		are defined in the gnui namespace (without the Fl_ prefix).
+		are defined in the gnui namespace (without the GNUI_ prefix).
 		For instance, creating a gnui Window could be written as follow:
 			gnui::Window myWin(300,300);
 		Or
@@ -77,9 +77,9 @@ I. FLTK2 Source Organisation
 	and libgnui.a is named libgnui.a
 
 	Finally, constant Naming follow similar rules:
-	to design a gnui Color (Fl_Color equivalent) constant:
-	remove the FL_ prefix and add gnui::
-	example: FL_BLUE -> gnui::BLUE
+	to design a gnui Color (GNUI_Color equivalent) constant:
+	remove the GNUI_ prefix and add gnui::
+	example: GNUI_BLUE -> gnui::BLUE
 
 ===============================================
 II. FLTK2 Window creation and event loops
@@ -137,10 +137,10 @@ III. Popular gnui Widgets differences in instanciation and use
 		Hints & summary: 
 			i.  In gnui you can use BOTH text labels and images in the same widget
 			ii. In gnui, you can use multiple symbols/images according to the event type.
-			iii. Well known Fl_Pixmap gnui1 class correspond to gnui xpmImage.
+			iii. Well known GNUI_Pixmap gnui1 class correspond to gnui xpmImage.
 
 2. Boxes
-	In FLTK2, there is basically no need for an equivalent gnui1 Fl_Box class.
+	In FLTK2, there is basically no need for an equivalent gnui1 GNUI_Box class.
 	Instead, all Widget and derived classes can use and benefit from a box 
 	drawing capability by simply using the box() method.
 	For more straightforward/simple use of boxes (especially for gnui1 users)
@@ -150,7 +150,7 @@ III. Popular gnui Widgets differences in instanciation and use
 	This will create a up box with a label centered by default inside the box.
 
 3. Browser
-	The Browser class in gnui is very different from the gnui1 Fl_Browser class.
+	The Browser class in gnui is very different from the gnui1 GNUI_Browser class.
 	
 	In gnui, it also permits to address most tree view needs, and multi-columning.
 	(gnui::Browser was first implemented from Marteen de Boer ToggleTree contrib.).
@@ -169,7 +169,7 @@ III. Popular gnui Widgets differences in instanciation and use
 	the gnui FileBrowser port from gnui1 and used in FileChooser in the gnui lib.
 
 4. Tabs
-	gnui1 Fl_Tabs class is TabGroup class in gnui.
+	gnui1 GNUI_Tabs class is TabGroup class in gnui.
 	In gnui1 value() get/set method use the Widget group pointer in order
 	to select a tab, gnui TabGroup is only asking for a relative position instead.
 	You can still obtain the Widget group pointing at this index easily

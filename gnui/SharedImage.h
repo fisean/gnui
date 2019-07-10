@@ -47,10 +47,10 @@ data and create the correct subclass.
 
 namespace gnui {
 
-struct FL_IMAGES_API ImageType;
+struct GNUI_IMAGES_API ImageType;
 
 
-class FL_API SharedImage : public Image {
+class GNUI_API SharedImage : public Image {
 // fabien : introducing SharedImage handlers and uniform loading api inspired from 1.1.x
 public:
     /*! get an image of this name and dimensions , can be already loaded or not */
@@ -149,7 +149,7 @@ public:
 ////////////////////////////////////////////////////////////////
 
 /*! Description of an Image file format */
-struct FL_IMAGES_API ImageType {
+struct GNUI_IMAGES_API ImageType {
   // Name of the filetype as it appear in the source code LOWERCASE!!!
   const char* name;
   // Function to test the filetype
@@ -157,19 +157,19 @@ struct FL_IMAGES_API ImageType {
   // Function to get/create an image of this type
   SharedImage* (*get)(const char* name, const uchar* datas);
 };
-extern FL_IMAGES_API ImageType image_filetypes[];
+extern GNUI_IMAGES_API ImageType image_filetypes[];
 
 /*! Try to guess the filetype
   Beware that calling this force you to link in all image types ! */
-FL_IMAGES_API ImageType* guess_image(const char* name, const uchar* datas=0);
+GNUI_IMAGES_API ImageType* guess_image(const char* name, const uchar* datas=0);
 
 ////////////////////////////////////////////////////////////////
 
 // 
-// bmp and gif classes are build in libgnui so they are FL_API
+// bmp and gif classes are build in libgnui so they are GNUI_API
 //
 
-class FL_API gifImage : public SharedImage {
+class GNUI_API gifImage : public SharedImage {
   gifImage() { }
   static SharedImage* create() { return new gifImage; }
 public:
@@ -180,7 +180,7 @@ public:
   bool fetch();
 };
 
-class FL_API bmpImage : public SharedImage {
+class GNUI_API bmpImage : public SharedImage {
   bmpImage() { }
   static SharedImage* create() { return new bmpImage; }
 public:
@@ -191,7 +191,7 @@ public:
   bool fetch();
 };
 
-class FL_IMAGES_API xpmFileImage : public SharedImage {
+class GNUI_IMAGES_API xpmFileImage : public SharedImage {
   xpmFileImage() { }
   static SharedImage* create() { return new xpmFileImage; }
 public:
@@ -203,10 +203,10 @@ public:
 };
 
 // 
-// jpeg and png classes are in libgnui_images so they are FL_IMAGES_API
+// jpeg and png classes are in libgnui_images so they are GNUI_IMAGES_API
 //
 
-class FL_IMAGES_API jpegImage : public SharedImage {
+class GNUI_IMAGES_API jpegImage : public SharedImage {
   jpegImage() { }
   static SharedImage* create() { return new jpegImage; }
 public:
@@ -217,7 +217,7 @@ public:
   bool fetch();
 };
 
-class FL_IMAGES_API pngImage : public SharedImage {
+class GNUI_IMAGES_API pngImage : public SharedImage {
   pngImage() { }
   static SharedImage* create() { return new pngImage; } // Instantiate
 public:
@@ -229,8 +229,8 @@ public:
   bool fetch();
 };
 
-  extern FL_IMAGES_API void register_images(); // return always true only for automatic lib init purpose see images_core.cxx trick
-  extern FL_IMAGES_API void unregister_images();
+  extern GNUI_IMAGES_API void register_images(); // return always true only for automatic lib init purpose see images_core.cxx trick
+  extern GNUI_IMAGES_API void unregister_images();
 }
 
 #endif

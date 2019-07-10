@@ -45,13 +45,13 @@ struct OverlayInfo {
   long layer;
 };
 
-extern Colormap fl_overlay_colormap;
-extern XVisualInfo* fl_overlay_visual;
-extern ulong fl_transparent_pixel;
+extern Colormap gnui_overlay_colormap;
+extern XVisualInfo* gnui_overlay_visual;
+extern ulong gnui_transparent_pixel;
 
-XVisualInfo *fl_find_overlay_visual() {
+XVisualInfo *gnui_find_overlay_visual() {
   static bool beenhere;
-  if (beenhere) return fl_overlay_visual;
+  if (beenhere) return gnui_overlay_visual;
   beenhere = true;
 
   open_display();
@@ -83,21 +83,21 @@ XVisualInfo *fl_find_overlay_visual() {
 	  && (!v || v1->depth > v->depth && v1->depth <= 8)) {
 	if (v) XFree((char*)v);
 	v = v1;
-	fl_transparent_pixel = overlayInfo[i].value;
+	gnui_transparent_pixel = overlayInfo[i].value;
       } else {
 	XFree((char*)v1);
       }
     }
     if (v) {
-      fl_overlay_visual = v;
-      fl_overlay_colormap = 
+      gnui_overlay_visual = v;
+      gnui_overlay_colormap = 
 	XCreateColormap(xdisplay, RootWindow(xdisplay, xscreen),
 			v->visual, AllocNone);
     }
   }
   XFree((char*)overlayInfo);
   //printf("overlay visual %d selected\n", overlay_visual->visualid);
-  return fl_overlay_visual;
+  return gnui_overlay_visual;
 }
 
 //

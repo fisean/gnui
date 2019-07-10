@@ -105,9 +105,9 @@ bool gnui::filename_isfile(const char* name) {
 }
 
 /** Returns the size of the file in bytes. Returns zero if it does not exist.*/
-FL_FILESIZE_T gnui::filename_size(const char* name) {
+GNUI_FILESIZE_T gnui::filename_size(const char* name) {
   if (!fill_stat(name)) return 0;
-  return (FL_FILESIZE_T)last_stat.st_size;
+  return (GNUI_FILESIZE_T)last_stat.st_size;
 }
 
 /**

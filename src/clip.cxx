@@ -62,7 +62,7 @@ static inline void pushregion(Region r) {
   rstack[++rstackptr] = r;
 }
 
-int fl_clip_state_number = 0; // used by code that needs to update clip regions
+int gnui_clip_state_number = 0; // used by code that needs to update clip regions
 
 /**
   Return the current region as a system-specific structure. You must
@@ -88,9 +88,9 @@ Region XRectangleRegion(int x, int y, int w, int h) {
 // Make the system's clip match the top of the clip stack.  This can
 // be used after changing the stack, or to undo any clobbering of clip
 // done by your program:
-void fl_restore_clip() {
+void gnui_restore_clip() {
   Region r = rstack[rstackptr];
-  fl_clip_state_number++;
+  gnui_clip_state_number++;
 #if USE_CAIRO
 #elif USE_X11
   if (r) XSetRegion(xdisplay, gc, r);
@@ -117,7 +117,7 @@ void gnui::clip_region(Region region) {
 #endif
   rstack[rstackptr] = region;
 #if !USE_CAIRO
-  fl_restore_clip();
+  gnui_restore_clip();
 #endif
 }
 
@@ -174,7 +174,7 @@ void gnui::push_clip(int x, int y, int w, int h) {
     cairo_rectangle(cr, x,y,w,h);
     cairo_clip(cr); // should accumulate clip depending on the stack!
 #else
-  fl_restore_clip();
+  gnui_restore_clip();
 #endif
 }
 
@@ -206,7 +206,7 @@ void gnui::clipout(const Rectangle& rectangle) {
   DeleteObject(region);
 #endif
 #if !USE_CAIRO
-  fl_restore_clip();
+  gnui_restore_clip();
 #endif
 }
 
@@ -219,7 +219,7 @@ void gnui::clipout(const Rectangle& rectangle) {
 void gnui::push_no_clip() {
   pushregion(0);
 #if !USE_CAIRO
-  fl_restore_clip();
+  gnui_restore_clip();
 #else
   cairo_reset_clip(cr);
 #endif
@@ -241,7 +241,7 @@ void gnui::pop_clip() {
 #if USE_CAIRO
      cairo_reset_clip(cr);
 #else
-    fl_restore_clip();
+    gnui_restore_clip();
 #endif
   }
 }
@@ -249,7 +249,7 @@ void gnui::pop_clip() {
 ////////////////////////////////////////////////////////////////
 // clipping tests:
 
-extern int fl_clip_w, fl_clip_h;
+extern int gnui_clip_w, gnui_clip_h;
 
 /**
   Returns true if any or all of \a rectangle is inside the clip region.
@@ -258,7 +258,7 @@ bool gnui::not_clipped(const Rectangle& rectangle) {
   Rectangle r; transform(rectangle,r);
   // first check against the window so we get rid of coordinates
   // outside the 16-bit range the X/Win32 calls take:
-  if (r.r() <= 0 || r.b() <= 0 || r.x() >= fl_clip_w || r.y() >= fl_clip_h)
+  if (r.r() <= 0 || r.b() <= 0 || r.x() >= gnui_clip_w || r.y() >= gnui_clip_h)
     return false;
   Region region = rstack[rstackptr];
   if (!region) return true;
@@ -291,9 +291,9 @@ int gnui::intersect_with_clip(Rectangle& r) {
   // Test against the window to get 16-bit values:
   int ret = 1;
   if (r.x() < 0) {r.set_x(0); ret = 2;}
-  int t = fl_clip_w; if (r.r() > t) {r.set_r(t); ret = 2;}
+  int t = gnui_clip_w; if (r.r() > t) {r.set_r(t); ret = 2;}
   if (r.y() < 0) {r.set_y(0); ret = 2;}
-  t = fl_clip_h; if (r.b() > t) {r.set_b(t); ret = 2;}
+  t = gnui_clip_h; if (r.b() > t) {r.set_b(t); ret = 2;}
   // check for total clip (or for empty rectangle):
   if (r.empty()) return 0;
   if (!region) return ret;

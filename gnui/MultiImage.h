@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API MultiImage : public Symbol
+class GNUI_API MultiImage : public Symbol
 {
   const Symbol* image0;
   struct MultiImagePair {

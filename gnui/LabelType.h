@@ -38,7 +38,7 @@ namespace gnui {
 
 class Style;
 
-class FL_API LabelType {
+class GNUI_API LabelType {
 public:
   virtual void draw(const char*, const Rectangle&, Flags) const;
   const char* name;
@@ -50,7 +50,7 @@ public:
 };
 
 // You can use this to draw overlapping patterns
-class FL_API EngravedLabel : public LabelType {
+class GNUI_API EngravedLabel : public LabelType {
   const int* data;
 public:
   void draw(const char*, const Rectangle&, Flags) const;

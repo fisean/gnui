@@ -49,7 +49,7 @@ public:
     : Box(n), data(s), down(d) {}
 };
 
-extern void fl_to_inactive(const char* s, char* to);
+extern void gnui_to_inactive(const char* s, char* to);
 
 void DiamondBox::_draw(const Rectangle& r) const
 {
@@ -60,7 +60,7 @@ void DiamondBox::_draw(const Rectangle& r) const
   int y = r.y(); int h = r.h(); if (h&1) h--; else {h -= 2; y++;}
   const char* s = drawflags(PUSHED|STATE) && down ? down->data : data;
   char buf[26]; if (drawflags(INACTIVE_R) && Style::draw_boxes_inactive_) {
-    fl_to_inactive(s, buf); s = buf;}
+    gnui_to_inactive(s, buf); s = buf;}
   const char* t;
   if (*s == '2') {t = s+1; s += 3;} else {t = s+2;}
   while (*s && *t && w > 0 && h > 0) {

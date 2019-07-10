@@ -866,7 +866,7 @@ int VT100main() {
 #include <fltk/Window.h>
 #include <fltk/xbmImage.h>
 #include <fltk/draw.h>
-#include <FL/Fl_Menu_Item.H>
+#include <FL/GNUI_Menu_Item.H>
 #include <fltk/ask.h>
 #include <fltk/Cursor.h>
 
@@ -1111,8 +1111,8 @@ void Board::computer_move(int help) {
   if (!autoplay) cursor(gnui::CURSOR_DEFAULT);
 }
 
-extern Fl_Menu_Item menu[];
-extern Fl_Menu_Item busymenu[];
+extern GNUI_Menu_Item menu[];
+extern GNUI_Menu_Item busymenu[];
 static Board* board;
 
 int Board::handle(int e) {
@@ -1134,8 +1134,8 @@ int Board::handle(int e) {
   switch (e) {
   case gnui::PUSH:
     if (gnui::event_button() > 1) {
-      static const Fl_Menu_Item* previous;
-      const Fl_Menu_Item* i =
+      static const GNUI_Menu_Item* previous;
+      const GNUI_Menu_Item* i =
 	menu->popup(gnui::event_x(), gnui::event_y(), 0, previous);
       if (i) previous = i;
       return 1;
@@ -1218,17 +1218,17 @@ void copyright_cb(gnui::Widget*, void*) {
 
 void debug_cb(gnui::Widget* v, void*) {
   debug = !debug;
-  // LAME! Fltk2 does not emulate Fl_Menu_Item well enough to allow any
+  // LAME! Fltk2 does not emulate GNUI_Menu_Item well enough to allow any
   // changes to be remembered. Go change the table directly:
-  Fl_Menu_Item* item = menu+8;
+  GNUI_Menu_Item* item = menu+8;
   if (debug) item->set(); else item->clear();
 }
 
 void forced_cb(gnui::Widget* v, void*) {
   forcejumps = !forcejumps;
-  // LAME! Fltk2 does not emulate Fl_Menu_Item well enough to allow any
+  // LAME! Fltk2 does not emulate GNUI_Menu_Item well enough to allow any
   // changes to be remembered. Go change the table directly:
-  Fl_Menu_Item* item = menu+7;
+  GNUI_Menu_Item* item = menu+7;
   if (forcejumps) item->set(); else item->clear();
   killnode(root->son); root->son = 0;
   if (showlegal) {expandnode(root); board->redraw();}
@@ -1306,26 +1306,26 @@ void stop_cb(gnui::Widget*, void*) {abortflag = 1;}
 
 void continue_cb(gnui::Widget*, void*) {}
 
-Fl_Menu_Item menu[] = {
+GNUI_Menu_Item menu[] = {
   {"Autoplay", 'a', autoplay_cb},
   {"Legal moves", 'l', legal_cb},
   {"Move for me", 'm', move_cb},
   {"New game", 'n', newgame_cb},
   {"Predict", 'p', predict_cb},
   {"Switch sides", 's', switch_cb},
-  {"Undo", 'u', undo_cb, 0, FL_MENU_DIVIDER},
-  {"Forced jumps rule", 'f', forced_cb, 0, FL_MENU_TOGGLE|FL_MENU_VALUE},
-  {"Debug", 'd', debug_cb, 0, FL_MENU_TOGGLE},
-  {"Intelligence...", 'i', intel_cb, 0, FL_MENU_DIVIDER},
+  {"Undo", 'u', undo_cb, 0, GNUI_MENU_DIVIDER},
+  {"Forced jumps rule", 'f', forced_cb, 0, GNUI_MENU_TOGGLE|GNUI_MENU_VALUE},
+  {"Debug", 'd', debug_cb, 0, GNUI_MENU_TOGGLE},
+  {"Intelligence...", 'i', intel_cb, 0, GNUI_MENU_DIVIDER},
   {"About...", 'c', copyright_cb},
   {"Quit", 'q', quit_cb},
   {(const char *)0}};
 
-Fl_Menu_Item busymenu[] = {
+GNUI_Menu_Item busymenu[] = {
   {"Stop", '.', stop_cb},
   {"Autoplay", 'a', autoplay_cb},
   {"Continue", 0, continue_cb},
-  {"Debug", 'd', debug_cb, 0, FL_MENU_TOGGLE},
+  {"Debug", 'd', debug_cb, 0, GNUI_MENU_TOGGLE},
   {"Intelligence...", 'i', intel_cb},
   {"Copyright", 'c', copyright_cb},
   {"Quit", 'q', quit_cb},

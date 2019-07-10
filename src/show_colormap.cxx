@@ -149,7 +149,7 @@ int ColorMenu::handle(int e) {
 
   If they type Esc or click outside the window, the old index is returned.
 
-  \image html fl_show_colormap.gif
+  \image html gnui_show_colormap.gif
 */
 Color gnui::show_colormap(Color oldcol) {
   ColorMenu m(oldcol);

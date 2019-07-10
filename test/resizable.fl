@@ -131,7 +131,7 @@ This program demonstrates how you set the resizable() of a window to get things 
     {fltk::InvisibleBox} {} {
       label {This is the resizable() of the window.
 It is normally invisible.} selected
-      tooltip {To make it invisible, use an Fl_Box with the default box(FL_NO_BOX) and no label.
+      tooltip {To make it invisible, use an GNUI_Box with the default box(GNUI_NO_BOX) and no label.
 
 Fltk sets the window's minimum size such that this widget's minimum size is 100, unless it starts out smaller than that.  You can override this default by calling size_range() on the window.}
       xywh {95 150 365 270} align 192 resizable box BORDER_BOX color 37 labelcolor 1

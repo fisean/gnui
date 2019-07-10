@@ -1,6 +1,6 @@
 This directory contains Forms/XForms emulation code for fltk.
 This includes emulation of most of the functions in the forms.h header
-file, and special Fl_Widgets that replicate the forms ones.
+file, and special GNUI_Widgets that replicate the forms ones.
 
 The demo program "colbrowser" is an XForms program with minimal
 changes needed to make it work.  The demo program "forms" is an even

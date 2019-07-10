@@ -357,7 +357,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\..\images\Fl_Guess_Image.cxx"
+			RelativePath="..\..\images\GNUI_Guess_Image.cxx"
 			>
 			<FileConfiguration
 				Name="Release MinSize|Win32"
@@ -397,7 +397,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\..\images\fl_jpeg.cxx"
+			RelativePath="..\..\images\gnui_jpeg.cxx"
 			>
 			<FileConfiguration
 				Name="Release MinSize|Win32"
@@ -437,7 +437,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\..\images\fl_png.cxx"
+			RelativePath="..\..\images\gnui_png.cxx"
 			>
 			<FileConfiguration
 				Name="Release MinSize|Win32"

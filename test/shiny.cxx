@@ -25,7 +25,7 @@
 
 #include <config.h>
 #include "shiny_panel.cxx"
-#include <FL/fl_message.H>
+#include <FL/gnui_message.H>
 #include <stdio.h>
 
 static uchar color[8][3] = {
@@ -42,11 +42,11 @@ static int thickness = 3;
 
 int which = 0;
 
-static Fl_Color pcolor;
+static GNUI_Color pcolor;
 
-Fl_Window *window;
+GNUI_Window *window;
 
-void color_slider_cb(Fl_Value_Slider *o, long i) {
+void color_slider_cb(GNUI_Value_Slider *o, long i) {
   int v = int(o->value());
   if (!i) {
     color[which][0] = color[which][1] = color[which][2] = v;
@@ -57,7 +57,7 @@ void color_slider_cb(Fl_Value_Slider *o, long i) {
     color[which][i-1] = v;
   }
   for (int n=0; n<window->children(); n++) window->child(n)->redraw();
-  pcolor = FL_BLACK; // make it recalculate actual colors
+  pcolor = GNUI_BLACK; // make it recalculate actual colors
 //   test_box[0]->redraw();
 //   test_box[1]->redraw();
 //   test_box[2]->redraw();
@@ -70,23 +70,23 @@ void set_sliders() {
   color_slider[3]->value(color[which][2]);
 }
 
-void thickness_cb(Fl_Slider* s,void*) {
+void thickness_cb(GNUI_Slider* s,void*) {
   thickness = int(s->value());
   for (int n=0; n<window->children(); n++) window->child(n)->redraw();
 }
 
-void which_cb(Fl_Button *, long i) {
+void which_cb(GNUI_Button *, long i) {
   which = which&(~3) | i;
   set_sliders();
 }
 
-void inside_cb(Fl_Button *b, void*) {
+void inside_cb(GNUI_Button *b, void*) {
   if (b->value()) which = which | 4;
   else which = which & (3|8);
   set_sliders();
 }
 
-void dump_cb(Fl_Button *, void*) {
+void dump_cb(GNUI_Button *, void*) {
   printf("static uchar color[8][3] = {\n");
   for (int i=0; i<8; i++) {
     printf("  {%d,%d,%d}",color[i][0],color[i][1],color[i][2]);
@@ -95,14 +95,14 @@ void dump_cb(Fl_Button *, void*) {
   printf("\n};\nstatic int thickness = %d;\n",thickness);
 }
 
-#include <FL/fl_draw.H>
+#include <FL/gnui_draw.H>
 
 #if HAVE_GL
 #include <FL/gl.h>
 
 static uchar C[8][3]; // actual colors for current button
 
-static void calc_color(Fl_Color c) {
+static void calc_color(GNUI_Color c) {
   uchar r[3];
   pcolor = c;
   Fl::get_color(c,r[0],r[1],r[2]);
@@ -113,16 +113,16 @@ static void calc_color(Fl_Color c) {
   }
 }
 
-void shiny_down_draw(Fl_Boxtype, int x1, int y1, int w1, int h1, Fl_Color c, Fl_Flags);
+void shiny_down_draw(GNUI_Boxtype, int x1, int y1, int w1, int h1, GNUI_Color c, GNUI_Flags);
 
-void shiny_up_draw(Fl_Boxtype, int x1, int y1, int w1, int h1, Fl_Color c, Fl_Flags f) {
-  if (f & FL_VALUE) {
+void shiny_up_draw(GNUI_Boxtype, int x1, int y1, int w1, int h1, GNUI_Color c, GNUI_Flags f) {
+  if (f & GNUI_VALUE) {
     shiny_down_draw(0, x1, y1, w1, h1, c, f);
     return;
   }
   if (c != pcolor) calc_color(c);
   int x = x1+1;
-  int y = Fl_Window::current()->h()-(y1+h1-1);
+  int y = GNUI_Window::current()->h()-(y1+h1-1);
   int w = w1-2;
   int h = h1-2;
   gl_start();
@@ -175,14 +175,14 @@ void shiny_up_draw(Fl_Boxtype, int x1, int y1, int w1, int h1, Fl_Color c, Fl_Fl
   glEnd();
 
   gl_finish();
-  fl_color(FL_BLACK);
-  fl_rect(x1,y1,w1,h1);
+  gnui_color(GNUI_BLACK);
+  gnui_rect(x1,y1,w1,h1);
 }
 
-void shiny_down_draw(Fl_Boxtype, int x1, int y1, int w1, int h1, Fl_Color c, Fl_Flags) {
+void shiny_down_draw(GNUI_Boxtype, int x1, int y1, int w1, int h1, GNUI_Color c, GNUI_Flags) {
   if (c != pcolor) calc_color(c);
   int x = x1+1;
-  int y = Fl_Window::current()->h()-(y1+h1-1);
+  int y = GNUI_Window::current()->h()-(y1+h1-1);
   int w = w1-2;
   int h = h1-2;
   gl_start();
@@ -236,22 +236,22 @@ void shiny_down_draw(Fl_Boxtype, int x1, int y1, int w1, int h1, Fl_Color c, Fl_
   glEnd();
 
   gl_finish();
-  fl_color(FL_BLACK);
-  fl_rect(x1,y1,w1,h1);
+  gnui_color(GNUI_BLACK);
+  gnui_rect(x1,y1,w1,h1);
 }
 
-const Fl_Boxtype_ shiny_down_box = {
+const GNUI_Boxtype_ shiny_down_box = {
   shiny_down_draw, 0, &shiny_down_box, 3,3,6,6, true
 };
-const Fl_Boxtype_ shiny_up_box = {
+const GNUI_Boxtype_ shiny_up_box = {
   shiny_up_draw, 0, &shiny_down_box, 3,3,6,6, true
 };
 
 // It looks interesting if you use this for the window's boxtype,
 // but it is way too slow under MESA:
-void shiny_flat_draw(Fl_Boxtype, int x, int y1, int w, int h, Fl_Color c, Fl_Flags) {
+void shiny_flat_draw(GNUI_Boxtype, int x, int y1, int w, int h, GNUI_Color c, GNUI_Flags) {
   if (c != pcolor) calc_color(c);
-  int y = Fl_Window::current()->h()-(y1+h);
+  int y = GNUI_Window::current()->h()-(y1+h);
   gl_start();
   glBegin(GL_POLYGON);
   glColor3ub(C[4][0],C[4][1],C[4][2]);
@@ -266,7 +266,7 @@ void shiny_flat_draw(Fl_Boxtype, int x, int y1, int w, int h, Fl_Color c, Fl_Fla
   gl_finish();
 }
 
-const Fl_Boxtype_ shiny_flat_box = {
+const GNUI_Boxtype_ shiny_flat_box = {
   shiny_flat_draw, 0, &shiny_flat_box, 0,0,0,0
 };
 
@@ -276,13 +276,13 @@ const Fl_Boxtype_ shiny_flat_box = {
 // expect to erase a flat area will not work, as you will see the edges
 // of the area.  This "box type" clips to the area and then draws the
 // parent's box.  Perhaps sliders should be fixed to do this automatically?
-void invisible_draw(Fl_Boxtype, int x, int y, int w, int h, Fl_Color c, Fl_Flags) {
-  fl_clip(x,y,w,h);
-  Fl_Window *W = Fl_Window::current();
+void invisible_draw(GNUI_Boxtype, int x, int y, int w, int h, GNUI_Color c, GNUI_Flags) {
+  gnui_clip(x,y,w,h);
+  GNUI_Window *W = GNUI_Window::current();
   shiny_flat_box.draw(0,0,W->w(),W->h(),c);
-  fl_pop_clip();
+  gnui_pop_clip();
 }
-const Fl_Boxtype_ invisible_box = {
+const GNUI_Boxtype_ invisible_box = {
   invisible_draw, 0, &invisible_box, 0,0,0,0
 };
 
@@ -290,8 +290,8 @@ int main(int argc, char **argv) {
   window = make_panels();
 #if HAVE_GL
   // This will cause all buttons to be shiny:
-  fl_normal_box.draw_ = shiny_up_draw;
-  Fl_Window::default_style.set_box(&shiny_flat_box);
+  gnui_normal_box.draw_ = shiny_up_draw;
+  GNUI_Window::default_style.set_box(&shiny_flat_box);
 #endif
   set_sliders();
 //color_slider[0]->box(INVISIBLE_BOX);
@@ -300,16 +300,16 @@ int main(int argc, char **argv) {
 //color_slider[3]->box(INVISIBLE_BOX);
   thickness_slider->value(thickness);
   thickness_slider->box(&invisible_box);
-  thickness_slider->slider(FL_UP_BOX);
+  thickness_slider->slider(GNUI_UP_BOX);
   // we must eat the switches first so -display is done before trying
   // to set the visual:
   int i = 0;
   if (Fl::args(argc,argv,i) < argc) Fl::fatal(Fl::help);
 #if HAVE_GL
-  if (!Fl::gl_visual(FL_RGB|FL_DEPTH)) Fl::fatal("Display does not do OpenGL");
+  if (!Fl::gl_visual(GNUI_RGB|GNUI_DEPTH)) Fl::fatal("Display does not do OpenGL");
   glEnable(GL_DEPTH_TEST);
 #else
-  fl_message("This demo does not work without OpenGL");
+  gnui_message("This demo does not work without OpenGL");
 #endif
   window->show(argc,argv);
   return Fl::run();

@@ -68,7 +68,7 @@ using namespace gnui;
 #if USE_CAIRO
 # include <cairo.h>
 # include <cairo-quartz.h>
-  FL_API cairo_t * gnui::cr=0;
+  GNUI_API cairo_t * gnui::cr=0;
 #endif
 
 #if USE_CAIRO
@@ -82,8 +82,8 @@ namespace gnui {
 
 // these pointers are set by the lock() function:
 static void nothing() {}
-void (*fl_lock_function)() = nothing;
-void (*fl_unlock_function)() = nothing;
+void (*gnui_lock_function)() = nothing;
+void (*gnui_unlock_function)() = nothing;
 
 ////////////////////////////////////////////////////////////////
 // interface to select call:
@@ -210,9 +210,9 @@ static int run_select(double time_to_wait, bool in_thread, bool callbacks) {
       if (FD_ISSET(f, &x)) revents |= POLLERR;
       if (fd[i].events & revents) {
         DEBUGMSG("DOING CALLBACK: ");
-        fl_lock_function();
+        gnui_lock_function();
         fd[i].cb(f, fd[i].arg);
-        fl_unlock_function();
+        gnui_unlock_function();
         DEBUGMSG("DONE\n");
       }
     }
@@ -253,7 +253,7 @@ static void *select_thread_proc(void *userdata)
 static void HandleDataReady()
 {
 #if 0
-  fl_lock_function();
+  gnui_lock_function();
   timeval t = { 0, 0 };		// quick check
   fd_set r = fdsets[0];
   fd_set w = fdsets[1];
@@ -274,7 +274,7 @@ static void HandleDataReady()
       }
     }
   }
-  fl_unlock_function();
+  gnui_unlock_function();
 #endif
 }
 
@@ -380,9 +380,9 @@ static pascal OSStatus carbonDispatchHandler( EventHandlerCallRef nextHandler, E
     {
       case kEventCommandProcess:
         GetEventParameter( event, kEventParamDirectObject, typeHICommand, NULL, sizeof(HICommand), NULL, &cmd );
-	fl_lock_function();
+	gnui_lock_function();
         ret = HandleMenu( &cmd );
-	fl_unlock_function();
+	gnui_unlock_function();
         break;
     }
     break;
@@ -409,16 +409,16 @@ static pascal OSStatus carbonDispatchHandler( EventHandlerCallRef nextHandler, E
  * do the callbacks for the events and sockets. Returns non-zero if
  * anything happened during the time period.
  */
-static inline int fl_wait(double time) 
+static inline int gnui_wait(double time) 
 {
   if (!CreatedWindow::first && !select_thread) {
     // If there are no windows, avoid calling event handler stuff. This
     // allows the program to work on a headless render farm or when
     // ssh'd in without admin privledges.
     // Also similar to how the X11 version works when DISPLAY is not set.
-    fl_unlock_function();
+    gnui_unlock_function();
     int ret = run_select(time, false, true);
-    fl_lock_function();
+    gnui_lock_function();
     return ret;  
   }
 
@@ -459,7 +459,7 @@ static inline int fl_wait(double time)
   // START A THREAD TO WATCH FOR DATA READY
   if ( nfds && !select_thread) {
     // detect if calling program did not do gnui::lock() and do it:
-    if (fl_lock_function == nothing) gnui::lock();
+    if (gnui_lock_function == nothing) gnui::lock();
     pthread_mutex_init(&select_mutex, NULL);
     pipe(G_pipe);
     DEBUGMSG("*** START THREAD\n");
@@ -467,7 +467,7 @@ static inline int fl_wait(double time)
 		   (void*)GetCurrentEventQueue());
   }
 
-  fl_unlock_function();
+  gnui_unlock_function();
 
   EventRef event;
   if (!ReceiveNextEvent(0, NULL, time, true, &event)) {
@@ -497,7 +497,7 @@ static inline int fl_wait(double time)
     ReleaseEvent(event);
     time = 0.0; // just peek for pending events
   }
-  fl_lock_function();
+  gnui_lock_function();
 
   // we send LEAVE only if the mouse did not enter some other window:
   // I'm not sure if this is needed or if it works...
@@ -516,7 +516,7 @@ static inline int fl_wait(double time)
 /*
  * ready() is just like wait(0.0) except no callbacks are done.
  */
-static inline int fl_ready() {
+static inline int gnui_ready() {
   if (!CreatedWindow::first && !select_thread) {
     return run_select(0.0, false, false);
   }
@@ -580,7 +580,7 @@ static pascal OSStatus carbonWindowHandler( EventHandlerCallRef nextHandler, Eve
   UInt32 kind = GetEventKind( event );
   OSStatus ret = noErr;
   Window *window = (Window*)userData;
-  fl_lock_function();
+  gnui_lock_function();
 
   switch ( kind )
   {
@@ -640,7 +640,7 @@ static pascal OSStatus carbonWindowHandler( EventHandlerCallRef nextHandler, Eve
     ret = eventNotHandledErr;
     break;
   }
-  fl_unlock_function();
+  gnui_unlock_function();
   return ret;
 }
 
@@ -660,7 +660,7 @@ static pascal OSStatus carbonMousewheelHandler( EventHandlerCallRef nextHandler,
   GetEventParameter( event, kEventParamMouseWheelDelta, typeLongInteger, 
                      NULL, sizeof(long), NULL, &delta );
   OSStatus ret = noErr;
-  fl_lock_function();
+  gnui_lock_function();
   if ( axis == kEventMouseWheelAxisX ) {
     e_dx = -delta;
     e_dy = 0;
@@ -672,7 +672,7 @@ static pascal OSStatus carbonMousewheelHandler( EventHandlerCallRef nextHandler,
   } else {
     ret = eventNotHandledErr;
   }
-  fl_unlock_function();
+  gnui_unlock_function();
   return ret;
 }
 
@@ -712,7 +712,7 @@ static UInt32 recent_keycode = 0;
 //+++ verify port to FLTK2
 static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, EventRef event, void *userData )
 {
-  fl_lock_function();
+  gnui_lock_function();
 
   os_event = event;
   Window *window = (Window*)userData;
@@ -734,15 +734,15 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
     fix_xfocus(window);
     if ( FindWindow( pos, 0 ) != inContent ) {
       // let the OS handle clicks in the title bar
-      fl_unlock_function();
+      gnui_unlock_function();
       return CallNextEventHandler( nextHandler, event );
     }
     if ( !IsWindowActive( gnui::xid(window) ) ) {
       // let the OS handle the activation,
       // but continue to get a click-through effect
-      fl_unlock_function();
+      gnui_unlock_function();
       CallNextEventHandler( nextHandler, event );
-      fl_lock_function();
+      gnui_lock_function();
     }
     os_capture = gnui::xid(window); // make all mouse events go to this window
     px = pos.h; py = pos.v;
@@ -774,7 +774,7 @@ static pascal OSStatus carbonMouseHandler( EventHandlerCallRef nextHandler, Even
     break;
   }
 
-  fl_unlock_function();
+  gnui_unlock_function();
   return noErr;
 }
 
@@ -861,7 +861,7 @@ pascal OSStatus carbonKeyboardHandler( EventHandlerCallRef nextHandler, EventRef
   GetEventParameter( event, kEventParamKeyMacCharCodes, typeChar, NULL, sizeof(char), NULL, &macchar );
   unsigned short sym;
 
-  fl_lock_function();
+  gnui_lock_function();
   if (!xfocus) fix_xfocus((Window*)userData);
 
   switch ( GetEventKind( event ) )
@@ -928,7 +928,7 @@ pascal OSStatus carbonKeyboardHandler( EventHandlerCallRef nextHandler, EventRef
     break; }
   }
   bool r = (sendEvent && handle(sendEvent, xfocus));
-  fl_unlock_function();
+  gnui_unlock_function();
   if (r) return noErr;
   return CallNextEventHandler( nextHandler, event );
 }
@@ -937,7 +937,7 @@ pascal OSStatus carbonKeyboardHandler( EventHandlerCallRef nextHandler, EventRef
 // this function, so the system can move any Input Method widgets to
 // that position:
 //+++ verify port to FLTK2
-void fl_set_spot(gnui::Font *f, Widget *w, int x, int y) {}
+void gnui_set_spot(gnui::Font *f, Widget *w, int x, int y) {}
 
 /*
  * initialize the Mac toolboxes, dock status, and set the default menubar
@@ -1618,7 +1618,7 @@ void Window::label(const char *name, const char * iname) {
 #if 0
     // this probably works, it was in a bug report
     CFStringRef mlabel = CFStringCreateWithCString(NULL, name, kCFStringEncodingUTF8);
-    SetWindowTitleWithCFString(fl_xid(this), mlabel);
+    SetWindowTitleWithCFString(gnui_xid(this), mlabel);
     CFRelease(mlabel);
 #else
     Str255 pTitle;
@@ -1640,20 +1640,20 @@ void* Window::backbuffer() const {  return i ? i->gc :0;}
 const Window *Window::drawing_window_;
 static CGContextRef prev_gc = 0;
 static WindowPtr prev_window = 0;
-int fl_clip_w, fl_clip_h;
+int gnui_clip_w, gnui_clip_h;
 
 namespace gnui {class Image;}
-gnui::Image* fl_current_Image;
+gnui::Image* gnui_current_Image;
 
 void gnui::draw_into(CGContextRef gc, int w, int h) {
   prev_gc = quartz_gc;
   prev_window = quartz_window;
   quartz_window = 0;
   quartz_gc = gc;
-  fl_clip_w = w; fl_clip_h = h;
+  gnui_clip_w = w; gnui_clip_h = h;
   CGContextSaveGState(quartz_gc);
   fill_quartz_context();
-  fl_current_Image = 0;
+  gnui_current_Image = 0;
 }
 
 void gnui::stop_drawing(CGImageRef) {
@@ -1701,7 +1701,7 @@ void Widget::make_current() const {
   translate(x,y);
 }
 
-// helper function to manage the current CGContext fl_gc
+// helper function to manage the current CGContext gnui_gc
 namespace gnui {
   extern void restore_quartz_line_style();
 }

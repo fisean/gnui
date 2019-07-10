@@ -35,7 +35,7 @@
 
 namespace gnui {
 
-class FL_API PackedGroup : public Group {
+class GNUI_API PackedGroup : public Group {
   int spacing_;
   int margin_left_;
   int margin_right_;

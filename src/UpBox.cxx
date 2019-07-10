@@ -256,7 +256,7 @@ Box* const gnui::FLAT_BOX = &flatBox;
   edge, which will reverse exactly which pixels are drawn in
   the corner.
 
-  Emulates the gnui1 fl_frame2() function
+  Emulates the gnui1 gnui_frame2() function
 */
 void gnui::drawframe(const char* s, int x, int y, int w, int h) {
   if (h > 0 && w > 0) for (;*s;) {
@@ -283,7 +283,7 @@ void gnui::drawframe(const char* s, int x, int y, int w, int h) {
   Draw a spiral similar to drawframe(), but starts with the top
   edge and goes counter-clockwise.
 
-  Emulates the gnui1 fl_frame() function
+  Emulates the gnui1 gnui_frame() function
 */
 void gnui::drawframe2(const char* s, int x, int y, int w, int h) {
   if (h > 0 && w > 0) for (;*s;) {
@@ -306,7 +306,7 @@ void gnui::drawframe2(const char* s, int x, int y, int w, int h) {
   }
 }
 
-void fl_to_inactive(const char* s, char* to) {
+void gnui_to_inactive(const char* s, char* to) {
   if (*s == '2') *to++ = *s++;
   while (*s) *to++ = 'M'+(*s++ - 'A')/3;
   *to = 0;
@@ -321,7 +321,7 @@ void FrameBox::_draw(const gnui::Rectangle& R) const
   const Color fg = getcolor();
   const char* s = data();
   char buf[26]; if (drawflags(INACTIVE_R) && Style::draw_boxes_inactive_) {
-    fl_to_inactive(s, buf); s = buf;}
+    gnui_to_inactive(s, buf); s = buf;}
   if (*s == '2') {
     drawframe2(s+1,R.x(), R.y(), R.w(), R.h());
   } else {

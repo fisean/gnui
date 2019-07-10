@@ -44,7 +44,7 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /YX /FD /c
-# ADD CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /I "../../images/zlib" /D "NDEBUG" /D "FL_SHARED" /D "FL_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
+# ADD CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /I "../../images/zlib" /D "NDEBUG" /D "GNUI_SHARED" /D "GNUI_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
 # SUBTRACT CPP /YX
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
@@ -72,7 +72,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /YX /FD /c
-# ADD CPP /nologo /MTd /W3 /Gm /Gi /GX /ZI /Od /I "../../images/zlib" /I "../visualc" /I "." /I "../.." /I "../../fltk/compat" /D "_DEBUG" /D "FL_SHARED" /D "FL_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /FR /c
+# ADD CPP /nologo /MTd /W3 /Gm /Gi /GX /ZI /Od /I "../../images/zlib" /I "../visualc" /I "." /I "../.." /I "../../fltk/compat" /D "_DEBUG" /D "GNUI_SHARED" /D "GNUI_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /FR /c
 # SUBTRACT CPP /YX
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o /win32 "NUL"
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o /win32 "NUL"
@@ -100,9 +100,9 @@ LINK32=link.exe
 # PROP Intermediate_Dir "fltkdll_images___Win32_Release_MinSize"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /I "../../images/zlib" /D "NDEBUG" /D "FL_SHARED" /D "FL_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
+# ADD BASE CPP /nologo /MT /W3 /GX /Os /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /I "../../images/zlib" /D "NDEBUG" /D "GNUI_SHARED" /D "GNUI_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /c
 # SUBTRACT BASE CPP /YX
-# ADD CPP /nologo /MD /W1 /GX- /O1 /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /I "../../images/zlib" /D "NDEBUG" /D "FL_SHARED" /D "FL_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /D "_MSC_DLL" /YX /c
+# ADD CPP /nologo /MD /W1 /GX- /O1 /Ob2 /I "." /I "../.." /I "../../fltk/compat" /I "../visualc" /I "../../images/zlib" /D "NDEBUG" /D "GNUI_SHARED" /D "GNUI_IMAGES_LIBRARY" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /D "VC_EXTRA_LEAN" /D "WIN32_EXTRA_LEAN" /D "_MSC_DLL" /YX /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o /win32 "NUL"
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
@@ -138,7 +138,7 @@ DEP_CPP_FILEI=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -148,8 +148,8 @@ DEP_CPP_FILEI=\
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\images\Fl_Guess_Image.cxx
-DEP_CPP_FL_GU=\
+SOURCE=..\..\images\GNUI_Guess_Image.cxx
+DEP_CPP_GNUI_GU=\
 	"..\..\fltk\sharedimage.h"\
 	"..\..\fltk\types.h"\
 	"..\..\fltk\x.h"\
@@ -157,7 +157,7 @@ DEP_CPP_FL_GU=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\mac.h"\
@@ -169,15 +169,15 @@ DEP_CPP_FL_GU=\
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\images\fl_jpeg.cxx
-DEP_CPP_FL_JP=\
+SOURCE=..\..\images\gnui_jpeg.cxx
+DEP_CPP_GNUI_JP=\
 	"..\..\fltk\sharedimage.h"\
 	"..\..\fltk\types.h"\
 	"..\..\images\libjpeg\jpeglib.h"\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -191,8 +191,8 @@ DEP_CPP_FL_JP=\
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\images\fl_png.cxx
-DEP_CPP_FL_PN=\
+SOURCE=..\..\images\gnui_png.cxx
+DEP_CPP_GNUI_PN=\
 	"..\..\fltk\error.h"\
 	"..\..\fltk\sharedimage.h"\
 	"..\..\fltk\types.h"\
@@ -202,7 +202,7 @@ DEP_CPP_FL_PN=\
 	".\config.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\mac.h"\
@@ -213,7 +213,7 @@ DEP_CPP_FL_PN=\
 	{$(INCLUDE)}"images\libpng\pngconf.h"\
 	{$(INCLUDE)}"images\zlib\zconf.h"\
 	
-NODEP_CPP_FL_PN=\
+NODEP_CPP_GNUI_PN=\
 	"..\..\images\libpng\alloc.h"\
 	
 # End Source File
@@ -231,7 +231,7 @@ DEP_CPP_HELPD=\
 	{$(INCLUDE)}"fltk\button.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\group.h"\
 	{$(INCLUDE)}"fltk\image.h"\
@@ -255,7 +255,7 @@ DEP_CPP_IMAGE=\
 	"..\..\fltk\string.h"\
 	"..\..\fltk\types.h"\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -274,7 +274,7 @@ DEP_CPP_PNMIM=\
 	"..\..\fltk\string.h"\
 	"..\..\fltk\types.h"\
 	{$(INCLUDE)}"fltk\color.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\PixelType.h"\
@@ -293,7 +293,7 @@ DEP_CPP_XPMFI=\
 	"..\..\fltk\xpmimage.h"\
 	{$(INCLUDE)}"fltk\color.h"\
 	{$(INCLUDE)}"fltk\draw.h"\
-	{$(INCLUDE)}"fltk\fl_api.h"\
+	{$(INCLUDE)}"fltk\gnui_api.h"\
 	{$(INCLUDE)}"fltk\flags.h"\
 	{$(INCLUDE)}"fltk\image.h"\
 	{$(INCLUDE)}"fltk\mac.h"\

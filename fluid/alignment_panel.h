@@ -42,7 +42,7 @@ extern gnui::DoubleBufferWindow* shell_window;
 extern gnui::Input* shell_command_input;
 extern gnui::CheckButton* shell_writecode_button;
 extern gnui::CheckButton* shell_writemsgs_button;
-extern gnui::CheckButton* shell_savefl_button;
+extern gnui::CheckButton* shell_savegnui_button;
 #include <fltk/ReturnButton.h>
 extern void do_shell_command(gnui::ReturnButton*, void*);
 extern gnui::DoubleBufferWindow* shell_run_window;

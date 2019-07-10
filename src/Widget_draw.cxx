@@ -68,7 +68,7 @@ LabelType::~LabelType() {}
 
 ////////////////////////////////////////////////////////////////
 
-class FL_API NoLabel : public LabelType {
+class GNUI_API NoLabel : public LabelType {
 public:
   void draw(const char*, const Rectangle&, Flags) const {}
   NoLabel(const char * n) : LabelType(n) {}

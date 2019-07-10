@@ -38,7 +38,7 @@ int main (int argc, char **argv) {
         o->begin();
         new gnui::Button(10, 25, 100, 22, "button1");
         new gnui::Input(130, 58, 100, 22, "input in box2");
-        new gnui::Button(20, 113, 260, 22, "This is stuff inside the Fl_Group \"tab2\"");
+        new gnui::Button(20, 113, 260, 22, "This is stuff inside the GNUI_Group \"tab2\"");
         o->end();
       }
        {gnui::Group* o = new gnui::Group(0, 20, 300, 171, "tab3");

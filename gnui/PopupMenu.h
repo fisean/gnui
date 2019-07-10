@@ -35,7 +35,7 @@
 
 namespace gnui {
 
-class FL_API PopupMenu : public Menu {
+class GNUI_API PopupMenu : public Menu {
 public:
   // values for type:
   enum {NORMAL = GROUP_TYPE, POPUP1, POPUP2, POPUP12,

@@ -323,7 +323,7 @@ static float align(int first_segment,
   return my;
 }
 
-bool fl_hide_underscore; // set by Choice
+bool gnui_hide_underscore; // set by Choice
 
 // The amount returned here should exactly match the ascent returned by setsa:
 int Rectangle::baseline_y() const {
@@ -434,7 +434,7 @@ static void wrap(
     if (p >= end) break;
     width = 0;
     if (underscore) {
-      if (!fl_hide_underscore) {
+      if (!gnui_hide_underscore) {
 	const char* us = "_"; 
 	// on the some platforms the underscore sticks to the bottom of the letter
 	// so add space to enhance the shortcut appearance 

@@ -201,13 +201,13 @@ void Image::fetch_if_needed() const {
   }
 }
 
-extern void fl_set_quartz_ctm();
+extern void gnui_set_quartz_ctm();
 
 void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
   fetch_if_needed();
   if (!picture) {fillrect(to); return;}
   CGContextSaveGState(quartz_gc);
-  fl_set_quartz_ctm();
+  gnui_set_quartz_ctm();
   CGImageRef img = picture->img(from);
   CGRect rect = {{to.x(), -to.y()}, {to.w(), -to.h()}};
   CGContextDrawImage(quartz_gc, rect, img);

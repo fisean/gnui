@@ -83,7 +83,7 @@ CPPFILES = \
 	filename_match.cxx \
 	filename_name.cxx \
 	fillrect.cxx \
-	Fl_Menu_Item.cxx \
+	GNUI_Menu_Item.cxx \
 	FloatInput.cxx \
 	gnui_theme.cxx \
 	Font.cxx \

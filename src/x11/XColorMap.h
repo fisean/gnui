@@ -34,12 +34,12 @@ struct XColorMap {
   unsigned char mapped;	// true when XAllocColor done
   unsigned long pixel;	// the X pixel to use
 };
-struct XColorMap& fl_xmap(uchar i, uchar r, uchar g, uchar b);
+struct XColorMap& gnui_xmap(uchar i, uchar r, uchar g, uchar b);
 #endif
 
 // mask & shifts to produce xcolor for truecolor visuals:
-extern unsigned char fl_redmask, fl_greenmask, fl_bluemask;
-extern int fl_redshift, fl_greenshift, fl_blueshift, fl_extrashift;
+extern unsigned char gnui_redmask, gnui_greenmask, gnui_bluemask;
+extern int gnui_redshift, gnui_greenshift, gnui_blueshift, gnui_extrashift;
 
 //
 // End of "$Id$".

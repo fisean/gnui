@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API MenuBar : public Menu {
+class GNUI_API MenuBar : public Menu {
 public:
   MenuBar(int x,int y,int w,int h,const char *l=0);
   static NamedStyle* default_style;

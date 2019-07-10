@@ -35,7 +35,7 @@ enum {  // values for attributes:
   BOLD_ITALIC = 3
 };
 
-struct FL_API Font {
+struct GNUI_API Font {
   const char* name_;
   int attributes_;
   // other fields are added here!
@@ -59,13 +59,13 @@ struct FL_API Font {
 };
 
 // Find a Font from a name and attributes:
-FL_API Font* font(const char* name, int attrib = 0);
+GNUI_API Font* font(const char* name, int attrib = 0);
 
 // Find a Font from an gnui1 integer font id:
-FL_API Font* font(int);
+GNUI_API Font* font(int);
 
 // Find and return every font on the system.
-FL_API int list_fonts(Font**& arrayp);
+GNUI_API int list_fonts(Font**& arrayp);
 
 }
 

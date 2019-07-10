@@ -32,7 +32,7 @@
 
 namespace gnui {
 
-class FL_API LightButton : public CheckButton {
+class GNUI_API LightButton : public CheckButton {
 public:
   LightButton(int x,int y,int w,int h,const char *l = 0);
   static NamedStyle* default_style;

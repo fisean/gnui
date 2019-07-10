@@ -71,7 +71,7 @@ using namespace gnui;
 // The dimensions for the glyph in this and the PopupMenu are exactly
 // the same, so that glyphs may be shared between them.
 
-extern bool fl_hide_underscore;
+extern bool gnui_hide_underscore;
 
 /*! You can change the icon drawn on the right edge by setting glyph()
   to your own function that draws whatever you want.
@@ -109,9 +109,9 @@ void Choice::draw() {
       // center the item vertically:
       translate(r.x()+2, r.y()+((r.h()-h)>>1));
       int save_w = o->w(); o->w(r.w()-4);
-      fl_hide_underscore = true;
+      gnui_hide_underscore = true;
       o->draw();
-      fl_hide_underscore = false;
+      gnui_hide_underscore = false;
       Item::clear_style();
       o->w(save_w);
       o->flags(saved);

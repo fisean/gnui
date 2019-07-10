@@ -61,23 +61,23 @@ extern "C" {
 
 #endif
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
-FL_API extern char* newstring(const char *);
+GNUI_API extern char* newstring(const char *);
 
 #if defined(DOXYGEN) || defined(__MWERKS__)
-FL_API extern int strcasecmp(const char *, const char *);
-FL_API extern int strncasecmp(const char *, const char *, size_t);
+GNUI_API extern int strcasecmp(const char *, const char *);
+GNUI_API extern int strncasecmp(const char *, const char *, size_t);
 #endif
 
 #if defined(DOXYGEN) || !defined(__linux) && !defined(_WIN32) && !defined(__FreeBSD__) && !defined(__APPLE__)
-FL_API extern int snprintf(char *, size_t, const char *, ...);
-FL_API extern int vsnprintf(char *, size_t, const char *, va_list ap);
+GNUI_API extern int snprintf(char *, size_t, const char *, ...);
+GNUI_API extern int vsnprintf(char *, size_t, const char *, va_list ap);
 #endif
 
 #if defined(DOXYGEN) || !defined(__FreeBSD__) && !defined(__APPLE__)
-FL_API extern size_t strlcat(char *, const char *, size_t);
-FL_API extern size_t strlcpy(char *, const char *, size_t);
+GNUI_API extern size_t strlcat(char *, const char *, size_t);
+GNUI_API extern size_t strlcpy(char *, const char *, size_t);
 #endif
 
 #ifdef __cplusplus

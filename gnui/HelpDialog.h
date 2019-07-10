@@ -11,7 +11,7 @@
 
 namespace gnui  {
 
-class FL_IMAGES_API HelpDialog  {
+class GNUI_IMAGES_API HelpDialog  {
   int index_;
   int max_;
   int line_[100];

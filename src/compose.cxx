@@ -267,7 +267,7 @@ static const char compose_pairs[] = {
 };
 
 #if USE_X11 // X only
-extern int fl_actual_keysym;
+extern int gnui_actual_keysym;
 // X dead-key lookup table.  This turns a dead-key keysym into the
 // first of two characters for one of the compose sequences.  These
 // keysyms start at 0xFE50.
@@ -396,7 +396,7 @@ bool gnui::compose(int& del) {
   }
 
 #if USE_X11
-  int i = fl_actual_keysym;
+  int i = gnui_actual_keysym;
   // See if they typed a dead key.  This gets it into the same state as
   // typing prefix+accent:
   if (i >= 0xfe50 && i <= 0xfe5b) {

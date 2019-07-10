@@ -54,7 +54,7 @@ static inline void pushregion(Region r) {
   rstack[++rstackptr] = r;
 }
 
-int fl_clip_state_number = 0; // used by code that needs to update clip regions
+int gnui_clip_state_number = 0; // used by code that needs to update clip regions
 
 /*! Return the current region as a system-specific structure. You must
   include <gnui/x.h> to use this. Returns null if there is no clipping.
@@ -66,9 +66,9 @@ Region gnui::clip_region() {
 // Make the system's clip match the top of the clip stack.  This can
 // be used after changing the stack, or to undo any clobbering of clip
 // done by your program:
-void fl_restore_clip() {
+void gnui_restore_clip() {
   Region r = rstack[rstackptr];
-  fl_clip_state_number++;
+  gnui_clip_state_number++;
   if ( quartz_window ) {
     GrafPtr port = GetWindowPort( quartz_window );
     if ( port ) { 
@@ -91,7 +91,7 @@ void gnui::clip_region(Region r) {
   Region oldr = rstack[rstackptr];
   if (oldr) DisposeRgn(oldr);
   rstack[rstackptr] = r;
-  fl_restore_clip();
+  gnui_restore_clip();
 }
 // fabien : this code would merit inlining wouldn't it ?
 void gnui::push_clip(const Rectangle& r) {
@@ -118,7 +118,7 @@ void gnui::push_clip(int x, int y, int w, int  h) {
     if (current) SectRgn(region, current, region);
   }
   pushregion(region);
-  fl_restore_clip();
+  gnui_restore_clip();
 #endif
 }
 
@@ -138,7 +138,7 @@ void gnui::clipout(const Rectangle& r1) {
   Region region = NewRgn();
   SetRectRgn(region, r.x(), r.y(), r.r(), r.b());
   DiffRgn(current, region, current);
-  fl_restore_clip();
+  gnui_restore_clip();
 }
 
 /*!
@@ -149,7 +149,7 @@ void gnui::clipout(const Rectangle& r1) {
 */
 void gnui::push_no_clip() {
   pushregion(0);
-  fl_restore_clip();
+  gnui_restore_clip();
 }
 
 /*! 
@@ -164,7 +164,7 @@ void gnui::pop_clip() {
   if (rstackptr > 0) {
     Region oldr = rstack[rstackptr--];
     if (oldr) DisposeRgn(oldr);
-    fl_restore_clip();
+    gnui_restore_clip();
   }
 #endif
 }

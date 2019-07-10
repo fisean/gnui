@@ -31,7 +31,7 @@
 
 namespace gnui {
 
-class FL_IMAGES_API pnmImage : public SharedImage {
+class GNUI_IMAGES_API pnmImage : public SharedImage {
 public:
   pnmImage(const char* filename);
   // virtual function overrides

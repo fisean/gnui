@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API Dial : public Valuator {
+class GNUI_API Dial : public Valuator {
 
 public:
 

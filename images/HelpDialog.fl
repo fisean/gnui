@@ -39,7 +39,7 @@ decl {\#include <gnui/ask.h>} {}
 
 namespace gnui {open
 } {
-  class FL_API HelpDialog {open
+  class GNUI_API HelpDialog {open
   } {
     decl {int index_;} {}
     decl {int max_;} {}
@@ -184,7 +184,7 @@ index_    = -1;
 max_      = 0;
 find_pos_ = 0;
 window_->resizable(view_);
-/*fl_register_images();*/} {selected
+/*gnui_register_images();*/} {selected
       }
     }
     Function {~HelpDialog()} {} {

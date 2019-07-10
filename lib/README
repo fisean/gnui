@@ -15,7 +15,7 @@ The libraries are:
 
     fltk2        - the core of fltk2, most programs only need this
     fltk2_images - functions that use png, jpeg, other image libraries
-    fltk2_gl     - Fl_Gl_Window and functions that use OpenGL
+    fltk2_gl     - GNUI_Gl_Window and functions that use OpenGL
     fltk2_glut   - glut emulation functions
     fltk2_forms  - forms emulation functions
 

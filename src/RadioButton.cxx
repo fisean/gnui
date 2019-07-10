@@ -36,7 +36,7 @@ using namespace gnui;
   RadioButton widgets in the same group off.  It displays a round dot
   to show the user this:
 
-  \image html Fl_Round_Button.gif
+  \image html GNUI_Round_Button.gif
 
   You can control the color of the circle with color() and the color
   of the dot with textcolor(). You can make it draw different colors

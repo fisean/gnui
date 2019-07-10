@@ -114,15 +114,15 @@ LIB32=link.exe -lib
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=..\..\OpenGL\Fl_Gl_Choice.cxx
+SOURCE=..\..\OpenGL\GNUI_Gl_Choice.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\OpenGL\Fl_Gl_Overlay.cxx
+SOURCE=..\..\OpenGL\GNUI_Gl_Overlay.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\OpenGL\Fl_Gl_Window.cxx
+SOURCE=..\..\OpenGL\GNUI_Gl_Window.cxx
 # End Source File
 # Begin Source File
 

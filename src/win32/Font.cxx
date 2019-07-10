@@ -69,8 +69,8 @@ const char* gnui::Font::system_name() {
 
 static FontSize *current;
 
-FL_API unsigned fl_font_opengl_id() {return current->opengl_id;}
-FL_API void fl_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
+GNUI_API unsigned gnui_font_opengl_id() {return current->opengl_id;}
+GNUI_API void gnui_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
 
 static FontSize* all_fonts;
 
@@ -135,7 +135,7 @@ FontSize::~FontSize() {
 
 // Deallocate Win32 fonts on exit. Warning: it will crash if you try
 // to do any fonts after this, because the pointers are not changed!
-void fl_font_rid() {
+void gnui_font_rid() {
   for (FontSize* fontsize = all_fonts; fontsize;) {
     FontSize* next = fontsize->next_all;
     delete fontsize;
@@ -196,7 +196,7 @@ gnui::Font* gnui::font(int i) {
 
 // For gnui::list_fonts(), make a new font, and optionally the bold and
 // italic subfonts:
-Font* fl_make_font(const char* name, int attrib) {
+Font* gnui_make_font(const char* name, int attrib) {
   // see if it is one of our built-in fonts and return it:
   int j; for (j = 0; j < 13; j++) {
     if (fonts[j].f.attributes_ == attrib &&

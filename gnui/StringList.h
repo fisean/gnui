@@ -28,7 +28,7 @@
 
 namespace gnui {
 
-class FL_API StringHierarchy : public List {
+class GNUI_API StringHierarchy : public List {
   Widget* generated_item_;
 public:
   // gnui::List virtual functions:
@@ -42,7 +42,7 @@ public:
   ~StringHierarchy() {delete generated_item_;}
 };
 
-class FL_API StringList : public StringHierarchy {
+class GNUI_API StringList : public StringHierarchy {
 public:
   // overrides of StringHierarchy virtual functions:
   virtual int children(const Menu*, const int* indexes, int level);
@@ -52,7 +52,7 @@ public:
   virtual const char* label(const Menu*, int index) = 0;
 };
 
-class FL_API StringArray : public StringList {
+class GNUI_API StringArray : public StringList {
   const char* const * array;
   int children_;
 public:

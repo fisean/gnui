@@ -42,7 +42,7 @@
 #if defined(WIN32) 
 #include <gnui/win32.h>
 #include <wingdi.h>
-extern HDC fl_bitmap_dc;
+extern HDC gnui_bitmap_dc;
 #else
 #include <gnui/x.h>
 #endif
@@ -315,7 +315,7 @@ void AnsiWidget::setPixel(int x, int y, int c) {
   begin_offscreen();
 #if defined(WIN32) 
   if (c < 0) {
-    ::SetPixel(fl_bitmap_dc, x,y, -c);
+    ::SetPixel(gnui_bitmap_dc, x,y, -c);
   } else {
     setcolor(ansiToFltk(c));
     drawpoint(x,y);
@@ -342,7 +342,7 @@ int AnsiWidget::getPixel(int x, int y) {
   begin_offscreen();
   // needs to return a -ve number to distiguish from basic 16 color values
   // unpacked in later calls to ansiToFltk()
-  return -int(::GetPixel(fl_bitmap_dc, x, y));
+  return -int(::GetPixel(gnui_bitmap_dc, x, y));
 #elif defined(__APPLE__)
   // TODO !
 #endif
@@ -684,4 +684,4 @@ int AnsiWidget::handle(int e) {
   return Widget::handle(e);
 }
 
-// End of "$Id: Fl_Ansi_Window.cpp,v 1.39 2006/02/04 12:41:01 zeeb90au Exp $".
+// End of "$Id: GNUI_Ansi_Window.cpp,v 1.39 2006/02/04 12:41:01 zeeb90au Exp $".

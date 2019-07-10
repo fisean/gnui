@@ -48,7 +48,7 @@ using namespace gnui;
   set_color_index().  However gnui uses the ones between 32 and 255
   and assummes they are not changed from their default values.
 
-  \image html fl_show_colormap.gif
+  \image html gnui_show_colormap.gif
   (this is \e not the X colormap used by gnui)
 
   A Color of zero (gnui::NO_COLOR) will draw black but is

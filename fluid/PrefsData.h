@@ -104,7 +104,7 @@ class PrefsData : public gnui::Preferences {
       get("shell_command", shell_command_, "", sizeof(shell_command_));
       get("shell_writecode", shell_writecode_, 1);
       get("shell_writemsgs", shell_writemsgs_, 0);
-      get("shell_savefl", shell_savefl_, 1);
+      get("shell_savefl", shell_savegnui_, 1);
       get("show_statusbar", show_statusbar_, 1);
       get("show_splash",show_splash_,1);
 

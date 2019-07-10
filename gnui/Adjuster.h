@@ -34,7 +34,7 @@ namespace gnui {
   This may be removed before the final version!
   3-button "slider", made for Nuke
 */
-class FL_API Adjuster : public Valuator {
+class GNUI_API Adjuster : public Valuator {
 public:
   Adjuster(int x, int y, int w, int h, const char *l=0);
   static NamedStyle* default_style;

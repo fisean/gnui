@@ -613,7 +613,7 @@ void Widget::redraw_highlight() {
 // If a draw() method sets this then the calling group assummes it
 // modified the current clip region to clip out the area covered by
 // the widget.
-extern Widget* fl_did_clipping;
+extern Widget* gnui_did_clipping;
 
 /*!
   Fltk calls this virtual function to draw the widget, after setting
@@ -639,7 +639,7 @@ void Widget::draw()
     // can overlap any other widgets:
     if (!image() &&
 	(!label() || (align() != ALIGN_CENTER && !(align()&ALIGN_INSIDE)))) {
-      fl_did_clipping = this;
+      gnui_did_clipping = this;
       return;
     }
     // draw the background behind the invisible widget:

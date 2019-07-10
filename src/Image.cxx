@@ -361,7 +361,7 @@ void Image::fetch_if_needed() const {
   }
 }
 
-extern void fl_set_cairo_ctm();
+extern void gnui_set_cairo_ctm();
 
 /**
   Draws the subrectangle \a from of the image, transformed to fill
@@ -384,7 +384,7 @@ void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
   fetch_if_needed();
   if (!picture) {fillrect(to); return;}
   cairo_save(cr);
-  fl_set_cairo_ctm();
+  gnui_set_cairo_ctm();
   cairo_translate(cr, to.x(), to.y());
   cairo_scale(cr, double(to.w())/from.w(), double(to.h())/from.h());
   cairo_rectangle(cr, 0, 0, from.w(), from.h());

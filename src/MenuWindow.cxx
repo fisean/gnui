@@ -77,22 +77,22 @@ MenuWindow::MenuWindow(int X, int Y, int W, int H, const char *l) : Window(X,Y,W
 
 // _WIN32 note: USE_OVERLAY is false
 #if USE_OVERLAY
-extern XVisualInfo *fl_find_overlay_visual();
-extern XVisualInfo *fl_overlay_visual;
-extern Colormap fl_overlay_colormap;
-extern unsigned long fl_transparent_pixel;
+extern XVisualInfo *gnui_find_overlay_visual();
+extern XVisualInfo *gnui_overlay_visual;
+extern Colormap gnui_overlay_colormap;
+extern unsigned long gnui_transparent_pixel;
 static GC menugc; // the GC used by all X windows
-extern bool fl_overlay; // changes how color(x) works
+extern bool gnui_overlay; // changes how color(x) works
 #endif
 
 void MenuWindow::create() {
   set_override();
   clear_double_buffer();
 #if USE_OVERLAY
-  if (overlay() && fl_find_overlay_visual()) {
-    XInstallColormap(xdisplay, fl_overlay_colormap);
-    CreatedWindow::create(this, fl_overlay_visual, fl_overlay_colormap,
-			  int(fl_transparent_pixel));
+  if (overlay() && gnui_find_overlay_visual()) {
+    XInstallColormap(xdisplay, gnui_overlay_colormap);
+    CreatedWindow::create(this, gnui_overlay_visual, gnui_overlay_colormap,
+			  int(gnui_transparent_pixel));
   } else
 #endif
     Window::create();
@@ -100,12 +100,12 @@ void MenuWindow::create() {
 
 void MenuWindow::flush() {
 #if USE_OVERLAY
-  if (!fl_overlay_visual || !overlay()) {Window::flush(); return;}
+  if (!gnui_overlay_visual || !overlay()) {Window::flush(); return;}
   CreatedWindow *i = CreatedWindow::find(this);
   xwindow = i->xid;
   if (!menugc) menugc = XCreateGC(xdisplay, i->xid, 0, 0);
   gnui::gc = menugc;
-  fl_overlay = true;
+  gnui_overlay = true;
   current_ = this;
   bool expose =
     (damage() & DAMAGE_EXPOSE) && !(damage() & DAMAGE_ALL);
@@ -116,7 +116,7 @@ void MenuWindow::flush() {
     set_damage(DAMAGE_EXPOSE); draw();
     clip_region(0);
   }
-  fl_overlay = false;
+  gnui_overlay = false;
 #else
   Window::flush();
 #endif

@@ -33,7 +33,7 @@ using namespace gnui;
   Same as a normal button except the shortcut() is preset to ReturnKey
   and KeypadEnter, and a glyph is drawn to indicate this.
 
-  \image html Fl_Return_Button.gif
+  \image html GNUI_Return_Button.gif
 
 */
 

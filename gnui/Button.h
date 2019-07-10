@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API Button : public Widget {
+class GNUI_API Button : public Widget {
 public:
   /** Back-compatibility enumeration */
   enum {

@@ -31,43 +31,43 @@
 // complete.
 
 #include <fltk/Fl.h>
-#include <fltk/Fl_Free.h>
+#include <fltk/GNUI_Free.h>
 
-void Fl_Free::step(void *v) {
-  Fl_Free *f = (Fl_Free *)v;
-  f->handle(FL_STEP);
+void GNUI_Free::step(void *v) {
+  GNUI_Free *f = (GNUI_Free *)v;
+  f->handle(GNUI_STEP);
   Fl::add_timeout(.01,step,v);
 }
 
-Fl_Free::Fl_Free(uchar t,int x,int y,int w,int h,const char *l,
-		 FL_HANDLEPTR hdl) :
-Fl_Widget(x,y,w,h,l) {
+GNUI_Free::GNUI_Free(uchar t,int x,int y,int w,int h,const char *l,
+		 GNUI_HANDLEPTR hdl) :
+GNUI_Widget(x,y,w,h,l) {
   type(t);
   hfunc = hdl;
-  if (t == FL_SLEEPING_FREE) set_flag(FL_INACTIVE);
-  if (t == FL_CONTINUOUS_FREE || t == FL_ALL_FREE)
+  if (t == GNUI_SLEEPING_FREE) set_flag(GNUI_INACTIVE);
+  if (t == GNUI_CONTINUOUS_FREE || t == GNUI_ALL_FREE)
     Fl::add_timeout(.01,step,this);
 }
 
-Fl_Free::~Fl_Free() {
+GNUI_Free::~GNUI_Free() {
   Fl::remove_timeout(step,this);
-  hfunc(this,FL_FREEMEM,0,0,0);
+  hfunc(this,GNUI_FREEMEM,0,0,0);
 }
 
-void Fl_Free::draw() {hfunc(this,FL_DRAW,0,0,0);}
+void GNUI_Free::draw() {hfunc(this,GNUI_DRAW,0,0,0);}
 
-int Fl_Free::handle(int e) {
+int GNUI_Free::handle(int e) {
   char key = Fl::event_key();
   switch (e) {
-  case FL_FOCUS:
-    if (type()!=FL_INPUT_FREE && type()!=FL_ALL_FREE) return 0;
+  case GNUI_FOCUS:
+    if (type()!=GNUI_INPUT_FREE && type()!=GNUI_ALL_FREE) return 0;
     break;
-  case FL_PUSH:
-  case FL_DRAG:
-  case FL_RELEASE:
+  case GNUI_PUSH:
+  case GNUI_DRAG:
+  case GNUI_RELEASE:
     key = 4-Fl::event_button();
     break;
-  case FL_SHORTCUT:
+  case GNUI_SHORTCUT:
     return 0;
   }
   if (hfunc(this, e, float(Fl::event_x()), float(Fl::event_y()), key)) do_callback();

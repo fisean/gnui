@@ -30,7 +30,7 @@
 #ifndef _gnui_TextBuffer_h_
 #define _gnui_TextBuffer_h_
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 namespace gnui {
 
@@ -38,7 +38,7 @@ namespace gnui {
    of a single buffer character */
 #define TEXT_MAX_EXP_CHAR_LEN 20
 
-class FL_API TextSelection {
+class GNUI_API TextSelection {
 public:
   TextSelection();
 
@@ -80,7 +80,7 @@ typedef void (*Text_Modify_Cb)(	int pos, int nInserted, int nDeleted,
 typedef void (*Text_Predelete_Cb)(int pos, int nDeleted, void* cbArg);
 
 /** TextBuffer */
-class FL_API TextBuffer {
+class GNUI_API TextBuffer {
 public:
   TextBuffer(int requestedsize = 0);
   ~TextBuffer();

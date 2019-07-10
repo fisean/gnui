@@ -60,7 +60,7 @@
 
 namespace gnui {
 	
-	class FL_GLUT_API GlutWindow : public gnui::GlWindow {
+	class GNUI_GLUT_API GlutWindow : public gnui::GlWindow {
 	  void _init();
 	  int mouse_down;
 	protected:
@@ -87,21 +87,21 @@ namespace gnui {
 	};
 }
 
-extern FL_GLUT_API gnui::GlutWindow *glut_window;	// the current window
-extern FL_GLUT_API int glut_menu;			// the current menu
+extern GNUI_GLUT_API gnui::GlutWindow *glut_window;	// the current window
+extern GNUI_GLUT_API int glut_menu;			// the current menu
 
 // function pointers that are not per-window:
-extern FL_GLUT_API void (*glut_idle_function)();
-extern FL_GLUT_API void (*glut_menustate_function)(int);
-extern FL_GLUT_API void (*glut_menustatus_function)(int,int,int);
+extern GNUI_GLUT_API void (*glut_idle_function)();
+extern GNUI_GLUT_API void (*glut_menustate_function)(int);
+extern GNUI_GLUT_API void (*glut_menustatus_function)(int,int,int);
 
 ////////////////////////////////////////////////////////////////
 
 //#  define GLUT_API_VERSION This does not match any version of GLUT exactly...
 
-FL_GLUT_API void glutInit(int *argcp, char **argv); // creates first window
+GNUI_GLUT_API void glutInit(int *argcp, char **argv); // creates first window
 
-FL_GLUT_API void glutInitDisplayMode(unsigned int mode);
+GNUI_GLUT_API void glutInitDisplayMode(unsigned int mode);
 enum {
   GLUT_RGB	= gnui::RGB_COLOR,
   GLUT_RGBA	= gnui::RGB_COLOR,
@@ -117,27 +117,27 @@ enum {
 //GLUT_LUMINANCE = 512
 };
 
-FL_GLUT_API void glutInitWindowPosition(int x, int y);
+GNUI_GLUT_API void glutInitWindowPosition(int x, int y);
 
-FL_GLUT_API void glutInitWindowSize(int w, int h);
+GNUI_GLUT_API void glutInitWindowSize(int w, int h);
 
-FL_GLUT_API void glutMainLoop();
+GNUI_GLUT_API void glutMainLoop();
 
-FL_GLUT_API int glutCreateWindow(const char *title);
+GNUI_GLUT_API int glutCreateWindow(const char *title);
 
-FL_GLUT_API int glutCreateSubWindow(int win, int x, int y, int width, int height);
+GNUI_GLUT_API int glutCreateSubWindow(int win, int x, int y, int width, int height);
 
-FL_GLUT_API void glutDestroyWindow(int win);
+GNUI_GLUT_API void glutDestroyWindow(int win);
 
 inline void glutPostRedisplay() {glut_window->redraw();}
 
-FL_GLUT_API void glutPostWindowRedisplay(int win);
+GNUI_GLUT_API void glutPostWindowRedisplay(int win);
 
-FL_GLUT_API void glutSwapBuffers();
+GNUI_GLUT_API void glutSwapBuffers();
 
 inline int glutGetWindow() {return glut_window->number;}
 
-FL_GLUT_API void glutSetWindow(int win);
+GNUI_GLUT_API void glutSetWindow(int win);
 
 inline void glutSetWindowTitle(const char *t) {glut_window->label(t);}
 
@@ -201,23 +201,23 @@ inline void glutShowOverlay() {glut_window->redraw_overlay();}
 
 inline void glutHideOverlay() {glut_window->hide_overlay();}
 
-FL_GLUT_API int glutCreateMenu(void (*)(int));
+GNUI_GLUT_API int glutCreateMenu(void (*)(int));
 
-FL_GLUT_API void glutDestroyMenu(int menu);
+GNUI_GLUT_API void glutDestroyMenu(int menu);
 
 inline int glutGetMenu() {return glut_menu;}
 
 inline void glutSetMenu(int m) {glut_menu = m;}
 
-FL_GLUT_API void glutAddMenuEntry(const char *label, int value);
+GNUI_GLUT_API void glutAddMenuEntry(const char *label, int value);
 
-FL_GLUT_API void glutAddSubMenu(const char *label, int submenu);
+GNUI_GLUT_API void glutAddSubMenu(const char *label, int submenu);
 
-FL_GLUT_API void glutChangeToMenuEntry(int item, const char *label, int value);
+GNUI_GLUT_API void glutChangeToMenuEntry(int item, const char *label, int value);
 
-FL_GLUT_API void glutChangeToSubMenu(int item, const char *label, int submenu);
+GNUI_GLUT_API void glutChangeToSubMenu(int item, const char *label, int submenu);
 
-FL_GLUT_API void glutRemoveMenuItem(int item);
+GNUI_GLUT_API void glutRemoveMenuItem(int item);
 
 inline void glutAttachMenu(int b) {glut_window->menu[b] = glut_menu;}
 
@@ -251,7 +251,7 @@ enum {GLUT_LEFT, GLUT_ENTERED};
 inline void glutVisibilityFunc(void (*f)(int s)) {glut_window->visibility=f;}
 enum {GLUT_NOT_VISIBLE, GLUT_VISIBLE};
 
-FL_GLUT_API void glutIdleFunc(void (*f)());
+GNUI_GLUT_API void glutIdleFunc(void (*f)());
 
 // Warning: this cast may not work on all machines:
 inline void glutTimerFunc(unsigned int msec, void (*f)(int), int value) {
@@ -420,7 +420,7 @@ int glutLayerGet(GLenum);
 // Emulated GLUT drawing functions:
 
 // Font argument must be a void* for compatability, so...
-extern FL_GLUT_API struct Glut_Bitmap_Font {gnui::Font* font; int size;}
+extern GNUI_GLUT_API struct Glut_Bitmap_Font {gnui::Font* font; int size;}
   glutBitmap9By15, glutBitmap8By13, glutBitmapTimesRoman10,
   glutBitmapTimesRoman24, glutBitmapHelvetica10, glutBitmapHelvetica12,
   glutBitmapHelvetica18;
@@ -432,9 +432,9 @@ extern FL_GLUT_API struct Glut_Bitmap_Font {gnui::Font* font; int size;}
 #  define GLUT_BITMAP_HELVETICA_12        (&glutBitmapHelvetica12)
 #  define GLUT_BITMAP_HELVETICA_18        (&glutBitmapHelvetica18)
 
-FL_GLUT_API void glutBitmapCharacter(void *font, int character);
-FL_GLUT_API int glutBitmapWidth(void *font, int character);
-FL_GLUT_API int glutBitmapLength(void *font, const unsigned char* string);
+GNUI_GLUT_API void glutBitmapCharacter(void *font, int character);
+GNUI_GLUT_API int glutBitmapWidth(void *font, int character);
+GNUI_GLUT_API int glutBitmapLength(void *font, const unsigned char* string);
 
 ////////////////////////////////////////////////////////////////
 // GLUT drawing functions.  These are NOT emulated but you can

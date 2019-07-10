@@ -37,7 +37,7 @@ using namespace gnui;
   into Discreet products and many other pieces of software that
   originated with SGI machines:
 
-  \image html Fl_Light_Button.gif
+  \image html GNUI_Light_Button.gif
 
   When off the light is color(), when on the light is selection_color().
 */

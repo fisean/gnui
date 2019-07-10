@@ -28,7 +28,7 @@
 
 namespace gnui {
 
-class FL_API Monitor : public Rectangle {
+class GNUI_API Monitor : public Rectangle {
   int depth_;
   float dpi_x_;
   float dpi_y_;

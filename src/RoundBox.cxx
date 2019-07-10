@@ -123,7 +123,7 @@ static void lozenge(int which, int x,int y,int w,int h, Color color)
 #endif
 }
 
-extern void fl_to_inactive(const char* s, char* to);
+extern void gnui_to_inactive(const char* s, char* to);
 
 void RoundBox::_draw(const Rectangle& r) const
 {
@@ -133,7 +133,7 @@ void RoundBox::_draw(const Rectangle& r) const
   }
   const char* s = data();
   char buf[26]; if (drawflags(INACTIVE_R) && Style::draw_boxes_inactive_) {
-    fl_to_inactive(s, buf); s = buf;}
+    gnui_to_inactive(s, buf); s = buf;}
   const Color fg = getcolor();
   const Color bg = getbgcolor();
   int x = r.x();

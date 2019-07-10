@@ -32,7 +32,7 @@ namespace gnui {
 
 /** A ClockOutput can be used to display a program-supplied time */
 
-class FL_API ClockOutput : public Widget {
+class GNUI_API ClockOutput : public Widget {
 public:
   /** The type of clock */
   enum {
@@ -62,7 +62,7 @@ private:
 
 // a Clock displays the current time always by using a timeout:
 
-class FL_API Clock : public ClockOutput {
+class GNUI_API Clock : public ClockOutput {
 public:
   int handle(int);
   /** This looks NYI and, really, pretty useless. It's going to be removed

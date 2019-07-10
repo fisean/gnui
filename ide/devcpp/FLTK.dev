@@ -10,8 +10,8 @@ Libs=../../lib
 PrivateResource=
 ResourceIncludes=
 MakeIncludes=
-Compiler=-DBUILDING_DLL=1_@@_-DFL_DLL_@@_-DFL_SHARED_@@_-DFL_LIBRARY_@@_-DWIN32_LEAN_AND_MEAN_@@_-DWIN32_EXTRA_LEAN_@@_-DUSE_CONF_@@_
-CppCompiler=-DBUILDING_DLL=1_@@_-DFL_DLL_@@_-DFL_SHARED_@@_-DFL_LIBRARY_@@_-DWIN32_LEAN_AND_MEAN_@@_-DWIN32_EXTRA_LEAN_@@_-DUSE_CONF_@@_
+Compiler=-DBUILDING_DLL=1_@@_-DGNUI_DLL_@@_-DGNUI_SHARED_@@_-DGNUI_LIBRARY_@@_-DWIN32_LEAN_AND_MEAN_@@_-DWIN32_EXTRA_LEAN_@@_-DUSE_CONF_@@_
+CppCompiler=-DBUILDING_DLL=1_@@_-DGNUI_DLL_@@_-DGNUI_SHARED_@@_-DGNUI_LIBRARY_@@_-DWIN32_LEAN_AND_MEAN_@@_-DWIN32_EXTRA_LEAN_@@_-DUSE_CONF_@@_
 Linker=--no-export-all-symbols _@@_--add-stdcall-alias_@@_-lpthread_@@_-lkernel32_@@_-luser32_@@_-lgdi32_@@_-lwinspool_@@_-lcomdlg32_@@_-ladvapi32_@@_-lshell32_@@_-lole32_@@_-loleaut32_@@_-luuid_@@_-lwsock32_@@_-lmsimg32_@@_
 IsCpp=1
 Icon=
@@ -500,7 +500,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit48]
-FileName=..\..\src\Fl_Menu_Item.cxx
+FileName=..\..\src\GNUI_Menu_Item.cxx
 CompileCpp=1
 Folder=fltk
 Compile=1

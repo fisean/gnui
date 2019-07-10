@@ -108,12 +108,12 @@ public:
   }
 };
 
-extern bool fl_hide_underscore;
+extern bool gnui_hide_underscore;
 
 void MenuTitle::draw() {
 
   const Style* style = menustate->widget->style();
-  if (style->hide_underscore()) fl_hide_underscore = true;
+  if (style->hide_underscore()) gnui_hide_underscore = true;
 
   if (menustate->menubar) {
 
@@ -153,7 +153,7 @@ void MenuTitle::draw() {
     style->buttonbox()->draw(r);
     draw_label(r, 0);
   }
-  fl_hide_underscore = false;
+  gnui_hide_underscore = false;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -299,7 +299,7 @@ void Menu::draw_in(Widget* widget, const int* indexes, int level,
   Item::set_style(widget, widget->parent()!=0);
   if (!widget->shortcut() ||
       (widget->style()->hide_underscore() && !event_state(ACCELERATOR)))
-    fl_hide_underscore = true;
+    gnui_hide_underscore = true;
 
   const bool horizontal = widget->horizontal();
   int spacing = 0;
@@ -373,7 +373,7 @@ void Menu::draw_in(Widget* widget, const int* indexes, int level,
     else ir.move(0,ir.h());
   }
   Item::clear_style();
-  fl_hide_underscore = false;
+  gnui_hide_underscore = false;
 }
 
 /*! Return the index of the item that is under the location mx, my in

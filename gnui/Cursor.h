@@ -8,30 +8,30 @@
 #ifndef gnui_Cursor_h
 #define gnui_Cursor_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 namespace gnui {
 
 struct Cursor; // this is not public
 
 class Image;
-extern FL_API Cursor* cursor(Image*, int x, int y);
-extern FL_API Cursor* cursor(void *raw);
+extern GNUI_API Cursor* cursor(Image*, int x, int y);
+extern GNUI_API Cursor* cursor(void *raw);
 
-extern FL_API Cursor* const CURSOR_DEFAULT; // == NULL
-extern FL_API Cursor* const CURSOR_ARROW;
-extern FL_API Cursor* const CURSOR_CROSS;
-extern FL_API Cursor* const CURSOR_WAIT;
-extern FL_API Cursor* const CURSOR_INSERT;
-extern FL_API Cursor* const CURSOR_HAND;
-extern FL_API Cursor* const CURSOR_HELP;
-extern FL_API Cursor* const CURSOR_MOVE;
-extern FL_API Cursor* const CURSOR_NS;
-extern FL_API Cursor* const CURSOR_WE;
-extern FL_API Cursor* const CURSOR_NWSE;
-extern FL_API Cursor* const CURSOR_NESW;
-extern FL_API Cursor* const CURSOR_NO;
-extern FL_API Cursor* const CURSOR_NONE;
+extern GNUI_API Cursor* const CURSOR_DEFAULT; // == NULL
+extern GNUI_API Cursor* const CURSOR_ARROW;
+extern GNUI_API Cursor* const CURSOR_CROSS;
+extern GNUI_API Cursor* const CURSOR_WAIT;
+extern GNUI_API Cursor* const CURSOR_INSERT;
+extern GNUI_API Cursor* const CURSOR_HAND;
+extern GNUI_API Cursor* const CURSOR_HELP;
+extern GNUI_API Cursor* const CURSOR_MOVE;
+extern GNUI_API Cursor* const CURSOR_NS;
+extern GNUI_API Cursor* const CURSOR_WE;
+extern GNUI_API Cursor* const CURSOR_NWSE;
+extern GNUI_API Cursor* const CURSOR_NESW;
+extern GNUI_API Cursor* const CURSOR_NO;
+extern GNUI_API Cursor* const CURSOR_NONE;
 
 }
 #endif

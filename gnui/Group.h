@@ -35,7 +35,7 @@
 
 namespace gnui {
 
-class FL_API Group : public Widget {
+class GNUI_API Group : public Widget {
 public:
 
   int children() const {return children_;}
@@ -80,7 +80,7 @@ public:
   static int navigation_key();
 
   // back compatability function:
-  friend FL_FORMS_API void end_group(); // forms emulation function
+  friend GNUI_FORMS_API void end_group(); // forms emulation function
   void fix_old_positions();
 
   Flags resize_align() const {return resize_align_;}

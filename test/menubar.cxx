@@ -25,8 +25,8 @@
 //    http://www.fltk.org/str.php
 //
 
-// Use compat header for Fl_Menu_Item
-#include <FL/Fl_Menu_Item.H>
+// Use compat header for GNUI_Menu_Item
+#include <FL/GNUI_Menu_Item.H>
 
 #include <fltk/run.h>
 #include <fltk/events.h>
@@ -74,12 +74,12 @@ void test_cb(gnui::Widget* w, void*)
 
 void quit_cb(gnui::Widget*, void*) { exit(0); }
 
-Fl_Menu_Item hugemenu[100];
+GNUI_Menu_Item hugemenu[100];
 
-Fl_Menu_Item menutable[] = {
-  {"foo",0,0,0,FL_MENU_INACTIVE},
-  {"&File",0,0,0,FL_SUBMENU},
-    {"&Open",	gnui::COMMAND+'O', 0, 0, FL_MENU_INACTIVE},
+GNUI_Menu_Item menutable[] = {
+  {"foo",0,0,0,GNUI_MENU_INACTIVE},
+  {"&File",0,0,0,GNUI_SUBMENU},
+    {"&Open",	gnui::COMMAND+'O', 0, 0, GNUI_MENU_INACTIVE},
     {"&Close",	0,	0},
     {"&Quit",	gnui::COMMAND+'Q', quit_cb, 0, gnui::MENU_DIVIDER},
     {"shortcut",'A'},
@@ -100,9 +100,9 @@ Fl_Menu_Item menutable[] = {
     {"shortcut",gnui::ACCELERATOR+gnui::SHIFT+gnui::F1Key},
     {"shortcut",gnui::ACCELERATOR+gnui::COMMAND+gnui::F1Key},
     {"shortcut",gnui::ACCELERATOR+gnui::SHIFT+gnui::COMMAND+gnui::F1Key, 0,0, gnui::MENU_DIVIDER},
-    {"&Submenus", gnui::ACCELERATOR+'S',	0, (void*)"Submenu1", FL_SUBMENU},
+    {"&Submenus", gnui::ACCELERATOR+'S',	0, (void*)"Submenu1", GNUI_SUBMENU},
       {"A very long menu item"},
-      {"&submenu",gnui::COMMAND+'S',	0, (void*)"submenu2", FL_SUBMENU},
+      {"&submenu",gnui::COMMAND+'S',	0, (void*)"submenu2", GNUI_SUBMENU},
 	{"item 1"},
 	{"item 2"},
 	{"item 3"},
@@ -111,24 +111,24 @@ Fl_Menu_Item menutable[] = {
       {"after submenu"},
       {0},
     {0},
-  {"&Edit",0,0,0,FL_SUBMENU},
+  {"&Edit",0,0,0,GNUI_SUBMENU},
     {"Undo",	gnui::COMMAND+'Z',	0},
     {"Redo",	gnui::COMMAND+'Y',	0, 0, gnui::MENU_DIVIDER},
     {"Cut",	gnui::COMMAND+'X',	0},
     {"Copy",	gnui::COMMAND+'C',	0},
     {"Paste",	gnui::COMMAND+'V',	0},
-    {"Inactive",gnui::COMMAND+'D',	0, 0, FL_MENU_INACTIVE},
+    {"Inactive",gnui::COMMAND+'D',	0, 0, GNUI_MENU_INACTIVE},
     {"Clear",	0,	0, 0, gnui::MENU_DIVIDER},
-    {"Invisible",gnui::COMMAND+'E',	0, 0, FL_MENU_INVISIBLE},
+    {"Invisible",gnui::COMMAND+'E',	0, 0, GNUI_MENU_INVISIBLE},
     {"Preferences",0,	0},
     {"Larger", '+', 0, 0},
     {"Smaller", '-', 0, 0},
     {0},
-  {"&Checkbox",0,0,0,FL_SUBMENU},
-    {"&Alpha",	0,	0, (void *)1, gnui::MENU_TOGGLE|FL_MENU_VALUE},
+  {"&Checkbox",0,0,0,GNUI_SUBMENU},
+    {"&Alpha",	0,	0, (void *)1, gnui::MENU_TOGGLE|GNUI_MENU_VALUE},
     {"&Beta",	0,	0, (void *)2, gnui::MENU_TOGGLE},
     {"&Gamma",	0,	0, (void *)3, gnui::MENU_TOGGLE},
-    {"&Delta",	0,	0, (void *)4, gnui::MENU_TOGGLE|FL_MENU_VALUE},
+    {"&Delta",	0,	0, (void *)4, gnui::MENU_TOGGLE|GNUI_MENU_VALUE},
     {"&Epsilon",0,	0, (void *)5, gnui::MENU_TOGGLE},
     {"&Pi",	0,	0, (void *)6, gnui::MENU_TOGGLE},
     {"&Mu",	0,	0, (void *)7, gnui::MENU_TOGGLE|gnui::MENU_DIVIDER},
@@ -137,11 +137,11 @@ Fl_Menu_Item menutable[] = {
     {"00",	0,	0, (void *)1, gnui::MENU_TOGGLE},
     {"000",	0,	0, (void *)1, gnui::MENU_TOGGLE},
     {0},
-  {"&Radio",0,0,0,FL_SUBMENU},
+  {"&Radio",0,0,0,GNUI_SUBMENU},
     {"&Alpha",	0,	0, (void *)1, gnui::MENU_RADIO},
     {"&Beta",	0,	0, (void *)2, gnui::MENU_RADIO},
     {"&Gamma",	0,	0, (void *)3, gnui::MENU_RADIO},
-    {"&Delta",	0,	0, (void *)4, gnui::MENU_RADIO|FL_MENU_VALUE},
+    {"&Delta",	0,	0, (void *)4, gnui::MENU_RADIO|GNUI_MENU_VALUE},
     {"&Epsilon",0,	0, (void *)5, gnui::MENU_RADIO},
     {"&Pi",	0,	0, (void *)6, gnui::MENU_RADIO},
     {"&Mu",	0,	0, (void *)7, gnui::MENU_RADIO|gnui::MENU_DIVIDER},
@@ -150,7 +150,7 @@ Fl_Menu_Item menutable[] = {
     {"00",	0,	0, (void *)1, gnui::MENU_RADIO},
     {"000",	0,	0, (void *)1, gnui::MENU_RADIO},
     {0},
-  {"&Font",0,0,0,FL_SUBMENU},
+  {"&Font",0,0,0,GNUI_SUBMENU},
     {"Normal",	0, 0},
     {"Bold",	0, 0},
     {"Italic",	0, 0},
@@ -162,17 +162,17 @@ Fl_Menu_Item menutable[] = {
     {"Shadow",	0, 0},
     {"@->",	0, 0},
     {0},
-  {"E&mpty",0,0,0,FL_SUBMENU},
+  {"E&mpty",0,0,0,GNUI_SUBMENU},
     {0},
-  {"&Inactive", 0,	0, 0, FL_MENU_INACTIVE|FL_SUBMENU},
-    {"A very long menu item"},
-    {"A very long menu item"},
-    {0},
-  {"Invisible",0,	0, 0, FL_MENU_INVISIBLE|FL_SUBMENU},
+  {"&Inactive", 0,	0, 0, GNUI_MENU_INACTIVE|GNUI_SUBMENU},
     {"A very long menu item"},
     {"A very long menu item"},
     {0},
-  {"&Huge", 0, 0, (void*)hugemenu, FL_SUBMENU_POINTER},
+  {"Invisible",0,	0, 0, GNUI_MENU_INVISIBLE|GNUI_SUBMENU},
+    {"A very long menu item"},
+    {"A very long menu item"},
+    {0},
+  {"&Huge", 0, 0, (void*)hugemenu, GNUI_SUBMENU_POINTER},
   // these buttons demonstrates that the menubar can be used as a "toolbar"
   {"@[]"}, {"@<->"}, {"@+"},
   // it would be nice if checkmarks worked, but they don't:
@@ -180,7 +180,7 @@ Fl_Menu_Item menutable[] = {
   {0}
 };
 
-Fl_Menu_Item pulldown[] = {
+GNUI_Menu_Item pulldown[] = {
   {"Red",	gnui::ACCELERATOR+'r'},
   {"Green",	gnui::ACCELERATOR+'g'},
   {"Blue",	gnui::ACCELERATOR+'b'},

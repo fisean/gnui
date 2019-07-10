@@ -3,8 +3,8 @@
 #ifndef essai_panel_h
 #define essai_panel_h
 #include <FL/Fl.H>
-extern Fl_Group *Essai;
-#include <FL/Fl_Slider.H>
-extern void major_tick_precision_cb(Fl_Slider*, void*);
-Fl_Group* make_window();
+extern GNUI_Group *Essai;
+#include <FL/GNUI_Slider.H>
+extern void major_tick_precision_cb(GNUI_Slider*, void*);
+GNUI_Group* make_window();
 #endif

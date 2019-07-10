@@ -57,7 +57,7 @@ using namespace gnui;
 
 */
 
-extern bool fl_hide_underscore;
+extern bool gnui_hide_underscore;
 
 static CycleButton* held_down;
 
@@ -103,9 +103,9 @@ void CycleButton::draw() {
     translate(r1.x(),r1.y());
     int save_w = o->w(); o->w(r1.w());
     int save_h = o->h(); o->h(r1.h());
-    fl_hide_underscore = true;
+    gnui_hide_underscore = true;
     o->draw();
-    fl_hide_underscore = false;
+    gnui_hide_underscore = false;
     Item::clear_style();
     o->w(save_w);
     o->h(save_h);

@@ -31,39 +31,39 @@
 #include <fltk/forms.h>
 #include <stdlib.h>
 
-void fl_set_object_lstyle(Fl_Widget* o,int a) {
-  o->label_font(fl_fonts+(a&15));
+void gnui_set_object_lstyle(GNUI_Widget* o,int a) {
+  o->label_font(gnui_fonts+(a&15));
   switch (a >> 8) {
   case 0:
-    o->label_type(FL_NORMAL_LABEL);
+    o->label_type(GNUI_NORMAL_LABEL);
     break;
   case 1:
-    o->label_type(FL_SHADOW_LABEL);
+    o->label_type(GNUI_SHADOW_LABEL);
     break;
   case 2:
-    o->label_type(FL_ENGRAVED_LABEL);
+    o->label_type(GNUI_ENGRAVED_LABEL);
     break;
   case 3:
-    o->label_type(FL_EMBOSSED_LABEL);
+    o->label_type(GNUI_EMBOSSED_LABEL);
     break;
   }
 }
 
 // Emulate old forms (not XForms) inverted coordinate system.  Like
-// XForms, this emulation is shut off if fl_initialize() is called
+// XForms, this emulation is shut off if gnui_initialize() is called
 // before the widgets are created:
 
-char fl_flip = 2;
+char gnui_flip = 2;
 
-void fl_end_form() {
-  while (Fl_Group::current()) fl_end_group();
+void gnui_end_form() {
+  while (GNUI_Group::current()) gnui_end_group();
 }
 
-void fl_end_group() {
-  Fl_Group* group = Fl_Group::current();
+void gnui_end_group() {
+  GNUI_Group* group = GNUI_Group::current();
   // set the dimensions of a group to surround contents
   if (group->children() && !group->w()) {
-    Fl_Widget* o = group->child(0);
+    GNUI_Widget* o = group->child(0);
     int rx = o->x();
     int ry = o->y();
     int rw = rx+o->w();
@@ -81,11 +81,11 @@ void fl_end_group() {
     group->h(rh-ry);
   }
   // flip all the children's coordinate systems:
-  if (fl_flip) {
-    Fl_Widget* o = group->is_window() ? group : group->window();
+  if (gnui_flip) {
+    GNUI_Widget* o = group->is_window() ? group : group->window();
     int Y = o->h();
     for (int i = 0; i < group->children(); i++) {
-      Fl_Widget* o = group->child(i);
+      GNUI_Widget* o = group->child(i);
       o->y(Y-o->y()-o->h());
     }
 //    group->oy_ = Y-group->oy_-group->h();
@@ -97,7 +97,7 @@ void fl_end_group() {
 static int initargc;
 static char **initargv;
 
-void fl_initialize(int *argc, char **argv, const char *, FL_CMD_OPT *, int) {
+void gnui_initialize(int *argc, char **argv, const char *, GNUI_CMD_OPT *, int) {
   initargc = *argc;
   initargv = new char*[*argc+1];
   int i,j;
@@ -108,44 +108,44 @@ void fl_initialize(int *argc, char **argv, const char *, FL_CMD_OPT *, int) {
   }
   argv[j] = 0;
   *argc = j;
-  if (fl_flip==2) fl_flip = 0;
+  if (gnui_flip==2) gnui_flip = 0;
 }
 
-// Emulate fl_show_form().  The "placement" bitflag causes all kinds of
+// Emulate gnui_show_form().  The "placement" bitflag causes all kinds of
 // different fltk functions to be called:
 
-char fl_modal_next; // set by fl_freeze_forms()
+char gnui_modal_next; // set by gnui_freeze_forms()
 
-void fl_show_form(Fl_Window *f,int place,int b,const char *n) {
+void gnui_show_form(GNUI_Window *f,int place,int b,const char *n) {
 
-  Fl_Widget::default_style->label_type = FL_SYMBOL_LABEL;
+  GNUI_Widget::default_style->label_type = GNUI_SYMBOL_LABEL;
 
   f->label(n);
   if (!b) f->clear_border();
-  if (fl_modal_next || b==FL_TRANSIENT) {f->set_modal(); fl_modal_next = 0;}
+  if (gnui_modal_next || b==GNUI_TRANSIENT) {f->set_modal(); gnui_modal_next = 0;}
 
-  if (place & FL_PLACE_MOUSE) f->hotspot(f);
+  if (place & GNUI_PLACE_MOUSE) f->hotspot(f);
 
-  if (place & FL_PLACE_CENTER)
+  if (place & GNUI_PLACE_CENTER)
     f->position((Fl::w()-f->w())/2, (Fl::h()-f->h())/2);
 
-  if (place & FL_PLACE_FULLSCREEN)
+  if (place & GNUI_PLACE_FULLSCREEN)
     f->fullscreen();
 
-  if (place & (FL_PLACE_POSITION | FL_PLACE_GEOMETRY))
+  if (place & (GNUI_PLACE_POSITION | GNUI_PLACE_GEOMETRY))
     f->position(
       (f->x() < 0) ? Fl::w()-f->w()+f->x()-1 : f->x(),
       (f->y() < 0) ? Fl::h()-f->h()+f->y()-1 : f->y());
 
-// if (place & FL_PLACE_ASPECT) {
+// if (place & GNUI_PLACE_ASPECT) {
 // this is not yet implemented
 // it can be done by setting size_range().
 
-  if (place == FL_PLACE_FREE || place == FL_PLACE_SIZE) {
-    f->x(FL_USEDEFAULT); f->y(FL_USEDEFAULT);
+  if (place == GNUI_PLACE_FREE || place == GNUI_PLACE_SIZE) {
+    f->x(GNUI_USEDEFAULT); f->y(GNUI_USEDEFAULT);
   }
 
-  if (place == FL_PLACE_FREE || place & FL_FREE_SIZE)
+  if (place == GNUI_PLACE_FREE || place & GNUI_FREE_SIZE)
     if (!f->resizable()) f->resizable(f);
 
   if (initargc) {f->show(initargc,initargv); initargc = 0;}
@@ -161,56 +161,56 @@ void fl_show_form(Fl_Window *f,int place,int b,const char *n) {
 // that exit when this returns zero to work, I return the first window
 // each time, this is zero only when all windows are closed.
 
-Fl_Widget *fl_do_forms(void) {
+GNUI_Widget *gnui_do_forms(void) {
   Fl::wait();	
   return Fl::first_window();
 }
 
-Fl_Widget *fl_check_forms() {
+GNUI_Widget *gnui_check_forms() {
   Fl::check();
   return Fl::first_window();
 }
 
 // Subclass to simulate the XForms text object.  This is the same as
-// a Fl_Box except that the label is drawn inside it:
+// a GNUI_Box except that the label is drawn inside it:
 
-void Fl_FormsText::draw() {
+void GNUI_FormsText::draw() {
   draw_box();
-  set_flag(flags()|FL_ALIGN_INSIDE); // questionable method of compatability
+  set_flag(flags()|GNUI_ALIGN_INSIDE); // questionable method of compatability
   draw_inside_label();
 }
 
 // Create an XForms button by selecting correct fltk subclass:
 
-#include <fltk/Fl_Return_Button.h>
-#include <fltk/Fl_Repeat_Button.h>
+#include <fltk/GNUI_Return_Button.h>
+#include <fltk/GNUI_Repeat_Button.h>
 
-Fl_Button *fl_add_button(uchar t,int x,int y,int w,int h,const char *l) {
-  Fl_Button *b;
+GNUI_Button *gnui_add_button(uchar t,int x,int y,int w,int h,const char *l) {
+  GNUI_Button *b;
   switch (t) {
-  case FL_RETURN_BUTTON:
-  case FL_HIDDEN_RET_BUTTON:
-    b = new Fl_Return_Button(x,y,w,h,l);
+  case GNUI_RETURN_BUTTON:
+  case GNUI_HIDDEN_RET_BUTTON:
+    b = new GNUI_Return_Button(x,y,w,h,l);
     break;
-  case FL_TOUCH_BUTTON:
-    b = new Fl_Repeat_Button(x,y,w,h,l);
+  case GNUI_TOUCH_BUTTON:
+    b = new GNUI_Repeat_Button(x,y,w,h,l);
     break;
   default:
-    b = new Fl_Button(x,y,w,h,l);
+    b = new GNUI_Button(x,y,w,h,l);
   }
   switch (t) {
-  case FL_TOGGLE_BUTTON:
-  case FL_RADIO_BUTTON:
+  case GNUI_TOGGLE_BUTTON:
+  case GNUI_RADIO_BUTTON:
     b->type(t);
     break;
 #if 0
-  case FL_HIDDEN_BUTTON:
-  case FL_HIDDEN_RET_BUTTON:
-    b->type(FL_HIDDEN_BUTTON);
+  case GNUI_HIDDEN_BUTTON:
+  case GNUI_HIDDEN_RET_BUTTON:
+    b->type(GNUI_HIDDEN_BUTTON);
     break;
 #endif
-  case FL_INOUT_BUTTON:
-    b->when(FL_WHEN_CHANGED);
+  case GNUI_INOUT_BUTTON:
+    b->when(GNUI_WHEN_CHANGED);
     break;
   }
   return b;
@@ -219,12 +219,12 @@ Fl_Button *fl_add_button(uchar t,int x,int y,int w,int h,const char *l) {
 // Convert an XForms shortcut string name to an fltk integer shortcut:
 
 #include <stdlib.h>
-int fl_old_shortcut(const char* s) {
+int gnui_old_shortcut(const char* s) {
   if (!s || !*s) return 0;
   int n = 0;
-  if (*s == '#') {n |= FL_ALT; s++;}
-  if (*s == '+') {n |= FL_SHIFT; s++;}
-  if (*s == '^') {n |= FL_CTRL; s++;}
+  if (*s == '#') {n |= GNUI_ALT; s++;}
+  if (*s == '+') {n |= GNUI_SHIFT; s++;}
+  if (*s == '^') {n |= GNUI_CTRL; s++;}
   if (s[1]) return n | (int)strtol(s,0,0); // allow 0xf00 to get any key
   return n | *s;
 }
@@ -232,19 +232,19 @@ int fl_old_shortcut(const char* s) {
 // Wrappers for the popup message utilities to convert from the XForms
 // 3-argument versions to the sprintf versions used by fltk:
 
-void fl_show_message(const char *q1,const char *q2,const char *q3) {
-  fl_message("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"");
+void gnui_show_message(const char *q1,const char *q2,const char *q3) {
+  gnui_message("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"");
 }
 
-void fl_show_alert(const char *q1,const char *q2,const char *q3,int) {
-  fl_alert("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"");
+void gnui_show_alert(const char *q1,const char *q2,const char *q3,int) {
+  gnui_alert("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"");
 }
 
-int fl_show_question(const char *q1,const char *q2,const char *q3) {
-  return fl_ask("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"");
+int gnui_show_question(const char *q1,const char *q2,const char *q3) {
+  return gnui_ask("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"");
 }
 
-int fl_show_choice(
+int gnui_show_choice(
   const char *q1,
   const char *q2,
   const char *q3,
@@ -252,11 +252,11 @@ int fl_show_choice(
   const char *b0,
   const char *b1,
   const char *b2) {
-  return fl_choice("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"", b0,b1,b2)+1;
+  return gnui_choice("%s\n%s\n%s", q1?q1:"", q2?q2:"", q3?q3:"", b0,b1,b2)+1;
 }
 
-char *fl_show_simple_input(const char *str1, const char *defstr) {
-  const char *r = fl_input(str1, defstr);
+char *gnui_show_simple_input(const char *str1, const char *defstr) {
+  const char *r = gnui_input(str1, defstr);
   return (char *)(r ? r : defstr);
 }
 

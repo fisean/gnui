@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API ValueInput : public Valuator {
+class GNUI_API ValueInput : public Valuator {
 public:
   FloatInput input;
 

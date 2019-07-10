@@ -27,67 +27,67 @@
 
 #include "forms.h"
 
-FL_FORM *form;
-FL_OBJECT *browserobj, *inputobj, *exitobj;
+GNUI_FORM *form;
+GNUI_OBJECT *browserobj, *inputobj, *exitobj;
 
-void addit(FL_OBJECT *, long)
+void addit(GNUI_OBJECT *, long)
 {
   /* append and show the last line. Don't use this if you just want
-   * to add some lines. use fl_add_browser_line
+   * to add some lines. use gnui_add_browser_line
    */
-  fl_addto_browser(browserobj,fl_get_input(inputobj));
+  gnui_addto_browser(browserobj,gnui_get_input(inputobj));
 }
 
-void insertit(FL_OBJECT *, long)
+void insertit(GNUI_OBJECT *, long)
 {
   int n;
-  if (! ( n = fl_get_browser(browserobj))) return;
-  fl_insert_browser_line(browserobj,n,fl_get_input(inputobj));
+  if (! ( n = gnui_get_browser(browserobj))) return;
+  gnui_insert_browser_line(browserobj,n,gnui_get_input(inputobj));
 }
 
-void replaceit(FL_OBJECT *, long)
+void replaceit(GNUI_OBJECT *, long)
 {
   int n;
-  if (! (n=fl_get_browser(browserobj))) return;
-  fl_replace_browser_line(browserobj,n,fl_get_input(inputobj));
+  if (! (n=gnui_get_browser(browserobj))) return;
+  gnui_replace_browser_line(browserobj,n,gnui_get_input(inputobj));
 }
 
-void deleteit(FL_OBJECT *, long)
+void deleteit(GNUI_OBJECT *, long)
 {
   int n;
-  if (! (n = fl_get_browser(browserobj))) return;
-  fl_delete_browser_line(browserobj,n);
+  if (! (n = gnui_get_browser(browserobj))) return;
+  gnui_delete_browser_line(browserobj,n);
 }
 
-void clearit(FL_OBJECT *, long)
+void clearit(GNUI_OBJECT *, long)
 {
-  fl_clear_browser(browserobj);
+  gnui_clear_browser(browserobj);
 }
 
 /*---------------------------------------*/
 
 void create_form(void)
 {
-  FL_OBJECT *obj;
+  GNUI_OBJECT *obj;
 
-  form = fl_bgn_form(FL_UP_BOX,390,420);
-  browserobj = fl_add_browser(FL_HOLD_BROWSER,20,20,210,330,"");
-//  fl_set_object_dblbuffer(browserobj, 1);
-  inputobj = obj = fl_add_input(FL_NORMAL_INPUT,20,370,210,30,"");
-    fl_set_object_callback(obj,addit,0);
-    obj->when(FL_WHEN_ENTER_KEY|FL_WHEN_NOT_CHANGED);
-  obj = fl_add_button(FL_NORMAL_BUTTON,250,20,120,30,"Add");
-    fl_set_object_callback(obj,addit,0);
-  obj = fl_add_button(FL_NORMAL_BUTTON,250,60,120,30,"Insert");
-    fl_set_object_callback(obj,insertit,0);
-  obj = fl_add_button(FL_NORMAL_BUTTON,250,100,120,30,"Replace");
-    fl_set_object_callback(obj,replaceit,0);
-  obj = fl_add_button(FL_NORMAL_BUTTON,250,160,120,30,"Delete");
-    fl_set_object_callback(obj,deleteit,0);
-  obj = fl_add_button(FL_NORMAL_BUTTON,250,200,120,30,"Clear");
-    fl_set_object_callback(obj,clearit,0);
-  exitobj = fl_add_button(FL_NORMAL_BUTTON,250,370,120,30,"Exit");
-  fl_end_form();
+  form = gnui_bgn_form(GNUI_UP_BOX,390,420);
+  browserobj = gnui_add_browser(GNUI_HOLD_BROWSER,20,20,210,330,"");
+//  gnui_set_object_dblbuffer(browserobj, 1);
+  inputobj = obj = gnui_add_input(GNUI_NORMAL_INPUT,20,370,210,30,"");
+    gnui_set_object_callback(obj,addit,0);
+    obj->when(GNUI_WHEN_ENTER_KEY|GNUI_WHEN_NOT_CHANGED);
+  obj = gnui_add_button(GNUI_NORMAL_BUTTON,250,20,120,30,"Add");
+    gnui_set_object_callback(obj,addit,0);
+  obj = gnui_add_button(GNUI_NORMAL_BUTTON,250,60,120,30,"Insert");
+    gnui_set_object_callback(obj,insertit,0);
+  obj = gnui_add_button(GNUI_NORMAL_BUTTON,250,100,120,30,"Replace");
+    gnui_set_object_callback(obj,replaceit,0);
+  obj = gnui_add_button(GNUI_NORMAL_BUTTON,250,160,120,30,"Delete");
+    gnui_set_object_callback(obj,deleteit,0);
+  obj = gnui_add_button(GNUI_NORMAL_BUTTON,250,200,120,30,"Clear");
+    gnui_set_object_callback(obj,clearit,0);
+  exitobj = gnui_add_button(GNUI_NORMAL_BUTTON,250,370,120,30,"Exit");
+  gnui_end_form();
 }
 
 /*---------------------------------------*/
@@ -95,13 +95,13 @@ void create_form(void)
 int
 main(int argc, char *argv[])
 {
-  FL_OBJECT *obj;
+  GNUI_OBJECT *obj;
 
-  fl_initialize(&argc, argv, "FormDemo", 0, 0);
+  gnui_initialize(&argc, argv, "FormDemo", 0, 0);
   create_form();
-  fl_show_form(form,FL_PLACE_CENTER,FL_TRANSIENT,"Browser Op");
-  do obj = fl_do_forms(); while (obj != exitobj);
-  fl_hide_form(form);
+  gnui_show_form(form,GNUI_PLACE_CENTER,GNUI_TRANSIENT,"Browser Op");
+  do obj = gnui_do_forms(); while (obj != exitobj);
+  gnui_hide_form(form);
   return 0;
 }
 

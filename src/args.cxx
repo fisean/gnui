@@ -59,7 +59,7 @@ using namespace gnui;
 
 // This fixes linkage problem in VC++ 6.0
 #if defined(_MSC_VER)
-  //extern FL_API const char *filename_name(const char *);
+  //extern GNUI_API const char *filename_name(const char *);
 #endif
 
 static int match(const char *a, const char *match, int atleast = 1) {
@@ -69,12 +69,12 @@ static int match(const char *a, const char *match, int atleast = 1) {
 }
 
 // flags set by previously parsed arguments:
-extern bool fl_show_iconic;
+extern bool gnui_show_iconic;
 static bool arg_called;
 static bool return_i;
 static const char* name;
 static const char* geometry;
-extern Color fl_bg_switch;	// in Style.cxx
+extern Color gnui_bg_switch;	// in Style.cxx
 
 /*!
   Consume a single switch from \a argv, starting at word \a i. Returns the
@@ -105,7 +105,7 @@ int gnui::arg(int argc, char **argv, int &i) {
   s++; // point after the dash
 
   if (match(s, "iconic")) {
-    fl_show_iconic = true;
+    gnui_show_iconic = true;
     i++;
     return 1;
   }
@@ -128,8 +128,8 @@ int gnui::arg(int argc, char **argv, int &i) {
     name = v;
 
   } else if (match(s, "bg") || match(s, "background")) {
-    fl_bg_switch = color(v);
-    if (!fl_bg_switch) error("Unknown color \"%s\"", v);
+    gnui_bg_switch = color(v);
+    if (!gnui_bg_switch) error("Unknown color \"%s\"", v);
 
   } else return 0; // unrecognized
 

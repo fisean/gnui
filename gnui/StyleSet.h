@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API StyleSet {
+class GNUI_API StyleSet {
   NamedStyle* first_style;
   Theme theme;
   Color background;

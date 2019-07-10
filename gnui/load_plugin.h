@@ -4,11 +4,11 @@
   \e not in the gnui namespace!
 */
 
-#ifndef fl_load_plugin_h
-#define fl_load_plugin_h
+#ifndef gnui_load_plugin_h
+#define gnui_load_plugin_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
-FL_API void* load_plugin(const char* name, const char* symbol);
+GNUI_API void* load_plugin(const char* name, const char* symbol);
 
 #endif

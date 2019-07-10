@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API ProgressBar : public Widget {
+class GNUI_API ProgressBar : public Widget {
 protected:
   double mMin;
   double mMax;

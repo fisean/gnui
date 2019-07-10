@@ -144,7 +144,7 @@ Quoted char names:
   - Yacute yacute
   - yen Yuml yuml
 */
-class FL_API HelpView : public Group    //// Help viewer widget
+class GNUI_API HelpView : public Group    //// Help viewer widget
 {
   /** Alignments */
   enum { 

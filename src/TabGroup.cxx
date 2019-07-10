@@ -322,7 +322,7 @@ bool TabGroup::selected_child(Widget *newvalue) {
 enum {TAB_LEFT, TAB_RIGHT, SELECTED};
 
 #if USE_CLIPOUT
-extern Widget* fl_did_clipping;
+extern Widget* gnui_did_clipping;
 #endif
 
 static int H;
@@ -365,9 +365,9 @@ void TabGroup::draw() {
 #if USE_CLIPOUT
     push_clip(0, 0, w(), h());
     if (v) {
-      fl_did_clipping = 0;
+      gnui_did_clipping = 0;
       draw_child(*v);
-      if (fl_did_clipping != v) clipout(v->x(), v->y(), v->w(), v->h());
+      if (gnui_did_clipping != v) clipout(v->x(), v->y(), v->w(), v->h());
     }
     draw_tab_background();
     pop_clip();
@@ -382,7 +382,7 @@ void TabGroup::draw() {
   if (damage() & DAMAGE_EXPOSE) {
     clipout(0, H>=0 ? 0 : h()+H, p[children()]+pager_->slope(), (H>=0?H:-H));
     clipout(0, H>0 ? H : 0, this->w(), h()-(H>=0?H:-H-1));
-    fl_did_clipping = this;
+    gnui_did_clipping = this;
   }
 #endif
 }

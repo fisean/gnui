@@ -42,7 +42,7 @@
  * USE_COLORMAP:
  *
  * Setting this to zero will save a good deal of code (especially for
- * fl_draw_image), but FLTK will only work on TrueColor visuals.
+ * gnui_draw_image), but FLTK will only work on TrueColor visuals.
  */
 
 #define USE_COLORMAP 1
@@ -59,7 +59,7 @@
  * USE_XDBE:
  *
  * Actually try to use the double-buffer extension?
- * You can try this, it may speed up Fl_Double_Window.  However we have
+ * You can try this, it may speed up GNUI_Double_Window.  However we have
  * found most (all?) X implementations to be broken, or at least I
  * don't understand the documentation, or something...
  */
@@ -70,7 +70,7 @@
  * HAVE_OVERLAY:
  *
  * Use the X overlay extension?  FLTK will try to use an overlay
- * visual for Fl_Overlay_Window, the Gl_Window overlay, and for the
+ * visual for GNUI_Overlay_Window, the Gl_Window overlay, and for the
  * menus.  Setting this to zero will remove a substantial amount of
  * code from FLTK.  Overlays have only been tested on SGI servers!
  */
@@ -97,7 +97,7 @@
 /*
  * U16, U32, U64:
  *
- * Types used by fl_draw_image.  One of U32 or U64 must be defined.
+ * Types used by gnui_draw_image.  One of U32 or U64 must be defined.
  * U16 is optional but FLTK will work better with it!
  */
 
@@ -108,7 +108,7 @@
 /*
  * HAVE_DIRENT_H, HAVE_SYS_NDIR_H, HAVE_SYS_DIR_H, HAVE_NDIR_H, HAVE_SCANDIR:
  *
- * Where is <dirent.h> (used only by fl_file_chooser and scandir).
+ * Where is <dirent.h> (used only by gnui_file_chooser and scandir).
  */
 
 #define HAVE_DIRENT_H 1
@@ -165,7 +165,7 @@
  * HAVE_DLOPEN
  *
  * Do we have ELF shared objects support?
- * (used in fltk/Fl_Plugin.h)
+ * (used in fltk/GNUI_Plugin.h)
  */
 
 #define HAVE_DLOPEN 0

@@ -26,7 +26,7 @@
   ends with a slash then this returns a pointer to the NUL. If there
   is no slash this returns a pointer to the start of \a name.
 */
-FL_API const char *gnui::filename_name(const char *name) {
+GNUI_API const char *gnui::filename_name(const char *name) {
   if (!name) return 0;
 
   const char *p,*q;

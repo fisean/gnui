@@ -42,7 +42,7 @@ class TabGroup;
 
 enum {TAB_LEFT, TAB_RIGHT, TAB_SELECTED};
 
-class FL_API TabGroupPager {
+class GNUI_API TabGroupPager {
 public:
 
     TabGroupPager() : shift_(0), border_(10), slope_(5), extra_space_(5),_noclip(false) {}
@@ -93,7 +93,7 @@ const int PAGER_MENU   = 0; //<-- two left and right buttons  provide prev page 
 const int PAGER_SHRINK = 1; //<-- tabs outside rect are shrinked to very small slice to fit
 
 
-class FL_API TabGroup : public Group {
+class GNUI_API TabGroup : public Group {
 
 public:
   int handle(int);

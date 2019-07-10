@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API Output : public Input {
+class GNUI_API Output : public Input {
   virtual bool replace(int, int, const char*, int); // does nothing
 public:
   Output(int x, int y, int w, int h, const char *l = 0);

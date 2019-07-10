@@ -79,7 +79,7 @@ header files directly.
 
 #include "draw.h"
 
-extern FL_API Region	XRectangleRegion(int x, int y, int w, int h);
+extern GNUI_API Region	XRectangleRegion(int x, int y, int w, int h);
 const int XSTATE_MASK = 0x1fff;
 
 namespace gnui {
@@ -90,51 +90,51 @@ namespace gnui {
 ////////////////////////////////////////////////////////////////
 // constant info about the X server connection:
 
-extern FL_API void	open_display();
-extern FL_API void	open_display(Display*);
-extern FL_API void	close_display();
+extern GNUI_API void	open_display();
+extern GNUI_API void	open_display(Display*);
+extern GNUI_API void	close_display();
 
-extern FL_API Display*	xdisplay;
-extern FL_API XWindow	message_window;
-extern FL_API int	xscreen;
-extern FL_API XVisualInfo* xvisual;
-extern FL_API Colormap	xcolormap;
+extern GNUI_API Display*	xdisplay;
+extern GNUI_API XWindow	message_window;
+extern GNUI_API int	xscreen;
+extern GNUI_API XVisualInfo* xvisual;
+extern GNUI_API Colormap	xcolormap;
 
 ////////////////////////////////////////////////////////////////
 // event handling:
 
 // feed events into gnui by setting xevent and calling handle:
-extern FL_API XEvent	xevent;
-extern FL_API bool	handle();
+extern GNUI_API XEvent	xevent;
+extern GNUI_API bool	handle();
 
 // set by last xevent with a timestamp:
-extern FL_API ulong	event_time;
+extern GNUI_API ulong	event_time;
 
 ////////////////////////////////////////////////////////////////
 // DnD:
 
-extern FL_API XWindow dnd_source_window;
-extern FL_API Atom *dnd_source_types;
-extern FL_API Atom dnd_type;
-extern FL_API Atom dnd_source_action;
-extern FL_API Atom dnd_action;
+extern GNUI_API XWindow dnd_source_window;
+extern GNUI_API Atom *dnd_source_types;
+extern GNUI_API Atom dnd_type;
+extern GNUI_API Atom dnd_source_action;
+extern GNUI_API Atom dnd_action;
 
 ////////////////////////////////////////////////////////////////
 // drawing functions:
 
-extern FL_API XftDraw*	xftc;
-extern FL_API GC	gc;
-extern FL_API XWindow	xwindow;
-extern FL_API ulong	current_xpixel;
-extern FL_API ulong	xpixel(Color i);
-extern FL_API void	clip_region(Region);
-extern FL_API Region	clip_region();
+extern GNUI_API XftDraw*	xftc;
+extern GNUI_API GC	gc;
+extern GNUI_API XWindow	xwindow;
+extern GNUI_API ulong	current_xpixel;
+extern GNUI_API ulong	xpixel(Color i);
+extern GNUI_API void	clip_region(Region);
+extern GNUI_API Region	clip_region();
 
-extern FL_API void	draw_into(XWindow, int w, int h);
-extern FL_API void	stop_drawing(XWindow);
+extern GNUI_API void	draw_into(XWindow, int w, int h);
+extern GNUI_API void	stop_drawing(XWindow);
 
-extern FL_API XFontStruct* xfont();
-extern FL_API XftFont*  xftfont();
+extern GNUI_API XFontStruct* xfont();
+extern GNUI_API XftFont*  xftfont();
 
 ////////////////////////////////////////////////////////////////
 // only include this if <gnui/Window.h> was included:
@@ -145,7 +145,7 @@ extern FL_API XftFont*  xftfont();
   Warning: this object is highly subject to change!  It's definition
   is only here so that xid(Window) can be declared inline
 */
-class FL_API CreatedWindow {
+class GNUI_API CreatedWindow {
 public:
   XWindow xid; //!< The CreatedWindow's XWindow IDentifier
   XWindow backbuffer; //!< The CreatedWindow's secondary buffer

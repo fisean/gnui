@@ -26,15 +26,15 @@
 #
 
 CPPFILES = \
-	Fl_Chart.cxx \
-	Fl_Positioner.cxx \
+	GNUI_Chart.cxx \
+	GNUI_Positioner.cxx \
 	forms_bitmap.cxx \
 	forms_compatability.cxx \
 	forms_free.cxx \
 	forms_fselect.cxx \
 	forms_pixmap.cxx \
 	forms_timer.cxx \
-	fl_load_browser.cxx
+	gnui_load_browser.cxx
 
 DEMOS = \
 	forms colbrowser
@@ -42,8 +42,8 @@ DEMOS = \
 ################################################################
 
 include ../makeinclude
-DSOCFLAGS += -DFL_FORMS_LIBRARY
-DSOCXXFLAGS += -DFL_FORMS_LIBRARY
+DSOCFLAGS += -DGNUI_FORMS_LIBRARY
+DSOCXXFLAGS += -DGNUI_FORMS_LIBRARY
 LDLIBS := $(FORMSLIBS) $(LDLIBS)
 
 LIBRARY = ../lib/$(LIBNAME)_forms

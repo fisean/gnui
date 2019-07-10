@@ -709,9 +709,9 @@ COLS_IN_ALPHA_INDEX    = 5
 # should be ignored while generating the index headers.
 
 IGNORE_PREFIX          = fltk:: \
-                         fl_ \
-                         Fl_ \
-                         FL_
+                         gnui_ \
+                         GNUI_ \
+                         GNUI_
 
 #---------------------------------------------------------------------------
 # configuration options related to the HTML output
@@ -1135,11 +1135,11 @@ INCLUDE_FILE_PATTERNS  =
 
 PREDEFINED             = DEBUG \
                          DOXYGEN \
-                         FL_API= \
-                         FL_IMAGES_API= \
-                         FL_GLUT_API= \
-                         FL_FORMS_API= \
-                         FL_GL_API= \
+                         GNUI_API= \
+                         GNUI_IMAGES_API= \
+                         GNUI_GLUT_API= \
+                         GNUI_FORMS_API= \
+                         GNUI_GL_API= \
                          HAVE_GL=1
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then 

@@ -47,23 +47,23 @@ static int stacksize = 0;
 static int sptr = 0;
 
 // Returns true if transformation is an integer translate only
-bool fl_trivial_transform() {return m.trivial;}
+bool gnui_trivial_transform() {return m.trivial;}
 
 #if USE_CAIRO
-void fl_set_cairo_ctm() {
+void gnui_set_cairo_ctm() {
   cairo_matrix_t cm = { m.a, m.b, m.c, m.d, m.x, m.y };
   cairo_transform(cr, &cm);
 }
 #elif USE_QUARTZ
-extern int fl_clip_h;
-void fl_set_quartz_ctm() {
-  CGAffineTransform mx = {m.a, m.b, -m.c, -m.d, m.x-.5f, -fl_clip_h+m.y-.5f};
+extern int gnui_clip_h;
+void gnui_set_quartz_ctm() {
+  CGAffineTransform mx = {m.a, m.b, -m.c, -m.d, m.x-.5f, -gnui_clip_h+m.y-.5f};
   CGContextConcatCTM(quartz_gc, mx);
 }
 #endif
 
 #if USE_XFT
-bool fl_get_invert_matrix(XTransform& i) {
+bool gnui_get_invert_matrix(XTransform& i) {
   i.matrix[2][0] = 0;
   i.matrix[2][1] = 0;
   i.matrix[2][2] = XDoubleToFixed(1);

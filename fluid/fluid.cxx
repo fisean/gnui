@@ -1045,7 +1045,7 @@ void do_shell_command(gnui::ReturnButton*, void*) {
     return;
   }
 
-  if (shell_savefl_button->value()) {
+  if (shell_savegnui_button->value()) {
     save_cb(0, 0);
   }
 
@@ -1101,7 +1101,7 @@ void do_shell_command(gnui::ReturnButton*, void*) {
     return;
   }
 
-  if (shell_savefl_button->value()) {
+  if (shell_savegnui_button->value()) {
     save_cb(0, 0);
   }
 

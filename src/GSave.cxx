@@ -58,10 +58,10 @@ using namespace gnui;
 */
 
 #ifdef _WIN32
-extern HDC fl_bitmap_dc;
+extern HDC gnui_bitmap_dc;
 #endif
-extern gnui::Image* fl_current_Image;
-extern int fl_clip_w, fl_clip_h;
+extern gnui::Image* gnui_current_Image;
+extern int gnui_clip_w, gnui_clip_h;
 
 GSave::GSave() {
   push_matrix();
@@ -71,32 +71,32 @@ GSave::GSave() {
 #elif defined(_WIN32)
   // make it not destroy the previous dc:
   data[0] = (void*)dc;
-  data[1] = (void*)(fl_bitmap_dc); fl_bitmap_dc = 0;
+  data[1] = (void*)(gnui_bitmap_dc); gnui_bitmap_dc = 0;
 #elif defined(__APPLE__)
   data[0] = (void*)quartz_window;
   data[1] = (void*)quartz_gc;
 #else
 # error
 #endif
-  data[2] = fl_current_Image;
-  data[3] = (void*)((fl_clip_w<<16)+(fl_clip_h&0xffff));
+  data[2] = gnui_current_Image;
+  data[3] = (void*)((gnui_clip_w<<16)+(gnui_clip_h&0xffff));
 }
 
 GSave::~GSave() {
   unsigned v = (unsigned) (unsigned long)data[3];
-  fl_clip_w = v >> 16;
-  fl_clip_h = v & 0xffff;
+  gnui_clip_w = v >> 16;
+  gnui_clip_h = v & 0xffff;
 #if USE_X11
-  if (data[0]) draw_into((XWindow)(data[0]), fl_clip_w, fl_clip_h);
+  if (data[0]) draw_into((XWindow)(data[0]), gnui_clip_w, gnui_clip_h);
 #elif defined(_WIN32)
   dc = (HDC)(data[0]);
-  DeleteDC(fl_bitmap_dc);
-  fl_bitmap_dc = (HDC)(data[1]);
+  DeleteDC(gnui_bitmap_dc);
+  gnui_bitmap_dc = (HDC)(data[1]);
 #elif defined(__APPLE__)
   quartz_window = (WindowPtr)data[0];
   quartz_gc = (CGContextRef)data[1];
 #endif
-  fl_current_Image = (gnui::Image*)data[2];
+  gnui_current_Image = (gnui::Image*)data[2];
   pop_clip();
   pop_matrix();
 }

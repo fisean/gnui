@@ -39,7 +39,7 @@ namespace gnui {
 #define TEXT_EDITOR_ANY_STATE  (-1L)
 
 /** TextEditor */
-class FL_API TextEditor : public TextDisplay {
+class GNUI_API TextEditor : public TextDisplay {
 public:
   typedef int (*Key_Func)(int key, TextEditor* editor);
 

@@ -57,7 +57,7 @@ will not need to put the "fltk::" in front of everything.
 Fltk1.1 emulation is mostly achieved by aliasing the old class name
 "Fl" to this namespace so that the static methods in Fltk1.1 will
 work, and by typedefs from the new fltk::Widget class names to the
-older Fl_Widget class names.
+older GNUI_Widget class names.
 
 \section copyrights Copyrights and Trademarks
 

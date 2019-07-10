@@ -29,7 +29,7 @@
 #include <fltk/Style.h>
 
 extern "C" int fltk_plugin() {
-  return fl_xft();
+  return gnui_xft();
 }
 
 //

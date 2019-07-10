@@ -17,7 +17,7 @@ int main (int argc, char **argv) {
     o->labelsize(10);
     o->shortcut(0xff1b);
     o->begin();
-     {gnui::Widget* o = new gnui::Widget(10, 10, 280, 235, "Fl_Slider");
+     {gnui::Widget* o = new gnui::Widget(10, 10, 280, 235, "GNUI_Slider");
       o->box(gnui::ENGRAVED_BOX);
       o->labelfont(gnui::HELVETICA_BOLD);
       o->color((gnui::Color)49);
@@ -83,7 +83,7 @@ int main (int argc, char **argv) {
       o->labelsize(8);
       o->callback((gnui::Callback*)callback);
     }
-     {gnui::Widget* o = new gnui::Widget(295, 10, 260, 126, "Fl_Value_Input");
+     {gnui::Widget* o = new gnui::Widget(295, 10, 260, 126, "GNUI_Value_Input");
       o->box(gnui::ENGRAVED_BOX);
       o->labelfont(gnui::HELVETICA_BOLD);
       o->color((gnui::Color)49);
@@ -123,13 +123,13 @@ int main (int argc, char **argv) {
       o->selection_color((gnui::Color)1);
       o->callback((gnui::Callback*)callback);
     }
-     {gnui::Widget* o = new gnui::Widget(10, 250, 280, 229, "Fl_Value_Slider");
+     {gnui::Widget* o = new gnui::Widget(10, 250, 280, 229, "GNUI_Value_Slider");
       o->box(gnui::ENGRAVED_BOX);
       o->labelfont(gnui::HELVETICA_BOLD);
       o->color((gnui::Color)49);
       o->align(gnui::ALIGN_TOP|gnui::ALIGN_CENTER);
     }
-     {gnui::Widget* o = new gnui::Widget(295, 141, 145, 131, "   Fl_Scrollbar");
+     {gnui::Widget* o = new gnui::Widget(295, 141, 145, 131, "   GNUI_Scrollbar");
       o->box(gnui::ENGRAVED_BOX);
       o->labelfont(gnui::HELVETICA_BOLD);
       o->color((gnui::Color)49);
@@ -208,7 +208,7 @@ int main (int argc, char **argv) {
       o->labelsize(8);
       o->callback((gnui::Callback*)callback);
     }
-     {gnui::Widget* o = new gnui::Widget(295, 277, 145, 136, "Fl_Roller");
+     {gnui::Widget* o = new gnui::Widget(295, 277, 145, 136, "GNUI_Roller");
       o->box(gnui::ENGRAVED_BOX);
       o->labelfont(gnui::HELVETICA_BOLD);
       o->color((gnui::Color)49);
@@ -227,7 +227,7 @@ int main (int argc, char **argv) {
       o->labelsize(8);
       o->callback((gnui::Callback*)callback);
     }
-     {gnui::Group* o = new gnui::Group(445, 141, 110, 272, "Fl_Dial");
+     {gnui::Group* o = new gnui::Group(445, 141, 110, 272, "GNUI_Dial");
       o->set_vertical();
       o->box(gnui::ENGRAVED_BOX);
       o->labelfont(gnui::HELVETICA_BOLD);

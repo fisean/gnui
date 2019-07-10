@@ -345,7 +345,7 @@ void ccValueBox::draw() {
 #define ROWS 4
 #define COLS 16
 
-FL_API Color fl_color_cells[ROWS*COLS] = {
+GNUI_API Color gnui_color_cells[ROWS*COLS] = {
 // first the 16 assignable gnui color indexes:
 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,
 16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,
@@ -364,7 +364,7 @@ void ccCellBox::draw() {
       Rectangle r(xx,yy,ww,hh);
       drawstyle(style(),OUTPUT);
       if (X || Y || !((ColorChooser*)parent())->support_no_value) {
-	setbgcolor(fl_color_cells[Y*COLS+X]);
+	setbgcolor(gnui_color_cells[Y*COLS+X]);
 	THIN_DOWN_BOX->draw(r);
       } else {
 	THIN_DOWN_BOX->draw(r);
@@ -392,11 +392,11 @@ int ccCellBox::handle(int e) {
     ColorChooser* c = (ColorChooser*)parent();
     if (event_button() > 1) {
       if (X) {
-	fl_color_cells[X] = c->value();
+	gnui_color_cells[X] = c->value();
 	redraw();
       }
     } else {
-      Color color = fl_color_cells[X];
+      Color color = gnui_color_cells[X];
       if (!color && !c->support_no_value) color = BLACK;
       if (c->value(color)) c->do_callback();
     }
@@ -477,7 +477,7 @@ bool ColorChooser::value(Color c) {
 #include <gnui/ReturnButton.h>
 #include <gnui/ask.h>
 
-class FL_API ccValueInput : public ValueInput {
+class GNUI_API ccValueInput : public ValueInput {
 public:
   int format(char*);
   ccValueInput(int X, int Y, int W, int H) : ValueInput(X,Y,W,H) {}
@@ -636,7 +636,7 @@ static int run_it(const char* name)
 }
 
 /*!
-  \image html fl_color_chooser.jpg
+  \image html gnui_color_chooser.jpg
 
   gnui::color_chooser() pops up a window to let the user pick an
   arbitrary RGB color. They can pick the hue and saturation in the

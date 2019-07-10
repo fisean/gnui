@@ -20,7 +20,7 @@ int main (int argc, char **argv) {
    {gnui::Window* o = new gnui::Window(395, 274);
     w = o;
     o->begin();
-     {gnui::Group* o = the_group = new gnui::Group(5, 6, 384, 233, "activate()/deactivate() called on this Fl_Group");
+     {gnui::Group* o = the_group = new gnui::Group(5, 6, 384, 233, "activate()/deactivate() called on this GNUI_Group");
       o->box(gnui::ENGRAVED_BOX);
       o->align(gnui::ALIGN_TOP|gnui::ALIGN_INSIDE);
       o->begin();
@@ -57,12 +57,12 @@ int main (int argc, char **argv) {
         }
         o->end();
       }
-       {gnui::Slider* o = new gnui::Slider(140, 25, 24, 146, "Fl_Slider");
+       {gnui::Slider* o = new gnui::Slider(140, 25, 24, 146, "GNUI_Slider");
         o->set_vertical();
         o->value(0.5);
       }
        {gnui::Input* o = new gnui::Input(170, 27, 195, 21);
-        o->static_value("Fl_Input");
+        o->static_value("GNUI_Input");
       }
        {gnui::InputBrowser* o = new gnui::InputBrowser(255, 59, 110, 21, "input browser");
         o->begin();
@@ -78,7 +78,7 @@ int main (int argc, char **argv) {
         o->end();
         o->text("Shemp");
       }
-       {gnui::Widget* o = new gnui::Widget(215, 134, 145, 86, "Fl_Box");
+       {gnui::Widget* o = new gnui::Widget(215, 134, 145, 86, "GNUI_Box");
         o->box(gnui::ENGRAVED_BOX);
         o->labelfont(gnui::HELVETICA_BOLD_ITALIC);
         o->labeltype(gnui::SHADOW_LABEL);
@@ -90,7 +90,7 @@ int main (int argc, char **argv) {
         o->textsize(24);
         o->maximum(10000);
         o->step(1);
-        o->tooltip("This Fl_Value_Output widget has a tooltip.");
+        o->tooltip("This GNUI_Value_Output widget has a tooltip.");
       }
        {gnui::Scrollbar* o = new gnui::Scrollbar(15, 191, 180, 19, "scrollbar");
         o->maximum(100);

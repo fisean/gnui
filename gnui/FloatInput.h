@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API FloatInput : public NumericInput {
+class GNUI_API FloatInput : public NumericInput {
   virtual bool replace(int, int, const char*, int);
 public:
   enum { FLOAT = 1, INT = 2 };

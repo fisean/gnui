@@ -35,13 +35,13 @@
 #include <fltk/run.h>
 #include <fltk/Group.h>
 #include "Fluid_Plugins.h"
-#include <FL/Fl_Menu_Item.H>
+#include <FL/GNUI_Menu_Item.H>
 #include <fltk/load_plugin.h>
 
 Fluid_Plugin* plugins[MAXPLUGINS];
 int nbplugins;
-Fl_Menu_Item Plugins_Options_Menu[MAXPLUGINS+1];
-Fl_Menu_Item Plugins_New_Menu[MAXPLUGINS+1];
+GNUI_Menu_Item Plugins_Options_Menu[MAXPLUGINS+1];
+GNUI_Menu_Item Plugins_New_Menu[MAXPLUGINS+1];
 
 #if HAVE_DLOPEN
 
@@ -72,13 +72,13 @@ static void ReadPlugin(char* s, const char* location)
 	if(d->options_menu) {
 	  Plugins_Options_Menu[nboptions].text = d->name;
 	  Plugins_Options_Menu[nboptions].user_data_ = d->options_menu;
-	  Plugins_Options_Menu[nboptions].flags = FL_SUBMENU_POINTER;
+	  Plugins_Options_Menu[nboptions].flags = GNUI_SUBMENU_POINTER;
 	  nboptions++;
 	}
 	if(d->new_menu) {
 	  Plugins_New_Menu[nbnew].text = d->name;
 	  Plugins_New_Menu[nbnew].user_data_ = d->new_menu;
-	  Plugins_New_Menu[nbnew].flags = FL_SUBMENU_POINTER;
+	  Plugins_New_Menu[nbnew].flags = GNUI_SUBMENU_POINTER;
 	  fill_in_New_Menu(d->new_menu);
 	  nbnew++;
 	}

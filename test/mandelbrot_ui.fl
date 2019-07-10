@@ -30,7 +30,7 @@ Right-click will create the Julia set viewer and set it to that point.}
 d->new_display();}
         tooltip {x coordinate of window center}
         xywh {10 10 130 25} type Float align 20 labelfont 2 textfont 1 labelsize 10
-        extra_code {o->when(FL_WHEN_ENTER_KEY|FL_WHEN_RELEASE);}
+        extra_code {o->when(GNUI_WHEN_ENTER_KEY|GNUI_WHEN_RELEASE);}
       }
       {fltk::Input} y_input {
         label y
@@ -38,7 +38,7 @@ d->new_display();}
 d->new_display();}
         tooltip {y coordinate of window center}
         xywh {150 10 130 25} type Float align 20 labelfont 2 textfont 1 labelsize 10
-        extra_code {o->when(FL_WHEN_ENTER_KEY|FL_WHEN_RELEASE);}
+        extra_code {o->when(GNUI_WHEN_ENTER_KEY|GNUI_WHEN_RELEASE);}
       }
       {fltk::Input} w_input {
         label w
@@ -46,7 +46,7 @@ d->new_display();}
 d->new_display();}
         tooltip {width of the window}
         xywh {290 10 130 25} type Float align 20 labelfont 2 textfont 1 labelsize 10
-        extra_code {o->when(FL_WHEN_ENTER_KEY|FL_WHEN_RELEASE);}
+        extra_code {o->when(GNUI_WHEN_ENTER_KEY|GNUI_WHEN_RELEASE);}
       }
       {fltk::Slider} {} {
         label {brightness:}
@@ -56,7 +56,7 @@ d->new_display();}
         xywh {70 40 160 15} align 4 box THIN_DOWN_BOX labelsize 10 step 1 slider_size 16
         extra_code {o->bounds(0,d->MAX_BRIGHTNESS);
 o->value(d->DEFAULT_BRIGHTNESS);
-o->slider(FL_UP_BOX);}
+o->slider(GNUI_UP_BOX);}
       }
       {fltk::InvisibleBox} {} {
         label {FLTK Mandelbrot Viewer} selected
@@ -70,7 +70,7 @@ d->new_display();}
         xywh {70 55 160 15} align 4 box THIN_DOWN_BOX labelsize 10 step 1 slider_size 16
         extra_code {o->bounds(1,d->MAX_ITERATIONS);
 o->value(d->DEFAULT_ITERATIONS);
-o->slider(FL_UP_BOX);}
+o->slider(GNUI_UP_BOX);}
       }
     }
   }

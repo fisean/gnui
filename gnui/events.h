@@ -27,7 +27,7 @@
 #ifndef gnui_events_h
 #define gnui_events_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 namespace gnui {
 
@@ -226,31 +226,31 @@ class Window;
 ////////////////////////////////////////////////////////////////
 // Do not use these variables, they may not exist in future versions:
 
-extern FL_API int e_type;
-extern FL_API int e_x;
-extern FL_API int e_y;
-extern FL_API int e_dx;
-extern FL_API int e_dy;
-extern FL_API int e_x_root;
-extern FL_API int e_y_root;
-extern FL_API unsigned e_state;
-extern FL_API int e_clicks;
-extern FL_API unsigned e_is_click;
-extern FL_API unsigned e_keysym;
-extern FL_API unsigned e_length;
-extern FL_API const char* e_text;
-extern FL_API unsigned e_key_repeated;
-extern FL_API float e_pressure;
-extern FL_API float e_x_tilt;
-extern FL_API float e_y_tilt;
-extern FL_API int e_device;
-extern FL_API int compose_state;
-extern FL_API Widget* belowmouse_;
-extern FL_API Widget* pushed_;
-extern FL_API Widget* focus_;
-extern FL_API Widget* modal_;
-extern FL_API bool grab_;
-extern FL_API bool exit_modal_;
+extern GNUI_API int e_type;
+extern GNUI_API int e_x;
+extern GNUI_API int e_y;
+extern GNUI_API int e_dx;
+extern GNUI_API int e_dy;
+extern GNUI_API int e_x_root;
+extern GNUI_API int e_y_root;
+extern GNUI_API unsigned e_state;
+extern GNUI_API int e_clicks;
+extern GNUI_API unsigned e_is_click;
+extern GNUI_API unsigned e_keysym;
+extern GNUI_API unsigned e_length;
+extern GNUI_API const char* e_text;
+extern GNUI_API unsigned e_key_repeated;
+extern GNUI_API float e_pressure;
+extern GNUI_API float e_x_tilt;
+extern GNUI_API float e_y_tilt;
+extern GNUI_API int e_device;
+extern GNUI_API int compose_state;
+extern GNUI_API Widget* belowmouse_;
+extern GNUI_API Widget* pushed_;
+extern GNUI_API Widget* focus_;
+extern GNUI_API Widget* modal_;
+extern GNUI_API bool grab_;
+extern GNUI_API bool exit_modal_;
 
 ////////////////////////////////////////////////////////////////
 #endif
@@ -270,7 +270,7 @@ inline unsigned event_state()		{return e_state;}
 inline bool event_state(unsigned i)	{return (e_state&i) != 0;}
 inline unsigned event_key()		{return e_keysym;}
 inline unsigned event_button()		{return e_keysym;}
-FL_API bool event_key_state(unsigned);
+GNUI_API bool event_key_state(unsigned);
 inline const char* event_text() 	{return e_text;}
 inline unsigned event_length() 		{return e_length;}
 inline unsigned event_key_repeated()	{return e_key_repeated;}
@@ -280,47 +280,47 @@ inline float event_y_tilt()     	{return e_y_tilt;}
 inline int  event_device()      	{return e_device;}
 
 // tests on current event:
-FL_API bool event_inside(const Rectangle&);
-FL_API bool compose(int &del);
+GNUI_API bool event_inside(const Rectangle&);
+GNUI_API bool compose(int &del);
 inline void compose_reset()		{compose_state = 0;}
 
 // shortcuts:
-FL_API bool try_shortcut();
-FL_API const char* key_name(unsigned key);
-FL_API unsigned key(const char* name);
+GNUI_API bool try_shortcut();
+GNUI_API const char* key_name(unsigned key);
+GNUI_API unsigned key(const char* name);
 
-class FL_API ShortcutFunctor {
+class GNUI_API ShortcutFunctor {
  public:
   virtual bool handle(const Widget*, unsigned key) = 0;
 };
-FL_API unsigned foreachShortcut(const Widget*, ShortcutFunctor&);
+GNUI_API unsigned foreachShortcut(const Widget*, ShortcutFunctor&);
 inline unsigned foreachShortcut(ShortcutFunctor& f) { return foreachShortcut(0,f); }
 
 // get current information, not info from last event:
-FL_API bool get_key_state(unsigned);
-FL_API void get_mouse(int &,int &);
-FL_API bool warp_mouse(int, int);
+GNUI_API bool get_key_state(unsigned);
+GNUI_API void get_mouse(int &,int &);
+GNUI_API bool warp_mouse(int, int);
 
 // event destinations:
-FL_API bool handle(int, Window*);
-FL_API void add_event_handler(int (*h)(int, Window*));
+GNUI_API bool handle(int, Window*);
+GNUI_API void add_event_handler(int (*h)(int, Window*));
 inline Widget* belowmouse() 		{return belowmouse_;}
-FL_API void belowmouse(Widget*);
+GNUI_API void belowmouse(Widget*);
 inline void belowmouse(Widget& w)	{belowmouse(&w);}
 inline Widget* pushed()			{return pushed_;}
-FL_API void pushed(Widget*);
+GNUI_API void pushed(Widget*);
 inline void pushed(Widget& w)		{pushed(&w);}
 inline Widget* focus()			{return focus_;}
-FL_API void focus(Widget*);
+GNUI_API void focus(Widget*);
 inline void focus(Widget& w)		{focus(&w);}
 
 // cut/paste/dnd:
-FL_API void copy(const char* stuff, int len, bool clipboard = false);
-FL_API void paste(Widget &receiver, bool clipboard = false);
-FL_API bool dnd();
+GNUI_API void copy(const char* stuff, int len, bool clipboard = false);
+GNUI_API void paste(Widget &receiver, bool clipboard = false);
+GNUI_API bool dnd();
 
 // Modal widgets (block events going to any other widgets):
-FL_API void modal(Widget*, bool grab = false);
+GNUI_API void modal(Widget*, bool grab = false);
 inline Widget* modal()			{return modal_;}
 inline bool grab()			{return grab_;}
 inline void exit_modal()		{exit_modal_ = true;}

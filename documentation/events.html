@@ -62,10 +62,10 @@ This eliminates the need for "interests" (event masks or tables), and
 this is the main reason FLTK is much smaller than other toolkits.
 
 <p>Most events are sent to the outermost <a
-href=Fl_Window.html>fltk::Window</a> containing the event, and those
+href=GNUI_Window.html>fltk::Window</a> containing the event, and those
 widgets are responsible for finding and sending the events to child
 widgets. Some events are sent directly to <a
-href=Fl_Widget.html>fltk::Widgets</a>, this is controlled by the
+href=GNUI_Widget.html>fltk::Widgets</a>, this is controlled by the
 following methods, which the container widgets are required to call:
 
 <ul>
@@ -82,7 +82,7 @@ href=Fl.html#add_handler><tt>fltk::add_handler(int
 (*)(int,fltk::Window*))</tt></a>.
 
 <p>You can generate fake events by calling <a
-href=Fl_Widget.html#handle><tt>handle(int)</tt></a> on the correct
+href=GNUI_Widget.html#handle><tt>handle(int)</tt></a> on the correct
 widgets (usally a window). Currently you can change the values returned by the
 <tt>fltk::event_*()</tt> functions by storing the desired value into the
 static variables <tt>fltk::e_*</tt>, but this may change in future
@@ -103,7 +103,7 @@ method is being called.</p>
 
 <p>A widget indicates that it &quot;wants&quot; the mouse click by
 returning non-zero from its <a
-href=Fl_Widget.html#handle><tt>handle()</tt></a> method. It will then
+href=GNUI_Widget.html#handle><tt>handle()</tt></a> method. It will then
 become the <a href=Fl.html#pushed><tt>fltk::pushed()</tt></a>
 widget (this is done by the enclosing group widget) and will get <a
 href=#DRAG><tt>fltk::DRAG</tt></a> and the matching <a
@@ -134,7 +134,7 @@ passed a <a href=#PUSH><tt>fltk::PUSH</tt></a> event.
 The mouse has been moved to point at this widget.  This can be used
 for highlighting feedback.  If a widget wants to highlight or
 otherwise track the mouse, it indicates this by returning non-zero
-from its <a href="Fl_Widget.html#handle"><tt>handle()</tt></a>
+from its <a href="GNUI_Widget.html#handle"><tt>handle()</tt></a>
 method. It then becomes the <a href="Fl.html#belowmouse">
 <tt>fltk::belowmouse()</tt></a> widget and will receive <a
 href=#MOVE><tt>fltk::MOVE</tt></a> and <a
@@ -170,7 +170,7 @@ This indicates an <I>attempt</I> to give a widget the keyboard focus.
 
 <P>If a widget wants the focus, it should change itself to display the
 fact that it has the focus, and return non-zero from its <a
-href="Fl_Widget.html#handle"><tt>handle()</tt></a> method.  It then
+href="GNUI_Widget.html#handle"><tt>handle()</tt></a> method.  It then
 becomes the <a href="Fl.html#focus"><tt>fltk::focus()</tt></a>
 widget and gets <a href=#KEY><tt>fltk::KEY</tt></a>, <a
 href=#KEYUP><tt>fltk::KEYUP</tt></a> and <a
@@ -236,25 +236,25 @@ which one has the focus.
 <h4><a name="DEACTIVATE">fltk::DEACTIVATE</a></h4>
 
 The method <a
-href="Fl_Widget.html#deactivate"><tt>deactivate()</tt></a> has been
+href="GNUI_Widget.html#deactivate"><tt>deactivate()</tt></a> has been
 called on this widget or one of its parents. The function <a
-href="Fl_Widget.html#active_r"><tt>active_r()</tt></a> will now return
+href="GNUI_Widget.html#active_r"><tt>active_r()</tt></a> will now return
 <tt>false</tt>.
 
 <h4><a name="ACTIVATE">fltk::ACTIVATE</a></h4>
 
 The method <a
-href="Fl_Widget.html#activate"><tt>activate()</tt></a> has been
+href="GNUI_Widget.html#activate"><tt>activate()</tt></a> has been
 called on this widget or one of its parents. The function <a
-href="Fl_Widget.html#active_r"><tt>active_r()</tt></a> will now return
+href="GNUI_Widget.html#active_r"><tt>active_r()</tt></a> will now return
 <tt>true</tt>.
 
 <h4><a name="HIDE">fltk::HIDE</a></h4>
 
 This widget is no longer visible, due to <a
-href=Fl_Widget.html#hide><tt>hide()</tt></a> being called on it or one
+href=GNUI_Widget.html#hide><tt>hide()</tt></a> being called on it or one
 of its parents, or due to a parent window being minimized. The
-function <a href="Fl_Widget.html#visible_r"><tt>visible_r()</tt></a>
+function <a href="GNUI_Widget.html#visible_r"><tt>visible_r()</tt></a>
 will now return <tt>false</tt>.
 
 <p>If you implement a widget class it is important to call your base
@@ -264,10 +264,10 @@ visiblilty of widgets that are windows to the system.
 <h4><a name="SHOW">fltk::SHOW</a></h4>
 
 This widget is visible, due to <a
-href=Fl_Widget.html#hide><tt>show()</tt></a> being called on it or one
+href=GNUI_Widget.html#hide><tt>show()</tt></a> being called on it or one
 of its parents, or due to a parent window being restored from
 minimized state. The
-function <a href="Fl_Widget.html#visible_r"><tt>visible_r()</tt></a>
+function <a href="GNUI_Widget.html#visible_r"><tt>visible_r()</tt></a>
 will now return <tt>true</tt>.
 
 <p>If you implement a widget class it is important to call your base

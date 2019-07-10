@@ -2,11 +2,11 @@
 
 #include "image_file.h"
 #include <stdio.h>
-#include <fltk/fl_file_chooser.h>
+#include <fltk/gnui_file_chooser.h>
 
-Fl_Window* window;
+GNUI_Window* window;
 
-#include <fltk/Fl_Shared_Image.h>
+#include <fltk/GNUI_Shared_Image.h>
 static const unsigned char datas_coucou[4328] = {
 137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,0,64,0,0,0,64,8,6,0,0,0,
 170,105,113,222,0,0,0,4,103,65,77,65,0,1,134,160,49,232,150,95,0,0,16,159,73,
@@ -211,10 +211,10 @@ static const unsigned char datas_coucou[4328] = {
 152,119,117,63,208,9,86,248,223,33,250,169,183,253,236,176,15,223,56,142,245,
 63,29,34,171,173,78,153,43,170,0,0,0,0,73,69,78,68,174,66,96,130};
 
-Fl_Value_Slider* slider;
+GNUI_Value_Slider* slider;
 
-static void cb_slider(Fl_Value_Slider* o, void*) {
-  Fl_Shared_Image::set_cache_size((int)o->value()*1024);
+static void cb_slider(GNUI_Value_Slider* o, void*) {
+  GNUI_Shared_Image::set_cache_size((int)o->value()*1024);
 }
 static const unsigned char datas_testimg[5756] = {
 255,216,255,224,0,16,74,70,73,70,0,1,1,0,0,1,0,1,0,0,255,219,0,67,0,8,6,6,
@@ -484,14 +484,14 @@ static const unsigned char datas_testimg[5756] = {
 144,5,125,60,177,81,156,81,69,103,31,133,25,173,142,125,152,6,60,126,180,81,
 69,110,106,127,255,217};
 
-static void cb_Load(Fl_Button*, void*) {
+static void cb_Load(GNUI_Button*, void*) {
   static char *name=0;
-  name = fl_file_chooser("Choose in image", "", name);
+  name = gnui_file_chooser("Choose in image", "", name);
   char s[256];
   sprintf(s, "%s%s", name[0]=='/'? "":"../", name);
-  static Fl_Shared_Image* im;
-  if (im && im!=(Fl_Shared_Image*)&nosuch_bitmap) im->remove();
-  im = Fl_Shared_Image::guess(s)->get(s);
+  static GNUI_Shared_Image* im;
+  if (im && im!=(GNUI_Shared_Image*)&nosuch_bitmap) im->remove();
+  im = GNUI_Shared_Image::guess(s)->get(s);
   image_box->image(im);
   int w, h;
   im->measure(w, h);
@@ -499,80 +499,80 @@ static void cb_Load(Fl_Button*, void*) {
   image_window->show();
 }
 
-Fl_Window* browser_window;
+GNUI_Window* browser_window;
 
-Fl_Browser* browser;
+GNUI_Browser* browser;
 
-Fl_Window* image_window;
+GNUI_Window* image_window;
 
-Fl_Box* image_box;
+GNUI_Box* image_box;
 
 int main (int argc, char **argv) {
 
-  Fl_Window* w;
-  Fl_Shared_Image::set_root_directory("images");
-   {Fl_Window* o = window = new Fl_Window(660, 405, "The background is a BMP file");
-    o->image(Fl_BMP_Image::get("ulon.bmp"));
-    o->box(FL_NO_BOX);
+  GNUI_Window* w;
+  GNUI_Shared_Image::set_root_directory("images");
+   {GNUI_Window* o = window = new GNUI_Window(660, 405, "The background is a BMP file");
+    o->image(GNUI_BMP_Image::get("ulon.bmp"));
+    o->box(GNUI_NO_BOX);
     o->align(32);
-     {Fl_Box* o = new Fl_Box(23, 158, 352, 197, "tiled GIF image loaded from disk");
-      o->image(Fl_GIF_Image::get("coucou.gif"));
-      o->label_font(fl_fonts+1);
-      o->label_type(FL_SHADOW_LABEL);
-      o->label_color((Fl_Color)3);
+     {GNUI_Box* o = new GNUI_Box(23, 158, 352, 197, "tiled GIF image loaded from disk");
+      o->image(GNUI_GIF_Image::get("coucou.gif"));
+      o->label_font(gnui_fonts+1);
+      o->label_type(GNUI_SHADOW_LABEL);
+      o->label_color((GNUI_Color)3);
       o->align(32);
     }
-     {Fl_Box* o = new Fl_Box(100, 23, 170, 102, "PNG image with datas included in code");
-      o->image(Fl_PNG_Image::get("coucou.png", datas_coucou));
-      o->label_font(fl_fonts+1);
-      o->label_type(FL_SHADOW_LABEL);
-      o->label_color((Fl_Color)3);
+     {GNUI_Box* o = new GNUI_Box(100, 23, 170, 102, "PNG image with datas included in code");
+      o->image(GNUI_PNG_Image::get("coucou.png", datas_coucou));
+      o->label_font(gnui_fonts+1);
+      o->label_type(GNUI_SHADOW_LABEL);
+      o->label_color((GNUI_Color)3);
       o->align(32);
     }
-     {Fl_Box* o = new Fl_Box(408, 16, 134, 109, "XPM image loaded from disk");
-      o->image(Fl_XPM_Image::get("../porsche.xpm"));
-      o->label_font(fl_fonts+1);
-      o->label_type(FL_SHADOW_LABEL);
-      o->label_color((Fl_Color)3);
+     {GNUI_Box* o = new GNUI_Box(408, 16, 134, 109, "XPM image loaded from disk");
+      o->image(GNUI_XPM_Image::get("../porsche.xpm"));
+      o->label_font(gnui_fonts+1);
+      o->label_type(GNUI_SHADOW_LABEL);
+      o->label_color((GNUI_Color)3);
       o->deactivate();
     }
-     {Fl_Value_Slider* o = slider = new Fl_Value_Slider(40, 368, 288, 22, "Size of the image cache in kilo pixels (0 for unlimited)");
-      o->label_font(fl_fonts+1);
-      o->label_type(FL_SHADOW_LABEL);
-      o->label_color((Fl_Color)3);
+     {GNUI_Value_Slider* o = slider = new GNUI_Value_Slider(40, 368, 288, 22, "Size of the image cache in kilo pixels (0 for unlimited)");
+      o->label_font(gnui_fonts+1);
+      o->label_type(GNUI_SHADOW_LABEL);
+      o->label_color((GNUI_Color)3);
       o->maximum(100);
       o->step(1);
-      o->callback((Fl_Callback*)cb_slider);
+      o->callback((GNUI_Callback*)cb_slider);
     }
-     {Fl_Box* o = new Fl_Box(395, 195, 230, 150, "JPEG image stored in the executable");
-      o->image(Fl_JPEG_Image::get("testimg.jpg", datas_testimg));
-      o->label_font(fl_fonts+1);
-      o->label_type(FL_SHADOW_LABEL);
-      o->label_color((Fl_Color)3);
+     {GNUI_Box* o = new GNUI_Box(395, 195, 230, 150, "JPEG image stored in the executable");
+      o->image(GNUI_JPEG_Image::get("testimg.jpg", datas_testimg));
+      o->label_font(gnui_fonts+1);
+      o->label_type(GNUI_SHADOW_LABEL);
+      o->label_color((GNUI_Color)3);
       o->align(32);
     }
-     {Fl_Button* o = new Fl_Button(510, 15, 135, 30, "Load an image ...");
-      o->callback((Fl_Callback*)cb_Load);
+     {GNUI_Button* o = new GNUI_Button(510, 15, 135, 30, "Load an image ...");
+      o->callback((GNUI_Callback*)cb_Load);
     }
     o->end();
     o->resizable(o);
   }
-   {Fl_Window* o = browser_window = new Fl_Window(255, 150, "Image in the cache");
-     {Fl_Browser* o = browser = new Fl_Browser(0, 0, 255, 115); o->begin();
+   {GNUI_Window* o = browser_window = new GNUI_Window(255, 150, "Image in the cache");
+     {GNUI_Browser* o = browser = new GNUI_Browser(0, 0, 255, 115); o->begin();
       o->end();
     }
-     {Fl_Box* o = new Fl_Box(0, 115, 165, 20, "Italic : out of the cache");
-      o->align(133|FL_ALIGN_INSIDE);
+     {GNUI_Box* o = new GNUI_Box(0, 115, 165, 20, "Italic : out of the cache");
+      o->align(133|GNUI_ALIGN_INSIDE);
     }
-     {Fl_Box* o = new Fl_Box(0, 130, 205, 20, "Grey : just loaded or unloaded");
-      o->align(FL_ALIGN_TOP | FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+     {GNUI_Box* o = new GNUI_Box(0, 130, 205, 20, "Grey : just loaded or unloaded");
+      o->align(GNUI_ALIGN_TOP | GNUI_ALIGN_LEFT|GNUI_ALIGN_INSIDE);
     }
     o->end();
   }
-   {Fl_Window* o = image_window = new Fl_Window(115, 100);
+   {GNUI_Window* o = image_window = new GNUI_Window(115, 100);
     w = o;
-     {Fl_Box* o = image_box = new Fl_Box(0, 0, 115, 100);
-      o->align(FL_ALIGN_TOP | FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+     {GNUI_Box* o = image_box = new GNUI_Box(0, 0, 115, 100);
+      o->align(GNUI_ALIGN_TOP | GNUI_ALIGN_LEFT|GNUI_ALIGN_INSIDE);
     }
     o->end();
   }

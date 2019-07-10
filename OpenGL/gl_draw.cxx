@@ -49,12 +49,12 @@ static void glXUseXftFont(XftFont*, unsigned listbase);
 
 using namespace gnui;
 
-extern GLContext fl_current_glcontext;
-FL_API unsigned fl_font_opengl_id();
-FL_API void fl_set_font_opengl_id(unsigned v);
+extern GLContext gnui_current_glcontext;
+GNUI_API unsigned gnui_font_opengl_id();
+GNUI_API void gnui_set_font_opengl_id(unsigned v);
 #if TEXTURES
-FL_API unsigned fl_font_opengl_texture();
-FL_API void fl_set_font_opengl_texture(unsigned);
+GNUI_API unsigned gnui_font_opengl_texture();
+GNUI_API void gnui_set_font_opengl_texture(unsigned);
 static unsigned texture; // current texture
 static float scalefactor = 1; // current scale factor
 #endif
@@ -65,7 +65,7 @@ static float scalefactor = 1; // current scale factor
   aliased except on X.
 */
 void gnui::glsetfont(gnui::Font* font, float size) {
-  if (!fl_current_glcontext) {
+  if (!gnui_current_glcontext) {
     setfont(font, size); // necessary so measure() works
     return;
   }
@@ -80,10 +80,10 @@ void gnui::glsetfont(gnui::Font* font, float size) {
   float tsize = size;
 #endif
   setfont(font, tsize);
-  unsigned listbase = fl_font_opengl_id();
+  unsigned listbase = gnui_font_opengl_id();
   if (!listbase) {
     listbase = glGenLists(256);
-    fl_set_font_opengl_id(listbase);
+    gnui_set_font_opengl_id(listbase);
 #if USE_XFT
     glXUseXftFont(xftfont(), listbase);
 #elif USE_X11
@@ -121,7 +121,7 @@ void gnui::glsetfont(gnui::Font* font, float size) {
   }
   glListBase(listbase);
 #if TEXTURES
-  texture = fl_font_opengl_texture();
+  texture = gnui_font_opengl_texture();
 #endif
   setfont(font, size); // necessary so measure() works when scalefactor!=1
 }
@@ -262,9 +262,9 @@ void gnui::glstrokerect(int x, int y, int w, int h) {
 */
 
 #if USE_GL_OVERLAY
-extern bool fl_overlay;
+extern bool gnui_overlay;
 #ifdef _WIN32
-extern int fl_overlay_depth;
+extern int gnui_overlay_depth;
 #endif
 #endif
 
@@ -274,14 +274,14 @@ Set the current OpenGL color to a FLTK color, or as close as possible.
 void gnui::glsetcolor(Color i) {
 #if USE_GL_OVERLAY
 #ifndef _WIN32
-  if (fl_overlay) {glIndexi(int(xpixel(i))); return;}
+  if (gnui_overlay) {glIndexi(int(xpixel(i))); return;}
 #else
-  if (fl_overlay && fl_overlay_depth) {
+  if (gnui_overlay && gnui_overlay_depth) {
     i = nearest_index(i); // convert to 8-bit color
-    if (fl_overlay_depth < 8) {
+    if (gnui_overlay_depth < 8) {
       // only black & white produce the expected colors.  This could
       // be improved by fixing the colormap set in GlOverlay.cxx
-      unsigned size = 1<<fl_overlay_depth;
+      unsigned size = 1<<gnui_overlay_depth;
       if (!i) glIndexi(size-2);
       else if (i >= size-2) glIndexi(size-1);
       else glIndexi(i);
@@ -308,7 +308,7 @@ void gnui::gldrawimage(const uchar* b, int x, int y, int w, int h, int d, int ld
   glDrawPixels(w, h, d<4?GL_RGB:GL_RGBA, GL_UNSIGNED_BYTE, (const unsigned long*)b);
 }
 
-const char* fl_default_font_pathname;
+const char* gnui_default_font_pathname;
 
 #if USE_XFT
 
@@ -339,8 +339,8 @@ static void glXUseXftFont(XftFont* xftfont, unsigned listbase) {
   FT_Face face = XftLockFace(xftfont);
 
   // hack so Nuke knows where to look for fonts...
-  if (!fl_default_font_pathname)
-    fl_default_font_pathname = (char*)(face->stream->pathname.pointer);
+  if (!gnui_default_font_pathname)
+    gnui_default_font_pathname = (char*)(face->stream->pathname.pointer);
 
 //   if (!face->charmap && face->num_charmaps)
 //     FT_Set_Charmap(face, face->charmaps[0]);
@@ -465,7 +465,7 @@ static void glXUseXftFont(XftFont* xftfont, unsigned listbase) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
   // remember it:
-  fl_set_font_opengl_texture(texture);
+  gnui_set_font_opengl_texture(texture);
 
   // Now build the display lists
   float umul = 1.0f/width;

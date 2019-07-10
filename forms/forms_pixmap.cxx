@@ -27,21 +27,21 @@
 
 #include <fltk/forms.h>
 
-Fl_FormsPixmap::Fl_FormsPixmap(
-  Fl_Boxtype t, int x, int y, int w, int h, const char* l)
-: Fl_Widget(x, y, w, h, l) {
+GNUI_FormsPixmap::GNUI_FormsPixmap(
+  GNUI_Boxtype t, int x, int y, int w, int h, const char* l)
+: GNUI_Widget(x, y, w, h, l) {
   box(t);
   b = 0;
-  clear_flag(FL_ALIGN_MASK);
-  set_flag(FL_ALIGN_BOTTOM);
+  clear_flag(GNUI_ALIGN_MASK);
+  set_flag(GNUI_ALIGN_BOTTOM);
 }
 
-void Fl_FormsPixmap::set(const char* const* bits) {
+void GNUI_FormsPixmap::set(const char* const* bits) {
   delete b;
-  b = new Fl_Pixmap(bits);
+  b = new GNUI_Pixmap(bits);
 }
 
-void Fl_FormsPixmap::draw() {
+void GNUI_FormsPixmap::draw() {
   box()->draw(0, 0, w(), h(), selection_color());
   if (b) {
     int W,H; b->measure(W,H);

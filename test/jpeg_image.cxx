@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// fl_draw_image test program for the Fast Light Tool Kit (FLTK).
+// gnui_draw_image test program for the Fast Light Tool Kit (FLTK).
 //
 // Be sure to try every visual with the -v switch and try -m (monochrome)
 // on each of them.
@@ -43,7 +43,7 @@
 //
 
 #include <fltk/Fl.h>
-#include <fltk/fl_draw.h>
+#include <fltk/gnui_draw.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -56,20 +56,20 @@ uchar *ibuffer;
 
 ////////////////////////////////////////////////////////////////
 
-#include <fltk/Fl_Window.h>
+#include <fltk/GNUI_Window.h>
 int mono;
 
-class image_window : public Fl_Window {
+class image_window : public GNUI_Window {
   void draw();
 public:
-  image_window(int w,int h) : Fl_Window(w,h) {box(FL_NO_BOX);}
+  image_window(int w,int h) : GNUI_Window(w,h) {box(GNUI_NO_BOX);}
 };
 
 void image_window::draw() {
   if (mono)
-    fl_draw_image_mono(ibuffer+1,0,0,::width,::height,depth,linedelta);
+    gnui_draw_image_mono(ibuffer+1,0,0,::width,::height,depth,linedelta);
   else
-    fl_draw_image(ibuffer,0,0,::width,::height,depth,linedelta);
+    gnui_draw_image(ibuffer,0,0,::width,::height,depth,linedelta);
 }
 
 ////////////////////////////////////////////////////////////////
@@ -109,18 +109,18 @@ int main(int argc, char ** argv) {
   image_window *window = new image_window(width,height);
 
   if (visid>=0) {
-    fl_open_display();
+    gnui_open_display();
     XVisualInfo templt; int num;
     templt.visualid = visid;
-    fl_visual = XGetVisualInfo(fl_display, VisualIDMask, &templt, &num);
-    if (!fl_visual) {
+    gnui_visual = XGetVisualInfo(gnui_display, VisualIDMask, &templt, &num);
+    if (!gnui_visual) {
       fprintf(stderr, "No visual with id %d, use one of:\n",visid);
       list_visuals();
       exit(1);
     }
-    fl_colormap = XCreateColormap(fl_display, RootWindow(fl_display,fl_screen),
-				fl_visual->visual, AllocNone);
-    fl_xpixel(FL_BLACK); // make sure black is allocated
+    gnui_colormap = XCreateColormap(gnui_display, RootWindow(gnui_display,gnui_screen),
+				gnui_visual->visual, AllocNone);
+    gnui_xpixel(GNUI_BLACK); // make sure black is allocated
   }
 
   window->show(argc,argv);

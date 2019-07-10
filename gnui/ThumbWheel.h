@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API ThumbWheel : public Valuator {
+class GNUI_API ThumbWheel : public Valuator {
 public:
 #ifdef FLTK_1_SLIDER
   // for back-compatability only

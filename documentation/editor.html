@@ -54,11 +54,11 @@ application.
 <h2><a name=emenus>Menubars and Menus</a></h2>
 
 The first goal requires us to use a menubar and menus that define each 
-function the editor needs to perform.  The <A href=Fl_Menu_Item.html>
-<TT>Fl_Menu_Item</TT></A> structure is used to define the menus and 
+function the editor needs to perform.  The <A href=GNUI_Menu_Item.html>
+<TT>GNUI_Menu_Item</TT></A> structure is used to define the menus and 
 items in a menubar: 
 <PRE>
-Fl_Menu_Item menuitems[] = {
+GNUI_Menu_Item menuitems[] = {
   { "&amp;File", 0, 0, 0, fltk::SUBMENU },
     { "&amp;New",        fltk::ALT + 'n', (fltk::Callback *)new_cb },
     { "&amp;Open...",    fltk::ALT + 'o', (fltk::Callback *)open_cb, 0, fltk::MENU_DIVIDER },
@@ -95,7 +95,7 @@ menubar-&gt;menu(menuitems);
 
 <h2><a name=eediting>Editing the Text</a></h2>
 
- To keep things simple our text editor will use the <A href=Fl_Multiline_Input.html#MultilineInput>
+ To keep things simple our text editor will use the <A href=GNUI_Multiline_Input.html#MultilineInput>
 <TT>fltk::MultilineInput</TT></A> widget to edit the text: 
 <PRE>
 fltk::MultilineInput *input = new fltk::MultilineInput(0, 30, 640, 450);
@@ -148,7 +148,7 @@ because some of the other callbacks will set the changed status to 0,
 and also because we want to show the changed status in the window's 
 title bar. 
 <H3>copy_cb()</H3>
- This callback function will call <A href=Fl_Input.html#copy><TT>
+ This callback function will call <A href=GNUI_Input.html#copy><TT>
 input-&gt;copy()</TT></A> to copy the currently selected text to the 
 clipboard: 
 <PRE>
@@ -157,9 +157,9 @@ void copy_cb(void) {
 }
 </PRE>
 <H3>cut_cb()</H3>
- This callback function will call <A href=Fl_Input.html#copy><TT>
+ This callback function will call <A href=GNUI_Input.html#copy><TT>
 input-&gt;copy()</TT></A> to copy the currently selected text to the 
-clipboard and then <A href=Fl_Input.html#cut><TT>input-&gt;cut()</TT>
+clipboard and then <A href=GNUI_Input.html#cut><TT>input-&gt;cut()</TT>
 </A> to delete it: 
 <PRE>
 void cut_cb(void) {
@@ -168,7 +168,7 @@ void cut_cb(void) {
 }
 </PRE>
 <H3>delete_cb()</H3>
- This callback function will call <A href=Fl_Input.html#cut><TT>
+ This callback function will call <A href=GNUI_Input.html#cut><TT>
 input-&gt;cut()</TT></A> to delete the selected text: 
 <PRE>
 void delete_cb(void) {
@@ -384,7 +384,7 @@ void saveas_cb(void) {
  The <TT>save_file()</TT> function saves the current file to the 
 specified filename. 
 <H3>undo_cb()</H3>
- The undo callback just calls the <A href=Fl_Input.html#undo><TT>
+ The undo callback just calls the <A href=GNUI_Input.html#undo><TT>
 undo()</TT></A> method: 
 <PRE>
 void undo_cb(void) {
@@ -444,7 +444,7 @@ void load_file(char *newfile) {
   }
 }
 </PRE>
- When loading the file we use the <A href=Fl_Input.html#replace>
+ When loading the file we use the <A href=GNUI_Input.html#replace>
 <TT>input-&gt;replace()</TT></A> method to &quot;replace&quot; the text at the end 
 of the buffer.  The <TT>pos</TT> variable keeps track of the end of the 
 buffer. 

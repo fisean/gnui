@@ -474,7 +474,7 @@ Style* Style::find(const char* name) {
 ////////////////////////////////////////////////////////////////
 // Themes:
 
-//extern "C" FL_API bool gnui_theme();
+//extern "C" GNUI_API bool gnui_theme();
 
 /*! \typedef Theme
 
@@ -511,7 +511,7 @@ Style* Style::find(const char* name) {
 
 Theme gnui::theme_ = gnui_theme;
 
-Color fl_bg_switch = 0; // set by -bg in arg.cxx
+Color gnui_bg_switch = 0; // set by -bg in arg.cxx
 
 static char theme_loaded;
 
@@ -525,7 +525,7 @@ void gnui::load_theme() {
   if (theme_loaded) return;
   theme_loaded = 2; // signal reset_theme to do nothing
   theme_();
-  if (fl_bg_switch) set_background(fl_bg_switch);
+  if (gnui_bg_switch) set_background(gnui_bg_switch);
   theme_loaded = 1;
 }
 
@@ -544,7 +544,7 @@ void gnui::reload_theme() {
   if (theme_loaded != 1) return;
   reset_theme();
   theme_();
-  if (fl_bg_switch) set_background(fl_bg_switch);
+  if (gnui_bg_switch) set_background(gnui_bg_switch);
   gnui::redraw();
 }
 

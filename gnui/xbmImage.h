@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API xbmImage : public Image {
+class GNUI_API xbmImage : public Image {
 public:
   const unsigned char *array;
   xbmImage(const unsigned char *bits, int w,int h) :

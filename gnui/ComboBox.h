@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API ComboBox : public Choice {
+class GNUI_API ComboBox : public Choice {
 public:
   ComboBox(int,int,int,int,const char * = 0);
   ~ComboBox();

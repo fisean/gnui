@@ -63,13 +63,13 @@ namespace gnui {
 ////////////////////////////////////////////////////////////////
 // constant information about the display:
 
-//extern FL_API void    *qdisplay;
-extern FL_API void	open_display();
-extern FL_API void	close_display();
-extern FL_API WindowPtr  quartz_window;
-extern FL_API CGContextRef quartz_gc;
-extern FL_API Handle    system_menu;
-extern FL_API class     SystemMenuBar *system_menu_bar;
+//extern GNUI_API void    *qdisplay;
+extern GNUI_API void	open_display();
+extern GNUI_API void	close_display();
+extern GNUI_API WindowPtr  quartz_window;
+extern GNUI_API CGContextRef quartz_gc;
+extern GNUI_API Handle    system_menu;
+extern GNUI_API class     SystemMenuBar *system_menu_bar;
 
 ////////////////////////////////////////////////////////////////
 // event handling:
@@ -82,16 +82,16 @@ extern void open_callback(void (*cb)(const char* name));
 ////////////////////////////////////////////////////////////////
 // drawing functions:
 
-extern FL_API void	clip_region(RgnHandle);
-extern FL_API RgnHandle	clip_region();
-extern FL_API void	draw_into(CGContextRef xid, int w, int h);
-extern FL_API void	stop_drawing(CGImageRef xid);
+extern GNUI_API void	clip_region(RgnHandle);
+extern GNUI_API RgnHandle	clip_region();
+extern GNUI_API void	draw_into(CGContextRef xid, int w, int h);
+extern GNUI_API void	stop_drawing(CGImageRef xid);
 # define HFONT const char* // points at name of font!
-extern FL_API HFONT	xfont();
+extern GNUI_API HFONT	xfont();
 
-extern FL_API void clear_quartz_clipping();
-extern FL_API void begin_quartz_image(CGRect&, const Rectangle&);
-extern FL_API void end_quartz_image();
+extern GNUI_API void clear_quartz_clipping();
+extern GNUI_API void begin_quartz_image(CGRect&, const Rectangle&);
+extern GNUI_API void end_quartz_image();
 
 ////////////////////////////////////////////////////////////////
 # ifdef gnui_Window_h // only include this if <gnui/Window.h> was included
@@ -100,7 +100,7 @@ extern FL_API void end_quartz_image();
 // Warning: this object is highly subject to change!  It's definition
 // is only here so that gnui::xid(Window) can be declared inline:
 
-class FL_API CreatedWindow {
+class GNUI_API CreatedWindow {
 public:
   WindowPtr xid; // used by main windows
   Window* window;
@@ -119,8 +119,8 @@ public:
   CGContextRef gc;
 };
 
-extern FL_API void fill_quartz_context();
-extern FL_API void release_quartz_context(CreatedWindow *x=0);
+extern GNUI_API void fill_quartz_context();
+extern GNUI_API void release_quartz_context(CreatedWindow *x=0);
 
 // convert xid <-> Window:
 //inline WindowPtr xid(const Window*w) {return CreatedWindow::find(w)->xid;}
@@ -131,7 +131,7 @@ extern CursPtr default_cursor;
 extern CursPtr current_cursor;
 extern const Widget* cursor_for;
 
-# endif //Fl_Window_H
+# endif //GNUI_Window_H
 
 //@}
 
