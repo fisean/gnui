@@ -26,28 +26,28 @@
 #ifndef gnui_utf_h
 #define gnui_utf_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 #include <stdlib.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-FL_API int	utf8bytes(unsigned ucs);
+GNUI_API int	utf8bytes(unsigned ucs);
 
-FL_API unsigned	utf8decode(const char*, const char* end, int* len);
-FL_API int	utf8encode(unsigned, char*);
-FL_API const char* utf8fwd(const char*, const char* start, const char* end);
-FL_API const char* utf8back(const char*, const char* start, const char* end);
+GNUI_API unsigned	utf8decode(const char*, const char* end, int* len);
+GNUI_API int	utf8encode(unsigned, char*);
+GNUI_API const char* utf8fwd(const char*, const char* start, const char* end);
+GNUI_API const char* utf8back(const char*, const char* start, const char* end);
 
-FL_API unsigned	utf8towc(const char*, unsigned, wchar_t*, unsigned);
-FL_API unsigned utf8tomb(const char*, unsigned, char*, unsigned);
-FL_API unsigned utf8toa (const char*, unsigned, char*, unsigned);
-FL_API unsigned utf8fromwc(char*, unsigned, const wchar_t*, unsigned);
-FL_API unsigned utf8frommb(char*, unsigned, const char*, unsigned);
-FL_API unsigned utf8froma (char*, unsigned, const char*, unsigned);
-FL_API int utf8locale();
-FL_API int utf8test(const char*, unsigned);
+GNUI_API unsigned	utf8towc(const char*, unsigned, wchar_t*, unsigned);
+GNUI_API unsigned utf8tomb(const char*, unsigned, char*, unsigned);
+GNUI_API unsigned utf8toa (const char*, unsigned, char*, unsigned);
+GNUI_API unsigned utf8fromwc(char*, unsigned, const wchar_t*, unsigned);
+GNUI_API unsigned utf8frommb(char*, unsigned, const char*, unsigned);
+GNUI_API unsigned utf8froma (char*, unsigned, const char*, unsigned);
+GNUI_API int utf8locale();
+GNUI_API int utf8test(const char*, unsigned);
 
 #ifdef __cplusplus
 }

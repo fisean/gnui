@@ -49,7 +49,7 @@
 #if USE_CAIRO
 # include <cairo.h>
 # include <cairo-win32.h>
-  FL_API cairo_t * gnui::cr=0;
+  GNUI_API cairo_t * gnui::cr=0;
 #endif
 
 ////////////////////////////////////////////////////////////////
@@ -177,9 +177,9 @@ HIMC (WINAPI *pfnImmAssociateContext)(HWND, HIMC);
 # define pfnImmAssociateContext ImmAssociateContext
 #endif
 
-static bool fl_use_imm32 = false;
+static bool gnui_use_imm32 = false;
 
-static bool fl_load_imm32() {
+static bool gnui_load_imm32() {
 #ifdef IMM_DYNAMIC_LOADING
   hLibImm = __LoadLibraryW(L"imm32.dll");
   if (hLibImm == NULL)
@@ -206,12 +206,12 @@ static bool fl_load_imm32() {
   }
   #endif // IMM_DYNAMIC_LOADING
   return true;
-  } // fl_load_imm32() function
+  } // gnui_load_imm32() function
 #endif // USE_IMM
 
-void fl_set_spot(gnui::Font *f, Widget *w, int x, int y) {
+void gnui_set_spot(gnui::Font *f, Widget *w, int x, int y) {
 #if USE_IMM
-  if (!fl_use_imm32) return;
+  if (!gnui_use_imm32) return;
 
   HWND hwnd;
   {Window* flwindow = w->window();
@@ -355,8 +355,8 @@ void gnui::remove_fd(int n, int events) {
 
 // these pointers are set by the lock() function:
 static void nothing() {}
-void (*fl_lock_function)() = nothing;
-void (*fl_unlock_function)() = nothing;
+void (*gnui_lock_function)() = nothing;
+void (*gnui_unlock_function)() = nothing;
 
 static void* thread_message_;
 void* gnui::thread_message() {
@@ -366,7 +366,7 @@ void* gnui::thread_message() {
 }
 
 // ready() is just like wait(0.0) except no callbacks are done:
-static inline int fl_ready() {
+static inline int gnui_ready() {
   if (__PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE)) return 1;
 #ifdef USE_ASYNC_SELECT
   return 0;
@@ -397,7 +397,7 @@ MSG gnui::msg;
 // timeout, and >0 if any callbacks were done.	This version only
 // returns zero if nothing happens during a 0.0 timeout, otherwise
 // it returns 1.
-static inline int fl_wait(double time_to_wait) {
+static inline int gnui_wait(double time_to_wait) {
 
 #ifndef USE_ASYNC_SELECT
   if (nfds) {
@@ -430,13 +430,13 @@ static inline int fl_wait(double time_to_wait) {
   }
 #endif // USE_ASYNC_SELECT
 
-  if (!fl_ready()) {
-    fl_unlock_function();
+  if (!gnui_ready()) {
+    gnui_unlock_function();
     int t_msec =
       time_to_wait < 2147483.647 ? int(time_to_wait*1000+.5) : 0x7fffffff;
     // int ret_val =
       MsgWaitForMultipleObjects(0, NULL, false, t_msec, QS_ALLINPUT);
-    fl_lock_function();
+    gnui_lock_function();
   }
 
   // Execute all pending messages:
@@ -987,8 +987,8 @@ void gnui::paste(Widget &receiver, bool clipboard) {
 // Communicating data to Win32 requires it to be in "global memory", this
 // copies the given selection to such a block and returns it. It appears
 // this block is usually handed to Windows and Windows deletes it.
-HANDLE fl_global_selection(int clipboard) {
-  //printf("fl_global_selection(%d)\n", clipboard);
+HANDLE gnui_global_selection(int clipboard) {
+  //printf("gnui_global_selection(%d)\n", clipboard);
   int n = utf8towc(selection_buffer[clipboard],
 		   selection_length[clipboard],
 		   0, 0);
@@ -1001,10 +1001,10 @@ HANDLE fl_global_selection(int clipboard) {
   return h;
 }
 
-// Same as fl_global_selection(), but for ASCII text.
+// Same as gnui_global_selection(), but for ASCII text.
 // Clipboard format: CF_TEXT
-HANDLE fl_global_selection_ansi(int clipboard) {
-  //printf("fl_global_selection_ansi(%d)\n", clipboard);
+HANDLE gnui_global_selection_ansi(int clipboard) {
+  //printf("gnui_global_selection_ansi(%d)\n", clipboard);
   int n = utf8tomb(selection_buffer[clipboard], selection_length[clipboard], 0, 0);
   HANDLE h = GlobalAlloc(GHND, n+1);
   LPSTR p = (LPSTR)GlobalLock(h);
@@ -1018,8 +1018,8 @@ static void renderallformats() {
   i_own_selection = false;
   OpenClipboard(NULL);
   EmptyClipboard();
-  SetClipboardData(CF_TEXT, fl_global_selection_ansi(1));
-  SetClipboardData(CF_UNICODETEXT, fl_global_selection(1));
+  SetClipboardData(CF_TEXT, gnui_global_selection_ansi(1));
+  SetClipboardData(CF_UNICODETEXT, gnui_global_selection(1));
   CloseClipboard();
 }
 
@@ -1420,7 +1420,7 @@ static const struct {unsigned short vk, gnui, extended;} vktab[] = {
   {0xdd,	']'},
   {0xde,	'\''}
 };
-bool fl_last_was_extended;
+bool gnui_last_was_extended;
 static inline int ms2gnui(int vk, LPARAM lParam) {
   static unsigned short vklut[256];
   static unsigned short extendedlut[256];
@@ -1445,21 +1445,21 @@ static inline int ms2gnui(int vk, LPARAM lParam) {
     lParam |= 1 << 24;
   }
   if (lParam&(1<<24)) {
-    if (!(lParam&(1<<31))) fl_last_was_extended = true;
+    if (!(lParam&(1<<31))) gnui_last_was_extended = true;
     return extendedlut[vk];
   } else {
-    if (!(lParam&(1<<31))) fl_last_was_extended = false;
+    if (!(lParam&(1<<31))) gnui_last_was_extended = false;
     return vklut[vk];
   }
 }
 
 #if USE_COLORMAP
-extern HPALETTE fl_select_palette(HDC dc); // in color_win32.C
+extern HPALETTE gnui_select_palette(HDC dc); // in color_win32.C
 #else
-static inline bool fl_select_palette(HDC) {return false;}
+static inline bool gnui_select_palette(HDC) {return false;}
 #endif
 
-extern void fl_prune_deferred_calls(HWND);
+extern void gnui_prune_deferred_calls(HWND);
 HWND ignore_size_change_window;
 
 #define MakeWaitReturn() __PostMessage(hWnd, WM_MAKEWAITRETURN, 0, 0)
@@ -1527,7 +1527,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     // don't send any commands to the now non-existent window:
     tablet_close(hWnd);
     if (window) window->destroy();
-    fl_prune_deferred_calls(hWnd);
+    gnui_prune_deferred_calls(hWnd);
     break;
 
   case WM_ACTIVATE:
@@ -1786,7 +1786,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
   case WM_QUERYNEWPALETTE :
     {
       CreatedWindow* i = CreatedWindow::find(window);
-      if (fl_select_palette(i->dc)) InvalidateRect(hWnd, NULL, FALSE);
+      if (gnui_select_palette(i->dc)) InvalidateRect(hWnd, NULL, FALSE);
     }
     break;
 
@@ -1794,7 +1794,7 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
     if (!window) break; // see STR #1902
     if ((HWND)wParam != hWnd) {
       CreatedWindow* i = CreatedWindow::find(window);
-      if (fl_select_palette(i->dc)) UpdateColors(i->dc);
+      if (gnui_select_palette(i->dc)) UpdateColors(i->dc);
     }
     break;
 #endif
@@ -1824,9 +1824,9 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
   case WM_RENDERFORMAT:
     if (wParam == CF_TEXT)
-      SetClipboardData(CF_TEXT, fl_global_selection_ansi(1));
+      SetClipboardData(CF_TEXT, gnui_global_selection_ansi(1));
     else
-      SetClipboardData(CF_UNICODETEXT, fl_global_selection(1));
+      SetClipboardData(CF_UNICODETEXT, gnui_global_selection(1));
     // Windoze also seems unhappy if I don't do this. Documentation very
     // unclear on what is correct:
     return 1;
@@ -1956,7 +1956,7 @@ void Window::create() {
   CreatedWindow::create(this);
 }
 
-const Window* fl_mdi_window = 0; // set by show_inside()
+const Window* gnui_mdi_window = 0; // set by show_inside()
 HCURSOR gnui::default_cursor;
 
 static void register_unicode(HICON smallicon, HICON bigicon)
@@ -2033,7 +2033,7 @@ void CreatedWindow::create(Window* window) {
 #endif
 
 #if USE_IMM
-    fl_use_imm32 = fl_load_imm32();
+    gnui_use_imm32 = gnui_load_imm32();
 #endif
   }
 
@@ -2086,8 +2086,8 @@ void CreatedWindow::create(Window* window) {
     hp += r.h();
     if (window->child_of() && window->child_of()->shown()) {
       parent = window->child_of()->i->xid;
-    } else if (fl_mdi_window) {
-      parent = fl_mdi_window->i->xid;
+    } else if (gnui_mdi_window) {
+      parent = gnui_mdi_window->i->xid;
       styleEx |= WS_EX_MDICHILD;
     } else {
       parent = 0;
@@ -2249,7 +2249,7 @@ void Window::label(const char *name,const char *iname) {
 // ImageDraw creates a temporary DC. See Image.cxx
 
 const Window *Window::drawing_window_;
-int fl_clip_w, fl_clip_h;
+int gnui_clip_w, gnui_clip_h;
 
 /** The device context that is currently being drawn into. */
 HDC gnui::dc;
@@ -2277,30 +2277,30 @@ void Widget::make_current() const {
   }
   const Window* window = (const Window*)widget;
   Window::drawing_window_ = window;
-  fl_clip_w = window->w();
-  fl_clip_h = window->h();
+  gnui_clip_w = window->w();
+  gnui_clip_h = window->h();
   dc = CreatedWindow::find( window )->dc;
 #if USE_CAIRO
   cairo_invalidate_context();
 #endif
-  fl_select_palette(dc);
+  gnui_select_palette(dc);
   load_identity();
   translate(x,y);
 }
 
-HDC fl_bitmap_dc;
+HDC gnui_bitmap_dc;
 namespace gnui {class Image;}
-gnui::Image* fl_current_Image;
+gnui::Image* gnui_current_Image;
 
 void gnui::draw_into(HBITMAP bitmap, int w, int h) {
-  if (!fl_bitmap_dc) {
-    fl_bitmap_dc = CreateCompatibleDC(getDC());
-    SetTextAlign(fl_bitmap_dc, TA_BASELINE|TA_LEFT);
-    SetBkMode(fl_bitmap_dc, TRANSPARENT);
+  if (!gnui_bitmap_dc) {
+    gnui_bitmap_dc = CreateCompatibleDC(getDC());
+    SetTextAlign(gnui_bitmap_dc, TA_BASELINE|TA_LEFT);
+    SetBkMode(gnui_bitmap_dc, TRANSPARENT);
   }
-  SelectObject(fl_bitmap_dc, bitmap);
-  dc = fl_bitmap_dc;
-  fl_select_palette(dc);
+  SelectObject(gnui_bitmap_dc, bitmap);
+  dc = gnui_bitmap_dc;
+  gnui_select_palette(dc);
 #if USE_CAIRO
     cairo_surface_t * surface =cairo_win32_surface_create(dc);
     cairo_invalidate_context();
@@ -2308,9 +2308,9 @@ void gnui::draw_into(HBITMAP bitmap, int w, int h) {
     cairo_surface_destroy(surface);
 #endif
   load_identity();
-  fl_clip_w = w;
-  fl_clip_h = h;
-  fl_current_Image = 0;
+  gnui_clip_w = w;
+  gnui_clip_h = h;
+  gnui_current_Image = 0;
 }
 
 #if __BORLANDC__ || __DMC__
@@ -2341,8 +2341,8 @@ void*Window::backbuffer() const {return i ? (void*)i->bdc:0;}
 void Window::flush() {
 
   drawing_window_ = this;
-  fl_clip_w = w();
-  fl_clip_h = h();
+  gnui_clip_w = w();
+  gnui_clip_h = h();
 
   unsigned char damage = this->damage();
 
@@ -2370,7 +2370,7 @@ void Window::flush() {
     if (damage || i->backbuffer_bad) {
       // set the graphics context to draw into back buffer:
       dc = i->bdc;
-      fl_select_palette(dc);
+      gnui_select_palette(dc);
 #if USE_CAIRO
       cairo_invalidate_context();
 #endif
@@ -2393,7 +2393,7 @@ void Window::flush() {
 	}
       }
       i->backbuffer_bad = false;
-      //fl_restore_clip(); // duplicate region into new dc (there is none)
+      //gnui_restore_clip(); // duplicate region into new dc (there is none)
     }
 
     dc = i->dc;
@@ -2418,7 +2418,7 @@ void Window::flush() {
 
     // Single buffer drawing
     dc = i->dc;
-    fl_select_palette(dc);
+    gnui_select_palette(dc);
 #if USE_CAIRO
     cairo_invalidate_context();
 #endif
@@ -2448,7 +2448,7 @@ void Window::free_backbuffer() {
 
 ////////////////////////////////////////////////////////////////
 
-extern void fl_font_rid();
+extern void gnui_font_rid();
 
 namespace gnui {
 
@@ -2464,10 +2464,10 @@ Cleanup::~Cleanup() {
   // necessary on Win98 and earler to free some large objects stored
   // in shared DLL's and in the OS itself:
   while (CreatedWindow* x = CreatedWindow::first) x->window->destroy();
-  if (fl_bitmap_dc) DeleteDC(fl_bitmap_dc);
+  if (gnui_bitmap_dc) DeleteDC(gnui_bitmap_dc);
 
   // get rid of allocated font resources
-  fl_font_rid();
+  gnui_font_rid();
 
   // free stuff needed by tablet api:
   if (wintab_ctx) {

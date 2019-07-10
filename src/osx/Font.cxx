@@ -98,8 +98,8 @@ static FontSize* findsize() {
   return f;
 }
 
-FL_API unsigned fl_font_opengl_id() {return findsize()->opengl_id;}
-FL_API void fl_set_font_opengl_id(unsigned v) {findsize()->opengl_id = v;}
+GNUI_API unsigned gnui_font_opengl_id() {return findsize()->opengl_id;}
+GNUI_API void gnui_set_font_opengl_id(unsigned v) {findsize()->opengl_id = v;}
 
 ////////////////////////////////////////////////////////////////
 
@@ -149,7 +149,7 @@ gnui::Font* gnui::font(int i) {return &(fonts[i%16].f);}
 
 // For gnui::list_fonts(), make a new font, and optionally the bold and
 // italic subfonts:
-Font* fl_make_font(const char* name, int attrib) {
+Font* gnui_make_font(const char* name, int attrib) {
   // see if it is one of our built-in fonts and return it:
   int j; for (j = 0; j < 16; j++) {
     if (fonts[j].f.attributes_ == attrib &&

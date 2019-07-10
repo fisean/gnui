@@ -44,7 +44,7 @@ enum {
   NO_ERASE_OVERLAY = 2048
 };
 
-class FL_GL_API GlWindow : public Window {
+class GNUI_GL_API GlWindow : public Window {
 
 public:
 

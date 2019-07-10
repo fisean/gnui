@@ -98,38 +98,38 @@ static struct FD {
 ////////////////////////////////////////////////////////////////
 #if USE_XIM
 
-static XIM fl_xim_im = 0;
-static XIC fl_xim_ic = 0;
-static XFontSet fl_xim_fs = NULL;
-static char fl_is_over_the_spot = 0;
+static XIM gnui_xim_im = 0;
+static XIC gnui_xim_ic = 0;
+static XFontSet gnui_xim_fs = NULL;
+static char gnui_is_over_the_spot = 0;
 static XRectangle status_area;
 
-static void fl_new_ic(XWindow xid)
+static void gnui_new_ic(XWindow xid)
 {
   // Give up if this failed earlier:
-  if (!fl_xim_im)
+  if (!gnui_xim_im)
     return;
 
-  if (fl_xim_ic)
-    XDestroyIC(fl_xim_ic);
-  fl_xim_ic = NULL;
+  if (gnui_xim_ic)
+    XDestroyIC(gnui_xim_ic);
+  gnui_xim_ic = NULL;
 
-  if (!fl_xim_fs) {
+  if (!gnui_xim_fs) {
     char          **missing_list;
     int           missing_count;
     char          *def_string;
-    fl_xim_fs = XCreateFontSet(xdisplay,
+    gnui_xim_fs = XCreateFontSet(xdisplay,
 			       "-misc-fixed-medium-r-normal--14-*",
 			       &missing_list, &missing_count, &def_string);
   }
 
   XIMStyles* xim_styles = NULL;
-  if (XGetIMValues(fl_xim_im, XNQueryInputStyle,
+  if (XGetIMValues(gnui_xim_im, XNQueryInputStyle,
 		   &xim_styles, NULL, NULL) ||
       !xim_styles || !xim_styles->count_styles) {
     warning("No XIM style found");
-    XCloseIM(fl_xim_im);
-    fl_xim_im = NULL;
+    XCloseIM(gnui_xim_im);
+    gnui_xim_im = NULL;
     return;
   }
 
@@ -153,14 +153,14 @@ static void fl_new_ic(XWindow xid)
     XVaNestedList preedit_attr =
       XVaCreateNestedList(0,
 			  XNSpotLocation, &spot,
-			  XNFontSet, fl_xim_fs, NULL);
+			  XNFontSet, gnui_xim_fs, NULL);
 
     if (sarea) {
       XVaNestedList status_attr =
 	XVaCreateNestedList(0,
 			    XNAreaNeeded, &status_area,
-			    XNFontSet, fl_xim_fs, NULL);
-      fl_xim_ic = XCreateIC(fl_xim_im,
+			    XNFontSet, gnui_xim_fs, NULL);
+      gnui_xim_ic = XCreateIC(gnui_xim_im,
 			    XNInputStyle, (XIMPreeditPosition | XIMStatusArea),
 			    XNPreeditAttributes, preedit_attr,
 			    XNStatusAttributes, status_attr,
@@ -168,20 +168,20 @@ static void fl_new_ic(XWindow xid)
 			    NULL);
       XFree(status_attr);
     }
-    if (!fl_xim_ic)
-      fl_xim_ic = XCreateIC(fl_xim_im,
+    if (!gnui_xim_ic)
+      gnui_xim_ic = XCreateIC(gnui_xim_im,
 			    XNInputStyle,XIMPreeditPosition | XIMStatusNothing,
 			    XNPreeditAttributes, preedit_attr,
                             XNClientWindow, xid,
 			    NULL);
     XFree(preedit_attr);
-    if (fl_xim_ic) {
-      fl_is_over_the_spot = 1;
+    if (gnui_xim_ic) {
+      gnui_is_over_the_spot = 1;
 #if 0 // This appears to have been done in the "if (sarea)" above
       XVaNestedList status_attr;
       status_attr = XVaCreateNestedList(0, XNAreaNeeded, &status_area, NULL);
       if (status_area.height != 0)
-	XGetICValues(fl_xim_ic, XNStatusAttributes, status_attr, NULL);
+	XGetICValues(gnui_xim_ic, XNStatusAttributes, status_attr, NULL);
       XFree(status_attr);
 #endif
       return;
@@ -189,31 +189,31 @@ static void fl_new_ic(XWindow xid)
   }
 
   // create a non-preedit one:
-  fl_is_over_the_spot = 0;
-  fl_xim_ic = XCreateIC(fl_xim_im,
+  gnui_is_over_the_spot = 0;
+  gnui_xim_ic = XCreateIC(gnui_xim_im,
 			XNInputStyle, (XIMPreeditNothing | XIMStatusNothing),
                         XNClientWindow, xid,
 			NULL);
-  if (!fl_xim_ic) {
+  if (!gnui_xim_ic) {
     warning("XCreateIC() failed");
-    XCloseIM(fl_xim_im);
-    fl_xim_im = NULL;
+    XCloseIM(gnui_xim_im);
+    gnui_xim_im = NULL;
   }
 }
 
-static void fl_init_xim()
+static void gnui_init_xim()
 {
   if (!xdisplay) return;
-  if (fl_xim_im) return;
+  if (gnui_xim_im) return;
 
   XSetLocaleModifiers("");
-  fl_xim_im = XOpenIM(xdisplay, NULL, NULL, NULL);
+  gnui_xim_im = XOpenIM(xdisplay, NULL, NULL, NULL);
 
-  if (!fl_xim_im)
+  if (!gnui_xim_im)
     warning("XOpenIM() failed");
 }
 
-void fl_set_spot(gnui::Font *f, Widget *w, int x, int y)
+void gnui_set_spot(gnui::Font *f, Widget *w, int x, int y)
 {
   int change = 0;
   XVaNestedList preedit_attr;
@@ -227,7 +227,7 @@ void fl_set_spot(gnui::Font *f, Widget *w, int x, int y)
   static XPoint	spot, spot_set;
   static Color background_orig, textcolor_orig;
 
-  if (!fl_xim_ic || !fl_is_over_the_spot) return;
+  if (!gnui_xim_ic || !gnui_is_over_the_spot) return;
   if (w != spotw) {
     spotw = w;
     change = 1;
@@ -245,8 +245,8 @@ void fl_set_spot(gnui::Font *f, Widget *w, int x, int y)
 	XFontSet fs = XCreateFontSet(xdisplay, fnt, &missing_list,
 				     &missing_count, &def_string);
 	if (fs) {
-	  XFreeFontSet(xdisplay, fl_xim_fs);
-	  fl_xim_fs = fs;
+	  XFreeFontSet(xdisplay, gnui_xim_fs);
+	  gnui_xim_fs = fs;
 	  change = 1;
 	}
       }
@@ -254,8 +254,8 @@ void fl_set_spot(gnui::Font *f, Widget *w, int x, int y)
       change = 1;
     }
   }
-  if (fl_xim_ic != ic) {
-    ic = fl_xim_ic;
+  if (gnui_xim_ic != ic) {
+    ic = gnui_xim_ic;
     change = 1;
   }
 
@@ -272,7 +272,7 @@ void fl_set_spot(gnui::Font *f, Widget *w, int x, int y)
   if (f) {
     XFontSetExtents *extents;
     int ascent;
-    extents = XExtentsOfFontSet(fl_xim_fs);
+    extents = XExtentsOfFontSet(gnui_xim_fs);
     ascent=-extents->max_logical_extent.y;
     spot_set = spot;
     spot_set.y += ascent;
@@ -283,20 +283,20 @@ void fl_set_spot(gnui::Font *f, Widget *w, int x, int y)
 			  XNForeground, xpixel(textcolor),
 			  XNBackground, xpixel(background),
 #endif
-			  XNFontSet, fl_xim_fs,
+			  XNFontSet, gnui_xim_fs,
                           NULL);
     if (preedit_attr) {
-      XSetICValues(fl_xim_ic, XNPreeditAttributes, preedit_attr, NULL);
+      XSetICValues(gnui_xim_ic, XNPreeditAttributes, preedit_attr, NULL);
       XFree(preedit_attr);
     }
-    XSetICFocus(fl_xim_ic);
+    XSetICFocus(gnui_xim_ic);
   } else {
-    XUnsetICFocus(fl_xim_ic);
+    XUnsetICFocus(gnui_xim_ic);
   }
 }
 
 #else // !USE_XIM
-void fl_set_spot(gnui::Font *f, Widget *w, int x, int y) {}
+void gnui_set_spot(gnui::Font *f, Widget *w, int x, int y) {}
 #endif
 
 /*!
@@ -417,12 +417,12 @@ static void do_queued_events(int, void*) {
 
 // these pointers are set by the lock() function:
 static void nothing() {}
-void (*fl_lock_function)() = nothing;
-void (*fl_unlock_function)() = nothing;
+void (*gnui_lock_function)() = nothing;
+void (*gnui_unlock_function)() = nothing;
 
 // Wait up to the given time for any events or sockets to become ready,
 // do the callbacks for the events and sockets:
-static inline int fl_wait(float time_to_wait) {
+static inline int gnui_wait(float time_to_wait) {
 
   // OpenGL and other broken libraries call XEventsQueued()
   // and thus cause the file descriptor to not be ready,
@@ -436,7 +436,7 @@ static inline int fl_wait(float time_to_wait) {
   fdt[2] = fdsets[2];
 #endif
 
-  fl_unlock_function();
+  gnui_unlock_function();
 #if USE_POLL
   int n = ::poll(pollfds, nfds,
 		 (time_to_wait<2147483.648f) ? int(time_to_wait*1000+.5f) : -1);
@@ -451,7 +451,7 @@ static inline int fl_wait(float time_to_wait) {
     n = ::select(maxfd+1,&fdt[0],&fdt[1],&fdt[2],0);
   }
 #endif
-  fl_lock_function();
+  gnui_lock_function();
 
   if (n > 0) {
     for (int i=0; i<nfds; i++) {
@@ -471,7 +471,7 @@ static inline int fl_wait(float time_to_wait) {
 }
 
 // ready() is just like wait(0.0) except no callbacks are done:
-static inline int fl_ready() {
+static inline int gnui_ready() {
   if (XQLength(xdisplay)) return 1;
 #if USE_POLL
   return ::poll(pollfds, nfds, 0);
@@ -664,7 +664,7 @@ void gnui::open_display(Display* d) {
   xvisual = XGetVisualInfo(d, VisualIDMask, &templt, &num);
   xcolormap = DefaultColormap(d, xscreen);
 #if USE_XIM
-  fl_init_xim();
+  gnui_init_xim();
 #endif
 
 #if !USE_COLORMAP
@@ -1092,9 +1092,9 @@ action. See #dnd_source_types, which you must also set.
 */
 Atom gnui::dnd_source_action;
 
-Atom *fl_incoming_dnd_source_types;
+Atom *gnui_incoming_dnd_source_types;
 
-void fl_sendClientMessage(XWindow xwindow, Atom message,
+void gnui_sendClientMessage(XWindow xwindow, Atom message,
 			  unsigned long d0,
 			  unsigned long d1=0,
 			  unsigned long d2=0,
@@ -1121,7 +1121,7 @@ static Widget *selection_requestor;
 static char *selection_buffer[2];
 static int selection_length[2];
 static int selection_buffer_length[2];
-bool fl_i_own_selection[2];
+bool gnui_i_own_selection[2];
 
 /*!
   Change the current selection. The block of text is copied to an
@@ -1152,7 +1152,7 @@ void gnui::copy(const char *stuff, int len, bool clipboard) {
   memcpy(selection_buffer[clipboard], stuff, len);
   selection_buffer[clipboard][len] = 0; // needed for direct paste
   selection_length[clipboard] = len;
-  fl_i_own_selection[clipboard] = true;
+  gnui_i_own_selection[clipboard] = true;
   Atom property = clipboard ? CLIPBOARD : XA_PRIMARY;
   XSetSelectionOwner(xdisplay, property, message_window, event_time);
 }
@@ -1177,7 +1177,7 @@ void gnui::copy(const char *stuff, int len, bool clipboard) {
   error-prone synchronization code most toolkits require.
 */
 void gnui::paste(Widget &receiver, bool clipboard) {
-  if (fl_i_own_selection[clipboard]) {
+  if (gnui_i_own_selection[clipboard]) {
     // We already have it, do it quickly without window server.
     // Notice that the text is clobbered if set_selection is
     // called in response to PASTE!
@@ -1202,7 +1202,7 @@ XEvent gnui::xevent;
 Many X calls (like cut and paste) need this value. */
 ulong gnui::event_time;
 
-char fl_key_vector[32]; // used by get_key()
+char gnui_key_vector[32]; // used by get_key()
 
 // Records shift keys that X does not handle:
 static int extra_state;
@@ -1248,7 +1248,7 @@ static unsigned wheel_down_button = 5;
 static unsigned wheel_left_button = 6;
 static unsigned wheel_right_button = 7;
 
-int fl_actual_keysym;
+int gnui_actual_keysym;
 
 // this little function makes sure that the stylus related event data
 // is useful, even if no tablet was discovered, or the mouse was used to
@@ -1280,9 +1280,9 @@ bool gnui::handle()
 
  KEYPRESS:
 #if USE_X11_MULTITHREADING
-  fl_unlock_function();
-  if (XFilterEvent((XEvent *)&xevent, 0)) {fl_lock_function(); return 1;}
-  fl_lock_function();
+  gnui_unlock_function();
+  if (XFilterEvent((XEvent *)&xevent, 0)) {gnui_lock_function(); return 1;}
+  gnui_lock_function();
 #else
   if (XFilterEvent((XEvent *)&xevent, 0)) return 1;
 #endif
@@ -1290,7 +1290,7 @@ bool gnui::handle()
   switch (xevent.type) {
 
   case KeymapNotify:
-    memcpy(fl_key_vector, xevent.xkeymap.key_vector, 32);
+    memcpy(gnui_key_vector, xevent.xkeymap.key_vector, 32);
     break;
 
   case MappingNotify:
@@ -1325,18 +1325,18 @@ bool gnui::handle()
 			   &count, &remaining, &buffer);
 	if (actual != XA_ATOM || format != 32 || count<4 || !buffer)
 	  goto FAILED;
-	delete [] fl_incoming_dnd_source_types;
-	fl_incoming_dnd_source_types = new Atom[count+1];
-	dnd_source_types = fl_incoming_dnd_source_types;
+	delete [] gnui_incoming_dnd_source_types;
+	gnui_incoming_dnd_source_types = new Atom[count+1];
+	dnd_source_types = gnui_incoming_dnd_source_types;
 	for (unsigned i = 0; i < count; i++)
 	  dnd_source_types[i] = ((Atom*)buffer)[i];
 	dnd_source_types[count] = 0;
       } else {
       FAILED:
 	// less than four data types, or if the above messes up:
-	if (!fl_incoming_dnd_source_types)
-	  fl_incoming_dnd_source_types = new Atom[4];
-	dnd_source_types = fl_incoming_dnd_source_types;
+	if (!gnui_incoming_dnd_source_types)
+	  gnui_incoming_dnd_source_types = new Atom[4];
+	dnd_source_types = gnui_incoming_dnd_source_types;
 	dnd_source_types[0] = data[2];
 	dnd_source_types[1] = data[3];
 	dnd_source_types[2] = data[4];
@@ -1380,7 +1380,7 @@ bool gnui::handle()
       dnd_source_action = data[4];
       dnd_action = XdndActionCopy;
       int accept = handle(DND_DRAG, window);
-      fl_sendClientMessage(data[0], XdndStatus,
+      gnui_sendClientMessage(data[0], XdndStatus,
 			   xevent.xclient.window,
 			   accept ? 1 : 0,
 			   0, // used for xy rectangle to not send position inside
@@ -1409,7 +1409,7 @@ bool gnui::handle()
 	// It is not clear whether I can just send finished always,
 	// or if I have to wait for the SelectionNotify event as the
 	// code is currently doing.
-	fl_sendClientMessage(dnd_source_window, XdndFinished, to_window);
+	gnui_sendClientMessage(dnd_source_window, XdndFinished, to_window);
 	dnd_source_window = 0;
       }
       return true;
@@ -1595,11 +1595,11 @@ bool gnui::handle()
 
   case FocusIn:
 #if USE_XIM
-    if (fl_xim_ic) {
-      XSetICValues(fl_xim_ic,
+    if (gnui_xim_ic) {
+      XSetICValues(gnui_xim_ic,
 		   XNClientWindow, xevent.xclient.window,
 		   NULL);
-      XSetICFocus(fl_xim_ic);
+      XSetICFocus(gnui_xim_ic);
     }
 #endif
     xfocus = window;
@@ -1611,7 +1611,7 @@ bool gnui::handle()
       xfocus = 0;
       fix_focus();
 #if USE_XIM
-      if (fl_xim_ic && !focus()) XUnsetICFocus(fl_xim_ic);
+      if (gnui_xim_ic && !focus()) XUnsetICFocus(gnui_xim_ic);
 #endif
       return true;
     }
@@ -1622,7 +1622,7 @@ bool gnui::handle()
     //if (grab_) XAllowEvents(xdisplay, SyncKeyboard, CurrentTime);
     unsigned keycode = xevent.xkey.keycode;
     // Make repeating keys increment the click counter:
-    if (fl_key_vector[keycode/8]&(1<<(keycode%8))) {
+    if (gnui_key_vector[keycode/8]&(1<<(keycode%8))) {
       e_key_repeated++;
       recent_keycode = 0;
     } else {
@@ -1630,7 +1630,7 @@ bool gnui::handle()
       e_key_repeated = 0;
       recent_keycode = keycode;
     }
-    fl_key_vector[keycode/8] |= (1 << (keycode%8));
+    gnui_key_vector[keycode/8] |= (1 << (keycode%8));
     event = KEY;
     goto GET_KEYSYM;}
 
@@ -1670,7 +1670,7 @@ bool gnui::handle()
 
     set_event_xy(false);
     unsigned keycode = xevent.xkey.keycode;
-    fl_key_vector[keycode/8] &= ~(1 << (keycode%8));
+    gnui_key_vector[keycode/8] &= ~(1 << (keycode%8));
     // Leave event_is_click() on only if this is the last key pressed:
     e_is_click = (recent_keycode == keycode);
     recent_keycode = 0;
@@ -1689,9 +1689,9 @@ bool gnui::handle()
     int len;
     KeySym keysym;
 #if USE_XIM
-    if (!fl_xim_ic)
-        fl_new_ic(xevent.xany.window);
-    if (fl_xim_ic) {
+    if (!gnui_xim_ic)
+        gnui_new_ic(xevent.xany.window);
+    if (gnui_xim_ic) {
       Status status;
     RETRY:
       buffer[0] = 0;
@@ -1699,7 +1699,7 @@ bool gnui::handle()
 #ifdef __sgi
 #define Xutf8LookupString XmbLookupString
 #endif
-      len = Xutf8LookupString(fl_xim_ic, (XKeyPressedEvent *)&xevent.xkey,
+      len = Xutf8LookupString(gnui_xim_ic, (XKeyPressedEvent *)&xevent.xkey,
 			      buffer, buffer_len-1, &keysym, &status);
       switch (status) {
       case XBufferOverflow:
@@ -1725,7 +1725,7 @@ bool gnui::handle()
     buffer[len] = 0;
     e_text = buffer;
     e_length = len;
-    fl_actual_keysym = int(keysym);
+    gnui_actual_keysym = int(keysym);
     keysym = XKeycodeToKeysym(xdisplay, keycode, 0);
     if (!keysym) {
       // X did not map this key, return keycode with 0x8000:
@@ -1738,13 +1738,13 @@ bool gnui::handle()
       case 148: keysym = RightMetaKey; break;
       case 149: keysym = MenuKey; break;
       }
-      if (fl_key_vector[18]&0x18) extra_state |= META;
+      if (gnui_key_vector[18]&0x18) extra_state |= META;
       else extra_state &= ~META;
 #endif
     } else if (keysym >= 0xff95 && keysym <= 0xff9f) { // XK_KP_*
-      if (fl_actual_keysym != int(keysym) && (e_state&NUMLOCK)) {
+      if (gnui_actual_keysym != int(keysym) && (e_state&NUMLOCK)) {
 	// numlock has changed it into a Keypad+n key
-	keysym = fl_actual_keysym;
+	keysym = gnui_actual_keysym;
       } else {
 #if IGNORE_NUMLOCK // turn them always into numeric keys (my preference):
 	keysym = Keypad+"7486293150."[keysym-0xff95];
@@ -1901,7 +1901,7 @@ bool gnui::handle()
     // immediatly after calling XConvertSelection.
     if (xevent.xselection.property == XA_SECONDARY &&
 	dnd_source_window) {
-      fl_sendClientMessage(dnd_source_window, XdndFinished,
+      gnui_sendClientMessage(dnd_source_window, XdndFinished,
 			   xevent.xselection.requestor);
       dnd_source_window = 0; // don't send a second time
     }
@@ -1909,7 +1909,7 @@ bool gnui::handle()
 
   case SelectionClear: {
     bool clipboard = xevent.xselectionclear.selection == CLIPBOARD;
-    fl_i_own_selection[clipboard] = false;
+    gnui_i_own_selection[clipboard] = false;
     return true;}
 
   case SelectionRequest: {
@@ -1999,7 +1999,7 @@ bool gnui::handle()
 ////////////////////////////////////////////////////////////////
 // Innards of Window::create()
 
-extern bool fl_show_iconic; // In Window.cxx, set by iconize() or -i switch
+extern bool gnui_show_iconic; // In Window.cxx, set by iconize() or -i switch
 
 /**
 This virtual function may be overridden to use something other than
@@ -2185,10 +2185,10 @@ void CreatedWindow::create(Window* window,
       if (w->shown()) hints->window_group = w->i->xid;
     hints->flags |= WindowGroupHint;
 #endif
-    if (!gnui::modal() && fl_show_iconic) {
+    if (!gnui::modal() && gnui_show_iconic) {
       hints->flags |= StateHint;
       hints->initial_state = IconicState;
-      fl_show_iconic = false;
+      gnui_show_iconic = false;
     }
     if (window->icon()) {
 #if 0
@@ -2351,7 +2351,7 @@ void Window::label(const char *name, const char *iname) {
 */
 const Window *Window::drawing_window_;
 
-int fl_clip_w, fl_clip_h;
+int gnui_clip_w, gnui_clip_h;
 
 /**
 Set by Window::make_current() and/or draw_into() to the window being
@@ -2410,7 +2410,7 @@ void Widget::make_current() const {
 }
 
 namespace gnui {class Image;}
-gnui::Image* fl_current_Image;
+gnui::Image* gnui_current_Image;
 
 #if USE_CAIRO
 /** Fltk cairo create surface function accepting a Window* as input */
@@ -2435,9 +2435,9 @@ cairo_surface_t* gnui::cairo_create_surface(Window* wi) {
   that were created by this.
 */
 void gnui::draw_into(XWindow window, int w, int h) {
-  fl_current_Image = 0;
-  fl_clip_w = w;
-  fl_clip_h = h;
+  gnui_current_Image = 0;
+  gnui_clip_w = w;
+  gnui_clip_h = h;
 
 #if USE_CAIRO
   if (cr) {

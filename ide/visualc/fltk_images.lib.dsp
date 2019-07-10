@@ -150,15 +150,15 @@ SOURCE=..\..\images\FileIcon2.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\images\Fl_Guess_Image.cxx
+SOURCE=..\..\images\GNUI_Guess_Image.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\images\fl_jpeg.cxx
+SOURCE=..\..\images\gnui_jpeg.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\images\fl_png.cxx
+SOURCE=..\..\images\gnui_png.cxx
 # End Source File
 # Begin Source File
 

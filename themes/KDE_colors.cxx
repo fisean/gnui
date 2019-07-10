@@ -33,10 +33,10 @@
 // use KDE's colors.
 
 #include <fltk/Fl.h>
-#include <fltk/fl_theme.h>
+#include <fltk/gnui_theme.h>
 
 extern "C" int fltk_plugin() {
-  return fl_kde(1);
+  return gnui_kde(1);
 }
 
 //

@@ -32,7 +32,7 @@
 %vendor GNUI Development Team
 %license COPYING
 %readme README
-%version @FL_MAJOR_VERSION@.@FL_MINOR_VERSION@.@FL_PATCH_VERSION@@FL_RELEASE_VERSION@
+%version @GNUI_MAJOR_VERSION@.@GNUI_MINOR_VERSION@.@GNUI_PATCH_VERSION@@GNUI_RELEASE_VERSION@
 %description GNUI is a cross-platform GUI toolkit for C++.
 
 $prefix=@prefix@

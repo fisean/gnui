@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Fl_FileIcon definitions for the Fast Light Tool Kit (FLTK).
+// GNUI_FileIcon definitions for the Fast Light Tool Kit (FLTK).
 //
 // Copyright 1997-1999 by Easy Software Products.
 //
@@ -28,7 +28,7 @@
 #ifndef gnui_FileIcon_h
 #define gnui_FileIcon_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 #include "Color.h"
 #include "Symbol.h"
 
@@ -36,7 +36,7 @@ namespace gnui {
 
 class Widget;
 
-class FL_API FileIcon : public Symbol {
+class GNUI_API FileIcon : public Symbol {
   static FileIcon *first_;	// Pointer to first icon/filetype
   FileIcon	*next_;		// Pointer to next icon/filetype
   const char	*pattern_;	// Pattern string

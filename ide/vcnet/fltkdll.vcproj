@@ -49,7 +49,7 @@
 				InlineFunctionExpansion="2"
 				FavorSizeOrSpeed="2"
 				AdditionalIncludeDirectories=".,../..,../../fltk/compat,../visualc"
-				PreprocessorDefinitions="FL_SHARED;FL_LIBRARY;FL_FORMS_LIBRARY;_WIN32;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN"
+				PreprocessorDefinitions="GNUI_SHARED;GNUI_LIBRARY;GNUI_FORMS_LIBRARY;_WIN32;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN"
 				RuntimeLibrary="0"
 				PrecompiledHeaderFile=".\fltkdll/fltkdll.pch"
 				AssemblerListingLocation=".\fltkdll/"
@@ -145,7 +145,7 @@
 				Optimization="1"
 				InlineFunctionExpansion="2"
 				AdditionalIncludeDirectories=".,../..,../../fltk/compat,../visualc"
-				PreprocessorDefinitions="NDEBUG;FL_SHARED;FL_LIBRARY;FL_GL_LIBRARY;FL_GLUT_LIBRARY;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_MSC_DLL"
+				PreprocessorDefinitions="NDEBUG;GNUI_SHARED;GNUI_LIBRARY;GNUI_GL_LIBRARY;GNUI_GLUT_LIBRARY;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_MSC_DLL"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -241,7 +241,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories=".,../..,../../fltk/compat,../visualc"
-				PreprocessorDefinitions="_DEBUG;FL_SHARED;FL_LIBRARY;FL_FORMS_LIBRARY;_WIN32;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN"
+				PreprocessorDefinitions="_DEBUG;GNUI_SHARED;GNUI_LIBRARY;GNUI_FORMS_LIBRARY;_WIN32;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=".\fltkdlld/fltkdll.pch"
@@ -1625,7 +1625,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\..\src\Fl_Menu_Item.cxx"
+			RelativePath="..\..\src\GNUI_Menu_Item.cxx"
 			>
 			<FileConfiguration
 				Name="Release|Win32"

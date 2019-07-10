@@ -29,7 +29,7 @@
 
 namespace gnui {
 
-class FL_API AlignGroup : public Group {
+class GNUI_API AlignGroup : public Group {
   bool vertical_;
   uchar n_to_break_,dw_,dh_;
   Flags align_;

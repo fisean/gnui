@@ -35,7 +35,7 @@
 
 namespace gnui {
 
-class FL_API StatusBarGroup : public Group {
+class GNUI_API StatusBarGroup : public Group {
 public:
   StatusBarGroup(int x,int y,int w,int h, const char* l=0, bool begin=false) :
     Group(x,y,w,h,l,begin) {init(); }

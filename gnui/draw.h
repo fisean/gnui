@@ -49,7 +49,7 @@ namespace gnui {
 struct Font;
 class Style;
 
-class FL_API GSave {
+class GNUI_API GSave {
   void* data[4]; // hopefully big enough for everybody...
  public:
   GSave();
@@ -57,53 +57,53 @@ class FL_API GSave {
 };
 
 // Transformation
-FL_API void push_matrix();
-FL_API void pop_matrix();
-FL_API void scale(float x, float y);
-FL_API void scale(float x);
-FL_API void translate(float x, float y);
-FL_API void translate(int x, int y);
-FL_API void rotate(float d);
-FL_API void concat(float, float, float, float, float, float);
-FL_API void load_identity();
+GNUI_API void push_matrix();
+GNUI_API void pop_matrix();
+GNUI_API void scale(float x, float y);
+GNUI_API void scale(float x);
+GNUI_API void translate(float x, float y);
+GNUI_API void translate(int x, int y);
+GNUI_API void rotate(float d);
+GNUI_API void concat(float, float, float, float, float, float);
+GNUI_API void load_identity();
 
 // get and use transformed positions:
-FL_API void transform(float& x, float& y);
-FL_API void transform_distance(float& x, float& y);
-FL_API void transform(int& x, int& y);
-FL_API void transform(const Rectangle& from, Rectangle& to);
-FL_API void transform(int& x, int& y, int& w, int& h);
+GNUI_API void transform(float& x, float& y);
+GNUI_API void transform_distance(float& x, float& y);
+GNUI_API void transform(int& x, int& y);
+GNUI_API void transform(const Rectangle& from, Rectangle& to);
+GNUI_API void transform(int& x, int& y, int& w, int& h);
 
 // Clipping
-FL_API void push_clip(const Rectangle&);
+GNUI_API void push_clip(const Rectangle&);
 //! Same as push_clip(Rectangle(x,y,w,h)) but faster:
-FL_API void push_clip(int X,int Y, int W, int H);
-FL_API void clipout(const Rectangle&);
-FL_API void pop_clip();
-FL_API void push_no_clip();
-FL_API bool not_clipped(const Rectangle&);
-FL_API int intersect_with_clip(Rectangle&);
+GNUI_API void push_clip(int X,int Y, int W, int H);
+GNUI_API void clipout(const Rectangle&);
+GNUI_API void pop_clip();
+GNUI_API void push_no_clip();
+GNUI_API bool not_clipped(const Rectangle&);
+GNUI_API int intersect_with_clip(Rectangle&);
 
-FL_API void setcolor(Color);
-FL_API void setcolor_alpha(Color, float alpha);
-extern FL_API Color current_color_;
+GNUI_API void setcolor(Color);
+GNUI_API void setcolor_alpha(Color, float alpha);
+extern GNUI_API Color current_color_;
 inline Color getcolor() {return current_color_;}
 
-extern FL_API Color current_bgcolor_;
+extern GNUI_API Color current_bgcolor_;
 inline void setbgcolor(Color c) {current_bgcolor_ = c;}
 inline Color getbgcolor() {return current_bgcolor_;}
 
-extern FL_API const Style* drawstyle_;
-void FL_API drawstyle(const Style* s, Flags);
+extern GNUI_API const Style* drawstyle_;
+void GNUI_API drawstyle(const Style* s, Flags);
 inline const Style* drawstyle() {return drawstyle_;}
 
-extern FL_API Flags drawflags_;
+extern GNUI_API Flags drawflags_;
 inline void setdrawflags(Flags f) {drawflags_ = f;}
 inline Flags drawflags() {return drawflags_;}
 inline Flags drawflags(Flags f) {return drawflags_ & f;}
 
 // line type:
-FL_API void line_style(int, float width=0, const char* dashes=0);
+GNUI_API void line_style(int, float width=0, const char* dashes=0);
 enum {
   SOLID	= 0,
   DASH	= 1,
@@ -119,99 +119,99 @@ enum {
   JOIN_ROUND	= 0x2000,
   JOIN_BEVEL	= 0x3000
 };
-extern FL_API int line_style_;
-inline FL_API int line_style() {return line_style_;}
-extern FL_API float line_width_;
-inline FL_API float line_width() {return line_width_;}
-extern FL_API const char* line_dashes_;
-inline FL_API const char* line_dashes() {return line_dashes_;}
+extern GNUI_API int line_style_;
+inline GNUI_API int line_style() {return line_style_;}
+extern GNUI_API float line_width_;
+inline GNUI_API float line_width() {return line_width_;}
+extern GNUI_API const char* line_dashes_;
+inline GNUI_API const char* line_dashes() {return line_dashes_;}
 
 // Path construction
-FL_API void newpath();
-FL_API void addvertex(float x, float y);
-FL_API void addvertex(int x, int y);
-FL_API void addvertices(int n, const float v[][2]);
-FL_API void addvertices(int n, const int v[][2]);
-FL_API void addvertices_transformed(int n, const float v[][2]);
-FL_API void addcurve(float,float, float,float, float,float, float,float);
-FL_API void addarc(float x,float y,float w,float h, float a1, float a2);
-FL_API void addpie(const Rectangle& r, float a, float a2);
-FL_API void addchord(const Rectangle& r,float a,float a2);
-FL_API void closepath();
+GNUI_API void newpath();
+GNUI_API void addvertex(float x, float y);
+GNUI_API void addvertex(int x, int y);
+GNUI_API void addvertices(int n, const float v[][2]);
+GNUI_API void addvertices(int n, const int v[][2]);
+GNUI_API void addvertices_transformed(int n, const float v[][2]);
+GNUI_API void addcurve(float,float, float,float, float,float, float,float);
+GNUI_API void addarc(float x,float y,float w,float h, float a1, float a2);
+GNUI_API void addpie(const Rectangle& r, float a, float a2);
+GNUI_API void addchord(const Rectangle& r,float a,float a2);
+GNUI_API void closepath();
 
 // Shapes and lines
-FL_API void strokepath();
-FL_API void fillpath();
-FL_API void fillstrokepath(Color);
+GNUI_API void strokepath();
+GNUI_API void fillpath();
+GNUI_API void fillstrokepath(Color);
 
-FL_API void fillrect(int, int, int, int);
+GNUI_API void fillrect(int, int, int, int);
 inline void fillrect(const Rectangle& r) {fillrect(r.x(),r.y(),r.w(),r.h());}
-FL_API void strokerect(int, int, int, int);
+GNUI_API void strokerect(int, int, int, int);
 inline void strokerect(const Rectangle& r) {strokerect(r.x(),r.y(),r.w(),r.h());}
-FL_API void drawline(int x0, int y0, int x1, int y1);
-FL_API void drawline(float x0, float y0, float x1, float y1);
-FL_API void drawpoint(int x, int y);
-FL_API void drawpoint(float x, float y);
+GNUI_API void drawline(int x0, int y0, int x1, int y1);
+GNUI_API void drawline(float x0, float y0, float x1, float y1);
+GNUI_API void drawpoint(int x, int y);
+GNUI_API void drawpoint(float x, float y);
 
 // Text
-FL_API void setfont(Font*, float size);
-FL_API void setfont(const char*, float size);
-FL_API void setfont(const char*, int attributes, float size);
+GNUI_API void setfont(Font*, float size);
+GNUI_API void setfont(const char*, float size);
+GNUI_API void setfont(const char*, int attributes, float size);
 
 // change the encoding used to draw bytes (depreciated)
-extern FL_API const char* encoding_;
+extern GNUI_API const char* encoding_;
 inline const char* get_encoding() {return encoding_;}
-FL_API void set_encoding(const char*);
+GNUI_API void set_encoding(const char*);
 
 // information you can get about the current font+size+encoding:
-extern FL_API Font* current_font_;
-extern FL_API float current_size_; // should be 2x2 transformation matrix
+extern GNUI_API Font* current_font_;
+extern GNUI_API float current_size_; // should be 2x2 transformation matrix
 inline Font* getfont() {return current_font_;}
 inline float getsize() {return current_size_;}
 
 // measure things in the current font:
-FL_API float getwidth(const char*);
-FL_API float getwidth(const char*, int length);
-FL_API float getascent();
-FL_API float getdescent();
+GNUI_API float getwidth(const char*);
+GNUI_API float getwidth(const char*, int length);
+GNUI_API float getascent();
+GNUI_API float getdescent();
 
 // draw using current font:
-FL_API void drawtext_transformed(const char*, int n, float x, float y);
-FL_API void drawtext(const char*, float x, float y);
-FL_API void drawtext(const char*, int length, float x, float y);
+GNUI_API void drawtext_transformed(const char*, int n, float x, float y);
+GNUI_API void drawtext(const char*, float x, float y);
+GNUI_API void drawtext(const char*, int length, float x, float y);
 
 // the label text formatter:
-FL_API void measure(const char*, int& w, int& h, Flags = 0);
-FL_API void measure(float (*getwidth)(const char*, int),const char*, float& w, float& h, Flags = 0);
-FL_API void drawtext(const char*, const Rectangle&, Flags);
-FL_API void drawtext(void (*textfunction)(const char*,int,float,float),
+GNUI_API void measure(const char*, int& w, int& h, Flags = 0);
+GNUI_API void measure(float (*getwidth)(const char*, int),const char*, float& w, float& h, Flags = 0);
+GNUI_API void drawtext(const char*, const Rectangle&, Flags);
+GNUI_API void drawtext(void (*textfunction)(const char*,int,float,float),
 		     float (*getwidth)(const char*, int),
 		     const char* str, const Rectangle& r, Flags flags);
 
 // set where \t characters go in label text formatter:
-extern FL_API const int* column_widths_;
+extern GNUI_API const int* column_widths_;
 inline const int* column_widths() {return column_widths_;}
 inline void column_widths(const int* i) {column_widths_ = i;}
 // see also Symbol.h for @-sign commands
 
 // Images
-FL_API void drawimage(const uchar*, PixelType, const Rectangle&);
-FL_API void drawimage(const uchar*, PixelType, const Rectangle&, int linedelta);
+GNUI_API void drawimage(const uchar*, PixelType, const Rectangle&);
+GNUI_API void drawimage(const uchar*, PixelType, const Rectangle&, int linedelta);
 
 typedef const uchar* (*DrawImageCallback)(void* data, int x, int y, int w, uchar* buffer);
-FL_API void drawimage(DrawImageCallback, void*, PixelType, const Rectangle&);
+GNUI_API void drawimage(DrawImageCallback, void*, PixelType, const Rectangle&);
 
-FL_API uchar *readimage(uchar *p, PixelType, const Rectangle&);
-FL_API uchar *readimage(uchar *p, PixelType, const Rectangle&, int linedelta);
+GNUI_API uchar *readimage(uchar *p, PixelType, const Rectangle&);
+GNUI_API uchar *readimage(uchar *p, PixelType, const Rectangle&, int linedelta);
 
-FL_API void scrollrect(const Rectangle&, int dx, int dy,
+GNUI_API void scrollrect(const Rectangle&, int dx, int dy,
 		       void (*draw_area)(void*, const Rectangle&), void*);
 
 #ifndef DOXYGEN /* depreciated: */
-FL_API void drawframe(const char* s, int x, int y, int w, int h);
-FL_API void drawframe2(const char* s, int x, int y, int w, int h);
-FL_API void overlay_rect(int,int,int,int);
-FL_API void overlay_clear();
+GNUI_API void drawframe(const char* s, int x, int y, int w, int h);
+GNUI_API void drawframe2(const char* s, int x, int y, int w, int h);
+GNUI_API void overlay_rect(int,int,int,int);
+GNUI_API void overlay_clear();
 #endif
 
 //@}

@@ -1,5 +1,5 @@
-#ifndef Fl_H
-#  define Fl_H
+#ifndef GNUI_H
+#  define GNUI_H
 
 #include "Enumerations.H"
 #include <gnui/run.h>
@@ -14,7 +14,7 @@
 
 namespace Fl = gnui;
 
-typedef gnui::TimeoutHandler Fl_Timeout_Handler;
+typedef gnui::TimeoutHandler GNUI_Timeout_Handler;
 
 namespace gnui {
 

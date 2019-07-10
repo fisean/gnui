@@ -7,16 +7,16 @@
 #ifndef gnui_error_h
 #define gnui_error_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 namespace gnui {
 
 /// \name gnui/error.h
 //@{
 
-extern FL_API void (*warning)(const char*, ...);
-extern FL_API void (*error)(const char*, ...);
-extern FL_API void (*fatal)(const char*, ...);
+extern GNUI_API void (*warning)(const char*, ...);
+extern GNUI_API void (*error)(const char*, ...);
+extern GNUI_API void (*fatal)(const char*, ...);
 
 //@}
 

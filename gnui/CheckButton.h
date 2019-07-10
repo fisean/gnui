@@ -31,7 +31,7 @@
 
 namespace gnui {
 
-class FL_API CheckButton : public Button {
+class GNUI_API CheckButton : public Button {
 public:
   CheckButton(int x,int y,int w,int h,const char *l = 0);
   static NamedStyle* default_style;

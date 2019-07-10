@@ -195,7 +195,7 @@ MenuBar* build_hierarchy(MenuBar* menubar) {
 	new Item("&Ungroup", F8Key, ungroup_cb,0);
 	new Divider();
 	//new Item("Deactivate", 0, nyi);
-	//new Item("Activate", 0, nyi, 0, FL_MENU_DIVIDER);
+	//new Item("Activate", 0, nyi, 0, GNUI_MENU_DIVIDER);
 	{MenuSection g("&Show / Hide"); 
 	    ishow_overlay = new ToggleItem("Show &Overlays",ACCELERATOR+'O',toggle_overlays);
 	    iwidget_bin   = new ToggleItem("Show &Widget Bin",ACCELERATOR+'B',toggle_widgetbin_cb);

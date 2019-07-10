@@ -39,8 +39,8 @@
 #include <ole2.h>
 #include <shellapi.h>
 
-HANDLE fl_global_selection(int clipboard);
-HANDLE fl_global_selection_ansi(int clipboard);
+HANDLE gnui_global_selection(int clipboard);
+HANDLE gnui_global_selection_ansi(int clipboard);
 
 // this class is needed to allow FLTK apps to be a DnD source
 class FLDropSource : public IDropSource
@@ -110,7 +110,7 @@ public:
         (pformatetcIn->cfFormat == CF_UNICODETEXT))
     {
       pmedium->tymed	      = TYMED_HGLOBAL;
-      pmedium->hGlobal	      = fl_global_selection(0);
+      pmedium->hGlobal	      = gnui_global_selection(0);
       pmedium->pUnkForRelease = NULL;
       return S_OK;
     }
@@ -119,7 +119,7 @@ public:
         (pformatetcIn->cfFormat == CF_TEXT))
     {
       pmedium->tymed	      = TYMED_HGLOBAL;
-      pmedium->hGlobal	      = fl_global_selection_ansi(0);
+      pmedium->hGlobal	      = gnui_global_selection_ansi(0);
       pmedium->pUnkForRelease = NULL;
       return S_OK;
     }

@@ -428,9 +428,9 @@ extern "C" bool xp_theme() {
 ///////////////////////////////////////////////
 // End of XP theme
 
-#include <gnui/FL_API.h>
+#include <gnui/GNUI_API.h>
 
-extern "C" FL_API bool gnui_theme();
+extern "C" GNUI_API bool gnui_theme();
 
 #if USE_X11
 

@@ -23,8 +23,8 @@
 //
 //    http://www.gnui.org/str.php
 
-#ifndef FL_ANSI_WIDGET
-#define FL_ANSI_WIDGET
+#ifndef GNUI_ANSI_WIDGET
+#define GNUI_ANSI_WIDGET
 
 #include <gnui/Widget.h>
 #include <gnui/draw.h>
@@ -92,4 +92,4 @@ class AnsiWidget : public Widget {
 
 #endif
 
-// $Id: Fl_Ansi_Window.h,v 1.23 2006/08/03 10:28:12 zeeb90au Exp $
+// $Id: GNUI_Ansi_Window.h,v 1.23 2006/08/03 10:28:12 zeeb90au Exp $

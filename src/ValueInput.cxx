@@ -38,7 +38,7 @@ using namespace gnui;
   FloatInput and two up/down buttons. Other toolkits call this a "Spin
   Box".
 
-  \image html Fl_Value_Input.gif
+  \image html GNUI_Value_Input.gif
 
   Clicking the buttons increments/decrements by the
   linesize(). Holding down any shift key and clicking

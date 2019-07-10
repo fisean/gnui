@@ -3,10 +3,10 @@
 #ifndef fast_slow_h
 #define fast_slow_h
 #include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-#include <FL/Fl_Slider.H>
-extern Fl_Slider* control;
-extern Fl_Slider* fast;
-extern Fl_Slider* slow;
-#include <FL/Fl_Box.H>
+#include <FL/GNUI_Window.H>
+#include <FL/GNUI_Slider.H>
+extern GNUI_Slider* control;
+extern GNUI_Slider* fast;
+extern GNUI_Slider* slow;
+#include <FL/GNUI_Box.H>
 #endif

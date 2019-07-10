@@ -34,17 +34,17 @@ dnl Required file in package...
 AC_INIT(src/Widget.cxx)
 
 dnl GNUI library versions...
-FL_MAJOR_VERSION=2
-FL_MINOR_VERSION=0
-FL_PATCH_VERSION=0
-FL_RELEASE_VERSION=a0
-FL_API_VERSION=${FL_MAJOR_VERSION}.${FL_MINOR_VERSION}
+GNUI_MAJOR_VERSION=2
+GNUI_MINOR_VERSION=0
+GNUI_PATCH_VERSION=0
+GNUI_RELEASE_VERSION=a0
+GNUI_API_VERSION=${GNUI_MAJOR_VERSION}.${GNUI_MINOR_VERSION}
 
-AC_SUBST(FL_MAJOR_VERSION)
-AC_SUBST(FL_MINOR_VERSION)
-AC_SUBST(FL_PATCH_VERSION)
-AC_SUBST(FL_RELEASE_VERSION)
-AC_SUBST(FL_API_VERSION)
+AC_SUBST(GNUI_MAJOR_VERSION)
+AC_SUBST(GNUI_MINOR_VERSION)
+AC_SUBST(GNUI_PATCH_VERSION)
+AC_SUBST(GNUI_RELEASE_VERSION)
+AC_SUBST(GNUI_API_VERSION)
 
 dnl Get the operating system and version number...
 uname=`uname`
@@ -147,7 +147,7 @@ AC_ARG_ENABLE(gl, [  --enable-gl             turn on OpenGL support (default=yes
 AC_ARG_ENABLE(shared, [  --enable-shared         turn on shared libraries (default=no)])
 if test x$enable_shared = xyes; then
     DSOPREFIX="lib"
-    DSOSUFFIX=".so.$FL_API_VERSION"
+    DSOSUFFIX=".so.$GNUI_API_VERSION"
     DSOSYMLINK=".so"
     DSOTARGET="shared"
 
@@ -161,7 +161,7 @@ if test x$enable_shared = xyes; then
     case $uname in
 	Darwin*)
 	    DSOSYMLINK=".dylib"
-	    DSOSUFFIX=".$FL_API_VERSION.dylib"
+	    DSOSUFFIX=".$GNUI_API_VERSION.dylib"
 	    DSOCOMMAND="ld $DSOFLAGS -dylib /usr/lib/dylib1.o -lc"
 	    if test "$libdir" != "/usr/lib"; then
 		    DSOLINK="-Wl,-rpath,$libdir"
@@ -175,7 +175,7 @@ if test x$enable_shared = xyes; then
             fi
 	    ;;
 	HP-UX*)
-	    DSOSUFFIX=".sl.$FL_API_VERSION"
+	    DSOSUFFIX=".sl.$GNUI_API_VERSION"
 	    DSOSYMLINK=".sl"
 	    DSOCOMMAND="ld -b -z +h \$@ $DEBUGFLAG -o"
 	    if test "$libdir" != "/usr/lib"; then
@@ -217,7 +217,7 @@ if test x$enable_shared = xyes; then
 
 			PICFLAG=0
 			SHAREDSUFFIX=".dll"
-			DSOCOMMAND="\$(CXX) -Wl,--out-implib,../lib/lib\$(DSONAME).a -shared -DFL_SHARED -DFL_LIBRARY -DFL_IMAGES_LIBRARY -DFL_GLUT_LIBRARY -DFL_FORMS_LIBRARY -DFL_GL_LIBRARY $DEBUGFLAG -o"
+			DSOCOMMAND="\$(CXX) -Wl,--out-implib,../lib/lib\$(DSONAME).a -shared -DGNUI_SHARED -DGNUI_LIBRARY -DGNUI_IMAGES_LIBRARY -DGNUI_GLUT_LIBRARY -DGNUI_FORMS_LIBRARY -DGNUI_GL_LIBRARY $DEBUGFLAG -o"
 	        CFLAGS="$CFLAGS -D_WIN32"
 			CPPFLAGS="$CPPFLAGS -D_WIN32"
 	        CXXFLAGS="$CXXFLAGS -D_WIN32"

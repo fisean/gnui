@@ -30,7 +30,7 @@
 
 namespace gnui {
 
-class FL_API ShapedWindow : public Window {
+class GNUI_API ShapedWindow : public Window {
     void init() { shape_ = 0; lw = lh = 0; changed = 0; }
   public:
     ShapedWindow(int W, int H, const char *l = 0)  : Window(W,H,l) {

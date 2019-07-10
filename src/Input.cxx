@@ -36,9 +36,9 @@
 
 using namespace gnui;
 
-extern void fl_set_spot(gnui::Font *f, Widget *w, int x, int y);
+extern void gnui_set_spot(gnui::Font *f, Widget *w, int x, int y);
 
-extern Widget* fl_pending_callback;
+extern Widget* gnui_pending_callback;
 
 // Called by any changes to the text, this correctly triggers callbacks:
 static void changed_stuff(Input* i) {
@@ -46,10 +46,10 @@ static void changed_stuff(Input* i) {
   if (i->when() & WHEN_CHANGED) {
     i->do_callback();
   } else if (i->when() & (WHEN_RELEASE|WHEN_ENTER_KEY)) {
-    Widget* w = fl_pending_callback;
+    Widget* w = gnui_pending_callback;
     if (i == w) return;
-    if (w) {fl_pending_callback = 0; w->do_callback();}
-    fl_pending_callback = i;
+    if (w) {gnui_pending_callback = 0; w->do_callback();}
+    gnui_pending_callback = i;
   }
 }
 
@@ -470,7 +470,7 @@ void Input::draw(const Rectangle& r)
   pop_clip();
   if (focused()) {
     transform(spot_x, spot_y);
-    fl_set_spot(textfont(), this, spot_x, spot_y);
+    gnui_set_spot(textfont(), this, spot_x, spot_y);
   }
 }
 
@@ -1007,7 +1007,7 @@ void Input::reserve(int len) {
   constants a lot but the user rarely edits it.
 */
 bool Input::static_text(const char* str, int len) {
-  if (fl_pending_callback == this) fl_pending_callback = 0;
+  if (gnui_pending_callback == this) gnui_pending_callback = 0;
   clear_changed();
   if (undowidget == this) undowidget = 0;
   bool ret = true;
@@ -1070,7 +1070,7 @@ bool Input::text(const char* str) {
 
 /*! The destructor destroys the memory used by text() */
 Input::~Input() {
-  if (fl_pending_callback == this) fl_pending_callback = 0;
+  if (gnui_pending_callback == this) gnui_pending_callback = 0;
   if (undowidget == this) undowidget = 0;
   delete[] buffer;
 }
@@ -1271,8 +1271,8 @@ bool Input::handle_key() {
     if (command || shift) return false;
     if (when() & WHEN_ENTER_KEY) {
       position(size(), 0);
-      if (fl_pending_callback==this || (when()&WHEN_NOT_CHANGED)) {
-	if (fl_pending_callback == this) fl_pending_callback = 0;
+      if (gnui_pending_callback==this || (when()&WHEN_NOT_CHANGED)) {
+	if (gnui_pending_callback == this) gnui_pending_callback = 0;
 	do_callback();
       }
       return true;
@@ -1464,7 +1464,7 @@ int Input::handle(int event, const Rectangle& r) {
 
   case UNFOCUS:
     // disable input method
-    fl_set_spot(NULL, this, 0, 0);
+    gnui_set_spot(NULL, this, 0, 0);
     // redraw the highlight area:
     if (mark_ != position_) minimal_update(mark_, position_);
     // else make the cursor disappear:

@@ -12,7 +12,7 @@
 
 namespace gnui {
 
-class FL_API InvisibleBox : public Widget {
+class GNUI_API InvisibleBox : public Widget {
 public:
   InvisibleBox(int x, int y, int w, int h, const char *l=0);
   InvisibleBox(Box* b, int x, int y, int w, int h, const char *l);

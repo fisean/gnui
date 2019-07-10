@@ -53,9 +53,9 @@ TextEditor::TextEditor(int X, int Y, int W, int H, const char* l)
   default_key_function(kf_default);
 }
 
-extern Widget* fl_pending_callback;
+extern Widget* gnui_pending_callback;
 TextEditor::~TextEditor() {
-  if (fl_pending_callback == this) fl_pending_callback = 0;
+  if (gnui_pending_callback == this) gnui_pending_callback = 0;
   remove_all_key_bindings();
 }
 
@@ -426,10 +426,10 @@ int TextEditor::handle_key() {
 void TextEditor::maybe_do_callback() {
   set_changed();
   if (when() & (WHEN_RELEASE|WHEN_ENTER_KEY)) {
-    Widget* w = fl_pending_callback;
+    Widget* w = gnui_pending_callback;
     if (w == this) return;
-    if (w) {fl_pending_callback = 0; w->do_callback();}
-    fl_pending_callback = this;
+    if (w) {gnui_pending_callback = 0; w->do_callback();}
+    gnui_pending_callback = this;
   } else {
     if (when()) do_callback();
   }

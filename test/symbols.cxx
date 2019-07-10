@@ -39,7 +39,7 @@ int sort(const void* a, const void* b) {
   return strcasecmp(A->name(), B->name());
 }
 
-struct fl_char_table {const char* name; const char* text;} specialtable[] = {
+struct gnui_char_table {const char* name; const char* text;} specialtable[] = {
   {"b", "@t@@b;\t@n@b;bold"},
   {"B", "@t@@B#;\t@n@B11;bg color"},
   {"C", "@t@@C#;\t@n@C11;color"},

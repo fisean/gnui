@@ -170,7 +170,7 @@ int Button::handle(int event, const Rectangle& rectangle) {
 
 #include <gnui/draw.h>
 
-extern Widget* fl_did_clipping;
+extern Widget* gnui_did_clipping;
 
 /*!
   This function provides a mess of back-compatabilty and Windows
@@ -215,7 +215,7 @@ void Button::draw(int glyph_width) const {
       draw_background();
     }
     // this allows these buttons to be put into browser/menus:
-    //fg = fl_item_labelcolor(this);
+    //fg = gnui_item_labelcolor(this);
   } else {
     if ((damage()&(DAMAGE_EXPOSE|DAMAGE_HIGHLIGHT)) && !box->fills_rectangle()) {
       // Erase the area behind non-square boxes
@@ -264,7 +264,7 @@ void Button::draw(int glyph_width) const {
 */
 void Button::draw() {
   if (type() == HIDDEN) {
-    fl_did_clipping = this;
+    gnui_did_clipping = this;
     return;
   }
   draw(0);

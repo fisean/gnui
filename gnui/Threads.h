@@ -1,6 +1,6 @@
 #ifndef gnui_Threads_h
 #define gnui_Threads_h
-#include <gnui/FL_API.h>
+#include <gnui/GNUI_API.h>
 
 #if !defined( _WIN32) || defined(__CYGWIN__)
 // pthreads:
@@ -142,7 +142,7 @@ inline int create_thread(Thread& t, void *(*f) (void *), void* p) {
   return t = (Thread)_beginthread((void( __cdecl * )( void * ))f, 0, p);
 }
 
-class FL_API Mutex {
+class GNUI_API Mutex {
   CRITICAL_SECTION cs;
   Mutex(const Mutex&);
   Mutex& operator=(const Mutex&);
@@ -156,7 +156,7 @@ public:
 
 // After many experiments we have determined that this very stupid
 // implementation has the lowest overhead:
-class FL_API SignalMutex : public Mutex {
+class GNUI_API SignalMutex : public Mutex {
 public:
   SignalMutex() : Mutex() {}
   void signal() {}
@@ -191,7 +191,7 @@ typedef Mutex RecursiveMutex;
 \endcode
 
 */
-class FL_API Guard {
+class GNUI_API Guard {
   Mutex& lock;
  public:
   Guard(Mutex& m) : lock(m) {lock.lock();}

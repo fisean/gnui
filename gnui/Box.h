@@ -36,7 +36,7 @@ namespace gnui {
 
 typedef Symbol Box;
 
-class FL_API FrameBox : public Box {
+class GNUI_API FrameBox : public Box {
 protected:
   const char* data_;
   const Box* down_;
@@ -51,7 +51,7 @@ public:
     : Box(name),data_(pattern),down_(down) {set_inset(dx,dy,-dw,-dh);}
 };
 
-class FL_API FlatBox : public Box {
+class GNUI_API FlatBox : public Box {
 public:
   void _draw(const Rectangle&) const;
   bool fills_rectangle() const;
@@ -59,7 +59,7 @@ public:
   FlatBox(const char* n);
 };
 
-class FL_API HighlightBox : public FlatBox {
+class GNUI_API HighlightBox : public FlatBox {
   const Box* down_;
 public:
   void _draw(const Rectangle&) const;

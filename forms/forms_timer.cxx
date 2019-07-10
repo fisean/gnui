@@ -30,8 +30,8 @@
 // Fl::add_timeout directly!
 
 #include <fltk/Fl.h>
-#include <fltk/Fl_Timer.h>
-#include <fltk/fl_draw.h>
+#include <fltk/GNUI_Timer.h>
+#include <fltk/gnui_draw.h>
 #ifdef _WIN32
 # include <sys/types.h> 
 # include <sys/timeb.h>
@@ -40,9 +40,9 @@
 #endif
 #include <stdio.h>
 
-#define FL_TIMER_BLINKRATE	0.2
+#define GNUI_TIMER_BLINKRATE	0.2
 
-void fl_gettime(long* sec, long* usec) {
+void gnui_gettime(long* sec, long* usec) {
 #ifdef _WIN32
   struct timeb tp;
   ftime(&tp);
@@ -57,16 +57,16 @@ void fl_gettime(long* sec, long* usec) {
 #endif
 }
 
-void Fl_Timer::draw() {
+void GNUI_Timer::draw() {
   int tt;
   char str[32];
-  Fl_Color color;
-  if (on && delay<=0.0 && ((int) (delay / FL_TIMER_BLINKRATE) % 2))
+  GNUI_Color color;
+  if (on && delay<=0.0 && ((int) (delay / GNUI_TIMER_BLINKRATE) % 2))
     color = selection_color();
   else
     color = this->color();
   box()->draw(0, 0, w(), h(), color);
-  if (type() == FL_VALUE_TIMER && delay>0.0) {
+  if (type() == GNUI_VALUE_TIMER && delay>0.0) {
     double d = direction_ ? total-delay : delay;
     if (d < 60.0)
       sprintf(str, "%.1f", d);
@@ -74,81 +74,81 @@ void Fl_Timer::draw() {
       tt = (int) ((d+0.05) / 60.0);
       sprintf(str, "%d:%04.1f", tt, d - 60.0 * tt);
     }
-    fl_font(label_font(), label_size());
-    fl_color(label_color());
-    fl_draw(str, 0, 0, w(), h(), FL_ALIGN_CENTER);
+    gnui_font(label_font(), label_size());
+    gnui_color(label_color());
+    gnui_draw(str, 0, 0, w(), h(), GNUI_ALIGN_CENTER);
   } else
     draw_inside_label();
 }
 
-void Fl_Timer::stepcb(void* v) {
-  ((Fl_Timer*)v)->step();
+void GNUI_Timer::stepcb(void* v) {
+  ((GNUI_Timer*)v)->step();
 }
 
-void Fl_Timer::step() {
+void GNUI_Timer::step() {
   if (!on) return;
   double lastdelay = delay;
-  long sec, usec; fl_gettime(&sec, &usec);
+  long sec, usec; gnui_gettime(&sec, &usec);
   delay -= (double) (sec - lastsec) + (double) (usec - lastusec) / 1000000.0;
   lastsec = sec; lastusec = usec;
   if (lastdelay > 0.0 && delay <= 0.0) {
-    if (type() == FL_HIDDEN_TIMER) {
+    if (type() == GNUI_HIDDEN_TIMER) {
       on = 0;
       delay = 0;
     } else {
       redraw();
-      Fl::add_timeout(FL_TIMER_BLINKRATE, (Fl_Timeout_Handler)stepcb, this);
+      Fl::add_timeout(GNUI_TIMER_BLINKRATE, (GNUI_Timeout_Handler)stepcb, this);
     }
     do_callback();
   } else {
-    if (type() == FL_VALUE_TIMER) redraw();
-    Fl::add_timeout(FL_TIMER_BLINKRATE, (Fl_Timeout_Handler)stepcb, this);
+    if (type() == GNUI_VALUE_TIMER) redraw();
+    Fl::add_timeout(GNUI_TIMER_BLINKRATE, (GNUI_Timeout_Handler)stepcb, this);
   }
 }
 
-int Fl_Timer::handle(int event) {
-  if (event == FL_RELEASE && delay <= 0) value(0.0);
+int GNUI_Timer::handle(int event) {
+  if (event == GNUI_RELEASE && delay <= 0) value(0.0);
   return 0;
 }
 
-Fl_Timer::~Fl_Timer() {
-  Fl::remove_timeout((Fl_Timeout_Handler)stepcb, this);
+GNUI_Timer::~GNUI_Timer() {
+  Fl::remove_timeout((GNUI_Timeout_Handler)stepcb, this);
 }
 
-Fl_Timer::Fl_Timer(uchar t, int x, int y, int w, int h, const char* l)
-: Fl_Widget(x, y, w, h, l) {
-  box(FL_DOWN_BOX);
-  selection_color(FL_RED);
+GNUI_Timer::GNUI_Timer(uchar t, int x, int y, int w, int h, const char* l)
+: GNUI_Widget(x, y, w, h, l) {
+  box(GNUI_DOWN_BOX);
+  selection_color(GNUI_RED);
   delay = 0;
   on = 0;
   direction_ = 0;
   type(t);
-  if (t == FL_HIDDEN_TIMER) clear_visible();
-  if (t == FL_VALUE_TIMER) {
-	  clear_flag(FL_ALIGN_MASK);
-	  set_flag(FL_ALIGN_LEFT);
+  if (t == GNUI_HIDDEN_TIMER) clear_visible();
+  if (t == GNUI_VALUE_TIMER) {
+	  clear_flag(GNUI_ALIGN_MASK);
+	  set_flag(GNUI_ALIGN_LEFT);
   }
 }
 
-void Fl_Timer::value(double d) {
+void GNUI_Timer::value(double d) {
   delay = total = d;
   on = (d > 0.0);
-  fl_gettime(&(lastsec), &(lastusec));
-  if (type() != FL_HIDDEN_TIMER) redraw();
-  Fl::remove_timeout((Fl_Timeout_Handler)stepcb, this);
-  if (on) Fl::add_timeout(FL_TIMER_BLINKRATE, (Fl_Timeout_Handler)stepcb, this);
+  gnui_gettime(&(lastsec), &(lastusec));
+  if (type() != GNUI_HIDDEN_TIMER) redraw();
+  Fl::remove_timeout((GNUI_Timeout_Handler)stepcb, this);
+  if (on) Fl::add_timeout(GNUI_TIMER_BLINKRATE, (GNUI_Timeout_Handler)stepcb, this);
 }
 
-void Fl_Timer::suspended(char d) {
+void GNUI_Timer::suspended(char d) {
   if (!d) {
     if (on) return;
     on = (delay > 0.0);
-    fl_gettime(&(lastsec), &(lastusec));
-    if (on) Fl::add_timeout(FL_TIMER_BLINKRATE, (Fl_Timeout_Handler)stepcb, this);
+    gnui_gettime(&(lastsec), &(lastusec));
+    if (on) Fl::add_timeout(GNUI_TIMER_BLINKRATE, (GNUI_Timeout_Handler)stepcb, this);
   } else {
     if (!on) return;
     on = 0;
-    Fl::remove_timeout((Fl_Timeout_Handler)stepcb, this);
+    Fl::remove_timeout((GNUI_Timeout_Handler)stepcb, this);
   }
 }
 

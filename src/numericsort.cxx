@@ -91,7 +91,7 @@ static int numericsort(const dirent*const*A, const dirent*const*B, int cs) {
 }
 
 /*
- * 'fl_casenumericsort()' - Compare directory entries with case-sensitivity.
+ * 'gnui_casenumericsort()' - Compare directory entries with case-sensitivity.
  */
 
 int gnui::casenumericsort(const dirent*const*A, const dirent*const*B) {
@@ -99,7 +99,7 @@ int gnui::casenumericsort(const dirent*const*A, const dirent*const*B) {
 }
 
 /*
- * 'fl_numericsort()' - Compare directory entries with case-sensitivity.
+ * 'gnui_numericsort()' - Compare directory entries with case-sensitivity.
  */
 
 int gnui::numericsort(const dirent*const*A, const dirent*const*B) {

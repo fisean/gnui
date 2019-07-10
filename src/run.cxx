@@ -53,12 +53,12 @@
 #include <gnui/x.h>
 
 /* things that should be in different source files: */
-#include <gnui/FL_VERSION.h>
+#include <gnui/GNUI_VERSION.h>
 #include <gnui/Monitor.h>
 
 using namespace gnui;
 
-double gnui::version() {return FL_VERSION;}
+double gnui::version() {return GNUI_VERSION;}
 
 //
 // Globals...
@@ -113,7 +113,7 @@ static void fix_focus() {
 extern "C" {
 // This function is here because Window::label() uses it:
 // Make sure gnui/string.h is included above. Without it it appears
-// that VC++ will be unable to link to this. Adding FL_API does not fix it.
+// that VC++ will be unable to link to this. Adding GNUI_API does not fix it.
 /**
   Equivalent to strdup() except the C++ new[] operator is used. A
   block of memory strlen(from)+1 is allocated and the \a from
@@ -126,7 +126,7 @@ extern "C" {
   replacement new-handler to work. FLTK uses this for all strings
   that it copies internally.
 */
-FL_API char* newstring(const char *from) {
+GNUI_API char* newstring(const char *from) {
   if (!from) return 0;
   unsigned n = strlen(from)+1;
   char* ret = new char[n];
@@ -462,7 +462,7 @@ int gnui::wait(float time_to_wait) {
 
   // run the system-specific part that waits for sockets & events:
   if (time_to_wait <= 0 || (idle && !in_idle)) time_to_wait = 0;
-  int ret = fl_wait(time_to_wait);
+  int ret = gnui_wait(time_to_wait);
 
   if (first_timeout) {
     elapse_timeouts();
@@ -530,7 +530,7 @@ int gnui::ready() {
     if (first_timeout->time <= 0) return 1;
   }
   // run the system-specific part:
-  return fl_ready();
+  return gnui_ready();
 }
 
 ////////////////////////////////////////////////////////////////
@@ -634,11 +634,11 @@ void gnui::redraw() {
 }
 
 #if !USE_X11 && defined(_WIN32)
-extern void fl_do_deferred_calls(); // in Fl_Window.cxx:
+extern void gnui_do_deferred_calls(); // in GNUI_Window.cxx:
 #endif
 
 // This is extra code that probably should be in Window::flush():
-void fl_window_flush(Window* window) {
+void gnui_window_flush(Window* window) {
   CreatedWindow* x = CreatedWindow::find(window);
   if (x->wait_for_expose || !window->visible_r()) return;
 #if !USE_X11 && USE_QUARTZ
@@ -690,7 +690,7 @@ void gnui::flush() {
     damage_ = false; // turn it off so Window::flush() can turn it back on
     for (CreatedWindow* x = CreatedWindow::first; x; x = x->next) {
       Window* window = x->window;
-      fl_window_flush(window);
+      gnui_window_flush(window);
     }
   }
 #if USE_X11
@@ -705,7 +705,7 @@ void gnui::flush() {
   XFlush(xdisplay);
 #elif defined(_WIN32)
   GdiFlush();
-  fl_do_deferred_calls();
+  gnui_do_deferred_calls();
 #elif USE_QUARTZ
   //+++ QDFlushPortBuffer( GetWindowPort(xid), 0 ); // \todo do we need this?
 #endif
@@ -798,11 +798,11 @@ void gnui::Rectangle::intersect(const gnui::Rectangle& R) {
 ////////////////////////////////////////////////////////////////
 // Event handling:
 
-Widget* fl_pending_callback = 0; // used by gnui::Input
+Widget* gnui_pending_callback = 0; // used by gnui::Input
 static void call_pending_if_not(Widget* i) {
-  Widget* w = fl_pending_callback;
+  Widget* w = gnui_pending_callback;
   if (w && w != i) {
-    fl_pending_callback = 0;
+    gnui_pending_callback = 0;
     w->do_callback();
   }
 }
@@ -1150,7 +1150,7 @@ void gnui::add_event_handler(int (*h)(int, Window*)) {
   handlers = l;
 }
 
-bool (*fl_local_grab)(int); // used by fl_dnd_x.cxx
+bool (*gnui_local_grab)(int); // used by gnui_dnd_x.cxx
 
 // Similar to !modal->contains(b) but it also follows the child_of
 // pointers to windows. Possibly this is what contains() should do always.
@@ -1168,7 +1168,7 @@ static bool outside_modal(const Widget* b) {
   }
 }
 
-Window* fl_actual_window;
+Window* gnui_actual_window;
 
 /*!
   Try sending the current KEY event as a SHORTCUT event.
@@ -1194,7 +1194,7 @@ bool gnui::try_shortcut() {
   static bool recursion;
   if (recursion) return false;
   recursion = true;
-  bool ret = handle(SHORTCUT, fl_actual_window) != 0;
+  bool ret = handle(SHORTCUT, gnui_actual_window) != 0;
   recursion = false;
   return ret;
 }
@@ -1229,9 +1229,9 @@ bool gnui::handle(int event, Window* window)
   if (event) printf("event name = %8lu %s\n", ++evtnum, gnui::event_name(event));
 #endif
 
-  if (fl_local_grab) return fl_local_grab(event);
+  if (gnui_local_grab) return gnui_local_grab(event);
 
-  Widget* to = fl_actual_window = window;
+  Widget* to = gnui_actual_window = window;
 
   switch (event) {
 

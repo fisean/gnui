@@ -34,7 +34,7 @@
 
 namespace gnui {
 
-class FL_API Divider : public Widget {
+class GNUI_API Divider : public Widget {
 public:
   void draw();
   void layout();

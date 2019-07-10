@@ -30,37 +30,37 @@
 #include <fltk/forms.h>
 #include <string.h>
 
-static char fl_directory[1024];
-static const char *fl_pattern;  // assummed passed value is static
-static char fl_filename[256];
+static char gnui_directory[1024];
+static const char *gnui_pattern;  // assummed passed value is static
+static char gnui_filename[256];
 
-char* fl_show_file_selector(const char *message,const char *dir,
+char* gnui_show_file_selector(const char *message,const char *dir,
 			    const char *pat,const char *fname) {
-  if (dir && dir[0]) strncpy(fl_directory,dir,1023);
-  if (pat && pat[0]) fl_pattern = pat;
-  if (fname && fname[0]) strncpy(fl_filename,fname,255);
-  char *p = fl_directory+strlen(fl_directory);
-  if (p > fl_directory && *(p-1)!='/'
+  if (dir && dir[0]) strncpy(gnui_directory,dir,1023);
+  if (pat && pat[0]) gnui_pattern = pat;
+  if (fname && fname[0]) strncpy(gnui_filename,fname,255);
+  char *p = gnui_directory+strlen(gnui_directory);
+  if (p > gnui_directory && *(p-1)!='/'
 #ifdef _WIN32
       && *(p-1)!='\\' && *(p-1)!=':'
 #endif
       ) *p++ = '/';
-  strcpy(p,fl_filename);
-  const char *q = fl_file_chooser(message,fl_pattern,fl_directory);
+  strcpy(p,gnui_filename);
+  const char *q = gnui_file_chooser(message,gnui_pattern,gnui_directory);
   if (!q) return 0;
-  strcpy(fl_directory, q);
-  p = (char *)filename_name(fl_directory);
-  strcpy(fl_filename, p);
-  if (p > fl_directory+1) p--;
+  strcpy(gnui_directory, q);
+  p = (char *)filename_name(gnui_directory);
+  strcpy(gnui_filename, p);
+  if (p > gnui_directory+1) p--;
   *p = 0;
   return (char *)q;
 }
 
-char*	fl_get_directory() {return fl_directory;}
+char*	gnui_get_directory() {return gnui_directory;}
 
-char*	fl_get_pattern() {return (char *)fl_pattern;}
+char*	gnui_get_pattern() {return (char *)gnui_pattern;}
 
-char*	fl_get_filename() {return fl_filename;}
+char*	gnui_get_filename() {return gnui_filename;}
 
 //
 // End of "$Id$".

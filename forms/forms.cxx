@@ -33,11 +33,11 @@
 
 #include <fltk/forms.h> // changed for fltk
 
-static int border = 1; // changed from FL_TRANSIENT for fltk
+static int border = 1; // changed from GNUI_TRANSIENT for fltk
 // (this is so the close box and Esc work to close the window)
 
-// fltk: changed from int to Fl_Boxtype
-typedef struct { Fl_Boxtype val; const char *name; } VN_struct;
+// fltk: changed from int to GNUI_Boxtype
+typedef struct { GNUI_Boxtype val; const char *name; } VN_struct;
 #define VN(a) {a,#a}
 
 // static VN_struct gmode[] =
@@ -48,22 +48,22 @@ typedef struct { Fl_Boxtype val; const char *name; } VN_struct;
 
 static VN_struct btypes[]=
 {
-   {FL_NO_BOX,"no box"},
-   {FL_UP_BOX, "up box"},
-   {FL_DOWN_BOX,"down box"},
-   {FL_BORDER_BOX,"border box"},
-   {FL_SHADOW_BOX,"shadow box"},
-   {FL_FLAT_BOX,"flat box"},
-   {FL_ENGRAVED_BOX,"frame box"},
-   {FL_EMBOSSED_BOX,"embossed box"},
-   {FL_ROUNDED_BOX,"rounded box"},
-   {FL_RFLAT_BOX,"rflat box"},
-   {FL_RSHADOW_BOX,"rshadow box"}, // renamed for fltk
-   {FL_OVAL_BOX,"oval box"},
-   {FL_ROUNDED3D_UPBOX,"rounded3d upbox"},
-   {FL_ROUNDED3D_DOWNBOX,"rounded3d downbox"},
-   {FL_OVAL3D_UPBOX,"oval3d upbox"},
-   {FL_OVAL3D_DOWNBOX,"oval3d downbox"},
+   {GNUI_NO_BOX,"no box"},
+   {GNUI_UP_BOX, "up box"},
+   {GNUI_DOWN_BOX,"down box"},
+   {GNUI_BORDER_BOX,"border box"},
+   {GNUI_SHADOW_BOX,"shadow box"},
+   {GNUI_FLAT_BOX,"flat box"},
+   {GNUI_ENGRAVED_BOX,"frame box"},
+   {GNUI_EMBOSSED_BOX,"embossed box"},
+   {GNUI_ROUNDED_BOX,"rounded box"},
+   {GNUI_RFLAT_BOX,"rflat box"},
+   {GNUI_RSHADOW_BOX,"rshadow box"}, // renamed for fltk
+   {GNUI_OVAL_BOX,"oval box"},
+   {GNUI_ROUNDED3D_UPBOX,"rounded3d upbox"},
+   {GNUI_ROUNDED3D_DOWNBOX,"rounded3d downbox"},
+   {GNUI_OVAL3D_UPBOX,"oval3d upbox"},
+   {GNUI_OVAL3D_DOWNBOX,"oval3d downbox"},
    /* sentinel */
    {0} // fltk: changed from -1 to zero
 };
@@ -72,46 +72,46 @@ static VN_struct btypes[]=
 
 /*************** Callback **********************/
 
-FL_FORM *form;
-Fl_Widget *tobj[18], *exitob, *btypeob, *modeob;
+GNUI_FORM *form;
+GNUI_Widget *tobj[18], *exitob, *btypeob, *modeob;
 
 void 
-boxtype_cb (Fl_Widget * ob, long)
+boxtype_cb (GNUI_Widget * ob, long)
 {
-  int i, req_bt = fl_get_choice(ob) - 1;
+  int i, req_bt = gnui_get_choice(ob) - 1;
   static int lastbt = -1;
 
   if(lastbt != req_bt)
   {
-     fl_freeze_form (form);
-     fl_redraw_form (form);
+     gnui_freeze_form (form);
+     gnui_redraw_form (form);
      for (i = 0; i < 18; i++)
-        fl_set_object_boxtype (tobj[i], btypes[req_bt].val);
-     fl_unfreeze_form (form);
+        gnui_set_object_boxtype (tobj[i], btypes[req_bt].val);
+     gnui_unfreeze_form (form);
      lastbt = req_bt;
-     fl_redraw_form(form); // added for fltk
+     gnui_redraw_form(form); // added for fltk
   }
 }
 
 void 
-mode_cb (Fl_Widget *, long)
+mode_cb (GNUI_Widget *, long)
 {
 //   static int lval = -1;
-//   int val = fl_get_choice (ob) -1;
+//   int val = gnui_get_choice (ob) -1;
 //   int  db = 0;
 
 //   if (val == lval || val < 0)
 //     return;
 
-//   fl_hide_form (form);
-//   if (!fl_mode_capable (gmode[val].val, 0))
+//   gnui_hide_form (form);
+//   if (!gnui_mode_capable (gmode[val].val, 0))
 //   {
-//       fl_set_choice(ob, lval);
+//       gnui_set_choice(ob, lval);
 //       val = lval;
 //   }
 
-//   fl_set_graphics_mode (gmode[val].val, db);
-//   fl_show_form (form, FL_PLACE_GEOMETRY, border, "Box types");
+//   gnui_set_graphics_mode (gmode[val].val, db);
+//   gnui_show_form (form, GNUI_PLACE_GEOMETRY, border, "Box types");
 
 //   lval = val;
 }
@@ -121,42 +121,42 @@ mode_cb (Fl_Widget *, long)
 void 
 create_form_form (void)
 {
-  Fl_Widget *obj;
+  GNUI_Widget *obj;
 
-  form = fl_bgn_form(FL_NO_BOX, 720, 520);
-  obj = fl_add_box(FL_UP_BOX, 0, 0, 720, 520, "");
-  fl_set_object_color(obj, FL_BLUE, FL_COL1);
-  obj = fl_add_box(FL_DOWN_BOX, 10, 90, 700, 420, "");
-  fl_set_object_color(obj, FL_COL1, FL_COL1);
-  obj = fl_add_box(FL_DOWN_BOX, 10, 10, 700, 70, "");
-  fl_set_object_color(obj, FL_SLATEBLUE, FL_COL1);
-  tobj[0] = obj = fl_add_box(FL_UP_BOX, 30, 110, 110, 110, "Box");
-  tobj[1] = obj = fl_add_text(FL_NORMAL_TEXT, 30, 240, 110, 30, "Text");
-  tobj[2] = obj = fl_add_bitmap(FL_NORMAL_BITMAP, 40, 280, 90, 80, "Bitmap");
-  fl_set_object_lcol(obj, FL_BLUE);
-  tobj[3] = obj = fl_add_chart(FL_BAR_CHART, 160, 110, 160, 110, "Chart");
-  tobj[4] = obj = fl_add_clock(FL_ANALOG_CLOCK, 40, 390, 90, 90, "Clock");
-//fl_set_object_dblbuffer(tobj[4],1); // removed for fltk
-  tobj[5]=obj=fl_add_button(FL_NORMAL_BUTTON, 340, 110, 120, 30, "Button");
-  tobj[6]=obj=fl_add_lightbutton(FL_PUSH_BUTTON,340,150,120,30,"Lightbutton");
-  tobj[7]=obj=fl_add_roundbutton(FL_PUSH_BUTTON,340,190,120,30,"Roundbutton");
-  tobj[8]=obj=fl_add_slider(FL_VERT_SLIDER, 160, 250, 40, 230, "Slider");
-  tobj[9]=obj=fl_add_valslider(FL_VERT_SLIDER, 220, 250, 40, 230, "Valslider");
-  tobj[10]=obj=fl_add_dial (FL_LINE_DIAL, 280, 250, 100, 100, "Dial");
-  tobj[11]=obj=fl_add_positioner(FL_NORMAL_POSITIONER,280,380,150,100, "Positioner");
-  tobj[12]=obj=fl_add_counter (FL_NORMAL_COUNTER,480,110,210,30, "Counter");
-  tobj[13]=obj=fl_add_input (FL_NORMAL_INPUT, 520,170,170,30, "Input");
-  tobj[14]=obj=fl_add_menu (FL_PUSH_MENU, 400, 240, 100, 30, "Menu");
-  tobj[15]=obj=fl_add_choice (FL_NORMAL_CHOICE, 580, 250, 110, 30, "Choice");
-  tobj[16]=obj=fl_add_timer (FL_VALUE_TIMER, 580, 210, 110, 30, "Timer");
-//fl_set_object_dblbuffer(tobj[16], 1); // removed for fltk
-  tobj[17]=obj=fl_add_browser (FL_NORMAL_BROWSER,450,300,240, 180, "Browser");
-  exitob=obj= fl_add_button (FL_NORMAL_BUTTON, 590, 30, 100, 30, "Exit");
-  btypeob=obj= fl_add_choice (FL_NORMAL_CHOICE,110,30, 130, 30, "Boxtype");
-  fl_set_object_callback (obj, boxtype_cb, 0);
-  modeob = obj=fl_add_choice(FL_NORMAL_CHOICE,370,30,130,30,"Graphics mode");
-  fl_set_object_callback (obj, mode_cb, 0);
-  fl_end_form ();
+  form = gnui_bgn_form(GNUI_NO_BOX, 720, 520);
+  obj = gnui_add_box(GNUI_UP_BOX, 0, 0, 720, 520, "");
+  gnui_set_object_color(obj, GNUI_BLUE, GNUI_COL1);
+  obj = gnui_add_box(GNUI_DOWN_BOX, 10, 90, 700, 420, "");
+  gnui_set_object_color(obj, GNUI_COL1, GNUI_COL1);
+  obj = gnui_add_box(GNUI_DOWN_BOX, 10, 10, 700, 70, "");
+  gnui_set_object_color(obj, GNUI_SLATEBLUE, GNUI_COL1);
+  tobj[0] = obj = gnui_add_box(GNUI_UP_BOX, 30, 110, 110, 110, "Box");
+  tobj[1] = obj = gnui_add_text(GNUI_NORMAL_TEXT, 30, 240, 110, 30, "Text");
+  tobj[2] = obj = gnui_add_bitmap(GNUI_NORMAL_BITMAP, 40, 280, 90, 80, "Bitmap");
+  gnui_set_object_lcol(obj, GNUI_BLUE);
+  tobj[3] = obj = gnui_add_chart(GNUI_BAR_CHART, 160, 110, 160, 110, "Chart");
+  tobj[4] = obj = gnui_add_clock(GNUI_ANALOG_CLOCK, 40, 390, 90, 90, "Clock");
+//gnui_set_object_dblbuffer(tobj[4],1); // removed for fltk
+  tobj[5]=obj=gnui_add_button(GNUI_NORMAL_BUTTON, 340, 110, 120, 30, "Button");
+  tobj[6]=obj=gnui_add_lightbutton(GNUI_PUSH_BUTTON,340,150,120,30,"Lightbutton");
+  tobj[7]=obj=gnui_add_roundbutton(GNUI_PUSH_BUTTON,340,190,120,30,"Roundbutton");
+  tobj[8]=obj=gnui_add_slider(GNUI_VERT_SLIDER, 160, 250, 40, 230, "Slider");
+  tobj[9]=obj=gnui_add_valslider(GNUI_VERT_SLIDER, 220, 250, 40, 230, "Valslider");
+  tobj[10]=obj=gnui_add_dial (GNUI_LINE_DIAL, 280, 250, 100, 100, "Dial");
+  tobj[11]=obj=gnui_add_positioner(GNUI_NORMAL_POSITIONER,280,380,150,100, "Positioner");
+  tobj[12]=obj=gnui_add_counter (GNUI_NORMAL_COUNTER,480,110,210,30, "Counter");
+  tobj[13]=obj=gnui_add_input (GNUI_NORMAL_INPUT, 520,170,170,30, "Input");
+  tobj[14]=obj=gnui_add_menu (GNUI_PUSH_MENU, 400, 240, 100, 30, "Menu");
+  tobj[15]=obj=gnui_add_choice (GNUI_NORMAL_CHOICE, 580, 250, 110, 30, "Choice");
+  tobj[16]=obj=gnui_add_timer (GNUI_VALUE_TIMER, 580, 210, 110, 30, "Timer");
+//gnui_set_object_dblbuffer(tobj[16], 1); // removed for fltk
+  tobj[17]=obj=gnui_add_browser (GNUI_NORMAL_BROWSER,450,300,240, 180, "Browser");
+  exitob=obj= gnui_add_button (GNUI_NORMAL_BUTTON, 590, 30, 100, 30, "Exit");
+  btypeob=obj= gnui_add_choice (GNUI_NORMAL_CHOICE,110,30, 130, 30, "Boxtype");
+  gnui_set_object_callback (obj, boxtype_cb, 0);
+  modeob = obj=gnui_add_choice(GNUI_NORMAL_CHOICE,370,30,130,30,"Graphics mode");
+  gnui_set_object_callback (obj, mode_cb, 0);
+  gnui_end_form ();
 }
 /*---------------------------------------*/
 
@@ -186,46 +186,46 @@ const char *browserlines[] = {
 int
 main (int argc, char *argv[])
 {
-  FL_COLOR c = 0;
+  GNUI_COLOR c = 0;
   const char **p;
   VN_struct *vn;
 
-  fl_initialize(&argc, argv, "FormDemo", 0, 0);
+  gnui_initialize(&argc, argv, "FormDemo", 0, 0);
   create_the_forms ();
-  fl_set_bitmap_data (tobj[2], sorceress_width, sorceress_height, sorceress_bits);
-  fl_add_chart_value (tobj[3], 15, "item 1", c++);
-  fl_add_chart_value (tobj[3], 5, "item 2", c++);
-  fl_add_chart_value (tobj[3], -10, "item 3", c++);
-  fl_add_chart_value (tobj[3], 25, "item 4", c++);
-  fl_set_menu (tobj[14], "item 1|item 2|item 3|item 4|item 5");
-  fl_addto_choice (tobj[15], "item 1");
-  fl_addto_choice (tobj[15], "item 2");
-  fl_addto_choice (tobj[15], "item 3");
-  fl_addto_choice (tobj[15], "item 4");
-  fl_addto_choice (tobj[15], "item 5");
-  fl_set_timer (tobj[16], 1000.0);
+  gnui_set_bitmap_data (tobj[2], sorceress_width, sorceress_height, sorceress_bits);
+  gnui_add_chart_value (tobj[3], 15, "item 1", c++);
+  gnui_add_chart_value (tobj[3], 5, "item 2", c++);
+  gnui_add_chart_value (tobj[3], -10, "item 3", c++);
+  gnui_add_chart_value (tobj[3], 25, "item 4", c++);
+  gnui_set_menu (tobj[14], "item 1|item 2|item 3|item 4|item 5");
+  gnui_addto_choice (tobj[15], "item 1");
+  gnui_addto_choice (tobj[15], "item 2");
+  gnui_addto_choice (tobj[15], "item 3");
+  gnui_addto_choice (tobj[15], "item 4");
+  gnui_addto_choice (tobj[15], "item 5");
+  gnui_set_timer (tobj[16], 1000.0);
 
   for ( p = browserlines; *p; p++)
-     fl_add_browser_line (tobj[17], *p);
+     gnui_add_browser_line (tobj[17], *p);
 
   for ( vn = btypes; vn->val; vn++)
-    fl_addto_choice(btypeob, vn->name);
+    gnui_addto_choice(btypeob, vn->name);
 
 //   {
 //     int i;
 //     VN_struct *g = gmode, *gs = g + sizeof (gmode) / sizeof (gmode[0]);
 //     for (i = 1; g < gs; g++, i++)
 //     {
-//       fl_addto_choice (modeob, g->name);
-//       if(!fl_mode_capable(g->val, 0))
-//         fl_set_choice_item_mode(modeob, i, FL_PUP_GRAY);
+//       gnui_addto_choice (modeob, g->name);
+//       if(!gnui_mode_capable(g->val, 0))
+//         gnui_set_choice_item_mode(modeob, i, GNUI_PUP_GRAY);
 //     }
 //   }
-//   fl_set_choice (modeob, fl_vmode+1);
+//   gnui_set_choice (modeob, gnui_vmode+1);
 
-  fl_show_form (form, FL_PLACE_MOUSE, border, "Box types");
+  gnui_show_form (form, GNUI_PLACE_MOUSE, border, "Box types");
 
-  while (fl_do_forms () != exitob)
+  while (gnui_do_forms () != exitob)
      ;
 
   return 0;

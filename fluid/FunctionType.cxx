@@ -948,8 +948,8 @@ void ClassType::write_code() {
     current_class = this;
     write_public_state = 0;
     if (prefix() && strlen(prefix())) {
-	if (strcmp(prefix(),"FL_EXPORT")==0) // convert it to FL_API
-	    prefix("FL_API");
+	if (strcmp(prefix(),"GNUI_EXPORT")==0) // convert it to GNUI_API
+	    prefix("GNUI_API");
 	write_h("\nclass %s %s ", prefix(), name());
     }
     else

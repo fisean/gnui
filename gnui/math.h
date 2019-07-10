@@ -26,8 +26,8 @@
 //    http://www.gnui.org/str.php
 //
 
-#ifndef fl_math_h
-#define fl_math_h
+#ifndef gnui_math_h
+#define gnui_math_h
 
 #include <math.h>
 

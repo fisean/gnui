@@ -72,7 +72,7 @@
 # endif
 
 # if !defined(GL_VERSION_1_4) || defined(DOXYGEN)
-FL_GL_API void glWindowPos2i(int x, int y);
+GNUI_GL_API void glWindowPos2i(int x, int y);
 # endif
 
 #endif
@@ -85,26 +85,26 @@ struct Font;
 /// \name gnui/gl.h
 //@{
 
-FL_GL_API void glstart();
-FL_GL_API void glfinish();
+GNUI_GL_API void glstart();
+GNUI_GL_API void glfinish();
 
-FL_GL_API void glsetcolor(Color);
+GNUI_GL_API void glsetcolor(Color);
 
-FL_GL_API void glstrokerect(int x,int y,int w,int h);
+GNUI_GL_API void glstrokerect(int x,int y,int w,int h);
 inline void glfillrect(int x,int y,int w,int h) {glRecti(x,y,x+w,y+h);}
 
-FL_GL_API void glsetfont(Font* f, float size);
-FL_GL_API float glgetascent();
-FL_GL_API float glgetdescent();
-FL_GL_API float glgetwidth(const char *);
-FL_GL_API float glgetwidth(const char *, int n);
+GNUI_GL_API void glsetfont(Font* f, float size);
+GNUI_GL_API float glgetascent();
+GNUI_GL_API float glgetdescent();
+GNUI_GL_API float glgetwidth(const char *);
+GNUI_GL_API float glgetwidth(const char *, int n);
 
-FL_GL_API void gldrawtext(const char*);
-FL_GL_API void gldrawtext(const char*, int n);
-FL_GL_API void gldrawtext(const char*, float x, float y, float z = 0);
-FL_GL_API void gldrawtext(const char*, int n, float x, float y, float z = 0);
+GNUI_GL_API void gldrawtext(const char*);
+GNUI_GL_API void gldrawtext(const char*, int n);
+GNUI_GL_API void gldrawtext(const char*, float x, float y, float z = 0);
+GNUI_GL_API void gldrawtext(const char*, int n, float x, float y, float z = 0);
 
-FL_GL_API void gldrawimage(const uchar *, int x,int y,int w,int h, int d=3, int ld=0);
+GNUI_GL_API void gldrawimage(const uchar *, int x,int y,int w,int h, int d=3, int ld=0);
 
 //@}
 

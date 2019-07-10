@@ -23,8 +23,8 @@ If you want this, edit config.h and set USE_X11_MULTITHREADING to 1.
 #include <unistd.h>
 #include <fcntl.h>
 
-extern void (*fl_lock_function)();
-extern void (*fl_unlock_function)();
+extern void (*gnui_lock_function)();
+extern void (*gnui_unlock_function)();
 static void init_function();
 static void (*init_or_lock_function)() = init_function;
 
@@ -44,14 +44,14 @@ static void init_function() {
   pipe(thread_filedes);
   fcntl(thread_filedes[0], F_SETFL, O_NONBLOCK);
   gnui::add_fd(thread_filedes[0], gnui::READ, thread_awake_cb);
-  fl_lock_function = init_or_lock_function = lock_function;
-  fl_unlock_function = unlock_function;
+  gnui_lock_function = init_or_lock_function = lock_function;
+  gnui_unlock_function = unlock_function;
   lock_function();
 }
 
 void gnui::lock() {init_or_lock_function();}
 
-void gnui::unlock() {fl_unlock_function();}
+void gnui::unlock() {gnui_unlock_function();}
 
 void gnui::awake(void* msg) {
   write(thread_filedes[1], &msg, sizeof(void*));

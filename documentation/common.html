@@ -21,7 +21,7 @@ button-&gt;callback(xyz_callback, data);
 </PRE>
  Normally callbacks are performed only when the value of the widget 
 changes. You can change this using the <A
-href=Fl_Widget.html#when><TT>when()</TT></A> method:
+href=GNUI_Widget.html#when><TT>when()</TT></A> method:
 <PRE>
 button-&gt;when(fltk::WHEN_NEVER);
 button-&gt;when(fltk::WHEN_CHANGED);
@@ -54,7 +54,7 @@ fltk::LightButton *lbutton = new fltk::LightButton(x, y, width, height);
 fltk::RoundButton *rbutton = new fltk::RoundButton(x, y, width, height, &quot;label&quot;);
 </PRE>
 Each button has an associated <A
-href=Fl_Button.html#type><TT>type()</TT></A> which allows it to behave
+href=GNUI_Button.html#type><TT>type()</TT></A> which allows it to behave
 as a push button, toggle button, or radio button. This type is
 defaulted for each button type but you can change it.
 <PRE>
@@ -64,14 +64,14 @@ button-&gt;type(fltk::RADIO_BUTTON); // default for fltk::Radio_Button
 </PRE>
 
 The <a
-href=Fl_Button.html#value><tt>value()</tt></a> method
+href=GNUI_Button.html#value><tt>value()</tt></a> method
 returns the current button state (0 = off, 1 = on) (push buttons are
 on while they are held down).  The <a
-href=Fl_Button.html#set><tt>set()</tt></a> and <a
-href=Fl_Button.html#clear><tt>clear()</tt></a> methods can be used on
+href=GNUI_Button.html#set><tt>set()</tt></a> and <a
+href=GNUI_Button.html#clear><tt>clear()</tt></a> methods can be used on
 toggle buttons to turn a toggle button on or off, respectively.  Radio
 buttons can be turned on with the <a
-href=Fl_Button.html#setonly><tt>setonly()</tt></a> method; this will also
+href=GNUI_Button.html#setonly><tt>setonly()</tt></a> method; this will also
 turn off other radio buttons in the same group.
 
 <h2><a name=text>Text</a></h2>
@@ -87,7 +87,7 @@ field. </LI>
 </UL>
  The <TT>fltk::Output</TT> and <TT>fltk::MultilineOutput</TT> widgets allow 
 the user to copy text from the output field but not change it. 
-<P>The <A href=Fl_Input.html#value><TT>value()</TT></A> method 
+<P>The <A href=GNUI_Input.html#value><TT>value()</TT></A> method 
 is used to get or set the string that is displayed: </P>
 <PRE>
 fltk::Input *input = new fltk::Input(x, y, width, height, &quot;label&quot;);
@@ -110,9 +110,9 @@ arrow buttons (MicroSoft calls this a "spin box")</LI>
 <LI><TT>fltk::Scrollbar</TT> - A standard scrollbar widget. </LI>
 </UL>
 <P ALIGN=CENTER><IMG SRC="valuators.gif"></P>
-The <A href=Fl_Valuator.html#value><TT>value()</TT></A>
- method gets and sets the current value of the widget.  The <A href=Fl_Valuator.html#minimum>
-<TT>minimum()</TT></A> and <A href=Fl_Valuator.html#maximum><TT>
+The <A href=GNUI_Valuator.html#value><TT>value()</TT></A>
+ method gets and sets the current value of the widget.  The <A href=GNUI_Valuator.html#minimum>
+<TT>minimum()</TT></A> and <A href=GNUI_Valuator.html#maximum><TT>
 maximum()</TT></A> methods set the range of values that are reported by 
 the widget. 
 
@@ -149,7 +149,7 @@ will have to call <tt>redraw()</tt> on the widget's parent.
 
 <h2><a name=colors_common>Colors</a></h2>
 
-The typedef <a href=Fl_Color.html>fltk::Color</a> is a 32-bit number that
+The typedef <a href=GNUI_Color.html>fltk::Color</a> is a 32-bit number that
 is used to store a color.  For most widgets only the "indexed" colors
 are used, these are colors with a value less than 256 that is an index
 into a color palette of 256 colors. This is <i>not</i> the X or WIN32
@@ -170,7 +170,7 @@ colormap, but instead is an internal table with fixed contents.
 </UL>
 
 <p>You can also get an arbitrary color with <a
-href=Fl_Color.html#rgb>fltk::rgb(r,g,b)</a>.  However this does not
+href=GNUI_Color.html#rgb>fltk::rgb(r,g,b)</a>.  However this does not
 work that well on 8-bit screens.
 
  The widget color can be set using the <TT>color()</TT> method: 
@@ -186,8 +186,8 @@ button-&gt;labelcolor(fltk::WHITE);
 
 <h2><a name=boxtypes>Box Types</a></h2>
 
-<P><A href=Fl_Widget.html#box><TT>fltk::Widget::box()</TT></A>
-is a pointer to a struct <a href=Fl_Boxtype.html>fltk::Box_</a>.  This
+<P><A href=GNUI_Widget.html#box><TT>fltk::Widget::box()</TT></A>
+is a pointer to a struct <a href=GNUI_Boxtype.html>fltk::Box_</a>.  This
 describes how to draw the box around the widget.  By making your own
 you can cause arbitrary drawing code to be called.
 
@@ -215,15 +215,15 @@ string contains the actual symbol or image data.
 
 The <tt>image()</tt> method sets an image that is drawn with the
 label.  The value is a pointer to a class <a
-href=Fl_Image.html>fltk::Image</a>.  This class stores the data of the
+href=GNUI_Image.html>fltk::Image</a>.  This class stores the data of the
 image and also stores a window-system cached copy that is created when
 the image is first drawn so that redrawing it is very fast.
 
 <p>Different subclasses draw different types of images.  The provided
 types include
-<a href=Fl_Bitmap.html><tt>fltk::Bitmap</tt></a>,
-<a href=Fl_Pixmap.html><tt>fltk::Pixmap</tt></a>,
-<a href=Fl_RGB_Image.html><tt>fltk::RGB_Image</tt></a>.
+<a href=GNUI_Bitmap.html><tt>fltk::Bitmap</tt></a>,
+<a href=GNUI_Pixmap.html><tt>fltk::Pixmap</tt></a>,
+<a href=GNUI_RGB_Image.html><tt>fltk::RGB_Image</tt></a>.
 
 <H3>align()</H3>
  The <TT>align()</TT> method positions the label.  The following 
@@ -266,8 +266,8 @@ raised </LI>
 </UL>
 
 <P><A
-href=Fl_Widget.html#label_type><TT>fltk::Widget::label_type()</TT></A>
-is a pointer to a struct <a href=Fl_Labeltype.html>fltk::Labeltype_</a>.
+href=GNUI_Widget.html#label_type><TT>fltk::Widget::label_type()</TT></A>
+is a pointer to a struct <a href=GNUI_Labeltype.html>fltk::Labeltype_</a>.
 By making your own you can cause arbitrary drawing code to be called.
 
 <H4><A name=symbols>Symbol Labels</A></H4>

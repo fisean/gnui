@@ -30,7 +30,7 @@
 #ifndef gnui_Color_h
 #define gnui_Color_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 #include "Flags.h"
 
 namespace gnui {
@@ -108,17 +108,17 @@ inline Color color(unsigned char r, unsigned char g, unsigned char b) {
   return Color((r<<24)+(g<<16)+(b<<8)); }
 inline Color color(unsigned char g) {
   return Color(g*0x1010100u); }
-FL_API Color color(const char*);
-FL_API Color parsecolor(const char*, unsigned length);
-FL_API Color lerp(Color c0, Color c1, float f);
-FL_API Color inactive(Color fg);
-FL_API Color inactive(Color fg, Color bg);
-FL_API Color contrast(Color fg, Color bg);
-FL_API void split_color(Color c, unsigned char& r, unsigned char& g, unsigned char& b);
-FL_API void set_color_index(Color index, Color);
-FL_API Color get_color_index(Color index);
-FL_API void set_background(Color);
-FL_API Color nearest_index(Color);
+GNUI_API Color color(const char*);
+GNUI_API Color parsecolor(const char*, unsigned length);
+GNUI_API Color lerp(Color c0, Color c1, float f);
+GNUI_API Color inactive(Color fg);
+GNUI_API Color inactive(Color fg, Color bg);
+GNUI_API Color contrast(Color fg, Color bg);
+GNUI_API void split_color(Color c, unsigned char& r, unsigned char& g, unsigned char& b);
+GNUI_API void set_color_index(Color index, Color);
+GNUI_API Color get_color_index(Color index);
+GNUI_API void set_background(Color);
+GNUI_API Color nearest_index(Color);
 
 }
 

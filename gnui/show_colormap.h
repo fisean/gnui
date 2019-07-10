@@ -24,11 +24,11 @@
 #ifndef gnui_show_colormap_h
 #define gnui_show_colormap_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 #include "Color.h"
 
 namespace gnui {
-FL_API Color show_colormap(Color oldcol);
+GNUI_API Color show_colormap(Color oldcol);
 }
 
 #endif

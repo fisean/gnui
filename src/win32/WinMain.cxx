@@ -3,7 +3,7 @@
  *
  * Copyright 1998-2006 by Bill Spitzak and others.
  *
- * fl_call_main() calls main() for you Windows people.  Needs to be done in C
+ * gnui_call_main() calls main() for you Windows people.  Needs to be done in C
  * because Borland C++ won't let you call main() from C++.
  *
  * This library is free software; you can redistribute it and/or
@@ -47,7 +47,7 @@
  * Microsoft(r) Windows(r) that allows for it.
  */
 
-#if defined(_WIN32) && !defined(FL_LIBRARY) && !defined (__GNUC__) 
+#if defined(_WIN32) && !defined(GNUI_LIBRARY) && !defined (__GNUC__) 
 
 #include <windows.h>
 #include <stdio.h>
@@ -89,7 +89,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
   return main(__argc, __argv);
 }
 
-#endif /* _WIN32 && !FL_LIBRARY && !__GNUC__ */
+#endif /* _WIN32 && !GNUI_LIBRARY && !__GNUC__ */
 
 /*
  * End of "$Id$".

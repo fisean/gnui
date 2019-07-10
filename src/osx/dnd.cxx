@@ -24,7 +24,7 @@
 //
 //    http://www.gnui.org/str.php
 
-// The Mac version of gnui::dnd() is in Fl_mac.cxx
+// The Mac version of gnui::dnd() is in GNUI_mac.cxx
 
 //
 //

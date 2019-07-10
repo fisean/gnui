@@ -43,7 +43,7 @@
 
 namespace gnui  {
 
-class FL_API FileChooser  {
+class GNUI_API FileChooser  {
 private:
   static gnui::Preferences prefs_;
   void (*callback_)(FileChooser*, void *);

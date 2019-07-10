@@ -169,24 +169,24 @@ static FluidType *FluidType_make(const char *tn, gnui::ItemGroup * menu) {
 static struct {const char* oldname; const char* newname;} ntable[] = {
   {"submenu",		"gnui::ItemGroup"},
   {"menuitem",		"gnui::Item"},
-  {"Fl_Counter",	"gnui::ValueInput"},
-  {"Fl_Spinner",	"gnui::ValueInput"},
-  {"Fl_Tabs",		"gnui::TabGroup"},
-  {"Fl_Return_Button",	"gnui::ReturnButton"},
+  {"GNUI_Counter",	"gnui::ValueInput"},
+  {"GNUI_Spinner",	"gnui::ValueInput"},
+  {"GNUI_Tabs",		"gnui::TabGroup"},
+  {"GNUI_Return_Button",	"gnui::ReturnButton"},
   {"gnui::EnterButton",	"gnui::ReturnButton"},
-  {"Fl_Menu_Button",	"gnui::PopupMenu"},
-  {"Fl_Box",		"gnui::InvisibleBox"},
-  {"Fl_Boxtype",	"gnui::InvisibleBoxType"},
-  {"Fl_Round_Button",	"gnui::RadioButton"},
-  {"Fl_Pack",		"gnui::PackedGroup"},
-  {"Fl_Tabs",		"gnui::TabGroup"},
-  {"Fl_Scroll",		"gnui::ScrollGroup"},
-  {"Fl_Bar",		"gnui::BarGroup"},
-  {"Fl_Roller",		"gnui::ThumbWheel"},
-  {"Fl_File_Browser",	"gnui::FileBrowser"},
-  {"Fl_Text_Display",	"gnui::TextDisplay"},
-  {"Fl_Text_Editor",	"gnui::TextEditor"},
-  {"Fl_Tile",		"gnui::TiledGroup"}
+  {"GNUI_Menu_Button",	"gnui::PopupMenu"},
+  {"GNUI_Box",		"gnui::InvisibleBox"},
+  {"GNUI_Boxtype",	"gnui::InvisibleBoxType"},
+  {"GNUI_Round_Button",	"gnui::RadioButton"},
+  {"GNUI_Pack",		"gnui::PackedGroup"},
+  {"GNUI_Tabs",		"gnui::TabGroup"},
+  {"GNUI_Scroll",		"gnui::ScrollGroup"},
+  {"GNUI_Bar",		"gnui::BarGroup"},
+  {"GNUI_Roller",		"gnui::ThumbWheel"},
+  {"GNUI_File_Browser",	"gnui::FileBrowser"},
+  {"GNUI_Text_Display",	"gnui::TextDisplay"},
+  {"GNUI_Text_Editor",	"gnui::TextEditor"},
+  {"GNUI_Tile",		"gnui::TiledGroup"}
 };
 
 // Create a new type by name.
@@ -199,7 +199,7 @@ FluidType* FluidType::make(const char *tn) {
   }
   char buffer[128];
   // Now try cooking old names into new ones:
-  if (!p && !strncmp(tn, "Fl_", 3)) {
+  if (!p && !strncmp(tn, "GNUI_", 3)) {
     p = buffer;
     strcpy(buffer, "gnui::");
     char* q = buffer+6;
@@ -276,16 +276,16 @@ static symbol table[] = {
   {"ALIGN_TOP_RIGHT",	 gnui::ALIGN_TOP | gnui::ALIGN_RIGHT},
   {"ALIGN_BOTTOM_LEFT",	 gnui::ALIGN_BOTTOM | gnui::ALIGN_LEFT},
   {"ALIGN_BOTTOM_RIGHT", gnui::ALIGN_BOTTOM | gnui::ALIGN_RIGHT},
-  {"ALIGN_CENTER|FL_ALIGN_INSIDE",	gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE},
-  {"ALIGN_TOP|FL_ALIGN_INSIDE",		gnui::ALIGN_TOP|gnui::ALIGN_INSIDE},
-  {"ALIGN_BOTTOM|FL_ALIGN_INSIDE",	gnui::ALIGN_BOTTOM|gnui::ALIGN_INSIDE},
-  {"ALIGN_LEFT|FL_ALIGN_INSIDE",	gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
-  {"ALIGN_RIGHT|FL_ALIGN_INSIDE",	gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
-  {"ALIGN_INSIDE|FL_ALIGN_INSIDE",	gnui::ALIGN_INSIDE|gnui::ALIGN_INSIDE},
-  {"ALIGN_TOP_LEFT|FL_ALIGN_INSIDE",	gnui::ALIGN_TOP|gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
-  {"ALIGN_TOP_RIGHT|FL_ALIGN_INSIDE",	gnui::ALIGN_TOP|gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
-  {"ALIGN_BOTTOM_LEFT|FL_ALIGN_INSIDE",	gnui::ALIGN_BOTTOM|gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
-  {"ALIGN_BOTTOM_RIGHT|FL_ALIGN_INSIDE",gnui::ALIGN_BOTTOM|gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
+  {"ALIGN_CENTER|GNUI_ALIGN_INSIDE",	gnui::ALIGN_CENTER|gnui::ALIGN_INSIDE},
+  {"ALIGN_TOP|GNUI_ALIGN_INSIDE",		gnui::ALIGN_TOP|gnui::ALIGN_INSIDE},
+  {"ALIGN_BOTTOM|GNUI_ALIGN_INSIDE",	gnui::ALIGN_BOTTOM|gnui::ALIGN_INSIDE},
+  {"ALIGN_LEFT|GNUI_ALIGN_INSIDE",	gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
+  {"ALIGN_RIGHT|GNUI_ALIGN_INSIDE",	gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
+  {"ALIGN_INSIDE|GNUI_ALIGN_INSIDE",	gnui::ALIGN_INSIDE|gnui::ALIGN_INSIDE},
+  {"ALIGN_TOP_LEFT|GNUI_ALIGN_INSIDE",	gnui::ALIGN_TOP|gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
+  {"ALIGN_TOP_RIGHT|GNUI_ALIGN_INSIDE",	gnui::ALIGN_TOP|gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
+  {"ALIGN_BOTTOM_LEFT|GNUI_ALIGN_INSIDE",	gnui::ALIGN_BOTTOM|gnui::ALIGN_LEFT|gnui::ALIGN_INSIDE},
+  {"ALIGN_BOTTOM_RIGHT|GNUI_ALIGN_INSIDE",gnui::ALIGN_BOTTOM|gnui::ALIGN_RIGHT|gnui::ALIGN_INSIDE},
 
   {"ALIGN_LEFT_TOP",	 gnui::ALIGN_TOP | gnui::ALIGN_LEFT},
   {"ALIGN_RIGHT_TOP",	 gnui::ALIGN_TOP | gnui::ALIGN_RIGHT},

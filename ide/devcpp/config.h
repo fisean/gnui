@@ -32,7 +32,7 @@
 /*
  * BORDER_WIDTH:
  *
- * Thickness of FL_UP_BOX and FL_DOWN_BOX.  Current 1,2, and 3 are
+ * Thickness of GNUI_UP_BOX and GNUI_DOWN_BOX.  Current 1,2, and 3 are
  * supported.
  *
  * 3 is the historic FLTK look.
@@ -58,7 +58,7 @@
  * USE_COLORMAP:
  *
  * Setting this to zero will save a good deal of code (especially for
- * fl_draw_image), but FLTK will only work on TrueColor visuals.
+ * gnui_draw_image), but FLTK will only work on TrueColor visuals.
  */
 
 #define USE_COLORMAP 0
@@ -84,7 +84,7 @@
  * HAVE_OVERLAY:
  *
  * Use the X overlay extension?  FLTK will try to use an overlay
- * visual for Fl_Overlay_Window, the Gl_Window overlay, and for the
+ * visual for GNUI_Overlay_Window, the Gl_Window overlay, and for the
  * menus.  Setting this to zero will remove a substantial amount of
  * code from FLTK.  Overlays have only been tested on SGI servers!
  */
@@ -111,7 +111,7 @@
 /*
  * U16, U32, U64:
  *
- * Types used by fl_draw_image.  One of U32 or U64 must be defined.
+ * Types used by gnui_draw_image.  One of U32 or U64 must be defined.
  * U16 is optional but FLTK will work better with it!
  */
 
@@ -122,7 +122,7 @@
 /*
  * HAVE_DIRENT_H, HAVE_SYS_NDIR_H, HAVE_SYS_DIR_H, HAVE_NDIR_H, HAVE_SCANDIR:
  *
- * Where is <dirent.h> (used only by fl_file_chooser and scandir).
+ * Where is <dirent.h> (used only by gnui_file_chooser and scandir).
  */
 
 #define HAVE_DIRENT_H 1
@@ -137,8 +137,8 @@
 #	define HAVE_SNPRINTF 1
 #	define HAVE_VSPRINTF 1
 #	include <stdio.h>
-#	define fl_snprintf _snprintf
-#	define fl_vsnprintf _vsnprintf
+#	define gnui_snprintf _snprintf
+#	define gnui_vsnprintf _vsnprintf
 #	define snprintf _snprintf
 #	define vsnprintf _vsnprintf
 #else
@@ -159,8 +159,8 @@ extern int vsnprintf(char* str, size_t size, const char* fmt, va_list ap);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
-#define fl_snprintf snprintf
-#define fl_vsnprintf vsnprintf
+#define gnui_snprintf snprintf
+#define gnui_vsnprintf vsnprintf
 
 #endif
 

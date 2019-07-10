@@ -35,7 +35,7 @@
 
 namespace gnui {
 
-class FL_API xpmImage : public Image {
+class GNUI_API xpmImage : public Image {
 public:
   const char * const * data;
   // XPM files define the data all kinds of ways, so the constructor

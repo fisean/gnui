@@ -1,5 +1,5 @@
-#ifndef FL_gl_H
-#define FL_gl_H
+#ifndef GNUI_gl_H
+#define GNUI_gl_H
 
 #include <gnui/gl.h>
 
@@ -16,4 +16,4 @@ inline float gl_height() {return gnui::glgetascent()+gnui::glgetdescent();}
 //void gl_measure(const char*, int& x, int& y);
 #define gl_draw_image	gnui::gldrawimage
 
-#endif // !FL_gl_H
+#endif // !GNUI_gl_H

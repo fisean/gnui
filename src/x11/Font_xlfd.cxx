@@ -66,8 +66,8 @@ const char* gnui::Font::system_name() {
 static FontSize *current;
 static GC font_gc; // which gc the font was set in last time
 
-FL_API unsigned fl_font_opengl_id() {return current->opengl_id;}
-FL_API void fl_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
+GNUI_API unsigned gnui_font_opengl_id() {return current->opengl_id;}
+GNUI_API void gnui_set_font_opengl_id(unsigned v) {current->opengl_id = v;}
 
 /*! Returns the operating-system dependent structure defining the
   current font. You must include <gnui/x.h> to use this. */

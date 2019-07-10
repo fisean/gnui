@@ -32,7 +32,7 @@ namespace gnui {
 
 /*! Dial but the constructor sets type() to LINE, so it draws a
   pointer rather than a dot. */
-class FL_API LineDial : public Dial {
+class GNUI_API LineDial : public Dial {
 public:
   LineDial(int x,int y,int w,int h, const char *l = 0) :
     Dial(x,y,w,h,l) {type(LINE);}

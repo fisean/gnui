@@ -44,7 +44,7 @@ Function {} {open
           xywh {130 58 100 22}
         }
         {fltk::Button} {} {
-          label {This is stuff inside the Fl_Group "tab2"}
+          label {This is stuff inside the GNUI_Group "tab2"}
           xywh {20 113 260 22}
         }
       }

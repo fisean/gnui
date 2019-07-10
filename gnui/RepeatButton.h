@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API RepeatButton : public Button {
+class GNUI_API RepeatButton : public Button {
   static void repeat_callback(void *);
 public:
   int handle(int);

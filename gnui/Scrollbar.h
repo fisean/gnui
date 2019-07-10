@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API Scrollbar : public Slider {
+class GNUI_API Scrollbar : public Slider {
 
 public:
   Scrollbar(int x,int y,int w,int h, const char *l = 0);

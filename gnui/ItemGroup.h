@@ -35,7 +35,7 @@
 
 namespace gnui {
 
-class FL_API ItemGroup : public Menu {
+class GNUI_API ItemGroup : public Menu {
 public:
   void draw();
   void layout();
@@ -57,7 +57,7 @@ public:
   } // destructor ends the submenu
   \endcode
 */
-class FL_API MenuSection {
+class GNUI_API MenuSection {
   ItemGroup* group_;
 public:
   //! build a typical submenu group section, then call begin()

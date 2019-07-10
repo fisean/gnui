@@ -37,9 +37,9 @@
 
 #define MAX_RGB 3000
 
-static FL_FORM *cl;
-static Fl_Widget *rescol, *dbobj, *colbr, *rs, *gs, *bs;
-char dbname[FL_PATH_MAX];
+static GNUI_FORM *cl;
+static GNUI_Widget *rescol, *dbobj, *colbr, *rs, *gs, *bs;
+char dbname[GNUI_PATH_MAX];
 static void create_form_cl(void);
 static int load_browser(char *);
 
@@ -68,26 +68,26 @@ int
 main(int argc, char *argv[])
 {
 
-    fl_initialize(&argc, argv, "FormDemo", 0, 0);
+    gnui_initialize(&argc, argv, "FormDemo", 0, 0);
 
     create_form_cl();
     strcpy(dbname, rgbfile);
 
     if (load_browser(dbname))
-	fl_set_object_label(dbobj, dbname);
+	gnui_set_object_label(dbobj, dbname);
     else
-	fl_set_object_label(dbobj, "None");
+	gnui_set_object_label(dbobj, "None");
 
-//    fl_set_form_minsize(cl, cl->w , cl->h); // removed for fltk
-//    fl_set_form_maxsize(cl, 2*cl->w , 2*cl->h); // removed for fltk
+//    gnui_set_form_minsize(cl, cl->w , cl->h); // removed for fltk
+//    gnui_set_form_maxsize(cl, 2*cl->w , 2*cl->h); // removed for fltk
     cl->size_range(cl->w(),cl->h(),2*cl->w(),2*cl->h()); // added for fltk
-    // border changed from FL_TRANSIENT for fltk:
+    // border changed from GNUI_TRANSIENT for fltk:
     // This is so Esc & the close box will close the window.
     // (on transient windows attempting to close it just calls the callback)
-    fl_show_form(cl, FL_PLACE_FREE, 1/*FL_TRANSIENT*/, "RGB Browser");
+    gnui_show_form(cl, GNUI_PLACE_FREE, 1/*GNUI_TRANSIENT*/, "RGB Browser");
 
 
-    while (fl_do_forms())
+    while (gnui_do_forms())
 	;
     return 0;
 }
@@ -97,21 +97,21 @@ set_entry(int i)
 {
     RGBdb *db = rgbdb + i;
 
-    fl_freeze_form(cl);
+    gnui_freeze_form(cl);
 // unclear why demo is doing this.  This messes up FL:
-//    fl_mapcolor(FL_FREE_COL4+i, db->r, db->g, db->b);
-    fl_mapcolor(FL_FREE_COL4, db->r, db->g, db->b);
-    fl_set_slider_value(rs, db->r);
-    fl_set_slider_value(gs, db->g);
-    fl_set_slider_value(bs, db->b);
-    fl_redraw_object(rescol);
-    fl_unfreeze_form(cl);
+//    gnui_mapcolor(GNUI_FREE_COL4+i, db->r, db->g, db->b);
+    gnui_mapcolor(GNUI_FREE_COL4, db->r, db->g, db->b);
+    gnui_set_slider_value(rs, db->r);
+    gnui_set_slider_value(gs, db->g);
+    gnui_set_slider_value(bs, db->b);
+    gnui_redraw_object(rescol);
+    gnui_unfreeze_form(cl);
 }
 
 static void
-br_cb(Fl_Widget * ob, long)
+br_cb(GNUI_Widget * ob, long)
 {
-    int r = fl_get_browser(ob);
+    int r = gnui_get_browser(ob);
 
     if (r <= 0)
 	return;
@@ -161,13 +161,13 @@ load_browser(char *fname)
     if (!(fp = fopen(fname, "r")))
 #endif
     {
-	fl_show_alert("Load", fname, "Can't open", 0);
+	gnui_show_alert("Load", fname, "Can't open", 0);
 	return 0;
     }
 
     /* read the items */
 
-    fl_freeze_form(cl);
+    gnui_freeze_form(cl);
 
     for (; db < dbs && read_entry(fp, &r, &g, &b, name);)
     {
@@ -183,7 +183,7 @@ load_browser(char *fname)
 	    lg = g;
 	    lb = b;
 	    sprintf(buf, "(%3d %3d %3d) %s", r, g, b, name);
-	    fl_addto_browser(colbr, buf);
+	    gnui_addto_browser(colbr, buf);
 	}
     }
     fclose(fp);
@@ -196,10 +196,10 @@ load_browser(char *fname)
 	db->r = 1000;
     }
 
-    fl_set_browser_topline(colbr, 1);
-    fl_select_browser_line(colbr, 1);
+    gnui_set_browser_topline(colbr, 1);
+    gnui_select_browser_line(colbr, 1);
     set_entry(0);
-    fl_unfreeze_form(cl);
+    gnui_unfreeze_form(cl);
     return 1;
 }
 
@@ -217,10 +217,10 @@ search_entry(int r, int g, int b)
        diffg = g - db->g;
        diffb = b - db->b;
 
-#ifdef FL_LINEAR
-	diff = unsigned(3.0 * (FL_abs(r - db->r)) +
-			(5.9 * FL_abs(g - db->g)) +
-			(1.1 * (FL_abs(b - db->b)));
+#ifdef GNUI_LINEAR
+	diff = unsigned(3.0 * (GNUI_abs(r - db->r)) +
+			(5.9 * GNUI_abs(g - db->g)) +
+			(1.1 * (GNUI_abs(b - db->b)));
 #else
         diff = unsigned(3.0 * (diffr *diffr) +
 			5.9 * (diffg *diffg) +
@@ -238,31 +238,31 @@ search_entry(int r, int g, int b)
 }
 
 static void
-search_rgb(Fl_Widget *, long)
+search_rgb(GNUI_Widget *, long)
 {
     int r, g, b, i;
-    int top  = fl_get_browser_topline(colbr);
+    int top  = gnui_get_browser_topline(colbr);
 
-    r = int(fl_get_slider_value(rs));
-    g = int(fl_get_slider_value(gs));
-    b = int(fl_get_slider_value(bs));
+    r = int(gnui_get_slider_value(rs));
+    g = int(gnui_get_slider_value(gs));
+    b = int(gnui_get_slider_value(bs));
 
-    fl_freeze_form(cl);
-    fl_mapcolor(FL_FREE_COL4, r, g, b);
-    fl_redraw_object(rescol);
+    gnui_freeze_form(cl);
+    gnui_mapcolor(GNUI_FREE_COL4, r, g, b);
+    gnui_redraw_object(rescol);
     i = search_entry(r, g, b);
     /* change topline only if necessary */
     if(i < top || i > (top+15))
-       fl_set_browser_topline(colbr, i-8);
-    fl_select_browser_line(colbr, i + 1);
-    fl_unfreeze_form(cl);
+       gnui_set_browser_topline(colbr, i-8);
+    gnui_select_browser_line(colbr, i + 1);
+    gnui_unfreeze_form(cl);
 }
 
 /* change database */
 static void
-db_cb(Fl_Widget * ob, long)
+db_cb(GNUI_Widget * ob, long)
 {
-    const char *p = fl_show_input("Enter New Database Name", dbname);
+    const char *p = gnui_show_input("Enter New Database Name", dbname);
     char buf[512];
 
     if (!p || strcmp(p, dbname) == 0)
@@ -272,11 +272,11 @@ db_cb(Fl_Widget * ob, long)
     if (load_browser(buf))
 	strcpy(dbname, buf);
     else
-	fl_set_object_label(ob, dbname);
+	gnui_set_object_label(ob, dbname);
 }
 
 static void
-done_cb(Fl_Widget *, long)
+done_cb(GNUI_Widget *, long)
 {
     exit(0);
 }
@@ -284,62 +284,62 @@ done_cb(Fl_Widget *, long)
 static void
 create_form_cl(void)
 {
-    Fl_Widget *obj;
+    GNUI_Widget *obj;
 
     if (cl)
 	return;
 
-    cl = fl_bgn_form(FL_NO_BOX, 330, 385);
-    obj = fl_add_box(FL_UP_BOX, 0, 0, 330, 385, "");
-    fl_set_object_color(obj, FL_INDIANRED, FL_COL1);
+    cl = gnui_bgn_form(GNUI_NO_BOX, 330, 385);
+    obj = gnui_add_box(GNUI_UP_BOX, 0, 0, 330, 385, "");
+    gnui_set_object_color(obj, GNUI_INDIANRED, GNUI_COL1);
 
-    obj = fl_add_box(FL_NO_BOX, 40, 10, 250, 30, "Color Browser");
-    fl_set_object_lcol(obj, FL_RED);
-    fl_set_object_lsize(obj, FL_HUGE_SIZE);
-    fl_set_object_lstyle(obj, FL_BOLD_STYLE + FL_SHADOW_STYLE);
+    obj = gnui_add_box(GNUI_NO_BOX, 40, 10, 250, 30, "Color Browser");
+    gnui_set_object_lcol(obj, GNUI_RED);
+    gnui_set_object_lsize(obj, GNUI_HUGE_SIZE);
+    gnui_set_object_lstyle(obj, GNUI_BOLD_STYLE + GNUI_SHADOW_STYLE);
 
-    dbobj = obj = fl_add_button(FL_NORMAL_BUTTON, 40, 50, 250, 25, "");
-    fl_set_object_boxtype(obj, FL_BORDER_BOX);
-    fl_set_object_color(obj, /*fl_get_visual_depth()==1 ? FL_WHITE:*/ FL_INDIANRED,
-                        FL_INDIANRED);
-    fl_set_object_callback(obj, db_cb, 0);
-    rs = obj = fl_add_valslider(FL_VERT_FILL_SLIDER, 225, 130, 30, 200, "");
-    fl_set_object_color(obj, FL_INDIANRED, FL_RED);
-    fl_set_slider_bounds(obj, 0, 255);
-    fl_set_slider_precision(obj, 0);
-    fl_set_object_callback(obj, search_rgb, 0);
-    fl_set_slider_return(obj, 0);
+    dbobj = obj = gnui_add_button(GNUI_NORMAL_BUTTON, 40, 50, 250, 25, "");
+    gnui_set_object_boxtype(obj, GNUI_BORDER_BOX);
+    gnui_set_object_color(obj, /*gnui_get_visual_depth()==1 ? GNUI_WHITE:*/ GNUI_INDIANRED,
+                        GNUI_INDIANRED);
+    gnui_set_object_callback(obj, db_cb, 0);
+    rs = obj = gnui_add_valslider(GNUI_VERT_FILL_SLIDER, 225, 130, 30, 200, "");
+    gnui_set_object_color(obj, GNUI_INDIANRED, GNUI_RED);
+    gnui_set_slider_bounds(obj, 0, 255);
+    gnui_set_slider_precision(obj, 0);
+    gnui_set_object_callback(obj, search_rgb, 0);
+    gnui_set_slider_return(obj, 0);
 
-    gs = obj = fl_add_valslider(FL_VERT_FILL_SLIDER, 255, 130, 30, 200, "");
-    fl_set_object_color(obj, FL_INDIANRED, FL_GREEN);
-    fl_set_slider_bounds(obj, 0, 255);
-    fl_set_slider_precision(obj, 0);
-    fl_set_object_callback(obj, search_rgb, 1);
-    fl_set_slider_return(obj, 0);
+    gs = obj = gnui_add_valslider(GNUI_VERT_FILL_SLIDER, 255, 130, 30, 200, "");
+    gnui_set_object_color(obj, GNUI_INDIANRED, GNUI_GREEN);
+    gnui_set_slider_bounds(obj, 0, 255);
+    gnui_set_slider_precision(obj, 0);
+    gnui_set_object_callback(obj, search_rgb, 1);
+    gnui_set_slider_return(obj, 0);
 
-    bs = obj = fl_add_valslider(FL_VERT_FILL_SLIDER, 285, 130, 30, 200, "");
-    fl_set_object_color(obj, FL_INDIANRED, FL_BLUE);
-    fl_set_slider_bounds(obj, 0, 255);
-    fl_set_slider_precision(obj, 0);
-    fl_set_object_callback(obj, search_rgb, 2);
-    fl_set_slider_return(obj, 0);
-
-
-    colbr = obj = fl_add_browser(FL_HOLD_BROWSER, 10, 90, 205, 240, "");
-    fl_set_browser_fontstyle(obj, FL_FIXED_STYLE); 
-    fl_set_object_callback(obj, br_cb, 0);
+    bs = obj = gnui_add_valslider(GNUI_VERT_FILL_SLIDER, 285, 130, 30, 200, "");
+    gnui_set_object_color(obj, GNUI_INDIANRED, GNUI_BLUE);
+    gnui_set_slider_bounds(obj, 0, 255);
+    gnui_set_slider_precision(obj, 0);
+    gnui_set_object_callback(obj, search_rgb, 2);
+    gnui_set_slider_return(obj, 0);
 
 
-    obj = fl_add_button(FL_NORMAL_BUTTON, 135, 345, 80, 30, "Done");
-    fl_set_object_callback(obj, done_cb, 0);
-
-    rescol = obj = fl_add_box(FL_FLAT_BOX, 225, 90, 90, 35, "");
-    fl_set_object_color(obj, FL_FREE_COL4, FL_FREE_COL4);
-    fl_set_object_boxtype(obj, FL_BORDER_BOX);
+    colbr = obj = gnui_add_browser(GNUI_HOLD_BROWSER, 10, 90, 205, 240, "");
+    gnui_set_browser_fontstyle(obj, GNUI_FIXED_STYLE); 
+    gnui_set_object_callback(obj, br_cb, 0);
 
 
-    fl_end_form();
-    fl_scale_form(cl, 1.1, 1.0);
+    obj = gnui_add_button(GNUI_NORMAL_BUTTON, 135, 345, 80, 30, "Done");
+    gnui_set_object_callback(obj, done_cb, 0);
+
+    rescol = obj = gnui_add_box(GNUI_FLAT_BOX, 225, 90, 90, 35, "");
+    gnui_set_object_color(obj, GNUI_FREE_COL4, GNUI_FREE_COL4);
+    gnui_set_object_boxtype(obj, GNUI_BORDER_BOX);
+
+
+    gnui_end_form();
+    gnui_scale_form(cl, 1.1, 1.0);
 }
 
 //

@@ -78,7 +78,7 @@
 #    include <unistd.h>
 #  endif /* _WIN32 */
 
-#define FL_API
+#define GNUI_API
 
 /* misc defines */
 #  define CONF_WHITESPACE	" \t\n\r"	/* all whitespace characters */
@@ -120,10 +120,10 @@ extern "C" {
   typedef conf_entry* conf_list;
 
   /* global variables */
-  extern FL_API char   conf_sep;                  /* seperator charactor used in config files */
-  extern FL_API char   conf_level_sep;            /* seperator used to denote nested sections */
-  extern FL_API char   conf_comment_sep;          /* denotes comments */
-  extern FL_API int    conf_comment_column;       /* the column comments start in */
+  extern GNUI_API char   conf_sep;                  /* seperator charactor used in config files */
+  extern GNUI_API char   conf_level_sep;            /* seperator used to denote nested sections */
+  extern GNUI_API char   conf_comment_sep;          /* denotes comments */
+  extern GNUI_API int    conf_comment_column;       /* the column comments start in */
 
 
 
@@ -143,7 +143,7 @@ extern "C" {
                 returns 0 for OK or error code defined in conf.h
                 svalue: string associated with key
   */
-  FL_API int getconf(const char *configfile, const char *key, char *svalue,
+  GNUI_API int getconf(const char *configfile, const char *key, char *svalue,
                      int slen);
 
 
@@ -157,7 +157,7 @@ extern "C" {
                 from disk
   */
 
-  FL_API void conf_clear_cache(void);
+  GNUI_API void conf_clear_cache(void);
 
 
 
@@ -178,7 +178,7 @@ extern "C" {
                 returns 0 for OK or error code defined in conf.h
                 returns a pointer to first in list of entries in "list"
   */
-  FL_API int getconf_keys(const char *configfile, const char *section,
+  GNUI_API int getconf_keys(const char *configfile, const char *section,
                           conf_list *list);
 
 
@@ -198,7 +198,7 @@ extern "C" {
                 returns 0 for OK or error code defined in conf.h
                 svalue: string associated with key
   */
-  FL_API int getconf_list(const conf_list list, const char *key, char *svalue,
+  GNUI_API int getconf_list(const conf_list list, const char *key, char *svalue,
                          int slen);
 
 
@@ -218,7 +218,7 @@ extern "C" {
                 returns 0 for OK or error code defined in conf.h
                 returns a pointer to first in list of entries in "list"
   */
-  FL_API int getconf_sections(const char *configfile, const char *section,
+  GNUI_API int getconf_sections(const char *configfile, const char *section,
                               conf_list *list);
 
 
@@ -233,7 +233,7 @@ extern "C" {
         return values:
                 returns 0 for OK or error code defined in conf.h
   */
-  FL_API int conf_list_free(conf_list *list);
+  GNUI_API int conf_list_free(conf_list *list);
 
 
 
@@ -250,7 +250,7 @@ extern "C" {
         return values:
                 returns 0 for OK or error code defined in conf.h
   */
-  FL_API int setconf(const char *configfile, const char *key,
+  GNUI_API int setconf(const char *configfile, const char *key,
                      const char *svalue);
 
 
@@ -270,7 +270,7 @@ extern "C" {
         return values:
                 returns 0 for OK or error code defined in conf.h
   */
-  FL_API int setconf_keys(const char *configfile, const char *section,
+  GNUI_API int setconf_keys(const char *configfile, const char *section,
                           conf_list list);
 
 
@@ -289,7 +289,7 @@ extern "C" {
         return values:
                 returns 0 for OK or error code defined in conf.h
   */
-  FL_API int setconf_list(conf_list list, const char *key, const char *svalue);
+  GNUI_API int setconf_list(conf_list list, const char *key, const char *svalue);
 
 
 
@@ -304,7 +304,7 @@ extern "C" {
         return values:
                 returns 0 for OK or error code defined in conf.h
   */
-  FL_API int delconf(const char *configfile, const char *key);
+  GNUI_API int delconf(const char *configfile, const char *key);
 
 
 
@@ -321,7 +321,7 @@ extern "C" {
                 returns 0 for OK or error code defined in conf.h
                 lvalue: the long integer associated with key in section
   */
-  FL_API int getconf_long(const char *configfile, const char *key,
+  GNUI_API int getconf_long(const char *configfile, const char *key,
                           long *lvalue);
 
 
@@ -338,7 +338,7 @@ extern "C" {
         return values:
                 returns 0 for OK or error code defined in conf.h
   */
-  FL_API int setconf_long(const char *configfile, const char *key,
+  GNUI_API int setconf_long(const char *configfile, const char *key,
                           long lvalue);
 
 
@@ -356,7 +356,7 @@ extern "C" {
                 returns 0 for OK or error code defined in conf.h
                 bvalue: boolean value associated with key (ON = 1, OFF = 0)
   */
-  FL_API int getconf_boolean(const char *configfile, const char *key,
+  GNUI_API int getconf_boolean(const char *configfile, const char *key,
                              int *bvalue);
 
 
@@ -373,7 +373,7 @@ extern "C" {
         return values:
                 returns 0 for OK or error code defined in conf.h
   */
-  FL_API int setconf_boolean(const char *configfile, const char *key,
+  GNUI_API int setconf_boolean(const char *configfile, const char *key,
                              int bvalue);
 
 
@@ -388,7 +388,7 @@ extern "C" {
         return value:
                 returns pointer to a static error message string
   */
-  FL_API const char *getconf_error(int error);
+  GNUI_API const char *getconf_error(int error);
 
 
 
@@ -404,7 +404,7 @@ extern "C" {
         return value:
                 returns s
   */
-  FL_API char *conf_trim(char *s);
+  GNUI_API char *conf_trim(char *s);
 
 
 
@@ -419,7 +419,7 @@ extern "C" {
         return value:
                 returns s
   */
-  FL_API char *conf_endtrim(char *s);
+  GNUI_API char *conf_endtrim(char *s);
 
 
 
@@ -434,7 +434,7 @@ extern "C" {
         return value:
                 returns the number of instances of c in s
   */
-  FL_API int conf_strcnt(const char *s, char c);
+  GNUI_API int conf_strcnt(const char *s, char c);
 
 
 
@@ -449,11 +449,11 @@ extern "C" {
         return value:
                 returns the long integer represented by the decimal string
   */
-  FL_API long conf_atol(const char *decstr);
+  GNUI_API long conf_atol(const char *decstr);
 
 
 
-  FL_API int conf_is_path_rooted(const char *path);
+  GNUI_API int conf_is_path_rooted(const char *path);
 
 #  ifdef __cplusplus
 }

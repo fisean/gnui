@@ -39,7 +39,7 @@ class Monitor;
 
 // implementations of methods of Window are in different files in src/
 
-class FL_API Window : public Group {
+class GNUI_API Window : public Group {
 public:
 
   Window(int,int,int,int, const char* = 0, bool begin = false);

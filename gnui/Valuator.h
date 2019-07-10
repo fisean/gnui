@@ -30,7 +30,7 @@
 
 namespace gnui {
 
-class FL_API Valuator : public Widget {
+class GNUI_API Valuator : public Widget {
 
 public:
 

@@ -4,7 +4,7 @@
 //
 // This is different than the default behavior of fltk. If you don't
 // specify a theme, fltk tries to load one called "default". If that
-// fails, it will call fl_get_system_colors() which reads the Windows
+// fails, it will call gnui_get_system_colors() which reads the Windows
 // preferences or the xrdb database to try to get some colors.
 
 extern "C" bool fltk_theme() {return true;}

@@ -24,7 +24,7 @@
 #ifndef gnui_visual_h
 #define gnui_visual_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 namespace gnui {
 
@@ -45,11 +45,11 @@ enum {
   STEREO	= 256
 };
 
-extern FL_API bool visual(int);
+extern GNUI_API bool visual(int);
 
-extern FL_GL_API bool glVisual(int);
+extern GNUI_GL_API bool glVisual(int);
 
-extern FL_API void own_colormap();
+extern GNUI_API void own_colormap();
 
 //@}
 

@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API RadioButton : public CheckButton {
+class GNUI_API RadioButton : public CheckButton {
 public:
   RadioButton(int x, int y, int w, int h, const char *l=0);
   static NamedStyle* default_style;

@@ -43,7 +43,7 @@ namespace gnui {
 // FileBrowser class...
 //
 
-class FL_API FileBrowser : public Browser
+class GNUI_API FileBrowser : public Browser
 {
   int		filetype_; /**< Paramted based on FileBrowser::FILES or FileBrowser::DIRECTORIES */
   const char	*directory_; /**< The current directory */
@@ -114,7 +114,7 @@ private:
 
 }
 
-#endif // !_Fl_File_Browser_H_
+#endif // !_GNUI_File_Browser_H_
 
 //
 // End of "$Id$".

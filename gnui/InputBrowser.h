@@ -42,7 +42,7 @@ namespace gnui {
 class ComboBrowser;
 class ComboWindow;
 
-class FL_API InputBrowser : public Menu {
+class GNUI_API InputBrowser : public Menu {
 public:
   enum { // values for type()
     NORMAL = 0,

@@ -58,7 +58,7 @@ static int utf8seqlen(char cc) {
 
 using namespace gnui;
 
-extern void fl_set_spot(gnui::Font *f, Widget *w, int x, int y);
+extern void gnui_set_spot(gnui::Font *f, Widget *w, int x, int y);
 
 #undef min
 #undef max
@@ -1783,7 +1783,7 @@ void TextDisplay::draw_cursor(int X, int Y) {
   cursor_oldx_ = X;
   cursor_oldy_ = Y;
   transform(X, Y);
-  fl_set_spot(textfont(), this, X, Y);
+  gnui_set_spot(textfont(), this, X, Y);
 }
 
 /*
@@ -3116,7 +3116,7 @@ int TextDisplay::handle(int event) {
   case FOCUS:
   case UNFOCUS:
     // disable input method
-    fl_set_spot(NULL, this, 0, 0);
+    gnui_set_spot(NULL, this, 0, 0);
     if (buffer()->selected()) redraw();
     return 1;
 

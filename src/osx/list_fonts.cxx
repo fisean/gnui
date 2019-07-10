@@ -55,9 +55,9 @@ int Font::sizes(int*& sizep) {
 #if 0
 // Code used by gnui1.1:
 static int array[128];
-int Fl::get_font_sizes(Fl_Font fnum, int*& sizep) {
-  Fl_Fontdesc *s = fl_fonts+fnum;
-  if (!s->name) s = fl_fonts; // empty slot in table, use entry 0
+int Fl::get_font_sizes(GNUI_Font fnum, int*& sizep) {
+  GNUI_Fontdesc *s = gnui_fonts+fnum;
+  if (!s->name) s = gnui_fonts; // empty slot in table, use entry 0
 
   Str255 name;
   int len = strlen( s->name ); strncpy( (char*)(name+1), s->name+1, len ); name[0] = len-1;
@@ -116,7 +116,7 @@ static int sort_function(const void *aa, const void *bb) {
   return a->attributes_ - b->attributes_;
 }}
 
-extern Font* fl_make_font(const char* name, int attrib);
+extern Font* gnui_make_font(const char* name, int attrib);
 
 static Font** font_array = 0;
 static int num_fonts = 0;
@@ -149,9 +149,9 @@ int gnui::list_fonts(Font**& arrayp) {
       font_array = (Font**)realloc(font_array, array_size*sizeof(Font*));
     }
     // Style enumeration could be used here to figure out if there is
-    // a bold or italic version, if not fl_make_font can be altered to
+    // a bold or italic version, if not gnui_make_font can be altered to
     // not create them:
-    font_array[num_fonts++] = fl_make_font((char*)buf+1, 0);
+    font_array[num_fonts++] = gnui_make_font((char*)buf+1, 0);
   }
   FMDisposeFontFamilyIterator( &ffIterator );
   qsort(font_array, num_fonts, sizeof(*font_array), sort_function);

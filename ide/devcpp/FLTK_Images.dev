@@ -670,7 +670,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit81]
-FileName=..\..\src\Fl_Help_View.cxx
+FileName=..\..\src\GNUI_Help_View.cxx
 CompileCpp=1
 Folder=FLTK Images
 Compile=1
@@ -680,7 +680,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit82]
-FileName=..\..\src\Fl_Help_Dialog.cxx
+FileName=..\..\src\GNUI_Help_Dialog.cxx
 CompileCpp=1
 Folder=FLTK Images
 Compile=1
@@ -1048,7 +1048,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit78]
-FileName=..\..\images\fl_png.cxx
+FileName=..\..\images\gnui_png.cxx
 CompileCpp=1
 Folder=FLTK Images
 Compile=1
@@ -1058,7 +1058,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit79]
-FileName=..\..\images\fl_jpeg.cxx
+FileName=..\..\images\gnui_jpeg.cxx
 CompileCpp=1
 Folder=FLTK Images
 Compile=1
@@ -1068,7 +1068,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit80]
-FileName=..\..\images\Fl_Guess_Image.cxx
+FileName=..\..\images\GNUI_Guess_Image.cxx
 CompileCpp=1
 Folder=FLTK Images
 Compile=1

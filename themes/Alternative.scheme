@@ -14,12 +14,12 @@ FLTK version = 2.0.0                              # minimum FLTK version needed
 
 [global colors]                                   # global color options
 #  background = gray                              # background color
-#  LIGHT1 = red                                   # color for FL_LIGHT1
-#  LIGHT2 = green                                 # color for FL_LIGHT2
-#  LIGHT3 = blue                                  # color for FL_LIGHT3
-#  DARK1 = red                                    # color for FL_DARK1
-#  DARK2 = green                                  # color for FL_DARK2
-#  DARK3 = blue                                   # color for FL_DARK3
+#  LIGHT1 = red                                   # color for GNUI_LIGHT1
+#  LIGHT2 = green                                 # color for GNUI_LIGHT2
+#  LIGHT3 = blue                                  # color for GNUI_LIGHT3
+#  DARK1 = red                                    # color for GNUI_DARK1
+#  DARK2 = green                                  # color for GNUI_DARK2
+#  DARK3 = blue                                   # color for GNUI_DARK3
 
 [widgets]
 
@@ -143,7 +143,7 @@ FLTK version = 2.0.0                              # minimum FLTK version needed
     color = 215                                   # color of tooltip window
     box = thin up                                 # box around tooltips
 
-[aliases]                                         # user defined fonts (offsets into fl_font)
+[aliases]                                         # user defined fonts (offsets into gnui_font)
 # the standard fonts are built in already
 #  helvetica = 0
 #  helvetica bold = 1
@@ -158,7 +158,7 @@ FLTK version = 2.0.0                              # minimum FLTK version needed
   green = #00ff00
   blue = #0000ff
   gray = 49
-  black = 56                                      # do not use 0 when you want FL_BLACK!
+  black = 56                                      # do not use 0 when you want GNUI_BLACK!
   puke green = 14
   white = 7
   light1 = 51

@@ -204,11 +204,11 @@ Function {make_shell_window()} {open
       xywh {231 61 126 19} hide
       extra_code {shell_writemsgs_button->value(prefs.shell_writemsgs() ? true : false);}
     }
-    {fltk::CheckButton} shell_savefl_button {
+    {fltk::CheckButton} shell_savegnui_button {
       label {Save Fluid File}
-      callback {prefs.shell_savefl(shell_savefl_button->value());}
+      callback {prefs.shell_savefl(shell_savegnui_button->value());}
       xywh {10 61 108 19}
-      extra_code {shell_savefl_button->value(prefs.shell_savefl() ? true : false);}
+      extra_code {shell_savegnui_button->value(prefs.shell_savefl() ? true : false);}
     }
     {fltk::ReturnButton} {} {
       label {Run Command}

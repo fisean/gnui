@@ -24,14 +24,14 @@
 #ifndef gnui_Preferences_h
 #define gnui_Preferences_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 namespace gnui {
 
 /**
  * Preferences are a data tree containing a root, branches and leafs
  */
-class FL_API Preferences
+class GNUI_API Preferences
 {
 
 public:
@@ -76,7 +76,7 @@ public:
   // bool export( const char *filename, Type fileFormat );
   // bool import( const char *filename );
 
-  class FL_API Name {
+  class GNUI_API Name {
     char *data_;
   public:
     Name( int n );

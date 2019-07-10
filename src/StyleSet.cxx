@@ -55,7 +55,7 @@ using namespace gnui;
 
 static StyleSet* current_set;
 
-extern "C" FL_API bool gnui_theme();
+extern "C" GNUI_API bool gnui_theme();
 
 /*! The \e first StyleSet you create is made into the current one and
   is made equal to the current settings of the styles. All subsequent

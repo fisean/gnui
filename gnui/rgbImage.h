@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API rgbImage : public Image {
+class GNUI_API rgbImage : public Image {
 public:
   //bool write_jpeg(const char *filename, int quality=75, int dpi=150);
   rgbImage(const char* name=0) : Image(name) {}

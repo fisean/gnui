@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Fl_Help_Dialog test program.
+// GNUI_Help_Dialog test program.
 //
 // Copyright 1999-2003 by Easy Software Products.
 //

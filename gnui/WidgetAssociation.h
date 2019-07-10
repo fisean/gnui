@@ -1,12 +1,12 @@
 #ifndef gnui_WidgetAssociation_h
 #define gnui_WidgetAssociation_h
 
-#include <gnui/FL_API.h>
+#include <gnui/GNUI_API.h>
 
 namespace gnui {
 
-class FL_API Widget;
-class FL_API AssociationType;
+class GNUI_API Widget;
+class GNUI_API AssociationType;
 
 /*! \brief Class used by the foreach() functions.
  *
@@ -14,7 +14,7 @@ class FL_API AssociationType;
  * your specific actions to do with the associated data found by the foreach() functions
  * you need to derive from this class and provide a new handle function.
  */
-class FL_API AssociationFunctor {
+class GNUI_API AssociationFunctor {
  public:
   /*!
    * For each
@@ -35,7 +35,7 @@ class FL_API AssociationFunctor {
  * The function either returns the first associated data for which the functor returns true, or NULL.
  * See also Widget::foreach() and AssociationType::foreach().
  */
-FL_API void*  foreach(const AssociationType*, const Widget*, AssociationFunctor&);
+GNUI_API void*  foreach(const AssociationType*, const Widget*, AssociationFunctor&);
 
 /*! \brief Base class for the association type.
  *
@@ -59,7 +59,7 @@ FL_API void*  foreach(const AssociationType*, const Widget*, AssociationFunctor&
  * - assign data needed by typesafe callback mechanisms
  * - assign all kind of data not always required within a widget / each widget
  */
-class FL_API AssociationType {
+class GNUI_API AssociationType {
 
  public:
   /*! \brief This function is called when associated data is freed

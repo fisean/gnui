@@ -35,16 +35,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-#include <FL/Fl_Input.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Return_Button.H>
+#include <FL/GNUI_Window.H>
+#include <FL/GNUI_Input.H>
+#include <FL/GNUI_Button.H>
+#include <FL/GNUI_Return_Button.H>
 
-#include <FL/fl_ask.H>
+#include <FL/gnui_ask.H>
 #include <stdlib.h>
 
-void rename_me(Fl_Widget*o) {
-  const char *input = fl_input("Input:", o->label());
+void rename_me(GNUI_Widget*o) {
+  const char *input = gnui_input("Input:", o->label());
 
   if (input) {
     o->label(input);
@@ -52,8 +52,8 @@ void rename_me(Fl_Widget*o) {
   }
 }
 
-void window_callback(Fl_Widget*, void*) {
-  if (!fl_ask("Are you sure you want to quit?")) return;
+void window_callback(GNUI_Widget*, void*) {
+  if (!gnui_ask("Are you sure you want to quit?")) return;
   exit(0);
 }
 
@@ -62,8 +62,8 @@ int main(int argc, char **argv) {
 
 // this is a test to make sure automatic destructors work.  Pop up
 // the question dialog several times and make sure it don't crash.
-  Fl_Window window(200, 55);
-  Fl_Return_Button b(20, 10, 160, 35, buffer); b.callback(rename_me);
+  GNUI_Window window(200, 55);
+  GNUI_Return_Button b(20, 10, 160, 35, buffer); b.callback(rename_me);
   window.add(b);
   window.resizable(&b);
   window.show(argc, argv);

@@ -91,7 +91,7 @@ static void mono_to_8(const uchar *from, uchar *to, int w) {
     g += from[0]; if (g < 0) g = 0; else if (g>255) g = 255;
     b += from[0]; if (b < 0) b = 0; else if (b>255) b = 255;
     i = (uchar)(BLACK + (b*5/256 * 5 + r*5/256) * 8 + g*8/256);
-    XColorMap& xmap = fl_xmap(i,(uchar)r,(uchar)g,(uchar)b);
+    XColorMap& xmap = gnui_xmap(i,(uchar)r,(uchar)g,(uchar)b);
     r -= xmap.r;
     g -= xmap.g;
     b -= xmap.b;
@@ -122,7 +122,7 @@ static void rgb_to_8d(const uchar *from, uchar *to, int w, int delta) {
     g += from[1]; if (g < 0) g = 0; else if (g>255) g = 255;
     b += from[2]; if (b < 0) b = 0; else if (b>255) b = 255;
     i = (uchar)(BLACK + (b*5/256 * 5 + r*5/256) * 8 + g*8/256);
-    XColorMap& xmap = fl_xmap(i,(uchar)r,(uchar)g,(uchar)b);
+    XColorMap& xmap = gnui_xmap(i,(uchar)r,(uchar)g,(uchar)b);
     r -= xmap.r;
     g -= xmap.g;
     b -= xmap.b;
@@ -164,7 +164,7 @@ static void argb32_to_8(const uchar *from, uchar *to, int w) {
     g += from[1]; if (g < 0) g = 0; else if (g>255) g = 255;
     b += from[0]; if (b < 0) b = 0; else if (b>255) b = 255;
     i = (uchar)(BLACK + (b*5/256 * 5 + r*5/256) * 8 + g*8/256);
-    XColorMap& xmap = fl_xmap(i,(uchar)r,(uchar)g,(uchar)b);
+    XColorMap& xmap = gnui_xmap(i,(uchar)r,(uchar)g,(uchar)b);
     r -= xmap.r;
     g -= xmap.g;
     b -= xmap.b;
@@ -207,17 +207,17 @@ static void mono_to_16(const uchar *from,uchar *to,int w) {
     td = OUTSIZE;
   }
 
-  uchar mask = fl_redmask & fl_greenmask & fl_bluemask;
+  uchar mask = gnui_redmask & gnui_greenmask & gnui_bluemask;
   uchar m;
   int r=ri;
   for (;; from += d, t += td) {
     r = (r&~mask) + *from; if (r > 255) r = 255;
     m = r&mask;
     OUTASSIGN((
-      (m<<fl_redshift)+
-      (m<<fl_greenshift)+
-      (m<<fl_blueshift)
-      ) >> fl_extrashift);
+      (m<<gnui_redshift)+
+      (m<<gnui_greenshift)+
+      (m<<gnui_blueshift)
+      ) >> gnui_extrashift);
     if (!--w) break;
   }
   ri = r;
@@ -239,14 +239,14 @@ static void rgb_to_16d(const uchar *from, uchar *to, int w, int delta) {
   }
   int r=ri, g=gi, b=bi;
   for (;; from += d, t += td) {
-    r = (r&~fl_redmask)  +from[0]; if (r>255) r = 255;
-    g = (g&~fl_greenmask)+from[1]; if (g>255) g = 255;
-    b = (b&~fl_bluemask) +from[2]; if (b>255) b = 255;
+    r = (r&~gnui_redmask)  +from[0]; if (r>255) r = 255;
+    g = (g&~gnui_greenmask)+from[1]; if (g>255) g = 255;
+    b = (b&~gnui_bluemask) +from[2]; if (b>255) b = 255;
     OUTASSIGN((
-      ((r&fl_redmask)<<fl_redshift)+
-      ((g&fl_greenmask)<<fl_greenshift)+
-      ((b&fl_bluemask)<<fl_blueshift)
-      ) >> fl_extrashift);
+      ((r&gnui_redmask)<<gnui_redshift)+
+      ((g&gnui_greenmask)<<gnui_greenshift)+
+      ((b&gnui_bluemask)<<gnui_blueshift)
+      ) >> gnui_extrashift);
     if (!--w) break;
   }
   ri = r; gi = g; bi = b;
@@ -279,14 +279,14 @@ static void argb32_to_16(const uchar *from, uchar *to, int w) {
   }
   int r=ri, g=gi, b=bi;
   for (;; from += d, t += td) {
-    r = (r&~fl_redmask)  +from[2]; if (r>255) r = 255;
-    g = (g&~fl_greenmask)+from[1]; if (g>255) g = 255;
-    b = (b&~fl_bluemask) +from[0]; if (b>255) b = 255;
+    r = (r&~gnui_redmask)  +from[2]; if (r>255) r = 255;
+    g = (g&~gnui_greenmask)+from[1]; if (g>255) g = 255;
+    b = (b&~gnui_bluemask) +from[0]; if (b>255) b = 255;
     OUTASSIGN((
-      ((r&fl_redmask)<<fl_redshift)+
-      ((g&fl_greenmask)<<fl_greenshift)+
-      ((b&fl_bluemask)<<fl_blueshift)
-      ) >> fl_extrashift);
+      ((r&gnui_redmask)<<gnui_redshift)+
+      ((g&gnui_greenmask)<<gnui_greenshift)+
+      ((b&gnui_bluemask)<<gnui_blueshift)
+      ) >> gnui_extrashift);
     if (!--w) break;
   }
   ri = r; gi = g; bi = b;
@@ -682,9 +682,9 @@ static int scanline_add;
 static int scanline_mask;
 
 #if USE_XFT
-XRenderPictFormat* fl_rgba_xrender_format;
-extern bool fl_get_invert_matrix(XTransform&);
-extern bool fl_trivial_transform();
+XRenderPictFormat* gnui_rgba_xrender_format;
+extern bool gnui_get_invert_matrix(XTransform&);
+extern bool gnui_trivial_transform();
 
 ::Picture p;
 XWindow prevsource;
@@ -723,14 +723,14 @@ static void mrgb32_to_argb32(const uchar* from, uchar* to, int w) {
 }
 #endif
 
-void fl_xrender_draw_image(XWindow source, gnui::PixelType type,
+void gnui_xrender_draw_image(XWindow source, gnui::PixelType type,
                            const gnui::Rectangle& from,
                            const gnui::Rectangle& to)
 {
   XTransform xtransform;
-  if (!fl_get_invert_matrix(xtransform)) return; // give up if we can't invert
+  if (!gnui_get_invert_matrix(xtransform)) return; // give up if we can't invert
   int x,y,r,b; // box to draw
-  if (!fl_trivial_transform()) {
+  if (!gnui_trivial_transform()) {
     float X,Y,R,B,tx,ty;
     tx = to.x(); ty = to.y(); transform(tx, ty);
     X = R = tx; Y = B = ty;
@@ -776,7 +776,7 @@ void fl_xrender_draw_image(XWindow source, gnui::PixelType type,
   if (source != prevsource) {
     prevsource = source;
     if (p) XRenderFreePicture(xdisplay, p);
-    p = XRenderCreatePicture(xdisplay, source, fl_rgba_xrender_format, 0, 0);
+    p = XRenderCreatePicture(xdisplay, source, gnui_rgba_xrender_format, 0, 0);
     XRenderSetPictureFilter(xdisplay, p, "best", 0, 0);
   }
   XRenderSetPictureTransform(xdisplay, p, &xtransform);
@@ -862,9 +862,9 @@ static void figure_out_visual() {
 //   {int major, minor; major = minor = -1;
 //   int status = XRenderQueryVersion(xdisplay, &major, &minor);
 //   printf("status = %d, version = %d.%d\n", status, major, minor);}
-  fl_rgba_xrender_format =
+  gnui_rgba_xrender_format =
     XRenderFindStandardFormat(xdisplay, PictStandardARGB32);
-  if (fl_rgba_xrender_format) {
+  if (gnui_rgba_xrender_format) {
     // fill in the xrender converters
     xrender_converter[MASK] = mask_to_32;
     xrender_converter[MONO] = mono_to_32;
@@ -931,9 +931,9 @@ static void figure_out_visual() {
 
   // otherwise it is a TrueColor visual:
 
-  int rs = fl_redshift;
-  int gs = fl_greenshift;
-  int bs = fl_blueshift;
+  int rs = gnui_redshift;
+  int gs = gnui_greenshift;
+  int bs = gnui_blueshift;
 
   switch (bytes_per_pixel) {
 
@@ -945,7 +945,7 @@ static void figure_out_visual() {
 #else
     ::i.byte_order = 1;
 #endif
-    if (rs == 11 && gs == 6 && bs == 0 && fl_extrashift == 3) {
+    if (rs == 11 && gs == 6 && bs == 0 && gnui_extrashift == 3) {
       converter[MONO] = mono_to_565;
       converter[RGB] = rgb_to_565;
       converter[RGBx] = rgba_to_565;
@@ -1144,7 +1144,7 @@ int Image::buffer_linedelta() const {
   if (picture) return picture->linedelta;
   if (!bytes_per_pixel) figure_out_visual();
 #if USE_XFT
-  if (fl_rgba_xrender_format) return w()*4;
+  if (gnui_rgba_xrender_format) return w()*4;
 #endif
   return (w()*bytes_per_pixel+scanline_add)&scanline_mask;
 }
@@ -1152,7 +1152,7 @@ int Image::buffer_linedelta() const {
 int Image::buffer_depth() const {
   if (!bytes_per_pixel) figure_out_visual();
 #if USE_XFT
-  if (fl_rgba_xrender_format) return 4;
+  if (gnui_rgba_xrender_format) return 4;
 #endif
   return bytes_per_pixel;
 }
@@ -1170,7 +1170,7 @@ void Image::clear_forceARGB32() {
 PixelType Image::buffer_pixeltype() const {
   if (!bytes_per_pixel) figure_out_visual();
 #if USE_XFT
-  if (fl_rgba_xrender_format) return ARGB32;
+  if (gnui_rgba_xrender_format) return ARGB32;
 #endif
   return PixelType(bytes_per_pixel); // not really right...
 }
@@ -1195,7 +1195,7 @@ uchar* Image::buffer() {
   int depth;
   int ld;
 #if USE_XFT
-  if (fl_rgba_xrender_format) {
+  if (gnui_rgba_xrender_format) {
     ld = w_*4;
     depth = 32;
   } else
@@ -1205,7 +1205,7 @@ uchar* Image::buffer() {
   picture = new Picture(w_, h_, depth, ld);
   memused_ += picture->n;
 #if USE_XFT
-  if (!fl_rgba_xrender_format)
+  if (!gnui_rgba_xrender_format)
 #endif
     if (pixeltype_==MASK || pixeltype_==RGBA || pixeltype_>=ARGB32)
       picture->makealphabuffer();
@@ -1223,7 +1223,7 @@ void Image::destroy() {
 void Image::setpixeltype(PixelType p) {
   pixeltype_ = p;
 #if USE_XFT
-  if (fl_rgba_xrender_format) return;
+  if (gnui_rgba_xrender_format) return;
 #endif
   // we need to allocate the alphabuffer if it is missing
   if (picture && (p==MASK || p==RGBA || p>=ARGB32) && !picture->alphabuffer)
@@ -1239,7 +1239,7 @@ void Image::setsize(int w, int h) {
 uchar* Image::linebuffer(int y) {
   buffer();
 #if USE_XFT
-  if (fl_rgba_xrender_format) return picture->data+y*picture->linedelta;
+  if (gnui_rgba_xrender_format) return picture->data+y*picture->linedelta;
 #endif
   if (bytes_per_pixel >= 4) return picture->data+y*picture->linedelta;
   if (!picture->linebuffer)
@@ -1253,7 +1253,7 @@ void Image::setpixels(const uchar* buf, int y) {
   uchar* to = picture->data+y*picture->linedelta;
   void (*conv)(const uchar *from,uchar *to,int w);
 #if USE_XFT
-  if (fl_rgba_xrender_format) {
+  if (gnui_rgba_xrender_format) {
     conv = xrender_converter[pixeltype_];
     conv(buf, to, width());
     return;
@@ -1273,7 +1273,7 @@ void Image::setpixels(const uchar* buf, const Rectangle& r, int linedelta)
   uchar* to = picture->data+r.y()*picture->linedelta+r.x()*buffer_depth();
   void (*conv)(const uchar *from,uchar *to,int w);
 #if USE_XFT
-  if (fl_rgba_xrender_format) {
+  if (gnui_rgba_xrender_format) {
     conv = xrender_converter[pixeltype_];
     // see if we can do it all at once:
     if (r.w() == picture->w && (r.h()==1 || linedelta == picture->linedelta)) {
@@ -1312,7 +1312,7 @@ void Image::setpixels(const uchar* buf, const Rectangle& r, int linedelta)
 void Image::fetch_if_needed() const {
     Image* thisimage = const_cast<Image*>(this);
 #if USE_XFT
-  if (!fl_rgba_xrender_format)
+  if (!gnui_rgba_xrender_format)
 #endif
     // kludge to refetch if fg/bg colors change
     if (pixeltype_==MASK) {
@@ -1327,7 +1327,7 @@ void Image::fetch_if_needed() const {
   }
 }
 
-void fl_restore_clip(); // in clip.cxx
+void gnui_restore_clip(); // in clip.cxx
 
 void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
   fetch_if_needed();
@@ -1341,7 +1341,7 @@ void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
 #endif
     if (picture->rgb) {
 #if USE_XFT
-      XImage& i = fl_rgba_xrender_format ? xrenderi : ::i;
+      XImage& i = gnui_rgba_xrender_format ? xrenderi : ::i;
 #endif
       i.width = w();
       i.height = h();
@@ -1362,8 +1362,8 @@ void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
     ((Image*)this)->flags |= COPIED;
   }
 #if USE_XFT
-  if (fl_rgba_xrender_format && picture->rgb && !picture->draw_target) {
-    fl_xrender_draw_image(picture->rgb, pixeltype_, from, to);
+  if (gnui_rgba_xrender_format && picture->rgb && !picture->draw_target) {
+    gnui_xrender_draw_image(picture->rgb, pixeltype_, from, to);
     return;
   }
 #endif
@@ -1392,7 +1392,7 @@ void Image::draw(const gnui::Rectangle& from, const gnui::Rectangle& to) const {
       XCopyArea(xdisplay, picture->rgb, xwindow, gc,
                 r.x()-r1.x(), r.y()-r1.y(), r.w(), r.h(), r.x(), r.y());
       XSetClipOrigin(xdisplay, gc, 0, 0);
-      fl_restore_clip();
+      gnui_restore_clip();
     } else {
       // xbmImage
       XSetStipple(xdisplay, gc, picture->alpha);
@@ -1418,7 +1418,7 @@ void Image::setimage(const uchar* d, PixelType p, int w, int h, int ld) {
 
 void Image::make_current() {
   // make this image the target for drawing operations
-  // fl_xrender_draw_image() cannot be used in draw() apparently
+  // gnui_xrender_draw_image() cannot be used in draw() apparently
   // due to incompatible depth attributes
   if (!picture) {
     // initialise
@@ -1471,7 +1471,7 @@ static bool innards(const uchar *buf, PixelType type,
 #if USE_XFT
   // Image is needed to do XRender transforms. If XRender is not
   // working then we can't do transforms, so I'll just use this code:
-  if (fl_rgba_xrender_format && !fl_trivial_transform()) return false;
+  if (gnui_rgba_xrender_format && !gnui_trivial_transform()) return false;
 #endif
 
 #if USE_XSHM

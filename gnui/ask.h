@@ -25,7 +25,7 @@
 #ifndef gnui_ask_h
 #define gnui_ask_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 #include "Style.h"
 
 namespace gnui {
@@ -44,32 +44,32 @@ enum {
   BEEP_NOTIFICATION
 };
 
-FL_API void message(const char *, ...);
-FL_API void alert(const char *, ...);
-FL_API int  ask(const char *, ...);
-FL_API int  choice(const char *q,
+GNUI_API void message(const char *, ...);
+GNUI_API void alert(const char *, ...);
+GNUI_API int  ask(const char *, ...);
+GNUI_API int  choice(const char *q,
 		  const char *b0, const char *b1, const char *b2, ...);
-FL_API int  choice_alert(const char *q,
+GNUI_API int  choice_alert(const char *q,
 		  const char *b0, const char *b1, const char *b2, ...);
-FL_API const char *input(const char *label, const char *deflt = 0, ...);
-FL_API const char *password(const char *label, const char *deflt = 0, ...);
-FL_API void beep(int type = BEEP_DEFAULT);
-FL_API void beep_on_dialog(bool);
-FL_API bool beep_on_dialog();
+GNUI_API const char *input(const char *label, const char *deflt = 0, ...);
+GNUI_API const char *password(const char *label, const char *deflt = 0, ...);
+GNUI_API void beep(int type = BEEP_DEFAULT);
+GNUI_API void beep_on_dialog(bool);
+GNUI_API bool beep_on_dialog();
 
-extern FL_API NamedStyle* icon_style;
-extern FL_API NamedStyle* message_style;
+extern GNUI_API NamedStyle* icon_style;
+extern GNUI_API NamedStyle* message_style;
 
-extern FL_API const char* message_window_label;
-extern FL_API float message_window_timeout;
+extern GNUI_API const char* message_window_label;
+extern GNUI_API float message_window_timeout;
 
-extern FL_API bool message_window_scrollable;
+extern GNUI_API bool message_window_scrollable;
 
 // pointers you can use to change FLTK to a foreign language:
-extern FL_API const char* no;
-extern FL_API const char* yes;
-extern FL_API const char* ok;
-extern FL_API const char* cancel;
+extern GNUI_API const char* no;
+extern GNUI_API const char* yes;
+extern GNUI_API const char* ok;
+extern GNUI_API const char* cancel;
 
 }
 

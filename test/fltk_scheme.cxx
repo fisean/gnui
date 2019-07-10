@@ -1,4 +1,4 @@
-#include <fltk/fl_config.h>
+#include <fltk/gnui_config.h>
 #include <fltk/x.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,7 +20,7 @@ static int _getprop(Window w, Atom a, Atom type, long len, unsigned char **p){
   unsigned long n, extra;
   int status;
 
-  status = XGetWindowProperty(fl_display, w, a, 0L, len, False, type, &real_type, &format, &n, &extra, p);
+  status = XGetWindowProperty(gnui_display, w, a, 0L, len, False, type, &real_type, &format, &n, &extra, p);
   if (status != Success || *p == 0)
     return -1;
   if (n == 0)
@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
   char scheme[PATH_MAX];
   strncpy(scheme, argv[1], sizeof(scheme));
 
-  Fl_Config flconfig("flconfig");
+  GNUI_Config flconfig("flconfig");
   int r;
 
   if ( (r = flconfig.set("default/scheme", scheme)) ) {
@@ -67,34 +67,34 @@ int main(int argc, char* argv[]) {
 
 #ifndef _WIN32
   // stolen from KDE!
-  fl_open_display();
-  int screen = DefaultScreen(fl_display);
-  Window root = RootWindow(fl_display, screen);
+  gnui_open_display();
+  int screen = DefaultScreen(gnui_display);
+  Window root = RootWindow(gnui_display, screen);
 
   XEvent ev;
   unsigned int i, nrootwins;
   Window dw1, dw2, *rootwins;
 
-  XQueryTree(fl_display, root, &dw1, &dw2, &rootwins, &nrootwins);
+  XQueryTree(gnui_display, root, &dw1, &dw2, &rootwins, &nrootwins);
 
-  Atom a = XInternAtom(fl_display, "FLTK_STYLE_WINDOW", False);
-  Atom Scheme = XInternAtom(fl_display, "FLTKChangeScheme", False);
+  Atom a = XInternAtom(gnui_display, "FLTK_STYLE_WINDOW", False);
+  Atom Scheme = XInternAtom(gnui_display, "FLTKChangeScheme", False);
 
   for (i = 0; i < nrootwins; i++) {
     long result = 0;
     getSimpleProperty(rootwins[i],a, result);
     if (result) {
       ev.xclient.type = ClientMessage;
-      ev.xclient.display = fl_display;
+      ev.xclient.display = gnui_display;
       ev.xclient.window = rootwins[i];
       ev.xclient.message_type = Scheme;
       ev.xclient.format = 32;
 
-      XSendEvent(fl_display, rootwins[i] , False, 0L, &ev);
+      XSendEvent(gnui_display, rootwins[i] , False, 0L, &ev);
     }
   }
 
-  XFlush(fl_display);
+  XFlush(gnui_display);
 
   XFree((char *) rootwins);
 #else

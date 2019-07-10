@@ -121,18 +121,18 @@ static const struct {unsigned short vk, gnui, ext;} vktab[] = {
   {VK_DELETE,	DeleteKey}
 };
 
-extern bool fl_last_was_extended;
+extern bool gnui_last_was_extended;
 
 static unsigned short gnuims(unsigned gnui) {
   if (gnui >= '0' && gnui <= '9') return gnui;
   if (gnui >= 'A' && gnui <= 'Z') return gnui;
   if (gnui >= 'a' && gnui <= 'z') return gnui-('a'-'A');
   if (gnui >= F1Key && gnui <= LastFunctionKey) return gnui-F1Key+VK_F1;
-  if (event_state(NUMLOCK) || fl_last_was_extended) {
+  if (event_state(NUMLOCK) || gnui_last_was_extended) {
     if (gnui >= Keypad0 && gnui<=Keypad9) return gnui-Keypad0+VK_NUMPAD0;
     if (gnui == DecimalKey) return VK_DECIMAL;
   }
-  if (gnui == KeypadEnter && fl_last_was_extended)
+  if (gnui == KeypadEnter && gnui_last_was_extended)
     return VK_RETURN;
   int a = 0;
   int b = sizeof(vktab)/sizeof(*vktab);

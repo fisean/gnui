@@ -55,7 +55,7 @@ using namespace gnui;
   widget, unless another widget calls this.
 
   On X you can mess with the colors by setting the Color variables
-  \c fl_cursor_fg and \c fl_cursor_bg to the colors you want, before calling
+  \c gnui_cursor_fg and \c gnui_cursor_bg to the colors you want, before calling
   this.
 */
 
@@ -85,11 +85,11 @@ using namespace gnui;
 */
 
 #ifdef __sgi
-FL_API Color fl_cursor_fg = RED;
+GNUI_API Color gnui_cursor_fg = RED;
 #else
-FL_API Color fl_cursor_fg = BLACK;
+GNUI_API Color gnui_cursor_fg = BLACK;
 #endif
-FL_API Color fl_cursor_bg = WHITE;
+GNUI_API Color gnui_cursor_bg = WHITE;
 
 #ifdef DOXYGEN
 // don't let it print internal stuff
@@ -102,7 +102,7 @@ struct gnui::Cursor {
   uchar tableid;
 };
 
-FL_API gnui::Cursor *gnui::cursor(void *raw) {
+GNUI_API gnui::Cursor *gnui::cursor(void *raw) {
   gnui::Cursor *c = new gnui::Cursor;
   c->cursor = (::Cursor)raw;
   c->fontid = 0;
@@ -133,7 +133,7 @@ static XcursorImage* create_cursor_image(Image *cimg, int x, int y) {
   return xcimage;
 }
 
-FL_API gnui::Cursor *gnui::cursor(Image *img, int x, int y) {
+GNUI_API gnui::Cursor *gnui::cursor(Image *img, int x, int y) {
   gnui::Cursor *c = new gnui::Cursor;
   if(!xdisplay)gnui::open_display();
   img->fetch();
@@ -163,7 +163,7 @@ static gnui::Cursor no = {0,0,4};
 static gnui::Cursor none = {0,0,5};
 
 // this probably should be a nicer bitmap:
-gnui::Cursor fl_drop_ok_cursor = {0,21};
+gnui::Cursor gnui_drop_ok_cursor = {0,21};
 
 #define CURSORSIZE 16
 #define HOTXY 8
@@ -243,12 +243,12 @@ void Widget::cursor(gnui::Cursor* c) const {
       }
       uchar r,g,b;
       XColor fgc;
-      split_color(fl_cursor_fg, r,g,b);
+      split_color(gnui_cursor_fg, r,g,b);
       fgc.red = r*0x101;
       fgc.green = g*0x101;
       fgc.blue = b*0x101;
       XColor bgc;
-      split_color(fl_cursor_bg, r,g,b);
+      split_color(gnui_cursor_bg, r,g,b);
       bgc.red = r*0x101;
       bgc.green = g*0x101;
       bgc.blue = b*0x101;
@@ -271,7 +271,7 @@ struct gnui::Cursor {
   HCURSOR cursor;
 };
 
-FL_API gnui::Cursor *gnui::cursor(void *raw) {
+GNUI_API gnui::Cursor *gnui::cursor(void *raw) {
   gnui::Cursor *c = new gnui::Cursor;
   c->cursor = (HCURSOR)raw;
   c->resource = 0;
@@ -344,7 +344,7 @@ static HCURSOR create_cursor_from_image(Image *img, int x, int y)
   return hAlphaCursor;
 }
 
-FL_API gnui::Cursor *gnui::cursor(Image *img, int x, int y) {
+GNUI_API gnui::Cursor *gnui::cursor(Image *img, int x, int y) {
   img->fetch();
   gnui::Cursor *c = new gnui::Cursor;
   c->cursor = create_cursor_from_image(img, x, y);
@@ -520,7 +520,7 @@ void Widget::cursor(gnui::Cursor* c) const {
 // that the structure itself did not port to Intel, as it is defined with
 // 16-bit shorts but apparently the system api wants the bytes the same,
 // probably because they expect it to be resource data.
-FL_API gnui::Cursor *gnui::cursor(void *raw) {
+GNUI_API gnui::Cursor *gnui::cursor(void *raw) {
   gnui::Cursor *c = new gnui::Cursor;
   c->resource=0;
   if(raw) {

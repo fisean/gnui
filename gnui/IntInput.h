@@ -30,7 +30,7 @@
 
 namespace gnui {
 
-class FL_API IntInput : public FloatInput {
+class GNUI_API IntInput : public FloatInput {
 public:
   IntInput(int x,int y,int w,int h,const char *l = 0)
     : FloatInput(x,y,w,h,l) { type(INT); }

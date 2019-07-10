@@ -31,7 +31,7 @@
 
 namespace gnui {
 
-class FL_API ValueSlider : public Slider {
+class GNUI_API ValueSlider : public Slider {
 public:
   FloatInput input;
   int handle(int);

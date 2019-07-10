@@ -47,7 +47,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../images/zlib,../visualc,.,../..,../../fltk/compat"
-				PreprocessorDefinitions="_DEBUG;FL_SHARED;FL_IMAGES_LIBRARY;WIN32;_WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_LIB"
+				PreprocessorDefinitions="_DEBUG;GNUI_SHARED;GNUI_IMAGES_LIBRARY;WIN32;_WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_LIB"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
 				PrecompiledHeaderFile=".\fltkdlld/fltkdll_images.pch"
@@ -147,7 +147,7 @@
 				Optimization="1"
 				InlineFunctionExpansion="2"
 				AdditionalIncludeDirectories=".,../..,../../fltk/compat,../visualc,../../images/zlib"
-				PreprocessorDefinitions="NDEBUG;FL_SHARED;FL_IMAGES_LIBRARY;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_MSC_DLL"
+				PreprocessorDefinitions="NDEBUG;GNUI_SHARED;GNUI_IMAGES_LIBRARY;WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_MSC_DLL"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -245,7 +245,7 @@
 				InlineFunctionExpansion="2"
 				FavorSizeOrSpeed="2"
 				AdditionalIncludeDirectories=".,../..,../../fltk/compat,../visualc,../../images/zlib"
-				PreprocessorDefinitions="FL_SHARED;FL_IMAGES_LIBRARY;WIN32;_WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_LIB"
+				PreprocessorDefinitions="GNUI_SHARED;GNUI_IMAGES_LIBRARY;WIN32;_WIN32;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN;_LIB"
 				RuntimeLibrary="0"
 				PrecompiledHeaderFile=".\fltkdll/fltkdll_images.pch"
 				AssemblerListingLocation=".\fltkdll/"
@@ -774,7 +774,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\..\images\Fl_Guess_Image.cxx"
+			RelativePath="..\..\images\GNUI_Guess_Image.cxx"
 			>
 			<FileConfiguration
 				Name="Debug|Win32"
@@ -805,7 +805,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\..\images\fl_jpeg.cxx"
+			RelativePath="..\..\images\gnui_jpeg.cxx"
 			>
 			<FileConfiguration
 				Name="Debug|Win32"
@@ -836,7 +836,7 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath="..\..\images\fl_png.cxx"
+			RelativePath="..\..\images\gnui_png.cxx"
 			>
 			<FileConfiguration
 				Name="Debug|Win32"

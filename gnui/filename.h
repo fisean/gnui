@@ -27,7 +27,7 @@
 #ifndef gnui_filename_h
 #define gnui_filename_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -41,9 +41,9 @@
 //  a 32 bit long to calculate size in the stat struct so don't expect
 //  to handle >4GB files here...
 #if defined(_WIN32) && !defined(__CYGWIN__) && !defined(__MINGW32__) && (_MSC_VER==1200)
-typedef unsigned __int64 FL_FILESIZE_T;
+typedef unsigned __int64 GNUI_FILESIZE_T;
 #else
-typedef unsigned long long FL_FILESIZE_T;
+typedef unsigned long long GNUI_FILESIZE_T;
 #endif
 
 #if defined(__WATCOMC__)
@@ -115,29 +115,29 @@ namespace gnui {
 #if defined (_WIN32) && !defined (__CYGWIN__)
 # define stat _stat
 #endif
-FL_API int gnui_stat(const char* name, struct stat *buffer);
+GNUI_API int gnui_stat(const char* name, struct stat *buffer);
 
-FL_API int filename_absolute(char *to, int tolen, const char *from, const char* cwd=0);
-FL_API int filename_relative(char *to, int tolen, const char *from, const char* cwd=0);
-FL_API const char *filename_name(const char *);
+GNUI_API int filename_absolute(char *to, int tolen, const char *from, const char* cwd=0);
+GNUI_API int filename_relative(char *to, int tolen, const char *from, const char* cwd=0);
+GNUI_API const char *filename_name(const char *);
 inline char* filename_name(char* a) {return (char*)(filename_name((const char*)a));}
-FL_API const char *filename_ext(const char *);
+GNUI_API const char *filename_ext(const char *);
 inline char* filename_ext(char* a) {return (char*)(filename_ext((const char*)a));}
-FL_API bool filename_match(const char *, const char *pattern); // glob match
-FL_API bool filename_exist(const char*);
-FL_API bool filename_isdir(const char*);
-FL_API bool filename_isfile(const char*);
-FL_API FL_FILESIZE_T filename_size(const char *); // return size of file
-FL_API long int filename_mtime(const char *); // return modification time
+GNUI_API bool filename_match(const char *, const char *pattern); // glob match
+GNUI_API bool filename_exist(const char*);
+GNUI_API bool filename_isdir(const char*);
+GNUI_API bool filename_isfile(const char*);
+GNUI_API GNUI_FILESIZE_T filename_size(const char *); // return size of file
+GNUI_API long int filename_mtime(const char *); // return modification time
 
 typedef int (FileSortF)(const dirent*const*, const dirent*const*);
-FL_API int alphasort(const dirent*const*, const dirent*const*);
-FL_API int casealphasort(const dirent*const*, const dirent*const*);
-FL_API int casenumericsort(const dirent*const*, const dirent*const*);
-FL_API int numericsort(const dirent*const*, const dirent*const*);
-FL_API int modificationsort(const dirent*const*, const dirent*const*);
-FL_API int filename_list(const char *d, dirent ***list, FileSortF *sort);
-FL_API int filename_list(const char *d, dirent ***list); // uses numericsort
+GNUI_API int alphasort(const dirent*const*, const dirent*const*);
+GNUI_API int casealphasort(const dirent*const*, const dirent*const*);
+GNUI_API int casenumericsort(const dirent*const*, const dirent*const*);
+GNUI_API int numericsort(const dirent*const*, const dirent*const*);
+GNUI_API int modificationsort(const dirent*const*, const dirent*const*);
+GNUI_API int filename_list(const char *d, dirent ***list, FileSortF *sort);
+GNUI_API int filename_list(const char *d, dirent ***list); // uses numericsort
 
 //@}
 

@@ -137,7 +137,7 @@ class ClassType : public FluidType {
   void write_properties();
   void read_property(const char *);
 
-  // fc: added for FL_API prefixing and others prefix capability
+  // fc: added for GNUI_API prefixing and others prefix capability
   // class prefix attribute access
   void prefix(const char* p);
   const char*  prefix() const {return class_prefix;}

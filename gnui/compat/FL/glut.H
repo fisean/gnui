@@ -1,2 +1,2 @@
-#include "Fl_Widget.H"
+#include "GNUI_Widget.H"
 #include <gnui/glut.h>

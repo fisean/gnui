@@ -35,7 +35,7 @@ using namespace gnui;
   fills the remaining space. Child widgets that have vertical() true
   are pushed against the left/right edge.
 
-  \image html Fl_Pack.gif
+  \image html GNUI_Pack.gif
 
   This is most useful for layout menu/toolbars and work areas in your
   main window. You can get many layouts with this, except the top

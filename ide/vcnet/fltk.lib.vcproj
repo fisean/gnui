@@ -445,11 +445,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\fltk\fl_api.h"
+				RelativePath="..\..\fltk\gnui_api.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\fltk\FL_VERSION.h"
+				RelativePath="..\..\fltk\GNUI_VERSION.h"
 				>
 			</File>
 			<File
@@ -2454,7 +2454,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\src\Fl_Menu_Item.cxx"
+				RelativePath="..\..\src\GNUI_Menu_Item.cxx"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

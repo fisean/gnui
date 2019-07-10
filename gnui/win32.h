@@ -122,43 +122,43 @@ namespace gnui {
 ////////////////////////////////////////////////////////////////
 // constant information about the display:
 
-extern FL_API void	open_display();
-extern FL_API void	close_display();
-extern FL_API HINSTANCE	xdisplay;
-extern FL_API HPALETTE	xpalette; // non-zero only on 8-bit displays!
+extern GNUI_API void	open_display();
+extern GNUI_API void	close_display();
+extern GNUI_API HINSTANCE	xdisplay;
+extern GNUI_API HPALETTE	xpalette; // non-zero only on 8-bit displays!
 
 ////////////////////////////////////////////////////////////////
 // event handling:
 
-extern FL_API MSG msg;
+extern GNUI_API MSG msg;
 
 ////////////////////////////////////////////////////////////////
 // drawing functions:
 
-extern FL_API HDC	dc;
-extern FL_API HDC	getDC();
-extern FL_API HFONT	xfont();
-extern FL_API TEXTMETRICW* textmetric();
-extern FL_API COLORREF	current_xpixel;
-extern FL_API COLORREF	xpixel(Color i);
-extern FL_API HPEN	setpen();
-extern FL_API HBRUSH	setbrush();
-extern FL_API void	clip_region(HRGN);
-extern FL_API HRGN	clip_region();
+extern GNUI_API HDC	dc;
+extern GNUI_API HDC	getDC();
+extern GNUI_API HFONT	xfont();
+extern GNUI_API TEXTMETRICW* textmetric();
+extern GNUI_API COLORREF	current_xpixel;
+extern GNUI_API COLORREF	xpixel(Color i);
+extern GNUI_API HPEN	setpen();
+extern GNUI_API HBRUSH	setbrush();
+extern GNUI_API void	clip_region(HRGN);
+extern GNUI_API HRGN	clip_region();
 
-extern FL_API void	draw_into(HBITMAP, int w, int h);
-extern FL_API void	stop_drawing(HBITMAP);
-extern FL_API void	stop_drawing(HWND);
+extern GNUI_API void	draw_into(HBITMAP, int w, int h);
+extern GNUI_API void	stop_drawing(HBITMAP);
+extern GNUI_API void	stop_drawing(HWND);
 
 ////////////////////////////////////////////////////////////////
-#ifdef gnui_Window_h // only include this if <gnui/Fl_Window.h> was included
+#ifdef gnui_Window_h // only include this if <gnui/GNUI_Window.h> was included
 
 /** When gnui tells WIN32 about a Window, one of these objects is created.
     Warning: this object is highly subject to change!  It's definition
-    is only here so that fl_xid can be declared inline
+    is only here so that gnui_xid can be declared inline
 */
 
-class FL_API CreatedWindow {
+class GNUI_API CreatedWindow {
 public:
   HWND xid;
   HDC dc;
@@ -190,9 +190,9 @@ inline HWND xid(const Window*w) {return CreatedWindow::find(w)->xid;}
 */
 Window* find(HWND xid);
 
-extern FL_API HCURSOR default_cursor;
+extern GNUI_API HCURSOR default_cursor;
 
-#endif // Fl_Window_H
+#endif // GNUI_Window_H
 
 //@}
 

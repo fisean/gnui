@@ -24,7 +24,7 @@
 #ifndef gnui_Rectangle_h
 #define gnui_Rectangle_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 // rectangle macros that help keeping rectangle predicates as strict as possible 
 // even when not using rectangles in some situations (as when only using w h scalars)  
@@ -37,7 +37,7 @@
 
 namespace gnui {
 
-class FL_API Rectangle {
+class GNUI_API Rectangle {
   int x_, y_, w_, h_;
 
  public:

@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
-#include <fltk/FL_VERSION.h>
+#include <fltk/GNUI_VERSION.h>
 
 #include "alignment_panel.h"
 #include "Fluid_Image.h"
@@ -324,7 +324,7 @@ extern char* theme;
 int write_file(const char *filename, int selected_only) {
   if (!open_write(filename)) return 0;
   write_string("# data file for the FLTK User Interface Designer (FLUID)\n"
-	       "version %.4f",FL_VERSION);
+	       "version %.4f",GNUI_VERSION);
   if (images_dir) write_string("\nimages_dir %s", images_dir);
   if(!include_H_from_C)
     write_string("\ndo_not_include_H_from_C");
@@ -382,7 +382,7 @@ static void read_children(FluidType *p, int paste) {
     if (!strcmp(c,"version")) {
       c = read_word();
       read_version = strtod(c,0);
-      if (read_version<=0 || read_version>FL_VERSION)
+      if (read_version<=0 || read_version>GNUI_VERSION)
 	read_error("unknown version '%s'",c);
       continue;
     }
@@ -566,7 +566,7 @@ static const char *class_matcher[] = {
 
 // This is copied from forms_compatability.cxx:
 
-static void fl_end_group() {
+static void gnui_end_group() {
   gnui::Group* g = gnui::Group::current();
   // set the dimensions of a group to surround contents
   if (g->children() && !g->w()) {
@@ -636,7 +636,7 @@ void read_fdesign() {
 	  gnui::Group* g = (gnui::Group*)(group->o);
 	  g->begin();
 	  // g->forms_end();
-	  fl_end_group(); // how 'bout this instead?
+	  gnui_end_group(); // how 'bout this instead?
 	  gnui::Group::current(0);
 	}
 	group = widget = 0;

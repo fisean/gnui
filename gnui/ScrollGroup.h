@@ -37,7 +37,7 @@
 
 namespace gnui {
 
-class FL_API ScrollGroup : public Group {
+class GNUI_API ScrollGroup : public Group {
 
   int xposition_, yposition_;
   int layoutdx, layoutdy;

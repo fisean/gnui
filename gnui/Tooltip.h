@@ -28,7 +28,7 @@
 
 namespace gnui {
 
-class FL_API Tooltip : public MenuWindow {
+class GNUI_API Tooltip : public MenuWindow {
 public:
   Tooltip();
   void draw();

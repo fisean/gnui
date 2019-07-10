@@ -29,12 +29,12 @@
 
 namespace gnui {
 
-class FL_API Widget;
-class FL_API Window;
-class FL_API Symbol;
-class FL_API Group;
-class FL_API AssociationType;
-class FL_API AssociationFunctor;
+class GNUI_API Widget;
+class GNUI_API Window;
+class GNUI_API Symbol;
+class GNUI_API Group;
+class GNUI_API AssociationType;
+class GNUI_API AssociationFunctor;
 struct Cursor;
 
 typedef void (Callback )(Widget*, void*); /**< Callback is a function pointer to a gnui callback mechanism. It points to any function void foo(Widget*, void*) */
@@ -43,10 +43,10 @@ typedef void (Callback0)(Widget*); /**< Function pointer to a callback with only
 typedef void (Callback1)(Widget*, long); /**<Function pointer to a callback with a long argument instead of a void argument*/
 
 #ifdef FLTK_1_WIDGET  // back-compatability section:
-FL_API Font* font(int);
+GNUI_API Font* font(int);
 #endif
 
-class FL_API Widget : public Rectangle {
+class GNUI_API Widget : public Rectangle {
   // disable the copy assignment/constructors:
   Widget & operator=(const Widget &);
   Widget(const Widget &);

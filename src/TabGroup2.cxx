@@ -48,7 +48,7 @@ const int BTN_WIDTH  = 14;
 const int BTN_HEIGHT = 14;
 
 ////////////////////////////////////////////////////////////////////////////////////
-class FL_API ShrinkTabPager : public TabGroupPager {
+class GNUI_API ShrinkTabPager : public TabGroupPager {
 public:
     virtual int update_positions(TabGroup* g, int nc, int& sel, int & cw, int& aw,int *p, int *w);
     virtual int which(TabGroup* g, int m_x,int m_y);
@@ -60,7 +60,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////////
-class FL_API MenuTabPager : public TabGroupPager {
+class GNUI_API MenuTabPager : public TabGroupPager {
 public:
     virtual int update_positions(TabGroup* g, int nc, int& sel, int & cw, int& aw,int *p, int *w);
     virtual bool draw_tabs(TabGroup* g, int selected, int* tab_pos, int* tab_width);

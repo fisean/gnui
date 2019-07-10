@@ -10,7 +10,7 @@ public:
   WidgetClassType() {write_public_state = false;  wc_relative = false;}
   // state variables for output:
   bool write_public_state; // true when public: has been printed
-  bool wc_relative; // if true, reposition all child widgets in an Fl_Group
+  bool wc_relative; // if true, reposition all child widgets in an GNUI_Group
 
   virtual void write_properties();
   virtual void read_property(const char *);

@@ -760,47 +760,47 @@ void MenuInit(void)
 /***************************************************************/
 
 // FLTK-style callbacks to Glut menu callback translators:
-void setlevel(Fl_Widget*, void *value) {setlevel(long(value));}
+void setlevel(GNUI_Widget*, void *value) {setlevel(long(value));}
 
-void choosefract(Fl_Widget*, void *value) {choosefract(long(value));}
+void choosefract(GNUI_Widget*, void *value) {choosefract(long(value));}
 
-void handlemenu(Fl_Widget*, void *value) {handlemenu(long(value));}
+void handlemenu(GNUI_Widget*, void *value) {handlemenu(long(value));}
 
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Group.H>
-#include <FL/Fl_Window.H>
+#include <FL/GNUI_Button.H>
+#include <FL/GNUI_Group.H>
+#include <FL/GNUI_Window.H>
 
 int main(int argc, char** argv)
 {
 //  glutInit(&argc, argv); // this line removed for FLTK
 
   // create FLTK window:
-  Fl_Window window(512+20, 512+100);
+  GNUI_Window window(512+20, 512+100);
   window.resizable(window);
 
   // create a bunch of buttons:
-  Fl_Group *g = new Fl_Group(110,50,400-110,30,"Level:");
-  g->align(FL_ALIGN_LEFT);
+  GNUI_Group *g = new GNUI_Group(110,50,400-110,30,"Level:");
+  g->align(GNUI_ALIGN_LEFT);
   g->begin();
-  Fl_Button *b;
+  GNUI_Button *b;
   // These coordinates were chagned from fltk1 to fltk2:
-  b = new Fl_Button(  0,0,30,30,"0"); b->callback(setlevel,(void*)0);
-  b = new Fl_Button( 30,0,30,30,"1"); b->callback(setlevel,(void*)1);
-  b = new Fl_Button( 60,0,30,30,"2"); b->callback(setlevel,(void*)2);
-  b = new Fl_Button( 90,0,30,30,"3"); b->callback(setlevel,(void*)3);
-  b = new Fl_Button(120,0,30,30,"4"); b->callback(setlevel,(void*)4);
-  b = new Fl_Button(150,0,30,30,"5"); b->callback(setlevel,(void*)5);
-  b = new Fl_Button(180,0,30,30,"6"); b->callback(setlevel,(void*)6);
-  b = new Fl_Button(210,0,30,30,"7"); b->callback(setlevel,(void*)7);
-  b = new Fl_Button(240,0,30,30,"8"); b->callback(setlevel,(void*)8);
+  b = new GNUI_Button(  0,0,30,30,"0"); b->callback(setlevel,(void*)0);
+  b = new GNUI_Button( 30,0,30,30,"1"); b->callback(setlevel,(void*)1);
+  b = new GNUI_Button( 60,0,30,30,"2"); b->callback(setlevel,(void*)2);
+  b = new GNUI_Button( 90,0,30,30,"3"); b->callback(setlevel,(void*)3);
+  b = new GNUI_Button(120,0,30,30,"4"); b->callback(setlevel,(void*)4);
+  b = new GNUI_Button(150,0,30,30,"5"); b->callback(setlevel,(void*)5);
+  b = new GNUI_Button(180,0,30,30,"6"); b->callback(setlevel,(void*)6);
+  b = new GNUI_Button(210,0,30,30,"7"); b->callback(setlevel,(void*)7);
+  b = new GNUI_Button(240,0,30,30,"8"); b->callback(setlevel,(void*)8);
   g->end();
 
-  b = new Fl_Button(400,50,100,30,"New Fractal"); b->callback(handlemenu,(void*)MENU_RAND);
+  b = new GNUI_Button(400,50,100,30,"New Fractal"); b->callback(handlemenu,(void*)MENU_RAND);
   
-  b = new Fl_Button( 10,10,100,30,"Mountain"); b->callback(choosefract,(void*)MOUNTAIN);
-  b = new Fl_Button(110,10,100,30,"Tree"); b->callback(choosefract,(void*)TREE);
-  b = new Fl_Button(210,10,100,30,"Island"); b->callback(choosefract,(void*)ISLAND);
-  b = new Fl_Button(400,10,100,30,"Quit"); b->callback(handlemenu,(void*)MENU_QUIT);
+  b = new GNUI_Button( 10,10,100,30,"Mountain"); b->callback(choosefract,(void*)MOUNTAIN);
+  b = new GNUI_Button(110,10,100,30,"Tree"); b->callback(choosefract,(void*)TREE);
+  b = new GNUI_Button(210,10,100,30,"Island"); b->callback(choosefract,(void*)ISLAND);
+  b = new GNUI_Button(400,10,100,30,"Quit"); b->callback(handlemenu,(void*)MENU_QUIT);
 
 
   window.show(argc,argv); // glut will die unless parent window visible

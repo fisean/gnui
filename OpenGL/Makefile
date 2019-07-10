@@ -37,9 +37,9 @@ include ../makeinclude
 #
 
 CPPFILES = \
-	Fl_Gl_Choice.cxx \
-	Fl_Gl_Overlay.cxx \
-	Fl_Gl_Window.cxx \
+	GNUI_Gl_Choice.cxx \
+	GNUI_Gl_Overlay.cxx \
+	GNUI_Gl_Window.cxx \
 	gl_draw.cxx \
 	gl_start.cxx
 

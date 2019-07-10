@@ -40,7 +40,7 @@ using namespace gnui;
   A control similar to SGI's Inventor toolkit, commonly used to move 3D
   objects or control zoom.
 
-  \image html Fl_Roller.gif
+  \image html GNUI_Roller.gif
 
   You can use set_vertical() to make the thumbwheel move vertically.
 */

@@ -24,18 +24,18 @@
 #ifndef gnui_file_chooser_h
 #define gnui_file_chooser_h
 
-#include "FL_API.h"
+#include "GNUI_API.h"
 
 namespace gnui {
 
 /// \name gnui/file_chooser.h
 //@{
 
-FL_API void file_chooser_ok_label(const char*l);
-FL_API void use_system_file_chooser(bool = true);
-FL_API const char *dir_chooser(const char *message, const char *fname, int relative = 0);
-FL_API void file_chooser_callback(void (*cb)(const char *));
-FL_API const char *file_chooser(const char *message, const char *pattern, const char *filename, bool save = false, int relative = 1);
+GNUI_API void file_chooser_ok_label(const char*l);
+GNUI_API void use_system_file_chooser(bool = true);
+GNUI_API const char *dir_chooser(const char *message, const char *fname, int relative = 0);
+GNUI_API void file_chooser_callback(void (*cb)(const char *));
+GNUI_API const char *file_chooser(const char *message, const char *pattern, const char *filename, bool save = false, int relative = 1);
 
 
 //@}

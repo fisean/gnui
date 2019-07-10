@@ -27,25 +27,25 @@
 
 #include <fltk/forms.h>
 
-Fl_FormsBitmap::Fl_FormsBitmap(
-  Fl_Boxtype t, int x, int y, int w, int h, const char* l)
-: Fl_Widget(x, y, w, h, l) {
+GNUI_FormsBitmap::GNUI_FormsBitmap(
+  GNUI_Boxtype t, int x, int y, int w, int h, const char* l)
+: GNUI_Widget(x, y, w, h, l) {
   box(t);
   b = 0;
-  color(FL_BLACK);
-  clear_flag(FL_ALIGN_MASK);
-  set_flag(FL_ALIGN_BOTTOM);
+  color(GNUI_BLACK);
+  clear_flag(GNUI_ALIGN_MASK);
+  set_flag(GNUI_ALIGN_BOTTOM);
 }
 
-void Fl_FormsBitmap::set(int W, int H, const uchar *bits) {
+void GNUI_FormsBitmap::set(int W, int H, const uchar *bits) {
   delete b;
-  bitmap(new Fl_Bitmap(bits, W, H));
+  bitmap(new GNUI_Bitmap(bits, W, H));
 }
 
-void Fl_FormsBitmap::draw() {
+void GNUI_FormsBitmap::draw() {
   box()->draw(0, 0, w(), h(), selection_color());
   if (b) {
-    fl_color(color());
+    gnui_color(color());
     b->draw((w()-b->width())/2, (h()-b->height())/2);
   }
   draw_inside_label();

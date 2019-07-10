@@ -36,7 +36,7 @@
 
 namespace gnui {
 
-class FL_API Choice : public Menu {
+class GNUI_API Choice : public Menu {
 public:
   int handle(int);
   int handle(int, const Rectangle&);

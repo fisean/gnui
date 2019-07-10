@@ -1,5 +1,5 @@
 //
-// "$Id: Fl_get_key_mac.cxx 3887 2004-11-12 06:50:20Z spitzak $"
+// "$Id: GNUI_get_key_mac.cxx 3887 2004-11-12 06:50:20Z spitzak $"
 //
 // MacOS keyboard state routines for the Fast Light Tool Kit (FLTK).
 //
@@ -108,5 +108,5 @@ bool gnui::get_key_state(unsigned k) {
 }
 
 //
-// End of "$Id: Fl_get_key_mac.cxx 3887 2004-11-12 06:50:20Z spitzak $".
+// End of "$Id: GNUI_get_key_mac.cxx 3887 2004-11-12 06:50:20Z spitzak $".
 //

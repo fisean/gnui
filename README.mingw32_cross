@@ -50,7 +50,7 @@ then the lib is builded
 
 Check file src/*.o to see if it was builded as windows version (crossbuilded)
 	src/fillrect.o:           80386 COFF executable not stripped - version 30821
-	src/Fl_Menu_Item.o:       80386 COFF executable not stripped - version 30821
+	src/GNUI_Menu_Item.o:       80386 COFF executable not stripped - version 30821
 	(...)
 
 --- INSTALL IT ---

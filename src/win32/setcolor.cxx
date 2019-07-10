@@ -227,7 +227,7 @@ void gnui::setcolor_alpha(Color color, float alpha) {
 // Thanks to Michael Sweet @ Easy Software Products for this
 
 HPALETTE
-fl_select_palette(HDC dc)
+gnui_select_palette(HDC dc)
 {
   static char beenhere;
   if (!beenhere) {

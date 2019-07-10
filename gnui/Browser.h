@@ -29,7 +29,7 @@
 
 namespace gnui {
 
-class FL_API Browser : public Menu {
+class GNUI_API Browser : public Menu {
 public:
   
   /** The Browser's custom handle function \n
@@ -65,7 +65,7 @@ public:
       vertical position and indexnumber (which is used to decide strip
       colour) of the item
   */
-  class FL_API Mark {
+  class GNUI_API Mark {
     friend class gnui::Browser;
     unsigned level; //!< depth in hierarchy of the item
     unsigned open_level; //!< depth of highest closed parent

@@ -29,19 +29,19 @@
 //
 
 #include <fltk/Fl.h>
-#include <fltk/Fl_Box.h>
-#include <fltk/Fl_Window.h>
-#include <fltk/Fl_Button.h>
-#include <fltk/Fl_Pixmap.h>
+#include <fltk/GNUI_Box.h>
+#include <fltk/GNUI_Window.h>
+#include <fltk/GNUI_Button.h>
+#include <fltk/GNUI_Pixmap.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
-#include <fltk/fl_file_chooser.h>
-#include <fltk/fl_message.h>
+#include <fltk/gnui_file_chooser.h>
+#include <fltk/gnui_message.h>
 
-Fl_Box *b;
-Fl_Window *w;
+GNUI_Box *b;
+GNUI_Window *w;
 
 char **data;
 int sizeofdata;
@@ -57,7 +57,7 @@ static int hexdigit(int x) {
 int load_file(const char *name) {
   FILE *f = fopen(name,"r");
   if (!f) {
-    fl_message("Can't open %s, %s",name,strerror(errno));
+    gnui_message("Can't open %s, %s",name,strerror(errno));
     return 0;
   }
   if (data) {
@@ -121,10 +121,10 @@ int load_file(const char *name) {
   return i;
 }
 
-Fl_Pixmap *pixmap;
+GNUI_Pixmap *pixmap;
 void newpixmap() {
   delete pixmap;
-  pixmap = new Fl_Pixmap(data);
+  pixmap = new GNUI_Pixmap(data);
   pixmap->label(b);
   w->redraw();
 }
@@ -139,10 +139,10 @@ void file_cb(const char *n) {
   newpixmap();
 }
 
-void button_cb(Fl_Widget *,void *) {
-  fl_file_chooser_callback(file_cb);
-  fl_file_chooser("XPM file","*.xpm",name);
-  fl_file_chooser_callback(0);
+void button_cb(GNUI_Widget *,void *) {
+  gnui_file_chooser_callback(file_cb);
+  gnui_file_chooser("XPM file","*.xpm",name);
+  gnui_file_chooser_callback(0);
 }
 
 int dvisual = 0;
@@ -156,11 +156,11 @@ int main(int argc, char **argv) {
   if (Fl::args(argc,argv,i,arg) < argc)
     Fl::fatal(" -8 # : use default visual\n%s\n",Fl::help);
 
-  Fl_Window window(400,400); ::w = &window;
-  Fl_Box b(0,0,window.w(),window.h()); ::b = &b;
-  Fl_Button button(5,5,100,35,"load");
+  GNUI_Window window(400,400); ::w = &window;
+  GNUI_Box b(0,0,window.w(),window.h()); ::b = &b;
+  GNUI_Button button(5,5,100,35,"load");
   button.callback(button_cb);
-  if (!dvisual) Fl::visual(FL_RGB);
+  if (!dvisual) Fl::visual(GNUI_RGB);
   window.resizable(window);
   window.show(argc,argv);
   return Fl::run();

@@ -36,11 +36,11 @@
 #include <sys/wait.h>
 
 #include <fltk/Fl.h>
-#include <fltk/Fl_Window.h>
-#include <fltk/Fl_Toggle_Button.h>
+#include <fltk/GNUI_Window.h>
+#include <fltk/GNUI_Toggle_Button.h>
 
 int running;	// actually the pid
-Fl_Toggle_Button *Button;
+GNUI_Toggle_Button *Button;
 
 void sigchld(int) {
   waitpid(running, 0, 0);
@@ -48,8 +48,8 @@ void sigchld(int) {
   Button->value(0);
 }
 
-void cb(Fl_Widget *o, void *) {
-  if (((Fl_Toggle_Button*)o)->value()) {
+void cb(GNUI_Widget *o, void *) {
+  if (((GNUI_Toggle_Button*)o)->value()) {
     if (running) return;
     running = fork();
     if (!running) execl("/usr/sbin/pppd","pppd","-detach",0);
@@ -63,8 +63,8 @@ void cb(Fl_Widget *o, void *) {
 }
 
 int main(int argc, char ** argv) {
-   Fl_Window window(100,50);
-   Fl_Toggle_Button button(0,0,100,50,"Connect");
+   GNUI_Window window(100,50);
+   GNUI_Toggle_Button button(0,0,100,50,"Connect");
    Button = &button;
    button.color(1,2);
    button.callback(cb,0);

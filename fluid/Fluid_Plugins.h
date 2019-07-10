@@ -27,7 +27,7 @@
 #ifndef FLUID_PLUGINS_H
 #define FLUID_PLUGINS_H
 
-#include <FL/Fl_Menu_Item.H>
+#include <FL/GNUI_Menu_Item.H>
 
 namespace gnui {class Group;}
 
@@ -36,8 +36,8 @@ namespace gnui {class Group;}
 struct Fluid_Plugin {
   // statically user filled informations
   char* 	name;
-  Fl_Menu_Item* options_menu;
-  Fl_Menu_Item* new_menu;
+  GNUI_Menu_Item* options_menu;
+  GNUI_Menu_Item* new_menu;
   void 		(*make_panel)();
 
   // dynamic variables
@@ -55,11 +55,11 @@ struct Fluid_Plugin {
 #define MAXPLUGINS 32
 extern Fluid_Plugin* plugins[MAXPLUGINS];
 extern int nbplugins;
-extern Fl_Menu_Item Plugins_Options_Menu[];
-extern Fl_Menu_Item Plugins_New_Menu[];
+extern GNUI_Menu_Item Plugins_Options_Menu[];
+extern GNUI_Menu_Item Plugins_New_Menu[];
 
 // defined in fluid/factory
-void fill_in_New_Menu(Fl_Menu_Item* menu);
+void fill_in_New_Menu(GNUI_Menu_Item* menu);
 
 void read_plugins();
 

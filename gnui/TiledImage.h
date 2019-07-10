@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-class FL_API TiledImage : public Symbol {
+class GNUI_API TiledImage : public Symbol {
 protected:
   const Symbol* image_;
 public:

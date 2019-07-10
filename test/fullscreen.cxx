@@ -31,7 +31,7 @@
 //
 // If it is a seperate window, turning double buffering on and off
 // will cause the window to raise, deiconize, and possibly move.  You
-// can avoid this by making the Fl_Gl_Window a child of a normal
+// can avoid this by making the GNUI_Gl_Window a child of a normal
 // window.
 //
 // Copyright 1998-2006 by Bill Spitzak and others.

@@ -44,7 +44,7 @@
 // is used, though it is a mystery to me why the GLX/WGL libraries
 // don't do this themselves...
 //
-// no_gl_context clears that cache so the next fl_set_gl_context is
+// no_gl_context clears that cache so the next gnui_set_gl_context is
 // guaranteed to work.
 //
 // delete_gl_context destroys the context.
@@ -84,7 +84,7 @@
 namespace gnui {
 
 // Describes crap needed to create a GLContext.
-class FL_GL_API GlChoice {
+class GNUI_GL_API GlChoice {
   int mode;
   GlChoice *next;
 public:

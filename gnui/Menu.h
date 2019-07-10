@@ -28,9 +28,9 @@
 
 namespace gnui {
 
-class FL_API Menu;
+class GNUI_API Menu;
 
-class FL_API List {
+class GNUI_API List {
 public:
   virtual int children(const Menu*, const int* indexes, int level);
   virtual Widget* child(const Menu*, const int* indexes, int level);
@@ -39,14 +39,14 @@ public:
 };
 
 enum { // Special flag values for add(), you can also use Flags.h values
-  // These match values from Fl_Menu_Item in gnui 1.0:
+  // These match values from GNUI_Menu_Item in gnui 1.0:
   MENU_TOGGLE = 2,
   MENU_RADIO = 8,
   SUBMENU = 0x40,
   MENU_DIVIDER = 0x80
 };
 
-class FL_API Menu : public Group {
+class GNUI_API Menu : public Group {
 
 public:
 
@@ -113,31 +113,31 @@ public:
   /** Calls Group::remove(o) */
   void remove(Widget* o) {Group::remove(o);}
 
-#ifdef Fl_Menu_Item_h
+#ifdef GNUI_Menu_Item_h
   // Commented-out methods cannot be emulated.
-//const Fl_Menu_Item* test_shortcut();
-//Fl_Menu_Item* menu() const;
-  void copy(const Fl_Menu_Item* m, void* data = 0) {clear(); m->add_to(this,data);}
-  void menu(const Fl_Menu_Item* m) {copy(m,0);}
+//const GNUI_Menu_Item* test_shortcut();
+//GNUI_Menu_Item* menu() const;
+  void copy(const GNUI_Menu_Item* m, void* data = 0) {clear(); m->add_to(this,data);}
+  void menu(const GNUI_Menu_Item* m) {copy(m,0);}
   void replace(int n, const char* s) { child(n)->label(s); }
   void replace(const char* l, const char* s) { find(l)->label(s); }
   void shortcut(const char* l, unsigned s) { find(l)->shortcut(s); }
   void shortcut(unsigned s) {Widget::shortcut(s);}
   unsigned shortcut() const {return Widget::shortcut();}
   void shortcut(int i, unsigned s) { child(i)->shortcut(s); }
-//int index(Fl_Menu_Item* m) const { return m - menu_; }
+//int index(GNUI_Menu_Item* m) const { return m - menu_; }
 //int index(const char* label) const;
-//void replace(Fl_Menu_Item* m, const char* s) { replace(index(m), s); }
-//void remove(Fl_Menu_Item* m) { remove(index(m)); }
-//void shortcut(Fl_Menu_Item* m, unsigned s) {shortcut(index(m), s);}
+//void replace(GNUI_Menu_Item* m, const char* s) { replace(index(m), s); }
+//void remove(GNUI_Menu_Item* m) { remove(index(m)); }
+//void shortcut(GNUI_Menu_Item* m, unsigned s) {shortcut(index(m), s);}
 //void mode(int i,int x);
-//void mode(Fl_Menu_Item* m, int x) {mode(index(m), x);}
+//void mode(GNUI_Menu_Item* m, int x) {mode(index(m), x);}
 //void mode(const char* l, int x) {mode(index(l), x);}
   unsigned mode(int i) const {return child(i)->flags() >> 8;}
-//unsigned mode(Fl_Menu_Item* m) const {return mode(index(m));}
+//unsigned mode(GNUI_Menu_Item* m) const {return mode(index(m));}
   unsigned mode(const char* l) const {return find(l)->flags() >> 8;}
 
-  // in gnui 1.0 these returned/took an Fl_Menu_Item*:
+  // in gnui 1.0 these returned/took an GNUI_Menu_Item*:
   Widget* mvalue() {return item();}
 //void value(Widget* o) {set_item(o);}
 

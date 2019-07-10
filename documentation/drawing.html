@@ -18,21 +18,21 @@ href=subclassing.html#draw><tt> fltk::Widget::draw()</tt></A>.  To write
 code here, you must subclass one of the existing <tt>fltk::Widget</tt>
 classes and implement your own version of <tt>draw()</tt>. 
 
-<li>You can also write <a href=Fl_Boxtype.html>boxtypes</A> and <A
-href=Fl_Labeltype.html> labeltypes</A>.  These are small structures
+<li>You can also write <a href=GNUI_Boxtype.html>boxtypes</A> and <A
+href=GNUI_Labeltype.html> labeltypes</A>.  These are small structures
 with functions in them that rae called by existing
 <tt>fltk::Widget::draw()</tt> methods.  Pointers to these
 structures are stored in the widget's <tt>box()</tt> ,
 <tt>labeltype()</tt>, and possibly other properties. 
 
-<li>You can write <a href=Fl_Image.html>fltk::Image</a> classes, which
+<li>You can write <a href=GNUI_Image.html>fltk::Image</a> classes, which
 can then be put into the <a
-href=Fl_Widget.html#image>fltk::Widget::image()</a> and be called by
+href=GNUI_Widget.html#image>fltk::Widget::image()</a> and be called by
 existing <tt>fltk::Widget::draw()</tt> methods.
 
-<li>You can call <A href=Fl_Window.html#make_current><tt>
+<li>You can call <A href=GNUI_Window.html#make_current><tt>
 fltk::Window::make_current()</tt></A> to do incremental update of a 
-widget. Use <A href=Fl_Widget.html#window><tt>
+widget. Use <A href=GNUI_Widget.html#window><tt>
 fltk::Widget::window()</tt></A> to  find the window.
 
 </ul>
@@ -173,10 +173,10 @@ images) to the smallest rectangle needed to update the visible area.
 
 <h2><a name=dcolors>Colors</a></h2>
 
-<h4><a name=color>void fltk::color(<a href=Fl_Color.html>fltk::Color</a>)</a></h4>
+<h4><a name=color>void fltk::color(<a href=GNUI_Color.html>fltk::Color</a>)</a></h4>
 
 Set the color for all subsequent drawing operations. <tt><a
-href=Fl_Color.html>fltk::Color</a></tt> is a typedef for a 32-bit integer
+href=GNUI_Color.html>fltk::Color</a></tt> is a typedef for a 32-bit integer
 containing r,g,b bytes and an "index" byte.  The index is used if
 r,g,b is zero. For instance <tt>0xFF008000</tt> is 255 red, zero
 green, and 128 blue.
@@ -188,7 +188,7 @@ the system dithering is used for all colors, which looks lousy, but
 Windows does not have the defective X behavior and thus you usually
 are not forced to set the screen to 8-bit mode)
 
-<h4><a href=Fl_Color.html>fltk::Color fltk::color()</a></h4>
+<h4><a href=GNUI_Color.html>fltk::Color fltk::color()</a></h4>
 
 Returns the last <tt>fltk::color()</tt> that was set.  This can be used 
 for state save/restore.
@@ -360,7 +360,7 @@ Color a rectangle that exactly fills the given bounding box.
 
 Draw a straight line between the two points.
 
-<h4><a name=pie>void fltk::pie(int x, int y, int w, int h, float start, float end, int what=FL_PIE);</a></h4>
+<h4><a name=pie>void fltk::pie(int x, int y, int w, int h, float start, float end, int what=GNUI_PIE);</a></h4>
 
 These functions match the rather limited circle drawing code provided
 by X and WIN32.  The advantage over using <A
@@ -380,12 +380,12 @@ and fill.
 
 <h2><a name=dtext>Text</a></h2>
 
-See <a href=Fl_Font.html>fltk::Font</a> for a description of what can be
+See <a href=GNUI_Font.html>fltk::Font</a> for a description of what can be
 passed as a font. For most uses one of the built-in constant fonts
 like <tt>fltk::HELVETICA</tt> can be used.
 
 <h4><A name=font>
-void fltk::font(<a href=Fl_Font.html>fltk::Font</a>, float size)</a></h4>
+void fltk::font(<a href=GNUI_Font.html>fltk::Font</a>, float size)</a></h4>
 
 Set the current font and font scaling so the size is <i>size</i>
 pixels. The size is unaffected by the current transformation matrix
@@ -408,9 +408,9 @@ void fltk::font(const char* name, int attributes, float size);</a></h4>
 
 Set the current font by name. Exactly what names work depend on your
 system, it is best to use <a
-href=Fl_Font.html#list_fonts><tt>fltk::list_fonts</tt></a> to see what
+href=GNUI_Font.html#list_fonts><tt>fltk::list_fonts</tt></a> to see what
 is provided. See <a
-href=Fl_Font.html#find_font><tt>fltk::find_font</tt></a> for how the
+href=GNUI_Font.html#find_font><tt>fltk::find_font</tt></a> for how the
 name and attributes are interpreted.
 
 <h4><a name=encoding>void fltk::encoding(const char*);</a></h4>
@@ -426,7 +426,7 @@ after this for the change in encoding to take effect.
 
 <p>The only way
 to find out what encodings are going to work is to call <a
-href=Fl_Font.html>fltk::Font::encodings()</a>.
+href=GNUI_Font.html>fltk::Font::encodings()</a>.
 
 <p>In general you should set this on startup to your locale, and leave
 it alone. We hope to support UTF-8 encoding by default in fltk in the
@@ -488,7 +488,7 @@ The string is formatted and aligned inside the passed box (only the
 x/y are transformed, the width and height are in device units).
 Handles '\t' and '\n', expands all other control characters to ^X, and
 aligns inside or against the edges of the box.  See <A
-href=Fl_Labeltype.html> <tt>fltk::Labeltype_::draw()</tt></A> for values
+href=GNUI_Labeltype.html> <tt>fltk::Labeltype_::draw()</tt></A> for values
 for the flags (<tt>fltk::ALIGN_INSIDE</tt> is ignored, it acts like it is
 always on).
 
@@ -502,11 +502,11 @@ in transformed coordinates.
 <h2><a name=dimages>Images</a></h2>
 
 If you plan to draw the same image many times, you may want an <a
-href=Fl_Image.html><tt>fltk::Image</tt></a> subclass such as <A
-href=Fl_Bitmap.html><tt>fltk::Bitmap</tt></A>, <A
-href=Fl_RGB_Image.html> <tt>fltk::RGB_Image</tt></A>, or <A
-href=Fl_Pixmap.html><tt>fltk::Pixmap</tt></A> and call <a
-href=Fl_Image.html#draw><tt>draw()</tt></a> on them. The advantage of
+href=GNUI_Image.html><tt>fltk::Image</tt></a> subclass such as <A
+href=GNUI_Bitmap.html><tt>fltk::Bitmap</tt></A>, <A
+href=GNUI_RGB_Image.html> <tt>fltk::RGB_Image</tt></A>, or <A
+href=GNUI_Pixmap.html><tt>fltk::Pixmap</tt></A> and call <a
+href=GNUI_Image.html#draw><tt>draw()</tt></a> on them. The advantage of
 using the object is that FLTK will cache translated forms of the image
 (on X it uses a server pixmap) and thus redrawing is <I>much</I>
 faster.  In addition, on current systems, <tt>fltk::Image</tt> is the

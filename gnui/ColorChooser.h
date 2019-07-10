@@ -36,7 +36,7 @@
 
 namespace gnui {
 
-class FL_API ccHueBox : public Widget {
+class GNUI_API ccHueBox : public Widget {
   int px, py;
 protected:
   void draw();
@@ -46,7 +46,7 @@ public:
   px = py = 0;}
 };
 
-class FL_API ccValueBox : public Widget {
+class GNUI_API ccValueBox : public Widget {
   int py;
   bool is_alpha() const;
 protected:
@@ -57,14 +57,14 @@ public:
   py = 0;}
 };
 
-class FL_API ccCellBox : public Widget {
+class GNUI_API ccCellBox : public Widget {
 public:
   ccCellBox(int X, int Y, int W, int H) : Widget(X,Y,W,H) {}
   void draw();
   int handle(int);
 };
 
-class FL_API ColorChooser : public Group {
+class GNUI_API ColorChooser : public Group {
   friend class ccHueBox;
   friend class ccValueBox;
   friend class ccCellBox;
@@ -103,11 +103,11 @@ public:
 
 // Convience functions to pop-up a control panel:
 
-FL_API bool color_chooser(const char* name, float& r, float& g, float& b);
-FL_API bool color_chooser(const char* name, float& r, float& g, float& b, float& a);
-FL_API bool color_chooser(const char* name, uchar& r, uchar& g, uchar& b);
-FL_API bool color_chooser(const char* name, uchar& r, uchar& g, uchar& b, uchar& a);
-FL_API bool color_chooser(const char* name, Color& c);
+GNUI_API bool color_chooser(const char* name, float& r, float& g, float& b);
+GNUI_API bool color_chooser(const char* name, float& r, float& g, float& b, float& a);
+GNUI_API bool color_chooser(const char* name, uchar& r, uchar& g, uchar& b);
+GNUI_API bool color_chooser(const char* name, uchar& r, uchar& g, uchar& b, uchar& a);
+GNUI_API bool color_chooser(const char* name, Color& c);
 
 }
 

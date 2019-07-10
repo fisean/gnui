@@ -116,7 +116,7 @@ static int sort_function(const void *aa, const void *bb) {
   return a->attributes_ - b->attributes_;
 }}
 
-extern Font* fl_make_font(const char* name, int attrib);
+extern Font* gnui_make_font(const char* name, int attrib);
 
 static Font** font_array = 0;
 static int num_fonts = 0;
@@ -145,7 +145,7 @@ static int CALLBACK enumcbW(CONST LOGFONTW* lplf,
   int attrib = 0;
 //    if (lplf->lfWeight > 400 || strstr(name, " Bold") == name+strlen(name)-5)
 //      attrib = BOLD;
-  font_array[num_fonts++] = fl_make_font(buffer, attrib);
+  font_array[num_fonts++] = gnui_make_font(buffer, attrib);
   return 1;
 }
 
@@ -164,7 +164,7 @@ static int CALLBACK enumcbA(CONST LOGFONT* lplf,
     font_array = (Font**)realloc(font_array, array_size*sizeof(Font*));
   }
   int attrib = 0;
-  font_array[num_fonts++] = fl_make_font(name, attrib);
+  font_array[num_fonts++] = gnui_make_font(name, attrib);
   return 1;
 }
 

@@ -33,7 +33,7 @@
 /* Byte order of your machine: 1 = big-endian, 0 = little-endian. */
 #define WORDS_BIGENDIAN		0
 
-/* Types used by fl_draw_image.  One of U32 or U64 must be defined.
+/* Types used by gnui_draw_image.  One of U32 or U64 must be defined.
    U16 is optional but FLTK will work better with it! */
 #define U16 unsigned short
 #define U32 unsigned
@@ -53,7 +53,7 @@
 
 /* Setting this to zero will delete code to handle X and WIN32
    colormaps, this will save a good deal of code (especially for
-   fl_draw_image), but FLTK will only work on TrueColor visuals. */
+   gnui_draw_image), but FLTK will only work on TrueColor visuals. */
 #define USE_COLORMAP		1
 
 /* Use the new Xft library to draw fonts, which is how you get
@@ -208,7 +208,7 @@
 #define HAVE_EXCEPTIONS 1
 
 /**** MRS: THESE TWO ARE GOING AWAY! ****/
-/* Enables fl_load_plugin() on Unix */
+/* Enables gnui_load_plugin() on Unix */
 #define HAVE_DLOPEN		0
 
 /**** MRS: These should be run-time checks!!!! ****/

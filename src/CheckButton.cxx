@@ -33,7 +33,7 @@ using namespace gnui;
   This button turns the value() on and off each release of a click
   inside of it, and displays a checkmark to show the user this:
 
-  \image html Fl_Check_Button.gif
+  \image html GNUI_Check_Button.gif
 
   You can control the color of the checkbox with color() and the
   color of the checkmark with textcolor(). You can make it draw

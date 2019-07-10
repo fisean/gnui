@@ -33,7 +33,7 @@
 
 namespace gnui {
 
-// This class is entirely inline.  If that changes, add FL_API to its declaration
+// This class is entirely inline.  If that changes, add GNUI_API to its declaration
 class MultiBrowser : public Browser {
 public:
     MultiBrowser(int x,int y,int w,int h,const char *l=0)

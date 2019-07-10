@@ -48,8 +48,8 @@ void gnui::addarc(float l, float t, float w, float h, float start, float end)
 {
 #if USE_CAIRO
   cairo_save(cr);
-  extern void fl_set_cairo_ctm();
-  fl_set_cairo_ctm();
+  extern void gnui_set_cairo_ctm();
+  gnui_set_cairo_ctm();
   float x = l+w/2;
   float y = t+h/2;
 

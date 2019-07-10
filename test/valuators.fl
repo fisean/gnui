@@ -20,7 +20,7 @@ Function {} {open
     extra_code {\#include <stdio.h>} visible
   } {
     {fltk::Widget} {} {
-      label Fl_Slider
+      label GNUI_Slider
       xywh {10 10 280 235} align 17 box ENGRAVED_BOX labelfont 1 color 49
     }
     {fltk::Slider} {} {
@@ -64,7 +64,7 @@ Function {} {open
       xywh {140 201 130 22} type TICK_BOTH color 10 selection_color 1 labelsize 8
     }
     {fltk::Widget} {} {
-      label Fl_Value_Input
+      label GNUI_Value_Input
       xywh {295 10 260 126} align 17 box ENGRAVED_BOX labelfont 1 color 49
     }
     {fltk::ValueInput} {} {
@@ -93,11 +93,11 @@ Function {} {open
       xywh {360 93 180 32} color 10 selection_color 1
     }
     {fltk::Widget} {} {
-      label Fl_Value_Slider
+      label GNUI_Value_Slider
       xywh {10 250 280 229} align 17 box ENGRAVED_BOX labelfont 1 color 49
     }
     {fltk::Widget} {} {
-      label {   Fl_Scrollbar}
+      label {   GNUI_Scrollbar}
       xywh {295 141 145 131} align 21 box ENGRAVED_BOX labelfont 1 color 49
     }
     {fltk::Scrollbar} {} {
@@ -146,7 +146,7 @@ Function {} {open
       xywh {145 424 130 33} type TICK_BOTH color 10 selection_color 1 labelsize 8
     }
     {fltk::Widget} {} {
-      label Fl_Roller
+      label GNUI_Roller
       xywh {295 277 145 136} align 17 box ENGRAVED_BOX labelfont 1 color 49
     }
     {fltk::ThumbWheel} {} {
@@ -160,7 +160,7 @@ Function {} {open
       xywh {405 299 20 103} color 0xe6e7e600 selection_color 1 labelsize 8
     }
     {fltk::Group} {} {
-      label Fl_Dial open
+      label GNUI_Dial open
       xywh {445 141 110 272} align 17 box ENGRAVED_BOX labelfont 1
     } {
       {fltk::Dial} {} {

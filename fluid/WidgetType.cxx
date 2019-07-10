@@ -2205,7 +2205,7 @@ int WidgetType::read_fdesign(const char* name, const char* value) {
   } else if (!strcmp(name,"resize")) {
     return !strcmp(value,"gnui::RESIZE_ALL");
   } else if (!strcmp(name,"gravity")) {
-    return !strcmp(value,"Fl_NoGravity Fl_NoGravity");
+    return !strcmp(value,"GNUI_NoGravity GNUI_NoGravity");
   } else if (!strcmp(name,"boxtype")) {
   TRY_BOXTYPE:
     const Enumeration* e = from_text(value, boxmenu);

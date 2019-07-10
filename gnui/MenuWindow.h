@@ -28,7 +28,7 @@
 
 namespace gnui {
 
-class FL_API MenuWindow : public Window {
+class GNUI_API MenuWindow : public Window {
   enum {NO_OVERLAY = 0x08000000};
 
 public:

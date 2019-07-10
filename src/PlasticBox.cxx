@@ -32,7 +32,7 @@
 #include <string.h>
 using namespace gnui;
 
-extern void fl_to_inactive(const char* s, char* to);
+extern void gnui_to_inactive(const char* s, char* to);
 
 static inline Color shade_color(uchar gc, Color bc) {
   return lerp(gc+(GRAY00-'A'), bc, 0.25f);
@@ -53,7 +53,7 @@ void PlasticBox::_draw(const Rectangle& r) const
   }
   const char* c = data();
   char buf[26]; if (drawflags(INACTIVE_R) && Style::draw_boxes_inactive_) {
-    fl_to_inactive(c, buf); c = buf;}
+    gnui_to_inactive(c, buf); c = buf;}
 
   const Color bc = getbgcolor();
   const Color fg = getcolor();

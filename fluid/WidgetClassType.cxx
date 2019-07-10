@@ -59,9 +59,9 @@ void WidgetClassType::write_code() {
 
   write_h("\nclass %s : public %s {\n", name(), c);
   if (!strcmp(c, "Window") ||
-      !strcmp(c, "Fl_Double_Window") ||
-      !strcmp(c, "Fl_Gl_Window") ||
-      !strcmp(c, "Fl_Overlay_Window")) {
+      !strcmp(c, "GNUI_Double_Window") ||
+      !strcmp(c, "GNUI_Gl_Window") ||
+      !strcmp(c, "GNUI_Overlay_Window")) {
     write_h("  void _%s();\n", name());
     write_h("public:\n");
     write_h("  %s(int X, int Y, int W, int H, const char *L = 0);\n", name());

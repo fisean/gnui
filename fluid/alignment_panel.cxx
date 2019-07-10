@@ -220,10 +220,10 @@ static void cb_shell_writemsgs_button(gnui::CheckButton*, void*) {
   prefs.shell_writemsgs(shell_writemsgs_button->value());
 }
 
-gnui::CheckButton *shell_savefl_button=(gnui::CheckButton *)0;
+gnui::CheckButton *shell_savegnui_button=(gnui::CheckButton *)0;
 
-static void cb_shell_savefl_button(gnui::CheckButton*, void*) {
-  prefs.shell_savefl(shell_savefl_button->value());
+static void cb_shell_savegnui_button(gnui::CheckButton*, void*) {
+  prefs.shell_savefl(shell_savegnui_button->value());
 }
 
 static void cb_Cancel(gnui::Button*, void*) {
@@ -261,9 +261,9 @@ gnui::DoubleBufferWindow* make_shell_window() {
       o->hide();
       shell_writemsgs_button->value(prefs.shell_writemsgs() ? true : false);
     }
-     {gnui::CheckButton* o = shell_savefl_button = new gnui::CheckButton(10, 61, 108, 19, "Save Fluid File");
-      o->callback((gnui::Callback*)cb_shell_savefl_button);
-      shell_savefl_button->value(prefs.shell_savefl() ? true : false);
+     {gnui::CheckButton* o = shell_savegnui_button = new gnui::CheckButton(10, 61, 108, 19, "Save Fluid File");
+      o->callback((gnui::Callback*)cb_shell_savegnui_button);
+      shell_savegnui_button->value(prefs.shell_savefl() ? true : false);
     }
      {gnui::ReturnButton* o = new gnui::ReturnButton(132, 90, 143, 25, "Run Command");
       o->shortcut(0xff0d);

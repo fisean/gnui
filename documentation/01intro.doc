@@ -35,7 +35,7 @@ FLTK in any software, whether or not you include the source code.
 FLTK was originally designed to be compatible with the Forms Library
 written for SGI machines (a derivative of this library called "XForms"
 is still used quite often). In that library all the functions and
-structures started with &quot;fl_&quot;. This naming was extended to
+structures started with &quot;gnui_&quot;. This naming was extended to
 all new methods and widgets in the C++ library, and this prefix "FL"
 was taken as the name of the library.
 

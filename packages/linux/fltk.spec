@@ -23,175 +23,175 @@ repository in the US.
 /usr/include/FL/Enumerations.h
 /usr/include/FL/Fl.H
 /usr/include/FL/Fl.h
-/usr/include/FL/Fl_Adjuster.H
-/usr/include/FL/Fl_Adjuster.h
-/usr/include/FL/Fl_Bitmap.H
-/usr/include/FL/Fl_Bitmap.h
-/usr/include/FL/Fl_Box.H
-/usr/include/FL/Fl_Box.h
-/usr/include/FL/Fl_Browser.H
-/usr/include/FL/Fl_Browser.h
-/usr/include/FL/Fl_Browser_.H
-/usr/include/FL/Fl_Browser_.h
-/usr/include/FL/Fl_Button.H
-/usr/include/FL/Fl_Button.h
-/usr/include/FL/Fl_Chart.H
-/usr/include/FL/Fl_Chart.h
-/usr/include/FL/Fl_Check_Button.H
-/usr/include/FL/Fl_Check_Button.h
-/usr/include/FL/Fl_Choice.H
-/usr/include/FL/Fl_Choice.h
-/usr/include/FL/Fl_Clock.H
-/usr/include/FL/Fl_Clock.h
-/usr/include/FL/Fl_Color_Chooser.H
-/usr/include/FL/Fl_Color_Chooser.h
-/usr/include/FL/Fl_Counter.H
-/usr/include/FL/Fl_Counter.h
-/usr/include/FL/Fl_Dial.H
-/usr/include/FL/Fl_Dial.h
-/usr/include/FL/Fl_Double_Window.H
-/usr/include/FL/Fl_Double_Window.h
-/usr/include/FL/Fl_Fill_Dial.H
-/usr/include/FL/Fl_Fill_Dial.h
-/usr/include/FL/Fl_Fill_Slider.H
-/usr/include/FL/Fl_Fill_Slider.h
-/usr/include/FL/Fl_Float_Input.H
-/usr/include/FL/Fl_Float_Input.h
-/usr/include/FL/Fl_FormsBitmap.H
-/usr/include/FL/Fl_FormsBitmap.h
-/usr/include/FL/Fl_FormsPixmap.H
-/usr/include/FL/Fl_FormsPixmap.h
-/usr/include/FL/Fl_Free.H
-/usr/include/FL/Fl_Free.h
-/usr/include/FL/Fl_Gl_Window.H
-/usr/include/FL/Fl_Gl_Window.h
-/usr/include/FL/Fl_Group.H
-/usr/include/FL/Fl_Group.h
-/usr/include/FL/Fl_Hold_Browser.H
-/usr/include/FL/Fl_Hold_Browser.h
-/usr/include/FL/Fl_Hor_Fill_Slider.H
-/usr/include/FL/Fl_Hor_Fill_Slider.h
-/usr/include/FL/Fl_Hor_Nice_Slider.H
-/usr/include/FL/Fl_Hor_Nice_Slider.h
-/usr/include/FL/Fl_Hor_Slider.H
-/usr/include/FL/Fl_Hor_Slider.h
-/usr/include/FL/Fl_Hor_Value_Slider.H
-/usr/include/FL/Fl_Hor_Value_Slider.h
-/usr/include/FL/Fl_Image.H
-/usr/include/FL/Fl_Image.h
-/usr/include/FL/Fl_Input.H
-/usr/include/FL/Fl_Input.h
-/usr/include/FL/Fl_Input_.H
-/usr/include/FL/Fl_Input_.h
-/usr/include/FL/Fl_Int_Input.H
-/usr/include/FL/Fl_Int_Input.h
-/usr/include/FL/Fl_Light_Button.H
-/usr/include/FL/Fl_Light_Button.h
-/usr/include/FL/Fl_Line_Dial.H
-/usr/include/FL/Fl_Line_Dial.h
-/usr/include/FL/Fl_Menu.H
-/usr/include/FL/Fl_Menu.h
-/usr/include/FL/Fl_Menu_.H
-/usr/include/FL/Fl_Menu_.h
-/usr/include/FL/Fl_Menu_Bar.H
-/usr/include/FL/Fl_Menu_Bar.h
-/usr/include/FL/Fl_Menu_Button.H
-/usr/include/FL/Fl_Menu_Button.h
-/usr/include/FL/Fl_Menu_Item.H
-/usr/include/FL/Fl_Menu_Item.h
-/usr/include/FL/Fl_Menu_Window.H
-/usr/include/FL/Fl_Menu_Window.h
-/usr/include/FL/Fl_Multi_Browser.H
-/usr/include/FL/Fl_Multi_Browser.h
-/usr/include/FL/Fl_Multi_Label.H
-/usr/include/FL/Fl_Multi_Label.h
-/usr/include/FL/Fl_Multiline_Input.H
-/usr/include/FL/Fl_Multiline_Input.h
-/usr/include/FL/Fl_Multiline_Output.H
-/usr/include/FL/Fl_Multiline_Output.h
-/usr/include/FL/Fl_Nice_Slider.H
-/usr/include/FL/Fl_Nice_Slider.h
-/usr/include/FL/Fl_Object.H
-/usr/include/FL/Fl_Object.h
-/usr/include/FL/Fl_Output.H
-/usr/include/FL/Fl_Output.h
-/usr/include/FL/Fl_Overlay_Window.H
-/usr/include/FL/Fl_Overlay_Window.h
-/usr/include/FL/Fl_Pack.H
-/usr/include/FL/Fl_Pack.h
-/usr/include/FL/Fl_Pixmap.H
-/usr/include/FL/Fl_Pixmap.h
-/usr/include/FL/Fl_Positioner.H
-/usr/include/FL/Fl_Positioner.h
-/usr/include/FL/Fl_Radio_Button.H
-/usr/include/FL/Fl_Radio_Button.h
-/usr/include/FL/Fl_Radio_Light_Button.H
-/usr/include/FL/Fl_Radio_Light_Button.h
-/usr/include/FL/Fl_Radio_Round_Button.H
-/usr/include/FL/Fl_Radio_Round_Button.h
-/usr/include/FL/Fl_Repeat_Button.H
-/usr/include/FL/Fl_Repeat_Button.h
-/usr/include/FL/Fl_Return_Button.H
-/usr/include/FL/Fl_Return_Button.h
-/usr/include/FL/Fl_Roller.H
-/usr/include/FL/Fl_Roller.h
-/usr/include/FL/Fl_Round_Button.H
-/usr/include/FL/Fl_Round_Button.h
-/usr/include/FL/Fl_Round_Clock.H
-/usr/include/FL/Fl_Round_Clock.h
-/usr/include/FL/Fl_Scroll.H
-/usr/include/FL/Fl_Scroll.h
-/usr/include/FL/Fl_Scrollbar.H
-/usr/include/FL/Fl_Scrollbar.h
-/usr/include/FL/Fl_Secret_Input.H
-/usr/include/FL/Fl_Secret_Input.h
-/usr/include/FL/Fl_Select_Browser.H
-/usr/include/FL/Fl_Select_Browser.h
-/usr/include/FL/Fl_Simple_Counter.H
-/usr/include/FL/Fl_Simple_Counter.h
-/usr/include/FL/Fl_Single_Window.H
-/usr/include/FL/Fl_Single_Window.h
-/usr/include/FL/Fl_Slider.H
-/usr/include/FL/Fl_Slider.h
-/usr/include/FL/Fl_Tabs.H
-/usr/include/FL/Fl_Tabs.h
-/usr/include/FL/Fl_Tile.H
-/usr/include/FL/Fl_Tile.h
-/usr/include/FL/Fl_Timer.H
-/usr/include/FL/Fl_Timer.h
-/usr/include/FL/Fl_Toggle_Button.H
-/usr/include/FL/Fl_Toggle_Button.h
-/usr/include/FL/Fl_Toggle_Light_Button.H
-/usr/include/FL/Fl_Toggle_Light_Button.h
-/usr/include/FL/Fl_Toggle_Round_Button.H
-/usr/include/FL/Fl_Toggle_Round_Button.h
-/usr/include/FL/Fl_Valuator.H
-/usr/include/FL/Fl_Valuator.h
-/usr/include/FL/Fl_Value_Input.H
-/usr/include/FL/Fl_Value_Input.h
-/usr/include/FL/Fl_Value_Output.H
-/usr/include/FL/Fl_Value_Output.h
-/usr/include/FL/Fl_Value_Slider.H
-/usr/include/FL/Fl_Value_Slider.h
-/usr/include/FL/Fl_Widget.H
-/usr/include/FL/Fl_Widget.h
-/usr/include/FL/Fl_Window.H
-/usr/include/FL/Fl_Window.h
+/usr/include/FL/GNUI_Adjuster.H
+/usr/include/FL/GNUI_Adjuster.h
+/usr/include/FL/GNUI_Bitmap.H
+/usr/include/FL/GNUI_Bitmap.h
+/usr/include/FL/GNUI_Box.H
+/usr/include/FL/GNUI_Box.h
+/usr/include/FL/GNUI_Browser.H
+/usr/include/FL/GNUI_Browser.h
+/usr/include/FL/GNUI_Browser_.H
+/usr/include/FL/GNUI_Browser_.h
+/usr/include/FL/GNUI_Button.H
+/usr/include/FL/GNUI_Button.h
+/usr/include/FL/GNUI_Chart.H
+/usr/include/FL/GNUI_Chart.h
+/usr/include/FL/GNUI_Check_Button.H
+/usr/include/FL/GNUI_Check_Button.h
+/usr/include/FL/GNUI_Choice.H
+/usr/include/FL/GNUI_Choice.h
+/usr/include/FL/GNUI_Clock.H
+/usr/include/FL/GNUI_Clock.h
+/usr/include/FL/GNUI_Color_Chooser.H
+/usr/include/FL/GNUI_Color_Chooser.h
+/usr/include/FL/GNUI_Counter.H
+/usr/include/FL/GNUI_Counter.h
+/usr/include/FL/GNUI_Dial.H
+/usr/include/FL/GNUI_Dial.h
+/usr/include/FL/GNUI_Double_Window.H
+/usr/include/FL/GNUI_Double_Window.h
+/usr/include/FL/GNUI_Fill_Dial.H
+/usr/include/FL/GNUI_Fill_Dial.h
+/usr/include/FL/GNUI_Fill_Slider.H
+/usr/include/FL/GNUI_Fill_Slider.h
+/usr/include/FL/GNUI_Float_Input.H
+/usr/include/FL/GNUI_Float_Input.h
+/usr/include/FL/GNUI_FormsBitmap.H
+/usr/include/FL/GNUI_FormsBitmap.h
+/usr/include/FL/GNUI_FormsPixmap.H
+/usr/include/FL/GNUI_FormsPixmap.h
+/usr/include/FL/GNUI_Free.H
+/usr/include/FL/GNUI_Free.h
+/usr/include/FL/GNUI_Gl_Window.H
+/usr/include/FL/GNUI_Gl_Window.h
+/usr/include/FL/GNUI_Group.H
+/usr/include/FL/GNUI_Group.h
+/usr/include/FL/GNUI_Hold_Browser.H
+/usr/include/FL/GNUI_Hold_Browser.h
+/usr/include/FL/GNUI_Hor_Fill_Slider.H
+/usr/include/FL/GNUI_Hor_Fill_Slider.h
+/usr/include/FL/GNUI_Hor_Nice_Slider.H
+/usr/include/FL/GNUI_Hor_Nice_Slider.h
+/usr/include/FL/GNUI_Hor_Slider.H
+/usr/include/FL/GNUI_Hor_Slider.h
+/usr/include/FL/GNUI_Hor_Value_Slider.H
+/usr/include/FL/GNUI_Hor_Value_Slider.h
+/usr/include/FL/GNUI_Image.H
+/usr/include/FL/GNUI_Image.h
+/usr/include/FL/GNUI_Input.H
+/usr/include/FL/GNUI_Input.h
+/usr/include/FL/GNUI_Input_.H
+/usr/include/FL/GNUI_Input_.h
+/usr/include/FL/GNUI_Int_Input.H
+/usr/include/FL/GNUI_Int_Input.h
+/usr/include/FL/GNUI_Light_Button.H
+/usr/include/FL/GNUI_Light_Button.h
+/usr/include/FL/GNUI_Line_Dial.H
+/usr/include/FL/GNUI_Line_Dial.h
+/usr/include/FL/GNUI_Menu.H
+/usr/include/FL/GNUI_Menu.h
+/usr/include/FL/GNUI_Menu_.H
+/usr/include/FL/GNUI_Menu_.h
+/usr/include/FL/GNUI_Menu_Bar.H
+/usr/include/FL/GNUI_Menu_Bar.h
+/usr/include/FL/GNUI_Menu_Button.H
+/usr/include/FL/GNUI_Menu_Button.h
+/usr/include/FL/GNUI_Menu_Item.H
+/usr/include/FL/GNUI_Menu_Item.h
+/usr/include/FL/GNUI_Menu_Window.H
+/usr/include/FL/GNUI_Menu_Window.h
+/usr/include/FL/GNUI_Multi_Browser.H
+/usr/include/FL/GNUI_Multi_Browser.h
+/usr/include/FL/GNUI_Multi_Label.H
+/usr/include/FL/GNUI_Multi_Label.h
+/usr/include/FL/GNUI_Multiline_Input.H
+/usr/include/FL/GNUI_Multiline_Input.h
+/usr/include/FL/GNUI_Multiline_Output.H
+/usr/include/FL/GNUI_Multiline_Output.h
+/usr/include/FL/GNUI_Nice_Slider.H
+/usr/include/FL/GNUI_Nice_Slider.h
+/usr/include/FL/GNUI_Object.H
+/usr/include/FL/GNUI_Object.h
+/usr/include/FL/GNUI_Output.H
+/usr/include/FL/GNUI_Output.h
+/usr/include/FL/GNUI_Overlay_Window.H
+/usr/include/FL/GNUI_Overlay_Window.h
+/usr/include/FL/GNUI_Pack.H
+/usr/include/FL/GNUI_Pack.h
+/usr/include/FL/GNUI_Pixmap.H
+/usr/include/FL/GNUI_Pixmap.h
+/usr/include/FL/GNUI_Positioner.H
+/usr/include/FL/GNUI_Positioner.h
+/usr/include/FL/GNUI_Radio_Button.H
+/usr/include/FL/GNUI_Radio_Button.h
+/usr/include/FL/GNUI_Radio_Light_Button.H
+/usr/include/FL/GNUI_Radio_Light_Button.h
+/usr/include/FL/GNUI_Radio_Round_Button.H
+/usr/include/FL/GNUI_Radio_Round_Button.h
+/usr/include/FL/GNUI_Repeat_Button.H
+/usr/include/FL/GNUI_Repeat_Button.h
+/usr/include/FL/GNUI_Return_Button.H
+/usr/include/FL/GNUI_Return_Button.h
+/usr/include/FL/GNUI_Roller.H
+/usr/include/FL/GNUI_Roller.h
+/usr/include/FL/GNUI_Round_Button.H
+/usr/include/FL/GNUI_Round_Button.h
+/usr/include/FL/GNUI_Round_Clock.H
+/usr/include/FL/GNUI_Round_Clock.h
+/usr/include/FL/GNUI_Scroll.H
+/usr/include/FL/GNUI_Scroll.h
+/usr/include/FL/GNUI_Scrollbar.H
+/usr/include/FL/GNUI_Scrollbar.h
+/usr/include/FL/GNUI_Secret_Input.H
+/usr/include/FL/GNUI_Secret_Input.h
+/usr/include/FL/GNUI_Select_Browser.H
+/usr/include/FL/GNUI_Select_Browser.h
+/usr/include/FL/GNUI_Simple_Counter.H
+/usr/include/FL/GNUI_Simple_Counter.h
+/usr/include/FL/GNUI_Single_Window.H
+/usr/include/FL/GNUI_Single_Window.h
+/usr/include/FL/GNUI_Slider.H
+/usr/include/FL/GNUI_Slider.h
+/usr/include/FL/GNUI_Tabs.H
+/usr/include/FL/GNUI_Tabs.h
+/usr/include/FL/GNUI_Tile.H
+/usr/include/FL/GNUI_Tile.h
+/usr/include/FL/GNUI_Timer.H
+/usr/include/FL/GNUI_Timer.h
+/usr/include/FL/GNUI_Toggle_Button.H
+/usr/include/FL/GNUI_Toggle_Button.h
+/usr/include/FL/GNUI_Toggle_Light_Button.H
+/usr/include/FL/GNUI_Toggle_Light_Button.h
+/usr/include/FL/GNUI_Toggle_Round_Button.H
+/usr/include/FL/GNUI_Toggle_Round_Button.h
+/usr/include/FL/GNUI_Valuator.H
+/usr/include/FL/GNUI_Valuator.h
+/usr/include/FL/GNUI_Value_Input.H
+/usr/include/FL/GNUI_Value_Input.h
+/usr/include/FL/GNUI_Value_Output.H
+/usr/include/FL/GNUI_Value_Output.h
+/usr/include/FL/GNUI_Value_Slider.H
+/usr/include/FL/GNUI_Value_Slider.h
+/usr/include/FL/GNUI_Widget.H
+/usr/include/FL/GNUI_Widget.h
+/usr/include/FL/GNUI_Window.H
+/usr/include/FL/GNUI_Window.h
 /usr/include/FL/dirent.h
 /usr/include/FL/filename.H
 /usr/include/FL/filename.h
-/usr/include/FL/fl_ask.H
-/usr/include/FL/fl_ask.h
-/usr/include/FL/fl_draw.H
-/usr/include/FL/fl_draw.h
-/usr/include/FL/fl_file_chooser.H
-/usr/include/FL/fl_file_chooser.h
-/usr/include/FL/fl_message.H
-/usr/include/FL/fl_message.h
-/usr/include/FL/fl_show_colormap.H
-/usr/include/FL/fl_show_colormap.h
-/usr/include/FL/fl_show_input.H
-/usr/include/FL/fl_show_input.h
+/usr/include/FL/gnui_ask.H
+/usr/include/FL/gnui_ask.h
+/usr/include/FL/gnui_draw.H
+/usr/include/FL/gnui_draw.h
+/usr/include/FL/gnui_file_chooser.H
+/usr/include/FL/gnui_file_chooser.h
+/usr/include/FL/gnui_message.H
+/usr/include/FL/gnui_message.h
+/usr/include/FL/gnui_show_colormap.H
+/usr/include/FL/gnui_show_colormap.h
+/usr/include/FL/gnui_show_input.H
+/usr/include/FL/gnui_show_input.h
 /usr/include/FL/forms.H
 /usr/include/FL/forms.h
 /usr/include/FL/gl.h
@@ -209,69 +209,69 @@ repository in the US.
 /usr/include/Fl
 %doc /usr/man/man1/fluid.1
 %doc /usr/doc/fltk-1.0.1/FL.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Adjuster.html
-%doc /usr/doc/fltk-1.0.1/Fl_Box.html
-%doc /usr/doc/fltk-1.0.1/Fl_Browser.html
-%doc /usr/doc/fltk-1.0.1/Fl_Browser_.html
-%doc /usr/doc/fltk-1.0.1/Fl_Button.html
-%doc /usr/doc/fltk-1.0.1/Fl_Chart.html
-%doc /usr/doc/fltk-1.0.1/Fl_Check_Button.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Check_Button.html
-%doc /usr/doc/fltk-1.0.1/Fl_Choice.html
-%doc /usr/doc/fltk-1.0.1/Fl_Clock.html
-%doc /usr/doc/fltk-1.0.1/Fl_Color_Chooser.html
-%doc /usr/doc/fltk-1.0.1/Fl_Counter.html
-%doc /usr/doc/fltk-1.0.1/Fl_Dial.html
-%doc /usr/doc/fltk-1.0.1/Fl_Double_Window.html
-%doc /usr/doc/fltk-1.0.1/Fl_End.html
-%doc /usr/doc/fltk-1.0.1/Fl_Float_Input.html
-%doc /usr/doc/fltk-1.0.1/Fl_Free.html
-%doc /usr/doc/fltk-1.0.1/Fl_Gl_Window.html
-%doc /usr/doc/fltk-1.0.1/Fl_Group.html
-%doc /usr/doc/fltk-1.0.1/Fl_Hold_Browser.html
-%doc /usr/doc/fltk-1.0.1/Fl_Input.html
-%doc /usr/doc/fltk-1.0.1/Fl_Input_.html
-%doc /usr/doc/fltk-1.0.1/Fl_Int_Input.html
-%doc /usr/doc/fltk-1.0.1/Fl_Light_Button.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Light_Button.html
-%doc /usr/doc/fltk-1.0.1/Fl_Menu_.html
-%doc /usr/doc/fltk-1.0.1/Fl_Menu_Bar.html
-%doc /usr/doc/fltk-1.0.1/Fl_Menu_Button.html
-%doc /usr/doc/fltk-1.0.1/Fl_Menu_Item.html
-%doc /usr/doc/fltk-1.0.1/Fl_Menu_Window.html
-%doc /usr/doc/fltk-1.0.1/Fl_Multi_Browser.html
-%doc /usr/doc/fltk-1.0.1/Fl_Multiline_Input.html
-%doc /usr/doc/fltk-1.0.1/Fl_Multiline_Output.html
-%doc /usr/doc/fltk-1.0.1/Fl_Output.html
-%doc /usr/doc/fltk-1.0.1/Fl_Overlay_Window.html
-%doc /usr/doc/fltk-1.0.1/Fl_Pack.html
-%doc /usr/doc/fltk-1.0.1/Fl_Positioner.html
-%doc /usr/doc/fltk-1.0.1/Fl_Repeat_Button.html
-%doc /usr/doc/fltk-1.0.1/Fl_Return_Button.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Return_Button.html
-%doc /usr/doc/fltk-1.0.1/Fl_Roller.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Roller.html
-%doc /usr/doc/fltk-1.0.1/Fl_Round_Button.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Round_Button.html
-%doc /usr/doc/fltk-1.0.1/Fl_Scroll.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Scroll.html
-%doc /usr/doc/fltk-1.0.1/Fl_Scrollbar.html
-%doc /usr/doc/fltk-1.0.1/Fl_Secret_Input.html
-%doc /usr/doc/fltk-1.0.1/Fl_Select_Browser.html
-%doc /usr/doc/fltk-1.0.1/Fl_Single_Window.html
-%doc /usr/doc/fltk-1.0.1/Fl_Slider.html
-%doc /usr/doc/fltk-1.0.1/Fl_Tabs.html
-%doc /usr/doc/fltk-1.0.1/Fl_Tile.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Tile.html
-%doc /usr/doc/fltk-1.0.1/Fl_Timer.html
-%doc /usr/doc/fltk-1.0.1/Fl_Valuator.html
-%doc /usr/doc/fltk-1.0.1/Fl_Value_Input.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Value_Input.html
-%doc /usr/doc/fltk-1.0.1/Fl_Value_Output.gif
-%doc /usr/doc/fltk-1.0.1/Fl_Value_Output.html
-%doc /usr/doc/fltk-1.0.1/Fl_Value_Slider.html
-%doc /usr/doc/fltk-1.0.1/Fl_Widget.html
-%doc /usr/doc/fltk-1.0.1/Fl_Window.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Adjuster.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Box.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Browser.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Browser_.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Button.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Chart.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Check_Button.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Check_Button.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Choice.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Clock.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Color_Chooser.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Counter.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Dial.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Double_Window.html
+%doc /usr/doc/fltk-1.0.1/GNUI_End.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Float_Input.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Free.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Gl_Window.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Group.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Hold_Browser.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Input.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Input_.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Int_Input.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Light_Button.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Light_Button.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Menu_.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Menu_Bar.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Menu_Button.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Menu_Item.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Menu_Window.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Multi_Browser.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Multiline_Input.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Multiline_Output.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Output.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Overlay_Window.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Pack.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Positioner.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Repeat_Button.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Return_Button.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Return_Button.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Roller.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Roller.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Round_Button.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Round_Button.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Scroll.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Scroll.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Scrollbar.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Secret_Input.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Select_Browser.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Single_Window.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Slider.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Tabs.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Tile.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Tile.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Timer.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Valuator.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Value_Input.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Value_Input.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Value_Output.gif
+%doc /usr/doc/fltk-1.0.1/GNUI_Value_Output.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Value_Slider.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Widget.html
+%doc /usr/doc/fltk-1.0.1/GNUI_Window.html
 %doc /usr/doc/fltk-1.0.1/adjuster1.gif
 %doc /usr/doc/fltk-1.0.1/ask.C.gif
 %doc /usr/doc/fltk-1.0.1/basics.html
@@ -293,14 +293,14 @@ repository in the US.
 %doc /usr/doc/fltk-1.0.1/enumerations.html
 %doc /usr/doc/fltk-1.0.1/events.html
 %doc /usr/doc/fltk-1.0.1/filechooser.gif
-%doc /usr/doc/fltk-1.0.1/fl_alert.gif
-%doc /usr/doc/fltk-1.0.1/fl_ask.gif
-%doc /usr/doc/fltk-1.0.1/fl_choice.gif
-%doc /usr/doc/fltk-1.0.1/fl_color_chooser.jpg
-%doc /usr/doc/fltk-1.0.1/fl_input.gif
-%doc /usr/doc/fltk-1.0.1/fl_message.gif
-%doc /usr/doc/fltk-1.0.1/fl_password.gif
-%doc /usr/doc/fltk-1.0.1/fl_show_colormap.gif
+%doc /usr/doc/fltk-1.0.1/gnui_alert.gif
+%doc /usr/doc/fltk-1.0.1/gnui_ask.gif
+%doc /usr/doc/fltk-1.0.1/gnui_choice.gif
+%doc /usr/doc/fltk-1.0.1/gnui_color_chooser.jpg
+%doc /usr/doc/fltk-1.0.1/gnui_input.gif
+%doc /usr/doc/fltk-1.0.1/gnui_message.gif
+%doc /usr/doc/fltk-1.0.1/gnui_password.gif
+%doc /usr/doc/fltk-1.0.1/gnui_show_colormap.gif
 %doc /usr/doc/fltk-1.0.1/fluid-org.gif
 %doc /usr/doc/fltk-1.0.1/fluid.gif
 %doc /usr/doc/fltk-1.0.1/fluid.html

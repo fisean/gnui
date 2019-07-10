@@ -28,7 +28,7 @@
 #include <gnui/x.h>
 using namespace gnui;
 
-extern bool fl_show_iconic; // in x.C/win32.C
+extern bool gnui_show_iconic; // in x.C/win32.C
 
 /*! Iconifies the window. If you call this when shown() is false it
   will show() it as an icon. If the window is already iconified this
@@ -41,7 +41,7 @@ extern bool fl_show_iconic; // in x.C/win32.C
   displaying the icons. */
 void Window::iconize() {
   if (!i) {
-    fl_show_iconic = true;
+    gnui_show_iconic = true;
     show();
   } else {
 #if USE_X11

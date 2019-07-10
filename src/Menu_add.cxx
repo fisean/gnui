@@ -130,7 +130,7 @@ static bool match_and_replace(Widget* i, const char* B, int flags, AddType what)
   }
 }
 
-FL_API bool fl_menu_replaced; // hack so fluid can tell what replace() did
+GNUI_API bool gnui_menu_replaced; // hack so fluid can tell what replace() did
 
 // Innards of Menu::add() and Menu::replace() methods:
 static Widget* innards(
@@ -220,11 +220,11 @@ static Widget* innards(
 
   if (item) {
     if (what == FIND) return item;
-    fl_menu_replaced = true;
+    gnui_menu_replaced = true;
   } else {
     if (what == FIND) return 0;
     item = append(group, item_label, flags|flags1, insert_here);
-    fl_menu_replaced = false;
+    gnui_menu_replaced = false;
   }
 
   /* fill it in */
@@ -364,11 +364,11 @@ static Widget* flat_innards(
 
   if (item) {
     if (what == FIND) return item;
-    fl_menu_replaced = true;
+    gnui_menu_replaced = true;
   } else {
     if (what == FIND) return 0;
     item = append(group, label, flags, insert_here);
-    fl_menu_replaced = false;
+    gnui_menu_replaced = false;
   }
 
   /* fill it in */

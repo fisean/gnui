@@ -30,7 +30,7 @@ CompilerSet=0
 CompilerSettings=0000000000010000000000
 
 [Unit1]
-FileName=..\..\OpenGL\Fl_Gl_Choice.cxx
+FileName=..\..\OpenGL\GNUI_Gl_Choice.cxx
 CompileCpp=1
 Folder=FLTK OpenGL
 Compile=1
@@ -40,7 +40,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=..\..\OpenGL\Fl_Gl_Overlay.cxx
+FileName=..\..\OpenGL\GNUI_Gl_Overlay.cxx
 CompileCpp=1
 Folder=FLTK OpenGL
 Compile=1
@@ -50,7 +50,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=..\..\OpenGL\Fl_Gl_Window.cxx
+FileName=..\..\OpenGL\GNUI_Gl_Window.cxx
 CompileCpp=1
 Folder=FLTK OpenGL
 Compile=1

@@ -20,7 +20,7 @@ static void revert(Style* s) {
 // this is unnamed as there is no need for themes to alter this:
 static NamedStyle style(0, revert, &InvisibleBox::default_style);
 /*! Sets box() to \c gnui::NO_BOX, sets color() to \c gnui::GRAY75 for
-  compatability with gnui1's Fl_Box widget. */
+  compatability with gnui1's GNUI_Box widget. */
 NamedStyle* InvisibleBox::default_style = &::style;
 
 InvisibleBox::InvisibleBox(int x, int y, int w, int h, const char *l)
@@ -29,7 +29,7 @@ InvisibleBox::InvisibleBox(int x, int y, int w, int h, const char *l)
   style(default_style);
 }
 
-/*! This constructor is for compatability with the gnui1 Fl_Box widget,
+/*! This constructor is for compatability with the gnui1 GNUI_Box widget,
   and sets box() to \a b. */
 InvisibleBox::InvisibleBox(Box* b, int x, int y, int w, int h, const char *l)
   : Widget(x,y,w,h,l)

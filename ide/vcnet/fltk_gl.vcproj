@@ -103,13 +103,13 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath="..\..\OpenGL\Fl_Gl_Choice.cxx">
+				RelativePath="..\..\OpenGL\GNUI_Gl_Choice.cxx">
 			</File>
 			<File
-				RelativePath="..\..\OpenGL\Fl_Gl_Overlay.cxx">
+				RelativePath="..\..\OpenGL\GNUI_Gl_Overlay.cxx">
 			</File>
 			<File
-				RelativePath="..\..\OpenGL\Fl_Gl_Window.cxx">
+				RelativePath="..\..\OpenGL\GNUI_Gl_Window.cxx">
 			</File>
 			<File
 				RelativePath="..\..\OpenGL\gl_draw.cxx">
