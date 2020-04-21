@@ -1,0 +1,11 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: gnui
+Version: 0.0.1
+Description: UI library for C++
+Requires: xcb
+Libs: -L${libdir} -lgnui
+Cflags: -I${includedir}

@@ -1,0 +1,6 @@
+clang++
+%h -std=c++17
+%c -std=c11
+%cpp -std=c++17
+-I.
+-I/usr/local/include

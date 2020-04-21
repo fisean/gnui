@@ -1,0 +1,7 @@
+*.o
+*.so
+*.core
+*.po
+*.pico
+build/
+gnui.pc
