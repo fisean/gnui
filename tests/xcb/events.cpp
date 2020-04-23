@@ -33,6 +33,11 @@ main()
 {
   /* Open the connection to the X server */
   Display *display = XOpenDisplay(nullptr);
+  if (display == nullptr)
+  {
+    std::cerr << "Could not open X display!\n";
+    return 1;
+  }
   xcb_connection_t *connection = XGetXCBConnection(display);
 
   /* Get the first screen */
@@ -71,6 +76,7 @@ main()
 
   /* Map the window on the screen */
   xcb_map_window(connection, window);
+  xcb_flush(connection);
 
   xcb_window_t window2 = xcb_generate_id(connection);
 
@@ -89,6 +95,8 @@ main()
   xcb_map_window(connection, window2);
 
   xcb_flush(connection);
+  std::cout << "window = " << window;
+  std::cout << ", window2 = " << window2 << '\n';
 
   xcb_generic_event_t *event;
   while ((event = xcb_wait_for_event(connection)))
@@ -98,7 +106,7 @@ main()
       case XCB_EXPOSE:
       {
         xcb_expose_event_t *expose = (xcb_expose_event_t *)event;
-        std::cout << "Window " << expose-window;
+        std::cout << "Window " << expose->window;
         std::cout << " exposed. Region to be redrawn at location (";
         std::cout << expose->x << ", " << expose->y <<"), with dimension (";
         std::cout << expose->width << ", " << expose->height << ")\n";
@@ -210,17 +218,15 @@ main()
 
         std::string buffer;
         int size;
-
-        // First find the needed size; return value is the same as snprintf(3).
         size = xkb_state_key_get_utf8(state, keycode, NULL, 0) + 1;
         if (size <= 1) { continue; }
         buffer.resize(size);
         xkb_state_key_get_utf8(state, keycode, buffer.data(), size);
         std::cout << "UTF8: " << buffer << '\n';
-
         break;
       }
-      case XCB_KEY_RELEASE: {
+      case XCB_KEY_RELEASE:
+      {
         xcb_key_release_event_t *kr = (xcb_key_release_event_t *)event;
         // print_modifiers(kr->state);
         std::cout << "Key released in window " << kr->event << '\n';
