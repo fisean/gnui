@@ -3,16 +3,14 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <xcb/xcb.h>
-#include <X11/Xlib.h>
 #include <X11/Xlib-xcb.h>
-#include <X11/Xutil.h>
 #include <xkbcommon/xkbcommon.h>
 #include <xkbcommon/xkbcommon-x11.h>
 
 
 /* print names of modifiers present in mask */
 void
-print_modifiers (uint32_t mask)
+print_modifiers(uint32_t mask)
 {
     const char *MODIFIERS[] = {
       "Shift", "Lock", "Ctrl", "Alt",
@@ -23,7 +21,7 @@ print_modifiers (uint32_t mask)
     std::cout << "Modifier mask: ";
     for (const char **modifier = MODIFIERS ; mask; mask >>= 1, ++modifier) {
         if (mask & 1) {
-          std::cout << *modifier;
+          // std::cout << *modifier;
         }
     }
     std::cout << '\n';
@@ -31,7 +29,7 @@ print_modifiers (uint32_t mask)
 
 
 int
-main ()
+main()
 {
   /* Open the connection to the X server */
   Display *display = XOpenDisplay(nullptr);
@@ -45,6 +43,11 @@ main ()
   xcb_window_t window = xcb_generate_id(connection);
 
   uint32_t mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
+  // uint32_t values[2] =
+  // {
+    // screen->white_pixel,
+    // 0x1ffffff
+  // };
   uint32_t values[2] =
   {
     screen->white_pixel,
@@ -69,6 +72,22 @@ main ()
   /* Map the window on the screen */
   xcb_map_window(connection, window);
 
+  xcb_window_t window2 = xcb_generate_id(connection);
+
+  xcb_create_window(
+    connection,
+    0,                             /* depth               */
+    window2,
+    window,                        /* parent window       */
+    20, 20,                        /* x, y                */
+    50, 50,                        /* width, height       */
+    10,                            /* border_width        */
+    XCB_WINDOW_CLASS_INPUT_OUTPUT, /* class               */
+    screen->root_visual,           /* visual              */
+    mask, values );                /* masks */
+
+  xcb_map_window(connection, window2);
+
   xcb_flush(connection);
 
   xcb_generic_event_t *event;
@@ -80,7 +99,7 @@ main ()
       {
         xcb_expose_event_t *expose = (xcb_expose_event_t *)event;
         std::cout << "Window " << expose-window;
-        std::cout << " exposed. Region to be redrawn at location ";
+        std::cout << " exposed. Region to be redrawn at location (";
         std::cout << expose->x << ", " << expose->y <<"), with dimension (";
         std::cout << expose->width << ", " << expose->height << ")\n";
         break;
@@ -182,7 +201,7 @@ main ()
           return 1;
         }
         xcb_key_press_event_t *kp = (xcb_key_press_event_t *)event;
-        // print_modifiers(kp->state);
+        print_modifiers(kp->state);
         xkb_keycode_t keycode;
         xkb_keysym_t keysym;
 
