@@ -1,4 +1,5 @@
 #include <iostream>
+#include <gnui/group.h>
 #include <gnui/xcb/display.h>
 
 
@@ -9,38 +10,6 @@ XCBDisplay::XCBDisplay()
 {
   _connection = xcb_connect(nullptr, nullptr);
   _screen = xcb_setup_roots_iterator(xcb_get_setup(_connection)).data;
-  _window = _screen->root;
-  _foreground = xcb_generate_id(_connection);
-  _mask = XCB_GC_FOREGROUND | XCB_GC_GRAPHICS_EXPOSURES;
-  _values[0] = 234351;
-  _values[1] = 0;
-  xcb_create_gc(_connection, _foreground, _window, _mask, _values);
-  _window = xcb_generate_id(_connection);
-  _mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
-  _values[0] = _screen->black_pixel;
-  _values[1] = XCB_EVENT_MASK_EXPOSURE;
-
-  xcb_create_window(
-    _connection,                   /* connection          */
-    XCB_COPY_FROM_PARENT,          /* depth               */
-    _window,                       /* window Id           */
-    _screen->root,                 /* parent window       */
-    0, 0,                          /* x, y                */
-    150, 150,                      /* width, height       */
-    10,                            /* border_width        */
-    XCB_WINDOW_CLASS_INPUT_OUTPUT, /* class               */
-    _screen->root_visual,          /* visual              */
-    _mask, _values                 /* masks */
-  );
-
-  /* Map the window on the screen and flush*/
-  xcb_map_window(_connection, _window);
-  xcb_flush(_connection);
-  xcb_generic_event_t *event;
-  while ((event = xcb_wait_for_event(_connection)))
-  {
-    if ((event->response_type & ~0x80) == XCB_EXPOSE) { return; }
-  }
 }
 
 
@@ -60,14 +29,14 @@ XCBDisplay::line(
     {(short)x0, (short)y0},
     {(short)x1, (short)y1}
   };
-  xcb_poly_line(
-    _connection,
-    XCB_COORD_MODE_PREVIOUS,
-    _window,
-    _foreground,
-    2,
-    lines
-  );
+  // xcb_poly_line(
+    // _connection,
+    // XCB_COORD_MODE_PREVIOUS,
+    // _window,
+    // _foreground,
+    // 2,
+    // lines
+  // );
   xcb_flush(_connection);
 }
 
@@ -82,6 +51,11 @@ XCBDisplay::run()
     auto rtype = event->response_type & ~0x80;
     switch (rtype)
     {
+      case XCB_EXPOSE:
+      {
+        std::cout << "Expose\n";
+        break;
+      }
       default:
         /* Unknown event type, ignore it */
         break;
@@ -89,4 +63,48 @@ XCBDisplay::run()
     free (event);
   }
   return 0;
+}
+
+
+Handler *
+XCBDisplay::create(
+  const int &x,
+  const int &y,
+  const int &w,
+  const int &h
+)
+{
+  xcb_gcontext_t foreground;
+  Handler *handler = new Handler();
+  auto &parent = Group::current == nullptr
+    ? _screen->root
+    : Group::current->handler()->xcb_window;
+  handler->xcb_window = xcb_generate_id(_connection);
+  uint32_t mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
+  uint32_t values[2] =
+  {
+    _screen->white_pixel,
+    XCB_EVENT_MASK_EXPOSURE       | XCB_EVENT_MASK_BUTTON_PRESS   |
+    XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_POINTER_MOTION |
+    XCB_EVENT_MASK_ENTER_WINDOW   | XCB_EVENT_MASK_LEAVE_WINDOW   |
+    XCB_EVENT_MASK_KEY_PRESS      | XCB_EVENT_MASK_KEY_RELEASE
+  };
+
+  xcb_create_window(
+    _connection,                   /* connection          */
+    XCB_COPY_FROM_PARENT,          /* depth               */
+    handler->xcb_window,           /* window Id           */
+    parent,                        /* parent window       */
+    x, y,                          /* x, y                */
+    w, h,                          /* width, height       */
+    0,                             /* border_width        */
+    XCB_WINDOW_CLASS_INPUT_OUTPUT, /* class               */
+    _screen->root_visual,          /* visual              */
+    mask, values                   /* masks */
+  );
+
+  /* Map the window on the screen and flush*/
+  xcb_map_window(_connection, handler->xcb_window);
+  xcb_flush(_connection);
+  return handler;
 }

@@ -1,8 +1,5 @@
-#include <unistd.h>      /* pause() */
-#include <thread>
-#include <chrono>
-#include <gnui/xcb/display.h>
 #include <gnui/engine.h>
+#include <gnui/window.h>
 
 
 using namespace gnui;
@@ -12,6 +9,6 @@ int
 main()
 {
   Engine::init();
-  // Engine::active->line(0, 0, 50, 200);
+  Window *win = new Window(0, 0, 150, 150);
   return Engine::run();
 }

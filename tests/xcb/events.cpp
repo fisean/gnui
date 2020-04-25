@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <string>
 #include <array>
 #include <stdlib.h>
 #include <inttypes.h>
@@ -12,19 +14,30 @@
 void
 print_modifiers(uint32_t mask)
 {
-    const char *MODIFIERS[] = {
-      "Shift", "Lock", "Ctrl", "Alt",
-      "Mod2", "Mod3", "Mod4", "Mod5",
-      "Button1", "Button2", "Button3", "Button4", "Button5"
-    };
-
-    std::cout << "Modifier mask: ";
-    for (const char **modifier = MODIFIERS ; mask; mask >>= 1, ++modifier) {
-        if (mask & 1) {
-          // std::cout << *modifier;
-        }
+  std::vector<std::string> modifiers =
+  {
+    "Shift",
+    "Lock",
+    "Ctrl",
+    "Alt",
+    "Mod2",
+    "Mod3",
+    "Mod4",
+    "Mod5",
+    "Button1",
+    "Button2",
+    "Button3",
+    "Button4",
+    "Button5"
+  };
+  for (std::size_t i = 0; mask; mask >>= 1, ++i)
+  {
+    if (mask & 1)
+    {
+      std::cout << "i = " << i << '\n';
+      std::cout << "Modifier mask: " << modifiers[i % modifiers.size()] << '\n';
     }
-    std::cout << '\n';
+  }
 }
 
 

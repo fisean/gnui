@@ -1,5 +1,7 @@
 #pragma once
+#include <string>
 #include <gnui/display.h>
+#include <gnui/handler.h>
 
 
 namespace gnui
@@ -15,7 +17,6 @@ class Widget
       const int &h
     );
 
-
     int x();
     int y();
     int width();
@@ -28,6 +29,9 @@ class Widget
     Widget * previous();
     void next(Widget *n);
     void previous(Widget *p);
+    Handler * handler();
+    void label(const std::string &l);
+    std::string label();
 
     friend class Engine;
 
@@ -38,6 +42,9 @@ class Widget
     int _height;
     Widget *_next;
     Widget *_previous;
+    Handler *_handler;
+    std::string _label;
+
     static Display * display;
 }; // Widget
 } // namespace

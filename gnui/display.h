@@ -1,4 +1,5 @@
 #pragma once
+#include <gnui/handler.h>
 
 
 namespace gnui
@@ -15,6 +16,12 @@ class Display
       const int &y0,
       const int &x1,
       const int &y1
+    ) = 0;
+    virtual Handler * create(
+      const int &x,
+      const int &y,
+      const int &w,
+      const int &h
     ) = 0;
 
   protected:

@@ -1,4 +1,5 @@
 #pragma once
+#include <gnui/display.h>
 #include <gnui/widget.h>
 
 
@@ -14,6 +15,8 @@ class Group : public Widget
       const int &h
     );
 
+    static Group *current;
+
     Widget * children();
     void add(Widget *child);
     void remove(Widget *child);
@@ -21,9 +24,7 @@ class Group : public Widget
     void end();
 
   protected:
-    static Group *_current;
     Group *_previous;
-
     Widget *_children;
     Widget *_last;
 }; // Widget

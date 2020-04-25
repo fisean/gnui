@@ -19,7 +19,9 @@ Widget::Widget(
   , _height{h}
   , _next{nullptr}
   , _previous{nullptr}
-{}
+{
+  _handler = new Handler();
+}
 
 
 void
@@ -68,3 +70,12 @@ Widget::previous(Widget *widget) { _previous = widget; }
 
 Widget *
 Widget::previous() { return _previous; }
+
+Handler *
+Widget::handler() { return _handler; }
+
+void
+Widget::label(const std::string &l) { _label = l; }
+
+std::string
+Widget::label() { return _label; }

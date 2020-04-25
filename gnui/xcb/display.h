@@ -18,13 +18,15 @@ class XCBDisplay : public Display
       const int &y1
     );
     virtual int run();
+    virtual Handler * create(
+      const int &x,
+      const int &y,
+      const int &w,
+      const int &h
+    );
 
   protected:
     xcb_connection_t *_connection;
     xcb_screen_t *_screen;
-    xcb_drawable_t _window;
-    xcb_gcontext_t _foreground;
-    uint32_t _values[2];
-    uint32_t _mask;
 }; // Display
 } // namespace

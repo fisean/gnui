@@ -4,7 +4,7 @@
 using namespace gnui;
 
 
-Group * Group::_current{nullptr};
+Group * Group::current{nullptr};
 
 
 Group::Group(
@@ -21,8 +21,8 @@ Group::Group(
 void
 Group::begin()
 {
-  _previous = _current;
-  _current = this;
+  _previous = current;
+  current = this;
 }
 
 
@@ -66,7 +66,7 @@ Group::remove(Widget *widget)
 
 
 void
-Group::end() { _current = _previous; }
+Group::end() { current = _previous; }
 
 
 Widget *
