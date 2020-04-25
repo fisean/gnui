@@ -8,9 +8,11 @@ Window::Window(
   const int &x,
   const int &y,
   const int &w,
-  const int &h
+  const int &h,
+  const std::string &label
 )
-  : Widget(x, y, w, h)
+  : BaseGroup(x, y, w, h, label)
 {
-  _handler = display->create(x, y, w, h);
+  _type = "window";
+  _handler = display->create(x, y, w, h, this);
 }

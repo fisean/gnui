@@ -1,5 +1,5 @@
 #include <iostream>
-#include <gnui/group.h>
+#include <gnui/basegroup.h>
 #include <gnui/xcb/display.h>
 
 
@@ -53,7 +53,6 @@ XCBDisplay::run()
     {
       case XCB_EXPOSE:
       {
-        std::cout << "Expose\n";
         break;
       }
       default:
@@ -71,17 +70,18 @@ XCBDisplay::create(
   const int &x,
   const int &y,
   const int &w,
-  const int &h
+  const int &h,
+  const Widget * const widget
 )
 {
   xcb_gcontext_t foreground;
   Handler *handler = new Handler();
-  auto &parent = Group::current == nullptr
+  auto &parent = BaseGroup::current == nullptr || widget->type() == "window"
     ? _screen->root
-    : Group::current->handler()->xcb_window;
+    : BaseGroup::current->handler()->xcb_window;
   handler->xcb_window = xcb_generate_id(_connection);
   uint32_t mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
-  uint32_t values[2] =
+  uint32_t values[] =
   {
     _screen->white_pixel,
     XCB_EVENT_MASK_EXPOSURE       | XCB_EVENT_MASK_BUTTON_PRESS   |
@@ -97,7 +97,7 @@ XCBDisplay::create(
     parent,                        /* parent window       */
     x, y,                          /* x, y                */
     w, h,                          /* width, height       */
-    0,                             /* border_width        */
+    10,                             /* border_width        */
     XCB_WINDOW_CLASS_INPUT_OUTPUT, /* class               */
     _screen->root_visual,          /* visual              */
     mask, values                   /* masks */

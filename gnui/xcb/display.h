@@ -5,6 +5,7 @@
 
 namespace gnui
 {
+class Widget;
 class XCBDisplay : public Display
 {
   public:
@@ -22,7 +23,8 @@ class XCBDisplay : public Display
       const int &x,
       const int &y,
       const int &w,
-      const int &h
+      const int &h,
+      const Widget * const widget
     );
 
   protected:

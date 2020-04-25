@@ -1,33 +1,36 @@
-#include <gnui/group.h>
+#include <gnui/basegroup.h>
 
 
 using namespace gnui;
 
 
-Group * Group::current{nullptr};
+BaseGroup * BaseGroup::current{nullptr};
 
 
-Group::Group(
+BaseGroup::BaseGroup(
   const int &x,
   const int &y,
   const int &w,
-  const int &h
+  const int &h,
+  const std::string &label
 )
-  : Widget(x, y, w, h)
-  , _previous{nullptr}
-{}
+  : Widget(x, y, w, h, label)
+  , _previousGroup{nullptr}
+{
+  _type = "group";
+}
 
 
 void
-Group::begin()
+BaseGroup::begin()
 {
-  _previous = current;
+  _previousGroup = current;
   current = this;
 }
 
 
 void
-Group::add(Widget *widget)
+BaseGroup::add(Widget *widget)
 {
   if (_children == nullptr)
   {
@@ -42,7 +45,7 @@ Group::add(Widget *widget)
 
 
 void
-Group::remove(Widget *widget)
+BaseGroup::remove(Widget *widget)
 {
   // TODO: Check if widget is in this group?
   if (widget == nullptr) { return; }
@@ -66,8 +69,11 @@ Group::remove(Widget *widget)
 
 
 void
-Group::end() { current = _previous; }
+BaseGroup::end()
+{
+  if (current == this) { current = _previousGroup; }
+}
 
 
 Widget *
-Group::children() { return _children; }
+BaseGroup::children() { return _children; }

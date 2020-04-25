@@ -5,17 +5,18 @@
 
 namespace gnui
 {
-class Group : public Widget
+class BaseGroup : public Widget
 {
   public:
-    Group(
+    BaseGroup(
       const int &x,
       const int &y,
       const int &w,
-      const int &h
+      const int &h,
+      const std::string &label = ""
     );
 
-    static Group *current;
+    static BaseGroup *current;
 
     Widget * children();
     void add(Widget *child);
@@ -24,7 +25,7 @@ class Group : public Widget
     void end();
 
   protected:
-    Group *_previous;
+    BaseGroup *_previousGroup;
     Widget *_children;
     Widget *_last;
 }; // Widget

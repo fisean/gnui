@@ -4,6 +4,7 @@
 
 namespace gnui
 {
+class Widget;
 class Display
 {
   public:
@@ -21,7 +22,8 @@ class Display
       const int &x,
       const int &y,
       const int &w,
-      const int &h
+      const int &h,
+      const Widget * const widget
     ) = 0;
 
   protected:

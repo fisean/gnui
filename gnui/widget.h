@@ -14,7 +14,8 @@ class Widget
       const int &x,
       const int &y,
       const int &w,
-      const int &h
+      const int &h,
+      const std::string &label
     );
 
     int x();
@@ -32,6 +33,7 @@ class Widget
     Handler * handler();
     void label(const std::string &l);
     std::string label();
+    const std::string type() const;
 
     friend class Engine;
 
@@ -44,6 +46,7 @@ class Widget
     Widget *_previous;
     Handler *_handler;
     std::string _label;
+    std::string _type;
 
     static Display * display;
 }; // Widget

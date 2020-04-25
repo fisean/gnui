@@ -1,17 +1,18 @@
 #pragma once
-#include <gnui/widget.h>
+#include <gnui/basegroup.h>
 
 
 namespace gnui
 {
-class Window : public Widget
+class Window : public BaseGroup
 {
   public:
     Window(
       const int &x,
       const int &y,
       const int &w,
-      const int &h
+      const int &h,
+      const std::string &label = ""
     );
   protected:
 }; // Window

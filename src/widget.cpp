@@ -11,7 +11,8 @@ Widget::Widget(
   const int &x,
   const int &y,
   const int &w,
-  const int &h
+  const int &h,
+  const std::string &label
 )
   : _x{x}
   , _y{y}
@@ -20,7 +21,7 @@ Widget::Widget(
   , _next{nullptr}
   , _previous{nullptr}
 {
-  _handler = new Handler();
+  _label = label;
 }
 
 
@@ -79,3 +80,6 @@ Widget::label(const std::string &l) { _label = l; }
 
 std::string
 Widget::label() { return _label; }
+
+const std::string
+Widget::type() const { return _type; }
