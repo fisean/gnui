@@ -6,6 +6,28 @@
 using namespace gnui;
 
 
+uint32_t
+widget2value(const Widget * const widget)
+{
+  if (widget->type() == "window")
+  {
+    return
+      XCB_EVENT_MASK_EXPOSURE       | XCB_EVENT_MASK_BUTTON_PRESS   |
+      XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_POINTER_MOTION |
+      XCB_EVENT_MASK_ENTER_WINDOW   | XCB_EVENT_MASK_LEAVE_WINDOW   |
+      XCB_EVENT_MASK_KEY_PRESS      | XCB_EVENT_MASK_KEY_RELEASE    ;
+  }
+  if (widget->type() == "button")
+  {
+    return
+      XCB_EVENT_MASK_EXPOSURE       | XCB_EVENT_MASK_BUTTON_PRESS   |
+      XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_ENTER_WINDOW   |
+      XCB_EVENT_MASK_KEY_PRESS      | XCB_EVENT_MASK_KEY_RELEASE    ;
+  }
+  return 0;
+}
+
+
 XCBDisplay::XCBDisplay()
 {
   _connection = xcb_connect(nullptr, nullptr);
@@ -84,10 +106,7 @@ XCBDisplay::create(
   uint32_t values[] =
   {
     _screen->white_pixel,
-    XCB_EVENT_MASK_EXPOSURE       | XCB_EVENT_MASK_BUTTON_PRESS   |
-    XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_POINTER_MOTION |
-    XCB_EVENT_MASK_ENTER_WINDOW   | XCB_EVENT_MASK_LEAVE_WINDOW   |
-    XCB_EVENT_MASK_KEY_PRESS      | XCB_EVENT_MASK_KEY_RELEASE
+    widget2value(widget)
   };
 
   xcb_create_window(
@@ -97,7 +116,7 @@ XCBDisplay::create(
     parent,                        /* parent window       */
     x, y,                          /* x, y                */
     w, h,                          /* width, height       */
-    10,                             /* border_width        */
+    1,                             /* border_width        */
     XCB_WINDOW_CLASS_INPUT_OUTPUT, /* class               */
     _screen->root_visual,          /* visual              */
     mask, values                   /* masks */

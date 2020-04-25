@@ -15,7 +15,7 @@ class Widget
       const int &y,
       const int &w,
       const int &h,
-      const std::string &label
+      const std::string &label = ""
     );
 
     int x();

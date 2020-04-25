@@ -1,4 +1,5 @@
 #include <iostream>
+#include <gnui/button.h>
 #include <gnui/engine.h>
 #include <gnui/window.h>
 
@@ -13,7 +14,7 @@ main()
   Window *win = new Window(0, 0, 150, 150);
   win->begin();
   {
-    Window *win2 = new Window(50, 50, 50, 50);
+    auto button = new Button(50, 50, 50, 50, "Button");
   }
   win->end();
   return Engine::run();
