@@ -48,6 +48,7 @@ class Widget
     std::string _label;
     std::string _type;
 
-    static Display * display;
+    static Display *display;
+    static Widget *_widgets;
 }; // Widget
 } // namespace

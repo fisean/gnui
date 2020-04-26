@@ -89,7 +89,7 @@ getFontGC(
     (
       connection,
       font,
-      strlen (font_name),
+      strlen(font_name),
       font_name
     );
     testCookie(fontCookie, connection, (char *)"can't open font");
@@ -150,15 +150,15 @@ main()
 
   /* create the window */
   xcb_window_t window = xcb_generate_id(connection);
-
   uint32_t mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
-  uint32_t values[2];
-  values[0] = screen->white_pixel;
-  values[1] = XCB_EVENT_MASK_KEY_RELEASE |
-              XCB_EVENT_MASK_BUTTON_PRESS |
-              XCB_EVENT_MASK_EXPOSURE |
-              XCB_EVENT_MASK_POINTER_MOTION;
-
+  uint32_t values[] =
+  {
+    screen->white_pixel,
+    XCB_EVENT_MASK_KEY_RELEASE |
+    XCB_EVENT_MASK_BUTTON_PRESS |
+    XCB_EVENT_MASK_EXPOSURE |
+    XCB_EVENT_MASK_POINTER_MOTION
+  };
   xcb_void_cookie_t windowCookie = xcb_create_window_checked
   (
     connection,

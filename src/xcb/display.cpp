@@ -1,4 +1,5 @@
 #include <iostream>
+#include <xcb/xproto.h>
 #include <gnui/basegroup.h>
 #include <gnui/xcb/display.h>
 
@@ -6,7 +7,7 @@
 using namespace gnui;
 
 
-uint32_t
+static uint32_t
 widget2value(const Widget * const widget)
 {
   if (widget->type() == "window")
@@ -25,6 +26,77 @@ widget2value(const Widget * const widget)
       XCB_EVENT_MASK_KEY_PRESS      | XCB_EVENT_MASK_KEY_RELEASE    ;
   }
   return 0;
+}
+
+
+static xcb_gcontext_t
+getFontGC(
+  xcb_connection_t *connection,
+  xcb_screen_t *screen,
+  xcb_window_t window,
+  const std::string &font_name
+)
+{
+    /* get font */
+    xcb_font_t font = xcb_generate_id(connection);
+    xcb_void_cookie_t fontCookie = xcb_open_font_checked
+    (
+      connection,
+      font,
+      font_name.size(),
+      font_name.data()
+    );
+
+    /* create graphics context */
+    xcb_gcontext_t gc = xcb_generate_id(connection);
+    uint32_t mask = XCB_GC_FOREGROUND | XCB_GC_BACKGROUND | XCB_GC_FONT;
+    uint32_t value_list[] =
+    {
+      screen->black_pixel,
+      screen->white_pixel,
+      font
+    };
+    xcb_void_cookie_t gcCookie = xcb_create_gc_checked
+    (
+      connection,
+      gc,
+      window,
+      mask,
+      value_list
+    );
+
+    /* close font */
+    fontCookie = xcb_close_font_checked(connection, font);
+    return gc;
+}
+
+
+static void
+drawText(
+  xcb_connection_t *connection,
+  xcb_screen_t *screen,
+  xcb_window_t window,
+  int16_t x1,
+  int16_t y1,
+  const std::string &label = ""
+)
+{
+  /* get graphics context */
+  xcb_gcontext_t gc = getFontGC(connection, screen, window, "fixed");
+
+  /* draw the text */
+  xcb_void_cookie_t textCookie = xcb_image_text_8_checked
+  (
+    connection,
+    label.size(),
+    window,
+    gc,
+    x1, y1,
+    label.data()
+  );
+
+  /* free the gc */
+  xcb_void_cookie_t gcCookie = xcb_free_gc(connection, gc);
 }
 
 
