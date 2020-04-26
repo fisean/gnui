@@ -5,6 +5,8 @@ using namespace gnui;
 
 
 Display * Widget::display;
+Widget * Widget::_begining{nullptr};
+Widget * Widget::_end{nullptr};
 
 
 Widget::Widget(
@@ -22,6 +24,9 @@ Widget::Widget(
   , _previous{nullptr}
 {
   _label = label;
+  if (_begining == nullptr) { _begining = this; }
+  else { _end->next(this); }
+  _end = this;
 }
 
 
@@ -72,14 +77,26 @@ Widget::previous(Widget *widget) { _previous = widget; }
 Widget *
 Widget::previous() { return _previous; }
 
+
 Handler *
 Widget::handler() { return _handler; }
+
 
 void
 Widget::label(const std::string &l) { _label = l; }
 
+
 std::string
 Widget::label() { return _label; }
 
+
 const std::string
 Widget::type() const { return _type; }
+
+
+Widget *
+Widget::begining() { return _begining; }
+
+
+Widget *
+Widget::end() { return _end; }

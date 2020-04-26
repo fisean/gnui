@@ -25,6 +25,7 @@ class Display
       const int &h,
       const Widget * const widget
     ) = 0;
+    virtual void drawLabel(Widget *widget, int x1, int y1) = 0;
 
   protected:
 }; // Display

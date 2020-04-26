@@ -23,6 +23,7 @@ class BaseGroup : public Widget
     void remove(Widget *child);
     void begin();
     void end();
+    virtual void draw() const;
 
   protected:
     BaseGroup *_previousGroup;

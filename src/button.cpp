@@ -1,3 +1,4 @@
+#include <iostream>
 #include <gnui/button.h>
 
 
@@ -15,4 +16,11 @@ Button::Button(
 {
   _type = "button";
   _handler = display->create(x, y, w, h, this);
+}
+
+
+void
+Button::draw() const
+{
+  Widget::display->drawLabel((Widget *)this, 0, _y);
 }

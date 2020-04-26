@@ -14,6 +14,7 @@ class Button : public Widget
       const int &h,
       const std::string &label
     );
+    virtual void draw() const;
   protected:
 }; // Button
 } // namespace

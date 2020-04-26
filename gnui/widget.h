@@ -18,6 +18,9 @@ class Widget
       const std::string &label = ""
     );
 
+    static Widget * begining();
+    static Widget * end();
+
     int x();
     int y();
     int width();
@@ -34,6 +37,7 @@ class Widget
     void label(const std::string &l);
     std::string label();
     const std::string type() const;
+    virtual void draw() const = 0;
 
     friend class Engine;
 
@@ -49,6 +53,7 @@ class Widget
     std::string _type;
 
     static Display *display;
-    static Widget *_widgets;
+    static Widget *_begining;
+    static Widget *_end;
 }; // Widget
 } // namespace

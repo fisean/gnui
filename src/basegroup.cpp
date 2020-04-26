@@ -77,3 +77,8 @@ BaseGroup::end()
 
 Widget *
 BaseGroup::children() { return _children; }
+
+
+void
+BaseGroup::draw() const
+{}

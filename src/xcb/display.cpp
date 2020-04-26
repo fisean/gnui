@@ -1,4 +1,3 @@
-#include <iostream>
 #include <xcb/xproto.h>
 #include <gnui/basegroup.h>
 #include <gnui/xcb/display.h>
@@ -29,74 +28,64 @@ widget2value(const Widget * const widget)
 }
 
 
-static xcb_gcontext_t
-getFontGC(
-  xcb_connection_t *connection,
-  xcb_screen_t *screen,
-  xcb_window_t window,
-  const std::string &font_name
-)
+xcb_gcontext_t
+XCBDisplay::getFontGC(Widget *widget, const std::string &font_name)
 {
     /* get font */
-    xcb_font_t font = xcb_generate_id(connection);
+    xcb_font_t font = xcb_generate_id(_connection);
     xcb_void_cookie_t fontCookie = xcb_open_font_checked
     (
-      connection,
+      _connection,
       font,
       font_name.size(),
       font_name.data()
     );
 
     /* create graphics context */
-    xcb_gcontext_t gc = xcb_generate_id(connection);
+    xcb_gcontext_t gc = xcb_generate_id(_connection);
     uint32_t mask = XCB_GC_FOREGROUND | XCB_GC_BACKGROUND | XCB_GC_FONT;
     uint32_t value_list[] =
     {
-      screen->black_pixel,
-      screen->white_pixel,
+      _screen->black_pixel,
+      _screen->white_pixel,
       font
     };
     xcb_void_cookie_t gcCookie = xcb_create_gc_checked
     (
-      connection,
+      _connection,
       gc,
-      window,
+      widget->handler()->xcb_window,
       mask,
       value_list
     );
 
     /* close font */
-    fontCookie = xcb_close_font_checked(connection, font);
+    fontCookie = xcb_close_font_checked(_connection, font);
     return gc;
 }
 
 
-static void
-drawText(
-  xcb_connection_t *connection,
-  xcb_screen_t *screen,
-  xcb_window_t window,
-  int16_t x1,
-  int16_t y1,
-  const std::string &label = ""
-)
+void
+XCBDisplay::drawLabel(Widget *widget, int x1, int y1)
 {
   /* get graphics context */
-  xcb_gcontext_t gc = getFontGC(connection, screen, window, "fixed");
+  xcb_gcontext_t gc = getFontGC(widget, "fixed");
 
+  auto label = widget->label();
   /* draw the text */
   xcb_void_cookie_t textCookie = xcb_image_text_8_checked
   (
-    connection,
+    _connection,
     label.size(),
-    window,
+    widget->handler()->xcb_window,
     gc,
     x1, y1,
     label.data()
   );
 
   /* free the gc */
-  xcb_void_cookie_t gcCookie = xcb_free_gc(connection, gc);
+  xcb_void_cookie_t gcCookie = xcb_free_gc(_connection, gc);
+  xcb_flush(_connection);
 }
 
 
@@ -147,6 +136,10 @@ XCBDisplay::run()
     {
       case XCB_EXPOSE:
       {
+        for (auto widget = Widget::begining(); widget != nullptr; widget = widget->next())
+        {
+          widget->draw();
+        }
         break;
       }
       default:

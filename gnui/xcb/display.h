@@ -26,6 +26,11 @@ class XCBDisplay : public Display
       const int &h,
       const Widget * const widget
     );
+    xcb_gcontext_t getFontGC(
+      Widget *widget,
+      const std::string &font_name
+    );
+    virtual void drawLabel(Widget *widget, int x1, int y1);
 
   protected:
     xcb_connection_t *_connection;

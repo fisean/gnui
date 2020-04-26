@@ -11,10 +11,10 @@ int
 main()
 {
   Engine::init();
-  Window *win = new Window(0, 0, 150, 150);
+  Window *win = new Window(0, 0, 500, 500);
   win->begin();
   {
-    auto button = new Button(50, 50, 50, 50, "Button");
+    auto button = new Button(10, 10, 400, 400, "Button");
   }
   win->end();
   return Engine::run();
