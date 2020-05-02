@@ -1,6 +1,11 @@
 #include <gnui/basegroup.h>
 #include <gnui/xorg/display.h>
 
+namespace xorg
+{
+#include <X11/Xft/Xft.h>
+}
+
 
 using namespace gnui;
 using namespace xorg;
@@ -27,7 +32,14 @@ XorgDisplay::run()
     xorg::XEvent ev;
 
     xorg::XNextEvent(_dpy, &ev);
-    if (ev.type == KeyPress)
+    if (ev.type == Expose)
+    {
+      for (auto widget = Widget::begining(); widget != nullptr; widget = widget->next())
+      {
+        widget->draw();
+      }
+    }
+    else if (ev.type == KeyPress)
     {
       break;
     }
@@ -76,5 +88,13 @@ XorgDisplay::create(
 
 
 void
-XorgDisplay::drawLabel(Widget *widget, int x1, int y1)
-{}
+XorgDisplay::drawLabel(Widget *widget, int x, int y)
+{
+  Colormap cmap = DefaultColormap(_dpy, _scr);
+  XftColor color;
+  XftColorAllocName(_dpy, _visual, cmap, "#0000ee", &color);
+  std::string fontname{"DejaVu Sans Mono:size=11:antialias=true"};
+  auto font = XftFontOpenName(_dpy, _scr, fontname.data());
+  XftDraw *draw = XftDrawCreate(_dpy, widget->handler()->win, _visual, cmap);
+  XftDrawStringUtf8(draw, &color, font, x, y, (const FcChar8 *)widget->label().data(), widget->label().size());
+}
