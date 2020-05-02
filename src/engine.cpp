@@ -1,6 +1,6 @@
 #include <gnui/engine.h>
 #include <gnui/widget.h>
-#include <gnui/xcb/display.h>
+#include <gnui/xorg/display.h>
 
 
 using namespace gnui;
@@ -9,12 +9,12 @@ using namespace gnui;
 void
 Engine::init()
 {
-  Widget::display = new XCBDisplay();
+  Widget::display = new XorgDisplay();
 }
 
 
 int
-Engine::run(const std::string &displayName)
+Engine::run()
 {
   auto result = Widget::display->run();
   delete Widget::display;

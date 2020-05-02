@@ -4,7 +4,7 @@
 using namespace gnui;
 
 
-Window::Window(
+gnui::Window::Window(
   const int &x,
   const int &y,
   const int &w,

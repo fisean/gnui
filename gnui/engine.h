@@ -9,6 +9,6 @@ class Engine
 {
   public:
     static void init();
-    static int run(const std::string &displayName = "");
+    static int run();
 }; // Engine
 } // namespace

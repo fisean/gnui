@@ -1,24 +1,28 @@
 #pragma once
-#include <xcb/xcb.h>
 #include <gnui/display.h>
+
+namespace xorg
+{
+#include <X11/Xlib.h>
+}
 
 
 namespace gnui
 {
 class Widget;
-class XCBDisplay : public Display
+class XorgDisplay : public Display
 {
   public:
-    XCBDisplay();
-    ~XCBDisplay();
+    XorgDisplay();
+    ~XorgDisplay();
 
+    virtual int run();
     virtual void line(
       const int &x0,
       const int &y0,
       const int &x1,
       const int &y1
     );
-    virtual int run();
     virtual Handler * create(
       const int &x,
       const int &y,
@@ -26,14 +30,11 @@ class XCBDisplay : public Display
       const int &h,
       const Widget * const widget
     );
-    xcb_gcontext_t getFontGC(
-      Widget *widget,
-      const std::string &font_name
-    );
     virtual void drawLabel(Widget *widget, int x1, int y1);
 
   protected:
-    xcb_connection_t *_connection;
-    xcb_screen_t *_screen;
-}; // Display
+    int _scr;
+    xorg::Display *_dpy;
+    xorg::Visual *_visual;
+}; // XorgDisplay
 } // namespace
