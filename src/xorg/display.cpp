@@ -56,11 +56,15 @@ XorgDisplay::create(
 )
 {
   Handler *handler = new Handler();
+  auto parent = widget->type() == "window"
+    ? RootWindow(_dpy, _scr)
+    : BaseGroup::current->handler()->win;
+
   handler->win = XCreateSimpleWindow(
     _dpy,
-    RootWindow(_dpy, _scr),
-    100, 100,
-    200, 100,
+    parent,
+    x, y,
+    w, h,
     1,
     BlackPixel(_dpy, _scr),
     WhitePixel(_dpy, _scr)
