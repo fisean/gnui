@@ -11,7 +11,7 @@ int
 main()
 {
   Engine::init();
-  auto win = new Window(0, 0, 500, 500);
+  auto win = new Window(0, 0, 500, 500, "Gnui");
   win->begin();
   {
     auto group = new Group(100, 100, 100, 100);

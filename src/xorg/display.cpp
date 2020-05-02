@@ -3,6 +3,8 @@
 
 namespace xorg
 {
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
 #include <X11/Xft/Xft.h>
 }
 
@@ -90,11 +92,28 @@ XorgDisplay::create(
 void
 XorgDisplay::drawLabel(Widget *widget, int x, int y)
 {
-  Colormap cmap = DefaultColormap(_dpy, _scr);
-  XftColor color;
-  XftColorAllocName(_dpy, _visual, cmap, "#0000ee", &color);
-  std::string fontname{"DejaVu Sans Mono:size=11:antialias=true"};
-  auto font = XftFontOpenName(_dpy, _scr, fontname.data());
-  XftDraw *draw = XftDrawCreate(_dpy, widget->handler()->win, _visual, cmap);
-  XftDrawStringUtf8(draw, &color, font, x, y, (const FcChar8 *)widget->label().data(), widget->label().size());
+  if (widget->type() == "window")
+  {
+    auto property = XInternAtom(_dpy, "WM_NAME", False);
+    XChangeProperty(
+      _dpy,
+      widget->handler()->win,
+      property,
+      XA_STRING,
+      8,
+      PropModeReplace,
+      (const unsigned char *)widget->label().data(),
+      widget->label().size()
+    );
+  }
+  else
+  {
+    Colormap cmap = DefaultColormap(_dpy, _scr);
+    XftColor color;
+    XftColorAllocName(_dpy, _visual, cmap, "#0000ee", &color);
+    std::string fontname{"DejaVu Sans Mono:size=11:antialias=true"};
+    auto font = XftFontOpenName(_dpy, _scr, fontname.data());
+    XftDraw *draw = XftDrawCreate(_dpy, widget->handler()->win, _visual, cmap);
+    XftDrawStringUtf8(draw, &color, font, x, y, (const FcChar8 *)widget->label().data(), widget->label().size());
+  }
 }

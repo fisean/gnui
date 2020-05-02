@@ -16,3 +16,10 @@ Window::Window(
   _type = "window";
   _handler = display->create(x, y, w, h, this);
 }
+
+
+void
+Window::draw() const
+{
+  Widget::display->drawLabel((Widget *)this, 0, _y);
+}

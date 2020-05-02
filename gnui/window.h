@@ -14,6 +14,7 @@ class Window : public BaseGroup
       const int &h,
       const std::string &label = ""
     );
+    void draw() const;
   protected:
 }; // Window
 } // namespace
