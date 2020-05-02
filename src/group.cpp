@@ -1,10 +1,10 @@
-#include <gnui/window.h>
+#include <gnui/group.h>
 
 
 using namespace gnui;
 
 
-Window::Window(
+Group::Group(
   const int &x,
   const int &y,
   const int &w,
@@ -13,6 +13,6 @@ Window::Window(
 )
   : BaseGroup(x, y, w, h, label)
 {
-  _type = "window";
+  _type = "group";
   _handler = display->create(x, y, w, h, this);
 }
